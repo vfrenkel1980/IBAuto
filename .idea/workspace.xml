@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="72a0257d-c676-4c89-b709-454016f83411" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/frameworkInfra/testbases/LinuxSimTestBase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/frameworkInfra/utils/XmlParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/Simulation IP list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/frameworkInfra/utils/StaticDataProvider.java" afterPath="$PROJECT_DIR$/src/main/java/frameworkInfra/utils/StaticDataProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/ILinuxCL.java" afterPath="$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/ILinuxCL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/LinuxCL.java" afterPath="$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/LinuxCL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ibInfra/windowscl/WindowsCLService.java" afterPath="$PROJECT_DIR$/src/main/java/ibInfra/windowscl/WindowsCLService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/SimulationConfiguration/Config.cfg" afterPath="$PROJECT_DIR$/src/main/resources/SimulationConfiguration/Config.cfg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/linuxtests/LinuxCLTests.java" afterPath="$PROJECT_DIR$/src/test/java/linuxtests/LinuxCLTests.java" />
+    <list default="true" readonly="true" id="72a0257d-c676-4c89-b709-454016f83411" name="Default" comment="Mark Z:&#10;Ignore dep eval 6 2010 test - causing hang">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/CopyBatchFromCM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Copy_DB_From_VM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/List_Procs_in_vm.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/RunQueriesMan.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Run_DB_tests_by_caption.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Run_Process_In_VM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Run_Queries.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Run_SSH_Command_In_VM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/SQLite_Query.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Start_Remote_VM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/Stop_Remote_VM.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/pythonbackup.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/sqlite3.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bin/sqlite3backup.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SImulation_Linux_Host22.atp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Simulation_Linux_Host20.atp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/run_simulation_Host22.bat" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -64,10 +73,11 @@
       <file leaf-file-name="LinuxCLTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/linuxtests/LinuxCLTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="68">
+              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1516886225164" expanded="true" signature="339:1312" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -77,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/utils/StaticDataProvider.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
-              <caret line="257" column="136" lean-forward="true" selection-start-line="257" selection-start-column="136" selection-end-line="257" selection-end-column="136" />
+              <caret line="257" column="136" lean-forward="false" selection-start-line="257" selection-start-column="136" selection-end-line="257" selection-end-column="136" />
               <folding />
             </state>
           </provider>
@@ -86,7 +96,7 @@
       <file leaf-file-name="LinuxSimTestBase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/testbases/LinuxSimTestBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="306">
               <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -98,7 +108,7 @@
       <file leaf-file-name="WindowsCLService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ibInfra/windowscl/WindowsCLService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-126">
+            <state relative-caret-position="119">
               <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
               <folding />
             </state>
@@ -130,8 +140,8 @@
       <file leaf-file-name="LinuxCL.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/LinuxCL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="53" column="49" lean-forward="true" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+            <state relative-caret-position="646">
+              <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -190,6 +200,9 @@
       <replace>cleanAndBuild</replace>
       <replace>&quot;%s&quot;</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -562,11 +575,12 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="1932" />
     <option name="height" value="1037" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -589,139 +603,19 @@
               <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
               <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="frameworkInfra" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="frameworkInfra" type="462c0819:PsiDirectoryNode" />
-              <item name="testbases" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ibInfra" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ibInfra" type="462c0819:PsiDirectoryNode" />
-              <item name="linuxcl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ibInfra" type="462c0819:PsiDirectoryNode" />
-              <item name="windowscl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="SimulationConfiguration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="linuxtests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="UnitTests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="windowstests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IBAuto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IBAuto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources/Unit.xml" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -1138,32 +1032,6 @@
     <configuration>C:\Users\Mark\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
   </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="X:\trunk\QA Automation\IBAuto" />
-          <option name="myCopyRoot" value="X:\trunk\QA Automation\IBAuto" />
-        </SvnCopyRootSimple>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="X:\trunk\QA Automation\IBAuto\src\main" />
-          <option name="myCopyRoot" value="X:\trunk\QA Automation\IBAuto\src\main" />
-        </SvnCopyRootSimple>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="X:\trunk\QA Automation\IBAuto\src\test" />
-          <option name="myCopyRoot" value="X:\trunk\QA Automation\IBAuto\src\test" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="X:\trunk\QA Automation\IBAuto" />
-          <option name="myCopyRoot" value="X:\trunk\QA Automation\IBAuto" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="72a0257d-c676-4c89-b709-454016f83411" name="Default" comment="" />
@@ -1551,35 +1419,34 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32218507" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277592" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32218507" sideWeight="0.4978678" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14232409" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14179105" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12793177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31661093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31661093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32998884" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1591,6 +1458,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="Mark Z:&#10;add groups to gradle build" />
     <MESSAGE value="Mark Z:&#10;remove groups from gradle build" />
     <MESSAGE value="Mark Z:&#10;test reports and exclude &quot;build&quot;" />
@@ -1899,10 +1769,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Simulation IP list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/linuxtests/LinuxCLTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1516886225164" expanded="true" signature="339:1312" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/testbases/LinuxSimTestBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
+        <state relative-caret-position="306">
           <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ibInfra/windowscl/WindowsCLService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/testbases/BatmanBCTestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="26" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1919,54 +1826,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ibInfra/linuxcl/LinuxCL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="53" column="49" lean-forward="true" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+        <state relative-caret-position="646">
+          <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ibInfra/windowscl/WindowsCLService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/testbases/BatmanBCTestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="26" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/linuxtests/LinuxCLTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Simulation IP list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frameworkInfra/utils/StaticDataProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
-          <caret line="257" column="136" lean-forward="true" selection-start-line="257" selection-start-column="136" selection-end-line="257" selection-end-column="136" />
+          <caret line="257" column="136" lean-forward="false" selection-start-line="257" selection-start-column="136" selection-end-line="257" selection-end-column="136" />
           <folding />
         </state>
       </provider>
