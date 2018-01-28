@@ -280,12 +280,22 @@ public class StaticDataProvider {
     }
 
     public static class LinuxMachines{
-        public static final String SIM_INITIATOR = "192.168.10.82";
+        public static final String SIM_INITIATOR = "192.168.10.80";
         public static final String SIM_COORDINATOR = "192.168.10.106";
         public static final String SIM_HELPER_1 = "192.168.10.134";
         public static final String SIM_HELPER_2 = "192.168.10.136";
         public static final String SIM_HELPER_3 = "192.168.10.94";
         public static final String SIM_HELPER_4 = "192.168.10.127";
+
+
+        public static final String TEST_MACHINE = "192.168.11.82";
+    }
+
+    public static class LinuxSimulation{
+        public static final String CD_APACHE_DIR = "cd /disk2/projects/httpd-2.4.18";
+        public static final String CD_MYSQL_DIR = "cd /disk2/projects/mysql-5.6.11";
+        public static final String MAKE_CLEAN = "make clean";
+        public static final String BUILD = "ib_console make -j32";
     }
 
     public static final String TEST = "buildconsole.exe C:\\Users\\Mark\\source\\repos\\ConsoleApplication2\\ConsoleApplication2.sln /%s /cfg=\"release|x64\"";

@@ -1,17 +1,30 @@
 package linuxtests;
 
 import frameworkInfra.testbases.LinuxSimTestBase;
+import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.linuxcl.LinuxCL;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
 import java.util.List;
 
-public class LinuxCLTests extends LinuxSimTestBase {
 
-    @Test(testName = "Linux Test" )
+public class LinuxSimulationTests extends LinuxSimTestBase {
+
+    @Test(testName = "Linux threads" )
     public void runIbConsoleAndVerifyResult() throws InterruptedException {
-        System.out.println(ipList.get(0));
+//        threads thread1 = new threads();
+//        thread1.start();
+//        threads thread2 = new threads();
+//        thread2.start();
 
+
+
+
+        int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" + StaticDataProvider.LinuxSimulation.BUILD,
+                StaticDataProvider.LinuxMachines.TEST_MACHINE);
+        Assert.assertTrue(exitCode  == 0 || exitCode == 2, "build failed");
 
 
 /*        LinuxCL runCommand = new LinuxCL();
@@ -34,4 +47,10 @@ public class LinuxCLTests extends LinuxSimTestBase {
         Assert.assertEquals(result, "Completed", "Result did not match expected");
         driver.close();*/
     }
+
+    @Test(testName = "MyName", invocationCount = 3)
+    public void myFirstTest(){
+        Assert.assertEquals(1, 1, ":(");
+    }
+
 }

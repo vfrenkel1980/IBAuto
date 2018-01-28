@@ -6,7 +6,7 @@
     <test name="TestA1" allow-return-values="true">
         <classes>
             <!-- packagename.Testcase class name  -->
-            <class name ="linuxtests.LinuxCLTests" />
+            <class name ="linuxtests.LinuxSimulationTests" />
         </classes>
     </test>
 </suite>

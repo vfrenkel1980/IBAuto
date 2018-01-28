@@ -23,7 +23,7 @@ public class LinuxSimTestBase extends TestBase {
 
         rawIpList = XmlParser.getIpList();
         ipList = runCommand.breakDownIPList(rawIpList);
-        runCommand.deleteLogsFolder(ipList);
+        //runCommand.deleteLogsFolder(ipList);
     }
 
     @BeforeMethod

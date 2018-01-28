@@ -59,6 +59,33 @@ public class LinuxCL extends TestBase implements ILinuxCL {
     }
 
     @Override
+    public void linuxRunSSHCommandDontWaitForExitCode(String command, String hostIP) throws InterruptedException {
+        JSch jsch = new JSch();
+        Session session;
+        try {
+
+            session = jsch.getSession("xoreax", hostIP, 22);
+            session.setConfig("StrictHostKeyChecking", "no");
+            //Set password
+            session.setPassword("xoreax");
+            session.connect();
+            test.log(Status.INFO, "Successfully connected to " + hostIP);
+            test.log(Status.INFO, "Running command " + command);
+
+            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand(command);
+            channelExec.connect();
+
+            Thread.sleep(10000);
+
+            session.disconnect();
+        } catch (JSchException e) {
+            test.log(Status.ERROR, "Connection error occurred");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void deleteLogsFolder(List<String> ipList) {
         WindowsCLService runCommand = new WindowsCLService();
         for (Object machine : ipList) {
