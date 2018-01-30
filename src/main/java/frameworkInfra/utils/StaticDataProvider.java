@@ -149,10 +149,10 @@ public class StaticDataProvider {
             public static final String LOADER_TEST_3_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_03_VC8.sln\" /%s /cfg=\"release|Win32\"";
             public static final String PROP_TEST_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\prop_test\\prop_test_VC8.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ENV_VARS_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\envvars1\\EnvVars1.sln\" /%s /cfg=\"Release|Win32\" ";
-            public static final String PROP_INHERITANCE_1_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_1_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
             public static final String PROP_INHERITANCE_2_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance2\\PropInheritance2.sln\" /%s /cfg=\"Release|Win32\"";
-            public static final String PROP_INHERITANCE_3_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
-            public static final String PROP_INHERITANCE_4_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_3_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_4_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
             public static final String REFERENCES_MACRO_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\ReferencesMacro\\ReferencesMacro.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ACE_BATCH = "C:\\QA\\simulation\\VC8\\ACE_VC8\\ACE_VC8.bat ";
         }
@@ -205,7 +205,7 @@ public class StaticDataProvider {
             public static final String DEP_EVAL_11 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_11_VC9\\DepEval_Test_11_VC9.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_12 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_12_VC9\\IncrediBuild_PreprocessorBug.sln\" /%s /cfg=\"debug|win32\" /title=\"DepEval 12 (division by zero 1)\"";
             public static final String ROOT_INCLUDE = "\"C:\\QA\\Simulation\\VC9\\DepEval\\rootincludebug\\rootincludebug.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String SPACE_IN_COMPILE_SWITCH_BUG = "\"C:\\QA\\Simulation\\vc9\\SpaceSample\\runme.bat";
+            public static final String SPACE_IN_COMPILE_SWITCH_BUG = "C:\\QA\\Simulation\\vc9\\SpaceSample\\runme.bat";
             public static final String DEP_EVAL_SELF_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\IncTests\\IncTests.sln\" /%s /cfg=\"debug|win32\"";
             public static final String BUILD_SYSTEM_SELF_1_TEST = "/selftest:depeval=c:\\qa\\simulation\\VC9\\DepEval\\Inctests\\inctests\\*.cpp";
             public static final String BUILD_SYSTEM_SELF_2_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\Inctests\\inctests\\runme.bat";

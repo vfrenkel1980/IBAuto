@@ -25,6 +25,7 @@
     <orderEntry type="library" name="Gradle: org.uncommons:reportng:1.1.4" level="project" />
     <orderEntry type="library" name="Gradle: velocity:velocity-dep:1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jdom:jdom:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: ch.ethz.ganymed:ganymed-ssh2:build210" level="project" />
     <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.19.3" level="project" />
     <orderEntry type="library" name="Gradle: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:3.6.0" level="project" />
@@ -98,6 +99,16 @@
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
     <orderEntry type="library" name="Gradle: org.testng:testng:6.13.1" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="JUnit5">
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0.jar!/" />
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/opentest4j-1.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
   <component name="TestModuleProperties" production-module="IBAuto_main" />
 </module>

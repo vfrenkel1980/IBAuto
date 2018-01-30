@@ -2,6 +2,7 @@ package windowstests;
 
 import frameworkInfra.testbases.VmBCTestBase;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -104,7 +105,6 @@ public class VmSimVC10Tests extends VmBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Ignore
     @Test(testName = "Dep Eval 6 2010- build" , groups = { "Build" })
     public void depEval6x32Debug(){
         int returnCode = runCommand.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC10_VMSIM.DEP_EVAL_6, "%s"));
@@ -150,7 +150,7 @@ public class VmSimVC10Tests extends VmBCTestBase {
     @Test(testName = "Configuration test 2 2010 Several Configuration - build" , groups = { "Build" })
     public void configurationTest2SeveralConfigurationx32Debug(){
         int returnCode = runCommand.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC10_VMSIM.CONFIGURATION_TEST_2_SEVERAL_CONF, "%s"));
-        Assert.assertTrue(returnCode == 1, "Build failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Configuration test 3 2010 - build" , groups = { "Build" })
@@ -213,10 +213,11 @@ public class VmSimVC10Tests extends VmBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Configuration test 8 Check 2010 - build" , groups = { "Build" })
+    @Test(testName = "Configuration test 8 Check 2010 - build" , groups = { "Build" }, dependsOnMethods = { "configurationTest8x32Debug" })
     public void configurationTest8CheckBatch(){
         int returnCode = runCommand.runCommandWaitForFinish(StaticDataProvider.Processes.XGCONSOLE + StaticDataProvider.ProjectsCommands.VC10_VMSIM.CONFIGURATION_TEST_8_CHECK);
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == 0 , "Build failed with return code " + returnCode);
+        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT + "VC10\\Configuration_Tests\\ConfigurationTest8\\Proj1", "i_was_ran");
     }
 
     @Test(testName = "Single Inverted Comma Batch 2010 - build" , groups = { "Build" })
@@ -226,6 +227,7 @@ public class VmSimVC10Tests extends VmBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Ignore
     @Test(testName = "Dependency Reference Test Batch 2010 - build" , groups = { "Build" })
     public void dependencyReferenceTestBatch(){
         int returnCode = runCommand.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.VC10_VMSIM.DEPENDENCY_REFERENCE_TEST);
