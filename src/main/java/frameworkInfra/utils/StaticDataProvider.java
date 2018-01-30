@@ -293,7 +293,7 @@ public class StaticDataProvider {
 
     public static class LinuxSimulation{
         public static final String CD_APACHE_DIR = "cd /disk2/projects/httpd-2.4.18";
-        public static final String CD_MYSQL_DIR = "cd /disk2/projects/mysql-5.6.11";
+        public static final String CD_LINUX_DIR = "cd /disk2/projects/linux-4.3.3";
         public static final String MAKE_CLEAN = "make clean";
         public static final String BUILD = "ib_console make -j32";
     }
