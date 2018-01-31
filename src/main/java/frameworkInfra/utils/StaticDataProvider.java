@@ -324,6 +324,4 @@ public class StaticDataProvider {
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
 
     }
-
-    public static final String TEST = "buildconsole.exe C:\\Users\\Mark\\source\\repos\\ConsoleApplication2\\ConsoleApplication2.sln /%s /cfg=\"release|x64\"";
 }
