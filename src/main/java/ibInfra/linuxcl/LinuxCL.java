@@ -59,11 +59,10 @@ public class LinuxCL extends TestBase implements ILinuxCL {
     }
 
     @Override
-    public void linuxRunSSHCommandDontWaitForExitCode(String command, String hostIP) throws InterruptedException {
+    public String linuxRunSSHCommandOutputString(String command, String hostIP) throws InterruptedException {
         JSch jsch = new JSch();
         Session session;
         try {
-
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
             //Set password
@@ -76,12 +75,20 @@ public class LinuxCL extends TestBase implements ILinuxCL {
             channelExec.setCommand(command);
             channelExec.connect();
 
-            Thread.sleep(10000);
-
-            session.disconnect();
-        } catch (JSchException e) {
+            InputStream in = channelExec.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            StringBuilder commandOutput=new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                commandOutput.append(line);
+                commandOutput.append('\n');
+            }
+            channelExec.disconnect();
+            return commandOutput.toString();
+        } catch (JSchException | IOException e) {
             test.log(Status.ERROR, "Connection error occurred");
             e.printStackTrace();
+            return "Unable to get result output from command " + command;
         }
     }
 

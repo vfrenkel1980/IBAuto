@@ -6,7 +6,7 @@ public interface ILinuxCL {
 
     int linuxRunSSHCommand(String command, String hostIP);
 
-    void linuxRunSSHCommandDontWaitForExitCode(String command, String hostIP) throws InterruptedException;
+    String linuxRunSSHCommandOutputString(String command, String hostIP) throws InterruptedException;
 
     void deleteLogsFolder(List<String> ipList);
 
