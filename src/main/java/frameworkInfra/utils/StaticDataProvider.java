@@ -58,7 +58,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC14\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2015 - Debug\" /VsVersion=14";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC14\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2015 - Release\" /VsVersion=14";
         }
-        
+
         public static class VC12_BATMAN {
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC12\\ACE_VC12\\ACE_2013.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2013 - Debug\" ";
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC12\\ACE_VC12\\ACE_2013.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2013 - Release\" ";
@@ -149,10 +149,10 @@ public class StaticDataProvider {
             public static final String LOADER_TEST_3_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_03_VC8.sln\" /%s /cfg=\"release|Win32\"";
             public static final String PROP_TEST_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\prop_test\\prop_test_VC8.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ENV_VARS_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\envvars1\\EnvVars1.sln\" /%s /cfg=\"Release|Win32\" ";
-            public static final String PROP_INHERITANCE_1_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_1_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
             public static final String PROP_INHERITANCE_2_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance2\\PropInheritance2.sln\" /%s /cfg=\"Release|Win32\"";
-            public static final String PROP_INHERITANCE_3_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
-            public static final String PROP_INHERITANCE_4_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_3_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_4_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
             public static final String REFERENCES_MACRO_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\ReferencesMacro\\ReferencesMacro.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ACE_BATCH = "C:\\QA\\simulation\\VC8\\ACE_VC8\\ACE_VC8.bat ";
         }
@@ -205,7 +205,7 @@ public class StaticDataProvider {
             public static final String DEP_EVAL_11 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_11_VC9\\DepEval_Test_11_VC9.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_12 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_12_VC9\\IncrediBuild_PreprocessorBug.sln\" /%s /cfg=\"debug|win32\" /title=\"DepEval 12 (division by zero 1)\"";
             public static final String ROOT_INCLUDE = "\"C:\\QA\\Simulation\\VC9\\DepEval\\rootincludebug\\rootincludebug.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String SPACE_IN_COMPILE_SWITCH_BUG = "C:\\QA\\Simulation\\vc9\\SpaceSample\\runme.bat";
+            public static final String SPACE_IN_COMPILE_SWITCH_BUG = "\"C:\\QA\\Simulation\\vc9\\SpaceSample\\runme.bat";
             public static final String DEP_EVAL_SELF_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\IncTests\\IncTests.sln\" /%s /cfg=\"debug|win32\"";
             public static final String BUILD_SYSTEM_SELF_1_TEST = "/selftest:depeval=c:\\qa\\simulation\\VC9\\DepEval\\Inctests\\inctests\\*.cpp";
             public static final String BUILD_SYSTEM_SELF_2_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\Inctests\\inctests\\runme.bat";
@@ -277,7 +277,11 @@ public class StaticDataProvider {
     public static class LinuxCommands{
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
+        public static final String CHECH_IB_SERVICES = "ps ax --forest | grep %s | grep -v \"grep\"";
+        public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db; " +
+                "SELECT %s FROM %S ORDER BY BuildId DESC LIMIT 1; .exit";
     }
+
 
     public static class LinuxMachines{
         public static final String SIM_INITIATOR = "192.168.10.80";
@@ -287,15 +291,38 @@ public class StaticDataProvider {
         public static final String SIM_HELPER_3 = "192.168.10.94";
         public static final String SIM_HELPER_4 = "192.168.10.127";
 
-
         public static final String TEST_MACHINE = "192.168.11.82";
+        public static final String VM_SIM_1A = "192.168.11.103";
     }
 
     public static class LinuxSimulation{
+
+        public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
+        public static final String CD_SAMBA_DIR = "cd /disk2/projects/samba-4.0.7";
+        public static final String CD_CPP_DIR = "cd /disk2/projects/cppunit-1.12.1";
         public static final String CD_APACHE_DIR = "cd /disk2/projects/httpd-2.4.18";
-        public static final String CD_LINUX_DIR = "cd /disk2/projects/linux-4.3.3";
+        public static final String CD_MYSQL_DIR = "cd /disk2/projects/mysql-5.6.11/build";
+        public static final String CD_BOOST_DIR = "cd /home/xoreax/projects/boost_1_60_0";
+        public static final String CD_CMAKE_DIR = "cd /home/xoreax/projects/cmake-3.5.2";
+        public static final String CD_GDB_DIR = "cd /disk2/projects/gdb-7.11";
+        public static final String CD_GIT_DIR = "cd /disk2/projects/git-2.8.1/";
+        public static final String CD_QT_DIR = "cd /disk2/projects/qt-everywhere-opensource-src-4.8.6";
+        public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
+        public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
+
+
         public static final String MAKE_CLEAN = "make clean";
-        public static final String BUILD = "ib_console make -j32";
+        public static final String SCONS_CLEAN = "scons -c";
+        public static final String B2_CLEAN = "./b2 clean";
+        public static final String NINJA_CLEAN = "ninja -C out/Release -t clean";
+
+        //placement strings: 1)flags 2)caption 3)env 4)processes
+
+        public static final String MAKE_BUILD = "ib_console %s -c %s %s make -j%s";
+        public static final String SCONS_BUILD = "ib_console %s -c %s %s scons -j%s";
+        public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
+        public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
+
     }
 
     public static final String TEST = "buildconsole.exe C:\\Users\\Mark\\source\\repos\\ConsoleApplication2\\ConsoleApplication2.sln /%s /cfg=\"release|x64\"";
