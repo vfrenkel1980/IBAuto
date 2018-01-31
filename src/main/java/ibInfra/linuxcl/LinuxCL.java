@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinuxCL extends TestBase implements ILinuxCL {
+    WindowsCLService runCommand = new WindowsCLService();
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
@@ -108,5 +109,21 @@ public class LinuxCL extends TestBase implements ILinuxCL {
             newIpList.add(node.getContent(0).getValue().trim());
         }
         return newIpList;
+    }
+    @Override
+    public boolean isIBServiceUp(String IP, String service) {
+
+        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECH_IB_SERVICES, service));
+
+        if (res == 0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public int runQueryLastBuild(String IP, String fieldName, String sqliteTable){
+        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable));
+        return res;
     }
 }

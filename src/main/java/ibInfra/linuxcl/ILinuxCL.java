@@ -11,4 +11,6 @@ public interface ILinuxCL {
     void deleteLogsFolder(List<String> ipList);
 
     List<String> breakDownIPList(List ipList);
+    boolean isIBServiceUp(String IP, String service);
+    int runQueryLastBuild(String IP, String fieldName, String sqliteTable);
 }
