@@ -1,6 +1,7 @@
 package ibInfra.linuxcl;
 
 import frameworkInfra.testbases.TestBase;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,8 @@ public class LinuxMultiThreaded extends TestBase implements Runnable{
     }
 
     public void run(){
-        runCommand.linuxRunSSHCommand(command, machine);
+        int exitCode = runCommand.linuxRunSSHCommand(command, machine);
+        Assert.assertEquals(exitCode, 1, "Build Failed");
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException e)

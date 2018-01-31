@@ -3,13 +3,7 @@ package linuxtests;
 import frameworkInfra.testbases.LinuxSimTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.linuxcl.LinuxMultiThreaded;
-import org.testng.Assert;
-import org.testng.TestListenerAdapter;
-import org.testng.TestNG;
 import org.testng.annotations.Test;
-import org.testng.collections.Lists;
-
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +21,7 @@ public class LinuxMultiTests extends LinuxSimTestBase {
                 StaticDataProvider.LinuxSimulation.BUILD, StaticDataProvider.LinuxMachines.TEST_MACHINE));
 
         execService.shutdown();
-
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-
     }
 
 /*    public static void main(String[] args) {

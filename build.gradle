@@ -20,6 +20,7 @@ def UI = project.hasProperty("UI")
 def BatmanSim = project.hasProperty("BatmanSim")
 def VmSim = project.hasProperty("VmSim")
 def LinuxCL = project.hasProperty("LinuxCL")
+def LinuxMulti = project.hasProperty("LinuxMulti")
 def Unit = project.hasProperty("Unit")
 
 dependencies {
@@ -74,6 +75,10 @@ test {
 
         if(LinuxCL) {
             suites "src/test/resources/LinuxCL.xml"
+        }
+
+        if(LinuxMulti) {
+            suites "src/test/resources/LinuxMulti.xml"
         }
 
         if(Unit) {
