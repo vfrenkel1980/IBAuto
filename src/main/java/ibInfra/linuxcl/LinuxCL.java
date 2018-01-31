@@ -111,7 +111,7 @@ public class LinuxCL extends TestBase implements ILinuxCL {
         return newIpList;
     }
     @Override
-    public boolean isIBServiceUp(String IP, String service) {
+    public boolean isIBServiceUp( String service, String IP) {
 
         int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECH_IB_SERVICES, service));
 
@@ -122,8 +122,9 @@ public class LinuxCL extends TestBase implements ILinuxCL {
     }
 
     @Override
-    public int runQueryLastBuild(String IP, String fieldName, String sqliteTable){
-        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable));
+    public String runQueryLastBuild(String fieldName, String sqliteTable, String IP){
+       // String res  = runCommand.linuxRunSSHCommandOutputString((StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable) ),IP);
+        String res="";
         return res;
     }
 }

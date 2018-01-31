@@ -278,10 +278,10 @@ public class StaticDataProvider {
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECH_IB_SERVICES = "ps ax --forest | grep %s | grep -v \"grep\"";
-        public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db; " +
-                "SELECT %s FROM %S ORDER BY BuildId DESC LIMIT 1; .exit";
+        public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM $s ORDER BY BuildId DESC LIMIT 1\"";
+        public static final String BUILD_ID = "BuildId";
+        public static final String BUILD_HISTORY = "build_history";
     }
-
 
     public static class LinuxMachines{
         public static final String SIM_INITIATOR = "192.168.10.80";

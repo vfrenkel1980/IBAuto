@@ -58,7 +58,7 @@ public class LinuxSimTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        //buildID = runCommand.linuxRunSSHCommandOutputString(StaticDataProvider.LinuxMachines.VM_SIM_1A, "BuildId", "build_history");
+        buildID = runCommand.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, StaticDataProvider.LinuxMachines.VM_SIM_1A);
         getResult(result);
 
     }
