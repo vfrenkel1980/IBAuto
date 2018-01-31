@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LinuxMultiTests extends LinuxSimTestBase {
 
-    @Test(testName = "Multi")
+/*    @Test(testName = "Multi")
     public static void Multi() throws InterruptedException {
 
         ExecutorService execService = Executors.newFixedThreadPool(2);
@@ -22,7 +22,7 @@ public class LinuxMultiTests extends LinuxSimTestBase {
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-    }
+    }*/
 
 /*    public static void main(String[] args) {
         ExecutorService execService = Executors.newFixedThreadPool(2);
