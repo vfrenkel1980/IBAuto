@@ -20,6 +20,7 @@ import java.util.List;
 public class LinuxCL extends TestBase implements ILinuxCL {
     WindowsCLService runCommand = new WindowsCLService();
 
+
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
         JSch jsch = new JSch();
@@ -110,11 +111,10 @@ public class LinuxCL extends TestBase implements ILinuxCL {
         }
         return newIpList;
     }
+
     @Override
-    public boolean isIBServiceUp( String service, String IP) {
-
-        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECH_IB_SERVICES, service));
-
+    public boolean isIBServiceUp(String service, String IP) {
+        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
         if (res == 0)
             return true;
         else
@@ -122,9 +122,8 @@ public class LinuxCL extends TestBase implements ILinuxCL {
     }
 
     @Override
-    public String runQueryLastBuild(String fieldName, String sqliteTable, String IP){
-       // String res  = runCommand.linuxRunSSHCommandOutputString((StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable) ),IP);
-        String res="";
+    public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException {
+        String res  = linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
         return res;
     }
 }

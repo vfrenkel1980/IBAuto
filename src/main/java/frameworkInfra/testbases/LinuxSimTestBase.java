@@ -5,6 +5,7 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxCL;
 import org.testng.ITestResult;
+import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -28,11 +29,10 @@ public class LinuxSimTestBase extends TestBase {
 
         rawIpList = XmlParser.getIpList();
         ipList = runCommand.breakDownIPList(rawIpList);
-        //runCommand.deleteLogsFolder(ipList);
+        runCommand.deleteLogsFolder(ipList);
 
-        if(!runCommand.isIBServiceUp(StaticDataProvider.LinuxMachines.VM_SIM_1A, "ib_server")) {
-           test.log(Status.ERROR, "IB service is down... Exiting!");
-            System.exit(1);
+        if(!runCommand.isIBServiceUp("ib_server", StaticDataProvider.LinuxMachines.VM_SIM_1A)) {
+           test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
         }
     }
 
@@ -48,7 +48,7 @@ public class LinuxSimTestBase extends TestBase {
         if (result.getStatus() == ITestResult.SUCCESS) {
             test.log(Status.PASS, result.getName() + " test passed");
         } else if (result.getStatus() == ITestResult.SKIP) {
-            test.log(Status.SKIP, result.getName() + " test skipped");
+            test.log(Status.SKIP, result.getName() + " test skipped - Build ID = " + buildID);
         } else if (result.getStatus() == ITestResult.FAILURE) {
             test.log(Status.ERROR, result.getName() + " test has failed - Build ID = " + buildID + result.getThrowable());
             String path = captureScreenshot(result.getName());
@@ -57,9 +57,8 @@ public class LinuxSimTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
         buildID = runCommand.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, StaticDataProvider.LinuxMachines.VM_SIM_1A);
         getResult(result);
-
     }
 }

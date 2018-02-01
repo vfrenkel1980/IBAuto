@@ -11,6 +11,8 @@ public interface ILinuxCL {
     void deleteLogsFolder(List<String> ipList);
 
     List<String> breakDownIPList(List ipList);
+
     boolean isIBServiceUp(String service, String IP);
-    String runQueryLastBuild(String fieldName, String sqliteTable, String IP);
+
+    String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException;
 }

@@ -149,10 +149,10 @@ public class StaticDataProvider {
             public static final String LOADER_TEST_3_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_03_VC8.sln\" /%s /cfg=\"release|Win32\"";
             public static final String PROP_TEST_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\prop_test\\prop_test_VC8.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ENV_VARS_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\envvars1\\EnvVars1.sln\" /%s /cfg=\"Release|Win32\" ";
-            public static final String PROP_INHERITANCE_1_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_1_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance1\\AutomiseRun.bat ";
             public static final String PROP_INHERITANCE_2_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance2\\PropInheritance2.sln\" /%s /cfg=\"Release|Win32\"";
-            public static final String PROP_INHERITANCE_3_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
-            public static final String PROP_INHERITANCE_4_BATCH = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_3_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance3\\AutomiseRun.bat ";
+            public static final String PROP_INHERITANCE_4_BATCH = "C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance4\\AutomiseRun.bat ";
             public static final String REFERENCES_MACRO_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\ReferencesMacro\\ReferencesMacro.sln\" /%s /cfg=\"Release|Win32\"";
             public static final String ACE_BATCH = "C:\\QA\\simulation\\VC8\\ACE_VC8\\ACE_VC8.bat ";
         }
@@ -208,8 +208,7 @@ public class StaticDataProvider {
             public static final String SPACE_IN_COMPILE_SWITCH_BUG = "\"C:\\QA\\Simulation\\vc9\\SpaceSample\\runme.bat";
             public static final String DEP_EVAL_SELF_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\IncTests\\IncTests.sln\" /%s /cfg=\"debug|win32\"";
             public static final String BUILD_SYSTEM_SELF_1_TEST = "/selftest:depeval=c:\\qa\\simulation\\VC9\\DepEval\\Inctests\\inctests\\*.cpp";
-            public static final String BUILD_SYSTEM_SELF_2_TEST = "\"C:\\QA\\Simulation\\VC9\\DepEval\\Inctests\\inctests\\runme.bat";
-
+            public static final String BUILD_SYSTEM_SELF_2_TEST = "C:\\QA\\Simulation\\VC9\\DepEval\\Inctests\\inctests\\runme.bat";
         }
 
         public static class VC10_VMSIM {
@@ -277,8 +276,8 @@ public class StaticDataProvider {
     public static class LinuxCommands{
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
-        public static final String CHECH_IB_SERVICES = "ps ax --forest | grep %s | grep -v \"grep\"";
-        public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM $s ORDER BY BuildId DESC LIMIT 1\"";
+        public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
+        public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
     }

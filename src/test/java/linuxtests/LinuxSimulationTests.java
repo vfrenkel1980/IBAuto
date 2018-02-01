@@ -44,7 +44,6 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
     }
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
-    //@Test(testName = "MyName", invocationCount = 3)
 
     @Test(testName = "Sim Kernel")
     public void SimTestKernel(){
@@ -52,7 +51,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -62,7 +61,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -73,7 +72,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Samba", "env JOBS=32", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_SAMBA_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -84,7 +83,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Cpp", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CPP_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -95,7 +94,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","MySQL", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_MYSQL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -106,7 +105,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.B2_BUILD, "", "Boost", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_BOOST_DIR + ";" + StaticDataProvider.LinuxSimulation.B2_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -117,7 +116,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -128,7 +127,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","GDB", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GDB_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -139,7 +138,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -150,7 +149,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","QT", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_QT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -161,7 +160,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD,"","MongoDB", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_MONGODB_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
@@ -172,12 +171,9 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.NINJA_BUILD,"","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
 
 
-        Assert.assertEquals(1, 1, ":(");
+        Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CHROMIUM_DIR + ";" + StaticDataProvider.LinuxSimulation.NINJA_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
 
 }
-
-
-// public static final String MAKE_BUILD = "ib_console %s -c %s %s make -j%s";

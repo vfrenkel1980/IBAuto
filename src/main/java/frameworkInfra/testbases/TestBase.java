@@ -92,7 +92,7 @@ public class TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result) throws IOException, InterruptedException {
         getResult(result);
     }
 
