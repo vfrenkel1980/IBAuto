@@ -6,9 +6,7 @@ import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxCL;
 import org.testng.ITestResult;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -29,7 +27,7 @@ public class LinuxSimTestBase extends TestBase {
 
         rawIpList = XmlParser.getIpList();
         ipList = runCommand.breakDownIPList(rawIpList);
-        runCommand.deleteLogsFolder(ipList);
+        //runCommand.deleteLogsFolder(ipList);
 
         if(!runCommand.isIBServiceUp("ib_server", StaticDataProvider.LinuxMachines.VM_SIM_1A)) {
            test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
@@ -37,10 +35,11 @@ public class LinuxSimTestBase extends TestBase {
     }
 
     @BeforeMethod
-    public void beforeMethod(Method method){
+    @Parameters({"cycle"})
+    public void beforeMethod(Method method, String cycle){
         testName = getTestName(method);
         test = extent.createTest(testName);
-        test.assignCategory("Linux Simulation");
+        test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.log(Status.INFO, method.getName() + " test started");
     }
 
@@ -50,7 +49,7 @@ public class LinuxSimTestBase extends TestBase {
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.log(Status.SKIP, result.getName() + " test skipped - Build ID = " + buildID);
         } else if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.ERROR, result.getName() + " test has failed - Build ID = " + buildID + result.getThrowable());
+            test.log(Status.ERROR, result.getName() + " test has failed - Build ID = " + buildID + "------->" + result.getThrowable());
             String path = captureScreenshot(result.getName());
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         }

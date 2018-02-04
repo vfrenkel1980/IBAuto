@@ -8,21 +8,21 @@ import org.testng.annotations.Test;
 
 public class LinuxSimulationTests extends LinuxSimTestBase {
 //---------------------------------------------------------------------------------------------------------------------------------------------
-    @Test(testName = "Linux threads" )
+/*    @Test(testName = "Linux threads" )
     public void runIbConsoleAndVerifyResult() throws InterruptedException {
-//        threads thread1 = new threads();
-//        thread1.start();
-//        threads thread2 = new threads();
-//        thread2.start();
+        threads thread1 = new threads();
+        thread1.start();
+        threads thread2 = new threads();
+        thread2.start();
 
 
 
-//       int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" + StaticDataProvider.LinuxSimulation.BUILD,
-//               StaticDataProvider.LinuxMachines.TEST_MACHINE);
-//
-//        Assert.assertTrue(exitCode  == 0 || exitCode == 2, "build failed");
+       int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" + StaticDataProvider.LinuxSimulation.BUILD,
+               StaticDataProvider.LinuxMachines.TEST_MACHINE);
 
-/*        LinuxCL runCommand = new LinuxCL();
+        Assert.assertTrue(exitCode  == 0 || exitCode == 2, "build failed");
+
+        LinuxCL runCommand = new LinuxCL();
 
         String success = "//*[@id=\"build_history_contentholder_table\"]/tbody/tr[1]/td[2]/div/div[2]";
         String navigateCommand = "cd /disk2/projects/httpd-2.4.18";
@@ -40,12 +40,12 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         Thread.sleep(10000);
         String result = driver.findElement(By.xpath(success)).getText();
         Assert.assertEquals(result, "Completed", "Result did not match expected");
-        driver.close();*/
-    }
+        driver.close();
+    }*/
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    @Test(testName = "Sim Kernel")
+/*    @Test(testName = "Sim Kernel")
     public void SimTestKernel(){
         int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
@@ -130,7 +130,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GDB_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
-    }
+    }*/
 
     @Test(testName = "Sim Git")
     public void SimTestGit(){
@@ -143,7 +143,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
     }
 
-    @Test(testName = "Sim QT")
+/*    @Test(testName = "Sim QT")
     public void SimTestQT(){
         int exitCode = runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_QT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","QT", "", "32"), StaticDataProvider.LinuxMachines.VM_SIM_1A);
@@ -174,6 +174,6 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         Assert.assertEquals(1, exitCode, "Test failed with Exit code " + exitCode);
 
         runCommand.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CHROMIUM_DIR + ";" + StaticDataProvider.LinuxSimulation.NINJA_CLEAN + ";", StaticDataProvider.LinuxMachines.VM_SIM_1A);
-    }
+    }*/
 
 }
