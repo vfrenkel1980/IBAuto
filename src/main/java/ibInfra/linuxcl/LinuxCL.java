@@ -70,9 +70,10 @@ public class LinuxCL extends TestBase implements ILinuxCL {
             //Set password
             session.setPassword("xoreax");
             session.connect();
-            test.log(Status.INFO, "Successfully connected to " + hostIP);
-            test.log(Status.INFO, "Running command " + command);
-
+            if (test != null) {
+                test.log(Status.INFO, "Successfully connected to " + hostIP);
+                test.log(Status.INFO, "Running command " + command);
+            }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);
             channelExec.connect();
@@ -88,7 +89,9 @@ public class LinuxCL extends TestBase implements ILinuxCL {
             channelExec.disconnect();
             return commandOutput.toString();
         } catch (JSchException | IOException e) {
-            test.log(Status.ERROR, "Connection error occurred");
+            if (test !=null) {
+                test.log(Status.ERROR, "Connection error occurred");
+            }
             e.printStackTrace();
             return "Unable to get result output from command " + command;
         }

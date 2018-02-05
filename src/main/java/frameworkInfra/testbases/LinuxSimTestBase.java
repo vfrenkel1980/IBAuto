@@ -1,6 +1,9 @@
 package frameworkInfra.testbases;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxCL;
@@ -10,14 +13,30 @@ import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class LinuxSimTestBase extends TestBase {
 
-    public LinuxCL runCommand = new LinuxCL();
-    private List rawIpList;
-    public List<String> ipList;
+    public static LinuxCL runCommand = new LinuxCL();
+    private static List rawIpList;
+    public static List<String> ipList;
     String buildID;
+    private static String ibVersion = "";
+
+    static {
+        rawIpList = XmlParser.getIpList();
+        ipList = runCommand.breakDownIPList(rawIpList);
+        ibVersion = getIBVersion();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+    }
 
     @BeforeSuite
     public void envSetUp(){
@@ -25,8 +44,6 @@ public class LinuxSimTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
 
-        rawIpList = XmlParser.getIpList();
-        ipList = runCommand.breakDownIPList(rawIpList);
         //runCommand.deleteLogsFolder(ipList);
 
         if(!runCommand.isIBServiceUp("ib_server", StaticDataProvider.LinuxMachines.VM_SIM_1A)) {
@@ -60,4 +77,16 @@ public class LinuxSimTestBase extends TestBase {
         buildID = runCommand.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, StaticDataProvider.LinuxMachines.VM_SIM_1A);
         getResult(result);
     }
+
+    private static String getIBVersion() {
+        LinuxCL runCommand = new LinuxCL();
+        try {
+            ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+        } catch (InterruptedException e) {
+            e.getMessage();
+        }
+        return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
+    }
+
+
 }
