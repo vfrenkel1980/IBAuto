@@ -45,12 +45,5 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Test" , groups = { "Build" })
-    public void test(){
-        int returnCode = UnitTestBase.cleanAndBuild(String.format(StaticDataProvider.TEST, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-
 
 }

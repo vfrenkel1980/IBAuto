@@ -22,6 +22,7 @@ def VmSim = project.hasProperty("VmSim")
 def LinuxCL = project.hasProperty("LinuxCL")
 def LinuxMulti = project.hasProperty("LinuxMulti")
 def Unit = project.hasProperty("Unit")
+def VSPreview = project.hasProperty("VSPreview")
 
 dependencies {
     //testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -43,7 +44,7 @@ dependencies {
 
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.23.0'
-    compile group: 'io.appium', name: 'java-client', version: '5.0.3'
+    compile group: 'io.appium', name: 'java-client', version: '5.0.4'
 
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
     compile group: 'org.uncommons', name: 'reportng', version: '1.1.4'
@@ -83,6 +84,10 @@ test {
 
         if(Unit) {
             suites "src/test/resources/Unit.xml"
+        }
+
+        if(VSPreview) {
+            suites "src/test/resources/VSPreview.xml"
         }
     }
 
