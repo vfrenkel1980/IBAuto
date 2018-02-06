@@ -7,6 +7,7 @@ public class StaticDataProvider {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
         public static final String IB_ROOT = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
+        public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
     }
 
@@ -16,6 +17,7 @@ public class StaticDataProvider {
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "buildsystem ";
+        public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
     }
 
     //projects
@@ -271,6 +273,13 @@ public class StaticDataProvider {
         public static final String STANDALONE_MODE = "Standalone";
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
+    }
+
+    public static class WindowsCommands{
+        public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent";
+        public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
+        public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\" /fi \"status eq running\"";
+        public static final String APPLY_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\IncrediBuild-tests_VS_preview.IB_lic\"";
     }
 
     public static class LinuxCommands{

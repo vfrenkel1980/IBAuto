@@ -1,5 +1,7 @@
 package uitests;
 
+import ibInfra.vsui.VSUIService;
+import ibInfra.windowscl.WindowsCLService;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import frameworkInfra.sikuli.sikulimapping.ibmonitor.IBMonitor;
 import frameworkInfra.testbases.VSTestBase;
@@ -14,12 +16,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VSTests extends VSTestBase {
+public class VSTests /*extends VSTestBase*/ {
 
 
     @Test
     public void test() {
-
+        WindowsCLService run = new WindowsCLService();
+        run.waitForProcessToFinish("devenv.exe");
     }
 
 }
