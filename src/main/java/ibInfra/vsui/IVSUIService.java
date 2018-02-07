@@ -10,6 +10,10 @@ public interface IVSUIService  {
 
     void upgradeVSWithIB();
 
+    void openProject(String projectPath);
+
+    void executeBuild(String action);
+
 
 
 }

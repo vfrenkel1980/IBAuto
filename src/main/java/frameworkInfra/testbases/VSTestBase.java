@@ -7,6 +7,7 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import com.aventstack.extentreports.Status;
 import ibInfra.vsui.VSUIService;
+import ibInfra.windowscl.IWindowsCL;
 import ibInfra.windowscl.WindowsCLService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.PropertyConfigurator;
@@ -32,7 +33,9 @@ public class VSTestBase extends TestBase {
     private static int ibVersion = 0;
     public VSUIService vsServie = new VSUIService();
 
+
     static {
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + ".html");
@@ -41,11 +44,11 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    @Parameters({"scenario"})
-    public static void setUpEnv(String scenario) {
+    //@Parameters({"scenario"})
+    public static void setUpEnv(/*String scenario*/) {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
-        if (scenario.equals("1")) {
+/*        if (scenario.equals("1")) {
 
         }
 
@@ -55,12 +58,11 @@ public class VSTestBase extends TestBase {
         if (scenario.equals("3"))
             System.out.println("scenario 3");
         if (scenario.equals("4"))
-            System.out.println("scenario 4");
+            System.out.println("scenario 4");*/
     }
 
     @BeforeMethod
-    @Parameters({"scenario"})
-    public void beforeMethod(Method method, String scenario, ITestContext context){
+    public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
@@ -69,7 +71,7 @@ public class VSTestBase extends TestBase {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             test.log(Status.INFO, "Opening VS2017");
             capabilities.setCapability("app", "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe");
-            driver = new WindowsDriver(new URL("http://192.168.10.162:4723"), capabilities);
+            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
         } catch (MalformedURLException e) {

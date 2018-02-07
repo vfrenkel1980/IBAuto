@@ -2,6 +2,7 @@ package ibInfra.windowscl;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
@@ -13,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class WindowsCLService extends TestBase implements IWindowsCL{
 
@@ -114,6 +117,7 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
         String output;
         while (isRunning){
             output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            System.out.println(output);
             if (output.contains("INFO: No tasks are running")){
                 isRunning = false;
             }

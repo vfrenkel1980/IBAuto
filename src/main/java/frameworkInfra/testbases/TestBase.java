@@ -40,7 +40,7 @@ public class TestBase {
 
 
     @BeforeSuite
-    public static void cleanup() throws IOException {
+    public static void cleanup(){
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
     }
 

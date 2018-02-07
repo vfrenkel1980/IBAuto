@@ -20,6 +20,12 @@ public class StaticDataProvider {
         public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
     }
 
+    public static class VsActions{
+        public static final String BUILD_SOLUTION = "Build Solution";
+        public static final String REBUILD_SOLUTION = "Rebuild Solution";
+        public static final String CLEAN_SOLUTION = "Clean Solution";
+    }
+
     //projects
     public static class ProjectsCommands {
         public static final String CLEAN = "clean ";
