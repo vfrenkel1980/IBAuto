@@ -2,8 +2,6 @@ package ibInfra.windowscl;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.testbases.WindowsTestBase;
-import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
@@ -14,11 +12,11 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-
-public class WindowsCLService extends TestBase implements IWindowsCL{
+public class WindowsService extends TestBase implements IWindowsService {
 
     @Override
     public int runCommandWaitForFinish(String command) {
@@ -73,46 +71,6 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
     }
 
     @Override
-    public int cleanAndBuild(String command) {
-        runCommandWaitForFinish(String.format(command, StaticDataProvider.ProjectsCommands.CLEAN));
-        return runCommandWaitForFinish(String.format(command, StaticDataProvider.ProjectsCommands.BUILD));
-    }
-
-
-    @Override
-    public void installIB() {
-        String installationFile = getIbConsoleInstallation();
-        runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND, installationFile));
-        loadIbLicense();
-    }
-
-    @Override
-    public String getIbConsoleInstallation() {
-        String path = "c:\\bld";
-        String postFix = "console.exe";
-        String installerName = "";
-        try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), "*" + postFix)) {
-            for (final Path newDirectoryStreamItem : newDirectoryStream) {
-                installerName = String.valueOf(newDirectoryStreamItem);
-            }
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-        return installerName;
-    }
-
-    @Override
-    public void loadIbLicense() {
-        runCommandWaitForFinish(StaticDataProvider.WindowsCommands.APPLY_IB_LICENSE);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        runCommandWaitForFinish(StaticDataProvider.WindowsCommands.KILL_COORDMON);
-    }
-
-    @Override
     public void waitForProcessToFinish(String processName) {
         boolean isRunning = true;
         String output;
@@ -149,6 +107,8 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
         }
         return pid;
     }
+
+
 
 
 }

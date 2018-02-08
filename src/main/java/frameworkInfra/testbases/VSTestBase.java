@@ -2,23 +2,17 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.SystemActions;
 import com.aventstack.extentreports.Status;
+import ibInfra.ibService.IIBService;
+import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
-import ibInfra.windowscl.IWindowsCL;
-import ibInfra.windowscl.WindowsCLService;
+import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.sikuli.script.FindFailed;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -27,14 +21,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-
 public class VSTestBase extends TestBase {
 
     public static WindowsDriver driver = null;
     private static int ibVersion = 0;
     public VSUIService vsService = new VSUIService();
-    public WindowsCLService runWin = new WindowsCLService();
+    public WindowsService runWin = new WindowsService();
+    public IbService runIb = new IbService();
 
 
     static {
@@ -52,7 +45,7 @@ public class VSTestBase extends TestBase {
         test.log(Status.INFO, "Before class started");
         //vs installed, install IB from installer
         if (scenario.equals("1")) {
-            runWin.installIB();
+            runIb.installIB();
         }
 
         //upgrade vs and install IB from vs installer
@@ -62,8 +55,10 @@ public class VSTestBase extends TestBase {
 
         //install old IB, install vs and upgrade IB from VS installer
         if (scenario.equals("3")){
-            runWin.installIB();
+            runIb.installIB();
+            int oldIbVersion = IIBService.getIbVersion();
             vsService.installVSWithIB();
+            ibVersion = IIBService.getIbVersion();
         }
 
         //install vs without IB

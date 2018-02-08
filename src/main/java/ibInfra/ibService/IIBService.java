@@ -1,16 +1,11 @@
-package ibInfra.windowscl;
-
+package ibInfra.ibService;
 
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
-public interface IWindowsCL {
-
-    int runCommandWaitForFinish(String command);
-
-    String runCommandGetOutput(String command);
+public interface IIBService {
 
     int cleanAndBuild(String command);
 
@@ -27,10 +22,5 @@ public interface IWindowsCL {
 
     void loadIbLicense();
 
-    void waitForProcessToFinish(String processName);
-
-    void waitForProcessToStart(String processName);
-
-    String getProcessPid(String processName);
-
+    String getIbVsExtensionVersion();
 }

@@ -2,7 +2,7 @@ package ibInfra.linuxcl;
 
 import java.util.List;
 
-public interface ILinuxCL {
+public interface ILinuxService {
 
     int linuxRunSSHCommand(String command, String hostIP);
 

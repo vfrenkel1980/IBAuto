@@ -1,19 +1,11 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.ConfigurationReader;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.SystemActions;
-import ibInfra.windowscl.WindowsCLService;
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-
-public class VmBCTestBase extends WindowsTestBase {
+public class VmSimTestBase extends WindowsTestBase {
 
     @BeforeMethod
     @Parameters ({ "logLevel"})
