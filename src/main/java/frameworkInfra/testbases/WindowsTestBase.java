@@ -64,7 +64,6 @@ public class WindowsTestBase extends TestBase {
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
         runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
-
     }
 
     @BeforeClass
