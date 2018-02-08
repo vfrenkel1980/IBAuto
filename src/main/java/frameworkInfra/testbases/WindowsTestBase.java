@@ -58,6 +58,7 @@ public class WindowsTestBase extends TestBase {
         SystemActions.killProcess(StaticDataProvider.Processes.TRAY_ICON);
         //delete logs folder
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.IB_ROOT + "\\logs", "*");
+        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.IB_ROOT + "\\logs\\Helper", "*");
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
