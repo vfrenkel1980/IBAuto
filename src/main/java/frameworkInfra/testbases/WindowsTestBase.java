@@ -19,7 +19,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class WindowsTestBase extends TestBase {
 
-    protected WindowsCLService runCommand = new WindowsCLService();
+    protected WindowsCLService runWin = new WindowsCLService();
     private static int ibVersion = 0;
 
     static {
@@ -53,7 +53,7 @@ public class WindowsTestBase extends TestBase {
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
         //stop agent service
-        runCommand.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        runWin.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //kill tray icon
         SystemActions.killProcess(StaticDataProvider.Processes.TRAY_ICON);
         //delete logs folder
@@ -61,7 +61,7 @@ public class WindowsTestBase extends TestBase {
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
-        runCommand.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
 
     }
 
@@ -79,7 +79,7 @@ public class WindowsTestBase extends TestBase {
     @AfterSuite
     public void postSimulation(){
         //stop agent service
-        runCommand.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        runWin.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //copy logs to backup folder
         SystemActions.copyFilesByExtension(StaticDataProvider.Locations.IB_ROOT + "\\logs",
                 StaticDataProvider.Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
@@ -88,7 +88,7 @@ public class WindowsTestBase extends TestBase {
 
 
         //start agent service
-        runCommand.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         SystemActions.startProcess(StaticDataProvider.Locations.IB_ROOT + "\\" + StaticDataProvider.Processes.TRAY_ICON);
     }
 

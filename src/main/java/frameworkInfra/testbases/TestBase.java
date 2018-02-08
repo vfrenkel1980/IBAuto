@@ -38,7 +38,6 @@ public class TestBase {
     public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
 
-
     @BeforeSuite
     public static void cleanup(){
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");

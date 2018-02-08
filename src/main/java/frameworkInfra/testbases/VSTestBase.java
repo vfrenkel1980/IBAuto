@@ -12,6 +12,7 @@ import ibInfra.windowscl.WindowsCLService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.sikuli.script.FindFailed;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -29,13 +30,14 @@ import java.util.concurrent.TimeUnit;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VSTestBase extends TestBase {
+
     public static WindowsDriver driver = null;
     private static int ibVersion = 0;
-    public VSUIService vsServie = new VSUIService();
+    public VSUIService vsService = new VSUIService();
+    public WindowsCLService runWin = new WindowsCLService();
 
 
     static {
-
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + ".html");
@@ -44,21 +46,31 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    //@Parameters({"scenario"})
-    public static void setUpEnv(/*String scenario*/) {
+    @Parameters({"scenario"})
+    public void setUpEnv(String scenario) {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
-/*        if (scenario.equals("1")) {
-
+        //vs installed, install IB from installer
+        if (scenario.equals("1")) {
+            runWin.installIB();
         }
 
+        //upgrade vs and install IB from vs installer
         if (scenario.equals("2")) {
-            test.log(Status.INFO,"2");
+            vsService.upgradeVSWithIB();
         }
-        if (scenario.equals("3"))
-            System.out.println("scenario 3");
-        if (scenario.equals("4"))
-            System.out.println("scenario 4");*/
+
+        //install old IB, install vs and upgrade IB from VS installer
+        if (scenario.equals("3")){
+            runWin.installIB();
+            vsService.installVSWithIB();
+        }
+
+        //install vs without IB
+        if (scenario.equals("4")){
+            vsService.installVSWithoutIB();
+        }
+
     }
 
     @BeforeMethod
@@ -74,11 +86,16 @@ public class VSTestBase extends TestBase {
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
+            try {
+                driver.findElementByName("Not now, maybe later.").click();
+                vsService.vsFirstActivation();
+            } catch (Exception e){
+                e.getMessage();
+            }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
-
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
@@ -89,10 +106,4 @@ public class VSTestBase extends TestBase {
         getResult(result);
     }
 
-    private static int getIBVersion(){
-        String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.VERSION);
-        int version = Integer.parseInt(regVersion);
-        version -= 1001000;
-        return version;
-    }
 }

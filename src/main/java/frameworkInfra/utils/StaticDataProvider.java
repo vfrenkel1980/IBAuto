@@ -284,8 +284,12 @@ public class StaticDataProvider {
     public static class WindowsCommands{
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent";
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
-        public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\" /fi \"status eq running\"";
+        public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String APPLY_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\IncrediBuild-tests_VS_preview.IB_lic\"";
+        public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -q --norestart";
+        public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+
     }
 
     public static class LinuxCommands{

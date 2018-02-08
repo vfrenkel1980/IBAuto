@@ -29,6 +29,8 @@ public interface IWindowsCL {
 
     void waitForProcessToFinish(String processName);
 
+    void waitForProcessToStart(String processName);
+
     String getProcessPid(String processName);
 
 }

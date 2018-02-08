@@ -5,7 +5,7 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import frameworkInfra.testbases.TestBase;
+import frameworkInfra.testbases.LinuxSimTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.windowscl.WindowsCLService;
 import org.jdom2.Element;
@@ -17,9 +17,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinuxCL extends TestBase implements ILinuxCL {
-    WindowsCLService runCommand = new WindowsCLService();
-
+public class LinuxCL extends LinuxSimTestBase implements ILinuxCL {
+    private WindowsCLService runWin = new WindowsCLService();
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
@@ -99,9 +98,8 @@ public class LinuxCL extends TestBase implements ILinuxCL {
 
     @Override
     public void deleteLogsFolder(List<String> ipList) {
-        WindowsCLService runCommand = new WindowsCLService();
         for (Object machine : ipList) {
-            runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
+            runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
         }
     }
 
@@ -117,7 +115,7 @@ public class LinuxCL extends TestBase implements ILinuxCL {
 
     @Override
     public boolean isIBServiceUp(String service, String IP) {
-        int res = runCommand.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
+        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
         if (res == 0)
             return true;
         else

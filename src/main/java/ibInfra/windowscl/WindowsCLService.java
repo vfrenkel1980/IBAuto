@@ -2,6 +2,7 @@ package ibInfra.windowscl;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import org.jutils.jprocesses.JProcesses;
@@ -25,7 +26,7 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
         int exitStatus = 0;
         try {
             Runtime rt = Runtime.getRuntime();
-            //test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            test.log(Status.INFO, "Running command " + command + " - Waiting for result");
             Process pr = rt.exec(command);
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
@@ -36,7 +37,7 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
 
             exitStatus = pr.waitFor();
             System.out.println("Command " + command + " - Completed Successfully");
-            //test.log(Status.INFO, "Command " + command + " - Completed Successfully");
+            test.log(Status.INFO, "Command " + command + " - Completed Successfully");
         } catch(Exception e) {
             test.log(Status.ERROR, "Failed to run command.\n" +
                     "Command: " + command +"\n"+
@@ -120,6 +121,19 @@ public class WindowsCLService extends TestBase implements IWindowsCL{
             System.out.println(output);
             if (output.contains("INFO: No tasks are running")){
                 isRunning = false;
+            }
+        }
+    }
+
+    @Override
+    public void waitForProcessToStart(String processName) {
+        boolean notRunning = true;
+        String output;
+        while (notRunning){
+            output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            System.out.println(output);
+            if (!output.contains("INFO: No tasks are running")){
+                notRunning = false;
             }
         }
     }

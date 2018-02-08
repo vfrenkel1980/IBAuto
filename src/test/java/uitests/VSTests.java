@@ -51,4 +51,20 @@ public class VSTests extends VSTestBase {
         }
     }
 
+    @Test
+    public void test2() throws MalformedURLException {
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("app", "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe");
+        driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        try {
+            vsService.vsFirstActivation();
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+
+    }
+
 }

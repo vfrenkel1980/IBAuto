@@ -1,12 +1,12 @@
 package ibInfra.vsui;
 
-import frameworkInfra.testbases.TestBase;
-import ibInfra.windowscl.WindowsCLService;
+import frameworkInfra.testbases.WindowsTestBase;
+import frameworkInfra.utils.StaticDataProvider;
+
 
 import static frameworkInfra.testbases.VSTestBase.driver;
 
-public class VSUIService extends TestBase implements IVSUIService {
-    WindowsCLService runWin = new WindowsCLService();
+public class VSUIService extends WindowsTestBase implements IVSUIService {
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
@@ -15,17 +15,23 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void installVSWithIB() {
-
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WITH_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void installVSWithoutIB() {
-
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WO_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void upgradeVSWithIB() {
-
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VS_WITH_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
