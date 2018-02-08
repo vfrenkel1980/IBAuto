@@ -4,11 +4,9 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
-import ibInfra.windowscl.IWindowsService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.*;
@@ -61,6 +59,7 @@ public class WindowsTestBase extends TestBase {
         SystemActions.killProcess(Processes.TRAY_ICON);
         //delete logs folder
         SystemActions.deleteFilesByPrefix(Locations.IB_ROOT + "\\logs", "*");
+        SystemActions.deleteFilesByPrefix(Locations.IB_ROOT + "\\logs\\Helper", "*");
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
