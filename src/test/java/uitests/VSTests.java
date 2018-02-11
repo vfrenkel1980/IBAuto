@@ -1,5 +1,8 @@
 package uitests;
 
+import frameworkInfra.testbases.TestBase;
+import frameworkInfra.testbases.WindowsTestBase;
+import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
 import ibInfra.windowscl.WindowsService;
@@ -12,7 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class VSTests /*extends VSTestBase*/ {
+public class VSTests /*extends TestBase*/ {
 
 
     @Test
@@ -44,10 +47,8 @@ public class VSTests /*extends VSTestBase*/ {
 
     @Test
     public void test2(){
-        IbService bla = new IbService();
-        System.out.println(bla.getIbVsExtensionVersion());
-
-
+        System.out.println("test started");
+        System.out.println("test finished");
     }
 
 }

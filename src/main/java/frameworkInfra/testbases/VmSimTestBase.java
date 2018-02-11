@@ -17,5 +17,6 @@ public class VmSimTestBase extends WindowsTestBase {
         if (logLevel.equals("0"))
             test.assignCategory("VmSim CL - Minimal logging");
         test.log(Status.INFO, method.getName() + " test started");
+        log.info(method.getName() + " test started");
     }
 }

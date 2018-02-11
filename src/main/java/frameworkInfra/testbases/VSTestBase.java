@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
@@ -73,6 +74,7 @@ public class VSTestBase extends TestBase {
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
+        log.info(method.getName() + " test started");
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();

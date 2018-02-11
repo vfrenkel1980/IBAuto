@@ -38,6 +38,7 @@ public class WindowsTestBase extends TestBase {
         test = extent.createTest("Before Suite");
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
+        log.info("BEFORE SUITE started");
 
         String currentMsBuildReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.MSBUILD);
         String currentPredictedReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.PREDICTED);
@@ -74,6 +75,8 @@ public class WindowsTestBase extends TestBase {
         test = extent.createTest("Before Class - Change Logging Level to " + logLevel);
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
+        log.info("BEFORE CLASS started - Change Logging Level to" + logLevel);
+
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel );
     }
 
@@ -91,6 +94,7 @@ public class WindowsTestBase extends TestBase {
         //start agent service
         runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         SystemActions.startProcess(Locations.IB_ROOT + "\\" + Processes.TRAY_ICON);
+        log.info("Suite finished");
     }
 
     private void verifyRegistry(String required, String current, String keyName){

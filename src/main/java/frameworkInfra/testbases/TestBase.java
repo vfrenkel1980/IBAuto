@@ -33,6 +33,7 @@ public class TestBase {
     @BeforeSuite
     public static void cleanup(){
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
+        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
     }
 
     @BeforeClass
@@ -57,6 +58,7 @@ public class TestBase {
             String path = captureScreenshot(result.getName());
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         }
+        log.info(result.getName() + "test finished");
     }
 
     public String captureScreenshot(String fileName){
