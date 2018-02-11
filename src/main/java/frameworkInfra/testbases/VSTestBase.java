@@ -29,7 +29,7 @@ public class VSTestBase extends TestBase {
     public VSUIService vsService = new VSUIService();
     public WindowsService runWin = new WindowsService();
     public IbService runIb = new IbService();
-
+    private String SCENARIO = System.getProperty("scenario");
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -40,22 +40,22 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    @Parameters({"scenario"})
-    public void setUpEnv(String scenario) {
+    /*@Parameters({"scenario"})*/
+    public void setUpEnv(/*String scenario*/) {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
         //vs installed, install IB from installer
-        if (scenario.equals("1")) {
+        if (SCENARIO.equals("1")) {
             runIb.installIB();
         }
 
         //upgrade vs and install IB from vs installer
-        if (scenario.equals("2")) {
+        if (SCENARIO.equals("2")) {
             vsService.upgradeVSWithIB();
         }
 
         //install old IB, install vs and upgrade IB from VS installer
-        if (scenario.equals("3")){
+        if (SCENARIO.equals("3")){
             runIb.installIB();
             int oldIbVersion = IIBService.getIbVersion();
             vsService.installVSWithIB();
@@ -63,7 +63,7 @@ public class VSTestBase extends TestBase {
         }
 
         //install vs without IB
-        if (scenario.equals("4")){
+        if (SCENARIO.equals("4")){
             vsService.installVSWithoutIB();
         }
 

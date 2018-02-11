@@ -8,6 +8,7 @@ import ibInfra.vsui.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import frameworkInfra.testbases.VSTestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class VSTests /*extends TestBase*/ {
 
 
-    @Test
+/*    @Test
     public void test() {
         IbService run = new IbService();
         WindowsDriver driver = null;
@@ -43,12 +44,17 @@ public class VSTests /*extends TestBase*/ {
         finally {
             driver.close();
         }
-    }
+    }*/
 
     @Test
     public void test2(){
-        System.out.println("test started");
-        System.out.println("test finished");
+        String SCENARIO = System.getProperty("scenario");
+        Logger log = Logger.getLogger(TestBase.class.getName());
+
+        if (SCENARIO.equals("1"))
+            log.info("1");
+        if (SCENARIO.equals("2"))
+            log.info("2");
     }
 
 }

@@ -4,33 +4,8 @@
 
 
     <test name="VS installed, install IB from installer">
-        <parameter name="scenario" value="1"/>
         <classes>
             <class name ="uitests.VSTests" />
         </classes>
     </test>
-
-    <test name="VS installed, install IB from VS">
-        <parameter name="scenario" value="2"/>
-        <classes>
-            <class name ="uitests.VSTests" />
-        </classes>
-    </test>
-
-    <test name="VS not installed, install VS upgrade IB">
-        <parameter name="scenario" value="3"/>
-        <classes>
-            <class name ="uitests.VSTests" />
-        </classes>
-    </test>
-
-    <test name="VS not installed, install VS">
-        <parameter name="scenario" value="4"/>
-        <classes>
-            <class name ="uitests.VSTests" />
-        </classes>
-    </test>
-
-
-
 </suite>

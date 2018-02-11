@@ -55,6 +55,10 @@ dependencies {
 
 test {
     ignoreFailures = true
+    systemProperty 'scenario', System.properties['scenario'] ?: '1'
+    systemProperty 'scenario', System.properties['scenario'] ?: '2'
+    systemProperty 'scenario', System.properties['scenario'] ?: '3'
+    systemProperty 'scenario', System.properties['scenario'] ?: '4'
 
     // enable TestNG support (default is JUnit)
     useTestNG(){
