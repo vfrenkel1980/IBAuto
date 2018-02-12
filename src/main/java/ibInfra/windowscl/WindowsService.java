@@ -1,0 +1,114 @@
+package ibInfra.windowscl;
+
+import com.aventstack.extentreports.Status;
+import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.StaticDataProvider;
+import org.jutils.jprocesses.JProcesses;
+import org.jutils.jprocesses.model.ProcessInfo;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class WindowsService extends TestBase implements IWindowsService {
+
+    @Override
+    public int runCommandWaitForFinish(String command) {
+        String line;
+        int exitStatus = 0;
+        try {
+            Runtime rt = Runtime.getRuntime();
+            //test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            Process pr = rt.exec(command);
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+
+            while((line=input.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            exitStatus = pr.waitFor();
+            System.out.println("Command " + command + " - Completed Successfully");
+            //test.log(Status.INFO, "Command " + command + " - Completed Successfully");
+        } catch(Exception e) {
+            test.log(Status.ERROR, "Failed to run command.\n" +
+                    "Command: " + command +"\n"+
+                    e.getMessage());
+            exitStatus = 1;
+        }
+        return exitStatus;
+    }
+
+    @Override
+    public String runCommandGetOutput(String command) {
+        String line;
+        try {
+            Runtime rt = Runtime.getRuntime();
+            Process pr = rt.exec(command);
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+
+            StringBuilder commandOutput = new StringBuilder();
+            while ((line = input.readLine()) != null) {
+                commandOutput.append(line);
+                commandOutput.append('\n');
+            }
+            pr.waitFor();
+            System.out.println("Command " + command + " - Completed Successfully");
+            return commandOutput.toString();
+        } catch(Exception e) {
+            test.log(Status.ERROR, "Failed to run command.\n" +
+                    "Command: " + command +"\n"+
+                    e.getMessage());
+            return "Unable to get result output from command " + command;
+        }
+    }
+
+    @Override
+    public void waitForProcessToFinish(String processName) {
+        boolean isRunning = true;
+        String output;
+        while (isRunning){
+            output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            System.out.println(output);
+            if (output.contains("INFO: No tasks are running")){
+                isRunning = false;
+            }
+        }
+    }
+
+    @Override
+    public void waitForProcessToStart(String processName) {
+        boolean notRunning = true;
+        String output;
+        while (notRunning){
+            output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            System.out.println(output);
+            if (!output.contains("INFO: No tasks are running")){
+                notRunning = false;
+            }
+        }
+    }
+
+    @Override
+    public String getProcessPid(String processName) {
+        List<ProcessInfo> processesList = JProcesses.getProcessList();
+        String pid = "";
+        for (final ProcessInfo processInfo : processesList) {
+            if (processInfo.getName().contains(processName)){
+                pid = processInfo.getPid();
+            }
+        }
+        return pid;
+    }
+
+
+
+
+}

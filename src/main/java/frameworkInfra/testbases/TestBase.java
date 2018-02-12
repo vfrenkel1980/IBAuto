@@ -4,14 +4,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.linuxcl.LinuxCL;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.PropertyConfigurator;
-import org.testng.ITestContext;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.*;
@@ -26,8 +20,6 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-
 
 public class TestBase {
 
@@ -38,10 +30,10 @@ public class TestBase {
     public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
 
-
     @BeforeSuite
-    public static void cleanup() throws IOException {
+    public static void cleanup(){
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
+        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
     }
 
     @BeforeClass
@@ -66,6 +58,7 @@ public class TestBase {
             String path = captureScreenshot(result.getName());
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         }
+        log.info(result.getName() + "test finished");
     }
 
     public String captureScreenshot(String fileName){
