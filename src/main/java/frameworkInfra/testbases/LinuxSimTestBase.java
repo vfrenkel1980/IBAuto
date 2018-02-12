@@ -41,9 +41,9 @@ public class LinuxSimTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
 
-        //runLinux.deleteLogsFolder(ipList);
+        runLinux.deleteLogsFolder(ipList);
 
-        if(!runLinux.isIBServiceUp("ib_server", LinuxMachines.VM_SIM_1A)) {
+        if(!runLinux.isIBServiceUp("ib_server", LinuxMachines.SIM_INITIATOR)) {
            test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
         }
     }
@@ -71,7 +71,7 @@ public class LinuxSimTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-        buildID = runLinux.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, LinuxMachines.VM_SIM_1A);
+        buildID = runLinux.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, LinuxMachines.SIM_INITIATOR);
         getResult(result);
     }
 
