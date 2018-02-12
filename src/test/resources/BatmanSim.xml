@@ -8,6 +8,7 @@
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
+            <class name="windowstests.BatmanVC15PreviewTests" />
             <class name ="windowstests.BatmanVC15Tests" />
             <class name ="windowstests.BatmanVC14Tests" />
             <class name ="windowstests.BatmanVC12Tests" />
@@ -18,6 +19,7 @@
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
+            <class name="windowstests.BatmanVC15PreviewTests" />
             <class name ="windowstests.BatmanVC15Tests" />
             <class name ="windowstests.BatmanVC14Tests" />
             <class name ="windowstests.BatmanVC12Tests" />
