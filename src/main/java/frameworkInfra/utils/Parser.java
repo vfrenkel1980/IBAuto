@@ -24,7 +24,7 @@ public class Parser{
                     pulledData = line.substring(line.lastIndexOf(entry.getValue())+ entry.getValue().length(), line.length());
                     //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
                     //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();
-                    pulledData = pulledData.replaceAll("[+={}^':\"]", "").trim();
+                    pulledData = pulledData.replaceAll("[+={}^']", "").trim();
                     if (pulledData.equals(""))
                         pulledData = "null";
                     entry.setValue(pulledData);

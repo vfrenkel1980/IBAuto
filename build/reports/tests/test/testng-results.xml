@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="8" passed="8">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Unit" duration-ms="935" started-at="2018-01-17T08:58:37Z" finished-at="2018-01-17T08:58:38Z">
+    <groups>
+      <group name="Build">
+        <method signature="BatmanVC11Tests.ace2012ReleaseBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ace2012ReleaseBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.ps4Edge2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012DebugOrbisBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.ps4Edge2012ProfileOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012ProfileOrbisBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.ps4Edge2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012ReleaseOrbisBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.ps4GNM2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4GNM2012DebugOrbisBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.ps4GNM2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4GNM2012ReleaseOrbisBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.shadowmap2012DebugDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="shadowmap2012DebugDurangoBuild" class="windowstests.BatmanVC11Tests"/>
+        <method signature="BatmanVC11Tests.shadowmap2012ReleaseDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="shadowmap2012ReleaseDurangoBuild" class="windowstests.BatmanVC11Tests"/>
+      </group> <!-- Build -->
+    </groups>
+    <test name="Detailed" duration-ms="935" started-at="2018-01-17T08:58:37Z" finished-at="2018-01-17T08:58:38Z">
+      <class name="windowstests.BatmanVC11Tests">
+        <test-method status="PASS" signature="cleanup()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="cleanup" is-config="true" duration-ms="15" started-at="2018-01-17T10:58:37Z" finished-at="2018-01-17T10:58:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cleanup -->
+        <test-method status="PASS" signature="setUpEnv(java.lang.String, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="setUpEnv" is-config="true" duration-ms="248" started-at="2018-01-17T10:58:37Z" depends-on-methods="frameworkInfra.testbases.TestBase.cleanup" finished-at="2018-01-17T10:58:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpEnv -->
+        <test-method status="PASS" signature="init()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="init" is-config="true" duration-ms="27" started-at="2018-01-17T10:58:37Z" finished-at="2018-01-17T10:58:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="init" is-config="true" duration-ms="3" started-at="2018-01-17T10:58:37Z" finished-at="2018-01-17T10:58:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="2" started-at="2018-01-17T10:58:37Z" finished-at="2018-01-17T10:58:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ace2012ReleaseBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ace2012ReleaseBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ace2012ReleaseBuild" duration-ms="84" started-at="2018-01-17T10:58:37Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ace2012ReleaseBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ace2012ReleaseBuild status=SUCCESS method=BatmanVC11Tests.ace2012ReleaseBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ps4Edge2012DebugOrbisBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ps4Edge2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012DebugOrbisBuild" duration-ms="72" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ps4Edge2012DebugOrbisBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ps4Edge2012DebugOrbisBuild status=SUCCESS method=BatmanVC11Tests.ps4Edge2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ps4Edge2012ProfileOrbisBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ps4Edge2012ProfileOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012ProfileOrbisBuild" duration-ms="68" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ps4Edge2012ProfileOrbisBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="0" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ps4Edge2012ProfileOrbisBuild status=SUCCESS method=BatmanVC11Tests.ps4Edge2012ProfileOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="0" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ps4Edge2012ReleaseOrbisBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ps4Edge2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4Edge2012ReleaseOrbisBuild" duration-ms="69" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ps4Edge2012ReleaseOrbisBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="0" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ps4Edge2012ReleaseOrbisBuild status=SUCCESS method=BatmanVC11Tests.ps4Edge2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="0" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ps4GNM2012DebugOrbisBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ps4GNM2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4GNM2012DebugOrbisBuild" duration-ms="70" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ps4GNM2012DebugOrbisBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ps4GNM2012DebugOrbisBuild status=SUCCESS method=BatmanVC11Tests.ps4GNM2012DebugOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.ps4GNM2012ReleaseOrbisBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="ps4GNM2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="ps4GNM2012ReleaseOrbisBuild" duration-ms="73" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ps4GNM2012ReleaseOrbisBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=ps4GNM2012ReleaseOrbisBuild status=SUCCESS method=BatmanVC11Tests.ps4GNM2012ReleaseOrbisBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.shadowmap2012DebugDurangoBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="shadowmap2012DebugDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="shadowmap2012DebugDurangoBuild" duration-ms="70" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shadowmap2012DebugDurangoBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="0" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shadowmap2012DebugDurangoBuild status=SUCCESS method=BatmanVC11Tests.shadowmap2012DebugDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method, java.lang.String)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void windowstests.BatmanVC11Tests.shadowmap2012ReleaseDurangoBuild()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="shadowmap2012ReleaseDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="shadowmap2012ReleaseDurangoBuild" duration-ms="69" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shadowmap2012ReleaseDurangoBuild -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="afterMethod" is-config="true" duration-ms="1" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shadowmap2012ReleaseDurangoBuild status=SUCCESS method=BatmanVC11Tests.shadowmap2012ReleaseDurangoBuild()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="endTest()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="endTest" is-config="true" duration-ms="287" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endTest -->
+        <test-method status="PASS" signature="postSimulation()[pri:0, instance:windowstests.BatmanVC11Tests@2c4c9a8d]" name="postSimulation" is-config="true" duration-ms="120" started-at="2018-01-17T10:58:38Z" finished-at="2018-01-17T10:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- postSimulation -->
+      </class> <!-- windowstests.BatmanVC11Tests -->
+    </test> <!-- Detailed -->
+  </suite> <!-- Unit -->
+</testng-results>
