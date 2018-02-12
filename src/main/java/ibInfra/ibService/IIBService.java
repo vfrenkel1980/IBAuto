@@ -23,4 +23,12 @@ public interface IIBService {
     void loadIbLicense();
 
     String getIbVsExtensionVersion();
+
+    boolean verifyIbInstallation(int ibVersion);
+
+    boolean verifyExtensionUpgrade(String oldVersion, String newVersion);
+
+    boolean verifyIbUpgrade(int oldVersion, int newVersion);
+
+    boolean verifyExtensionInstalled(String extensionVersion);
 }

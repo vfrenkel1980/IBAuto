@@ -70,4 +70,36 @@ public class IbService extends TestBase implements IIBService {
         result = result.substring(0,result.indexOf(","));
         return result;
     }
+
+    @Override
+    public boolean verifyIbInstallation(int ibVersion) {
+        if (ibVersion != 0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public boolean verifyExtensionUpgrade(String oldVersion, String newVersion) {
+        if (oldVersion.equals(newVersion))
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public boolean verifyIbUpgrade(int oldVersion, int newVersion) {
+        if (oldVersion == newVersion)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public boolean verifyExtensionInstalled(String extensionVersion) {
+        if (extensionVersion.equals(""))
+            return false;
+        else
+            return true;
+    }
 }

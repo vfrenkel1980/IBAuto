@@ -40,8 +40,7 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    /*@Parameters({"scenario"})*/
-    public void setUpEnv(/*String scenario*/) {
+    public void setUpEnv() {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
         //vs installed, install IB from installer
@@ -51,7 +50,19 @@ public class VSTestBase extends TestBase {
 
         //upgrade vs and install IB from vs installer
         if (SCENARIO.equals("2")) {
+            String oldExtensionVersion = runIb.getIbVsExtensionVersion();
             vsService.upgradeVSWithIB();
+            String extensionVersion = runIb.getIbVsExtensionVersion();
+            ibVersion = IIBService.getIbVersion();
+            if (runIb.verifyExtensionUpgrade(oldExtensionVersion, extensionVersion))
+                test.log(Status.INFO, "VS extension upgrade from " + oldExtensionVersion + " to " + extensionVersion);
+            else
+                test.log(Status.ERROR, "VS extension did not upgrade and remained " + oldExtensionVersion);
+            if (runIb.verifyIbInstallation(ibVersion))
+                test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
+            else
+                test.log(Status.ERROR, "IB failed to install from VS Installer");
+
         }
 
         //install old IB, install vs and upgrade IB from VS installer
@@ -59,14 +70,24 @@ public class VSTestBase extends TestBase {
             runIb.installIB();
             int oldIbVersion = IIBService.getIbVersion();
             vsService.installVSWithIB();
+            String extensionVersion = "";
             ibVersion = IIBService.getIbVersion();
+
+            if (runIb.verifyIbUpgrade(oldIbVersion, ibVersion))
+                test.log(Status.INFO, "IB upgraded successfully from " + oldIbVersion + " to " + ibVersion);
+            else
+                test.log(Status.ERROR, "IB failed to upgrade from " + oldIbVersion + " to " + " using VS Installer");
         }
 
         //install vs without IB
         if (SCENARIO.equals("4")){
+            String extensionVersion = "";
             vsService.installVSWithoutIB();
+            if (runIb.verifyExtensionInstalled(extensionVersion))
+                test.log(Status.INFO, "Extension installed successfully with version " + extensionVersion);
+            else
+                test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
         }
-
     }
 
     @BeforeMethod
