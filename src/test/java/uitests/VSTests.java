@@ -1,60 +1,39 @@
 package uitests;
 
-import frameworkInfra.testbases.TestBase;
-import frameworkInfra.testbases.WindowsTestBase;
-import frameworkInfra.utils.StaticDataProvider;
-import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
-import ibInfra.windowscl.WindowsService;
-import io.appium.java_client.windows.WindowsDriver;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import frameworkInfra.sikuli.sikulimapping.ibmonitor.IBMonitor;
 import frameworkInfra.testbases.VSTestBase;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import frameworkInfra.utils.Parser;
+import com.aventstack.extentreports.Status;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class VSTests /*extends TestBase*/ {
-
-
-/*    @Test
-    public void test() {
-        IbService run = new IbService();
-        WindowsDriver driver = null;
-        VSUIService runVs = new VSUIService();
-        run.installIB();
-
-        try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("app", "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe");
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            runVs.openProject("C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln");
-            runVs.executeBuild("Rebuild Solution");
-        }catch (Exception e){
-            e.getMessage();
-        }
-        finally {
-            driver.close();
-        }
-    }*/
-
+public class VSTests extends VSTestBase {
+    @Ignore
     @Test
-    public void test2(){
-        String SCENARIO = System.getProperty("scenario");
-        Logger log = Logger.getLogger(TestBase.class.getName());
-
-        if (SCENARIO.equals("1"))
-            log.info("1");
-        if (SCENARIO.equals("2"))
-            log.info("2");
+    public void runVSBuildAndGetResultUsingLog() throws InterruptedException, FindFailed, IOException {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("ExitCode", "ExitCode ");
+        Screen screen = new Screen();
+        driver.findElementByName("File").click();
+        driver.findElementByName("Open").click();
+        driver.findElementByName("Project/Solution...").click();
+        driver.findElementByClassName("Edit").sendKeys("\\\\192.168.10.15\\Share\\Mark\\ConsoleApplication3\\ConsoleApplication3.sln");
+        driver.findElementByName("Open").click();
+        driver.findElementByName("Build");
+        driver.findElementByName("Incredibuild").click();
+        driver.findElementByName("Build Solution").click();
+        screen.wait(IBMonitor.warningBar.similar((float) 0.8),30).click(IBMonitor.warningBar);
+        driver.close();
+        test.log(Status.INFO, "Build finished");
+        String fileName = Parser.getFileToParse(System.getProperty("java.io.tmpdir"), "pkt*");
+        String exitCode = Parser.retrieveDataFromFile(System.getProperty("java.io.tmpdir") + fileName, map);
+        Assert.assertEquals(exitCode, "0", "Exit code does not match, build failed");
     }
-
 }

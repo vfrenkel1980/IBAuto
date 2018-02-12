@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VmSim"  >
+    <!-- suite name="Suite Name" -->
+    <parameter name="predicted" value="2"/>
+    <parameter name="msBuild" value="0"/>
+
+    <test name="Detailed">
+        <parameter name="logLevel" value="4"/>
+        <classes>
+            <class name ="windowstests.VmSimVC10Tests" />
+            <class name ="windowstests.VmSimVC11Tests" />
+        </classes>
+    </test>
+
+    <test name="Minimal">
+        <parameter name="logLevel" value="0"/>
+        <classes>
+            <class name ="windowstests.VmSimVC10Tests" />
+            <class name ="windowstests.VmSimVC11Tests" />
+        </classes>
+    </test>
+</suite>
