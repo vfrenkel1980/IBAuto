@@ -3,12 +3,10 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
-import ibInfra.linuxcl.LinuxCL;
+import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestResult;
-import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -16,12 +14,11 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class LinuxSimTestBase extends TestBase {
 
-    public static LinuxCL runCommand = new LinuxCL();
+    public static LinuxService runLinux = new LinuxService();
     private static List rawIpList;
     public static List<String> ipList;
     String buildID;
@@ -29,7 +26,7 @@ public class LinuxSimTestBase extends TestBase {
 
     static {
         rawIpList = XmlParser.getIpList();
-        ipList = runCommand.breakDownIPList(rawIpList);
+        ipList = runLinux.breakDownIPList(rawIpList);
         ibVersion = getIBVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -44,9 +41,9 @@ public class LinuxSimTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
 
-        //runCommand.deleteLogsFolder(ipList);
+        runLinux.deleteLogsFolder(ipList);
 
-        if(!runCommand.isIBServiceUp("ib_server", StaticDataProvider.LinuxMachines.VM_SIM_1A)) {
+        if(!runLinux.isIBServiceUp("ib_server", LinuxMachines.SIM_INITIATOR)) {
            test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
         }
     }
@@ -74,12 +71,12 @@ public class LinuxSimTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-        buildID = runCommand.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, StaticDataProvider.LinuxMachines.VM_SIM_1A);
+        buildID = runLinux.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, LinuxMachines.SIM_INITIATOR);
         getResult(result);
     }
 
     private static String getIBVersion() {
-        LinuxCL runCommand = new LinuxCL();
+        LinuxService runCommand = new LinuxService();
         try {
             ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
         } catch (InterruptedException e) {

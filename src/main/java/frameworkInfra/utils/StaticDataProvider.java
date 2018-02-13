@@ -25,6 +25,12 @@ public class StaticDataProvider {
         public static final String COORD_SERVICE = "IncrediBuild_Coordinator";
     }
 
+    public static class VsActions{
+        public static final String BUILD_SOLUTION = "Build Solution";
+        public static final String REBUILD_SOLUTION = "Rebuild Solution";
+        public static final String CLEAN_SOLUTION = "Clean Solution";
+    }
+
     //projects
     public static class ProjectsCommands {
         public static final String CLEAN = "clean ";

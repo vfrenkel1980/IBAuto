@@ -1,29 +1,35 @@
 package ibInfra.linuxcl;
 
-import frameworkInfra.testbases.TestBase;
+import frameworkInfra.testbases.LinuxSimTestBase;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
-public class LinuxMultiThreaded extends TestBase implements Runnable{
+public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
 
     private String command;
     private String machine;
-    private LinuxCL runCommand = new LinuxCL();
+    private int cycles;
 
-    public LinuxMultiThreaded(String command, String machine){
+    public LinuxMultiThreaded(String command, String machine, int cycles){
         this.command = command;
         this.machine = machine;
+        this.cycles = cycles;
     }
 
     public void run(){
-        int exitCode = runCommand.linuxRunSSHCommand(command, machine);
-        Assert.assertEquals(exitCode, 1, "Build Failed");
-        try{
-            TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException e)
-        {
-            e.getMessage();
+        SoftAssert softAssert = new SoftAssert();
+        int exitCode;
+        for (int i = 0 ; i < cycles ; i++) {
+            //test = extent.createTest("Test No. " + i);
+            exitCode = runLinux.linuxRunSSHCommand(command, machine);
+            softAssert.assertEquals(exitCode, 0, "Build Failed");
+            try {
+                TimeUnit.MILLISECONDS.sleep(200);
+            } catch (InterruptedException e) {
+                e.getMessage();
+            }
         }
     }
 }
