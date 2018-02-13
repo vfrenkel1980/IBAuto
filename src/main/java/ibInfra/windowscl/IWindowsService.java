@@ -18,4 +18,6 @@ public interface IWindowsService {
 
     String getProcessPid(String processName);
 
+    boolean isServiceRunning(String serviceName);
+
 }

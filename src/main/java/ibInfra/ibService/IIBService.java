@@ -9,7 +9,7 @@ public interface IIBService {
 
     int cleanAndBuild(String command);
 
-    void installIB();
+    void installIB(String version);
 
     static int getIbVersion(){
         String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.VERSION);
@@ -18,11 +18,13 @@ public interface IIBService {
         return version;
     }
 
-    String getIbConsoleInstallation();
+    String getIbConsoleInstallation(String version);
 
     void loadIbLicense();
 
     String getIbVsExtensionVersion();
+
+    String getExpectedIbVsExtensionVersion();
 
     boolean verifyIbInstallation(int ibVersion);
 
@@ -31,4 +33,6 @@ public interface IIBService {
     boolean verifyIbUpgrade(int oldVersion, int newVersion);
 
     boolean verifyExtensionInstalled(String extensionVersion);
+
+    boolean verifyIbServicesRunning();
 }

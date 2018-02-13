@@ -45,29 +45,31 @@ public class VSTestBase extends TestBase {
         test.log(Status.INFO, "Before class started");
         //vs installed, install IB from installer
         if (SCENARIO.equals("1")) {
-            runIb.installIB();
+            runIb.installIB("Latest");
+            runIb.verifyIbServicesRunning();
         }
 
         //upgrade vs and install IB from vs installer
         if (SCENARIO.equals("2")) {
-            String oldExtensionVersion = runIb.getIbVsExtensionVersion();
+            String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
             vsService.upgradeVSWithIB();
             String extensionVersion = runIb.getIbVsExtensionVersion();
             ibVersion = IIBService.getIbVersion();
-            if (runIb.verifyExtensionUpgrade(oldExtensionVersion, extensionVersion))
-                test.log(Status.INFO, "VS extension upgrade from " + oldExtensionVersion + " to " + extensionVersion);
+            if (runIb.verifyExtensionUpgrade(expectedExtensionVersion, extensionVersion))
+                test.log(Status.INFO, "VS extension upgrade from " + expectedExtensionVersion + " to " + extensionVersion);
             else
-                test.log(Status.ERROR, "VS extension did not upgrade and remained " + oldExtensionVersion);
+                test.log(Status.ERROR, "VS extension did not upgrade and remained " + expectedExtensionVersion);
             if (runIb.verifyIbInstallation(ibVersion))
                 test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
             else
                 test.log(Status.ERROR, "IB failed to install from VS Installer");
 
+            runIb.verifyIbServicesRunning();
         }
 
         //install old IB, install vs and upgrade IB from VS installer
         if (SCENARIO.equals("3")){
-            runIb.installIB();
+            runIb.installIB("2147");
             int oldIbVersion = IIBService.getIbVersion();
             vsService.installVSWithIB();
             String extensionVersion = "";
@@ -77,6 +79,8 @@ public class VSTestBase extends TestBase {
                 test.log(Status.INFO, "IB upgraded successfully from " + oldIbVersion + " to " + ibVersion);
             else
                 test.log(Status.ERROR, "IB failed to upgrade from " + oldIbVersion + " to " + " using VS Installer");
+
+            runIb.verifyIbServicesRunning();
         }
 
         //install vs without IB
