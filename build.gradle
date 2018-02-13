@@ -22,6 +22,7 @@ def VmSim = project.hasProperty("VmSim")
 def LinuxCL = project.hasProperty("LinuxCL")
 def LinuxMulti = project.hasProperty("LinuxMulti")
 def Unit = project.hasProperty("Unit")
+def VSPreview = project.hasProperty("VSPreview")
 
 dependencies {
     //testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -31,19 +32,19 @@ dependencies {
     compile group: 'net.java.dev.jna', name: 'jna', version: '4.5.0'
     compile group: 'com.aventstack', name: 'extentreports', version: '3.0.7'
 
-    //compile group: 'com.sikulix', name: 'sikulixapi', version: '1.1.1000'
-
     compile group: 'com.melloware', name: 'jintellitype', version: '1.3.9'
     compile group: 'com.nativelibs4java', name: 'bridj', version: '0.7.0'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile group: 'org.apache.commons', name: 'commons-exec', version: '1.3'
+    compile group: 'org.jprocesses', name: 'jProcesses', version: '1.6.4'
+    compile group: 'com.profesorfalken', name: 'WMI4Java', version: '1.6.1'
     compile name:'sikulixapi'
-
+    
     testCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.19.3'
 
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.23.0'
-    compile group: 'io.appium', name: 'java-client', version: '5.0.3'
+    compile group: 'io.appium', name: 'java-client', version: '5.0.4'
 
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
     compile group: 'org.uncommons', name: 'reportng', version: '1.1.4'
