@@ -9,11 +9,6 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class BatmanVC15Tests extends BatmanBCTestBase {
 
-    @Test(testName = "Blender 2017 - Release - build" , groups = { "Build" })
-    public void blender2017ReleaseBuild(){
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.BLENDER_X64_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
 
     @Test(testName = "Audacity 2017 - Debug - build" , groups = { "Build" })
     public void audacityDebugBuild(){
