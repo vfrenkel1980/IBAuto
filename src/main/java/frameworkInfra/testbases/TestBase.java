@@ -89,7 +89,7 @@ public class TestBase {
     }
 
     @AfterClass
-    public void endTest(){
+    public void afterClass(){
         extent.flush();
     }
 

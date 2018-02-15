@@ -1,5 +1,9 @@
 package uitests;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -10,10 +14,17 @@ import io.appium.java_client.windows.WindowsDriver;
 import frameworkInfra.testbases.VSTestBase;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestResult;
+import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class VSTests /*extends TestBase*/ {
@@ -46,6 +57,8 @@ public class VSTests /*extends TestBase*/ {
         }
     }*/
 
+
+
     @Test
     public void test2(){
         String SCENARIO = System.getProperty("scenario");
@@ -56,5 +69,4 @@ public class VSTests /*extends TestBase*/ {
         if (SCENARIO.equals("2"))
             log.info("2");
     }
-
 }

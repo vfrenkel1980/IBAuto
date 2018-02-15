@@ -92,6 +92,9 @@ public class VSTestBase extends TestBase {
             else
                 test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
         }
+
+        extent.flush();
+        System.exit(0);
     }
 
     @BeforeMethod
