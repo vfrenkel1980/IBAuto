@@ -14,6 +14,6 @@ public interface IVSUIService  {
 
     void executeBuild(String action);
 
-
+    void uninstallIbExtension();
 
 }

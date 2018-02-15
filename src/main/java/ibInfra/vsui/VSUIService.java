@@ -35,6 +35,11 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
     }
 
     @Override
+    public void uninstallIbExtension() {
+
+    }
+
+    @Override
     public void openProject(String projectPath) {
         driver.findElementByName("File").click();
         driver.findElementByName("Open").click();
@@ -55,5 +60,6 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
         }
         runWin.waitForProcessToFinish("buildsystem.exe");
     }
+
 
 }

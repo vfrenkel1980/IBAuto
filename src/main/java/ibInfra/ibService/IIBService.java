@@ -35,4 +35,6 @@ public interface IIBService {
     boolean verifyExtensionInstalled(String extensionVersion);
 
     boolean verifyIbServicesRunning();
+
+    void uninstallIB(String version);
 }

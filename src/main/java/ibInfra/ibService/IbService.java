@@ -1,12 +1,13 @@
 package ibInfra.ibService;
 
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.JsonParser;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -14,7 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 
 public class IbService extends TestBase implements IIBService {
@@ -62,16 +66,16 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIbVsExtensionVersion() {
-        String result = "";
-        Map<String, String> lookFor = new HashMap<String, String>();
+        return JsonParser.getValueFromKey("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", "version");
+
+/*        Map<String, String> lookFor = new HashMap<String, String>();
         lookFor.put("version", "version");
         try {
             result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
         } catch (IOException e) {
             e.getMessage();
         }
-        result = result.substring(0,result.indexOf(","));
-        return result;
+        result = result.substring(0,result.indexOf(","));*/
     }
 
     @Override
@@ -82,17 +86,7 @@ public class IbService extends TestBase implements IIBService {
         } catch (ZipException e) {
             e.printStackTrace();
         }
-
-        String result = "";
-        Map<String, String> lookFor = new HashMap<String, String>();
-        lookFor.put("version", "version");
-        try {
-            result = Parser.retrieveDataFromFile(Locations.QA_ROOT + "Extracted\\manifest.json", lookFor);
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        result = result.substring(0,result.indexOf(","));
-        return result;
+        return JsonParser.getValueFromKey(Locations.QA_ROOT + "Extracted\\manifest.json", "version");
     }
 
 
@@ -134,7 +128,12 @@ public class IbService extends TestBase implements IIBService {
             return true;
         else
             return false;
+    }
 
+    @Override
+    public void uninstallIB(String version) {
+        String installationFile = getIbConsoleInstallation(version);
+        runWin.runCommandWaitForFinish(String.format(WindowsCommands.REMOVE_IB_EXTENSION, installationFile));
     }
 
 

@@ -50,4 +50,15 @@ public class Parser{
         return files[0];
     }
 
+
+    //usage example
+     /*        Map<String, String> lookFor = new HashMap<String, String>();
+        lookFor.put("version", "version");
+        try {
+            result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        result = result.substring(0,result.indexOf(","));*/
+
 }
