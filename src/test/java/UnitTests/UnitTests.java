@@ -6,6 +6,7 @@ import frameworkInfra.testbases.UnitTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,8 +21,7 @@ public class UnitTests {
     @Test
     public void test(){
 
-        Parser.doesFileContainString("C:\\Users\\Mark\\Desktop\\build.txt", "Build Succeeded");
-
+        Parser.doesFileContainString("C:\\Users\\Mark\\Desktop\\build.txt", "Build succeeded.");
     }
 
 
