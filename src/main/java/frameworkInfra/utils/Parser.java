@@ -4,6 +4,7 @@ import org.apache.tools.ant.DirectoryScanner;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Parser{
 
@@ -38,6 +39,24 @@ public class Parser{
 //        for (Map.Entry<String, String> entry : lookFor.entrySet()) {
 //            System.out.println(entry.getKey() + " = " + entry.getValue());
 //        }
+    }
+
+    public static boolean doesFileContainString(String filePath, String text){
+        File file = new File(filePath);
+        final Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine();
+                if(lineFromFile.contains(text)) {
+
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }
+        return false;
     }
 
     public static String getFileToParse(String path, String prefix){

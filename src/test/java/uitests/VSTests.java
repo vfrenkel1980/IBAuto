@@ -1,9 +1,5 @@
 package uitests;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -14,28 +10,21 @@ import io.appium.java_client.windows.WindowsDriver;
 import frameworkInfra.testbases.VSTestBase;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.ITestResult;
-import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class VSTests /*extends TestBase*/ {
 
 
-/*    @Test
+    @Test
     public void test() {
         IbService run = new IbService();
         WindowsDriver driver = null;
         VSUIService runVs = new VSUIService();
-        run.installIB();
+        run.installIB("Latest");
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -55,18 +44,6 @@ public class VSTests /*extends TestBase*/ {
         finally {
             driver.close();
         }
-    }*/
-
-
-
-    @Test
-    public void test2(){
-        String SCENARIO = System.getProperty("scenario");
-        Logger log = Logger.getLogger(TestBase.class.getName());
-
-        if (SCENARIO.equals("1"))
-            log.info("1");
-        if (SCENARIO.equals("2"))
-            log.info("2");
     }
+
 }
