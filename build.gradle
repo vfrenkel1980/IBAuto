@@ -20,7 +20,8 @@ def UI = project.hasProperty("UI")
 def BatmanSim = project.hasProperty("BatmanSim")
 def VmSim = project.hasProperty("VmSim")
 def LinuxCL = project.hasProperty("LinuxCL")
-def LinuxMulti = project.hasProperty("LinuxMulti")
+def LinuxMultiBuild = project.hasProperty("LinuxMultiBuild")
+def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
 def Unit = project.hasProperty("Unit")
 def VSPreview = project.hasProperty("VSPreview")
 
@@ -30,7 +31,7 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.6.0'
     compile group: 'net.java.dev.jna', name: 'jna-platform', version: '4.5.0'
     compile group: 'net.java.dev.jna', name: 'jna', version: '4.5.0'
-    compile group: 'com.aventstack', name: 'extentreports', version: '3.1.3'
+    compile group: 'com.aventstack', name: 'extentreports', version: '3.0.7'
 
     compile group: 'com.melloware', name: 'jintellitype', version: '1.3.9'
     compile group: 'com.nativelibs4java', name: 'bridj', version: '0.7.0'
@@ -50,8 +51,7 @@ dependencies {
     compile group: 'org.uncommons', name: 'reportng', version: '1.1.4'
     compile group: 'velocity', name: 'velocity-dep', version: '1.4'
     compile group: 'org.jdom', name: 'jdom', version: '2.0.0'
-    compile group: 'net.lingala.zip4j', name: 'zip4j', version: '1.3.2'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }
 
 test {
@@ -82,8 +82,12 @@ test {
             suites "src/test/resources/LinuxCL.xml"
         }
 
-        if(LinuxMulti) {
-            suites "src/test/resources/LinuxMulti.xml"
+        if(LinuxMultiBuild) {
+            suites "src/test/resources/LinuxMultiBuild.xml"
+        }
+
+        if(LinuxMultiInitiator) {
+            suites "src/test/resources/LinuxMultiInitiator.xml"
         }
 
         if(Unit) {

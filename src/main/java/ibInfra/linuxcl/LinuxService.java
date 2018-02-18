@@ -123,6 +123,24 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     }
 
     @Override
+    public boolean StartIBService(String service, String IP) {
+        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
+        if (res == 0)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public boolean StopIBService(String service, String IP) {
+        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
+        if (res == 0)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
     public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException {
         String res  = linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
         return res;

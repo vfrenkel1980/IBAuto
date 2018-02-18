@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="LinuxMulti"  >
+<suite name="LinuxMultiBuild"  >
     <!-- suite name="Suite Name" -->
 
-    <test name="Test" allow-return-values="true">
+    <test name="LinuxMultiBuild" allow-return-values="true">
         <parameter name="cycle" value=" "/>
         <classes>
-            <class name ="linuxtests.LinuxMultiTests" />
+            <class name ="linuxtests.LinuxMultiBuildTests" />
         </classes>
     </test>
+
 </suite>

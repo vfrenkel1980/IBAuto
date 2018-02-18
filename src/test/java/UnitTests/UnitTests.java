@@ -17,22 +17,9 @@ import static frameworkInfra.testbases.TestBase.extent;
 public class UnitTests extends UnitTestBase {
 
     @Test
-    public void test(){
-        ExtentHtmlReporter htmlReporter;
-        ExtentReports extent;
-        int ibVersion = getIBVersion();
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "-" + ibVersion + ".html");
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-    }
+    public void test() {
 
-    private static int getIBVersion(){
-        String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.VERSION);
-        int version = Integer.parseInt(regVersion);
-        version -= 1001000;
-        return version;
+        System.out.println("");
     }
 
 }

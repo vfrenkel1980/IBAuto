@@ -1,5 +1,6 @@
 package linuxtests;
 
+import frameworkInfra.testbases.LinuxMultiBuildTestBase;
 import frameworkInfra.testbases.LinuxSimTestBase;
 import ibInfra.linuxcl.LinuxMultiThreaded;
 import org.testng.annotations.Test;
@@ -8,19 +9,24 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
-public class LinuxMultiTests extends LinuxSimTestBase {
+public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
 
-    @Test(testName = "Multi")
-    public static void Multi() throws InterruptedException {
+    @Test(testName = "MultiBuild")
+    public static void multiBuild() throws InterruptedException {
 
         ExecutorService execService = Executors.newFixedThreadPool(4);
 
-            execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                    String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), LinuxMachines.VM_SIM_1A, 2));
+        execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1), 6));
 
+        execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1), 5));
 
-            execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                    String.format(LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), LinuxMachines.VM_SIM_1A, 2));
+        execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), ipList.get(1), 10));
+
+        execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(1), 8));
 
 
         execService.shutdown();
@@ -39,7 +45,7 @@ public class LinuxMultiTests extends LinuxSimTestBase {
 
         TestNG testng = new TestNG();
         List<String> suites = Lists.newArrayList();
-        suites.add("X:\\QA Automation\\IBAuto\\src\\test\\resources\\LinuxMulti.xml");
+        suites.add("X:\\QA Automation\\IBAuto\\src\\test\\resources\\LinuxMultiBuild.xml");
         testng.setTestSuites(suites);
         testng.run();
     }*/

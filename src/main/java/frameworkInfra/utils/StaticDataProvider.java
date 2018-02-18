@@ -309,18 +309,14 @@ public class StaticDataProvider {
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
+		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start";
+        public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
     }
 
     public static class LinuxMachines{
-        public static final String SIM_INITIATOR = "192.168.10.80";
-        public static final String SIM_COORDINATOR = "192.168.10.106";
-        public static final String SIM_HELPER_1 = "192.168.10.134";
-        public static final String SIM_HELPER_2 = "192.168.10.136";
-        public static final String SIM_HELPER_3 = "192.168.10.94";
-        public static final String SIM_HELPER_4 = "192.168.10.127";
 
         public static final String TEST_MACHINE = "192.168.11.82";
         public static final String VM_SIM_1A = "192.168.11.103";
