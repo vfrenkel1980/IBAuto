@@ -14,9 +14,9 @@ public interface ILinuxService {
 
     boolean isIBServiceUp(String service, String IP);
 
-    boolean StartIBService(String service, String IP);
+    boolean startIBService(String service, String IP);
 
-    boolean StopIBService(String service, String IP);
+    boolean stopIBService(String service, String IP);
 
     String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException;
 }

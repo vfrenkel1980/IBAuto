@@ -1,19 +1,9 @@
 package frameworkInfra.testbases;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
-import ibInfra.linuxcl.LinuxService;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
@@ -38,39 +28,21 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
             System.exit(0);
         }
 
-        if(runLinux.StartIBService("ib_server", ipList.get(1))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+ipList.get(1);
+        if(runLinux.startIBService("ib_server", ipList.get(1))) {
+            String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
             System.exit(0);
         }
 
-        if(runLinux.StopIBService("ib_server", otherGridIPList.get(1))) {
-            String err = "StopIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
+        for (int i=1; i<5; ++i) {
 
-        if(runLinux.StopIBService("ib_server", otherGridIPList.get(2))) {
-            String err = "StopIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(runLinux.StopIBService("ib_server", otherGridIPList.get(3))) {
-            String err = "StopIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(runLinux.StopIBService("ib_server", otherGridIPList.get(4))) {
-            String err = "StopIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
+            if(runLinux.stopIBService("ib_server", otherGridIPList.get(i))) {
+                String err = "stopIBService failed " +otherGridIPList.get(i) + "... FAILING ALL TESTS!";
+                test.log(Status.ERROR, err);
+                extent.flush();
+                System.exit(0);
+            }
         }
     }
 
@@ -78,29 +50,16 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
     @AfterClass  //???input? exeptions?
     public void afterClass() {
 
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(1))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
+        for (int i = 1; i < 5; ++i) {
+
+            if (runLinux.startIBService("ib_server", otherGridIPList.get(i))) {
+                String err = "startIBService failed " + otherGridIPList.get(i) + "... FAILING ALL TESTS!";
+                test.log(Status.ERROR, err);
+                extent.flush();
+                System.exit(0);
+            }
+            extent.flush();
         }
-
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(2))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-        }
-
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(3))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-
-        }
-
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(4))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
-            test.log(Status.ERROR, err);
-
-        }
-        extent.flush();
     }
-
 
 }
