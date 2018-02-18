@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 
-public class JsonParser {
+public class CustomJsonParser {
 
     public static String getValueFromKey(String filePath, String key){
         JSONParser parser = new JSONParser();

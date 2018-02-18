@@ -1,7 +1,7 @@
 package ibInfra.ibService;
 
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.JsonParser;
+import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
@@ -66,7 +66,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIbVsExtensionVersion() {
-        return JsonParser.getValueFromKey("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", "version");
+        return CustomJsonParser.getValueFromKey("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", "version");
 
 /*        Map<String, String> lookFor = new HashMap<String, String>();
         lookFor.put("version", "version");
@@ -86,7 +86,7 @@ public class IbService extends TestBase implements IIBService {
         } catch (ZipException e) {
             e.printStackTrace();
         }
-        return JsonParser.getValueFromKey(Locations.QA_ROOT + "Extracted\\manifest.json", "version");
+        return CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "Extracted\\manifest.json", "version");
     }
 
 
