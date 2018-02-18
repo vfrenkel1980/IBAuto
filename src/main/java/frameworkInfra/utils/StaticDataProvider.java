@@ -336,7 +336,7 @@ public class StaticDataProvider {
         public static final String CD_QT_DIR = "cd /disk2/projects/qt-everywhere-opensource-src-4.8.6";
         public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
         public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
-
+        public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
 
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";

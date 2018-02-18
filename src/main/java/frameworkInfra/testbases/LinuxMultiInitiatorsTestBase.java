@@ -13,25 +13,17 @@ import java.util.List;
 
 public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
 
-    public static LinuxService runLinux = new LinuxService();
-    protected static List rawIpList;
-    public static List<String> ipList;
     public static List<String> otherGridIPList;
-    String buildID;
-    private static String ibVersion = "";
 
-
+    @Override
     @BeforeClass
     public void initializeEnv(){
-        rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
-        ipList = runLinux.breakDownIPList(rawIpList);
+        test = extent.createTest("Before Class");
+        test.assignCategory("BEFORE CLASS");
+        test.log(Status.INFO, "BEFORE CLASS started");
 
-        rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
-        otherGridIPList = runLinux.breakDownIPList(rawIpList);
-
-        test = extent.createTest("Before Suite");
-        test.assignCategory("BEFORE SUITE");
-        test.log(Status.INFO, "BEFORE SUITE started");
+        rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
+        otherGridIPList = runLinux.breakDownIPList(rawIpList2);
 
         runLinux.deleteLogsFolder(ipList);
 
@@ -41,35 +33,17 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
             System.exit(0);
         }
 
-        if(runLinux.StartIBService("ib_server", ipList.get(1))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+ipList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
+        for (int i=1; i<5; ++i) {
+
+            if(runLinux.StartIBService("ib_server", ipList.get(i))) {
+                String err = "StartIBService failed " +ipList.get(i) + "... FAILING ALL TESTS!";
+                test.log(Status.ERROR, err);
+                extent.flush();
+                System.exit(0);
+            }
         }
 
-        if(runLinux.StartIBService("ib_server", ipList.get(2))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+ipList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(runLinux.StartIBService("ib_server", ipList.get(3))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+ipList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(runLinux.StartIBService("ib_server", ipList.get(4))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+ipList.get(1);
-            test.log(Status.ERROR, err);
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(1))) {
+        if(runLinux.StopIBService("ib_server", otherGridIPList.get(1))) {
             String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
             test.log(Status.ERROR, err);
             extent.flush();
@@ -78,7 +52,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
     }
 
     @Override
-    @AfterClass  //???input? exeptions?
+    @AfterClass
     public void afterClass() {
 
         if(runLinux.StartIBService("ib_server", otherGridIPList.get(1))) {

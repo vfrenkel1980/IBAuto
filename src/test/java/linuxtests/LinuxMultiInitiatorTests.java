@@ -1,6 +1,7 @@
 package linuxtests;
 
 import frameworkInfra.testbases.LinuxMultiBuildTestBase;
+import frameworkInfra.testbases.LinuxMultiInitiatorsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.linuxcl.LinuxMultiThreaded;
 import org.testng.annotations.Test;
@@ -9,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class LinuxMultiInitiatorTests  extends LinuxMultiBuildTestBase {
+public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
 
     @Test(testName = "MultiInitiator")
     public static void multiInitiators() throws InterruptedException {
@@ -19,18 +20,18 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiBuildTestBase {
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1), 6));
 
-        execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1), 5));
-
-        execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), ipList.get(1), 10));
+        execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_GPSD_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";" +
+                String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD,"","GPSD", "", "32"), ipList.get(2), 32));
 
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(1), 8));
+                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(3), 8));
 
+        execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(4), 16));
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
+
     }
 
 }
