@@ -22,6 +22,7 @@ public class LinuxSimTestBase extends TestBase {
 
     public static LinuxService runLinux = new LinuxService();
     protected static List rawIpList;
+    protected static List rawIpList2;
     public static List<String> ipList;
     String buildID;
     private static String ibVersion = "";
@@ -53,9 +54,9 @@ public class LinuxSimTestBase extends TestBase {
     public void initializeEnv(){
         rawIpList = XmlParser.getIpList("Simulation IP list.xml");
         ipList = runLinux.breakDownIPList(rawIpList);
-        test = extent.createTest("Before Suite");
-        test.assignCategory("BEFORE SUITE");
-        test.log(Status.INFO, "BEFORE SUITE started");
+        test = extent.createTest("Before Class");
+        test.assignCategory("BEFORE CLASS");
+        test.log(Status.INFO, "BEFORE CLASS started");
 
        runLinux.deleteLogsFolder(ipList);
 
