@@ -91,10 +91,10 @@ public class VSTestBase extends TestBase {
                 test.log(Status.INFO, "Extension installed successfully with version " + extensionVersion);
             else
                 test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
-        }
 
-        extent.flush();
-        System.exit(0);
+            extent.flush();
+            System.exit(0);
+        }
     }
 
     @BeforeMethod

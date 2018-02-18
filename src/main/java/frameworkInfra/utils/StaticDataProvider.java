@@ -25,6 +25,13 @@ public class StaticDataProvider {
         public static final String COORD_SERVICE = "IncrediBuild_Coordinator";
     }
 
+    public static class LogOutput{
+        public static final String BUILD_SUCCEEDED = "Build succeeded";
+        public static final String ERROR = "error";
+        public static final String XDTASKID = "xdTaskID";
+        public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
+    }
+
     public static class VsActions{
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
