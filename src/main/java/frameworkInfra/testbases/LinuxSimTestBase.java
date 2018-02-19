@@ -49,30 +49,30 @@ public class LinuxSimTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        runLinux.deleteLogsFolder(ipList);
         log.info("finished before suite");
     }
 
     @BeforeClass
-    public void initializeEnv(){
+    public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
-        rawIpList = XmlParser.getIpList("Simulation IP list.xml");
-        ipList = runLinux.breakDownIPList(rawIpList);
+
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
+        if (testContext.getName().equals("Cycle 1")) {
 
-       runLinux.deleteLogsFolder(ipList);
+            if (!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
+                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
+                extent.flush();
+                System.exit(0);
+            }
 
-        if(!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
-            test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
-            extent.flush();
-            System.exit(0);
-        }
-
-        if(!runLinux.isIBServiceUp("ib_server", ipList.get(1))) {
-            test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
-            extent.flush();
-            System.exit(0);
+            if (!runLinux.isIBServiceUp("ib_server", ipList.get(1))) {
+                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
+                extent.flush();
+                System.exit(0);
+            }
         }
         log.info("finished before class");
     }

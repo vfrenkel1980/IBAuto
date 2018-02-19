@@ -2,6 +2,7 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.XmlParser;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
 
     @Override
     @BeforeClass
-    public void initializeEnv(){
+    public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
