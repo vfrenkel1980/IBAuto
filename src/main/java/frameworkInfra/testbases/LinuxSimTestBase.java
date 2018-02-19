@@ -34,6 +34,7 @@ public class LinuxSimTestBase extends TestBase {
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext){
+        log("starting before suite");
         if (testContext.getName().equals("LinuxMultiBuild"))
             rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
         if (testContext.getName().equals("LinuxMultiInitiator"))
@@ -48,10 +49,12 @@ public class LinuxSimTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        log("finished before suite");
     }
 
     @BeforeClass
     public void initializeEnv(){
+        log("starting before class");
         rawIpList = XmlParser.getIpList("Simulation IP list.xml");
         ipList = runLinux.breakDownIPList(rawIpList);
         test = extent.createTest("Before Class");
@@ -71,6 +74,7 @@ public class LinuxSimTestBase extends TestBase {
             extent.flush();
             System.exit(0);
         }
+        log("finished before class");
     }
 
     @BeforeMethod

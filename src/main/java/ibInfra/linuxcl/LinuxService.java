@@ -32,9 +32,10 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
             //Set password
             session.setPassword("xoreax");
             session.connect();
-            test.log(Status.INFO, "Successfully connected to " + hostIP);
-            test.log(Status.INFO, "Running command " + command);
-
+            if (test != null) {
+                test.log(Status.INFO, "Successfully connected to " + hostIP);
+                test.log(Status.INFO, "Running command " + command);
+            }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);
             channelExec.connect();
