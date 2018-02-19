@@ -30,6 +30,12 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(4), 16));
 
         execService.shutdown();
+
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GPSD_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";", ipList.get(2));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(3));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(4));
+
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
 
     }

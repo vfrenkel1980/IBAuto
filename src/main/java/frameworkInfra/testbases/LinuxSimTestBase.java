@@ -102,6 +102,7 @@ public class LinuxSimTestBase extends TestBase {
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {
         buildID = runLinux.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
         getResult(result);
+        extent.flush();
     }
 
     private static String getIBVersion() {
