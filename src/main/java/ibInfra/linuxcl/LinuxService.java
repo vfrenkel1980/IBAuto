@@ -102,6 +102,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
         for (Object machine : ipList) {
             log.info("deleting " + machine);
             runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
+            log.info("deleted " + machine);
         }
     }
 
