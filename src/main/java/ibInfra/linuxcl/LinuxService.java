@@ -124,7 +124,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     }
 
     @Override
-    public boolean StartIBService(String service, String IP) {
+    public boolean startIBService(String service, String IP) {
         int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
         if (res == 0)
             return false;
@@ -133,7 +133,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     }
 
     @Override
-    public boolean StopIBService(String service, String IP) {
+    public boolean stopIBService(String service, String IP) {
         int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
         if (res == 0)
             return false;

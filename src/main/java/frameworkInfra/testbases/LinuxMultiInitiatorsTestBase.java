@@ -1,13 +1,9 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
-import ibInfra.linuxcl.LinuxService;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 
 import java.util.List;
 
@@ -35,16 +31,16 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
 
         for (int i=1; i<5; ++i) {
 
-            if(runLinux.StartIBService("ib_server", ipList.get(i))) {
-                String err = "StartIBService failed " +ipList.get(i) + "... FAILING ALL TESTS!";
+            if(runLinux.startIBService("ib_server", ipList.get(i))) {
+                String err = "startIBService failed " +ipList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
                 System.exit(0);
             }
         }
 
-        if(runLinux.StopIBService("ib_server", otherGridIPList.get(1))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
+        if(runLinux.stopIBService("ib_server", otherGridIPList.get(1))) {
+            String err = "stopIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
             System.exit(0);
@@ -55,8 +51,8 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
     @AfterClass
     public void afterClass() {
 
-        if(runLinux.StartIBService("ib_server", otherGridIPList.get(1))) {
-            String err = "StartIBService failed $s... FAILING ALL TESTS!"+otherGridIPList.get(1);
+        if(runLinux.startIBService("ib_server", otherGridIPList.get(1))) {
+            String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
         }
 
