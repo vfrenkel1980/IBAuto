@@ -9,6 +9,7 @@ public class StaticDataProvider {
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
+        public static final String OUTPUT_LOG_FILE = "C:\\QA\\Simulation\\buildLog.txt";
     }
 
     //processes
@@ -283,6 +284,11 @@ public class StaticDataProvider {
             public static final String XMBC_X32_DEBUG = "\"C:\\QA\\Simulation\\VC11\\xbmc-vs2012\\project\\VS2010Express\\XBMC for Windows.sln\" /%s /cfg=\"debug (directx)|win32\" /title=\"XBMC 2012 - Debug (DirectX)\" /vsversion=\"vc11\"";
             public static final String XMBC_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\xbmc-vs2012\\project\\VS2010Express\\XBMC for Windows.sln\" /%s /cfg=\"debug (directx)|win32\" /title=\"XBMC 2012 - Debug (DirectX)\" /vsversion=\"vc11\"";
 
+        }
+
+        public static class ConsoleAppProj{
+            public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
+            public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
         }
 
         public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
