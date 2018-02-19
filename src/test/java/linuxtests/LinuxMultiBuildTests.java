@@ -18,16 +18,16 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
         ExecutorService execService = Executors.newFixedThreadPool(4);
 
         execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1), 6));
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Kernel", "", "32"), ipList.get(1), 6));
 
         execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1), 5));
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Apache", "", "32"), ipList.get(1), 5));
 
         execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), ipList.get(1), 10));
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Git", "", "32"), ipList.get(1), 10));
 
         execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(1), 8));
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(1), 8));
 
 
         execService.shutdown();

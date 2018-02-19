@@ -18,16 +18,16 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
         ExecutorService execService = Executors.newFixedThreadPool(4);
 
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1), 6));
+                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Kernel", "", "32"), ipList.get(1), 6));
 
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_GPSD_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD,"","GPSD", "", "32"), ipList.get(2), 32));
+                String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD,"--ib-crash -d1 --f","GPSD", "", "32"), ipList.get(2), 32));
 
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(3), 8));
+                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(3), 8));
 
         execService.execute(new LinuxMultiThreaded(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(4), 16));
+                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Apache", "", "32"), ipList.get(4), 16));
 
         execService.shutdown();
 
