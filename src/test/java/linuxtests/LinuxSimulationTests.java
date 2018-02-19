@@ -90,7 +90,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
     @Test(testName = "Sim MySQL")
     public void SimTestMySQL(){
         int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","MySQL", "", "32"), ipList.get(1));
+                String.format(LinuxSimulation.MAKE_BUILD,"-d1 --ib-crash","MySQL", "", "32"), ipList.get(1));
 
 
         Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
@@ -145,7 +145,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
     @Test(testName = "Sim QT")
     public void SimTestQT(){
         int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","QT", "", "32"), ipList.get(1));
+                String.format(LinuxSimulation.MAKE_BUILD,"ib_console","-d1 --ib-crash", "", "32"), ipList.get(1));
 
 
         Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
@@ -153,26 +153,26 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         runLinux.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
     }
 
-    @Test(testName = "Sim MongoDB")
-    public void SimTestMongoDB(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MONGODB_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";" +
-                String.format(LinuxSimulation.SCONS_BUILD,"","MongoDB", "", "32"), ipList.get(1));
+//    @Test(testName = "Sim MongoDB")
+//    public void SimTestMongoDB(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MONGODB_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";" +
+//                String.format(LinuxSimulation.SCONS_BUILD,"","MongoDB", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MONGODB_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";", ipList.get(1));
+//    }
 
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MONGODB_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Chromium")
-    public void SimTestChromium(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";" +
-                String.format(LinuxSimulation.NINJA_BUILD,"","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";", ipList.get(1));
-    }
+//    @Test(testName = "Sim Chromium")
+//    public void SimTestChromium(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";" +
+//                String.format(LinuxSimulation.NINJA_BUILD,"","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";", ipList.get(1));
+//    }
 
 }
