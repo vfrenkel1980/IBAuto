@@ -10,9 +10,10 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
 
     public static List<String> otherGridIPList;
 
-
+    @Override
     @BeforeClass
     public void initializeEnv(){
+        log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -20,7 +21,9 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
         rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = runLinux.breakDownIPList(rawIpList2);
 
+        log.info("starting delete logs folder");
         runLinux.deleteLogsFolder(ipList);
+        log.info("finished delete logs folder");
 
         if(!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
@@ -44,12 +47,13 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
                 System.exit(0);
             }
         }
+        log.info("finished before class");
     }
 
     @Override
     @AfterClass  //???input? exeptions?
     public void afterClass() {
-
+        log.info("starting after class");
         for (int i = 1; i < 5; ++i) {
 
             if (runLinux.startIBService("ib_server", otherGridIPList.get(i))) {
@@ -58,8 +62,9 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
                 extent.flush();
                 System.exit(0);
             }
-            extent.flush();
         }
+        extent.flush();
+        log.info("finished after class");
     }
 
 }

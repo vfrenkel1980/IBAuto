@@ -14,6 +14,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
     @Override
     @BeforeClass
     public void initializeEnv(){
+        log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -45,18 +46,20 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
             extent.flush();
             System.exit(0);
         }
+        log.info("finished before class");
     }
 
     @Override
     @AfterClass
     public void afterClass() {
-
+        log.info("starting after class");
         if(runLinux.startIBService("ib_server", otherGridIPList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
         }
 
         extent.flush();
+        log.info("finished after class");
     }
 
 }
