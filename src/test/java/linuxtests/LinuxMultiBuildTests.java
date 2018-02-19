@@ -3,6 +3,7 @@ package linuxtests;
 import frameworkInfra.testbases.LinuxMultiBuildTestBase;
 import frameworkInfra.testbases.LinuxSimTestBase;
 import ibInfra.linuxcl.LinuxMultiThreaded;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,6 +33,14 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
     }
+
+//    int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//            String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1));
+//
+//        Assert.assertEquals(0, exitCode, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+
 
 /*    public static void main(String[] args) {
         ExecutorService execService = Executors.newFixedThreadPool(2);
