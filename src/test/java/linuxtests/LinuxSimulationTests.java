@@ -44,48 +44,48 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    @Test(testName = "Sim Kernel")
-    public void SimTestKernel(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Apache")
-    public void SimTestApache(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1));
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Samba")
-    public void SimTestSamba(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Samba", "env JOBS=32", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Cpp")
-    public void SimTestCpp(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Cpp", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
+//    @Test(testName = "Sim Kernel")
+//    public void SimTestKernel(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Kernel", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim Apache")
+//    public void SimTestApache(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1));
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim Samba")
+//    public void SimTestSamba(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Samba", "env JOBS=32", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim Cpp")
+//    public void SimTestCpp(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Cpp", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
 
     @Test(testName = "Sim MySQL")
     public void SimTestMySQL(){
@@ -98,49 +98,49 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         runLinux.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";",ipList.get(1));
     }
 
-    @Test(testName = "Sim Boost")
-    public void SimTestBoost() {
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";" +
-                String.format(LinuxSimulation.B2_BUILD, "", "Boost", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Cmake")
-    public void SimTestCmake(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim GDB")
-    public void SimTestGDB(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","GDB", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
-
-    @Test(testName = "Sim Git")
-    public void SimTestGit(){
-        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), ipList.get(1));
-
-
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-    }
+//    @Test(testName = "Sim Boost")
+//    public void SimTestBoost() {
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";" +
+//                String.format(LinuxSimulation.B2_BUILD, "", "Boost", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim Cmake")
+//    public void SimTestCmake(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Cmake", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim GDB")
+//    public void SimTestGDB(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","GDB", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
+//
+//    @Test(testName = "Sim Git")
+//    public void SimTestGit(){
+//        int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"","Git", "", "32"), ipList.get(1));
+//
+//
+//        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+//
+//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//    }
 
     @Test(testName = "Sim QT")
     public void SimTestQT(){
