@@ -100,6 +100,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     @Override
     public void deleteLogsFolder(List<String> ipList) {
         for (Object machine : ipList) {
+            log.info("deleting " + machine);
             runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
         }
     }
