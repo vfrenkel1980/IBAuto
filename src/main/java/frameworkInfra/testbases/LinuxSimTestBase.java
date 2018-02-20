@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxService;
 import org.aspectj.lang.annotation.Before;
@@ -41,6 +42,11 @@ public class LinuxSimTestBase extends TestBase {
             rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
         if (testContext.getName().contains("Cycle"))
             rawIpList = XmlParser.getIpList("Simulation IP list.xml");
+
+        //copy latest extent report to backup folder
+        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
+        //delete HTML report from workspace folder
+        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
 
         ipList = runLinux.breakDownIPList(rawIpList);
         ibVersion = getIBVersion();
