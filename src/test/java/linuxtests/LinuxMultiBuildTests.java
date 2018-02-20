@@ -31,12 +31,6 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
 
 
         execService.shutdown();
-
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
     }
 

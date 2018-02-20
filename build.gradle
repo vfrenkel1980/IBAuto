@@ -57,10 +57,16 @@ dependencies {
 
 test {
     ignoreFailures = true
+    //scenario parameter for VStests
     systemProperty 'scenario', System.properties['scenario'] ?: '1'
     systemProperty 'scenario', System.properties['scenario'] ?: '2'
     systemProperty 'scenario', System.properties['scenario'] ?: '3'
     systemProperty 'scenario', System.properties['scenario'] ?: '4'
+    //VSinstallation parameter for VStests
+    systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: 'release'
+    systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: 'preview'
+
+
 
     // enable TestNG support (default is JUnit)
     useTestNG(){

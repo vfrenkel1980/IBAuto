@@ -10,6 +10,12 @@ public interface IVSUIService  {
 
     void upgradeVSWithIB();
 
+    void installVSPreviewWithIB();
+
+    void installVSPreviewWithoutIB();
+
+    void upgradeVSPreviewWithIB();
+
     void openProject(String projectPath);
 
     void executeBuild(String action);

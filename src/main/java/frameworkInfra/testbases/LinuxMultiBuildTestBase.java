@@ -1,6 +1,7 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -52,9 +53,12 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
     }
 
     @Override
-    @AfterClass  //???input? exeptions?
+    @AfterClass
     public void afterClass() {
         log.info("starting after class");
+        test = extent.createTest("After Class");
+        test.assignCategory("AFTER CLASS");
+        test.log(Status.INFO, "AFTER CLASS started");
         for (int i = 1; i < 5; ++i) {
 
             if (runLinux.startIBService("ib_server", otherGridIPList.get(i))) {
@@ -64,6 +68,12 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
                 System.exit(0);
             }
         }
+
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+
         extent.flush();
         log.info("finished after class");
     }
