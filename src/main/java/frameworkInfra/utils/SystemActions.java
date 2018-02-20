@@ -42,9 +42,10 @@ public class SystemActions {
         try {
             FileUtils.copyDirectory(
                     FileUtils.getFile(sourceLocation), FileUtils.getFile(targetLocation), new SuffixFileFilter(extension));
-            test.log(Status.INFO, source + " Folder copied successfully");
+            if (test != null)
+                test.log(Status.INFO, source + " Folder copied successfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
