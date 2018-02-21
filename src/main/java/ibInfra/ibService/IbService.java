@@ -8,6 +8,8 @@ import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import java.io.FileReader;
+import org.testng.Assert;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -134,6 +136,14 @@ public class IbService extends TestBase implements IIBService {
     public void uninstallIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         runWin.runCommandWaitForFinish(String.format(WindowsCommands.REMOVE_IB_EXTENSION, installationFile));
+    }
+
+    @Override
+    public String findValueInPacketLog (String keyInLogFile) throws IOException{
+        Map<String, String> lookFor = new HashMap<String, String>();
+        lookFor.put(keyInLogFile, keyInLogFile);
+        String file = runWin.getLatestFilefromDir(Locations.SYSTEM_APPDATA_TEMP_FOLDER, "pkt").getCanonicalPath();
+        return Parser.retrieveDataFromFile(file, lookFor);
     }
 
 

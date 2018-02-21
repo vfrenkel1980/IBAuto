@@ -9,16 +9,16 @@ import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
-public class VS2017PreviewExtensionTests extends VSTestBase {
+public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
         String extensionVersion = runIb.getIbVsExtensionVersion();
         String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
-        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "Incredibuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
+        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "IncrediBuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
     }
 
-    @Test(testName = "IncrediBuild exectution from VS2017 menu bar")
+    @Test(testName = "IncrediBuild execution from VS2017 menu bar")
     public void executeVSBuild(){
         vsService.openVS2017instance();
         vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
@@ -28,7 +28,7 @@ public class VS2017PreviewExtensionTests extends VSTestBase {
             result = runIb.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 

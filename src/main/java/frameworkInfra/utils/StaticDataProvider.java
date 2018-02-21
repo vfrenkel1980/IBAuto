@@ -9,6 +9,7 @@ public class StaticDataProvider {
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
+        public static final String SYSTEM_APPDATA_TEMP_FOLDER = "C:\\Users\\Admin\\AppData\\Local\\Temp";
         public static final String OUTPUT_LOG_FILE = "C:\\QA\\Simulation\\buildLog.txt";
     }
 
@@ -303,6 +304,7 @@ public class StaticDataProvider {
         public static final String STANDALONE_MODE = "Standalone";
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
+        public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
     }
 
     public static class WindowsCommands{

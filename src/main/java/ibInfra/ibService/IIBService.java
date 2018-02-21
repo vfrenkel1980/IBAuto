@@ -1,7 +1,10 @@
 package ibInfra.ibService;
 
+import com.sun.jna.platform.unix.solaris.LibKstat;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+
+import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -35,6 +38,8 @@ public interface IIBService {
     boolean verifyExtensionInstalled(String extensionVersion);
 
     boolean verifyIbServicesRunning();
+
+    String findValueInPacketLog (String keyInLogFile)  throws IOException;
 
     void uninstallIB(String version);
 }

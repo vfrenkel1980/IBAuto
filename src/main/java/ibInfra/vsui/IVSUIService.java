@@ -20,6 +20,8 @@ public interface IVSUIService  {
 
     void executeBuildFromMenu(String action);
 
+    void openVS2017instance();
+
     void uninstallIbExtension();
 
 }

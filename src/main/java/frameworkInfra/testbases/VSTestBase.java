@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+
 public class VSTestBase extends TestBase {
 
     public static WindowsDriver driver = null;
@@ -43,6 +45,9 @@ public class VSTestBase extends TestBase {
 
     @BeforeClass
     public void setUpEnv() {
+        //set registry SaveBuildPacket=1 for saving packet log
+        regservice.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
+
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
         //vs installed, install IB from installer
@@ -99,23 +104,6 @@ public class VSTestBase extends TestBase {
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
         log.info(method.getName() + " test started");
-
-        try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS2017");
-            capabilities.setCapability("app", "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe");
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            test.log(Status.INFO, "Visual Studio opened successfully");
-            try {
-                driver.findElementByName("Not now, maybe later.").click();
-                vsService.vsFirstActivation();
-            } catch (Exception e){
-                e.getMessage();
-            }
-        } catch (MalformedURLException e) {
-            e.getMessage();
-        }
     }
 
     @AfterMethod

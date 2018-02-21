@@ -17,6 +17,7 @@ public class RegistryService extends TestBase{
         }
     }
 
+
     public static String getRegistryKey(HKEY rootKey, String keyPath, String keyName){
         try {
             return Advapi32Util.registryGetStringValue(rootKey, keyPath, keyName);

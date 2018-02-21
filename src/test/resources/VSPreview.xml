@@ -5,7 +5,7 @@
 
     <test name="VS installed, install IB from installer">
         <classes>
-            <class name ="uitests.VSTests" />
+            <class name ="vstests.VS2017ExtensionTests" />
         </classes>
     </test>
 </suite>

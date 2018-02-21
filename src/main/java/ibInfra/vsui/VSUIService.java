@@ -1,8 +1,15 @@
 package ibInfra.vsui;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
+import io.appium.java_client.windows.WindowsDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.testbases.VSTestBase.driver;
 
@@ -80,6 +87,26 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
             e.printStackTrace();
         }
         runWin.waitForProcessToFinish("buildsystem.exe");
+    }
+
+    @Override
+    public void openVS2017instance() {
+        try {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            test.log(Status.INFO, "Opening VS2017 Preview");
+            capabilities.setCapability("app", "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe");
+            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            test.log(Status.INFO, "Visual Studio opened successfully");
+            try {
+                driver.findElementByName("Not now, maybe later.").click();
+                vsFirstActivation();
+            } catch (Exception e){
+                e.getMessage();
+            }
+        } catch (MalformedURLException e) {
+            e.getMessage();
+        }
     }
 
 

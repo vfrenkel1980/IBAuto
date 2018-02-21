@@ -20,4 +20,6 @@ public interface IWindowsService {
 
     boolean isServiceRunning(String serviceName);
 
+
+
 }

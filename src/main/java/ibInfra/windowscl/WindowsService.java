@@ -6,9 +6,7 @@ import frameworkInfra.utils.StaticDataProvider;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -126,6 +124,24 @@ public class WindowsService extends TestBase implements IWindowsService {
             if(reader.nextLine().contains(serviceName))
                 return true;
         return false;
+    }
+
+    public File getLatestFilefromDir(String dirPath, String substring){
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles();
+        if (files == null || files.length == 0) {
+            return null;
+        }
+
+        File lastModifiedFile = files[0];
+        for (int i = 1; i < files.length; i++) {
+            if (files[i].getName().length() > 5){
+                if (lastModifiedFile.lastModified() < files[i].lastModified() && files[i].getName().contains(substring)) {
+                    lastModifiedFile = files[i];
+                }
+            }
+        }
+        return lastModifiedFile;
     }
 
 
