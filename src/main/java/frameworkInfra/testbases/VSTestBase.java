@@ -33,7 +33,7 @@ public class VSTestBase extends TestBase {
     public WindowsService runWin = new WindowsService();
     public IbService runIb = new IbService();
     private String SCENARIO = System.getProperty("scenario");
-    private String VSINSTALLATION = System.getProperty("vsinstallation");
+    public String VSINSTALLATION = System.getProperty("vsinstallation");
 
     static {
         Calendar calendar = Calendar.getInstance();

@@ -20,7 +20,9 @@ public interface IVSUIService  {
 
     void executeBuildFromMenu(String action);
 
-    void openVS2017instance();
+    void executeBuildFromPrjExplorer(String action, String solutionName);
+
+    void openVS2017instance(String vsinstallation);
 
     void uninstallIbExtension();
 
