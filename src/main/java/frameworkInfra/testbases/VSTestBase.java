@@ -45,7 +45,6 @@ public class VSTestBase extends TestBase {
 
     @BeforeClass
     public void setUpEnv() {
-
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
         //set registry SaveBuildPacket=1 for saving packet log
