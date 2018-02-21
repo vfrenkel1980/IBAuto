@@ -44,7 +44,7 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
     }
 
     @Override
-    public void executeBuild(String action) {
+    public void executeBuildFromMenu(String action) {
         driver.findElementByName("Build");
         driver.findElementByName("Incredibuild").click();
         driver.findElementByName(action).click();

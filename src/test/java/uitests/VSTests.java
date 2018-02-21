@@ -37,7 +37,7 @@ public class VSTests /*extends TestBase*/ {
 
         try {
             runVs.openProject("C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln");
-            runVs.executeBuild("Rebuild Solution");
+            runVs.executeBuildFromMenu("Rebuild Solution");
         }catch (Exception e){
             e.getMessage();
         }

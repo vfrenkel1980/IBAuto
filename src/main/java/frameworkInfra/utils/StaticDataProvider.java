@@ -303,6 +303,10 @@ public class StaticDataProvider {
 
     }
 
+    public static class TestProjects{
+        public static final String CONSOLE_APPLICATION_01 = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
+    }
+
     public static class LinuxCommands{
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";

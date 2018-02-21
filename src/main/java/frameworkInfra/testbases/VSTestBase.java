@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
@@ -29,6 +30,7 @@ public class VSTestBase extends TestBase {
     public VSUIService vsService = new VSUIService();
     public WindowsService runWin = new WindowsService();
     public IbService runIb = new IbService();
+    public RegistryService regservice = new RegistryService();
     private String SCENARIO = System.getProperty("scenario");
 
     static {
@@ -51,14 +53,8 @@ public class VSTestBase extends TestBase {
 
         //upgrade vs and install IB from vs installer
         if (SCENARIO.equals("2")) {
-            String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
             vsService.upgradeVSWithIB();
-            String extensionVersion = runIb.getIbVsExtensionVersion();
             ibVersion = IIBService.getIbVersion();
-            if (runIb.verifyExtensionUpgrade(expectedExtensionVersion, extensionVersion))
-                test.log(Status.INFO, "VS extension upgrade from " + expectedExtensionVersion + " to " + extensionVersion);
-            else
-                test.log(Status.ERROR, "VS extension did not upgrade and remained " + expectedExtensionVersion);
             if (runIb.verifyIbInstallation(ibVersion))
                 test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
             else

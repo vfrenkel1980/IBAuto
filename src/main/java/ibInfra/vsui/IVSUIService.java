@@ -12,8 +12,6 @@ public interface IVSUIService  {
 
     void openProject(String projectPath);
 
-    void executeBuild(String action);
-
-
+    void executeBuildFromMenu(String action);
 
 }
