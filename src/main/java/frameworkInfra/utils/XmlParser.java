@@ -11,10 +11,10 @@ import java.util.List;
 
 public class XmlParser {
 
-    public static List<String> getIpList(){
+    public static List<String> getIpList(String listFile){
 
         SAXBuilder builder = new SAXBuilder();
-        File xmlFile = new File(System.getProperty("user.dir") + "/src/main/resources/Simulation IP list.xml");
+        File xmlFile = new File(System.getProperty("user.dir") + "/src/main/resources/" + listFile);
 
         try {
             Document document = (Document) builder.build(xmlFile);
@@ -33,6 +33,7 @@ public class XmlParser {
         } catch (IOException | JDOMException io) {
             System.out.println(io.getMessage());
             return null;
+
         }
     }
 }

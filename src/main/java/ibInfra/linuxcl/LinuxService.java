@@ -32,9 +32,10 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
             //Set password
             session.setPassword("xoreax");
             session.connect();
-            test.log(Status.INFO, "Successfully connected to " + hostIP);
-            test.log(Status.INFO, "Running command " + command);
-
+            if (test != null) {
+                test.log(Status.INFO, "Successfully connected to " + hostIP);
+                test.log(Status.INFO, "Running command " + command);
+            }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);
             channelExec.connect();
@@ -99,7 +100,9 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     @Override
     public void deleteLogsFolder(List<String> ipList) {
         for (Object machine : ipList) {
+            log.info("deleting " + machine);
             runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
+            log.info("deleted " + machine);
         }
     }
 
@@ -120,6 +123,24 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public boolean startIBService(String service, String IP) {
+        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
+        if (res == 0)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public boolean stopIBService(String service, String IP) {
+        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
+        if (res == 0)
+            return false;
+        else
+            return true;
     }
 
     @Override

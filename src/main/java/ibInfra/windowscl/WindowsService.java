@@ -26,9 +26,10 @@ public class WindowsService extends TestBase implements IWindowsService {
         int exitStatus = 0;
         try {
             Runtime rt = Runtime.getRuntime();
-            //test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            if (test != null) {
+                test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            }
             Process pr = rt.exec(command);
-
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 
             while((line=input.readLine()) != null) {
@@ -37,7 +38,9 @@ public class WindowsService extends TestBase implements IWindowsService {
 
             exitStatus = pr.waitFor();
             System.out.println("Command " + command + " - Completed Successfully");
-            //test.log(Status.INFO, "Command " + command + " - Completed Successfully");
+            if (test != null) {
+                test.log(Status.INFO, "Command " + command + " - Completed Successfully");
+            }
         } catch(Exception e) {
             test.log(Status.ERROR, "Failed to run command.\n" +
                     "Command: " + command +"\n"+

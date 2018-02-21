@@ -9,6 +9,7 @@ public class StaticDataProvider {
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
+        public static final String OUTPUT_LOG_FILE = "C:\\QA\\Simulation\\buildLog.txt";
     }
 
     //processes
@@ -23,6 +24,13 @@ public class StaticDataProvider {
     public static class WindowsServices{
         public static final String AGENT_SERVICE = "IncrediBuild_Agent";
         public static final String COORD_SERVICE = "IncrediBuild_Coordinator";
+    }
+
+    public static class LogOutput{
+        public static final String BUILD_SUCCEEDED = "Build succeeded";
+        public static final String ERROR = "error";
+        public static final String XDTASKID = "xdTaskID";
+        public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
     }
 
     public static class VsActions{
@@ -278,6 +286,11 @@ public class StaticDataProvider {
 
         }
 
+        public static class ConsoleAppProj{
+            public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
+            public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
+        }
+
         public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
         public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
     }
@@ -294,12 +307,19 @@ public class StaticDataProvider {
 
     public static class WindowsCommands{
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent";
+        public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String APPLY_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\IncrediBuild-tests_VS_preview.IB_lic\"";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -q --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -q";
+
+        public static final String INSTALL_VSPREVIEW_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -q --norestart";
+        public static final String INSTALL_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String UPDATE_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -q";
 
     }
 
@@ -311,18 +331,14 @@ public class StaticDataProvider {
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
+		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
+        public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
     }
 
     public static class LinuxMachines{
-        public static final String SIM_INITIATOR = "192.168.10.80";
-        public static final String SIM_COORDINATOR = "192.168.10.106";
-        public static final String SIM_HELPER_1 = "192.168.10.134";
-        public static final String SIM_HELPER_2 = "192.168.10.136";
-        public static final String SIM_HELPER_3 = "192.168.10.94";
-        public static final String SIM_HELPER_4 = "192.168.10.127";
 
         public static final String TEST_MACHINE = "192.168.11.82";
         public static final String VM_SIM_1A = "192.168.11.103";
@@ -342,7 +358,7 @@ public class StaticDataProvider {
         public static final String CD_QT_DIR = "cd /disk2/projects/qt-everywhere-opensource-src-4.8.6";
         public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
         public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
-
+        public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
 
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";

@@ -32,14 +32,10 @@ public class TestBase {
 
     @BeforeSuite
     public static void cleanup(){
-        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
-        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
-    }
-
-    @BeforeClass
-    public static void init(){
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
+        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
+        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
     }
 
     public void log(String data){
@@ -89,7 +85,7 @@ public class TestBase {
     }
 
     @AfterClass
-    public void endTest(){
+    public void afterClass(){
         extent.flush();
     }
 

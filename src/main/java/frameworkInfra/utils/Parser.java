@@ -4,6 +4,7 @@ import org.apache.tools.ant.DirectoryScanner;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Parser{
 
@@ -40,6 +41,24 @@ public class Parser{
 //        }
     }
 
+    public static boolean doesFileContainString(String filePath, String text){
+        File file = new File(filePath);
+        final Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine();
+                if(lineFromFile.contains(text)) {
+
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }
+        return false;
+    }
+
     public static String getFileToParse(String path, String prefix){
         DirectoryScanner scanner = new DirectoryScanner();
         scanner.setIncludes(new String[]{prefix});
@@ -49,5 +68,16 @@ public class Parser{
         String[] files = scanner.getIncludedFiles();
         return files[0];
     }
+
+
+    //usage example
+     /*        Map<String, String> lookFor = new HashMap<String, String>();
+        lookFor.put("version", "version");
+        try {
+            result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        result = result.substring(0,result.indexOf(","));*/
 
 }

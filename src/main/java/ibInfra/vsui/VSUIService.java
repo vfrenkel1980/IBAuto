@@ -35,6 +35,32 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
     }
 
     @Override
+    public void installVSPreviewWithIB() {
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
+    }
+
+    @Override
+    public void installVSPreviewWithoutIB() {
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
+    }
+
+    @Override
+    public void upgradeVSPreviewWithIB() {
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VSPREVIEW_WITH_IB);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
+    }
+
+    @Override
+    public void uninstallIbExtension() {
+
+    }
+
+    @Override
     public void openProject(String projectPath) {
         driver.findElementByName("File").click();
         driver.findElementByName("Open").click();
@@ -55,5 +81,6 @@ public class VSUIService extends WindowsTestBase implements IVSUIService {
         }
         runWin.waitForProcessToFinish("buildsystem.exe");
     }
+
 
 }
