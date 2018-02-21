@@ -32,8 +32,8 @@ public class VSTestBase extends TestBase {
     public VSUIService vsService = new VSUIService();
     public WindowsService runWin = new WindowsService();
     public IbService runIb = new IbService();
-    public RegistryService regservice = new RegistryService();
     private String SCENARIO = System.getProperty("scenario");
+    private String VSINSTALLATION = System.getProperty("vsinstallation");
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -45,56 +45,71 @@ public class VSTestBase extends TestBase {
 
     @BeforeClass
     public void setUpEnv() {
-        //set registry SaveBuildPacket=1 for saving packet log
-        regservice.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
 
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
-        //vs installed, install IB from installer
-        if (SCENARIO.equals("1")) {
-            runIb.installIB("Latest");
-            runIb.verifyIbServicesRunning();
-        }
+        //set registry SaveBuildPacket=1 for saving packet log
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
+        String extensionVersion = "";
 
-        //upgrade vs and install IB from vs installer
-        if (SCENARIO.equals("2")) {
-            vsService.upgradeVSWithIB();
-            ibVersion = IIBService.getIbVersion();
-            if (runIb.verifyIbInstallation(ibVersion))
-                test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
-            else
-                test.log(Status.ERROR, "IB failed to install from VS Installer");
+        switch (SCENARIO) {
+            //vs installed, install IB from installer
+            case "1":
+                runIb.installIB("Latest");
+                runIb.verifyIbServicesRunning();
+                break;
 
-            runIb.verifyIbServicesRunning();
-        }
+            //upgrade vs and install IB from vs installer
+            case "2":
+                if (VSINSTALLATION.equals("release"))
+                    vsService.upgradeVSWithIB();
+                else
+                    vsService.upgradeVSPreviewWithIB();
+                ibVersion = IIBService.getIbVersion();
+                if (runIb.verifyIbInstallation(ibVersion))
+                    test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
+                else
+                    test.log(Status.ERROR, "IB failed to install from VS Installer");
 
-        //install old IB, install vs and upgrade IB from VS installer
-        if (SCENARIO.equals("3")){
-            runIb.installIB("2147");
-            int oldIbVersion = IIBService.getIbVersion();
-            vsService.installVSWithIB();
-            String extensionVersion = "";
-            ibVersion = IIBService.getIbVersion();
+                runIb.verifyIbServicesRunning();
+                break;
 
-            if (runIb.verifyIbUpgrade(oldIbVersion, ibVersion))
-                test.log(Status.INFO, "IB upgraded successfully from " + oldIbVersion + " to " + ibVersion);
-            else
-                test.log(Status.ERROR, "IB failed to upgrade from " + oldIbVersion + " to " + " using VS Installer");
+            //install old IB, install vs and upgrade IB from VS installer
+            case "3":
+                runIb.installIB("2147");
+                int oldIbVersion = IIBService.getIbVersion();
+                if (VSINSTALLATION.equals("release"))
+                    vsService.installVSWithIB();
+                else
+                    vsService.installVSPreviewWithIB();
+                ibVersion = IIBService.getIbVersion();
+                if (runIb.verifyIbUpgrade(oldIbVersion, ibVersion))
+                    test.log(Status.INFO, "IB upgraded successfully from " + oldIbVersion + " to " + ibVersion);
+                else
+                    test.log(Status.ERROR, "IB failed to upgrade from " + oldIbVersion + " to " + " using VS Installer");
 
-            runIb.verifyIbServicesRunning();
-        }
+                runIb.verifyIbServicesRunning();
+                break;
 
-        //install vs without IB
-        if (SCENARIO.equals("4")){
-            String extensionVersion = "";
-            vsService.installVSWithoutIB();
-            if (runIb.verifyExtensionInstalled(extensionVersion))
-                test.log(Status.INFO, "Extension installed successfully with version " + extensionVersion);
-            else
-                test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
+            //install vs without IB
+            case "4":
+                extensionVersion = "";
+                if (VSINSTALLATION.equals("release"))
+                    vsService.installVSWithoutIB();
+                else
+                    vsService.installVSPreviewWithoutIB();
+                if (runIb.verifyExtensionInstalled(extensionVersion))
+                    test.log(Status.INFO, "Extension installed successfully with version " + extensionVersion);
+                else
+                    test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
 
-            extent.flush();
-            System.exit(0);
+                extent.flush();
+                System.exit(0);
+                break;
+
+            //default for testing purpose
+            default:
+                break;
         }
     }
 

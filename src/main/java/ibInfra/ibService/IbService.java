@@ -102,40 +102,28 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public boolean verifyExtensionUpgrade(String oldVersion, String newVersion) {
-        if (oldVersion.equals(newVersion))
-            return false;
-        else
-            return true;
+        return oldVersion.equals(newVersion);
     }
 
     @Override
     public boolean verifyIbUpgrade(int oldVersion, int newVersion) {
-        if (oldVersion == newVersion)
-            return false;
-        else
-            return true;
+        return oldVersion == newVersion;
     }
 
     @Override
     public boolean verifyExtensionInstalled(String extensionVersion) {
-        if (extensionVersion.equals(""))
-            return false;
-        else
-            return true;
+        return extensionVersion.equals("");
     }
 
     @Override
     public boolean verifyIbServicesRunning() {
-        if (runWin.isServiceRunning(WindowsServices.AGENT_SERVICE) && runWin.isServiceRunning(WindowsServices.COORD_SERVICE))
-            return true;
-        else
-            return false;
+        return runWin.isServiceRunning(WindowsServices.AGENT_SERVICE) && runWin.isServiceRunning(WindowsServices.COORD_SERVICE);
     }
 
     @Override
     public void uninstallIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        runWin.runCommandWaitForFinish(String.format(WindowsCommands.REMOVE_IB_EXTENSION, installationFile));
+        runWin.runCommandWaitForFinish(String.format(WindowsCommands.IB_UNINSTALL_COMMAND, installationFile));
     }
 
     @Override
