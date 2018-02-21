@@ -46,10 +46,10 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         //set registry SaveBuildPacket=1 for saving packet log
-        regservice.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
 
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
+        regservice.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
         //vs installed, install IB from installer
         if (SCENARIO.equals("1")) {
             runIb.installIB("Latest");
