@@ -46,9 +46,6 @@ public class VSTestBase extends TestBase {
     public void setUpEnv() {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
-        //set registry SaveBuildPacket=1 for saving packet log
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        String extensionVersion = "";
 
         switch (SCENARIO) {
             //vs installed, install IB from installer
@@ -63,12 +60,6 @@ public class VSTestBase extends TestBase {
                     vsService.upgradeVSWithIB();
                 else
                     vsService.upgradeVSPreviewWithIB();
-                ibVersion = IIBService.getIbVersion();
-                if (runIb.verifyIbInstallation(ibVersion))
-                    test.log(Status.INFO, "IB " + ibVersion + " installed successfully from VS installer");
-                else
-                    test.log(Status.ERROR, "IB failed to install from VS Installer");
-
                 runIb.verifyIbServicesRunning();
                 break;
 
@@ -80,27 +71,15 @@ public class VSTestBase extends TestBase {
                     vsService.installVSWithIB();
                 else
                     vsService.installVSPreviewWithIB();
-                ibVersion = IIBService.getIbVersion();
-                if (runIb.verifyIbUpgrade(oldIbVersion, ibVersion))
-                    test.log(Status.INFO, "IB upgraded successfully from " + oldIbVersion + " to " + ibVersion);
-                else
-                    test.log(Status.ERROR, "IB failed to upgrade from " + oldIbVersion + " to " + " using VS Installer");
-
                 runIb.verifyIbServicesRunning();
                 break;
 
             //install vs without IB
             case "4":
-                extensionVersion = "";
                 if (VSINSTALLATION.equals("release"))
                     vsService.installVSWithoutIB();
                 else
                     vsService.installVSPreviewWithoutIB();
-                if (runIb.verifyExtensionInstalled(extensionVersion))
-                    test.log(Status.INFO, "Extension installed successfully with version " + extensionVersion);
-                else
-                    test.log(Status.ERROR, "Extension installation failed. Version is " + extensionVersion);
-
                 extent.flush();
                 System.exit(0);
                 break;

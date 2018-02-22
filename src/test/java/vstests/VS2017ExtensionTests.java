@@ -4,7 +4,7 @@ import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
@@ -23,9 +23,10 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
     public void executeVSBuild(){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVS2017instance(VSINSTALLATION);
-        vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
-        vsService.executeBuildFromMenu(StaticDataProvider.VsActions.REBUILD_SOLUTION);
+        vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
+        vsService.executeBuildFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
             result = runIb.findValueInPacketLog("ExitCode ");
@@ -37,9 +38,10 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "IncrediBuild execution from VS2017 project explorer")
     public void executeVSBuildExplorer(){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVS2017instance(VSINSTALLATION);
-        vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
-        vsService.executeBuildFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, "ConsoleApplication1");
+        vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
+        vsService.executeBuildFromPrjExplorer(VsActions.REBUILD_SOLUTION, "ConsoleApplication1");
         String result;
         try {
             result = runIb.findValueInPacketLog("ExitCode ");
@@ -51,137 +53,137 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Successful build - check for success. Predicted 0, MSBuild 0")
     public void successCheckForSuccessfulBuildNoPredictedNoMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.BUILD_SUCCEEDED));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
     @Test(testName = "Failed build - check for error. Predicted 0, MSBuild 0")
     public void failedCheckForErrorBuildNoPredictedNoMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.ERROR));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 0, MSBuild 0")
     public void failedCheckForXgTaskIdNoPredictedNoMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDTASKID));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
     @Test(testName = "Successful build - check for xgspeculativetaskid. Predicted 0, MSBuild 0")
     public void failedCheckForXgSpeculativeTaskIdNoPredictedNoMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDSPECULATIVETASKID));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
     @Test(testName = "Successful build - check for success. Predicted 0, MSBuild 1")
     public void successCheckForSuccessfulBuildNoPredictedMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.BUILD_SUCCEEDED));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
     @Test(testName = "Failed build - check for error. Predicted 0, MSBuild 1")
     public void failedCheckForErrorBuildNoPredictedMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.ERROR));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 0, MSBuild 1")
     public void failedCheckForXgTaskIdNoPredictedMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDTASKID));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
     @Test(testName = "Successful build - check for xgspeculativetaskid. Predicted 0, MSBuild 1")
     public void failedCheckForXgSpeculativeTaskIdNoPredictedMSBuild(){
-        setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDSPECULATIVETASKID));
+        setRegistry("0", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
     @Test(testName = "Successful build - check for success. Predicted 2, MSBuild 0")
     public void successCheckForSuccessfulBuildPredictedNoMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.BUILD_SUCCEEDED));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
     @Test(testName = "Failed build - check for error. Predicted 2, MSBuild 0")
     public void failedCheckForErrorBuildPredictedNoMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.ERROR));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 2, MSBuild 0")
     public void failedCheckForXgTaskIdPredictedNoMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDTASKID));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
     @Test(testName = "Successful build - check for xgspeculativetaskid. Predicted 2, MSBuild 0")
     public void failedCheckForXgSpeculativeTaskIdPredictedNoMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDSPECULATIVETASKID));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
     @Test(testName = "Successful build - check for success. Predicted 2, MSBuild 1")
     public void successCheckForSuccessfulBuildPredictedMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.BUILD_SUCCEEDED));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
     @Test(testName = "Failed build - check for error. Predicted 2, MSBuild 1")
     public void failedCheckForErrorBuildPredictedMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.ERROR));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 2, MSBuild 1")
     public void failedCheckForXgTaskIdPredictedMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDTASKID));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
     @Test(testName = "Successful build - check for xgspeculativetaskid. Predicted 2, MSBuild 1")
     public void failedCheckForXgSpeculativeTaskIdPredictedMSBuild(){
-        setRegistry("2", StaticDataProvider.RegistryKeys.PREDICTED);
-        setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDSPECULATIVETASKID));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
     
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String keyName){
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", keyName, required);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
     }
 
 }
