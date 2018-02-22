@@ -101,7 +101,12 @@ public class VSUIService extends TestBase implements IVSUIService {
         driver.findElementByName("Build");
         WebElement newel = driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]"));
         AppiumActions.rightClick(newel);
-        driver.findElementByName("Incredibuild").click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        AppiumActions.contextMenuIncrediBuildClick();
         driver.findElementByName(action).click();
         try {
             Thread.sleep(3000);

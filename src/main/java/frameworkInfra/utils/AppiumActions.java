@@ -5,6 +5,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class AppiumActions extends VSTestBase{
@@ -25,5 +26,10 @@ public class AppiumActions extends VSTestBase{
             System.out.println("Element " + element + " was not clickable "
                     + e.getStackTrace());
         }
+    }
+
+    public static void contextMenuIncrediBuildClick(){
+        List<WebElement> newel2 = driver.findElementsByName("Incredibuild");
+        newel2.get(1).click();
     }
 }
