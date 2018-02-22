@@ -288,8 +288,8 @@ public class StaticDataProvider {
         }
 
         public static class ConsoleAppProj{
-            public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
-            public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE + "\"";
+            public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\" /out=" + Locations.OUTPUT_LOG_FILE;
         }
 
         public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
