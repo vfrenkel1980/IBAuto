@@ -4,7 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
@@ -47,7 +47,7 @@ public class VSTestBase extends TestBase {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
         //set registry SaveBuildPacket=1 for saving packet log
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         String extensionVersion = "";
 
         switch (SCENARIO) {
@@ -126,6 +126,12 @@ public class VSTestBase extends TestBase {
         }
         driver = null;
         getResult(result);
+    }
+
+    @AfterClass
+    public void afterClass(){
+        runIb.uninstallIB(String.valueOf(IIBService.getIbVersion()));
+        extent.flush();
     }
 
 }

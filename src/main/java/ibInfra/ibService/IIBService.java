@@ -2,7 +2,7 @@ package ibInfra.ibService;
 
 import com.sun.jna.platform.unix.solaris.LibKstat;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public interface IIBService {
     void installIB(String version);
 
     static int getIbVersion(){
-        String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.VERSION);
+        String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
         int version = Integer.parseInt(regVersion);
         version -= 1001000;
         return version;
