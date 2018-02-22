@@ -58,6 +58,7 @@ dependencies {
 test {
     ignoreFailures = true
     //scenario parameter for VStests
+    systemProperty 'scenario', System.properties['scenario'] ?: '0'
     systemProperty 'scenario', System.properties['scenario'] ?: '1'
     systemProperty 'scenario', System.properties['scenario'] ?: '2'
     systemProperty 'scenario', System.properties['scenario'] ?: '3'

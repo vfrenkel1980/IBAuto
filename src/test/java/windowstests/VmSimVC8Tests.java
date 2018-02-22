@@ -2,6 +2,7 @@ package windowstests;
 
 import frameworkInfra.testbases.VmSimTestBase;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
@@ -19,6 +20,7 @@ public class VmSimVC8Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Ignore
     @Test(testName = "MIDL Interfaces 2005 - Debug x32 - build" , groups = { "Build" })
     public void midlInterfaces2005DebugBuild(){
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC8_VMSIN.MIDL_INTERFACES_DEBUG, "%s"));
