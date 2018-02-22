@@ -14,7 +14,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VS2017ExtensionTests extends VSTestBase {
 
-    /*@Test(testName = "Check version of installed IB extension")
+    @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
         String extensionVersion = runIb.getIbVsExtensionVersion();
         String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
@@ -33,7 +33,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         } catch (IOException e) {
             e.getMessage();
         }
-    }*/
+    }
 
     @Test(testName = "IncrediBuild execution from VS2017 project explorer")
     public void executeVSBuildExplorer(){
@@ -49,7 +49,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         }
     }
 
-    /*@Test(testName = "Successful build - check for success. Predicted 0, MSBuild 0")
+    @Test(testName = "Successful build - check for success. Predicted 0, MSBuild 0")
     public void successCheckForSuccessfulBuildNoPredictedNoMSBuild(){
         setRegistry("0", StaticDataProvider.RegistryKeys.PREDICTED);
         setRegistry("0", StaticDataProvider.RegistryKeys.MSBUILD);
@@ -175,7 +175,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("1", StaticDataProvider.RegistryKeys.MSBUILD);
         runIb.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.XDSPECULATIVETASKID));
-    }*/
+    }
 
     
     /*------------------------------METHODS------------------------------*/
