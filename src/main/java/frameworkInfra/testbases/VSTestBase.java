@@ -30,7 +30,6 @@ public class VSTestBase extends TestBase {
     public static WindowsDriver driver = null;
     private static int ibVersion = 0;
     public VSUIService vsService = new VSUIService();
-    public WindowsService runWin = new WindowsService();
     public IbService runIb = new IbService();
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");

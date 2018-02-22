@@ -1,9 +1,11 @@
 package ibInfra.vsui;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.testbases.TestBase;
 import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,7 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.testbases.VSTestBase.driver;
 
-public class VSUIService extends WindowsTestBase implements IVSUIService {
+public class VSUIService extends TestBase implements IVSUIService {
+
+    WindowsService runWin = new WindowsService();
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
