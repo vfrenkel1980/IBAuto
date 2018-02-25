@@ -29,7 +29,7 @@ public class StaticDataProvider {
 
     public static class LogOutput{
         public static final String BUILD_SUCCEEDED = "Build succeeded";
-        public static final String ERROR = "error";
+        public static final String ERROR = "Error";
         public static final String XDTASKID = "xdTaskID";
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
     }

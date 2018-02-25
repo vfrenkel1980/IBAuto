@@ -64,7 +64,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
         runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 0, MSBuild 0")
@@ -96,7 +96,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
         runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 0, MSBuild 1")
@@ -128,7 +128,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
         runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 2, MSBuild 0")
@@ -160,7 +160,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
         runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
     @Test(testName = "Successful build - check for xgtaskid. Predicted 2, MSBuild 1")
