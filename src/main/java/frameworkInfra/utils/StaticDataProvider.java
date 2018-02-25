@@ -15,7 +15,7 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = "buildconsole.exe ";
+        public static final String BUILD_CONSOLE = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "buildsystem ";
