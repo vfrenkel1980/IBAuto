@@ -109,7 +109,7 @@ public class VSTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        runIb.uninstallIB(String.valueOf(IIBService.getIbVersion()));
+        //runIb.uninstallIB(String.valueOf(IIBService.getIbVersion()));
         extent.flush();
     }
 
