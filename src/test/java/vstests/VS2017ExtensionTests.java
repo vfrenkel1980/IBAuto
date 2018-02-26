@@ -15,7 +15,7 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
-        String extensionVersion = runIb.getIbVsExtensionVersion();
+        String extensionVersion = runIb.getIbVsExtensionVersion(DevenvPath);
         String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
         Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "IncrediBuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
     }
@@ -178,7 +178,6 @@ public class VS2017ExtensionTests extends VSTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
-    
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String keyName){
