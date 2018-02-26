@@ -3,7 +3,7 @@
 <suite name="VSPreview"  >
 
 
-    <test name="VS installed, install IB from installer">
+    <test name="VSTests">
         <classes>
             <class name ="vstests.VS2017ExtensionTests" />
         </classes>

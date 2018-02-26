@@ -45,17 +45,18 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
-        test.log(Status.INFO, "Before class started");
 
         switch (SCENARIO) {
             //vs installed, install IB from installer
             case "1":
+                test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
                 runIb.installIB("Latest");
                 runIb.verifyIbServicesRunning();
                 break;
 
             //upgrade vs and install IB from vs installer
             case "2":
+                test.log(Status.INFO, "Before class started\n SCENARIO 2: upgrade vs and install IB from vs installer");
                 if (VSINSTALLATION.equals("release"))
                     vsService.upgradeVSWithIB();
                 else
@@ -65,6 +66,7 @@ public class VSTestBase extends TestBase {
 
             //install old IB, install vs and upgrade IB from VS installer
             case "3":
+                test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
                 runIb.installIB("2147");
                 if (VSINSTALLATION.equals("release"))
                     vsService.installVSWithIB();
@@ -75,6 +77,7 @@ public class VSTestBase extends TestBase {
 
             //install vs without IB
             case "4":
+                test.log(Status.INFO, "Before class started\n SCENARIO 4: install vs without IB");
                 if (VSINSTALLATION.equals("release"))
                     vsService.installVSWithoutIB();
                 else

@@ -1,12 +1,17 @@
 package frameworkInfra.utils;
 
+import com.aventstack.extentreports.Status;
+import frameworkInfra.testbases.TestBase;
+import frameworkInfra.testbases.WindowsTestBase;
+import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.DirectoryScanner;
 
 import java.io.*;
+import java.nio.file.FileSystem;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Parser{
+public class Parser extends WindowsTestBase{
 
     public static String retrieveDataFromFile(String filePath, Map<String, String> lookFor) throws IOException {
         BufferedReader in = null;
@@ -49,13 +54,13 @@ public class Parser{
             while (scanner.hasNextLine()) {
                 final String lineFromFile = scanner.nextLine();
                 if(lineFromFile.contains(text)) {
-
                     return true;
                 }
             }
         } catch (FileNotFoundException e) {
             e.getMessage();
         }
+        test.log(Status.INFO, "Didn't find " + text + " in BuildLog.txt");
         return false;
     }
 
