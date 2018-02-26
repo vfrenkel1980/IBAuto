@@ -1,6 +1,7 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -23,7 +24,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
         rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = runLinux.breakDownIPList(rawIpList2);
 
-        runLinux.deleteLogsFolder(ipList);
+        //runLinux.deleteLogsFolder(ipList);
 
         if(!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
@@ -58,6 +59,11 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
         }
+
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GPSD_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";", ipList.get(2));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(3));
+        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(4));
 
         extent.flush();
         log.info("finished after class");
