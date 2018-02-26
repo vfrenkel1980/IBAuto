@@ -34,6 +34,10 @@ public class StaticDataProvider {
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
     }
 
+    public static class WarningMessages{
+        public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
+    }
+
     public static class VsActions{
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";

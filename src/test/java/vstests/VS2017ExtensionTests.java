@@ -50,6 +50,22 @@ public class VS2017ExtensionTests extends VSTestBase {
         }
     }
 
+    @Test(testName = "Check that \"Predicted\" execution is enable: With MSBuild")
+    public void checkForPredictedExecutionWithMSBuild() {
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
+    }
+
+    @Test(testName = "Check that \"Predicted\" execution is enable: Without MSBuild")
+    public void checkForPredictedExecutionWithoutMSBuild() {
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("0", RegistryKeys.MSBUILD);
+        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
+    }
+
     @Test(testName = "Successful build - check for success. Predicted 0, MSBuild 0")
     public void successCheckForSuccessfulBuildNoPredictedNoMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
