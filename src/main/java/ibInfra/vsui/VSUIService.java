@@ -1,10 +1,12 @@
 package ibInfra.vsui;
 
 import com.aventstack.extentreports.Status;
+import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.testbases.WindowsTestBase;
 import frameworkInfra.utils.AppiumActions;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.By;
@@ -16,11 +18,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.testbases.VSTestBase.driver;
 
 public class VSUIService extends TestBase implements IVSUIService {
 
     WindowsService runWin = new WindowsService();
+    IbService ibService = new IbService();
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
@@ -32,6 +36,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "1");
     }
 
     @Override
@@ -46,6 +51,10 @@ public class VSUIService extends TestBase implements IVSUIService {
         runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VS_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.MODIFY_ADD_INCREDIBUILD);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
+        ibService.loadIbLicense();
     }
 
     @Override
@@ -53,6 +62,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "1");
     }
 
     @Override
@@ -64,9 +74,13 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void upgradeVSPreviewWithIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VSPREVIEW_WITH_IB);
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VSPREVIEW);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
+        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
+        ibService.loadIbLicense();
     }
 
     @Override

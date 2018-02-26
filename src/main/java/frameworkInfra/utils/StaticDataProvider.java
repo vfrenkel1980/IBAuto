@@ -305,6 +305,7 @@ public class StaticDataProvider {
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
+        public static final String VS_FIRST_ACTIVATION = "FirstActivation";
     }
 
     public static class WindowsCommands{
@@ -315,12 +316,14 @@ public class StaticDataProvider {
         public static final String APPLY_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic\"";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -q --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
-        public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
+        public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -q";
 
         public static final String INSTALL_VSPREVIEW_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -q --norestart";
         public static final String INSTALL_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
-        public static final String UPDATE_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -q --norestart";
+        public static final String UPDATE_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
+        public static final String MODIFY_PREVIEW_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -q";
 
     }

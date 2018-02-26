@@ -66,7 +66,6 @@ public class VSTestBase extends TestBase {
             //install old IB, install vs and upgrade IB from VS installer
             case "3":
                 runIb.installIB("2147");
-                int oldIbVersion = IIBService.getIbVersion();
                 if (VSINSTALLATION.equals("release"))
                     vsService.installVSWithIB();
                 else
