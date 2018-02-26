@@ -36,7 +36,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "1");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "1");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
