@@ -40,6 +40,11 @@ public class StaticDataProvider {
         public static final String CLEAN_SOLUTION = "Clean Solution";
     }
 
+    public static class VsDevenvInstallPath{
+        public static final String VS2017__RELEASE = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
+        public static final String VS2017__PREVIEW = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
+    }
+
     //projects
     public static class ProjectsCommands {
         public static final String CLEAN = "clean ";

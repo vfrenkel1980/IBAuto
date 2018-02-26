@@ -3,6 +3,7 @@ package ibInfra.ibService;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
@@ -67,8 +68,8 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
-    public String getIbVsExtensionVersion() {
-        return CustomJsonParser.getValueFromKey("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", "version");
+    public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
+        return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "Extensions\\IncredibuildExtension\\manifest.json", "version");
 
 /*        Map<String, String> lookFor = new HashMap<String, String>();
         lookFor.put("version", "version");
@@ -83,12 +84,12 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public String getExpectedIbVsExtensionVersion() {
         try {
-            ZipFile zipFile = new ZipFile("C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\IncredibuildMenu.vsix");
+            ZipFile zipFile = new ZipFile(Locations.IB_ROOT + "\\IncredibuildMenu.vsix");
             zipFile.extractAll(Locations.QA_ROOT + "Extracted");
         } catch (ZipException e) {
             e.printStackTrace();
         }
-        return CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "Extracted\\manifest.json", "version");
+        return CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "\\Extracted\\manifest.json", "version");
     }
 
 

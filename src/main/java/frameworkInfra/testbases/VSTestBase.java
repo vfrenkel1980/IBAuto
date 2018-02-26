@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
@@ -33,6 +34,7 @@ public class VSTestBase extends TestBase {
     public IbService runIb = new IbService();
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
+    public String DevenvPath = "";
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -46,6 +48,12 @@ public class VSTestBase extends TestBase {
     public void setUpEnv() {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "Before class started");
+
+        if (VSINSTALLATION.toLowerCase().equals("preview")){
+            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017__PREVIEW;
+        } else {
+            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017__RELEASE;
+        }
 
         switch (SCENARIO) {
             //vs installed, install IB from installer
