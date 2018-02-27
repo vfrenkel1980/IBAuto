@@ -141,16 +141,14 @@ public class VSUIService extends TestBase implements IVSUIService {
                 PathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
-
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS2017 Preview");
+            test.log(Status.INFO, "Opening VS2017");
             capabilities.setCapability("app", PathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
             try {
-                driver.findElementByName("Not now, maybe later.").click();
                 vsFirstActivation();
             } catch (Exception e) {
                 e.getMessage();

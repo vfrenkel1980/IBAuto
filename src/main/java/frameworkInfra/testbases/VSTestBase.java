@@ -3,28 +3,20 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
-import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VSTestBase extends TestBase {
 
@@ -49,9 +41,9 @@ public class VSTestBase extends TestBase {
         test = extent.createTest("Before Class");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
-            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017__PREVIEW;
+            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
-            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017__RELEASE;
+            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017_RELEASE;
         }
 
         switch (SCENARIO) {
@@ -98,18 +90,20 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
+        extent.flush();
     }
 
     @BeforeMethod
     public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(context.getName());
+        test.assignCategory(VSINSTALLATION);
         log.info(method.getName() + " test started");
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
+        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT, "BuildLog");
         if (driver != null) {
             driver.quit();
         }

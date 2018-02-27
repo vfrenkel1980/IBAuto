@@ -41,8 +41,8 @@ public class StaticDataProvider {
     }
 
     public static class VsDevenvInstallPath{
-        public static final String VS2017__RELEASE = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
-        public static final String VS2017__PREVIEW = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
+        public static final String VS2017_RELEASE = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
+        public static final String VS2017_PREVIEW = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE";
     }
 
     //projects
