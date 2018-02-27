@@ -90,14 +90,13 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
-        extent.flush();
     }
 
     @BeforeMethod
     public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(VSINSTALLATION);
+        test.assignCategory(VSINSTALLATION + " " + SCENARIO);
         log.info(method.getName() + " test started");
     }
 
