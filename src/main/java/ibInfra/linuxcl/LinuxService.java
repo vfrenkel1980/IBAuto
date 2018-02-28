@@ -7,6 +7,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import frameworkInfra.testbases.LinuxSimTestBase;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.windowscl.WindowsService;
 import org.jdom2.Element;
 
 import java.io.BufferedReader;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinuxService extends LinuxSimTestBase implements ILinuxService {
+
+    private WindowsService winService = new WindowsService();
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {

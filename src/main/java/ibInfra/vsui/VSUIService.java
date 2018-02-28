@@ -5,6 +5,8 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import ibInfra.ibService.IbService;
+import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,9 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.testbases.VSTestBase.driver;
 
 public class VSUIService extends TestBase implements IVSUIService {
+
+    private WindowsService winService = new WindowsService();
+    private IbService ibService = new IbService();
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();

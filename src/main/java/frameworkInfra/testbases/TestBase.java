@@ -33,10 +33,11 @@ public class TestBase {
     public static ExtentTest test;
     public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
+
+
     public VSUIService vsService = new VSUIService();
-    public IbService ibService = new IbService();
-    public static LinuxService linuxService = new LinuxService();
-    public WindowsService winService = new WindowsService();
+
+
 
     @BeforeSuite
     public static void cleanup(){

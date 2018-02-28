@@ -19,6 +19,8 @@ import java.util.Map;
 
 public class IbService extends TestBase implements IIBService {
 
+    private WindowsService winService = new WindowsService();
+
     @Override
     public int cleanAndBuild(String command) {
         winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));

@@ -5,6 +5,8 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibService.IbService;
+import ibInfra.vsui.VSUIService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -22,6 +24,8 @@ public class VSTestBase extends TestBase {
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String DevenvPath = "";
+    public IbService ibService = new IbService();
+    public VSUIService vsService = new VSUIService();
 
     static {
         Calendar calendar = Calendar.getInstance();

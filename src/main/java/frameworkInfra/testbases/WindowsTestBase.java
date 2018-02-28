@@ -20,6 +20,8 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 public class WindowsTestBase extends TestBase {
 
     private static int ibVersion = 0;
+    public WindowsService winService = new WindowsService();
+    public IbService ibService = new IbService();
 
     static {
         ibVersion = IIBService.getIbVersion();

@@ -25,6 +25,7 @@ public class LinuxSimTestBase extends TestBase {
     public static List<String> ipList;
     String buildID;
     private static String ibVersion = "";
+    public LinuxService linuxService = new LinuxService();
 
 /*    static {
 
