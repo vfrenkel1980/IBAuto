@@ -328,7 +328,7 @@ public class StaticDataProvider {
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
-        public static final String UNLOAD_IB_LICENSE = "CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
+        public static final String UNLOAD_IB_LICENSE = Locations.IB_ROOT + "\\CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";

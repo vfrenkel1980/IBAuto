@@ -48,7 +48,7 @@ public class Parser extends WindowsTestBase{
 
     public static boolean doesFileContainString(String filePath, String text){
         File file = new File(filePath);
-        final Scanner scanner;
+        Scanner scanner = null;
         try {
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -59,6 +59,8 @@ public class Parser extends WindowsTestBase{
             }
         } catch (FileNotFoundException e) {
             e.getMessage();
+        }finally {
+            scanner.close();
         }
         test.log(Status.INFO, "Didn't find " + text + " in BuildLog.txt");
         return false;
