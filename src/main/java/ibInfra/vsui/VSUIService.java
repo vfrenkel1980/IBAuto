@@ -5,7 +5,7 @@ import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
@@ -33,54 +33,60 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void installVSWithIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WITH_IB);
+        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "0");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
     public void installVSWithoutIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VS_WO_IB);
+        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WO_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void upgradeVSWithIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VS_WITH_IB);
+        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
+        runWin.waitForProcessToStart("vs_bootstrapper.exe");
+        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.MODIFY_ADD_INCREDIBUILD);
+        runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
+        runWin.waitForProcessToFinish("vs_professional.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
-        ibService.loadIbLicense();
+        runWin.waitForProcessToStart("vs_installer.exe");
+        ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
     @Override
     public void installVSPreviewWithIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
+        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", StaticDataProvider.RegistryKeys.VS_FIRST_ACTIVATION, "0");
+        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
     public void installVSPreviewWithoutIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
+        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void upgradeVSPreviewWithIB() {
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.UPDATE_VSPREVIEW);
+        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
+        runWin.waitForProcessToStart("vs_bootstrapper.exe");
+        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToFinish("vs_installer.exe");
-        runWin.runCommandWaitForFinish(StaticDataProvider.WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
+        runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
+        runWin.waitForProcessToFinish("vs_professional_preview.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
-        ibService.loadIbLicense();
+        runWin.waitForProcessToStart("vs_installer.exe");
+        ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
     @Override

@@ -3,7 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
@@ -41,9 +41,9 @@ public class VSTestBase extends TestBase {
         test = extent.createTest("Before Class");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
-            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017_PREVIEW;
+            DevenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
-            DevenvPath = StaticDataProvider.VsDevenvInstallPath.VS2017_RELEASE;
+            DevenvPath = VsDevenvInstallPath.VS2017_RELEASE;
         }
 
         switch (SCENARIO) {
@@ -102,7 +102,7 @@ public class VSTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT, "BuildLog");
+        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT, "BuildLog");
         if (driver != null) {
             driver.quit();
         }
@@ -112,7 +112,7 @@ public class VSTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        runIb.uninstallIB(String.valueOf(IIBService.getIbVersion()));
+        runIb.unloadIbLicense(IbLicenses.VSTESTS_LIC);
         extent.flush();
     }
 

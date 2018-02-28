@@ -318,12 +318,17 @@ public class StaticDataProvider {
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
     }
 
+    public static class IbLicenses{
+        public static final String VSTESTS_LIC= "IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic";
+    }
+
     public static class WindowsCommands{
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent";
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
-        public static final String APPLY_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic\"";
+        public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
+        public static final String UNLOAD_IB_LICENSE = "CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=" + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";

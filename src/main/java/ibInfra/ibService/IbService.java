@@ -3,13 +3,10 @@ package ibInfra.ibService;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-import java.io.FileReader;
-import org.testng.Assert;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -18,10 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 
 public class IbService extends TestBase implements IIBService {
@@ -38,7 +31,7 @@ public class IbService extends TestBase implements IIBService {
     public void installIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         runWin.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
-        loadIbLicense();
+        loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
     @Override
@@ -57,14 +50,19 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
-    public void loadIbLicense() {
-        runWin.runCommandWaitForFinish(WindowsCommands.APPLY_IB_LICENSE);
+    public void loadIbLicense(String license) {
+        runWin.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.getMessage();
         }
         runWin.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
+    }
+
+    @Override
+    public void unloadIbLicense(String license) {
+        runWin.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
     }
 
     @Override
