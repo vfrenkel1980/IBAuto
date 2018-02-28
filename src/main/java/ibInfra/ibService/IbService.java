@@ -22,7 +22,7 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public int cleanAndBuild(String command) {
         winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));
-        return winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.BUILD));
+        return winService.runCommandWaitForFinish(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE, ProjectsCommands.BUILD));
     }
 
     //choose what version of IB to install. type "Latest" for latest version
