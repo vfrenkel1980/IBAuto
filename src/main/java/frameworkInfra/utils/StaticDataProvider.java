@@ -11,7 +11,7 @@ public class StaticDataProvider {
         public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
         public static final String SYSTEM_APPDATA_TEMP_FOLDER = "C:\\Users\\Admin\\AppData\\Local\\Temp";
-        public static final String OUTPUT_LOG_FILE = "C:\\QA\\Simulation\\buildLog.txt";
+        public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
     }
 
     //processes
@@ -328,7 +328,7 @@ public class StaticDataProvider {
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
-        public static final String UNLOAD_IB_LICENSE = "CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=" + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
+        public static final String UNLOAD_IB_LICENSE = "CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";

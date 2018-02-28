@@ -15,6 +15,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
+import static frameworkInfra.testbases.TestBase.log;
 import static frameworkInfra.testbases.TestBase.test;
 
 public class SystemActions {
@@ -63,6 +64,19 @@ public class SystemActions {
             test.log(Status.INFO, "Starting process " + processPath);
             Runtime.getRuntime().exec(processPath);
         } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    public static void deleteFile(String filePath){
+        try{
+            File file = new File(filePath);
+            if(file.delete()){
+                log.info(filePath + " deleted successfully");
+            }else{
+                log.info("Failed to delete" + filePath);
+            }
+        }catch(Exception e){
             e.getMessage();
         }
     }

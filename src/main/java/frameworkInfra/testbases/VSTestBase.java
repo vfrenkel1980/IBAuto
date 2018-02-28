@@ -13,6 +13,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -102,7 +103,7 @@ public class VSTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT, "BuildLog");
+        SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         if (driver != null) {
             driver.quit();
         }

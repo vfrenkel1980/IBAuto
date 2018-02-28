@@ -90,13 +90,21 @@ public class WindowsService extends TestBase implements IWindowsService {
     public void waitForProcessToStart(String processName) {
         boolean notRunning = true;
         String output;
-        while (notRunning){
+        int seconds = 0;
+        while (notRunning && seconds < 30) {
             output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
             System.out.println(output);
-            if (!output.contains("INFO: No tasks are running")){
+            if (!output.contains("INFO: No tasks are running")) {
                 notRunning = false;
             }
+            try {
+                Thread.sleep(1000);
+                seconds++;
+            } catch (InterruptedException e) {
+                e.getMessage();
+            }
         }
+
     }
 
     @Override

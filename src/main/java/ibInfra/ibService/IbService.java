@@ -62,7 +62,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void unloadIbLicense(String license) {
-        runWin.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
+        runWin.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
     }
 
     @Override
