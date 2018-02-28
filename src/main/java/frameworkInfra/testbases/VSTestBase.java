@@ -51,6 +51,10 @@ public class VSTestBase extends TestBase {
             //vs installed, install IB from installer
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
+                if (VSINSTALLATION.equals("release"))
+                    vsService.upgradeVS();
+                else
+                    vsService.upgradeVSPreview();
                 runIb.installIB("Latest");
                 runIb.verifyIbServicesRunning();
                 break;
@@ -113,7 +117,7 @@ public class VSTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        runIb.unloadIbLicense(IbLicenses.VSTESTS_LIC);
+        runIb.unloadIbLicense();
         extent.flush();
     }
 

@@ -1,7 +1,6 @@
 package ibInfra.vsui;
 
 import com.aventstack.extentreports.Status;
-import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.RegistryService;
@@ -48,16 +47,21 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void upgradeVSWithIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
-        runWin.waitForProcessToStart("vs_bootstrapper.exe");
-        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        upgradeVS();
         runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
         runWin.waitForProcessToFinish("vs_professional.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
+    }
+
+    @Override
+    public void upgradeVS() {
+        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
+        runWin.waitForProcessToStart("vs_bootstrapper.exe");
+        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
@@ -77,16 +81,21 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void upgradeVSPreviewWithIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
-        runWin.waitForProcessToStart("vs_bootstrapper.exe");
-        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        upgradeVSPreview();
         runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
         runWin.waitForProcessToFinish("vs_professional_preview.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         runWin.waitForProcessToStart("vs_installer.exe");
         ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
+    }
+
+    @Override
+    public void upgradeVSPreview() {
+        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
+        runWin.waitForProcessToStart("vs_bootstrapper.exe");
+        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
+        runWin.waitForProcessToStart("vs_installer.exe");
+        runWin.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override

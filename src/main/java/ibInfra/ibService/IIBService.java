@@ -25,7 +25,7 @@ public interface IIBService {
 
     void loadIbLicense(String license);
 
-    void unloadIbLicense(String license);
+    void unloadIbLicense();
 
     String getIbVsExtensionVersion(String VsDevenvInstallPath);
 
