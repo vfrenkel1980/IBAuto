@@ -35,10 +35,6 @@ public class TestBase {
     public String testName = "";
 
 
-    public VSUIService vsService = new VSUIService();
-
-
-
     @BeforeSuite
     public static void cleanup(){
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
