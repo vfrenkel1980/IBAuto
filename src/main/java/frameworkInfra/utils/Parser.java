@@ -2,16 +2,12 @@ package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.testbases.WindowsTestBase;
-import org.apache.commons.io.FileUtils;
 import org.apache.tools.ant.DirectoryScanner;
-
 import java.io.*;
-import java.nio.file.FileSystem;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Parser extends WindowsTestBase{
+public class Parser extends TestBase{
 
     public static String retrieveDataFromFile(String filePath, Map<String, String> lookFor) throws IOException {
         BufferedReader in = null;
