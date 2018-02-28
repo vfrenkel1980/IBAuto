@@ -91,7 +91,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         boolean notRunning = true;
         String output;
         int seconds = 0;
-        while (notRunning && seconds < 30) {
+        while (notRunning && seconds < 50) {
             output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
             System.out.println(output);
             if (!output.contains("INFO: No tasks are running")) {

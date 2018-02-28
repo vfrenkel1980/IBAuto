@@ -85,7 +85,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         winService.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
         winService.waitForProcessToFinish("vs_professional_preview.exe");
         winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
         ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
