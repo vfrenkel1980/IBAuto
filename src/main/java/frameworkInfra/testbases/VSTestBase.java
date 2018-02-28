@@ -5,15 +5,11 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IIBService;
-import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -23,8 +19,6 @@ public class VSTestBase extends TestBase {
 
     public static WindowsDriver driver = null;
     private static int ibVersion = 0;
-    public VSUIService vsService = new VSUIService();
-    public IbService runIb = new IbService();
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String DevenvPath = "";
@@ -55,8 +49,8 @@ public class VSTestBase extends TestBase {
                     vsService.upgradeVS();
                 else
                     vsService.upgradeVSPreview();
-                runIb.installIB("Latest");
-                runIb.verifyIbServicesRunning();
+                ibService.installIB("Latest");
+                ibService.verifyIbServicesRunning();
                 break;
 
             //upgrade vs and install IB from vs installer
@@ -66,18 +60,18 @@ public class VSTestBase extends TestBase {
                     vsService.upgradeVSWithIB();
                 else
                     vsService.upgradeVSPreviewWithIB();
-                runIb.verifyIbServicesRunning();
+                ibService.verifyIbServicesRunning();
                 break;
 
             //install old IB, install vs and upgrade IB from VS installer
             case "3":
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
-                runIb.installIB("2147");
+                ibService.installIB("2147");
                 if (VSINSTALLATION.equals("release"))
                     vsService.installVSWithIB();
                 else
                     vsService.installVSPreviewWithIB();
-                runIb.verifyIbServicesRunning();
+                ibService.verifyIbServicesRunning();
                 break;
 
             //install vs without IB
@@ -117,7 +111,7 @@ public class VSTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        runIb.unloadIbLicense();
+        ibService.unloadIbLicense();
         extent.flush();
     }
 

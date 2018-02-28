@@ -7,7 +7,6 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import frameworkInfra.testbases.LinuxSimTestBase;
 import frameworkInfra.utils.StaticDataProvider;
-import ibInfra.windowscl.WindowsService;
 import org.jdom2.Element;
 
 import java.io.BufferedReader;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinuxService extends LinuxSimTestBase implements ILinuxService {
-    private WindowsService runWin = new WindowsService();
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
@@ -101,7 +99,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
     public void deleteLogsFolder(List<String> ipList) {
         for (Object machine : ipList) {
             log.info("deleting " + machine);
-            runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
+            winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
             log.info("deleted " + machine);
         }
     }
@@ -118,7 +116,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
 
     @Override
     public boolean isIBServiceUp(String service, String IP) {
-        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
         if (res == 0)
             return true;
         else
@@ -127,7 +125,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
 
     @Override
     public boolean startIBService(String service, String IP) {
-        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
         if (res == 0)
             return false;
         else
@@ -136,7 +134,7 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
 
     @Override
     public boolean stopIBService(String service, String IP) {
-        int res = runWin.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
         if (res == 0)
             return false;
         else
@@ -145,7 +143,6 @@ public class LinuxService extends LinuxSimTestBase implements ILinuxService {
 
     @Override
     public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException {
-        String res  = linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
-        return res;
+        return linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
     }
 }

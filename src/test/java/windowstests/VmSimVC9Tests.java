@@ -225,7 +225,7 @@ public class VmSimVC9Tests extends VmSimTestBase {
 
     @Test(testName = "Dep Eval 13 2008 - Debug - build" , groups = { "Build" })
     public void depEval12008x32Debug(){
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.DEP_EVAL_1);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.DEP_EVAL_1);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -291,7 +291,7 @@ public class VmSimVC9Tests extends VmSimTestBase {
 
     @Test(testName = "Space In Compile Switch Bug 2008- Debug - build" , groups = { "Build" })
     public void spaceInCompileSwitchBug2008x32Debug(){
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.SPACE_IN_COMPILE_SWITCH_BUG);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.SPACE_IN_COMPILE_SWITCH_BUG);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -304,13 +304,13 @@ public class VmSimVC9Tests extends VmSimTestBase {
 
     @Test(testName = "Build System Self Test 1" , groups = { "Build" })
     public void buildSystemSelfTest1(){
-        int returnCode = runWin.runCommandWaitForFinish(Processes.BUILDSYSTEM + ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_1_TEST);
+        int returnCode = winService.runCommandWaitForFinish(Processes.BUILDSYSTEM + ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_1_TEST);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Build System Self Test 2" , groups = { "Build" })
     public void buildSystemSelfTest2(){
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_2_TEST);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_2_TEST);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }

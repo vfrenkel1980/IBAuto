@@ -21,19 +21,19 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
         test.log(Status.INFO, "BEFORE CLASS started");
 
         rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
-        otherGridIPList = runLinux.breakDownIPList(rawIpList2);
+        otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 
         log.info("starting delete logs folder");
-        runLinux.deleteLogsFolder(ipList);
+        linuxService.deleteLogsFolder(ipList);
         log.info("finished delete logs folder");
 
-        if(!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
+        if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
         }
 
-        if(runLinux.startIBService("ib_server", ipList.get(1))) {
+        if(linuxService.startIBService("ib_server", ipList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
@@ -42,7 +42,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
 
         for (int i=1; i<5; ++i) {
 
-            if(runLinux.stopIBService("ib_server", otherGridIPList.get(i))) {
+            if(linuxService.stopIBService("ib_server", otherGridIPList.get(i))) {
                 String err = "stopIBService failed " +otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
@@ -61,7 +61,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
         test.log(Status.INFO, "AFTER CLASS started");
         for (int i = 1; i < 5; ++i) {
 
-            if (runLinux.startIBService("ib_server", otherGridIPList.get(i))) {
+            if (linuxService.startIBService("ib_server", otherGridIPList.get(i))) {
                 String err = "startIBService failed " + otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
@@ -69,10 +69,10 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
             }
         }
 
-        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        runLinux.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
 
         extent.flush();
         log.info("finished after class");

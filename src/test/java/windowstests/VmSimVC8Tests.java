@@ -215,8 +215,8 @@ public class VmSimVC8Tests extends VmSimTestBase {
 
     @Test(testName = "PropInheritance1 2005 - Batch" , groups = { "Build" })
     public void propInheritance12005Batch(){
-        runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_1_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_1_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
+        winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_1_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_1_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -228,15 +228,15 @@ public class VmSimVC8Tests extends VmSimTestBase {
 
     @Test(testName = "PropInheritance3 2005 - Batch" , groups = { "Build" })
     public void propInheritance32005Batch(){
-        runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_3_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_3_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
+        winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_3_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_3_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "PropInheritance4 2005 - Batch" , groups = { "Build" })
     public void propInheritance42005Batch(){
-        runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_4_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_4_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
+        winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_4_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.PROP_INHERITANCE_4_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -248,8 +248,8 @@ public class VmSimVC8Tests extends VmSimTestBase {
 
     @Test(testName = "Ace 2005 Batch" , groups = { "Build" })
     public void ace2005Batch(){
-        runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.ACE_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
-        int returnCode = runWin.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.ACE_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
+        winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.ACE_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.VC8_VMSIN.ACE_BATCH + Locations.QA_ROOT + " " + ProjectsCommands.BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }

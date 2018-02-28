@@ -39,7 +39,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 
     @Test(testName = "Chrome release - build" , groups = { "Build" })
     public void chromeReleaseBuild(){
-        runWin.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_CLEAN);
+        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_CLEAN);
         int returnCode = ibService.cleanAndBuild(ProjectsCommands.CHROME_RELEASE_BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }

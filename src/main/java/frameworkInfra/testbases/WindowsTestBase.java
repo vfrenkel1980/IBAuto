@@ -19,8 +19,6 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class WindowsTestBase extends TestBase {
 
-    protected WindowsService runWin = new WindowsService();
-    protected IbService ibService = new IbService();
     private static int ibVersion = 0;
 
     static {
@@ -55,7 +53,7 @@ public class WindowsTestBase extends TestBase {
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         //stop agent service
-        runWin.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //kill tray icon
         SystemActions.killProcess(Processes.TRAY_ICON);
         //delete logs folder
@@ -64,7 +62,7 @@ public class WindowsTestBase extends TestBase {
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
-        runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
     }
 
     @BeforeClass
@@ -83,7 +81,7 @@ public class WindowsTestBase extends TestBase {
     @AfterSuite
     public void postSimulation(){
         //stop agent service
-        runWin.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //copy logs to backup folder
         SystemActions.copyFilesByExtension(Locations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
@@ -92,7 +90,7 @@ public class WindowsTestBase extends TestBase {
 
 
         //start agent service
-        runWin.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         SystemActions.startProcess(Locations.IB_ROOT + "\\" + Processes.TRAY_ICON);
         log.info("Suite finished");
     }

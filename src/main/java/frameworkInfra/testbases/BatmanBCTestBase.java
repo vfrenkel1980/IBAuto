@@ -27,7 +27,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.QA_ROOT, "buildLog");
+        SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
         getResult(result);
     }
 

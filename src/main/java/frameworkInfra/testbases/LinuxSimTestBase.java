@@ -3,11 +3,9 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxService;
-import org.aspectj.lang.annotation.Before;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -21,7 +19,7 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class LinuxSimTestBase extends TestBase {
 
-    public static LinuxService runLinux = new LinuxService();
+
     protected static List rawIpList;
     protected static List rawIpList2;
     public static List<String> ipList;
@@ -48,14 +46,14 @@ public class LinuxSimTestBase extends TestBase {
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
 
-        ipList = runLinux.breakDownIPList(rawIpList);
+        ipList = linuxService.breakDownIPList(rawIpList);
         ibVersion = getIBVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        runLinux.deleteLogsFolder(ipList);
+        linuxService.deleteLogsFolder(ipList);
         log.info("finished before suite");
     }
 
@@ -68,13 +66,13 @@ public class LinuxSimTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE CLASS started");
         if (testContext.getName().equals("Cycle 1")) {
 
-            if (!runLinux.isIBServiceUp("ib_server", ipList.get(0))) {
+            if (!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
                 test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
                 extent.flush();
                 System.exit(0);
             }
 
-            if (!runLinux.isIBServiceUp("ib_server", ipList.get(1))) {
+            if (!linuxService.isIBServiceUp("ib_server", ipList.get(1))) {
                 test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
                 extent.flush();
                 System.exit(0);
@@ -106,7 +104,7 @@ public class LinuxSimTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-        buildID = runLinux.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
+        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
         getResult(result);
         extent.flush();
     }

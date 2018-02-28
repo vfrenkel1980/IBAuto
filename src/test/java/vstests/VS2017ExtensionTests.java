@@ -15,8 +15,8 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
-        String extensionVersion = runIb.getIbVsExtensionVersion(DevenvPath);
-        String expectedExtensionVersion = runIb.getExpectedIbVsExtensionVersion();
+        String extensionVersion = ibService.getIbVsExtensionVersion(DevenvPath);
+        String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();
         Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "IncrediBuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
     }
 
@@ -28,7 +28,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         vsService.executeBuildFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
-            result = runIb.findValueInPacketLog("ExitCode ");
+            result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
         } catch (IOException e) {
             e.getMessage();
@@ -43,7 +43,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         vsService.executeBuildFromPrjExplorer(VsActions.REBUILD_SOLUTION, "ConsoleApplication1");
         String result;
         try {
-            result = runIb.findValueInPacketLog("ExitCode ");
+            result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
         } catch (IOException e) {
             e.getMessage();
@@ -54,7 +54,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void checkForPredictedExecutionWithMSBuild() {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
     }
 
@@ -62,7 +62,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void checkForPredictedExecutionWithoutMSBuild() {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
     }
 
@@ -70,7 +70,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void successCheckForSuccessfulBuildNoPredictedNoMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
@@ -78,7 +78,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForErrorBuildNoPredictedNoMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
@@ -86,7 +86,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgTaskIdNoPredictedNoMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
@@ -94,7 +94,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgSpeculativeTaskIdNoPredictedNoMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
@@ -102,7 +102,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void successCheckForSuccessfulBuildNoPredictedMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
@@ -110,7 +110,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForErrorBuildNoPredictedMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
@@ -118,7 +118,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgTaskIdNoPredictedMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
@@ -126,7 +126,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgSpeculativeTaskIdNoPredictedMSBuild(){
         setRegistry("0", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
@@ -134,7 +134,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void successCheckForSuccessfulBuildPredictedNoMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
@@ -142,7 +142,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForErrorBuildPredictedNoMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
@@ -150,7 +150,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgTaskIdPredictedNoMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
@@ -158,7 +158,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgSpeculativeTaskIdPredictedNoMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 
@@ -166,7 +166,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void successCheckForSuccessfulBuildPredictedMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
     }
 
@@ -174,7 +174,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForErrorBuildPredictedMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.ERROR));
     }
 
@@ -182,7 +182,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgTaskIdPredictedMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDTASKID));
     }
 
@@ -190,7 +190,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void failedCheckForXgSpeculativeTaskIdPredictedMSBuild(){
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
-        runIb.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
 

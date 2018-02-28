@@ -18,19 +18,18 @@ import java.util.Map;
 
 
 public class IbService extends TestBase implements IIBService {
-    WindowsService runWin = new WindowsService();
 
     @Override
     public int cleanAndBuild(String command) {
-        runWin.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));
-        return runWin.runCommandWaitForFinish(String.format(command, ProjectsCommands.BUILD));
+        winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));
+        return winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.BUILD));
     }
 
     //choose what version of IB to install. type "Latest" for latest version
     @Override
     public void installIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        runWin.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
         loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
@@ -51,18 +50,18 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void loadIbLicense(String license) {
-        runWin.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.getMessage();
         }
-        runWin.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
+        winService.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
     }
 
     @Override
     public void unloadIbLicense() {
-        runWin.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
+        winService.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
     }
 
     @Override
@@ -116,20 +115,20 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public boolean verifyIbServicesRunning() {
-        return runWin.isServiceRunning(WindowsServices.AGENT_SERVICE) && runWin.isServiceRunning(WindowsServices.COORD_SERVICE);
+        return winService.isServiceRunning(WindowsServices.AGENT_SERVICE) && winService.isServiceRunning(WindowsServices.COORD_SERVICE);
     }
 
     @Override
     public void uninstallIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        runWin.runCommandWaitForFinish(String.format(WindowsCommands.IB_UNINSTALL_COMMAND, installationFile));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UNINSTALL_COMMAND, installationFile));
     }
 
     @Override
     public String findValueInPacketLog (String keyInLogFile) throws IOException{
         Map<String, String> lookFor = new HashMap<String, String>();
         lookFor.put(keyInLogFile, keyInLogFile);
-        String file = runWin.getLatestFilefromDir(Locations.SYSTEM_APPDATA_TEMP_FOLDER, "pkt").getCanonicalPath();
+        String file = winService.getLatestFilefromDir(Locations.SYSTEM_APPDATA_TEMP_FOLDER, "pkt").getCanonicalPath();
         return Parser.retrieveDataFromFile(file, lookFor);
     }
 

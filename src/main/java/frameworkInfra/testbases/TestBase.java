@@ -5,6 +5,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibService.IbService;
+import ibInfra.linuxcl.LinuxService;
+import ibInfra.vsui.VSUIService;
+import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -29,6 +33,10 @@ public class TestBase {
     public static ExtentTest test;
     public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
+    public VSUIService vsService = new VSUIService();
+    public IbService ibService = new IbService();
+    public static LinuxService linuxService = new LinuxService();
+    public WindowsService winService = new WindowsService();
 
     @BeforeSuite
     public static void cleanup(){

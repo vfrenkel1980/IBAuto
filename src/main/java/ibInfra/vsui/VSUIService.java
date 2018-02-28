@@ -5,8 +5,6 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
-import ibInfra.ibService.IbService;
-import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,9 +20,6 @@ import static frameworkInfra.testbases.VSTestBase.driver;
 
 public class VSUIService extends TestBase implements IVSUIService {
 
-    WindowsService runWin = new WindowsService();
-    IbService ibService = new IbService();
-
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
         driver.findElementByName("Start Visual Studio").click();
@@ -32,70 +27,70 @@ public class VSUIService extends TestBase implements IVSUIService {
 
     @Override
     public void installVSWithIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WITH_IB);
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WITH_IB);
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
         RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
     public void installVSWithoutIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WO_IB);
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WO_IB);
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void upgradeVSWithIB() {
         upgradeVS();
-        runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
-        runWin.waitForProcessToFinish("vs_professional.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
+        winService.waitForProcessToFinish("vs_professional.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
         ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
     @Override
     public void upgradeVS() {
-        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
-        runWin.waitForProcessToStart("vs_bootstrapper.exe");
-        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
+        winService.waitForProcessToStart("vs_bootstrapper.exe");
+        winService.waitForProcessToFinish("vs_bootstrapper.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void installVSPreviewWithIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
         RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
     }
 
     @Override
     public void installVSPreviewWithoutIB() {
-        runWin.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
     public void upgradeVSPreviewWithIB() {
         upgradeVSPreview();
-        runWin.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
-        runWin.waitForProcessToFinish("vs_professional_preview.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
+        winService.waitForProcessToFinish("vs_professional_preview.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
         ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
     }
 
     @Override
     public void upgradeVSPreview() {
-        runWin.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
-        runWin.waitForProcessToStart("vs_bootstrapper.exe");
-        runWin.waitForProcessToFinish("vs_bootstrapper.exe");
-        runWin.waitForProcessToStart("vs_installer.exe");
-        runWin.waitForProcessToFinish("vs_installer.exe");
+        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
+        winService.waitForProcessToStart("vs_bootstrapper.exe");
+        winService.waitForProcessToFinish("vs_bootstrapper.exe");
+        winService.waitForProcessToStart("vs_installer.exe");
+        winService.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
@@ -122,7 +117,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        runWin.waitForProcessToFinish("buildsystem.exe");
+        winService.waitForProcessToFinish("buildsystem.exe");
     }
 
     @Override
@@ -142,7 +137,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        runWin.waitForProcessToFinish("buildsystem.exe");
+        winService.waitForProcessToFinish("buildsystem.exe");
     }
 
     @Override

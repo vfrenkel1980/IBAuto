@@ -34,12 +34,12 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
     }
 
-//    int exitCode = runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//    int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
 //            String.format(LinuxSimulation.MAKE_BUILD,"","Apache", "", "32"), ipList.get(1));
 //
 //        Assert.assertEquals(0, exitCode, "Test failed with Exit code " + exitCode);
 //
-//        runLinux.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
 
 
 /*    public static void main(String[] args) {
