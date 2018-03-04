@@ -148,20 +148,47 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
-    public void openVS2017instance(String vsinstallation) {
-        String PathToDevenv = "";
-        switch (vsinstallation) {
+    public void openVS2017instance(String version) {
+        String pathToDevenv = "";
+        switch (version) {
             case "release":
-                PathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
+                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
             case "preview":
-                PathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
+                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
+                break;
+            case "6":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\MSDev98\\Bin\\MSDEV.EXE\"";
+                break;
+            case "7.1":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio .NET 2003\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "8":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 8\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "9":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 9.0\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "10":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 10.0\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "11":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "12":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "14":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe\"";
+                break;
+            case "15":
+                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe\"";
                 break;
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS2017");
-            capabilities.setCapability("app", PathToDevenv);
+            test.log(Status.INFO, "Opening VS" + version);
+            capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");

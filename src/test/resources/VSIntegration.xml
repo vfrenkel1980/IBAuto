@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VSIntegration"  >
+
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="6"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="7.1"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="8"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="9"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="10"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="11"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="12"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="14"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests">
+        <parameter name="VCVersion" value="15"/>
+        <classes>
+            <class name ="vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+
+
+</suite>

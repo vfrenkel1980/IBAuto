@@ -49,7 +49,7 @@ public class VSTestBase extends TestBase {
             //vs installed, install IB from installer
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
-                if (VSINSTALLATION.equals("release"))
+                if (VSINSTALLATION.equals("15"))
                     vsService.upgradeVS();
                 else
                     vsService.upgradeVSPreview();
@@ -60,7 +60,7 @@ public class VSTestBase extends TestBase {
             //upgrade vs and install IB from vs installer
             case "2":
                 test.log(Status.INFO, "Before class started\n SCENARIO 2: upgrade vs and install IB from vs installer");
-                if (VSINSTALLATION.equals("release"))
+                if (VSINSTALLATION.equals("15"))
                     vsService.upgradeVSWithIB();
                 else
                     vsService.upgradeVSPreviewWithIB();
@@ -71,7 +71,7 @@ public class VSTestBase extends TestBase {
             case "3":
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
                 ibService.installIB("2147");
-                if (VSINSTALLATION.equals("release"))
+                if (VSINSTALLATION.equals("15"))
                     vsService.installVSWithIB();
                 else
                     vsService.installVSPreviewWithIB();
@@ -81,7 +81,7 @@ public class VSTestBase extends TestBase {
             //install vs without IB
             case "4":
                 test.log(Status.INFO, "Before class started\n SCENARIO 4: install vs without IB");
-                if (VSINSTALLATION.equals("release"))
+                if (VSINSTALLATION.equals("15"))
                     vsService.installVSWithoutIB();
                 else
                     vsService.installVSPreviewWithoutIB();
