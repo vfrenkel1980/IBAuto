@@ -23,7 +23,7 @@ public class VSTestBase extends TestBase {
     protected static int ibVersion = 0;
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
-    public String DevenvPath = "";
+    public String devenvPath = "";
     public IbService ibService = new IbService();
     public VSUIService vsService = new VSUIService();
 
@@ -40,9 +40,9 @@ public class VSTestBase extends TestBase {
         test = extent.createTest("Before Class");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
-            DevenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
+            devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
-            DevenvPath = VsDevenvInstallPath.VS2017_RELEASE;
+            devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
         }
 
         switch (SCENARIO) {

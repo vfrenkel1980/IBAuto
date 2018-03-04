@@ -345,6 +345,15 @@ public class StaticDataProvider {
 
     public static class TestProjects{
         public static final String CONSOLE_APPLICATION_01 = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
+        public static final String VC6PROJECT = Locations.QA_ROOT + "\\projects\\vc6project\\vc6project.sln";
+        public static final String VC7_1PROJECT = Locations.QA_ROOT + "\\projects\\vc7.1project\\vc7.1project.sln";
+        public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
+        public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";
+        public static final String VC10PROJECT = Locations.QA_ROOT + "\\projects\\vc10project\\vc10project.sln";
+        public static final String VC11PROJECT = Locations.QA_ROOT + "\\projects\\vc11project\\vc11project.sln";
+        public static final String VC12PROJECT = Locations.QA_ROOT + "\\projects\\vc12project\\vc12project.sln";
+        public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
+        public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
         public static final String CONSOLE_APPLICATION_01_BUILDCONSOLE_COMMAND= "\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"Debug|x64\" /title=\"ConsoleApplication Test Project\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
     }
 
