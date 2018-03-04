@@ -14,7 +14,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
     public void executeVSBuild(){
-        vsService.openVS2017instance(devenvPath);
+        vsService.openVS2017instance(DevenvPath);
         vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
         vsService.executeBuildFromMenu(StaticDataProvider.VsActions.REBUILD_SOLUTION);
         System.out.println("");

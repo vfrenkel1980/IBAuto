@@ -60,6 +60,7 @@ public class TestBase {
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         }
         log.info(result.getName() + "test finished");
+        extent.flush();
     }
 
     public String captureScreenshot(String fileName){
