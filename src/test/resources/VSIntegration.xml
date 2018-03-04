@@ -3,63 +3,63 @@
 <suite name="VSIntegration"  >
 
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests6">
         <parameter name="VCVersion" value="6"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests7.1">
         <parameter name="VCVersion" value="7.1"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests8">
         <parameter name="VCVersion" value="8"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests9">
         <parameter name="VCVersion" value="9"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests10">
         <parameter name="VCVersion" value="10"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests11">
         <parameter name="VCVersion" value="11"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests12">
         <parameter name="VCVersion" value="12"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests14">
         <parameter name="VCVersion" value="14"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />
         </classes>
     </test>
 
-    <test name="VSIntegrationTests">
+    <test name="VSIntegrationTests15">
         <parameter name="VCVersion" value="15"/>
         <classes>
             <class name ="vstests.VSIntegrationTests" />

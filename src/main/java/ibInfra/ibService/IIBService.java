@@ -44,4 +44,6 @@ public interface IIBService {
     String findValueInPacketLog (String keyInLogFile)  throws IOException;
 
     void uninstallIB(String version);
+
+    void disableVsMonitor();
 }

@@ -9,6 +9,7 @@ import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
 import io.appium.java_client.windows.WindowsDriver;
+import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -29,6 +30,11 @@ public class VSIntegrationTestBase extends VSTestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+    }
+
+    @BeforeSuite
+    public void beforeSuite(){
+        ibService.disableVsMonitor();
     }
 
     @BeforeClass

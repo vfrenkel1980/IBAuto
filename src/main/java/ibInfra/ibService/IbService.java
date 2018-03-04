@@ -3,6 +3,7 @@ package ibInfra.ibService;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
@@ -15,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 
 public class IbService extends TestBase implements IIBService {
@@ -124,6 +127,13 @@ public class IbService extends TestBase implements IIBService {
     public void uninstallIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UNINSTALL_COMMAND, installationFile));
+    }
+
+    //disable IB monitor in visual studio
+    @Override
+    public void disableVsMonitor() {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT, "DockAutoOpen", "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT, "DockAutoOpenFloating", "0");
     }
 
     @Override

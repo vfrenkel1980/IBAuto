@@ -36,7 +36,7 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    public void setUpEnv() {
+    public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
@@ -96,7 +96,7 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeMethod
-    public void beforeMethod(Method method, ITestContext context){
+    public void beforeMethod(Method method, ITestContext context, String VCVersion){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(VSINSTALLATION + " " + SCENARIO);
