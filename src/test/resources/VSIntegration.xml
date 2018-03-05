@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="VSIntegration"  >
 
-
     <test name="VSIntegrationTests6">
         <parameter name="VCVersion" value="6"/>
         <classes>

@@ -4,12 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
-import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
-import io.appium.java_client.windows.WindowsDriver;
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -21,7 +16,8 @@ import java.util.Calendar;
 
 public class VSIntegrationTestBase extends VSTestBase {
 
-    protected String project = "";
+    protected String projectPath = "";
+    protected String projectName = "";
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -44,34 +40,43 @@ public class VSIntegrationTestBase extends VSTestBase {
         vsService.openVS2017instance(VCVersion);
         switch (VCVersion){
             case "6":
-                project = TestProjects.VC6PROJECT;
+                projectPath = TestProjects.VC6PROJECT;
+                projectName = "vc6project";
                 break;
             case "7.1":
-                project = TestProjects.VC7_1PROJECT;
+                projectPath = TestProjects.VC7_1PROJECT;
+                projectName = "vc7.1project";
                 break;
             case "8":
-                project = TestProjects.VC8PROJECT;
+                projectPath = TestProjects.VC8PROJECT;
+                projectName = "vc8project";
                 break;
             case "9":
-                project = TestProjects.VC9PROJECT;
+                projectPath = TestProjects.VC9PROJECT;
+                projectName = "vc9project";
                 break;
             case "10":
-                project = TestProjects.VC10PROJECT;
+                projectPath = TestProjects.VC10PROJECT;
+                projectName = "vc10project";
                 break;
             case "11":
-                project = TestProjects.VC11PROJECT;
+                projectPath = TestProjects.VC11PROJECT;
+                projectName = "vc11project";
                 break;
             case "12":
-                project = TestProjects.VC12PROJECT;
+                projectPath = TestProjects.VC12PROJECT;
+                projectName = "vc12project";
                 break;
             case "14":
-                project = TestProjects.VC14PROJECT;
+                projectPath = TestProjects.VC14PROJECT;
+                projectName = "vc14project";
                 break;
             case "15":
-                project = TestProjects.VC15PROJECT;
+                projectPath = TestProjects.VC15PROJECT;
+                projectName = "vc15project";
                 break;
         }
-        vsService.openProject(project);
+        vsService.openProject(projectPath);
     }
 
     @BeforeMethod
