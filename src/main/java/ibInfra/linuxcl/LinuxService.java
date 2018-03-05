@@ -6,6 +6,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import frameworkInfra.testbases.LinuxSimTestBase;
+import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.windowscl.WindowsService;
 import org.jdom2.Element;
@@ -17,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinuxService extends LinuxSimTestBase implements ILinuxService {
+public class LinuxService extends TestBase implements ILinuxService {
 
     private WindowsService winService = new WindowsService();
 
