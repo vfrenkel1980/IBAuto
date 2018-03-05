@@ -54,7 +54,7 @@ public class LinuxSimTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        linuxService.deleteLogsFolder(ipList);
+        //linuxService.deleteLogsFolder(ipList);
         log.info("finished before suite");
     }
 
