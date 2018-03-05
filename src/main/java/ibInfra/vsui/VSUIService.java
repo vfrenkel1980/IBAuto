@@ -11,8 +11,6 @@ import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -110,6 +108,11 @@ public class VSUIService extends TestBase implements IVSUIService {
         driver.findElementByName("File").click();
         driver.findElementByName("Open").click();
         driver.findElementByName("Project/Solution...").click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.getMessage();
+        }
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
     }
@@ -117,7 +120,17 @@ public class VSUIService extends TestBase implements IVSUIService {
     @Override
     public void executeBuildFromMenu(String action) {
         driver.findElementByName("Build");
-        driver.findElementByName("Incredibuild").click();
+        try {
+            driver.findElementByName("Incredibuild").click();
+        }
+        catch (Exception e){
+            try {
+                driver.findElementByName("IncrediBuild").click();
+            }
+            catch (Exception e1){
+                e.getMessage();
+            }
+        }
         driver.findElementByName(action).click();
         try {
             Thread.sleep(3000);
@@ -137,7 +150,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        AppiumActions.contextMenuIncrediBuildClick();
+        AppiumActions.contextMenuIncrediBuildClick(solutionName);
         driver.findElementByName(action).click();
         try {
             Thread.sleep(3000);

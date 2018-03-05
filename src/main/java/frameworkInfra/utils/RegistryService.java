@@ -8,7 +8,8 @@ import frameworkInfra.testbases.TestBase;
 public class RegistryService extends TestBase{
 
     public static void setRegistryKey(HKEY rootKey, String keyPath, String keyName, String value){
-        test.log(Status.INFO, "Setting " + keyName + " value to " + value);
+        if (test != null)
+            test.log(Status.INFO, "Setting " + keyName + " value to " + value);
         try {
             Advapi32Util.registrySetStringValue(rootKey, keyPath, keyName,value);
         } catch (Exception ex){

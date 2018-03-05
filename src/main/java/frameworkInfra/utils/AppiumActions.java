@@ -1,6 +1,7 @@
 package frameworkInfra.utils;
 
 import frameworkInfra.testbases.VSTestBase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -28,8 +29,24 @@ public class AppiumActions extends VSTestBase{
         }
     }
 
-    public static void contextMenuIncrediBuildClick(){
-        List<WebElement> newel2 = driver.findElementsByName("Incredibuild");
-        newel2.get(1).click();
+    public static void contextMenuIncrediBuildClick(String solutionName){
+        List<WebElement> ibElements = null;
+        WebElement goTo = null;
+        ibElements =driver.findElementsByName("Incredibuild");
+        if (ibElements.size() == 0) {
+            ibElements = driver.findElementsByName("IncrediBuild");
+        }
+        ibElements.get(1).click();
+
+        try {
+            goTo = driver.findElementByName("Go To");
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+        if (goTo != null){
+            AppiumActions.rightClick(driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]")));
+            ibElements.get(0).click();
+        }
     }
 }
