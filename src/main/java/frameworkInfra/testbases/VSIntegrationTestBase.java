@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
 import org.testng.ITestContext;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VSIntegrationTestBase extends VSTestBase {
 
@@ -31,6 +34,7 @@ public class VSIntegrationTestBase extends VSTestBase {
     @BeforeSuite
     public void beforeSuite(){
         ibService.disableVsMonitor();
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
     }
 
     @BeforeClass
