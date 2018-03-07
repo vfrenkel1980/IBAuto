@@ -6,6 +6,9 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
+import ibInfra.ibService.IbService;
+import ibInfra.vsui.VSUIService;
+import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -17,8 +20,12 @@ import java.util.Calendar;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
-public class VSIntegrationTestBase extends VSTestBase {
+public class VSIntegrationTestBase extends TestBase {
 
+    public static WindowsDriver driver = null;
+    protected static int ibVersion = 0;
+    public IbService ibService = new IbService();
+    public VSUIService vsService = new VSUIService();
     protected String projectPath = "";
     protected String projectName = "";
 

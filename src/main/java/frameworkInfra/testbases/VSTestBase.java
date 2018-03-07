@@ -36,7 +36,7 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeClass
-    public void setUpEnv(String VCVersion) {
+    public void setUpEnv() {
         test = extent.createTest("Before Class");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
