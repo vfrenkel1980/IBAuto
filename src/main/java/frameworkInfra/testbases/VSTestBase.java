@@ -96,7 +96,7 @@ public class VSTestBase extends TestBase {
     }
 
     @BeforeMethod
-    public void beforeMethod(Method method, ITestContext context, String VCVersion){
+    public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(VSINSTALLATION + " " + SCENARIO);
