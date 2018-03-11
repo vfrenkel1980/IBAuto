@@ -24,7 +24,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
         rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 
-        //linuxService.deleteLogsFolder(ipList);
+        linuxService.deleteLogsFolder(ipList);
 
         if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");

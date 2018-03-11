@@ -24,7 +24,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 
         log.info("starting delete logs folder");
-        //linuxService.deleteLogsFolder(ipList);
+        linuxService.deleteLogsFolder(ipList);
         log.info("finished delete logs folder");
 
         if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
