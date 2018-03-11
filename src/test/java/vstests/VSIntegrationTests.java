@@ -18,6 +18,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute Build from Menu")
     public void executeBuildFromMenu(){
         String result;
+        vsService.executeBuildFromMenu(StaticDataProvider.VsActions.CLEAN_SOLUTION);
         vsService.executeBuildFromMenu(StaticDataProvider.VsActions.BUILD_SOLUTION);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
@@ -42,6 +43,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute Build from Project Explorer")
     public void executeBuildFromProjectExplorer(){
         String result;
+        vsService.executeBuildFromPrjExplorer(StaticDataProvider.VsActions.CLEAN_SOLUTION, projectName);
         vsService.executeBuildFromPrjExplorer(StaticDataProvider.VsActions.BUILD_SOLUTION, projectName);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");

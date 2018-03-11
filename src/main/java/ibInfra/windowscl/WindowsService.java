@@ -7,6 +7,10 @@ import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -132,6 +136,15 @@ public class WindowsService extends TestBase implements IWindowsService {
             if(reader.nextLine().contains(serviceName))
                 return true;
         return false;
+    }
+
+    @Override
+    public void downloadFile(String url, String fileName) throws IOException {
+        URL website = new URL(url);
+        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");
+        ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+        FileOutputStream fos = new FileOutputStream(fileName);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     }
 
     public File getLatestFilefromDir(String dirPath, String substring){

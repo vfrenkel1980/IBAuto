@@ -10,6 +10,7 @@ import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,7 +22,12 @@ public class UnitTests {
     @Test
     public void test(){
 
-        Parser.doesFileContainString("C:\\Users\\Mark\\Desktop\\build.txt", "Build succeeded.");
+        WindowsService windowsService = new WindowsService();
+        try {
+            windowsService.downloadFile("https://download.visualstudio.microsoft.com/download/pr/11796490/da370bf146a3a1e91ec0ace29e623fdb/vs_Professional.exe", "C:\\Users\\Mark\\Downloads\\vs_professional.exe");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -8,11 +8,16 @@ public class StaticDataProvider {
         public static final String IB_ROOT = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild";
         public static final String LOGS_ROOT = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\Logs";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
-        public static final String VSPREVIEW_INSTALL = "c:\\QA\\Simulation\\VSintallation";
+        public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
         public static final String SYSTEM_APPDATA_TEMP_FOLDER = "C:\\Users\\Admin\\AppData\\Local\\Temp";
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
+    }
+
+    public static class URL{
+        public static final String VS_RELEASE_URL = "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Professional&rel=15";
+        public static final String VS_PREVIEW_URL = "https://www.visualstudio.com/thank-you-downloading-visual-studio/?ch=pre&sku=Professional&rel=15";
     }
 
     //processes

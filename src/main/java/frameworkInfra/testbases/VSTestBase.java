@@ -7,9 +7,11 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
+import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ public class VSTestBase extends TestBase {
     public String devenvPath = "";
     public IbService ibService = new IbService();
     public VSUIService vsService = new VSUIService();
+    public WindowsService winService = new WindowsService();
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -43,6 +46,11 @@ public class VSTestBase extends TestBase {
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
             devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
+            try {
+                winService.downloadFile(URL.VS_PREVIEW_URL, Locations.VS_INSTALL_DIR + "\\vs_professional.exe");
+            } catch (IOException e) {
+                e.getMessage();
+            }
         }
 
         switch (SCENARIO) {
@@ -86,8 +94,7 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.installVSPreviewWithoutIB();
                 extent.flush();
-                System.exit(0);
-                break;
+                throw new SkipException("EXITING");
 
             //default for testing purpose
             default:
