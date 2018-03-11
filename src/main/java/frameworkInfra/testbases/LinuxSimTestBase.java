@@ -54,14 +54,12 @@ public class LinuxSimTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        //linuxService.deleteLogsFolder(ipList);
         log.info("finished before suite");
     }
 
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
-
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -79,6 +77,7 @@ public class LinuxSimTestBase extends TestBase {
                 System.exit(0);
             }
         }
+        linuxService.deleteLogsFolder(ipList);
         log.info("finished before class");
     }
 

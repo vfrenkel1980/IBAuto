@@ -40,7 +40,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIbConsoleInstallation(String version) {
-        String path = "\\\\192.168.10.15\\Share\\1-IB_Builds\\" + version;
+        String path = Locations.NETWORK_IB_INSTALLATIONS + version;
         String postFix = "console.exe";
         String installerName = "";
         try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), "*" + postFix)) {

@@ -12,6 +12,7 @@ public class StaticDataProvider {
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
         public static final String SYSTEM_APPDATA_TEMP_FOLDER = "C:\\Users\\Admin\\AppData\\Local\\Temp";
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
+        public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
     }
 
     //processes

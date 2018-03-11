@@ -50,14 +50,6 @@ public class VSIntegrationTestBase extends TestBase {
         test = extent.createTest("Before Class");
         vsService.openVS2017instance(VCVersion);
         switch (VCVersion){
-            case "6":
-                projectPath = TestProjects.VC6PROJECT;
-                projectName = "vc6project";
-                break;
-            case "7.1":
-                projectPath = TestProjects.VC7_1PROJECT;
-                projectName = "vc7.1project";
-                break;
             case "8":
                 projectPath = TestProjects.VC8PROJECT;
                 projectName = "vc8project";
