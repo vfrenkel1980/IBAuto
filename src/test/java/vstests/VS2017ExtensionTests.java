@@ -14,6 +14,12 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of installed IB extension")
+    public void getVsVersion(){
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.getVSVersionFromOutputLog(Locations.OUTPUT_LOG_FILE);
+    }
+
+    @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
         String extensionVersion = ibService.getIbVsExtensionVersion(devenvPath);
         String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();

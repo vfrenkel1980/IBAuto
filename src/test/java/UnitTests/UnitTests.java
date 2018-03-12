@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.testbases.TestBase.extent;
@@ -20,15 +22,18 @@ import static frameworkInfra.testbases.TestBase.extent;
 public class UnitTests {
 
     @Test
-    public void test(){
+    public void test() {
 
-        WindowsService windowsService = new WindowsService();
+        Map<String, String> lookFor = new HashMap<String, String>();
+        lookFor.put("Command Prompt", "Command Prompt");
+        String result = "";
+
         try {
-            windowsService.downloadFile("https://download.visualstudio.microsoft.com/download/pr/11796490/da370bf146a3a1e91ec0ace29e623fdb/vs_Professional.exe", "C:\\Users\\Mark\\Downloads\\vs_professional.exe");
+            result = Parser.retrieveDataFromFile("C:\\QA\\Simulation\\buildLog.txt", lookFor);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(result);
+
     }
-
-
 }

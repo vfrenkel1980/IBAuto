@@ -46,4 +46,6 @@ public interface IIBService {
     void uninstallIB(String version);
 
     void disableVsMonitor();
+
+    String getVSVersionFromOutputLog(String logPath);
 }

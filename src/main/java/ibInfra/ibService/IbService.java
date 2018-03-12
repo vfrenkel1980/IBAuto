@@ -1,5 +1,6 @@
 package ibInfra.ibService;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
@@ -134,6 +135,21 @@ public class IbService extends TestBase implements IIBService {
     public void disableVsMonitor() {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT, "DockAutoOpen", "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT, "DockAutoOpenFloating", "0");
+    }
+
+    @Override
+    public String getVSVersionFromOutputLog(String logPath) {
+        Map<String, String> lookFor = new HashMap<String, String>();
+        lookFor.put("Command Prompt", "Command Prompt");
+        String result = "";
+
+        try {
+            result = Parser.retrieveDataFromFile(logPath, lookFor);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        test.log(Status.INFO, "-----------VS VERSION:  " + result + "-----------");
+        return result;
     }
 
     @Override
