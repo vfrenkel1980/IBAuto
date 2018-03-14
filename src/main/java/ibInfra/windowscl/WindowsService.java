@@ -145,6 +145,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream(fileName);
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        fos.close();
     }
 
     public File getLatestFileFromDir(String dirPath, String substring){
