@@ -49,7 +49,7 @@ public class VSTests /*extends TestBase*/ {
 
         try {
             //runVs.openProject("C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln");
-            //runVs.executeBuildFromMenu("Rebuild Solution");
+            //runVs.performIbActionFromMenu("Rebuild Solution");
             driver.findElementByName("File").click();
             driver.findElementByName("Open").click();
             driver.findElementByName("Project/Solution...").click();

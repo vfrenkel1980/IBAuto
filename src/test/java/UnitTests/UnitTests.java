@@ -3,9 +3,11 @@ package UnitTests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.UnitTestBase;
+import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.vsui.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,16 +26,9 @@ public class UnitTests {
     @Test
     public void test() {
 
-        Map<String, String> lookFor = new HashMap<String, String>();
-        lookFor.put("Command Prompt", "Command Prompt");
-        String result = "";
-
-        try {
-            result = Parser.retrieveDataFromFile("C:\\QA\\Simulation\\buildLog.txt", lookFor);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(result);
-
+        VSUIService vsService = new VSUIService();
+        vsService.openVS2017instance("15");
+        vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
+        vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.CLEAN_SOLUTION,"project", "ConsoleApplication1");
     }
 }

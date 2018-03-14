@@ -22,9 +22,9 @@ public interface IVSUIService  {
 
     void openProject(String projectPath);
 
-    void executeBuildFromMenu(String action);
+    void performIbActionFromMenu(String action);
 
-    void executeBuildFromPrjExplorer(String action, String solutionName);
+    void performIbActionFromPrjExplorer(String action,String type, String solutionName);
 
     void openVS2017instance(String vsinstallation);
 

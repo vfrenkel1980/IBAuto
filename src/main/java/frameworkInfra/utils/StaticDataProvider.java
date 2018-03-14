@@ -16,8 +16,8 @@ public class StaticDataProvider {
     }
 
     public static class URL{
-        public static final String VS_RELEASE_URL = "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Professional&rel=15";
-        public static final String VS_PREVIEW_URL = "https://www.visualstudio.com/thank-you-downloading-visual-studio/?ch=pre&sku=Professional&rel=15";
+        public static final String VS_PREVIEW_URL = "https://download.visualstudio.microsoft.com/download/pr/11796490/da370bf146a3a1e91ec0ace29e623fdb/vs_Professional.exe";
+        public static final String VS_RELEASE_URL = "https://aka.ms/vs/15/release/vs_professional.exe ";
     }
 
     //processes
@@ -49,6 +49,10 @@ public class StaticDataProvider {
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
         public static final String CLEAN_SOLUTION = "Clean Solution";
+        public static final String BUILD_PROJECT = "Build Project";
+        public static final String REBUILD_PROJECT = "Rebuild Project";
+        public static final String CLEAN_PROJECT = "Clean Project";
+        public static final String STOP_BUILD = "Stop Build";
     }
 
     public static class VsDevenvInstallPath{

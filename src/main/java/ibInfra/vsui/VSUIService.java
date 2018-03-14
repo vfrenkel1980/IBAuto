@@ -118,7 +118,7 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
-    public void executeBuildFromMenu(String action) {
+    public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
         try {
             driver.findElementByName("Incredibuild").click();
@@ -141,9 +141,15 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
-    public void executeBuildFromPrjExplorer(String action, String solutionName){
+    public void performIbActionFromPrjExplorer(String action,String type, String solutionName){
         driver.findElementByName("Build");
-        WebElement newel = driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]"));
+        WebElement newel;
+        if (type.equals("solution")) {
+            newel = driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]"));
+        }
+        else{
+            newel = driver.findElementByName(solutionName);
+        }
         AppiumActions.rightClick(newel);
         try {
             Thread.sleep(2000);
@@ -200,11 +206,11 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS" + version);
+            //test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            test.log(Status.INFO, "Visual Studio opened successfully");
+            //test.log(Status.INFO, "Visual Studio opened successfully");
             try {
                 vsFirstActivation();
             } catch (Exception e) {

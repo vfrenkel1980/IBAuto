@@ -31,7 +31,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVS2017instance(VSINSTALLATION);
         vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
-        vsService.executeBuildFromMenu(VsActions.REBUILD_SOLUTION);
+        vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
@@ -46,7 +46,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVS2017instance(VSINSTALLATION);
         vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
-        vsService.executeBuildFromPrjExplorer(VsActions.REBUILD_SOLUTION, "ConsoleApplication1");
+        vsService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "ConsoleApplication1");
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");

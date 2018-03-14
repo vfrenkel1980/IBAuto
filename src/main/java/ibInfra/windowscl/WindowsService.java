@@ -147,7 +147,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     }
 
-    public File getLatestFilefromDir(String dirPath, String substring){
+    public File getLatestFileFromDir(String dirPath, String substring){
         File dir = new File(dirPath);
         File[] files = dir.listFiles();
         if (files == null || files.length == 0) {
