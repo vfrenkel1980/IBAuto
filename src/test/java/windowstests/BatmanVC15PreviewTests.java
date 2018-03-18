@@ -2,16 +2,11 @@ package windowstests;
 
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
-
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-import static frameworkInfra.utils.StaticDataProvider.Processes;
-import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
 
 public class BatmanVC15PreviewTests extends BatmanBCTestBase {
 
@@ -43,13 +38,13 @@ public class BatmanVC15PreviewTests extends BatmanBCTestBase {
     @Test(testName = "Check that \"Predicted\" execution is enable: VS2017 Preview")
     public void checkForPredictedExecutionWithoutMSBuild() {
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15Preview_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.WarningMessages.PREDICTED_DISABLED));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PREDICTED_DISABLED));
     }
 
     @Test(testName = "Check if IBMSBHLP.log created")
     public void checkIBMSBHLPlogCreation(){
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15Preview_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        File ibmsbhlpLog = new File(StaticDataProvider.Locations.LOGS_ROOT + "\\IBMSBHLP.log");
+        File ibmsbhlpLog = new File(Locations.LOGS_ROOT + "\\IBMSBHLP.log");
         Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
     }
 
