@@ -81,6 +81,7 @@ public class VSIntegrationTestBase extends TestBase {
                 break;
         }
         vsService.openProject(projectPath);
+        extent.flush();
     }
 
     @BeforeMethod
