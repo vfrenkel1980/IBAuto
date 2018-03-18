@@ -38,10 +38,9 @@ public class StaticDataProvider {
         public static final String BUILD_SUCCEEDED = "Build succeeded";
         public static final String ERROR = "Error";
         public static final String XDTASKID = "xdTaskID";
+        public static final String LOCAL = "Local";
+        public static final String AGENT = "Agent";
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
-    }
-
-    public static class WarningMessages{
         public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
     }
 
@@ -322,6 +321,7 @@ public class StaticDataProvider {
         public static final String PREDICTED = "PredictedExecutionMode";
         public static final String LOCAL_LOGGING = "ExternalHelperLog";
         public static final String STANDALONE_MODE = "Standalone";
+        public static final String AVOID_LOCAL = "AvoidLocalExec";
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";

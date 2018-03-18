@@ -25,6 +25,7 @@ def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
 def Unit = project.hasProperty("Unit")
 def VSPreview = project.hasProperty("VSPreview")
 def VSIntegration = project.hasProperty("VSIntegration")
+def AgentSettings = project.hasProperty("AgentSettings")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -108,6 +109,10 @@ test {
 
         if(VSIntegration) {
             suites "src/test/resources/VSIntegration.xml"
+        }
+
+        if(AgentSettings) {
+            suites "src/test/resources/AgentSettings.xml"
         }
     }
 

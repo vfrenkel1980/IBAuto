@@ -61,7 +61,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("1", RegistryKeys.MSBUILD);
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PREDICTED_DISABLED));
     }
 
     @Test(testName = "Check that \"Predicted\" execution is enable: Without MSBuild")
@@ -69,7 +69,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         setRegistry("0", RegistryKeys.MSBUILD);
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WarningMessages.PREDICTED_DISABLED));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PREDICTED_DISABLED));
     }
 
     @Test(testName = "Successful build - check for success. Predicted 0, MSBuild 0")
