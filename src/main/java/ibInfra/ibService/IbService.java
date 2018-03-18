@@ -40,6 +40,12 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
+    public void updateIB(String version) {
+        String installationFile = getIbConsoleInstallation(version);
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
+    }
+
+    @Override
     public String getIbConsoleInstallation(String version) {
         String path = Locations.NETWORK_IB_INSTALLATIONS + version;
         String postFix = "console.exe";

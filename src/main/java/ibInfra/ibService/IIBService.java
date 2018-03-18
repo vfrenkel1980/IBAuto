@@ -14,6 +14,8 @@ public interface IIBService {
 
     void installIB(String version);
 
+    void updateIB(String version);
+
     static int getIbVersion(){
         String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
         int version = Integer.parseInt(regVersion);
