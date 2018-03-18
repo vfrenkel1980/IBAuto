@@ -22,7 +22,6 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VSIntegrationTestBase extends TestBase {
 
-    public static WindowsDriver driver = null;
     protected static int ibVersion = 0;
     public IbService ibService = new IbService();
     public VSUIService vsService = new VSUIService();

@@ -9,6 +9,7 @@ import ibInfra.ibService.IbService;
 import ibInfra.linuxcl.LinuxService;
 import ibInfra.vsui.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -28,7 +29,7 @@ import java.util.Calendar;
 public class TestBase {
 
     public static final Logger log = Logger.getLogger(TestBase.class.getName());
-
+    public static WindowsDriver driver = null;
     public static ExtentReports extent;
     public static ExtentTest test;
     public static ExtentHtmlReporter htmlReporter;

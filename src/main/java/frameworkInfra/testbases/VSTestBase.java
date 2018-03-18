@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 public class VSTestBase extends TestBase {
 
-    public static WindowsDriver driver = null;
+
     protected static int ibVersion = 0;
     private String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
