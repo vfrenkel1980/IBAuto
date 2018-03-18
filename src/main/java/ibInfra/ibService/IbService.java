@@ -139,8 +139,8 @@ public class IbService extends TestBase implements IIBService {
     //disable IB monitor in visual studio
     @Override
     public void disableVsMonitor() {
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "AddIn", "DockAutoOpen", "0");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "AddIn", "DockAutoOpenFloating", "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\AddIn", "DockAutoOpen", "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\AddIn", "DockAutoOpenFloating", "0");
     }
 
     @Override
