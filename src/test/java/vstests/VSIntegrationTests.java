@@ -93,7 +93,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
         }
     }
 
-    @Test(testName = "Execute Build from project Project Explorer")
+    @Test(testName = "Execute Build project from Project Explorer")
     public void executeBuildProjectFromProjectExplorer(){
         String result;
         vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.CLEAN_PROJECT,"project", projectName);
@@ -121,7 +121,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "IncrediBuild Stop Build")
     public void stopIbBuild(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVS2017instance("15");
+        vsService.openVSInstance("15");
         vsService.openProject(StaticDataProvider.TestProjects.CONSOLE_APPLICATION_01);
         vsService.performIbActionFromMenu(StaticDataProvider.VsActions.REBUILD_SOLUTION);
         vsService.performIbActionFromMenu(StaticDataProvider.VsActions.STOP_BUILD);

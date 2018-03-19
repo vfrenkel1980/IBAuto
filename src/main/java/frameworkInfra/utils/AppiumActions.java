@@ -29,7 +29,7 @@ public class AppiumActions extends VSTestBase{
         }
     }
 
-    public static void contextMenuIncrediBuildClick(String solutionName){
+    public static void contextMenuIncrediBuildClick(WebElement project){
         List<WebElement> ibElements = null;
         WebElement goTo = null;
         ibElements =driver.findElementsByName("Incredibuild");
@@ -45,7 +45,7 @@ public class AppiumActions extends VSTestBase{
             e.getMessage();
         }
         if (goTo != null){
-            AppiumActions.rightClick(driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]")));
+            AppiumActions.rightClick(project);
             ibElements.get(0).click();
         }
     }

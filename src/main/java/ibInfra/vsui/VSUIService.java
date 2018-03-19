@@ -156,7 +156,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        AppiumActions.contextMenuIncrediBuildClick(solutionName);
+        AppiumActions.contextMenuIncrediBuildClick(newel);
         driver.findElementByName(action).click();
         try {
             Thread.sleep(3000);
@@ -167,7 +167,7 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
-    public void openVS2017instance(String version) {
+    public void openVSInstance(String version) {
         String pathToDevenv = "";
         switch (version) {
             case "release":
@@ -206,11 +206,11 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            //test.log(Status.INFO, "Opening VS" + version);
+            test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            //test.log(Status.INFO, "Visual Studio opened successfully");
+            test.log(Status.INFO, "Visual Studio opened successfully");
             try {
                 vsFirstActivation();
             } catch (Exception e) {

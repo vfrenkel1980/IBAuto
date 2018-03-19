@@ -8,7 +8,6 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
-import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -48,7 +47,7 @@ public class VSIntegrationTestBase extends TestBase {
     public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
         ibService.updateIB("Latest");
-        vsService.openVS2017instance(VCVersion);
+        vsService.openVSInstance(VCVersion);
         switch (VCVersion){
             case "8":
                 projectPath = TestProjects.VC8PROJECT;
@@ -94,15 +93,15 @@ public class VSIntegrationTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
         getResult(result);
     }
 
     @AfterClass
     public void afterClass(){
+        if (driver != null) {
+            driver.quit();
+        }
+        driver = null;
         extent.flush();
     }
 }
