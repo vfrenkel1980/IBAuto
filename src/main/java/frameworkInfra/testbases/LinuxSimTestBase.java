@@ -19,10 +19,18 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class LinuxSimTestBase extends TestBase {
 
+    public enum TestNum{
+        MultiBuild, MultiIn, Sim
+    }
 
     protected static List rawIpList;
     protected static List rawIpList2;
+    protected static List rawIpList3;
+
+    protected static TestNum testNum;
+
     public static List<String> ipList;
+    public static List<String> multiGridIPList;
     String buildID;
     private static String ibVersion = "";
     public LinuxService linuxService = new LinuxService();
@@ -35,19 +43,26 @@ public class LinuxSimTestBase extends TestBase {
     @BeforeSuite
     public void envSetUp(ITestContext testContext){
         log.info("starting before suite");
-        if (testContext.getName().equals("LinuxMultiBuild"))
+        if (testContext.getName().equals("LinuxMultiBuild")) {
             rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
-        if (testContext.getName().equals("LinuxMultiInitiator"))
+            testNum = TestNum.MultiBuild;
+        }
+        if (testContext.getName().equals("LinuxMultiInitiator")) {
             rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
-        if (testContext.getName().contains("Cycle"))
+            testNum = TestNum.MultiIn;
+        }
+        if (testContext.getName().contains("Cycle")) {
             rawIpList = XmlParser.getIpList("Simulation IP list.xml");
-
+            testNum = TestNum.Sim;
+        }
+        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
         //copy latest extent report to backup folder
         SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
 
         ipList = linuxService.breakDownIPList(rawIpList);
+        multiGridIPList = linuxService.breakDownIPList(rawIpList3);
         ibVersion = getIBVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -111,11 +126,9 @@ public class LinuxSimTestBase extends TestBase {
 
     private static String getIBVersion() {
         LinuxService runCommand = new LinuxService();
-        try {
-            ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+
+        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
     }
 

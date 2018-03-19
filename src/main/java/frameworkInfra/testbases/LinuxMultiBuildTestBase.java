@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.util.List;
@@ -24,20 +25,20 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 
         log.info("starting delete logs folder");
-        linuxService.deleteLogsFolder(ipList);
+        linuxService.deleteLogsFolder(multiGridIPList);
         log.info("finished delete logs folder");
 
         if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
             extent.flush();
-            System.exit(0);
+            throw new SkipException("EXITING");
         }
 
         if(linuxService.startIBService("ib_server", ipList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
-            System.exit(0);
+            throw new SkipException("EXITING");
         }
 
         for (int i=1; i<5; ++i) {
@@ -46,7 +47,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
                 String err = "stopIBService failed " +otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
-                System.exit(0);
+                throw new SkipException("EXITING");
             }
         }
         log.info("finished before class");
@@ -65,7 +66,7 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
                 String err = "startIBService failed " + otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
-                System.exit(0);
+                throw new SkipException("EXITING");
             }
         }
 

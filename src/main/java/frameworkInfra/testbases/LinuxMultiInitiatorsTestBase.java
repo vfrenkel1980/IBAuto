@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -24,12 +25,12 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
         rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 
-        //linuxService.deleteLogsFolder(ipList);
+        //linuxService.deleteLogsFolder(multiGridIPList);
 
         if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
             extent.flush();
-            System.exit(0);
+            throw new SkipException("EXITING");
         }
 
         for (int i=1; i<5; ++i) {
@@ -38,7 +39,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
                 String err = "startIBService failed " +ipList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
-                System.exit(0);
+                throw new SkipException("EXITING");
             }
         }
 
@@ -46,7 +47,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
             String err = "stopIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
-            System.exit(0);
+            throw new SkipException("EXITING");
         }
         log.info("finished before class");
     }
