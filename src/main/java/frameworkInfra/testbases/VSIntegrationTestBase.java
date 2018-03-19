@@ -51,6 +51,7 @@ public class VSIntegrationTestBase extends TestBase {
     @Parameters({"VCVersion"})
     public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
+        test.assignCategory("VC" + VCVersion);
         ibService.updateIB("Latest");
         vsService.openVSInstance(VCVersion);
         switch (VCVersion){
