@@ -53,39 +53,45 @@ public class VSIntegrationTestBase extends TestBase {
     public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
-        vsService.openVSInstance(VCVersion);
-        switch (VCVersion){
-            case "8":
-                projectPath = TestProjects.VC8PROJECT;
-                projectName = "vc8project";
-                break;
-            case "9":
-                projectPath = TestProjects.VC9PROJECT;
-                projectName = "vc9project";
-                break;
-            case "10":
-                projectPath = TestProjects.VC10PROJECT;
-                projectName = "vc10project";
-                break;
-            case "11":
-                projectPath = TestProjects.VC11PROJECT;
-                projectName = "vc11project";
-                break;
-            case "12":
-                projectPath = TestProjects.VC12PROJECT;
-                projectName = "vc12project";
-                break;
-            case "14":
-                projectPath = TestProjects.VC14PROJECT;
-                projectName = "vc14project";
-                break;
-            case "15":
-                projectPath = TestProjects.VC15PROJECT;
-                projectName = "vc15project";
-                break;
+        try {
+            vsService.openVSInstance(VCVersion);
+            switch (VCVersion) {
+                case "8":
+                    projectPath = TestProjects.VC8PROJECT;
+                    projectName = "vc8project";
+                    break;
+                case "9":
+                    projectPath = TestProjects.VC9PROJECT;
+                    projectName = "vc9project";
+                    break;
+                case "10":
+                    projectPath = TestProjects.VC10PROJECT;
+                    projectName = "vc10project";
+                    break;
+                case "11":
+                    projectPath = TestProjects.VC11PROJECT;
+                    projectName = "vc11project";
+                    break;
+                case "12":
+                    projectPath = TestProjects.VC12PROJECT;
+                    projectName = "vc12project";
+                    break;
+                case "14":
+                    projectPath = TestProjects.VC14PROJECT;
+                    projectName = "vc14project";
+                    break;
+                case "15":
+                    projectPath = TestProjects.VC15PROJECT;
+                    projectName = "vc15project";
+                    break;
+            }
+            vsService.openProject(projectPath);
+        }catch (Exception e){
+            e.getMessage();
         }
-        vsService.openProject(projectPath);
-        extent.flush();
+        finally {
+            extent.flush();
+        }
     }
 
     @BeforeMethod

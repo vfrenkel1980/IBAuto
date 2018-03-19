@@ -1,8 +1,7 @@
 package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.VSTestBase;
-import org.openqa.selenium.By;
+import frameworkInfra.testbases.TestBase;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class AppiumActions extends VSTestBase{
+public class AppiumActions extends TestBase{
 
     public static void rightClick(WebElement element) {
         try {
@@ -20,13 +19,13 @@ public class AppiumActions extends VSTestBase{
 
         } catch (StaleElementReferenceException e) {
             System.out.println("Element is not attached to the page document "
-                    + e.getStackTrace());
+                    + e.getMessage());
         } catch (NoSuchElementException e) {
             System.out.println("Element " + element + " was not found in DOM "
-                    + e.getStackTrace());
+                    + e.getMessage());
         } catch (Exception e) {
             System.out.println("Element " + element + " was not clickable "
-                    + e.getStackTrace());
+                    + e.getMessage());
         }
     }
 
