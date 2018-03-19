@@ -115,6 +115,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
+        test.log(Status.INFO, projectPath + " project opened");
     }
 
     @Override
@@ -132,6 +133,7 @@ public class VSUIService extends TestBase implements IVSUIService {
             }
         }
         driver.findElementByName(action).click();
+        test.log(Status.INFO, "Successfully clicked on " + action);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -158,6 +160,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         AppiumActions.contextMenuIncrediBuildClick(newel);
         driver.findElementByName(action).click();
+        test.log(Status.INFO, "Successfully clicked on " + newel.getText() );
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

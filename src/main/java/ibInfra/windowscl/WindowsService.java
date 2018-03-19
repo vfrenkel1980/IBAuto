@@ -88,6 +88,7 @@ public class WindowsService extends TestBase implements IWindowsService {
                 isRunning = false;
             }
         }
+        test.log(Status.INFO, processName + " Finished running");
     }
 
     @Override

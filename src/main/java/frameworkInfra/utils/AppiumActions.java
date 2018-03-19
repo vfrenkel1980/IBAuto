@@ -1,5 +1,6 @@
 package frameworkInfra.utils;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.VSTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -15,8 +16,8 @@ public class AppiumActions extends VSTestBase{
         try {
             Actions action = new Actions(driver).contextClick(element);
             action.build().perform();
+            test.log(Status.INFO, "Successfully Right clicked on " + element.getText());
 
-            System.out.println("Successfully Right clicked on the element");
         } catch (StaleElementReferenceException e) {
             System.out.println("Element is not attached to the page document "
                     + e.getStackTrace());
@@ -47,6 +48,7 @@ public class AppiumActions extends VSTestBase{
         if (goTo != null){
             AppiumActions.rightClick(project);
             ibElements.get(0).click();
+            test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText() );
         }
     }
 }
