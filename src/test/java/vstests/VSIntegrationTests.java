@@ -12,12 +12,6 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class VSIntegrationTests extends VSIntegrationTestBase {
 
-/*    @Test(testName = "IncrediBuild execution from VS2017 menu bar")
-    public void executeVSBuild(){
-        vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, projectName);
-        System.out.println("");
-    }*/
-
     @Test(testName = "Execute Build from Menu")
     public void executeBuildFromMenu(){
         String result;

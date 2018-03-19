@@ -44,6 +44,7 @@ public class VSIntegrationTestBase extends TestBase {
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         ibService.disableVsMonitor();
+        ibService.updateIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
     }
 
@@ -52,7 +53,6 @@ public class VSIntegrationTestBase extends TestBase {
     public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
-        ibService.updateIB("Latest");
         vsService.openVSInstance(VCVersion);
         switch (VCVersion){
             case "8":
