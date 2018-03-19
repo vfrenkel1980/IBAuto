@@ -160,7 +160,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         AppiumActions.contextMenuIncrediBuildClick(newel);
         driver.findElementByName(action).click();
-        test.log(Status.INFO, "Successfully clicked on " + newel.getText() );
+        test.log(Status.INFO, "Successfully clicked on " + newel.getText() + action);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
