@@ -122,7 +122,11 @@ public class LinuxSimTestBase extends TestBase {
     private static String getIBVersion() {
         LinuxService runCommand = new LinuxService();
 
-        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+        try {
+            ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+        } catch (InterruptedException e) {
+            e.getMessage();
+        }
 
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
     }
