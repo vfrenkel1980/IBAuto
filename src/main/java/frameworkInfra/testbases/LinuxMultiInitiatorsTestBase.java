@@ -21,7 +21,6 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-
         rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
 

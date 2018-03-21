@@ -35,11 +35,6 @@ public class LinuxSimTestBase extends TestBase {
     private static String ibVersion = "";
     public LinuxService linuxService = new LinuxService();
 
-/*    static {
-
-
-    }*/
-
     @BeforeSuite
     public void envSetUp(ITestContext testContext){
         log.info("starting before suite");

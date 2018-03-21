@@ -23,7 +23,6 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
 
         rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = linuxService.breakDownIPList(rawIpList2);
-
         log.info("starting delete logs folder");
         linuxService.deleteLogsFolder(multiGridIPList);
         log.info("finished delete logs folder");
