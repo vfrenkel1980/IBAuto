@@ -33,7 +33,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void cleanAndBuildDontWaitTermination(String command) {
-        winService.runCommandDontWaitForTermination(String.format(command, ProjectsCommands.CLEAN));
+        winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));
         winService.runCommandDontWaitForTermination(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
     }
 

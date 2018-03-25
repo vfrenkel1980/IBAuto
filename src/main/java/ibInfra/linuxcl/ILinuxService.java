@@ -8,8 +8,6 @@ public interface ILinuxService {
 
     String linuxRunSSHCommandOutputString(String command, String hostIP);
 
-    public List<String> breakDownIPList(List ipList);
-
     void deleteLogsFolder(List<String> ipList);
 
     boolean isIBServiceUp(String service, String IP);

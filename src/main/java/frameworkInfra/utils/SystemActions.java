@@ -81,5 +81,13 @@ public class SystemActions {
         }
     }
 
+    public static void sleep(int seconds){
+        long timeout = seconds * 1000;
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.getMessage();
+        }
+    }
 
 }
