@@ -63,7 +63,7 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public String linuxRunSSHCommandOutputString(String command, String hostIP) throws InterruptedException {
+    public String linuxRunSSHCommandOutputString(String command, String hostIP) {
         JSch jsch = new JSch();
         Session session;
         try {
@@ -109,12 +109,27 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
+    public List<String> breakDownIPList(List ipList) {
+        List<String> newIpList = new ArrayList<String>();
+        for (Object anIpList : ipList) {
+            Element node = (Element) anIpList;
+            newIpList.add(node.getContent(0).getValue().trim());
+        }
+        return newIpList;
+    }
+
+    @Override
     public boolean isIBServiceUp(String service, String IP) {
         int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
         if (res == 0)
             return true;
         else
             return false;
+    }
+
+    @Override
+    public void killib_db_check(String IP) {
+        linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.KILL_IB_DB_CHECK,IP);
     }
 
     @Override
@@ -136,7 +151,12 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException {
+    public String getLinuxOS(String IP) {
+        return linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP);
+    }
+
+    @Override
+    public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) {
         return linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
     }
 }
