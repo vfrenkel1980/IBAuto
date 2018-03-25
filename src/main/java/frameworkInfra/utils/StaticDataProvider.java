@@ -369,6 +369,8 @@ public class StaticDataProvider {
 
     public static class LinuxCommands{
         public static final String PLINK = "plink -pw xoreax xoreax@";
+        public static final String KILL_IB_DB_CHECK =  "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
+        public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
 		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
@@ -388,9 +390,11 @@ public class StaticDataProvider {
 
         public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
         public static final String CD_SAMBA_DIR = "cd /disk2/projects/samba-4.0.7";
+        public static final String CD_SAMBA2_DIR = "cd /disk2/projects/samba/samba-4.3.3";
         public static final String CD_CPP_DIR = "cd /disk2/projects/cppunit-1.12.1";
         public static final String CD_APACHE_DIR = "cd /disk2/projects/httpd-2.4.18";
         public static final String CD_MYSQL_DIR = "cd /disk2/projects/mysql-5.6.11/build";
+        public static final String CD_MYSQL2_DIR = "cd /disk2/projects/mysql-5.6.11";
         public static final String CD_BOOST_DIR = "cd /home/xoreax/projects/boost_1_60_0";
         public static final String CD_CMAKE_DIR = "cd /home/xoreax/projects/cmake-3.5.2";
         public static final String CD_GDB_DIR = "cd /disk2/projects/gdb-7.11";

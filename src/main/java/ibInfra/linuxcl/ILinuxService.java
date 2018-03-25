@@ -6,7 +6,9 @@ public interface ILinuxService {
 
     int linuxRunSSHCommand(String command, String hostIP);
 
-    String linuxRunSSHCommandOutputString(String command, String hostIP) throws InterruptedException;
+    String linuxRunSSHCommandOutputString(String command, String hostIP);
+
+    public List<String> breakDownIPList(List ipList);
 
     void deleteLogsFolder(List<String> ipList);
 
@@ -16,5 +18,9 @@ public interface ILinuxService {
 
     boolean stopIBService(String service, String IP);
 
-    String runQueryLastBuild(String fieldName, String sqliteTable, String IP) throws InterruptedException;
+    void killib_db_check(String IP);
+
+    String getLinuxOS(String IP);
+
+    String runQueryLastBuild(String fieldName, String sqliteTable, String IP);
 }

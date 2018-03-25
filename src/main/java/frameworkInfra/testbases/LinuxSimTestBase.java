@@ -59,6 +59,16 @@ public class LinuxSimTestBase extends TestBase {
         ipList = XmlParser.breakDownIPList(rawIpList);
         multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
         ibVersion = getIBVersion();
+
+        if (testContext.getName().equals("LinuxMultiBuild")) {
+            for (int i=1; i<5; ++i)
+                linuxService.killib_db_check(ipList.get(i));
+        }
+        else {
+            linuxService.killib_db_check(ipList.get(1));
+        }
+
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
@@ -122,11 +132,9 @@ public class LinuxSimTestBase extends TestBase {
     private static String getIBVersion() {
         LinuxService runCommand = new LinuxService();
 
-        try {
-            ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+
+        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+
 
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
     }
