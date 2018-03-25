@@ -173,17 +173,8 @@ public class VSUIService extends TestBase implements IVSUIService {
     public void openVSInstance(String version) {
         String pathToDevenv = "";
         switch (version) {
-            case "release":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
-                break;
             case "preview":
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
-                break;
-            case "6":
-                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\MSDev98\\Bin\\MSDEV.EXE\"";
-                break;
-            case "7.1":
-                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio .NET 2003\\Common7\\IDE\\devenv.exe\"";
                 break;
             case "8":
                 pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 8\\Common7\\IDE\\devenv.exe\"";

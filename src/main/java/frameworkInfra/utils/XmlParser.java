@@ -7,6 +7,7 @@ import org.jdom2.input.SAXBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class XmlParser {
@@ -21,13 +22,6 @@ public class XmlParser {
             Element rootNode = document.getRootElement();
             List list = rootNode.getChildren("ip");
 
-/*            for (int i = 0; i < list.size(); i++) {
-
-                Element node = (Element) list.get(i);
-
-                System.out.println(node.getContent(0).getValue());
-            }*/
-
             return list;
 
         } catch (IOException | JDOMException io) {
@@ -35,5 +29,14 @@ public class XmlParser {
             return null;
 
         }
+    }
+
+    public static List<String> breakDownIPList(List ipList) {
+        List<String> newIpList = new ArrayList<String>();
+        for (Object anIpList : ipList) {
+            Element node = (Element) anIpList;
+            newIpList.add(node.getContent(0).getValue().trim());
+        }
+        return newIpList;
     }
 }

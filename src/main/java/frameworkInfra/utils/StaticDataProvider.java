@@ -10,7 +10,7 @@ public class StaticDataProvider {
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
-        public static final String SYSTEM_APPDATA_TEMP_FOLDER = "C:\\Users\\Admin\\AppData\\Local\\Temp";
+        public static final String SYSTEM_APPDATA_TEMP_FOLDER = System.getProperty("java.io.tmpdir");
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
     }
@@ -356,8 +356,6 @@ public class StaticDataProvider {
 
     public static class TestProjects{
         public static final String CONSOLE_APPLICATION_01 = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
-        public static final String VC6PROJECT = Locations.QA_ROOT + "\\projects\\vc6project\\vc6project.sln";
-        public static final String VC7_1PROJECT = Locations.QA_ROOT + "\\projects\\vc7.1project\\vc7.1project.sln";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
         public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";
         public static final String VC10PROJECT = Locations.QA_ROOT + "\\projects\\vc10project\\vc10project.sln";
@@ -414,6 +412,4 @@ public class StaticDataProvider {
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
 
     }
-
-    public static final String TEST = "buildconsole.exe C:\\Users\\Mark\\source\\repos\\ConsoleApplication2\\ConsoleApplication2.sln /%s /cfg=\"release|x64\"";
 }

@@ -1,5 +1,6 @@
 package windowstests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.testbases.UnitTestBase;
 import frameworkInfra.utils.*;
@@ -55,6 +56,19 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
         File ibmsbhlpLog = new File(Locations.LOGS_ROOT + "\\IBMSBHLP.log");
         Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
+    }
+
+    @Test(testName = "Check Basic Agent Assignment")
+    public void checkBasicAgentAssignment(){
+        boolean pass = true;
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        for (String machine : gridMachineList ) {
+            if (!Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
+                test.log(Status.INFO, machine + "is not assigned to build");
+                pass = false;
+            }
+        }
+        Assert.assertTrue(pass, "Some machines from the Grid were not assigned to the build process");
     }
 
 }

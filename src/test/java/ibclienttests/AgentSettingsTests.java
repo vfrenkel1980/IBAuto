@@ -7,6 +7,8 @@ import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class AgentSettingsTests extends AgentSettingsTestBase {
@@ -36,6 +38,32 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.LOCAL));
         Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.AGENT));
+    }
+
+    @Test(testName = "Verify Extended logging level")
+    public void verifyExtendedLoggingLevel() {
+        String result;
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Log", StaticDataProvider.RegistryKeys.LOGGING_LEVEL, "4" );
+        ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        try {
+            result = ibService.findValueInPacketLog("LoggingLevel");
+            Assert.assertEquals(result, "4");
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    @Test(testName = "Verify Minimal logging level")
+    public void verifyMinimalLoggingLevel() {
+        String result;
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Log", StaticDataProvider.RegistryKeys.LOGGING_LEVEL, "0" );
+        ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        try {
+            result = ibService.findValueInPacketLog("LoggingLevel");
+            Assert.assertEquals(result, "0");
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
 

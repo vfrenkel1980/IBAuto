@@ -22,7 +22,7 @@ public class Parser extends TestBase{
         while((line = in.readLine()) != null)
         {
             for (Map.Entry<String, String> entry : lookFor.entrySet()) {
-                if (line.contains(entry.getValue())){
+                if (line.contains(entry.getKey())){
                     pulledData = line.substring(line.lastIndexOf(entry.getValue())+ entry.getValue().length(), line.length());
                     //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
                     //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();

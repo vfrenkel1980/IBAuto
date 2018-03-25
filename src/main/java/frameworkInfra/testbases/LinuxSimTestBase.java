@@ -56,8 +56,8 @@ public class LinuxSimTestBase extends TestBase {
         //delete HTML report from workspace folder
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
 
-        ipList = linuxService.breakDownIPList(rawIpList);
-        multiGridIPList = linuxService.breakDownIPList(rawIpList3);
+        ipList = XmlParser.breakDownIPList(rawIpList);
+        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
         ibVersion = getIBVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");

@@ -10,8 +10,6 @@ public interface ILinuxService {
 
     void deleteLogsFolder(List<String> ipList);
 
-    List<String> breakDownIPList(List ipList);
-
     boolean isIBServiceUp(String service, String IP);
 
     boolean startIBService(String service, String IP);

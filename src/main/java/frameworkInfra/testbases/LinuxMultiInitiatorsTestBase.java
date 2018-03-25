@@ -22,7 +22,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxSimTestBase{
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
         rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
-        otherGridIPList = linuxService.breakDownIPList(rawIpList2);
+        otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
 
         linuxService.deleteLogsFolder(multiGridIPList);
 

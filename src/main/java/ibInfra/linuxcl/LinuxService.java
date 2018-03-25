@@ -109,16 +109,6 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public List<String> breakDownIPList(List ipList) {
-        List<String> newIpList = new ArrayList<String>();
-        for (Object anIpList : ipList) {
-            Element node = (Element) anIpList;
-            newIpList.add(node.getContent(0).getValue().trim());
-        }
-        return newIpList;
-    }
-
-    @Override
     public boolean isIBServiceUp(String service, String IP) {
         int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
         if (res == 0)

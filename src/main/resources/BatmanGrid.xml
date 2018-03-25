@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<IP_Addresses>
+
+    <ip> sr3-w81x64-c </ip>
+    <ip> sr3-w10-c </ip>
+    <ip> sr3-w2012r2-c </ip>
+    <ip> sr3-w2008r2-c </ip>
+    <ip> sr3-w7x64-c </ip>
+    <ip> sr3-w7-c-up </ip>
+    <ip> sr3-w2008-c </ip>
+    <ip> sr3-w2012-c </ip>
+    <ip> sr3-w8-c </ip>
+    <ip> sr3-w2016-c </ip>
+    <ip> sr3-xp32-c </ip>
+    <ip> sr3-Win8Pro </ip>
+
+</IP_Addresses>
