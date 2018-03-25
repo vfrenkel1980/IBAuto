@@ -53,6 +53,25 @@ public class WindowsService extends TestBase implements IWindowsService {
     }
 
     @Override
+    public void runCommandDontWaitForTermination(String command) {
+        try {
+            Runtime rt = Runtime.getRuntime();
+            if (test != null) {
+                test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            }
+            rt.exec(command);
+            System.out.println("Command " + command + " - Completed Successfully");
+            if (test != null) {
+                test.log(Status.INFO, "Command " + command + " - Completed Successfully");
+            }
+        } catch(Exception e) {
+            test.log(Status.ERROR, "Failed to run command.\n" +
+                    "Command: " + command +"\n"+
+                    e.getMessage());
+        }
+    }
+
+    @Override
     public String runCommandGetOutput(String command) {
         String line;
         try {
@@ -89,6 +108,18 @@ public class WindowsService extends TestBase implements IWindowsService {
             }
         }
         test.log(Status.INFO, processName + " Finished running");
+    }
+
+    @Override
+    public int getNumberOfProcessInstances(String processName) {
+        String output;
+        int instanceCount = 0;
+        output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+        System.out.println(output);
+        if (output.contains(processName)){
+            instanceCount++;
+        }
+        return instanceCount;
     }
 
     @Override

@@ -13,9 +13,13 @@ public interface IWindowsService {
 
     int runCommandWaitForFinish(String command);
 
+    void runCommandDontWaitForTermination(String command);
+
     String runCommandGetOutput(String command);
 
     void waitForProcessToFinish(String processName);
+
+    int getNumberOfProcessInstances(String processName);
 
     void waitForProcessToStart(String processName);
 

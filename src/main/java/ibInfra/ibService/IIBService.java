@@ -12,6 +12,8 @@ public interface IIBService {
 
     int cleanAndBuild(String command);
 
+    void cleanAndBuildDontWaitTermination(String command);
+
     void installIB(String version);
 
     void updateIB(String version);

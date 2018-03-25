@@ -31,6 +31,12 @@ public class IbService extends TestBase implements IIBService {
         return winService.runCommandWaitForFinish(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
     }
 
+    @Override
+    public void cleanAndBuildDontWaitTermination(String command) {
+        winService.runCommandDontWaitForTermination(String.format(command, ProjectsCommands.CLEAN));
+        winService.runCommandDontWaitForTermination(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
+    }
+
     //choose what version of IB to install. type "Latest" for latest version
     @Override
     public void installIB(String version) {

@@ -326,6 +326,7 @@ public class StaticDataProvider {
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
+        public static final String MIN_LOCAL_CORES = "MinLocalCoresPerBuild";
     }
 
     public static class IbLicenses{

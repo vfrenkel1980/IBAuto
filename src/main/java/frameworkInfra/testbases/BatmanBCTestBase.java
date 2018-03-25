@@ -14,13 +14,15 @@ import java.util.List;
 
 public class BatmanBCTestBase extends WindowsTestBase {
 
-    protected static List rawList;
-    public static List<String> gridMachineList;
+    protected static List rawBatmanList;
+    public static List<String> batmanMachineList;
+    protected static List rawVmSimList;
+    public static List<String> vmSimMachineList;
 
     @BeforeSuite
     public void beforeSuite(){
-        rawList = XmlParser.getIpList("BatmanGrid.xml");
-        gridMachineList = XmlParser.breakDownIPList(rawList);
+        rawBatmanList = XmlParser.getIpList("BatmanGrid.xml");
+        batmanMachineList = XmlParser.breakDownIPList(rawBatmanList);
     }
 
     @BeforeMethod

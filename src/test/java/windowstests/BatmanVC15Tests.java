@@ -2,7 +2,6 @@ package windowstests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.testbases.UnitTestBase;
 import frameworkInfra.utils.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -62,13 +61,26 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     public void checkBasicAgentAssignment(){
         boolean pass = true;
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        for (String machine : gridMachineList ) {
+        for (String machine : batmanMachineList) {
             if (!Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
                 test.log(Status.INFO, machine + "is not assigned to build");
                 pass = false;
             }
         }
         Assert.assertTrue(pass, "Some machines from the Grid were not assigned to the build process");
+    }
+
+    @Test(testName = "Verify Build Groups")
+    public void verifyBuildGroups(){
+        boolean pass = true;
+        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        for (String machine : vmSimMachineList) {
+            if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
+                test.log(Status.INFO, machine + " is assigned to build");
+                pass = false;
+            }
+        }
+        Assert.assertTrue(pass, "Some machines from VMSIM Grid were assigned to the Batman build process");
     }
 
 }
