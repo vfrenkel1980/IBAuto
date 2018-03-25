@@ -114,10 +114,17 @@ public class WindowsService extends TestBase implements IWindowsService {
     public int getNumberOfProcessInstances(String processName) {
         String output;
         int instanceCount = 0;
+        int lastIndex = 0;
         output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
         System.out.println(output);
-        if (output.contains(processName)){
-            instanceCount++;
+        while(lastIndex != -1){
+
+            lastIndex = output.indexOf(processName,lastIndex);
+
+            if(lastIndex != -1){
+                instanceCount ++;
+                lastIndex += processName.length();
+            }
         }
         return instanceCount;
     }

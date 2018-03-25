@@ -25,7 +25,7 @@ public class StaticDataProvider {
         public static final String BUILD_CONSOLE = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
-        public static final String BUILDSYSTEM = "buildsystem ";
+        public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
     }
 

@@ -24,6 +24,7 @@
             <class name ="windowstests.BatmanVC14Tests" />
             <class name ="windowstests.BatmanVC12Tests" />
             <class name ="windowstests.BatmanVC11Tests" />
+            <class name ="windowstests.GeneralWinTests" />
         </classes>
     </test>
 </suite>

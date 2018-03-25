@@ -67,18 +67,6 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         }
     }
 
-    @Test(testName = "Verify MultiBuild Success")
-    public void verifyMultiBuild() {
-        int instanceCount;
-        setRegistry("2", "BuildService" ,RegistryKeys.MIN_LOCAL_CORES);
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
-        SystemActions.sleep(10);
-        instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
-        Assert.assertEquals(instanceCount, 2, "Number of running instances does not match");
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-    }
-
 
 
 
