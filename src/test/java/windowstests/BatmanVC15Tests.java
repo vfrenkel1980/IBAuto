@@ -63,7 +63,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
         for (String machine : batmanMachineList) {
             if (!Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
-                test.log(Status.INFO, machine + "is not assigned to build");
+                test.log(Status.INFO, machine + " is not assigned to build");
                 pass = false;
             }
         }
