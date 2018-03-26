@@ -23,6 +23,8 @@ public class BatmanBCTestBase extends WindowsTestBase {
     public void beforeSuite(){
         rawBatmanList = XmlParser.getIpList("BatmanGrid.xml");
         batmanMachineList = XmlParser.breakDownIPList(rawBatmanList);
+        rawVmSimList = XmlParser.getIpList("VmSimGrid.xml");
+        vmSimMachineList = XmlParser.breakDownIPList(rawVmSimList);
     }
 
     @BeforeMethod
