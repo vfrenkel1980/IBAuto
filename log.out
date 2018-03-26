@@ -1,3 +1,6 @@
-BEFORE SUITE started
-BEFORE SUITE started
-verifyMinimalLoggingLeveltest finished
+starting before suite
+finished before suite
+starting before class
+deleting 192.168.11.106
+deleted 192.168.11.106
+deleting 192.168.11.118
