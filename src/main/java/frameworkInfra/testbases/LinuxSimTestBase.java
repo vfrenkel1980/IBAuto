@@ -69,6 +69,11 @@ public class LinuxSimTestBase extends TestBase {
         }
 
 
+        if (testContext.getName().contains("Cycle")) {
+            linuxService.deleteLogsFolder(ipList);
+            log.info("finished before class");
+        }
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
@@ -97,8 +102,8 @@ public class LinuxSimTestBase extends TestBase {
                 System.exit(0);
             }
         }
-        linuxService.deleteLogsFolder(ipList);
-        log.info("finished before class");
+       // linuxService.deleteLogsFolder(ipList);
+       // log.info("finished before class");
     }
 
     @BeforeMethod

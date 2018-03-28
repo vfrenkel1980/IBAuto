@@ -15,11 +15,11 @@ public class VmSimVC10Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "XBMC 2010 - Release x32- build" , groups = { "Build" })
+    /*@Test(testName = "XBMC 2010 - Release x32- build" , groups = { "Build" })
     public void xbmc2010x32Release(){
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC10_VMSIM.XMBC_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+    }*/
 
     @Test(testName = "Blender 2010 - Release x32- build" , groups = { "Build" })
     public void blender2010x32Release(){
