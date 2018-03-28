@@ -72,6 +72,55 @@ public class Parser extends TestBase{
         return files[0];
     }
 
+    public static int getLastLineForString(String filePath, String searchFor){
+        test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
+        int line = 0;
+        int finalLine = 0;
+        File file = new File(filePath);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                line ++;
+                final String lineFromFile = scanner.nextLine();
+                if (searchFor.equals("Local") && !lineFromFile.contains(("LNK"))) {
+                    if (lineFromFile.contains(searchFor)) {
+                        finalLine = line;
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }finally {
+            scanner.close();
+        }
+        return finalLine;
+    }
+
+    public static int getFirstLineForString(String filePath, String searchFor){
+        test.log(Status.INFO, "Starting to look for first appearance of " + searchFor + " in " + filePath);
+        int line = 0;
+        int firstLine = 0;
+        File file = new File(filePath);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                line ++;
+                final String lineFromFile = scanner.nextLine();
+                if(lineFromFile.contains(searchFor)) {
+                    firstLine = line;
+                    return firstLine;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }finally {
+            scanner.close();
+        }
+        return firstLine;
+    }
+
 
     //usage example
      /*        Map<String, String> lookFor = new HashMap<String, String>();

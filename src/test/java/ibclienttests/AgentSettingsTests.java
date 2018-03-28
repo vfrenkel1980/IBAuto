@@ -67,6 +67,27 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         }
     }
 
+    @Test(testName = "Verify Task Termination On High CPU Consumption")
+    public void verifyTaskTerminationOnHighCPUConsumption() {
+        winService.runCommandWaitForFinish(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, ProjectsCommands.CLEAN));
+        winService.runCommandDontWaitForTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD) );
+        SystemActions.sleep(7);
+        for (int i = 0 ; i < 2 ; i++) {
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + "-d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
+                    "cmd.exe /c " + Processes.NOTHING);
+        }
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+        int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+        int firstLocal = Parser.getFirstLineForString(Locations.OUTPUT_LOG_FILE, "Local");
+        for (int i = 0 ; i < 2 ; i++) {
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
+                    " cmd.exe /c \"TASKKILL /F /IM nothing.exe\"");
+        }
+        Assert.assertTrue(firstLocal > lastAgent, lastAgent + " appears after Local in output.log" + "local: " + firstLocal + " Agent: " + lastAgent);
+    }
+
+
+
 
 
 

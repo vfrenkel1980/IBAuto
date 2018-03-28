@@ -127,12 +127,6 @@ public class VmSimVC9Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Loader Test 7 2008 - Debug - build" , groups = { "Build" })
-    public void loaderTest72008x32Debug(){
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC9_VMSIM.LOADER_7, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
     @Test(testName = "Loader Test 8 2008 - Debug - build" , groups = { "Build" })
     public void loaderTest82008x32Debug(){
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC9_VMSIM.LOADER_8, "%s"));

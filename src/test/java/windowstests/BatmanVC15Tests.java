@@ -60,7 +60,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     @Test(testName = "Check Basic Agent Assignment")
     public void checkBasicAgentAssignment(){
         boolean pass = true;
-        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        winService.runCommandWaitForFinish(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         for (String machine : batmanMachineList) {
             if (!Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
                 test.log(Status.INFO, machine + " is not assigned to build");
@@ -73,7 +73,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     @Test(testName = "Verify Build Groups")
     public void verifyBuildGroups(){
         boolean pass = true;
-        ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        winService.runCommandWaitForFinish(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         for (String machine : vmSimMachineList) {
             if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)){
                 test.log(Status.INFO, machine + " is assigned to build");

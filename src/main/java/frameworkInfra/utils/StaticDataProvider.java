@@ -22,11 +22,13 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\buildconsole.exe ";
+        public static final String BUILD_CONSOLE = "\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\buildconsole.exe\" ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
+        public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
+        public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }
 
     public static class WindowsServices{
@@ -63,20 +65,25 @@ public class StaticDataProvider {
     public static class ProjectsCommands {
         public static final String CLEAN = "clean ";
         public static final String BUILD = "build ";
+        public static final String REBUILD = "rebuild ";
 
+        public static class AGENT_SETTINGS {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+        }
 
         public static class VC15Preview_BATMAN {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\"";
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\"";
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\"";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\"";
-        }
 
+        }
         public static class VC15_BATMAN {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+
         }
 
         public static class VC14_BATMAN {
@@ -225,7 +232,6 @@ public class StaticDataProvider {
             public static final String LOADER_4 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_04.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String LOADER_5 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_05.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String LOADER_6 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_06.sln\" /%s /cfg=\"Debug|Win32\"";
-            public static final String LOADER_7 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_07.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String LOADER_8 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_08.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String LOADER_9 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_09.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String LOADER_10 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\LoaderTests\\Loader_test_solution_10.sln\" /%s /cfg=\"Debug|Win32\"";
@@ -380,8 +386,13 @@ public class StaticDataProvider {
         public static final String BUILD_HISTORY = "build_history";
     }
 
-    public static class LinuxMachines{
+    public static class WindowsMachines{
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.85";
+        public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String BABYLON= "babylon";
+    }
 
+    public static class LinuxMachines{
         public static final String TEST_MACHINE = "192.168.11.82";
         public static final String VM_SIM_1A = "192.168.11.103";
     }
