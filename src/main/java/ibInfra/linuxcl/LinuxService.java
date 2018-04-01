@@ -141,8 +141,13 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public String getLinuxOS(String IP) {
-        return linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP);
+    public boolean isLinuxOSUbuntu(String IP) {
+
+        if(linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP).contains("Ubuntu"))
+            return true;
+        else
+            return false;
+       // return linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP);
     }
 
     @Override

@@ -376,7 +376,8 @@ public class StaticDataProvider {
     public static class LinuxCommands{
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String KILL_IB_DB_CHECK =  "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
-        public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
+       // public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
+        public static final String GET_OS =  "cat /proc/version";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
 		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";

@@ -29,7 +29,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
             test.log(Status.INFO, "starting cycle " +i );
             String command="";
 
-            if(linuxService.getLinuxOS(machine).contains("Ubuntu")) {
+            if(linuxService.isLinuxOSUbuntu(machine) == true) {
 
                 if (testNum == TestNum.MultiBuild) {
                     synchronized (this) {
