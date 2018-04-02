@@ -345,6 +345,8 @@ public class StaticDataProvider {
         public static final String IB_UPDATE_COMMAND = "%s /update";
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
+        public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
+        public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";
         public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         public static final String UNLOAD_IB_LICENSE = Locations.IB_ROOT + "\\CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
@@ -358,7 +360,11 @@ public class StaticDataProvider {
         public static final String UPDATE_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update -p --norestart";
         public static final String MODIFY_PREVIEW_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
+    }
 
+    public static class MemoryThresholds{
+        public static final String _20K = "20000";
+        public static final String _200K = "200000";
     }
 
     public static class TestProjects{
@@ -387,7 +393,7 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines{
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.85";
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String BABYLON= "babylon";
     }

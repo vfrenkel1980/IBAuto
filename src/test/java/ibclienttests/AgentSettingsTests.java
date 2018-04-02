@@ -73,8 +73,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         winService.runCommandDontWaitForTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD) );
         SystemActions.sleep(7);
         for (int i = 0 ; i < 2 ; i++) {
-            winService.runCommandDontWaitForTermination(Processes.PSEXEC + "-d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
-                    "cmd.exe /c " + Processes.NOTHING);
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
+                    " cmd.exe /c " + Processes.NOTHING);
         }
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);

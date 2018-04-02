@@ -5,6 +5,8 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.ibService.IbService;
 import ibInfra.vsui.VSUIService;
+import ibInfra.windowscl.WindowsService;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,15 +16,12 @@ public class UnitTests {
 
     @Test(testName = "Check Basic Agent Assignment")
     public void checkBasicAgentAssignment(){
-        List rawList;
-        List<String> gridMachineList;
-        rawList = XmlParser.getIpList("BatmanGrid.xml");
-        gridMachineList = XmlParser.breakDownIPList(rawList);
+        WindowsService winService = new WindowsService();
+        String output = winService.runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_MEMORY_USAGE, "20000"));
+        StringUtils.containsIgnoreCase(output, "CoordService.exe");
+        StringUtils.containsIgnoreCase(output, "BuildSystem.exe");
+        StringUtils.containsIgnoreCase(output, "BuildService.exe");
 
-        IbService ibService = new IbService();
-        ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        for (String machine : gridMachineList ) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "Agent '" + machine));
-        }
+
     }
 }

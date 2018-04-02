@@ -100,6 +100,10 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
+
+        vsService.openVSInstance(VSINSTALLATION);
+        driver.quit();
+        SystemActions.killProcess("devenv.exe");
     }
 
     @BeforeMethod

@@ -5,6 +5,7 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
@@ -26,6 +27,7 @@ public class VSUIService extends TestBase implements IVSUIService {
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
         driver.findElementByName("Start Visual Studio").click();
+        SystemActions.sleep(15);
     }
 
     @Override
