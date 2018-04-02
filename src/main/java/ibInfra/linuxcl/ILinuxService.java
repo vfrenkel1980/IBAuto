@@ -18,7 +18,7 @@ public interface ILinuxService {
 
     void killib_db_check(String IP);
 
-    String getLinuxOS(String IP);
+    boolean isLinuxOSUbuntu(String IP);
 
     String runQueryLastBuild(String fieldName, String sqliteTable, String IP);
 }
