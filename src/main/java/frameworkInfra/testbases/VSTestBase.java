@@ -103,6 +103,7 @@ public class VSTestBase extends TestBase {
 
         vsService.openVSInstance(VSINSTALLATION);
         driver.quit();
+        driver = null;
         SystemActions.killProcess("devenv.exe");
     }
 

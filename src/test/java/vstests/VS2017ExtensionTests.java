@@ -4,6 +4,7 @@ import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
@@ -30,6 +31,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void executeVSBuild(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance(VSINSTALLATION);
+        SystemActions.sleep(30);
         vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
