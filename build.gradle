@@ -25,6 +25,7 @@ def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
 def Unit = project.hasProperty("Unit")
 def VSPreview = project.hasProperty("VSPreview")
 def VSIntegration = project.hasProperty("VSIntegration")
+def LicenseTests = project.hasProperty("LicenseTests")
 def AgentSettings = project.hasProperty("AgentSettings")
 
 dependencies {
@@ -69,8 +70,6 @@ test {
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: '15'
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: 'preview'
 
-
-
     // enable TestNG support (default is JUnit)
     useTestNG(){
         useDefaultListeners = true
@@ -109,6 +108,10 @@ test {
 
         if(VSIntegration) {
             suites "src/test/resources/VSIntegration.xml"
+        }
+
+        if(LicenseTests) {
+            suites "src/test/resources/LicenseTests.xml"
         }
 
         if(AgentSettings) {

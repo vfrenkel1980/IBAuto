@@ -48,8 +48,8 @@ public class Parser extends TestBase{
         try {
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                final String lineFromFile = scanner.nextLine();
-                if(lineFromFile.contains(text)) {
+                final String lineFromFile = scanner.nextLine().toLowerCase();
+                if(lineFromFile.contains(text.toLowerCase())) {
                     return true;
                 }
             }

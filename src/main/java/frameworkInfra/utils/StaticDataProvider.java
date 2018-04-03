@@ -12,6 +12,7 @@ public class StaticDataProvider {
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
         public static final String SYSTEM_APPDATA_TEMP_FOLDER = System.getProperty("java.io.tmpdir");
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
+        public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
     }
 
@@ -327,12 +328,12 @@ public class StaticDataProvider {
         public static final String PREDICTED = "PredictedExecutionMode";
         public static final String LOCAL_LOGGING = "ExternalHelperLog";
         public static final String STANDALONE_MODE = "Standalone";
-        public static final String AVOID_LOCAL = "AvoidLocalExec";
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
         public static final String MIN_LOCAL_CORES = "MinLocalCoresPerBuild";
+        public static final String AVOID_LOCAL = "AvoidLocalExec";
     }
 
     public static class IbLicenses{
@@ -402,6 +403,19 @@ public class StaticDataProvider {
     public static class LinuxMachines{
         public static final String TEST_MACHINE = "192.168.11.82";
         public static final String VM_SIM_1A = "192.168.11.103";
+    }
+
+    public static class LicTestPrjBuildConsoleCommands{
+
+        public static final String VS2017_CPP = "\\2017\\Cpp\\Cpp.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C++\"";
+        public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C#\"";
+        public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" %s /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\"";
+        public static final String VS2015_XBOX_DURANGO = "\"C:\\Users\\Admin\\Desktop\\Xbox_03_2017_qfe4\\SimpleHDR12\\SimpleHDR12\\Samples\\Graphics\\SimpleHDR12\\SimpleHDR12.sln\" %s /cfg=\"Debug|Durango\" /title=\"License Test - xBox One\"";
+        public static final String MSBUILD_CPP = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && msbuild C:\\LicenseTests_projects\\2017\\Cpp\\Cpp.sln /t:rebuild /property:configuration=\"\"debug\"\";platform=\"\"x86\"\" /m:16 /nodeReuse:False /verbosity:normal\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Msbuild\"";
+        public static final String JOM = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && cd C:\\LicenseTests_projects\\Make_and_Build_Tools && jom clean && jom\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Jom\"";
+        public static final String INTERCEPTION = "ibconsole /command=\"cmd /c \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\spawner \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\sleep 5\"\" \"\"  \" /profile=C:\\LicenseTests_projects\\Dev_Tools\\Interception\\profile.xml /title=\"License test - Dev Tools - Interception\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+        public static final String SUBMITION = "ibconsole C:\\LicenseTests_projects\\Dev_Tools\\Submition\\Batch.bat /title=\"License test - Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+        public static final String XML = "xgconsole C:\\LicenseTests_projects\\Dev_Tools\\XML\\XmlSample.xml /title=\"License test - Dev Tools - XML\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
     }
 
     public static class LinuxSimulation{
