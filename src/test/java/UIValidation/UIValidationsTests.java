@@ -1,4 +1,4 @@
-package uitests;
+package UIValidation;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;

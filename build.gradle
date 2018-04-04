@@ -27,6 +27,7 @@ def VSPreview = project.hasProperty("VSPreview")
 def VSIntegration = project.hasProperty("VSIntegration")
 def LicenseTests = project.hasProperty("LicenseTests")
 def AgentSettings = project.hasProperty("AgentSettings")
+def UIValidations = project.hasProperty("UIValidations")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -116,6 +117,10 @@ test {
 
         if(AgentSettings) {
             suites "src/test/resources/AgentSettings.xml"
+        }
+
+        if(UIValidations) {
+            suites "src/test/resources/UIValidations.xml"
         }
     }
 
