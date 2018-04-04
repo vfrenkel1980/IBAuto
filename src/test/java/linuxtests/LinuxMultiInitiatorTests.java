@@ -30,10 +30,10 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
 //                String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"--ib-crash -d2 --f","Apache", "", "32"), ipList.get(4), 800));
 
 
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(2), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(3), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(4), 500));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(2), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(3), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(4), 250));
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
