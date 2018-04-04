@@ -29,13 +29,14 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
 //        execService.execute(new LinuxMultiThreaded(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
 //                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(1), 400));
 
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 500));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 500));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
+
     }
 
 //    int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
