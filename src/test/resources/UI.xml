@@ -7,7 +7,6 @@
         <classes>
             <!-- packagename.Testcase class name  -->
             <class name ="uitests.IbSettingsUITests" />
-            <class name ="uitests.VSTests" />
         </classes>
     </test>
 </suite>

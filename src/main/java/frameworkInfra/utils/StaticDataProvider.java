@@ -79,6 +79,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\"";
 
         }
+
         public static class VC15_BATMAN {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
@@ -167,7 +168,6 @@ public class StaticDataProvider {
             public static final String APACHE_DEBUG = "C:\\QA\\Simulation\\VC6\\apache_1.3.22\\src\\apache.dsw /%s /cfg=\"win32 debug\"";
 
         }
-
 
         public static class VC8_VMSIN{
             public static final String NONTEPAD_PLUS_DEBUG = "C:\\QA\\Simulation\\vc8\\NotePadPP\\PowerEditor\\visual.net\\notepadPlus.vcproj /%s /cfg=\"debug|win32\"";
@@ -313,6 +313,24 @@ public class StaticDataProvider {
 
         }
 
+        public static class UIVALIDATIONS{
+            public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=green01";
+            public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
+            public static final String GREEN03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green03\\RunMe.bat\"";
+            public static final String GREEN04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green04\\RunMe.bat\"";
+            public static final String GREEN05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green05\\RunMe.bat\"";
+            public static final String YELLOW01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln\" /rebuild /cfg=\"debug|x86\" /title=yellow01";
+            public static final String RED01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln\" /rebuild /cfg=\"debug|x86\" /title=red01";
+            public static final String RED02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln\" /rebuild /cfg=\"debug|x86\" /title=red02";
+            public static final String RED03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln\" /rebuild /cfg=\"debug|x86\" /title=red03";
+            public static final String RED04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red04\\Red04.sln\" /rebuild /cfg=\"debug|x86\" /title=red04";
+            public static final String RED05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red05\\Red05.sln\" /rebuild /cfg=\"debug|x86\" /title=red05";
+            public static final String RED06 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red06\\Red06.sln\" /rebuild /cfg=\"debug|x86\" /title=red06";
+            public static final String RED07 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red07\\RunMe.bat\"";
+            public static final String RED08 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red08\\RunMe.bat\"";
+            public static final String RED09 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red09\\RunMe.bat\"";
+        }
+
         public static class ConsoleAppProj{
             public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
@@ -335,6 +353,8 @@ public class StaticDataProvider {
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
         public static final String MIN_LOCAL_CORES = "MinLocalCoresPerBuild";
         public static final String MAX_CONCURRENT_BUILDS = "MaxConcurrentBuilds";
+        public static final String CUSTOM_STEP_VS10_SUPPORT = "CustomStepVs10Support";
+        public static final String KEEP_BUILD_STATUS_ICON = "KeepBuildStatusIcon";
 
     }
 
@@ -371,7 +391,7 @@ public class StaticDataProvider {
     }
 
     public static class TestProjects{
-        public static final String CONSOLE_APPLICATION_01 = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
+        public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
         public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";
         public static final String VC10PROJECT = Locations.QA_ROOT + "\\projects\\vc10project\\vc10project.sln";
@@ -380,6 +400,17 @@ public class StaticDataProvider {
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
         public static final String CONSOLE_APPLICATION_01_BUILDCONSOLE_COMMAND= "\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"Debug|x64\" /title=\"ConsoleApplication Test Project\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+    }
+
+    public static class UIValidationsProjects{
+        public static final String GREEN01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln";
+        public static final String YELLOW01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln";
+        public static final String RED01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln";
+        public static final String RED02 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln";
+        public static final String RED03 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln";
+        public static final String RED04 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red04\\Red04.sln";
+        public static final String RED05 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red05\\Red05.sln";
+        public static final String RED06 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red06\\Red06.sln";
     }
 
     public static class LinuxCommands{

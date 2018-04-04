@@ -15,15 +15,15 @@ public class WindowsCLTests extends TestBase {
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening ibmonitor");
+            test.log(Status.INFO, "Opening Monitor");
             capabilities.setCapability("app", "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\BuildMonitor.exe");
             session = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             session.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            test.log(Status.INFO, "ibmonitor opened successfully");
+            test.log(Status.INFO, "Monitor opened successfully");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        screen.wait(IBMonitor.consoleApp3Rebuild.similar((float) 0.5),2).click(IBMonitor.consoleApp3Rebuild);
+        screen.wait(Monitor.consoleApp3Rebuild.similar((float) 0.5),2).click(Monitor.consoleApp3Rebuild);
 
     }*/
 

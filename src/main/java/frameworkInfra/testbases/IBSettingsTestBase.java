@@ -34,11 +34,11 @@ public class IBSettingsTestBase extends TestBase {
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening ibsettings");
+            test.log(Status.INFO, "Opening IBSettings");
             capabilities.setCapability("app", "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\BuildSettings.exe");
             session = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             session.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            test.log(Status.INFO, "ibsettings opened successfully");
+            test.log(Status.INFO, "IBSettings opened successfully");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

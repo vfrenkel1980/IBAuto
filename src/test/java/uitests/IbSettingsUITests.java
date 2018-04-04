@@ -1,6 +1,6 @@
 package uitests;
 
-import frameworkInfra.sikuli.sikulimapping.ibsettings.IBSettings;
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.IBSettingsTestBase;
 import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.Advapi32Util;

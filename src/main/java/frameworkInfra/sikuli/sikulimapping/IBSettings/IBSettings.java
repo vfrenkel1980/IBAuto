@@ -1,9 +1,15 @@
-package frameworkInfra.sikuli.sikulimapping.ibsettings;
+package frameworkInfra.sikuli.sikulimapping.IBSettings;
 
 import org.sikuli.script.*;
 
 
 public class IBSettings {
+
+    public static class TrayIcon {
+        public static final Pattern Green = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\sikuli\\testscreenshots\\TrayIcon\\green_tray_icon.png");
+        public static final Pattern Yellow = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\sikuli\\testscreenshots\\TrayIcon\\yellow_tray_icon.png");
+        public static final Pattern Red = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\sikuli\\testscreenshots\\TrayIcon\\red_tray_icon.png");
+    }
 
     public static final Pattern network = new Pattern("src\\main\\java\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkTab.png");
     public static final Pattern networkcoordinator = new Pattern("src\\main\\java\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkCoordinatorTab.png");

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="UIValidations"  >
+
+    <test name="red01">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red02">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red03">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red04">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red05">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red06">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red07">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red08">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="red09">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+
+    <test name="yellow01">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="green01">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="green02">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="green03">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="green04">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+    <test name="green05">
+        <classes>
+            <class name ="UIValidation.UIValidationsTests" />
+        </classes>
+    </test>
+
+
+</suite>
