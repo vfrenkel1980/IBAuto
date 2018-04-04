@@ -333,6 +333,7 @@ public class StaticDataProvider {
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
         public static final String MIN_LOCAL_CORES = "MinLocalCoresPerBuild";
+        public static final String MAX_CONCURRENT_BUILDS = "MaxConcurrentBuilds";
     }
 
     public static class IbLicenses{

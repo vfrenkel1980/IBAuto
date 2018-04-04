@@ -3,6 +3,7 @@ package ibInfra.windowscl;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import org.apache.commons.lang3.StringUtils;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
@@ -141,12 +142,8 @@ public class WindowsService extends TestBase implements IWindowsService {
             if (!output.contains("INFO: No tasks are running")) {
                 notRunning = false;
             }
-            try {
-                Thread.sleep(1000);
-                seconds++;
-            } catch (InterruptedException e) {
-                e.getMessage();
-            }
+            SystemActions.sleep(1);
+            seconds++;
         }
 
     }

@@ -74,21 +74,21 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
     @Test(testName = "Verify Backup Coord Service Memory Usage")
     public void verifyBackupCoordServiceMemoryUsage() {
-        String output = winService.runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_MEMORY_USAGE, "20000"));
-        Assert.assertTrue(StringUtils.containsIgnoreCase(output, "CoordService.exe"), "CoordService has exceeded the memory threshold");
+        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "CoordService.exe"), "CoordService has exceeded the memory threshold");
     }
 
     @Test(testName = "Verify Agent Service Memory Usage")
     public void verifyAgentCoordServiceMemoryUsage() {
-        String output = winService.runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
-        Assert.assertTrue(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold");
+        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold");
     }
 
     @Test(testName = "Verify BuildSystem Memory Usage During Build")
     public void verifyBuildSystemMemoryUsageDuringBuild() {
         winService.runCommandDontWaitForTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-        String output = winService.runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
-        Assert.assertTrue(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold");
+        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
     }
 
 

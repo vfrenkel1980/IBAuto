@@ -6,6 +6,7 @@ import frameworkInfra.utils.CustomJsonParser;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -69,11 +70,7 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public void loadIbLicense(String license) {
         winService.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        SystemActions.sleep(3);
         winService.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
     }
 
@@ -85,15 +82,6 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
         return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "Extensions\\IncredibuildExtension\\manifest.json", "version");
-
-/*        Map<String, String> lookFor = new HashMap<String, String>();
-        lookFor.put("version", "version");
-        try {
-            result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        result = result.substring(0,result.indexOf(","));*/
     }
 
     @Override

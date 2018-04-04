@@ -109,11 +109,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         driver.findElementByName("File").click();
         driver.findElementByName("Open").click();
         driver.findElementByName("Project/Solution...").click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
         test.log(Status.INFO, projectPath + " project opened");
@@ -135,11 +131,7 @@ public class VSUIService extends TestBase implements IVSUIService {
         }
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        SystemActions.sleep(3);
         winService.waitForProcessToFinish("buildsystem.exe");
     }
 
@@ -154,19 +146,11 @@ public class VSUIService extends TestBase implements IVSUIService {
             newel = driver.findElementByName(solutionName);
         }
         AppiumActions.rightClick(newel);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        SystemActions.sleep(2);
         AppiumActions.contextMenuIncrediBuildClick(newel);
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + newel.getText() + action);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        SystemActions.sleep(3);
         winService.waitForProcessToFinish("buildsystem.exe");
     }
 
