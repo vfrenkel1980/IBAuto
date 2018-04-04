@@ -37,7 +37,6 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
-
     }
 
 }
