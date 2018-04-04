@@ -1,6 +1,7 @@
 package UIValidation;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -25,9 +26,10 @@ public class UIValidationsTests extends UIValidationTestBase {
         vsService.openProject(projectLocation);
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         try {
-            screen.wait(pattern.similar((float) 0.7),2);
+            screen.wait(pattern.similar((float) 0.9),2);
         } catch (FindFailed findFailed) {
             findFailed.printStackTrace();
+            Assert.fail("Failed to find VS Bar on screen");
         }
 
     }
