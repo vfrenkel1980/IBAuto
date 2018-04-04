@@ -28,4 +28,7 @@ public interface IWindowsService {
     boolean isServiceRunning(String serviceName);
 
     void downloadFile(String url, String fileName) throws IOException;
+
+    String getHostName();
+
 }

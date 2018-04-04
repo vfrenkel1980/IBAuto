@@ -9,6 +9,8 @@ import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -176,6 +178,19 @@ public class WindowsService extends TestBase implements IWindowsService {
     }
 
     @Override
+    public String getHostName() {
+        String hostname = "Unknown";
+        InetAddress addr;
+        try {
+            addr = InetAddress.getLocalHost();
+            hostname = addr.getHostName();
+        } catch (UnknownHostException e) {
+            e.getMessage();
+        }
+        return hostname;
+    }
+
+    @Override
     public void downloadFile(String url, String fileName) throws IOException {
         URL website = new URL(url);
         System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");
@@ -202,8 +217,5 @@ public class WindowsService extends TestBase implements IWindowsService {
         }
         return lastModifiedFile;
     }
-
-
-
 
 }
