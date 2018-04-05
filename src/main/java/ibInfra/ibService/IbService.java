@@ -47,6 +47,12 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
+    public void installIBnoLoadedLicense(String version) {
+        String installationFile = getIbConsoleInstallation(version);
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
+    }
+
+    @Override
     public void updateIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
