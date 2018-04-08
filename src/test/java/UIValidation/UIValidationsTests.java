@@ -72,6 +72,20 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
+    @Test(testName = "Verify Projects Tab Coloring")
+    public void verifyProjectsTabColoring(){
+        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        try {
+            screen.wait(Monitor.Tabs.Projects.similar((float) 0.9),2);
+            screen.wait(progressPattern.similar((float) 0.9),2);
+        } catch (FindFailed findFailed) {
+            Assert.fail(findFailed.getMessage());
+        }
+        finally {
+            SystemActions.killProcess(Processes.BUILDMONITOR);
+        }
+    }
+
 
 
 }
