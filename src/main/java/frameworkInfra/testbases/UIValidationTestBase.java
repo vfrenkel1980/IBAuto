@@ -46,6 +46,7 @@ public class UIValidationTestBase extends TestBase {
     protected Pattern trayIconPattern = new Pattern();
     protected Pattern ibMonBarPattern = new Pattern();
     protected Pattern historyPattern = new Pattern();
+    protected Pattern progressPattern = new Pattern();
 
 
     static {
@@ -171,12 +172,15 @@ public class UIValidationTestBase extends TestBase {
         if (project.contains("red")){
             trayIconPattern = IBSettings.TrayIcon.Red;
             ibMonBarPattern = Monitor.Bars.IBRedBar;
+            progressPattern = Monitor.Progress.Red;
         } else if (project.contains("yellow")){
             trayIconPattern = IBSettings.TrayIcon.Yellow;
             ibMonBarPattern = Monitor.Bars.IBYellowBar;
+            progressPattern = Monitor.Progress.Yellow;
         } else if (project.contains("green")){
             trayIconPattern = IBSettings.TrayIcon.Green;
             ibMonBarPattern = Monitor.Bars.IBGreenBar;
+            progressPattern = Monitor.Progress.Green;
         }
         winService.runCommandWaitForFinish(command);
     }

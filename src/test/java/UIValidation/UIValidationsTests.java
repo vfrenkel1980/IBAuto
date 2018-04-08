@@ -72,6 +72,27 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
+    @Test(testName = "Verify Projects Tab Coloring")
+    public void verifyProjectsTabColoring(){
+        batchProjects.forEach(item->{
+            if(project.equals(item)){
+                test.log(Status.SKIP, "Skipping test as this is a Batch project");
+                throw new SkipException("Skipped test");
+            }
+        });
+
+        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        try {
+            screen.wait(Monitor.Tabs.Projects.similar((float) 0.9),2).click();
+            screen.wait(progressPattern.similar((float) 0.9),2);
+        } catch (FindFailed findFailed) {
+            Assert.fail(findFailed.getMessage());
+        }
+        finally {
+            SystemActions.killProcess(Processes.BUILDMONITOR);
+        }
+    }
+
 
 
 }
