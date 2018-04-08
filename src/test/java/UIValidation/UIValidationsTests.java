@@ -5,6 +5,7 @@ import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -26,11 +27,51 @@ public class UIValidationsTests extends UIValidationTestBase {
         vsService.openProject(projectLocation);
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         try {
-            screen.wait(pattern.similar((float) 0.9),2);
+            screen.wait(vsBarPattern.similar((float) 0.9),2);
         } catch (FindFailed findFailed) {
             findFailed.printStackTrace();
             Assert.fail("Failed to find VS Bar on screen");
         }
-
     }
+
+    @Test(testName = "Verify Tray Icon Color")
+    public void verifyTrayIconColor(){
+        try {
+            screen.wait(trayIconPattern.similar((float) 0.8),2);
+        } catch (FindFailed findFailed) {
+            findFailed.printStackTrace();
+            Assert.fail("Failed to find Matching tray icon color on screen");
+        }
+    }
+
+    @Test(testName = "Verify IB Monitor Bar")
+    public void verifyIBMonitorBar(){
+        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        try {
+            screen.wait(ibMonBarPattern.similar((float) 0.9),2);
+        } catch (FindFailed findFailed) {
+            findFailed.printStackTrace();
+            Assert.fail("Failed to find IB Bar on screen");
+        }
+        finally {
+            SystemActions.killProcess(Processes.BUILDMONITOR);
+        }
+    }
+
+    @Test(testName = "Verify History Coloring")
+    public void verifyHistoryColoring(){
+        winService.runCommandDontWaitForTermination(Processes.BUILDHISTORY);
+        try {
+            screen.wait(historyPattern.similar((float) 0.8),2);
+        } catch (FindFailed findFailed) {
+            findFailed.printStackTrace();
+            Assert.fail("Failed to find matching history/project color on screen");
+        }
+        finally {
+            SystemActions.killProcess(Processes.BUILDHISTORY);
+        }
+    }
+
+
+
 }

@@ -27,6 +27,8 @@ public class StaticDataProvider {
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
+        public static final String BUILDMONITOR = "BuildMonitor.exe ";
+        public static final String BUILDHISTORY = "BuildHistory.exe ";
         public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
@@ -314,18 +316,18 @@ public class StaticDataProvider {
         }
 
         public static class UIVALIDATIONS{
-            public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=green01";
+            public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
             public static final String GREEN03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green03\\RunMe.bat\"";
             public static final String GREEN04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green04\\RunMe.bat\"";
             public static final String GREEN05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green05\\RunMe.bat\"";
-            public static final String YELLOW01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln\" /rebuild /cfg=\"debug|x86\" /title=yellow01";
-            public static final String RED01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln\" /rebuild /cfg=\"debug|x86\" /title=red01";
-            public static final String RED02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln\" /rebuild /cfg=\"debug|x86\" /title=red02";
-            public static final String RED03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln\" /rebuild /cfg=\"debug|x86\" /title=red03";
-            public static final String RED04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red04\\Red04.sln\" /rebuild /cfg=\"debug|x86\" /title=red04";
-            public static final String RED05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red05\\Red05.sln\" /rebuild /cfg=\"debug|x86\" /title=red05";
-            public static final String RED06 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red06\\Red06.sln\" /rebuild /cfg=\"debug|x86\" /title=red06";
+            public static final String YELLOW01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln\" /rebuild /cfg=\"debug|x86\" /title=Yellow01";
+            public static final String RED01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln\" /rebuild /cfg=\"debug|x86\" /title=Red01";
+            public static final String RED02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln\" /rebuild /cfg=\"debug|x86\" /title=Red02";
+            public static final String RED03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln\" /rebuild /cfg=\"debug|x86\" /title=Red03";
+            public static final String RED04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red04\\Red04.sln\" /rebuild /cfg=\"debug|x86\" /title=Red04";
+            public static final String RED05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red05\\Red05.sln\" /rebuild /cfg=\"debug|x86\" /title=Red05";
+            public static final String RED06 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red06\\Red06.sln\" /rebuild /cfg=\"debug|x86\" /title=Red06";
             public static final String RED07 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red07\\RunMe.bat\"";
             public static final String RED08 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red08\\RunMe.bat\"";
             public static final String RED09 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red09\\RunMe.bat\"";

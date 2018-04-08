@@ -7,7 +7,7 @@ public class IBSettings {
 
     public static class TrayIcon {
         public static final Pattern Green = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\green_tray_icon.png");
-        public static final Pattern Yellow = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\sframeworkInfra\\ikuli\\testscreenshots\\TrayIcon\\yellow_tray_icon.png");
+        public static final Pattern Yellow = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\yellow_tray_icon.png");
         public static final Pattern Red = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\red_tray_icon.png");
     }
 

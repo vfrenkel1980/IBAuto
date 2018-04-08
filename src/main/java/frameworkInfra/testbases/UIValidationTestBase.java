@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.sikuli.sikulimapping.IBHistory.History;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.RegistryService;
@@ -21,6 +22,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,10 @@ public class UIValidationTestBase extends TestBase {
     protected String project = "";
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");
-    protected Pattern pattern = new Pattern();
+    protected Pattern vsBarPattern = new Pattern();
+    protected Pattern trayIconPattern = new Pattern();
+    protected Pattern ibMonBarPattern = new Pattern();
+    protected Pattern historyPattern = new Pattern();
 
 
     static {
@@ -60,7 +65,7 @@ public class UIValidationTestBase extends TestBase {
         log.info("BEFORE SUITE started");
         //stop agent service in order to delete history
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
-        SystemActions.deleteFilesByPrefix(Locations.IB_ROOT + "\\History", "*");
+        SystemActions.deleteFolder(new File(Locations.IB_ROOT + "\\History"));
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
@@ -70,7 +75,7 @@ public class UIValidationTestBase extends TestBase {
         test = extent.createTest("Before Class - Running project " + testContext.getName());
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-        log.info("BEFORE CLASS started - Change Logging Level to" + testContext.getName());
+        log.info("BEFORE CLASS started - " + testContext.getName());
 
         project = testContext.getName();
         String command = "";
@@ -89,64 +94,89 @@ public class UIValidationTestBase extends TestBase {
             case "red01":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED01;
                 projectLocation = UIValidationsProjects.RED01;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red01;
                 break;
             case "red02":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED02;
                 projectLocation = UIValidationsProjects.RED02;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red02;
                 break;
             case "red03":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED03;
                 projectLocation = UIValidationsProjects.RED03;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red03;
                 break;
             case "red04":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED04;
                 projectLocation = UIValidationsProjects.RED04;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red04;
                 break;
             case "red05":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED05;
                 projectLocation = UIValidationsProjects.RED05;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red05;
                 break;
             case "red06":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED06;
                 projectLocation = UIValidationsProjects.RED06;
-                pattern = Monitor.Bars.VSRedBar;
+                vsBarPattern = Monitor.Bars.VSRedBar;
+                historyPattern = History.Projects.Red06;
                 break;
             case "red07":
                 command = ProjectsCommands.UIVALIDATIONS.RED07;
+                historyPattern = History.Projects.Red07;
                 break;
             case "red08":
                 command = ProjectsCommands.UIVALIDATIONS.RED08;
+                historyPattern = History.Projects.Red08;
                 break;
             case "red09":
                 command = ProjectsCommands.UIVALIDATIONS.RED09;
+                historyPattern = History.Projects.Red09;
                 break;
             case "yellow01":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.YELLOW01;
                 projectLocation = UIValidationsProjects.YELLOW01;
-                pattern = Monitor.Bars.VSYellowBar;
+                vsBarPattern = Monitor.Bars.VSYellowBar;
+                historyPattern = History.Projects.Yellow01;
                 break;
             case "green01":
                 command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.GREEN01;
                 projectLocation = UIValidationsProjects.GREEN01;
-                pattern = Monitor.Bars.VSGreenBar;
+                vsBarPattern = Monitor.Bars.VSGreenBar;
+                historyPattern = History.Projects.Green01;
                 break;
             case "green02":
                 command = ProjectsCommands.UIVALIDATIONS.GREEN02;
+                historyPattern = History.Projects.Green02;
                 break;
             case "green03":
                 command = ProjectsCommands.UIVALIDATIONS.GREEN03;
+                historyPattern = History.Projects.Green03;
                 break;
             case "green04":
                 command = ProjectsCommands.UIVALIDATIONS.GREEN04;
+                historyPattern = History.Projects.Green04;
                 break;
-            case "green0":
+            case "green05":
                 command = ProjectsCommands.UIVALIDATIONS.GREEN05;
+                historyPattern = History.Projects.Green05;
                 break;
+        }
+        if (project.contains("red")){
+            trayIconPattern = IBSettings.TrayIcon.Red;
+            ibMonBarPattern = Monitor.Bars.IBRedBar;
+        } else if (project.contains("yellow")){
+            trayIconPattern = IBSettings.TrayIcon.Yellow;
+            ibMonBarPattern = Monitor.Bars.IBYellowBar;
+        } else if (project.contains("green")){
+            trayIconPattern = IBSettings.TrayIcon.Green;
+            ibMonBarPattern = Monitor.Bars.IBGreenBar;
         }
         winService.runCommandWaitForFinish(command);
     }

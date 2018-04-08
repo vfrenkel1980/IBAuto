@@ -7,7 +7,6 @@
             <class name ="UIValidation.UIValidationsTests" />
         </classes>
     </test>
-<!--
 
     <test name="red02">
         <classes>
@@ -94,6 +93,5 @@
         </classes>
     </test>
 
--->
 
 </suite>

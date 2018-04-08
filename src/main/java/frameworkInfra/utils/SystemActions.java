@@ -30,6 +30,16 @@ public class SystemActions {
         }
     }
 
+    public static void deleteFolder(File path){
+        File[] allContents = path.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteFolder(file);
+            }
+        }
+        path.delete();
+    }
+
     public static void copyFilesByExtension(String source, String destination, String extension, boolean useTimeStamp){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
