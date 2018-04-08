@@ -55,7 +55,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
             winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
             try {
                 String result = ibService.findValueInPacketLog("ExitCode ");
-                Assert.assertTrue(result.equals("0"));
+                Assert.assertTrue(result.equals("0"), "Build failed with exit code " + result);
             } catch (IOException e) {
                 e.getMessage();
             }
