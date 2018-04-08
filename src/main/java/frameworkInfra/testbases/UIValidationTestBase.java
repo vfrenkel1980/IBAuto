@@ -197,6 +197,7 @@ public class UIValidationTestBase extends TestBase {
         }
         driver = null;
         getResult(result);
+        extent.flush();
     }
 
 
