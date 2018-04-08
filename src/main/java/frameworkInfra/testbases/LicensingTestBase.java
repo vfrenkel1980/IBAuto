@@ -7,13 +7,22 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import org.testng.annotations.*;
 
+import java.lang.reflect.Method;
+
 public class LicensingTestBase extends ReleaseTestBase{
 
     private String SCENARIO = System.getProperty("scenario");
+    private String scenarioDescription;
 
     @BeforeSuite
     public void beforeSuite(){
-        ibService.installIB("Latest");
+        test = extent.createTest("Before Suite");
+        test.assignCategory("BEFORE SUITE");
+        test.log(Status.INFO, "BEFORE SUITE started");
+        log.info("BEFORE SUITE started");
+
+        ibService.installIBnoLoadedLicense("Latest");
+
         try {
             Thread.sleep(30000);
         } catch (InterruptedException e) {
@@ -22,36 +31,37 @@ public class LicensingTestBase extends ReleaseTestBase{
     }
 
     @BeforeClass
-    public void beforeClass(String licenseTests){
+    public void beforeClass(){
+        test = extent.createTest("Before Class");
+        test.assignCategory("BEFORE CLASS");
+        test.log(Status.INFO, "BEFORE CLASS started");
+        log.info("BEFORE CLASS started");
+
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
 
-        ibService.unloadIbLicense();
-
         switch (SCENARIO){
-            case ("1"):
-                //Clean installation - No IB license loaded
-            case ("2"):
-                //No packages aside from agent package
+            case ("1"): //Clean installation - No IB license loaded
+                scenarioDescription = "Clean install - No license loaded";
+            case ("2"): //No packages aside from agent package
+
         }
     }
 
     @BeforeMethod
-    public void beforeMethod(){
-        test = extent.createTest("BEFORE METHOD");
-        test.assignCategory("BEFORE METHOD");
-        test.log(Status.INFO, "BEFORE METHOD started");
+    public void beforeMethod(Method method){
+        testName = getTestName(method);
+        test = extent.createTest(testName + ": " + scenarioDescription);
+        test.assignCategory(scenarioDescription);
+        test.log(Status.INFO, "BEFORE METHOD started: " + method + " scenario: " + scenarioDescription);
 
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod2(){
         SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
     }
 
-    @AfterClass
-    public void afterClass(){
-    }
 
     @AfterSuite
     public void afterSuite(){

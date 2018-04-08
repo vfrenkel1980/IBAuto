@@ -1,6 +1,20 @@
-starting before suite
-finished before suite
-starting before class
-deleting 192.168.11.106
-deleted 192.168.11.106
-deleting 192.168.11.118
+BEFORE SUITE started
+BEFORE CLASS started
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestDevTools_Interceptiontest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestDevTools_Submitiontest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestDevTools_XMLtest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestMakeAndBuild_Jomtest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestMakeAndBuild_MSbuildtest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestVS2015XBoxOnetest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestVS2017Cpptest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestVS2017Csctest finished
+c:\QA\Simulation\buildLog.txt deleted successfully
+licTestVS2017PS4test finished
