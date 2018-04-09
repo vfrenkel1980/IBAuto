@@ -16,7 +16,7 @@
             <class name ="linuxtests.LinuxSimulationTests" />
         </classes>
     </test>
-    <!--
+
     <test name="Cycle 3" allow-return-values="true">
         <parameter name="cycle" value="3"/>
         <classes>
@@ -171,5 +171,5 @@
         </classes>
     </test>
 
--->
+
 </suite>
