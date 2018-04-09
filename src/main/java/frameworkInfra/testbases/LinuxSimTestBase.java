@@ -17,98 +17,123 @@ import java.util.Calendar;
 import java.util.List;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
-public class LinuxSimTestBase extends TestBase {
+public class LinuxSimTestBase extends LinuxTestBase {
 
-    public enum TestNum{
-        MultiBuild, MultiIn, Sim
-    }
+  //  protected static LinuxSimTestBase.TestNum testNum = TestNum.Sim;
 
-    protected static List rawIpList;
-    protected static List rawIpList2;
-    protected static List rawIpList3;
+//    public enum TestNum{
+//        MultiBuild, MultiIn, Sim
+//    }
+//
+//    protected static List rawIpList;
+//    protected static List rawIpList2;
+//    protected static List rawIpList3;
 
-    protected static TestNum testNum;
+    // protected static TestNum testNum;
 
-    public static List<String> ipList;
-    public static List<String> multiGridIPList;
-    String buildID;
-    private static String ibVersion = "";
-    public LinuxService linuxService = new LinuxService();
+//    public static List<String> ipList;
+//    public static List<String> multiGridIPList;
+//    String buildID;
+//    private static String ibVersion = "";
+//    public LinuxService linuxService = new LinuxService();
 
     @BeforeSuite
-    public void envSetUp(ITestContext testContext){
+    public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
-        if (testContext.getName().equals("LinuxMultiBuild")) {
-            rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
-            testNum = TestNum.MultiBuild;
-        }
-        if (testContext.getName().equals("LinuxMultiInitiator")) {
-            rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
-            testNum = TestNum.MultiIn;
-        }
-        if (testContext.getName().contains("Cycle")) {
-            rawIpList = XmlParser.getIpList("Simulation IP list.xml");
-            testNum = TestNum.Sim;
-        }
-        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
+//        if (testContext.getName().equals("LinuxMultiBuild")) {
+//            rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
+//            testNum = TestNum.MultiBuild;
+//        }
+//        if (testContext.getName().equals("LinuxMultiInitiator")) {
+//            rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
+//            testNum = TestNum.MultiIn;
+//        }
+//        if (testContext.getName().contains("Cycle")) {
+//            rawIpList = XmlParser.getIpList("Simulation IP list.xml");
+//            testNum = TestNum.Sim;
+//        }
+
+        rawIpList = XmlParser.getIpList("Simulation IP list.xml");
+        testNum = TestNum.Sim;
+
+        //rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
         //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
+        // SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
         //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
+        //SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
 
         ipList = XmlParser.breakDownIPList(rawIpList);
-        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
+//        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
+//        ibVersion = getIBVersion();
+
+//        if (testContext.getName().equals("LinuxMultiBuild")) {
+//            for (int i=1; i<5; ++i)
+//                linuxService.killib_db_check(ipList.get(i));
+//        }
+//        else {
+//            linuxService.killib_db_check(ipList.get(1));
+//        }
+//
+//
+//        if (testContext.getName().contains("Cycle")) {
+//            linuxService.deleteLogsFolder(ipList);
+//            log.info("finished before class");
+//        }
+
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+//        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
+//        extent = new ExtentReports();
+//        extent.attachReporter(htmlReporter);
+
         ibVersion = getIBVersion();
-
-        if (testContext.getName().equals("LinuxMultiBuild")) {
-            for (int i=1; i<5; ++i)
-                linuxService.killib_db_check(ipList.get(i));
-        }
-        else {
-            linuxService.killib_db_check(ipList.get(1));
-        }
-
-
-        if (testContext.getName().contains("Cycle")) {
-            linuxService.deleteLogsFolder(ipList);
-            log.info("finished before class");
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        linuxService.killib_db_check(ipList.get(1));
         log.info("finished before suite");
     }
 
     @BeforeClass
-    public void initializeEnv(ITestContext testContext){
+    public void initializeEnv(ITestContext testContext) {
         log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-        if (testContext.getName().equals("Cycle 1")) {
+//        if (testContext.getName().equals("Cycle 1")) {
+//
+//            if (!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
+//                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
+//                extent.flush();
+//                System.exit(0);
+//            }
+//
+//            if (!linuxService.isIBServiceUp("ib_server", ipList.get(1))) {
+//                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
+//                extent.flush();
+//                System.exit(0);
+//            }
+//        }
 
-            if (!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
-                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
-                extent.flush();
-                System.exit(0);
-            }
 
-            if (!linuxService.isIBServiceUp("ib_server", ipList.get(1))) {
-                test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
-                extent.flush();
-                System.exit(0);
-            }
+        if (!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
+            test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
+            extent.flush();
+            System.exit(0);
         }
-       // linuxService.deleteLogsFolder(ipList);
-       // log.info("finished before class");
+
+        if (!linuxService.isIBServiceUp("ib_server", ipList.get(1))) {
+            test.log(Status.ERROR, "IB service in initiator is down... FAILING ALL TESTS!");
+            extent.flush();
+            System.exit(0);
+        }
+        // linuxService.deleteLogsFolder(ipList);
+         log.info("finished before class");
     }
 
     @BeforeMethod
     @Parameters({"cycle"})
-    public void beforeMethod(Method method, String cycle){
+    public void beforeMethod(Method method, String cycle) {
         testName = getTestName(method);
         test = extent.createTest(testName);
         test.assignCategory("Linux Simulation - Cycle " + cycle);
@@ -127,22 +152,25 @@ public class LinuxSimTestBase extends TestBase {
         }
     }
 
-    @AfterMethod
-    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
-        getResult(result);
-        extent.flush();
+//    @AfterMethod
+//    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
+//        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
+//        getResult(result);
+//        extent.flush();
+//    }
+//
+//    private static String getIBVersion() {
+//        LinuxService runCommand = new LinuxService();
+//
+//
+//        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+//
+//
+//        return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
+//    }
+
+    @AfterSuite
+    public void afterSuite() {
+        //runscript
     }
-
-    private static String getIBVersion() {
-        LinuxService runCommand = new LinuxService();
-
-
-        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
-
-
-        return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
-    }
-
-
 }

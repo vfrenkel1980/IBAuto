@@ -1,20 +1,2 @@
-BEFORE SUITE started
-BEFORE CLASS started
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestDevTools_Interceptiontest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestDevTools_Submitiontest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestDevTools_XMLtest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestMakeAndBuild_Jomtest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestMakeAndBuild_MSbuildtest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestVS2015XBoxOnetest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestVS2017Cpptest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestVS2017Csctest finished
-c:\QA\Simulation\buildLog.txt deleted successfully
-licTestVS2017PS4test finished
+starting LinuxTestBase before suite
+finished LinuxTestBase before suite

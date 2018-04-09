@@ -93,7 +93,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                         break;
                     case 1:
                         command = StaticDataProvider.LinuxSimulation.CD_GPSD_DIR + ";" + StaticDataProvider.LinuxSimulation.SCONS_CLEAN + ";" +
-                                String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD, "--ib-crash -d1 ", "Apache", "", "32");
+                                String.format(StaticDataProvider.LinuxSimulation.SCONS_BUILD, "--ib-crash -d1 ", "GPSD", "", "32");
                         break;
                     case 2:
                         command = StaticDataProvider.LinuxSimulation.CD_SAMBA2_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +

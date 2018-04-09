@@ -365,7 +365,7 @@ public class StaticDataProvider {
     }
 
     public static class WindowsCommands{
-        public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent";
+        public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
         public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
