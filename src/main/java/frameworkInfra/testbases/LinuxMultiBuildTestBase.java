@@ -1,19 +1,42 @@
 package frameworkInfra.testbases;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.*;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
-public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
+public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
     public static List<String> otherGridIPList;
+   //protected static LinuxSimTestBase.TestNum testNum = TestNum.MultiBuild;
 
-    @Override
+    @BeforeSuite
+    public void envSetUp(ITestContext testContext) {
+
+        rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
+        ipList = XmlParser.breakDownIPList(rawIpList);
+        testNum = TestNum.MultiBuild;
+        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
+        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
+
+        rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
+        otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
+        linuxService.killib_db_check(ipList.get(1));
+
+        ibVersion = getIBVersion();
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+    }
+
+   // @Override
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
@@ -50,6 +73,15 @@ public class LinuxMultiBuildTestBase extends LinuxSimTestBase{
             }
         }
         log.info("finished before class");
+    }
+
+    @BeforeMethod
+   // @Parameters({"cycle"})
+    public void beforeMethod(Method method) {
+        testName = getTestName(method);
+        test = extent.createTest(testName);
+        test.assignCategory("Linux Multi Build");
+        test.log(Status.INFO, method.getName() + " test started");
     }
 
     @Override
