@@ -38,9 +38,6 @@ public class LinuxTestBase extends TestBase{
 
     protected Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-    //@BeforeSuite
-    //public void envSetUp(ITestContext testContext) {
-    //}
 
     @BeforeSuite
     public void linuxSetup(ITestContext testContext) {
@@ -66,7 +63,6 @@ public class LinuxTestBase extends TestBase{
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         }
     }
-
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {

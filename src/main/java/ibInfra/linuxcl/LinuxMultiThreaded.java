@@ -17,7 +17,6 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
     private static Random rand = new Random();
     private int randIndex =-1;
     public LinuxMultiThreaded ( String machine, int cycles){//(String command, String machine, int cycles){
-        //this.command = command;
         this.machine = machine;
         this.cycles = cycles;
     }
@@ -115,12 +114,6 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                 }
             }
         }
-
-        //test = extent.createTest("Test No. " + i);
-        //exitCode = linuxService.linuxRunSSHCommand(command, machine);
-        //softAssert.assertEquals(exitCode, 0, "Build Failed");
-
-        //rand
 
         try {
             TimeUnit.MILLISECONDS.sleep(200);
