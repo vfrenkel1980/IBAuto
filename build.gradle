@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'uitests.VSTest'
+mainClassName = 'UITests.VSTest'
 
 
 sourceCompatibility = 1.8
@@ -28,6 +28,7 @@ def VSIntegration = project.hasProperty("VSIntegration")
 def LicenseTests = project.hasProperty("LicenseTests")
 def AgentSettings = project.hasProperty("AgentSettings")
 def UIValidations = project.hasProperty("UIValidations")
+def Setup = project.hasProperty("Setup")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -57,6 +58,8 @@ dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     compile group: 'net.lingala.zip4j', name: 'zip4j', version: '1.3.2'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'com.github.mmarquee', name: 'ui-automation', version: '0.4.3'
+
 }
 
 test {
@@ -121,6 +124,10 @@ test {
 
         if(UIValidations) {
             suites "src/test/resources/UIValidations.xml"
+        }
+
+        if(Setup) {
+            suites "src/test/resources/Setup.xml"
         }
     }
 

@@ -1,4 +1,4 @@
-package uitests;
+package UITests;
 
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.IBSettingsTestBase;

@@ -1,8 +1,7 @@
-package UIValidation;
+package UITests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
-import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
