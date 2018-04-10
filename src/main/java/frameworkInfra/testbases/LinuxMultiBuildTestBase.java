@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
@@ -12,6 +13,7 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.util.List;
 
+@Listeners(SuiteListener.class)
 public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
     public static List<String> otherGridIPList;

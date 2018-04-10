@@ -3,8 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.sun.jndi.toolkit.url.Uri;
-import frameworkInfra.utils.SystemActions;
+import frameworkInfra.Listeners.SuiteListener;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import io.appium.java_client.windows.WindowsElement;
@@ -14,6 +13,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(SuiteListener.class)
 public class SetupTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
@@ -79,7 +80,6 @@ public class SetupTestBase extends TestBase {
             driver.quit();
         }
         driver = null;
-        getResult(result);
         extent.flush();
     }
 }

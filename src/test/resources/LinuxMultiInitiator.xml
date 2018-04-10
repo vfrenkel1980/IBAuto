@@ -3,6 +3,10 @@
 <suite name="LinuxMultiInitiator"  >
     <!-- suite name="Suite Name" -->
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="LinuxMultiInitiator" allow-return-values="true">
         <parameter name="cycle" value=" "/>
         <classes>

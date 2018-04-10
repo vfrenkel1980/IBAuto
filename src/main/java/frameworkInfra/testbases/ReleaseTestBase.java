@@ -2,13 +2,16 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
+import org.testng.annotations.Listeners;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+@Listeners(SuiteListener.class)
 public class ReleaseTestBase extends TestBase{
 
     public WindowsService winService = new WindowsService();

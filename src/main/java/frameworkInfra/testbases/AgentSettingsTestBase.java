@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
@@ -11,12 +12,14 @@ import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+@Listeners(SuiteListener.class)
 public class AgentSettingsTestBase extends TestBase {
 
     private static int ibVersion = 0;

@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.linuxcl.LinuxService;
@@ -25,7 +26,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
+@Listeners(SuiteListener.class)
 public class TestBase {
 
     public static final Logger log = Logger.getLogger(TestBase.class.getName());
@@ -34,6 +35,7 @@ public class TestBase {
     public static ExtentTest test;
     public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
+    public static String OS = System.getProperty("os.name").toLowerCase();
 
 
     @BeforeSuite
@@ -48,47 +50,6 @@ public class TestBase {
         log.info(data);
         Reporter.log(data);
         test.log(Status.INFO, data);
-    }
-
-    public void getResult(ITestResult result) throws IOException {
-        if (result.getStatus()==ITestResult.SUCCESS){
-            test.log(Status.PASS, result.getName() + " test passed");
-        }else if (result.getStatus()==ITestResult.SKIP){
-            test.log(Status.SKIP, result.getName() + " test skipped");
-        }else if (result.getStatus()==ITestResult.FAILURE){
-            test.log(Status.ERROR, result.getName() + " test has failed " + result.getThrowable());
-            String path = captureScreenshot(result.getName());
-            test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
-        }
-        log.info(result.getName() + "test finished");
-        extent.flush();
-    }
-
-    public String captureScreenshot(String fileName){
-        File destFile = null;
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-
-        try {
-            Robot robot = new Robot();
-            String format = ".png";
-            fileName = fileName + "_Screenshot";
-
-            String screenShotDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/frameworkInfra/reportscreenshots/";
-            destFile = new File(screenShotDirectory + fileName + "_" + formatter.format(calendar.getTime()) + format);
-            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-            BufferedImage image = robot.createScreenCapture(screenRect);
-            ImageIO.write(image, "png", destFile);
-
-        } catch (AWTException | IOException ex) {
-            System.err.println(ex);
-        }
-        return destFile.getPath();
-    }
-
-    @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException, InterruptedException {
-        getResult(result);
     }
 
     @AfterClass

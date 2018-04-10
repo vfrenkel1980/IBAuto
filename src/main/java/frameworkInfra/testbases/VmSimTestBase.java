@@ -1,10 +1,12 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.Listeners.SuiteListener;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
+@Listeners(SuiteListener.class)
 public class VmSimTestBase extends WindowsTestBase {
 
     @BeforeMethod

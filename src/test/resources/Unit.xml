@@ -5,10 +5,14 @@
 <!--    <parameter name="predicted" value="2"/>
     <parameter name="msBuild" value="0"/>-->
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="Detailed">
         <!--<parameter name="logLevel" value="4"/>-->
         <classes>
-            <class name ="linuxtests.LinuxMultiTests" >
+            <class name ="linuxtests.LinuxMultiBuildTests" >
                 <methods>
                     <include name="Multi" />
                 </methods>

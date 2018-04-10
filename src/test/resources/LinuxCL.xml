@@ -3,6 +3,10 @@
 <suite name="LinuxCL"  >
     <!-- suite name="Suite Name" -->
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="Cycle 1" allow-return-values="true">
         <parameter name="cycle" value="1"/>
         <classes>

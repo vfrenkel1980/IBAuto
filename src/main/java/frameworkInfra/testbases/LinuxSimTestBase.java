@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxService;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
+@Listeners(SuiteListener.class)
 public class LinuxSimTestBase extends LinuxTestBase {
 
     @BeforeSuite
@@ -67,20 +69,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         test.log(Status.INFO, method.getName() + " test started");
     }
 
-    public void getResult(ITestResult result) throws IOException {
-        if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, result.getName() + " test passed");
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            test.log(Status.SKIP, result.getName() + " test skipped - Build ID = " + buildID);
-        } else if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.ERROR, result.getName() + " test has failed - Build ID = " + buildID + "------->" + result.getThrowable());
-            String path = captureScreenshot(result.getName());
-            test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
-        }
-    }
-
     @AfterSuite
     public void afterSuite() {
-        //runscript
+        //TODO : run script
     }
 }

@@ -2,6 +2,7 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.WinReg;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
@@ -9,6 +10,7 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
+@Listeners(SuiteListener.class)
 public class LicensingTestBase extends ReleaseTestBase{
 
     private String SCENARIO = System.getProperty("scenario");

@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+
 public class VSIntegrationTests extends VSIntegrationTestBase {
 
     @Test(testName = "Execute Build from Menu")

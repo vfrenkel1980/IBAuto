@@ -2,6 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="VSIntegration"  >
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="VSIntegrationTests8">
         <parameter name="VCVersion" value="8"/>
         <classes>

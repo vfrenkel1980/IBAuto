@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
+@Listeners(SuiteListener.class)
 public class WindowsTestBase extends TestBase {
 
     private static int ibVersion = 0;
@@ -44,7 +46,6 @@ public class WindowsTestBase extends TestBase {
         String currentPredictedReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.PREDICTED);
         String currentLocalLogging = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.LOCAL_LOGGING);
         String currentStandalone = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE);
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS, "-1");
 
         //set default registry values for run
         verifyRegistry(msBuild, currentMsBuildReg, RegistryKeys.MSBUILD);

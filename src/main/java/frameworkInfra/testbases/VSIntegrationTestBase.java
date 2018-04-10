@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+@Listeners(SuiteListener.class)
 public class VSIntegrationTestBase extends TestBase {
 
     protected static int ibVersion = 0;
@@ -101,11 +103,6 @@ public class VSIntegrationTestBase extends TestBase {
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory("VC" + VCVersion);
         log.info(method.getName() + " test started");
-    }
-
-    @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
-        getResult(result);
     }
 
     @AfterClass

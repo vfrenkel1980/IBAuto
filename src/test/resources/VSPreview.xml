@@ -2,6 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="VSPreview"  >
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
 
     <test name="VSTests">
         <classes>

@@ -3,6 +3,10 @@
 <suite name="LicenseTests"  >
 
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="Unloaded License">
         <classes>
             <class name ="releasetests.LicensingTests" />

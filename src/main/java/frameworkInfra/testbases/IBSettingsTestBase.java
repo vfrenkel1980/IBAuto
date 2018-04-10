@@ -1,6 +1,7 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.Listeners.SuiteListener;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -8,6 +9,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -15,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(SuiteListener.class)
 public class IBSettingsTestBase extends TestBase {
 
     public static WindowsDriver session = null;
@@ -51,7 +54,5 @@ public class IBSettingsTestBase extends TestBase {
             session.quit();
         }
         session = null;
-
-        getResult(result);
     }
 }

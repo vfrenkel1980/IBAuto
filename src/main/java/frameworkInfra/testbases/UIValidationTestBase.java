@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.sikuli.sikulimapping.IBHistory.History;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
@@ -17,10 +18,7 @@ import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +30,7 @@ import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+@Listeners(SuiteListener.class)
 public class UIValidationTestBase extends TestBase {
 
     private static int ibVersion = 0;
@@ -200,7 +199,6 @@ public class UIValidationTestBase extends TestBase {
             driver.quit();
         }
         driver = null;
-        getResult(result);
         extent.flush();
     }
 

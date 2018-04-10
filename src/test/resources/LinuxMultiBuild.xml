@@ -3,6 +3,10 @@
 <suite name="LinuxMultiBuild"  >
     <!-- suite name="Suite Name" -->
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="LinuxMultiBuild" allow-return-values="true">
         <parameter name="cycle" value=" "/>
         <classes>

@@ -1,6 +1,7 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-
+@Listeners(SuiteListener.class)
 public class BatmanBCTestBase extends WindowsTestBase {
 
     protected static List rawBatmanList;
@@ -43,7 +44,6 @@ public class BatmanBCTestBase extends WindowsTestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
-        getResult(result);
     }
 
 }

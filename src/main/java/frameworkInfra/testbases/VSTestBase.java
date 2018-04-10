@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
@@ -19,6 +20,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+@Listeners(SuiteListener.class)
 public class VSTestBase extends TestBase {
 
 
@@ -105,6 +107,7 @@ public class VSTestBase extends TestBase {
         driver.quit();
         driver = null;
         SystemActions.killProcess("devenv.exe");
+        extent.flush();
     }
 
     @BeforeMethod
@@ -122,7 +125,7 @@ public class VSTestBase extends TestBase {
             driver.quit();
         }
         driver = null;
-        getResult(result);
+        extent.flush();
     }
 
     @AfterClass

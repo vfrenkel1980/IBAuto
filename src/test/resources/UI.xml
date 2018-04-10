@@ -3,6 +3,10 @@
 <suite name="UI"  >
     <!-- suite name="Suite Name" -->
 
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
     <test name="TestA1" allow-return-values="true">
         <classes>
             <!-- packagename.Testcase class name  -->
