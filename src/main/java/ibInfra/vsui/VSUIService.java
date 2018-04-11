@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
+import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.VSTestBase.driver;
 
 public class VSUIService extends TestBase implements IVSUIService {

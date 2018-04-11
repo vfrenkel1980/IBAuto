@@ -17,6 +17,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static frameworkInfra.Listeners.SuiteListener.*;
+
 @Listeners(SuiteListener.class)
 public class IBSettingsTestBase extends TestBase {
 

@@ -5,6 +5,8 @@ import com.aventstack.extentreports.Status;
 
 import java.sql.*;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class SQLite extends TestBase {
 
     public static void selectQuery(String ip, String dbName, String query) {

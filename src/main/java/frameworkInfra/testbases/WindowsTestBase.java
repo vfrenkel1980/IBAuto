@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.*;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
 @Listeners(SuiteListener.class)

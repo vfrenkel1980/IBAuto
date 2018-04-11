@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import static frameworkInfra.Listeners.SuiteListener.*;
+
 @Listeners(SuiteListener.class)
 public class SetupTestBase extends TestBase {
 

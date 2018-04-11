@@ -5,6 +5,8 @@ import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg.HKEY;
 import frameworkInfra.testbases.TestBase;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class RegistryService extends TestBase{
 
     public static void setRegistryKey(HKEY rootKey, String keyPath, String keyName, String value){

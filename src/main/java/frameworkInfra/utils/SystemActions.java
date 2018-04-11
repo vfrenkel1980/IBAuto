@@ -15,8 +15,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.TestBase.log;
-import static frameworkInfra.testbases.TestBase.test;
 
 public class SystemActions {
 

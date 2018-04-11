@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.extent;
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 @Listeners(SuiteListener.class)
 public class BatmanBCTestBase extends WindowsTestBase {
 

@@ -8,6 +8,8 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
 
     //private String command;

@@ -9,6 +9,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class AppiumActions extends TestBase{
 
     public static void rightClick(WebElement element) {

@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.*;
+
 @Listeners(SuiteListener.class)
 public class LinuxTestBase extends TestBase{
 

@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class LinuxService extends TestBase implements ILinuxService {
 
     private WindowsService winService = new WindowsService();

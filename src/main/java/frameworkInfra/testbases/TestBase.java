@@ -26,14 +26,14 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static frameworkInfra.Listeners.SuiteListener.extent;
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 @Listeners(SuiteListener.class)
 public class TestBase {
 
     public static final Logger log = Logger.getLogger(TestBase.class.getName());
     public static WindowsDriver driver = null;
-    public static ExtentReports extent;
-    public static ExtentTest test;
-    public static ExtentHtmlReporter htmlReporter;
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
 

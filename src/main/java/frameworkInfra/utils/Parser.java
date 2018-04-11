@@ -7,6 +7,8 @@ import java.io.*;
 import java.util.Map;
 import java.util.Scanner;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class Parser extends TestBase{
 
     public static String retrieveDataFromFile(String filePath, Map<String, String> lookFor) throws IOException {

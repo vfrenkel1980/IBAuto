@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class WindowsService extends TestBase implements IWindowsService {
 
     @Override

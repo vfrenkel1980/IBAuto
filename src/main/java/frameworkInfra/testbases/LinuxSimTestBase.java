@@ -16,6 +16,8 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+
+import static frameworkInfra.Listeners.SuiteListener.*;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
 @Listeners(SuiteListener.class)

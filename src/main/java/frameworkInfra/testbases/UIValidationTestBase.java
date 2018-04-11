@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
 public class UIValidationTestBase extends TestBase {

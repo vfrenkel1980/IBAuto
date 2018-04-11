@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 
 public class IbService extends TestBase implements IIBService {

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class BatmanVC15Tests extends BatmanBCTestBase {

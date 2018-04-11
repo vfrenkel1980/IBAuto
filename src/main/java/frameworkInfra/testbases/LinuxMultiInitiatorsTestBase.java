@@ -13,6 +13,8 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.*;
+
 @Listeners(SuiteListener.class)
 public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 

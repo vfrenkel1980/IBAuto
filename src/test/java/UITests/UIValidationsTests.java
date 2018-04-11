@@ -10,6 +10,8 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class UIValidationsTests extends UIValidationTestBase {
 
 
