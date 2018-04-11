@@ -77,6 +77,9 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.upgradeVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
+                vsService.openVSInstance(VSINSTALLATION);
+                SystemActions.sleep(20);
+                driver.quit();
                 break;
 
             //install old IB, install vs and upgrade IB from VS installer
@@ -105,11 +108,6 @@ public class VSTestBase extends TestBase {
                 break;
         }
 
-        vsService.openVSInstance(VSINSTALLATION);
-        SystemActions.sleep(20);
-        driver.quit();
-        //driver = null;
-        //SystemActions.killProcess("devenv.exe");
         extent.flush();
     }
 
