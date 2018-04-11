@@ -72,7 +72,8 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: Dev Tools - Interception")
     public void licTestDevTools_Interception() {
-        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.LicTestPrjBuildConsoleCommands.INTERCEPTION);
+        String command = ibService.getIBinstallFolder() + StaticDataProvider.LicTestPrjBuildConsoleCommands.INTERCEPTION;
+        exitStatus = winService.runCommandWaitForFinish(command);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -82,7 +83,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: Dev Tools - Submition")
     public void licTestDevTools_Submition() {
-        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.LicTestPrjBuildConsoleCommands.SUBMITION);
+        exitStatus = winService.runCommandWaitForFinish(ibService.getIBinstallFolder() + StaticDataProvider.LicTestPrjBuildConsoleCommands.SUBMITION);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -92,7 +93,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: Dev Tools - XML")
     public void licTestDevTools_XML() {
-        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.LicTestPrjBuildConsoleCommands.XML);
+        exitStatus = winService.runCommandWaitForFinish(ibService.getIBinstallFolder() + StaticDataProvider.LicTestPrjBuildConsoleCommands.XML);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {

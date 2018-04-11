@@ -2,11 +2,8 @@ package ibInfra.ibService;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.CustomJsonParser;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -26,6 +23,12 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbService extends TestBase implements IIBService {
 
     private WindowsService winService = new WindowsService();
+
+    @Override
+    public String getIBinstallFolder() {
+        String IBfolder = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
+        return IBfolder;
+    }
 
     @Override
     public int cleanAndBuild(String command) {
@@ -50,9 +53,10 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public void installIBnoLoadedLicense(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        winService.runCommandDontWaitForTermination(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
+        /*winService.runCommandDontWaitForTermination(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
         winService.waitForProcessToStart(installationFile.substring(installationFile.lastIndexOf('\\') + 1));
-        winService.waitForProcessToFinish(installationFile.substring(installationFile.lastIndexOf('\\') + 1));
+        winService.waitForProcessToFinish(installationFile.substring(installationFile.lastIndexOf('\\') + 1));*/
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
     }
 
     @Override

@@ -9,6 +9,8 @@ import java.io.IOException;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public interface IIBService {
+    
+    String getIBinstallFolder();
 
     int cleanAndBuild(String command);
 
