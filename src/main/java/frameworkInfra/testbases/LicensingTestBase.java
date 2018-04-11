@@ -25,6 +25,8 @@ public class LicensingTestBase extends ReleaseTestBase{
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
 
+        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
+
         ibService.installIBnoLoadedLicense("Latest");
 
         try {
