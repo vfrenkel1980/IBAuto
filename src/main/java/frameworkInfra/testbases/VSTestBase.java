@@ -108,8 +108,8 @@ public class VSTestBase extends TestBase {
         vsService.openVSInstance(VSINSTALLATION);
         SystemActions.sleep(20);
         driver.quit();
-        driver = null;
-        SystemActions.killProcess("devenv.exe");
+        //driver = null;
+        //SystemActions.killProcess("devenv.exe");
         extent.flush();
     }
 
