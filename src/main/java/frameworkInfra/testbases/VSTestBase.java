@@ -61,10 +61,10 @@ public class VSTestBase extends TestBase {
             //vs installed, install IB from installer
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
-                if (VSINSTALLATION.equals("15"))
+/*                if (VSINSTALLATION.equals("15"))
                     vsService.upgradeVS();
                 else
-                    vsService.upgradeVSPreview();
+                    vsService.upgradeVSPreview();*/
                 ibService.installIB("Latest");
                 ibService.verifyIbServicesRunning();
                 break;
