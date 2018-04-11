@@ -443,7 +443,7 @@ public class StaticDataProvider {
     public static class LicTestPrjBuildConsoleCommands{
 
         public static final String VS2017_CPP = "\\2017\\Cpp\\Cpp.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C++\"";
-        public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C#\"";
+        public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|Any CPU\" /title=\"License Test - VS2017 C#\"";
         public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" /%s /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\"";
         public static final String VS2015_XBOX_DURANGO = "\"C:\\Users\\Admin\\Desktop\\Xbox_03_2017_qfe4\\SimpleHDR12\\SimpleHDR12\\Samples\\Graphics\\SimpleHDR12\\SimpleHDR12.sln\" /%s /cfg=\"Debug|Durango\" /title=\"License Test - xBox One\"";
         public static final String MSBUILD_CPP = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && msbuild C:\\LicenseTests_projects\\2017\\Cpp\\Cpp.sln /t:rebuild /property:configuration=\"\"debug\"\";platform=\"\"x86\"\" /m:16 /nodeReuse:False /verbosity:normal\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Msbuild\"";
