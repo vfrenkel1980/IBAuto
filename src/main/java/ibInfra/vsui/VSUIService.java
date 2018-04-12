@@ -2,18 +2,22 @@ package ibInfra.vsui;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.AppiumActions;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
@@ -103,6 +107,25 @@ public class VSUIService extends TestBase implements IVSUIService {
     @Override
     public void uninstallIbExtension() {
 
+    }
+
+    @Override
+    public String getInstalledMSBuildVersion() {
+        Map<String, String> lookFor = new HashMap<String, String>();
+        String installedBuild = "";
+        lookFor.put("version", "version");
+        WindowsService windowsService = new WindowsService();
+        String out = windowsService.runCommandGetOutput(StaticDataProvider.Processes.MSBUILD);
+        try {
+            FileUtils.writeStringToFile(new File(StaticDataProvider.Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
+            installedBuild = Parser.retrieveDataFromFile(StaticDataProvider.Locations.QA_ROOT + "\\out.txt", lookFor);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            SystemActions.deleteFile(StaticDataProvider.Locations.QA_ROOT + "\\out.txt");
+        }
+        installedBuild = installedBuild.substring(0, installedBuild.indexOf(" "));
+        return installedBuild;
     }
 
     @Override

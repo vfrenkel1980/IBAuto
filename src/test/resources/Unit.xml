@@ -12,7 +12,7 @@
     <test name="Detailed">
         <!--<parameter name="logLevel" value="4"/>-->
         <classes>
-            <class name ="linuxtests.LinuxMultiBuildTests" >
+            <class name ="Native.linuxtests.LinuxMultiBuildTests" >
                 <methods>
                     <include name="Multi" />
                 </methods>

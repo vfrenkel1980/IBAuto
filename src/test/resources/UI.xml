@@ -10,7 +10,7 @@
     <test name="TestA1" allow-return-values="true">
         <classes>
             <!-- packagename.Testcase class name  -->
-            <class name ="UITests.IbSettingsUITests" />
+            <class name ="Native.uitests.IbSettingsUITests" />
         </classes>
     </test>
 </suite>

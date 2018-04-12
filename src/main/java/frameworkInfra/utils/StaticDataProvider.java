@@ -1,5 +1,7 @@
 package frameworkInfra.utils;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
+
 public class StaticDataProvider {
 
     //locations
@@ -32,6 +34,7 @@ public class StaticDataProvider {
         public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
+        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER,"Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
 
     public static class WindowsServices{

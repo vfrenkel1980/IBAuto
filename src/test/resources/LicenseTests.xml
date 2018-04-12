@@ -9,7 +9,7 @@
 
     <test name="Unloaded License">
         <classes>
-            <class name ="releasetests.LicensingTests" />
+            <class name ="Native.releasetests.LicensingTests" />
         </classes>
     </test>
 </suite>

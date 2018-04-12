@@ -12,23 +12,23 @@
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="windowstests.BatmanVC15PreviewTests" />
-            <class name ="windowstests.BatmanVC15Tests" />
-            <class name ="windowstests.BatmanVC14Tests" />
-            <class name ="windowstests.BatmanVC12Tests" />
-            <class name ="windowstests.BatmanVC11Tests" />
+            <class name ="Native.windowstests.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.BatmanVC15Tests" />
+            <class name ="Native.windowstests.BatmanVC14Tests" />
+            <class name ="Native.windowstests.BatmanVC12Tests" />
+            <class name ="Native.windowstests.BatmanVC11Tests" />
         </classes>
     </test>
 
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="windowstests.BatmanVC15PreviewTests" />
-            <class name ="windowstests.BatmanVC15Tests" />
-            <class name ="windowstests.BatmanVC14Tests" />
-            <class name ="windowstests.BatmanVC12Tests" />
-            <class name ="windowstests.BatmanVC11Tests" />
-            <class name ="windowstests.GeneralWinTests" />
+            <class name ="Native.windowstests.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.BatmanVC15Tests" />
+            <class name ="Native.windowstests.BatmanVC14Tests" />
+            <class name ="Native.windowstests.BatmanVC12Tests" />
+            <class name ="Native.windowstests.BatmanVC11Tests" />
+            <class name ="Native.windowstests.GeneralWinTests" />
         </classes>
     </test>
 </suite>

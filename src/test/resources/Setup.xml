@@ -9,7 +9,7 @@
 
     <test name="Test" allow-return-values="true">
         <classes>
-            <class name ="UITests.SetupTests" />
+            <class name ="Native.uitests.SetupTests" />
         </classes>
     </test>
 </suite>

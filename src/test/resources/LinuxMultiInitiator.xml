@@ -10,7 +10,7 @@
     <test name="LinuxMultiInitiator" allow-return-values="true">
         <parameter name="cycle" value=" "/>
         <classes>
-            <class name ="linuxtests.LinuxMultiInitiatorTests" />
+            <class name ="Native.linuxtests.LinuxMultiInitiatorTests" />
         </classes>
     </test>
 

@@ -30,4 +30,6 @@ public interface IVSUIService  {
 
     void uninstallIbExtension();
 
+    String getInstalledMSBuildVersion();
+
 }

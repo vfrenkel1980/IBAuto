@@ -10,7 +10,7 @@
     <test name="LinuxMultiBuild" allow-return-values="true">
         <parameter name="cycle" value=" "/>
         <classes>
-            <class name ="linuxtests.LinuxMultiBuildTests" />
+            <class name ="Native.linuxtests.LinuxMultiBuildTests" />
         </classes>
     </test>
 

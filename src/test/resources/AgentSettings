@@ -8,7 +8,7 @@
 
     <test name="AgentSettings">
         <classes>
-            <class name ="ibclienttests.AgentSettingsTests" />
+            <class name ="Native.ibclienttests.AgentSettingsTests" />
         </classes>
     </test>
 </suite>

@@ -99,13 +99,16 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getExpectedIbVsExtensionVersion() {
+        String version;
         try {
             ZipFile zipFile = new ZipFile(Locations.IB_ROOT + "\\IncredibuildMenu.vsix");
             zipFile.extractAll(Locations.QA_ROOT + "Extracted");
         } catch (ZipException e) {
             e.printStackTrace();
         }
-        return CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "\\Extracted\\manifest.json", "version");
+        version =  CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "\\Extracted\\manifest.json", "version");
+        test.log(Status.INFO, "installed IB extension version ------> " + version);
+        return version;
     }
 
 

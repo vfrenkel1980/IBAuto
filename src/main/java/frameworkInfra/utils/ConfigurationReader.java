@@ -10,9 +10,9 @@ public class ConfigurationReader {
         configFile = new java.util.Properties();
         try {
             configFile.load(this.getClass().getClassLoader().
-                    getResourceAsStream("SimulationConfiguration/Config.cfg"));
-        }catch(Exception eta){
-            eta.printStackTrace();
+                    getResourceAsStream("Config.cfg"));
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
