@@ -4,21 +4,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
-import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
-import static frameworkInfra.utils.StaticDataProvider.*;
 
 @Listeners(SuiteListener.class)
 public class LinuxSimTestBase extends LinuxTestBase {
@@ -26,7 +18,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
-        rawIpList = XmlParser.getIpList("Simulation IP list.xml");
+        rawIpList = XmlParser.getIpList("Machines/Simulation IP list.xml");
         testNum = TestNum.Sim;
 
         ipList = XmlParser.breakDownIPList(rawIpList);

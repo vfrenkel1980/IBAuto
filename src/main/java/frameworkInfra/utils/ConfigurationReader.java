@@ -10,7 +10,7 @@ public class ConfigurationReader {
         configFile = new java.util.Properties();
         try {
             configFile.load(this.getClass().getClassLoader().
-                    getResourceAsStream("Config.cfg"));
+                    getResourceAsStream("Configuration/Config.cfg"));
         }catch(Exception e){
             e.printStackTrace();
         }

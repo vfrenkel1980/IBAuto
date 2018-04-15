@@ -24,13 +24,13 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
 
-        rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
+        rawIpList = XmlParser.getIpList("Machines/MultiInitiators IP list.xml");
         ipList = XmlParser.breakDownIPList(rawIpList);
         testNum = TestNum.MultiIn;
-        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
+        rawIpList3 = XmlParser.getIpList("Machines/MultiGridIPs.xml");
         multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
 
-        rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
+        rawIpList2 = XmlParser.getIpList("Machines/MultiBuild IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killib_db_check(ipList.get(1));
 
