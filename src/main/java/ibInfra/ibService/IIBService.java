@@ -1,14 +1,12 @@
 package ibInfra.ibService;
 
-import com.aventstack.extentreports.Status;
-import com.sun.jna.platform.unix.solaris.LibKstat;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-import static frameworkInfra.Listeners.SuiteListener.test;
 
 public interface IIBService {
     
