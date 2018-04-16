@@ -1,5 +1,6 @@
 package Native.vstests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class VS2017ExtensionTests extends VSTestBase {
 
@@ -42,6 +44,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         ConfigurationReader confReader = new ConfigurationReader();
         String actual = vsService.getInstalledMSBuildVersion();
         String expected = confReader.getProperty("MSBuildVersion");
+        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
         Assert.assertEquals(actual, expected, "Installed MSBuild version does not match expected");
     }
 

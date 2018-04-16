@@ -1,14 +1,15 @@
 package frameworkInfra.utils;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class StaticDataProvider {
 
     //locations
     public static class Locations {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
-        public static final String IB_ROOT = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild";
-        public static final String LOGS_ROOT = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\Logs";
+        public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, IB_REG_ROOT + "\\builder", "Folder");
+        public static final String LOGS_ROOT = IB_ROOT + "\\Logs";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
@@ -25,13 +26,13 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = "\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\buildconsole.exe\" ";
+        public static final String BUILD_CONSOLE = Locations.IB_ROOT + "\\buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
-        public static final String XLICPROC = "C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\xlicproc /LicenseFile=";
+        public static final String XLICPROC = Locations.IB_ROOT + "\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
         public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER,"Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";

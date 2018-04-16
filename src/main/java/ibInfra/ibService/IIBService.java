@@ -1,5 +1,6 @@
 package ibInfra.ibService;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
@@ -7,6 +8,7 @@ import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public interface IIBService {
     
@@ -26,6 +28,8 @@ public interface IIBService {
         String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
         int version = Integer.parseInt(regVersion);
         version -= 1001000;
+        if (test != null)
+            test.log(Status.INFO,"Installed IB version -----> " + version);
         return version;
     }
 
