@@ -18,7 +18,7 @@ public class CustomJsonParser {
             value = (String) jsonObject.get(key);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         return value;
     }

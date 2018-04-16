@@ -94,7 +94,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
-        return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "Extensions\\IncredibuildExtension\\manifest.json", "version");
+        return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "\\Extensions\\IncredibuildExtension\\manifest.json", "version");
     }
 
     @Override
@@ -102,9 +102,9 @@ public class IbService extends TestBase implements IIBService {
         String version;
         try {
             ZipFile zipFile = new ZipFile(Locations.IB_ROOT + "\\IncredibuildMenu.vsix");
-            zipFile.extractAll(Locations.QA_ROOT + "Extracted");
+            zipFile.extractAll(Locations.QA_ROOT + "\\Extracted");
         } catch (ZipException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         version =  CustomJsonParser.getValueFromKey(Locations.QA_ROOT + "\\Extracted\\manifest.json", "version");
         test.log(Status.INFO, "installed IB extension version ------> " + version);

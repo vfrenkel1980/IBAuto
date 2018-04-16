@@ -1,7 +1,9 @@
 package Native.UnitTests;
 
+import ibInfra.ibService.IbService;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -15,5 +17,15 @@ public class UnitTests {
         driver.get("https://www.google.com");
 
 
+    }
+
+
+
+    @Test(testName = "Check version of installed IB extension")
+    public void checkInstalledExtension(){
+        IbService ibService = new IbService();
+        String extensionVersion = ibService.getIbVsExtensionVersion("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE");
+        String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();
+        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "IncrediBuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
     }
 }
