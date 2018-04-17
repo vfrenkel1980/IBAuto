@@ -50,7 +50,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             extent.flush();
             System.exit(0);
         }
-        // linuxService.deleteLogsFolder(ipList);
+         linuxService.deleteLogsFolder(ipList);
          log.info("finished before class");
     }
 
