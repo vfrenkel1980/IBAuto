@@ -87,6 +87,8 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
+                vsService.openVSInstance(VSINSTALLATION);
+                SystemActions.killProcess("devenv.exe");
                 break;
 
             //install vs without IB

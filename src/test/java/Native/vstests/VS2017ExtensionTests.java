@@ -31,7 +31,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void checkInstalledExtension(){
         String extensionVersion = ibService.getIbVsExtensionVersion(devenvPath);
         String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();
-        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "IncrediBuild Extension Version: " + expectedExtensionVersion + "\n" + "Installed Extension Version: " + extensionVersion);
+        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "Expected Extension Version: " + expectedExtensionVersion + "-------" + "Installed Extension Version: " + extensionVersion);
     }
 
     @Test(testName = "Get Installed IB Version")

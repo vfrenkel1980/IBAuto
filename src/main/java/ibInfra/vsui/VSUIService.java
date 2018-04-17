@@ -217,6 +217,7 @@ public class VSUIService extends TestBase implements IVSUIService {
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
             try {
+                SystemActions.sleep(10);
                 vsFirstActivation();
             } catch (Exception e) {
                 e.getMessage();
