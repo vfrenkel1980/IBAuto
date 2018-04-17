@@ -5,11 +5,18 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class StaticDataProvider {
 
+    public static class InitIBRoot{
+        public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
+    }
+
+    public static class InitMSBuild{
+        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER,"Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
+    }
+
     //locations
     public static class Locations {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
-        public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, IB_REG_ROOT + "\\builder", "Folder");
-        public static final String LOGS_ROOT = IB_ROOT + "\\Logs";
+        public static final String LOGS_ROOT = InitIBRoot.IB_ROOT + "\\Logs";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
@@ -26,16 +33,15 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = Locations.IB_ROOT + "\\buildconsole.exe ";
+        public static final String BUILD_CONSOLE = InitIBRoot.IB_ROOT + "\\buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
-        public static final String XLICPROC = Locations.IB_ROOT + "\\xlicproc /LicenseFile=";
+        public static final String XLICPROC = InitIBRoot.IB_ROOT + "\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
-        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER,"Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
 
     public static class WindowsServices{
@@ -378,7 +384,7 @@ public class StaticDataProvider {
         public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
         public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";
         public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
-        public static final String UNLOAD_IB_LICENSE = Locations.IB_ROOT + "\\CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
+        public static final String UNLOAD_IB_LICENSE = InitIBRoot.IB_ROOT + "\\CoordMonitor.exe /LicenseFile=\"C:\\Program Files (x86)\\Xoreax\\IncrediBuild\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";

@@ -2,8 +2,11 @@ package ibInfra.vsui;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.*;
+import frameworkInfra.utils.AppiumActions;
+import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
@@ -22,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.Listeners.SuiteListener.test;
-import static frameworkInfra.testbases.VSTestBase.driver;
 
 public class VSUIService extends TestBase implements IVSUIService {
 
@@ -115,14 +117,14 @@ public class VSUIService extends TestBase implements IVSUIService {
         String installedBuild = "";
         lookFor.put("version", "version");
         WindowsService windowsService = new WindowsService();
-        String out = windowsService.runCommandGetOutput(StaticDataProvider.Processes.MSBUILD);
+        String out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD);
         try {
-            FileUtils.writeStringToFile(new File(StaticDataProvider.Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
-            installedBuild = Parser.retrieveDataFromFile(StaticDataProvider.Locations.QA_ROOT + "\\out.txt", lookFor);
+            FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
+            installedBuild = Parser.retrieveDataFromFile(Locations.QA_ROOT + "\\out.txt", lookFor);
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
-            SystemActions.deleteFile(StaticDataProvider.Locations.QA_ROOT + "\\out.txt");
+            SystemActions.deleteFile(Locations.QA_ROOT + "\\out.txt");
         }
         installedBuild = installedBuild.substring(0, installedBuild.indexOf(" "));
         return installedBuild;

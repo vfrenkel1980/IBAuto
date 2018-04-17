@@ -99,6 +99,7 @@ public class VSTestBase extends TestBase {
                     vsService.installVSWithoutIB();
                 else
                     vsService.installVSPreviewWithoutIB();
+                test.log(Status.PASS, "");
                 extent.flush();
                 throw new SkipException("EXITING");
 

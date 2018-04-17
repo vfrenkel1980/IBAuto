@@ -101,7 +101,7 @@ public class IbService extends TestBase implements IIBService {
     public String getExpectedIbVsExtensionVersion() {
         String version;
         try {
-            ZipFile zipFile = new ZipFile(Locations.IB_ROOT + "\\IncredibuildMenu.vsix");
+            ZipFile zipFile = new ZipFile(InitIBRoot.IB_ROOT + "\\IncredibuildMenu.vsix");
             zipFile.extractAll(Locations.QA_ROOT + "\\Extracted");
         } catch (ZipException e) {
             e.getMessage();
