@@ -206,7 +206,7 @@ public class VSUIService extends TestBase implements IVSUIService {
                 pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe\"";
                 break;
             case "15":
-                pathToDevenv = "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe\"";
+                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
         try {
