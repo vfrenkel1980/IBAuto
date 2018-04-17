@@ -76,9 +76,6 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.upgradeVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
-                vsService.openVSInstance(VSINSTALLATION);
-                SystemActions.sleep(20);
-                driver.quit();
                 break;
 
             //install old IB, install vs and upgrade IB from VS installer
@@ -90,6 +87,9 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
+                vsService.openVSInstance(VSINSTALLATION);
+                SystemActions.sleep(20);
+                driver.quit();
                 break;
 
             //install vs without IB
