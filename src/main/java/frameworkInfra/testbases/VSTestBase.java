@@ -88,6 +88,7 @@ public class VSTestBase extends TestBase {
                     vsService.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
                 vsService.openVSInstance(VSINSTALLATION);
+                driver.quit();
                 break;
 
             //install vs without IB
