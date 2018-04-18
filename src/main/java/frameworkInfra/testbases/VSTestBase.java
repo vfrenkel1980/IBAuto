@@ -134,8 +134,8 @@ public class VSTestBase extends TestBase {
         test.log(Status.INFO, "AFTER CLASS started");
         test.assignCategory(VSINSTALLATION + " " + SCENARIO);
         log.info("AFTER CLASS started");
-        ibService.isLicenseLoaded();
         ibService.unloadIbLicense();
+        ibService.isLicenseLoaded();
         extent.flush();
     }
 
