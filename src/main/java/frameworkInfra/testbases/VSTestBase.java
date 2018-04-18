@@ -130,6 +130,11 @@ public class VSTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
+        test = extent.createTest("AFTER CLASS");
+        test.log(Status.INFO, "AFTER CLASS started");
+        test.assignCategory(VSINSTALLATION + " " + SCENARIO);
+        log.info("AFTER CLASS started");
+        ibService.isLicenseLoaded();
         ibService.unloadIbLicense();
         extent.flush();
     }
