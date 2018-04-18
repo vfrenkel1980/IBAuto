@@ -8,6 +8,7 @@ import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -85,6 +86,7 @@ public class IbService extends TestBase implements IIBService {
         winService.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
         SystemActions.sleep(3);
         winService.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
+        isLicenseLoaded();
     }
 
     @Override
@@ -175,6 +177,21 @@ public class IbService extends TestBase implements IIBService {
         String file = winService.getLatestFileFromDir(Locations.SYSTEM_APPDATA_TEMP_FOLDER, "pkt").getCanonicalPath();
         return Parser.retrieveDataFromFile(file, lookFor);
     }
+
+    @Override
+    public boolean isLicenseLoaded() {
+        File file = new File(InitIBRoot.IB_ROOT + "\\CoordLicense.dat");
+        if(file.exists()) {
+            test.log(Status.INFO, "License is loaded");
+            return true;
+        }
+        else{
+            test.log(Status.WARNING, "License is NOT loaded");
+            return false;
+        }
+    }
+
+
 
 
 }

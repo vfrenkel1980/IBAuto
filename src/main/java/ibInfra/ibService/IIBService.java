@@ -60,4 +60,6 @@ public interface IIBService {
     void disableVsMonitor();
 
     String getVSVersionFromOutputLog(String logPath);
+
+    boolean isLicenseLoaded();
 }
