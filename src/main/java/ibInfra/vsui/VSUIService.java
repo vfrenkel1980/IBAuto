@@ -223,7 +223,7 @@ public class VSUIService extends TestBase implements IVSUIService {
                 e.getMessage();
             }
         } catch (MalformedURLException e) {
-            e.getMessage();
+            test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
         }
 
     }
