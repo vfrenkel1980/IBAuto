@@ -39,7 +39,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         ibVersion = IIBService.getIbVersion();
     }
 
-    @Test(testName = "Compare MSBuild Version")
+    @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
         ConfigurationReader confReader = new ConfigurationReader();
         String actual = vsService.getInstalledMSBuildVersion();
