@@ -87,7 +87,9 @@ public class VSTestBase extends TestBase {
                 else
                     vsService.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
-                vsService.openVSInstance(VSINSTALLATION);
+                vsService.openVSInstance(VSINSTALLATION, true);
+                driver.quit();
+                driver = null;
                 SystemActions.killProcess("devenv.exe");
                 break;
 
@@ -122,6 +124,7 @@ public class VSTestBase extends TestBase {
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         if (driver != null) {
+            SystemActions.killProcess("devenv.exe");
             driver.quit();
         }
         driver = null;

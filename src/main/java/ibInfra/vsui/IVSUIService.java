@@ -26,7 +26,7 @@ public interface IVSUIService  {
 
     void performIbActionFromPrjExplorer(String action,String type, String solutionName);
 
-    void openVSInstance(String vsinstallation);
+    void openVSInstance(String vsinstallation, boolean isFirstActivation);
 
     void uninstallIbExtension();
 

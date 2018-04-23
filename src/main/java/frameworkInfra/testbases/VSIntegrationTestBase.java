@@ -57,7 +57,7 @@ public class VSIntegrationTestBase extends TestBase {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
         try {
-            vsService.openVSInstance(VCVersion);
+            vsService.openVSInstance(VCVersion, false);
             switch (VCVersion) {
                 case "8":
                     projectPath = TestProjects.VC8PROJECT;

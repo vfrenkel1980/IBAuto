@@ -51,7 +51,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
     public void executeVSBuild(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVSInstance(VSINSTALLATION);
+        vsService.openVSInstance(VSINSTALLATION, false);
         SystemActions.sleep(30);
         vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
@@ -67,7 +67,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "IncrediBuild execution from VS2017 project explorer")
     public void executeVSBuildExplorer(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVSInstance(VSINSTALLATION);
+        vsService.openVSInstance(VSINSTALLATION, false);
         vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
         vsService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "ConsoleApplication1");
         String result;

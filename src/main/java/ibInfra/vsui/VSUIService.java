@@ -181,7 +181,7 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
-    public void openVSInstance(String version) {
+    public void openVSInstance(String version, boolean isFirstActivation) {
         String pathToDevenv = "";
         switch (version) {
             case "preview":
@@ -216,11 +216,13 @@ public class VSUIService extends TestBase implements IVSUIService {
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
-            try {
-                SystemActions.sleep(10);
-                vsFirstActivation();
-            } catch (Exception e) {
-                e.getMessage();
+            if(isFirstActivation) {
+                try {
+                    SystemActions.sleep(10);
+                    vsFirstActivation();
+                } catch (Exception e) {
+                    e.getMessage();
+                }
             }
         } catch (MalformedURLException e) {
             test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());

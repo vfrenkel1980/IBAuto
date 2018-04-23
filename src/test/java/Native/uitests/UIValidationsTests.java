@@ -24,7 +24,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
 
-        vsService.openVSInstance("15");
+        vsService.openVSInstance("15", false);
         vsService.openProject(projectLocation);
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         try {
