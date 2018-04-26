@@ -91,12 +91,12 @@ public class EventHandler implements WebDriverEventListener {
 
     @Override
     public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        test.log(Status.INFO, "Changing value of " + element + " to " + keysToSend);
+        test.log(Status.INFO, "Changing value of " + element + " to " + keysToSend[0].toString());
     }
 
     @Override
     public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        test.log(Status.INFO, "Successfully changed value of " + element + " to " + keysToSend);
+        test.log(Status.INFO, "Successfully changed value of " + element + " to " + keysToSend[0].toString());
     }
 
     @Override

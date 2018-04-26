@@ -41,7 +41,7 @@ public class TestListener implements ITestListener {
         try {
             test.fail("Screenshot " + test.addScreenCaptureFromPath(path, "Screenshot"));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 

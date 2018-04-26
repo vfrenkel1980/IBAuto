@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.EventHandler;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
@@ -12,6 +13,8 @@ import ibInfra.vsui.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.*;
@@ -34,6 +37,9 @@ public class TestBase {
 
     public static final Logger log = Logger.getLogger(TestBase.class.getName());
     public static WindowsDriver driver = null;
+    public static WebDriver webDriver = null;
+    protected static EventFiringWebDriver eventWebDriver;
+    protected EventHandler handler = new EventHandler();
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
 
