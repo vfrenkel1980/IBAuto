@@ -162,6 +162,25 @@ public class VSUIService extends TestBase implements IVSUIService {
     }
 
     @Override
+    public void performIbActionFromMenuDontWaitForFinish(String action) {
+        driver.findElementByName("Build");
+        try {
+            driver.findElementByName("Incredibuild").click();
+        }
+        catch (Exception e){
+            try {
+                driver.findElementByName("IncrediBuild").click();
+            }
+            catch (Exception e1){
+                e.getMessage();
+            }
+        }
+        driver.findElementByName(action).click();
+        test.log(Status.INFO, "Successfully clicked on " + action);
+        SystemActions.sleep(3);
+    }
+
+    @Override
     public void performIbActionFromPrjExplorer(String action,String type, String solutionName){
         driver.findElementByName("Build");
         WebElement newel;

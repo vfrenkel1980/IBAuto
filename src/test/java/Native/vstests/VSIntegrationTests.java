@@ -112,7 +112,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
 
     @Test(testName = "IncrediBuild Stop Build")
     public void stopIbBuild(){
-        vsService.performIbActionFromMenu(StaticDataProvider.VsActions.REBUILD_SOLUTION);
+        vsService.performIbActionFromMenuDontWaitForFinish(StaticDataProvider.VsActions.REBUILD_SOLUTION);
         vsService.performIbActionFromMenu(StaticDataProvider.VsActions.STOP_BUILD);
         String result;
         try {
