@@ -200,10 +200,7 @@ public class UIValidationTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
+        vsuiService.killDriver();
         extent.flush();
     }
 

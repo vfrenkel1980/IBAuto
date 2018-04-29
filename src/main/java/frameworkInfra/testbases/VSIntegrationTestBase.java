@@ -106,10 +106,7 @@ public class VSIntegrationTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
+        vsuiService.killDriver();
         extent.flush();
     }
 }
