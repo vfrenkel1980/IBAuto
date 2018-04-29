@@ -38,7 +38,7 @@ public class UIValidationTestBase extends TestBase {
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
     public Screen screen = new Screen();
-    public VSUIService vsService = new VSUIService();
+    public VSUIService vsuiService = new VSUIService();
     protected String project = "";
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");

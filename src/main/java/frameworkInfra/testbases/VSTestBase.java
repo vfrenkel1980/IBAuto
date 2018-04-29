@@ -30,7 +30,7 @@ public class VSTestBase extends TestBase {
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
     public IbService ibService = new IbService();
-    public VSUIService vsuiService;
+    public VSUIService vsuiService = new VSUIService();
     public VSCommands vsCommands = new VSCommands();
     public WindowsService winService = new WindowsService();
 
@@ -50,11 +50,11 @@ public class VSTestBase extends TestBase {
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
             devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
-            try {
+/*            try {
                 winService.downloadFile(URL.VS_RELEASE_URL, Locations.VS_INSTALL_DIR + "\\vs_professional.exe");
             } catch (IOException e) {
                 e.getMessage();
-            }
+            }*/
         }
 
         switch (SCENARIO) {
@@ -88,7 +88,7 @@ public class VSTestBase extends TestBase {
                 else
                     vsCommands.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
-
+                vsuiService.openVSInstance(VSINSTALLATION, true);
                 SystemActions.killProcess("devenv.exe");
                 break;
 
@@ -107,10 +107,6 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
-        vsuiService = new VSUIService(driver);
-        vsuiService.openVSInstance(VSINSTALLATION, true);
-        driver.quit();
-        driver = null;
         extent.flush();
     }
 
@@ -125,11 +121,7 @@ public class VSTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-        if (driver != null) {
-            SystemActions.killProcess("devenv.exe");
-            driver.quit();
-        }
-        driver = null;
+        vsuiService.killDriver();
         extent.flush();
     }
 

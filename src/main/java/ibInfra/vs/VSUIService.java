@@ -29,7 +29,6 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class VSUIService implements IVSUIService {
 
     private WindowsService winService = new WindowsService();
-    private IbService ibService = new IbService();
     private WindowsDriver driver;
 
     public VSUIService(WindowsDriver driver){
@@ -60,6 +59,15 @@ public class VSUIService implements IVSUIService {
         }
         installedBuild = installedBuild.substring(0, installedBuild.indexOf(" "));
         return installedBuild;
+    }
+
+    @Override
+    public void killDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
+        SystemActions.killProcess("devenv.exe");
+        driver = null;
     }
 
     @Override
@@ -179,11 +187,11 @@ public class VSUIService implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-//            test.log(Status.INFO, "Opening VS" + version);
+            test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-  //          test.log(Status.INFO, "Visual Studio opened successfully");
+            test.log(Status.INFO, "Visual Studio opened successfully");
             if(isFirstActivation) {
                 try {
                     SystemActions.sleep(10);
@@ -191,9 +199,12 @@ public class VSUIService implements IVSUIService {
                 } catch (Exception e) {
                     e.getMessage();
                 }
+                finally {
+                    driver.quit();
+                }
             }
         } catch (MalformedURLException e) {
-    //        test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
+            test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
         }
 
     }

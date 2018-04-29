@@ -24,9 +24,9 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
 
-        vsService.openVSInstance("15", false);
-        vsService.openProject(projectLocation);
-        vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
+        vsuiService.openVSInstance("15", false);
+        vsuiService.openProject(projectLocation);
+        vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         try {
             screen.wait(vsBarPattern.similar((float) 0.9),2);
         } catch (FindFailed findFailed) {

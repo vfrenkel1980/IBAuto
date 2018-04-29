@@ -41,7 +41,7 @@ public class IbWebTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\Mark\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);

@@ -21,7 +21,6 @@ public class UnitTests {
         IbService ibService = new IbService();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance("15", false);
-        SystemActions.sleep(10);
         vsService.createNewProject("custom");
         vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, "solution", "custom");
         String result;

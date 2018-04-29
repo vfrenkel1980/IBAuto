@@ -1,13 +1,15 @@
 package Native.vstests;
 
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.VSIntegrationTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-
+@Listeners(SuiteListener.class)
 public class VSIntegrationTests extends VSIntegrationTestBase {
 
     @Test(testName = "Execute Build from Menu")

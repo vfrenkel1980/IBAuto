@@ -18,4 +18,6 @@ public interface IVSUIService  {
 
     String getInstalledMSBuildVersion();
 
+    void killDriver();
+
 }
