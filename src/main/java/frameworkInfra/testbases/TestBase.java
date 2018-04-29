@@ -1,33 +1,21 @@
 package frameworkInfra.testbases;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.EventHandler;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IbService;
-import ibInfra.linuxcl.LinuxService;
-import ibInfra.vsui.VSUIService;
-import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.ITestResult;
 import org.testng.Reporter;
-import org.testng.annotations.*;
-import org.apache.log4j.Logger;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -36,9 +24,9 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class TestBase {
 
     public static final Logger log = Logger.getLogger(TestBase.class.getName());
-    public static WindowsDriver driver = null;
+    public WindowsDriver driver = null;
     public static WebDriver webDriver = null;
-    protected static EventFiringWebDriver eventWebDriver;
+    public EventFiringWebDriver eventWebDriver;
     protected EventHandler handler = new EventHandler();
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();

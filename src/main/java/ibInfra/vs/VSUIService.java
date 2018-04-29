@@ -1,7 +1,6 @@
-package ibInfra.vsui;
+package ibInfra.vs;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
@@ -12,7 +11,6 @@ import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -37,85 +35,12 @@ public class VSUIService implements IVSUIService {
     public VSUIService(WindowsDriver driver){
         this.driver = driver;
     }
+    public VSUIService(){
+    }
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
         driver.findElementByName("Start Visual Studio").click();
-    }
-
-    @Override
-    public void installVSWithIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WITH_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
-    }
-
-    @Override
-    public void installVSWithoutIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WO_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void upgradeVSWithIB() {
-        upgradeVS();
-        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
-        winService.waitForProcessToFinish("vs_professional.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
-    }
-
-    @Override
-    public void upgradeVS() {
-        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
-        winService.waitForProcessToStart("vs_bootstrapper.exe");
-        winService.waitForProcessToFinish("vs_bootstrapper.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void installVSPreviewWithIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
-    }
-
-    @Override
-    public void installVSPreviewWithoutIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void upgradeVSPreviewWithIB() {
-        upgradeVSPreview();
-        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
-        winService.waitForProcessToFinish("vs_professional_preview.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
-        RegistryService.setRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\Builder", RegistryKeys.VS_FIRST_ACTIVATION, "0");
-    }
-
-    @Override
-    public void upgradeVSPreview() {
-        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
-        winService.waitForProcessToStart("vs_bootstrapper.exe");
-        winService.waitForProcessToFinish("vs_bootstrapper.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void uninstallIbExtension() {
-
     }
 
     @Override
@@ -214,9 +139,9 @@ public class VSUIService implements IVSUIService {
         else{
             newel = driver.findElementByName(solutionName);
         }
-        AppiumActions.rightClick(newel);
+        AppiumActions.rightClick(newel, driver);
         SystemActions.sleep(2);
-        AppiumActions.contextMenuIncrediBuildClick(newel);
+        AppiumActions.contextMenuIncrediBuildClick(newel, driver);
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + newel.getText() + action);
         SystemActions.sleep(3);
@@ -254,11 +179,11 @@ public class VSUIService implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS" + version);
+//            test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            test.log(Status.INFO, "Visual Studio opened successfully");
+  //          test.log(Status.INFO, "Visual Studio opened successfully");
             if(isFirstActivation) {
                 try {
                     SystemActions.sleep(10);
@@ -268,7 +193,7 @@ public class VSUIService implements IVSUIService {
                 }
             }
         } catch (MalformedURLException e) {
-            test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
+    //        test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
         }
 
     }

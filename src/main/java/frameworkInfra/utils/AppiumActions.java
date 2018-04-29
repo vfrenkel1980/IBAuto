@@ -2,6 +2,7 @@ package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
+import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,9 +12,9 @@ import java.util.NoSuchElementException;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class AppiumActions extends TestBase{
+public class AppiumActions {
 
-    public static void rightClick(WebElement element) {
+    public static void rightClick(WebElement element, WindowsDriver driver) {
         try {
             Actions action = new Actions(driver).contextClick(element);
             action.build().perform();
@@ -31,7 +32,7 @@ public class AppiumActions extends TestBase{
         }
     }
 
-    public static void contextMenuIncrediBuildClick(WebElement project){
+    public static void contextMenuIncrediBuildClick(WebElement project, WindowsDriver driver){
         List<WebElement> ibElements = null;
         WebElement goTo = null;
         ibElements =driver.findElementsByName("Incredibuild");
@@ -47,7 +48,7 @@ public class AppiumActions extends TestBase{
             e.getMessage();
         }
         if (goTo != null){
-            AppiumActions.rightClick(project);
+            AppiumActions.rightClick(project, driver);
             ibElements.get(0).click();
             test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText() );
         }

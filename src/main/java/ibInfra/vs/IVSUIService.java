@@ -1,24 +1,8 @@
-package ibInfra.vsui;
+package ibInfra.vs;
 
 public interface IVSUIService  {
 
     void vsFirstActivation();
-
-    void installVSWithIB();
-
-    void installVSWithoutIB();
-
-    void upgradeVSWithIB();
-
-    void upgradeVS();
-
-    void installVSPreviewWithIB();
-
-    void installVSPreviewWithoutIB();
-
-    void upgradeVSPreviewWithIB();
-
-    void upgradeVSPreview();
 
     void openProject(String projectPath);
 
@@ -31,8 +15,6 @@ public interface IVSUIService  {
     void performIbActionFromPrjExplorer(String action,String type, String solutionName);
 
     void openVSInstance(String vsinstallation, boolean isFirstActivation);
-
-    void uninstallIbExtension();
 
     String getInstalledMSBuildVersion();
 

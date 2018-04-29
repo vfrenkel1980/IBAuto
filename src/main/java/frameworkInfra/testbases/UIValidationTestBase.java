@@ -12,7 +12,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
+import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;

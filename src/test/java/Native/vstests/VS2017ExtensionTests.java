@@ -5,16 +5,10 @@ import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
-import ibInfra.ibService.IbService;
-import ibInfra.windowscl.WindowsService;
-import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -42,7 +36,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
         ConfigurationReader confReader = new ConfigurationReader();
-        String actual = vsService.getInstalledMSBuildVersion();
+        String actual = vsuiService.getInstalledMSBuildVersion();
         String expected = confReader.getProperty("MSBuildVersion");
         test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
         Assert.assertEquals(actual, expected, "Installed MSBuild version does not match expected");
@@ -51,10 +45,10 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
     public void executeVSBuild(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVSInstance(VSINSTALLATION, false);
+        vsuiService.openVSInstance(VSINSTALLATION, false);
         SystemActions.sleep(20);
-        vsService.createNewProject("custom");
-        vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
+        vsuiService.createNewProject("custom");
+        vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
@@ -67,9 +61,9 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "IncrediBuild execution from VS2017 project explorer")
     public void executeVSBuildExplorer(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVSInstance(VSINSTALLATION, false);
-        vsService.openProject(TestProjects.CUSTOM_PROJECT);
-        vsService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "custom");
+        vsuiService.openVSInstance(VSINSTALLATION, false);
+        vsuiService.openProject(TestProjects.CUSTOM_PROJECT);
+        vsuiService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "custom");
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");

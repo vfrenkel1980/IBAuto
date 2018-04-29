@@ -9,12 +9,10 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
+import ibInfra.vs.VSUIService;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,7 +25,7 @@ public class VSIntegrationTestBase extends TestBase {
 
     protected static int ibVersion = 0;
     public IbService ibService = new IbService();
-    public VSUIService vsService = new VSUIService();
+    public VSUIService vsuiService = new VSUIService();
     protected String projectPath = "";
     protected String projectName = "";
 
@@ -57,7 +55,7 @@ public class VSIntegrationTestBase extends TestBase {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
         try {
-            vsService.openVSInstance(VCVersion, false);
+            vsuiService.openVSInstance(VCVersion, false);
             switch (VCVersion) {
                 case "8":
                     projectPath = TestProjects.VC8PROJECT;
@@ -88,7 +86,7 @@ public class VSIntegrationTestBase extends TestBase {
                     projectName = "vc15project";
                     break;
             }
-            vsService.openProject(projectPath);
+            vsuiService.openProject(projectPath);
         }catch (Exception e){
             e.getMessage();
         }

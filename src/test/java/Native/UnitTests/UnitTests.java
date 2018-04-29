@@ -1,31 +1,33 @@
 package Native.UnitTests;
 
-import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
+import ibInfra.vs.VSUIService;
+import io.appium.java_client.windows.WindowsDriver;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import webInfra.RestCalls.Get.GetIsMailRegistered;
 
 import java.io.IOException;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class UnitTests {
 
     @Test
-    public void test(){
-        String projectPath = StaticDataProvider.TestProjects.VC15PROJECT;
+    public void test() {
         VSUIService vsService = new VSUIService();
         IbService ibService = new IbService();
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance("15", false);
-        vsService.openProject("\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\"");
-        vsService.performIbActionFromMenuDontWaitForFinish(StaticDataProvider.VsActions.REBUILD_SOLUTION);
-        vsService.performIbActionFromMenu(StaticDataProvider.VsActions.STOP_BUILD);
+        SystemActions.sleep(10);
+        vsService.createNewProject("custom");
+        vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, "solution", "custom");
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertTrue(result.equals("4"));
+            Assert.assertTrue(result.equals("0"));
         } catch (IOException e) {
             e.getMessage();
         }

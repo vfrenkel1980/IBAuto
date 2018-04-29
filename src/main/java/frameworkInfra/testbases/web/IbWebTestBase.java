@@ -28,7 +28,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class IbWebTestBase extends TestBase {
 
-    protected DownloadPage downloadPage = new DownloadPage();
+    protected DownloadPage downloadPage;
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -47,6 +47,7 @@ public class IbWebTestBase extends TestBase {
         eventWebDriver.register(handler);
         eventWebDriver.get("https://test-store.incredibuild.com/");
         eventWebDriver.manage().window().maximize();
+        downloadPage = new DownloadPage(eventWebDriver);
     }
 
     @BeforeMethod
@@ -64,6 +65,7 @@ public class IbWebTestBase extends TestBase {
             eventWebDriver.quit();
             eventWebDriver.unregister(handler);
         }
+
         webDriver = null;
         extent.flush();
     }

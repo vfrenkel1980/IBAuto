@@ -7,9 +7,9 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
-import ibInfra.vsui.VSUIService;
+import ibInfra.vs.VSCommands;
+import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
-import io.appium.java_client.windows.WindowsDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.SkipException;
@@ -30,7 +30,8 @@ public class VSTestBase extends TestBase {
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
     public IbService ibService = new IbService();
-    public VSUIService vsService = new VSUIService();
+    public VSUIService vsuiService;
+    public VSCommands vsCommands = new VSCommands();
     public WindowsService winService = new WindowsService();
 
     static {
@@ -61,9 +62,9 @@ public class VSTestBase extends TestBase {
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
                 if (VSINSTALLATION.equals("15"))
-                    vsService.upgradeVS();
+                    vsCommands.upgradeVS();
                 else
-                    vsService.upgradeVSPreview();
+                    vsCommands.upgradeVSPreview();
                 ibService.installIB("Latest");
                 ibService.verifyIbServicesRunning();
                 break;
@@ -72,9 +73,9 @@ public class VSTestBase extends TestBase {
             case "2":
                 test.log(Status.INFO, "Before class started\n SCENARIO 2: upgrade vs and install IB from vs installer");
                 if (VSINSTALLATION.equals("15"))
-                    vsService.upgradeVSWithIB();
+                    vsCommands.upgradeVSWithIB();
                 else
-                    vsService.upgradeVSPreviewWithIB();
+                    vsCommands.upgradeVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
                 break;
 
@@ -83,13 +84,11 @@ public class VSTestBase extends TestBase {
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
                 ibService.installIB("2147");
                 if (VSINSTALLATION.equals("15"))
-                    vsService.installVSWithIB();
+                    vsCommands.installVSWithIB();
                 else
-                    vsService.installVSPreviewWithIB();
+                    vsCommands.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning();
-                vsService.openVSInstance(VSINSTALLATION, true);
-                driver.quit();
-                driver = null;
+
                 SystemActions.killProcess("devenv.exe");
                 break;
 
@@ -97,9 +96,9 @@ public class VSTestBase extends TestBase {
             case "4":
                 test.log(Status.INFO, "Before class started\n SCENARIO 4: install vs without IB");
                 if (VSINSTALLATION.equals("15"))
-                    vsService.installVSWithoutIB();
+                    vsCommands.installVSWithoutIB();
                 else
-                    vsService.installVSPreviewWithoutIB();
+                    vsCommands.installVSPreviewWithoutIB();
                 test.log(Status.PASS, "");
                 extent.flush();
                 throw new SkipException("EXITING");
@@ -108,7 +107,10 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
-
+        vsuiService = new VSUIService(driver);
+        vsuiService.openVSInstance(VSINSTALLATION, true);
+        driver.quit();
+        driver = null;
         extent.flush();
     }
 

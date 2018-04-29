@@ -1,13 +1,11 @@
 package webInfra.ibWeb.pageObjects;
 
-import frameworkInfra.testbases.TestBase;
-import frameworkInfra.testbases.web.IbWebTestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DownloadPage extends TestBase{
+public class DownloadPage{
 
     /*-------------------MAPPING-------------------*/
     //First stage
@@ -38,7 +36,11 @@ public class DownloadPage extends TestBase{
     public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//*[@id=\"free-dev-submit\"]");
     public static final By PREVIOUS_BTN = By.xpath("//*[@value=\"prev\"]");
 
+    private EventFiringWebDriver eventWebDriver;
 
+    public DownloadPage(EventFiringWebDriver driver){
+        this.eventWebDriver = driver;
+    }
 
     public void createNewFreeDevWinAccount(String name, String lname, String email, String pass, String phone, String country, String company, String state, String city, String how, String job,
                                            boolean cpp, boolean csshort, boolean cslong, boolean java, boolean mailing){
@@ -55,7 +57,7 @@ public class DownloadPage extends TestBase{
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(country);
         eventWebDriver.findElement(COMPANY_TB).sendKeys(company);
         if (country.equals("united states"))
-            webDriver.findElement(STATE_DDL).sendKeys(state);
+            eventWebDriver.findElement(STATE_DDL).sendKeys(state);
         eventWebDriver.findElement(CITY_TB).sendKeys(city);
         eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(how);
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(job);
