@@ -12,6 +12,7 @@ import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -20,16 +21,22 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class VSUIService extends TestBase implements IVSUIService {
+public class VSUIService implements IVSUIService {
 
     private WindowsService winService = new WindowsService();
     private IbService ibService = new IbService();
+    private WindowsDriver driver;
+
+    public VSUIService(WindowsDriver driver){
+        this.driver = driver;
+    }
 
     public void vsFirstActivation(){
         driver.findElementByName("Not now, maybe later.").click();
@@ -139,6 +146,23 @@ public class VSUIService extends TestBase implements IVSUIService {
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
         test.log(Status.INFO, projectPath + " project opened");
+    }
+
+    @Override
+    public void createNewProject(String projectName) {
+        List<WebElement> nameTB;
+        List<WebElement> locationTB;
+        driver.findElementByName("File").click();
+        driver.findElementByName("New").click();
+        driver.findElementByName("Project...").click();
+        SystemActions.sleep(3);
+        driver.findElementByName("Windows Console Application").click();
+        nameTB =driver.findElementsByName("Name:");
+        nameTB.get(1).sendKeys(projectName);
+        nameTB =driver.findElementsByName("Location:");
+        nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
+        driver.findElementByName("OK").click();
+        SystemActions.sleep(5);
     }
 
     @Override

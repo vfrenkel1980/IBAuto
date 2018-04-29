@@ -22,6 +22,8 @@ public interface IVSUIService  {
 
     void openProject(String projectPath);
 
+    void createNewProject(String projectName);
+
     void performIbActionFromMenu(String action);
 
     void performIbActionFromMenuDontWaitForFinish(String action);

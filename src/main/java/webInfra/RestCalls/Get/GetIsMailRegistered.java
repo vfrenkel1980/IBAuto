@@ -1,37 +1,47 @@
 package webInfra.RestCalls.Get;
 
+import com.aventstack.extentreports.Status;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static frameworkInfra.Listeners.SuiteListener.test;
+
 public class GetIsMailRegistered {
 
-    public static void isRegistered(String email){
-    try {
-        URL url = new URL("https://test-store.incredibuild.com/authentication/email/" + email);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/json");
+    public static boolean isMailRegistered(String email){
 
-        if (conn.getResponseCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + conn.getResponseCode());
+        try {
+            URL url = new URL("https://test-store.incredibuild.com/authentication/verifyUniqueEmail/" + email);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() != 200) {
+                test.log(Status.ERROR, "Fail to connect with error code " + conn.getResponseCode());
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+            String output;
+            while ((output = br.readLine()) != null) {
+                if (output.equals("true")) {
+                    test.log(Status.INFO, "Mail is registered");
+                    conn.disconnect();
+                    return true;
+                }
+            }
+
+            test.log(Status.INFO, "Mail is not registered");
+            conn.disconnect();
+            return false;
+        } catch (IOException e) {
+            e.getMessage();
+            return false;
         }
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
-
-        String output;
-        System.out.println("Output from Server .... \n");
-        while ((output = br.readLine()) != null) {
-            System.out.println(output);
-        }
-        conn.disconnect();
-    } catch (IOException e) {
-        e.getMessage();
-    }
-
     }
 }

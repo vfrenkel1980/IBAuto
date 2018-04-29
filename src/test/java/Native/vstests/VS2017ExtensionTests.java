@@ -52,8 +52,8 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void executeVSBuild(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance(VSINSTALLATION, false);
-        SystemActions.sleep(30);
-        vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
+        SystemActions.sleep(20);
+        vsService.createNewProject("custom");
         vsService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
@@ -68,8 +68,8 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void executeVSBuildExplorer(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance(VSINSTALLATION, false);
-        vsService.openProject(TestProjects.CONSOLE_APPLICATION_01);
-        vsService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "ConsoleApplication1");
+        vsService.openProject(TestProjects.CUSTOM_PROJECT);
+        vsService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "custom");
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
