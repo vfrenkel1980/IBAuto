@@ -50,11 +50,11 @@ public class VSTestBase extends TestBase {
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
             devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
-/*            try {
+            try {
                 winService.downloadFile(URL.VS_RELEASE_URL, Locations.VS_INSTALL_DIR + "\\vs_professional.exe");
             } catch (IOException e) {
                 e.getMessage();
-            }*/
+            }
         }
 
         switch (SCENARIO) {
