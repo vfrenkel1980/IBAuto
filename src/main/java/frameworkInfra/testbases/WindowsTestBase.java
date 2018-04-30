@@ -53,10 +53,6 @@ public class WindowsTestBase extends TestBase {
         verifyRegistry(predicted, currentPredictedReg, RegistryKeys.PREDICTED);
         verifyRegistry("0", currentLocalLogging, RegistryKeys.LOCAL_LOGGING);
         verifyRegistry("0", currentStandalone, RegistryKeys.STANDALONE_MODE);
-        //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
-        //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //kill tray icon

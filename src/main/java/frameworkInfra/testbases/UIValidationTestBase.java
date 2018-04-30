@@ -60,10 +60,6 @@ public class UIValidationTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite(){
-        //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
-        //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         test = extent.createTest("Before Suite");
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");

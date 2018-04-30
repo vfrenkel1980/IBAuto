@@ -40,10 +40,6 @@ public class VSIntegrationTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite(){
-        //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
-        //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         ibService.disableVsMonitor();
         ibService.updateIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");

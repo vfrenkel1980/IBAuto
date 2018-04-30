@@ -17,7 +17,6 @@ public class WinNewAccountFormTests extends IbWebTestBase{
         downloadPage.createNewFreeDevWinAccount("Mark", "Zvu", "a.ad2@a.com", "4illumination", "555954",
                 "united states", "IB", "alaska", "MOHA", "other", "KING", false, true, false, true, false);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered("a.ad2@a.com"));
-
     }
 
 }

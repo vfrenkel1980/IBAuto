@@ -48,10 +48,6 @@ public class LinuxTestBase extends TestBase{
     public void linuxSetup(ITestContext testContext) {
         OS = "linux";
         log.info("starting LinuxTestBase before suite");
-        //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(StaticDataProvider.Locations.WORKSPACE_REPORTS, StaticDataProvider.Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
-        //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
 
         log.info("finished LinuxTestBase before suite");
     }
