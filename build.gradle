@@ -29,6 +29,7 @@ def LicenseTests = project.hasProperty("LicenseTests")
 def AgentSettings = project.hasProperty("AgentSettings")
 def UIValidations = project.hasProperty("UIValidations")
 def Setup = project.hasProperty("Setup")
+def WebRegression = project.hasProperty("WebRegression")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -125,6 +126,10 @@ test {
 
         if(Setup) {
             suites "src/test/resources/Setup.xml"
+        }
+
+        if(WebRegression) {
+            suites "src/test/resources/WebRegression.xml"
         }
     }
 
