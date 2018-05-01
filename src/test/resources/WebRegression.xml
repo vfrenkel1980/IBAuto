@@ -8,7 +8,7 @@
 
     <test name="WebDownload">
         <classes>
-            <class name ="Web.IBWeb.WinNewAccountFormTests" />
+            <class name ="Web.IBWeb.DownloadFormTests" />
         </classes>
     </test>
 </suite>

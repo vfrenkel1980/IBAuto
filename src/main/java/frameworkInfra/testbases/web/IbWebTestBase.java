@@ -45,7 +45,7 @@ public class IbWebTestBase extends TestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://test-store.incredibuild.com/");
+        eventWebDriver.get("https://en-store.incredibuild.com/");
         eventWebDriver.manage().window().maximize();
         downloadPage = new DownloadPage(eventWebDriver);
     }
