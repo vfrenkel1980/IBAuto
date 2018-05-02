@@ -29,6 +29,9 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbWebTestBase extends TestBase {
 
     protected DownloadPage downloadPage;
+    protected String host = "imap.gmail.com";
+    protected String mailAddress = "automation@incredibuild.com";
+    protected String password = "4illumination";
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -45,7 +48,7 @@ public class IbWebTestBase extends TestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://en-store.incredibuild.com/");
+        eventWebDriver.get("https://test-store.incredibuild.com/");
         eventWebDriver.manage().window().maximize();
         downloadPage = new DownloadPage(eventWebDriver);
     }

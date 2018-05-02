@@ -1,5 +1,6 @@
 package Native.UnitTests;
 
+import frameworkInfra.utils.MailService;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
@@ -30,5 +31,16 @@ public class UnitTests {
         } catch (IOException e) {
             e.getMessage();
         }
+    }
+
+    @Test
+    public void test2() {
+        String host = "imap.gmail.com";
+        String username = "automation@incredibuild.com";
+        String password = "4illumination";
+
+        /*String subject = MailService.checkMail(username,password);
+        System.out.println(subject);
+        */MailService.deleteMail(host, username,password);
     }
 }

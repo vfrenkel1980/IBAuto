@@ -2,22 +2,29 @@ package Web.IBWeb;
 
 import frameworkInfra.Listeners.TestListener;
 import frameworkInfra.testbases.web.IbWebTestBase;
+
+import frameworkInfra.utils.MailService;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
 import webInfra.ibWeb.downloadPage.RegistrationForm;
 
+
 @Listeners(TestListener.class)
 public class DownloadFormTests extends IbWebTestBase{
 
     @Test(testName = "Windows Registration")
     public void windowsRegistration(){
-        RegistrationForm rf = new RegistrationForm("Win", "User", "a.ad3@a.com", "4illumination",
+        String mailSubject;
+        RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
                 "555954","united states", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, false);
         downloadPage.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered("a.ad2@a.com"));
+        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
+        mailSubject = MailService.checkMail(host, mailAddress, password);
+        Assert.assertEquals(mailSubject, "Sandbox: Your IncrediBuild Download and License Files");
+        MailService.deleteMail(host, mailAddress, password);
     }
 
     @Test(testName = "Linux Registration")
