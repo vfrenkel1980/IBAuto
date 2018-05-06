@@ -1,7 +1,6 @@
 package ibInfra.ibUIService;
 
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
-import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.FindFailed;
@@ -73,7 +72,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void browseLicense() throws FindFailed {
-            screen.wait(IBInstaller.BrowseLisenseBTN.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),2).click();
         }
 
         @Override
