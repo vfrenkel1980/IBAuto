@@ -5,10 +5,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import ibInfra.windowscl.WindowsService;
-import io.appium.java_client.windows.WindowsDriver;
-import io.appium.java_client.windows.WindowsElement;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.sikuli.script.Screen;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -16,14 +13,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
 
@@ -31,6 +23,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class SetupTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
+    public Screen screen = new Screen();
 
 
     static {
@@ -46,42 +39,13 @@ public class SetupTestBase extends TestBase {
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
-/*        try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-
-            capabilities.setCapability("app", "Root");
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
-            WebElement installerWindow = driver.findElementByName("IncrediBuild Setup - Welcome");
-            String installerTopLevelWindowHandle = installerWindow.getAttribute("NativeWindowHandle");
-            installerTopLevelWindowHandle = String.format("%040x", new BigInteger(1, installerTopLevelWindowHandle.getBytes("UTF-8")));
-
-            DesiredCapabilities appCapabilities = new DesiredCapabilities();
-            appCapabilities.setCapability("appTopLevelWindow", installerTopLevelWindowHandle);
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), appCapabilities);
-
-        } catch (MalformedURLException | UnsupportedEncodingException e) {
-            e.getMessage();
-        }*/
-        try{
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("app", "\"C:\\Users\\Mark\\Desktop\\Xoreax_Setup_14620\\Setup.exe\"");
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
 
 
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result)throws IOException {
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
+
         extent.flush();
     }
 }

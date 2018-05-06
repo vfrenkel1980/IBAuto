@@ -4,20 +4,11 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.SystemActions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import webInfra.ibWeb.pageObjects.DownloadPage;
+import webInfra.ibWeb.pageObjects.DownloadPageObject;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,7 +19,6 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class IbWebTestBase extends TestBase {
 
-    protected DownloadPage downloadPage;
     protected String host = "imap.gmail.com";
     protected String mailAddress = "automation@incredibuild.com";
     protected String password = "4illumination";
@@ -39,18 +29,6 @@ public class IbWebTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "- IBWEB.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-    }
-
-    @BeforeClass
-    public void setUpEnv() {
-        test = extent.createTest("Before Class");
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        eventWebDriver = new EventFiringWebDriver(webDriver);
-        eventWebDriver.register(handler);
-        eventWebDriver.get("https://test-store.incredibuild.com/");
-        eventWebDriver.manage().window().maximize();
-        downloadPage = new DownloadPage(eventWebDriver);
     }
 
     @BeforeMethod

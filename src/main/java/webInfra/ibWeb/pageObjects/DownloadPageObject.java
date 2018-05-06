@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webInfra.ibWeb.downloadPage.RegistrationForm;
 
-public class DownloadPage{
+public class DownloadPageObject {
 
     /*-------------------MAPPING-------------------*/
     //First stage
@@ -69,7 +69,7 @@ public class DownloadPage{
 
     private EventFiringWebDriver eventWebDriver;
 
-    public DownloadPage(EventFiringWebDriver driver){
+    public DownloadPageObject(EventFiringWebDriver driver){
         this.eventWebDriver = driver;
     }
 

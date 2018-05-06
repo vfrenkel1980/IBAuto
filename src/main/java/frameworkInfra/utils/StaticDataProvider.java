@@ -7,6 +7,7 @@ public class StaticDataProvider {
 
     public static class InitIBRoot{
         public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
+        public static final String LOGS_ROOT = InitIBRoot.IB_ROOT + "\\Logs";
     }
 
     public static class InitMSBuild{
@@ -16,7 +17,6 @@ public class StaticDataProvider {
     //locations
     public static class Locations {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
-        public static final String LOGS_ROOT = InitIBRoot.IB_ROOT + "\\Logs";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
