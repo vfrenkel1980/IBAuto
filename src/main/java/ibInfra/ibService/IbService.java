@@ -76,7 +76,7 @@ public class IbService extends TestBase implements IIBService {
                 installerName = String.valueOf(newDirectoryStreamItem);
             }
         } catch (final Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         return installerName;
     }

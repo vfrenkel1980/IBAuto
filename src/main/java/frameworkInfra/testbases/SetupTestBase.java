@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Screen;
 import org.testng.ITestContext;
@@ -24,6 +26,9 @@ public class SetupTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
     public Screen screen = new Screen();
+    public IBUIService ibuiService = new IBUIService();
+    public IbService ibService = new IbService();
+    public IBUIService.Installer installer = ibuiService.new Installer();
 
 
     static {
@@ -39,13 +44,10 @@ public class SetupTestBase extends TestBase {
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
-
-
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result)throws IOException {
-
         extent.flush();
     }
 }

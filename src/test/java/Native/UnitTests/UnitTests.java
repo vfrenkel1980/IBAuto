@@ -5,6 +5,7 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
 import ibInfra.vs.VSUIService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.testng.Assert;
@@ -35,12 +36,7 @@ public class UnitTests {
 
     @Test
     public void test2() {
-        String host = "imap.gmail.com";
-        String username = "automation@incredibuild.com";
-        String password = "4illumination";
-
-        /*String subject = MailService.checkMail(username,password);
-        System.out.println(subject);
-        */MailService.deleteMail(host, username,password);
+        IBUIService ibuiService = new IBUIService();
+        ibuiService.startIBUIInstaller("Latest");
     }
 }
