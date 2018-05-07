@@ -8,6 +8,7 @@ import frameworkInfra.utils.SystemActions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import webInfra.ibWeb.pageObjects.DownloadPageObject;
 
 import java.lang.reflect.Method;
@@ -33,10 +34,11 @@ public class IbWebTestBase extends TestBase {
     }
 
     @BeforeMethod
-    public void beforeMethod(Method method, ITestContext context){
+    @Parameters({"lang"})
+    public void beforeMethod(Method method, ITestContext context, String lang){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(context.getName());
+        test.assignCategory(context.getName() + " - " + lang);
         log.info(method.getName() + " test started");
     }
 
@@ -47,7 +49,6 @@ public class IbWebTestBase extends TestBase {
             eventWebDriver.quit();
             eventWebDriver.unregister(handler);
         }
-
         webDriver = null;
         extent.flush();
     }

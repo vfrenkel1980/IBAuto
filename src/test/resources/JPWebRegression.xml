@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="JPWebRegression"  >
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <parameter name="lang" value="jp"/>
+
+    <test name="JapanUnique">
+        <classes>
+            <class name ="Web.IBWeb.DownloadFormTests" />
+        </classes>
+    </test>
+</suite>

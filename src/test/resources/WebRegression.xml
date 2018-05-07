@@ -6,9 +6,34 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
+
     <test name="WebDownload">
+        <parameter name="lang" value="en"/>
         <classes>
             <class name ="Web.IBWeb.DownloadFormTests" />
+        </classes>
+    </test>
+
+    <test name="LandingPage">
+        <parameter name="lang" value="en"/>
+        <classes>
+            <class name ="Web.IBWeb.LandingPageTests" />
+        </classes>
+    </test>
+
+    <!--JAPAN-->
+
+    <test name="WebDownload">
+        <parameter name="lang" value="jp"/>
+        <classes>
+            <class name ="Web.IBWeb.DownloadFormTests" />
+        </classes>
+    </test>
+
+    <test name="LandingPage">
+        <parameter name="lang" value="jp"/>
+        <classes>
+            <class name ="Web.IBWeb.LandingPageTests" />
         </classes>
     </test>
 </suite>

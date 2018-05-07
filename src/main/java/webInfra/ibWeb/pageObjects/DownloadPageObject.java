@@ -66,7 +66,7 @@ public class DownloadPageObject {
     public static final By ADVANCED_REPORTING_CB = By.xpath("//*[@id=\"Advanced_Reporting\"]");
 
 
-    public static final By AWESOME = By.xpath("//h4[contains(text(),'AWESOME!')]");
+    public static final By AWESOME_LBL = By.xpath("//h4[contains(text(),'AWESOME_LBL!')]");
 
 
 
@@ -181,7 +181,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
 
     public void registerEnterpriseUser(RegistrationForm rf){
@@ -225,7 +225,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
 
 

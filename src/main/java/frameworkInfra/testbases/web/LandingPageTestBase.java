@@ -3,6 +3,7 @@ package frameworkInfra.testbases.web;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import webInfra.ibWeb.pageObjects.DownloadPageObject;
 import webInfra.ibWeb.pageObjects.LandingPageObject;
 
@@ -14,13 +15,21 @@ public class LandingPageTestBase extends IbWebTestBase {
     protected LandingPageObject landingPageObject;
 
     @BeforeClass
-    public void setUpEnv() {
+    @Parameters({"lang"})
+    public void setUpEnv(String lang) {
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://en-store.incredibuild.com/incredibuild-codeproject#/");
+        switch (lang){
+            case "en":
+                eventWebDriver.get("https://en-store.incredibuild.com/incredibuild-codeproject#/");
+                break;
+            case "jp":
+                eventWebDriver.get("https://en-store.incredibuild.com/incredibuild-codeproject#/");
+                break;
+        }
         eventWebDriver.manage().window().maximize();
         landingPageObject = new LandingPageObject(eventWebDriver);
     }
