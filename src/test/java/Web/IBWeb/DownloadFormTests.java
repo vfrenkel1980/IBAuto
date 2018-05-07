@@ -17,14 +17,14 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Windows Registration")
     public void windowsRegistration(){
         String mailSubject;
-        RegistrationForm rf = new RegistrationForm("Win", "User", "automation+5@incredibuild.com", "4illumination",
+        RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
                 "555954","united states", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered("automation+4@incredibuild.com"));
-        mailSubject = MailService.checkMail(host, "automation+5@incredibuild.com", password);
+        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
+        mailSubject = MailService.checkMail(host, mailAddress, password);
         Assert.assertEquals(mailSubject, "Sandbox: Your IncrediBuild Download and License Files");
-        MailService.deleteMail(host, "automation+5@incredibuild.com", password);
+        MailService.deleteMail(host, mailAddress, password);
     }
 
     @Test(testName = "Linux Registration")
