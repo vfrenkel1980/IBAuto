@@ -138,8 +138,15 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
-    public boolean verifyIbServicesRunning() {
-        return winService.isServiceRunning(WindowsServices.AGENT_SERVICE) && winService.isServiceRunning(WindowsServices.COORD_SERVICE);
+    public boolean verifyIbServicesRunning(boolean agent, boolean coord) {
+        if (agent)
+            return winService.isServiceRunning(WindowsServices.AGENT_SERVICE);
+        else if (coord)
+            return winService.isServiceRunning(WindowsServices.COORD_SERVICE);
+        else if (agent && coord)
+            return winService.isServiceRunning(WindowsServices.AGENT_SERVICE) && winService.isServiceRunning(WindowsServices.COORD_SERVICE);
+        else
+            return false;
     }
 
     @Override
@@ -191,7 +198,10 @@ public class IbService extends TestBase implements IIBService {
         }
     }
 
-
+    @Override
+    public String getCoordinator() {
+        return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.COORDINATOR_HOST);
+    }
 
 
 }

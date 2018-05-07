@@ -11,10 +11,10 @@ public class DownloadPageObject {
     /*-------------------MAPPING-------------------*/
     //First stage
 
-    public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"myDIV\"]/ul/li[7]/a");
-    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows\"]/a/a");
-    public static final By LINUX_REG = By.xpath("//*[@id=\"linux\"]/a/a");
-    public static final By ENTERPISE_REG = By.xpath("//*[@id=\"enterprise\"]/a/a");
+    public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download-button\"]");
+    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows-form\"]");
+    public static final By LINUX_REG = By.xpath("//*[@id=\"linux-form\"]");
+    public static final By ENTERPISE_REG = By.xpath("//*[@id=\"enterprise-form\"]");
     public static final By FIRST_NAME_TB = By.xpath("//*[@id=\"name\"]");
     public static final By LAST_NAME_TB = By.xpath("//*[@id=\"lname\"]");
     public static final By EMAIL_TB = By.xpath("//*[@id=\"email\"]");
@@ -28,7 +28,8 @@ public class DownloadPageObject {
     //Second stage
     public static final By COUNTRY_SELECTION_DDL = By.xpath("//*[@id=\"countriesSelection\"]");
     public static final By COMPANY_TB = By.xpath("//*[@id=\"company\"]");
-    public static final By STATE_DDL = By.xpath("//*[@id=\"statesSelection\"]");
+    public static final By US_STATE_DDL = By.xpath("//*[@id=\"statesSelectionUSA\"]");
+    public static final By CANADA_STATE_DDL = By.xpath("//*[@id=\"statesSelectionCanada\"]");
     public static final By CITY_TB = By.xpath("//*[@id=\"city\"]");
     public static final By HOW_DID_YOU_HEAR_DDL = By.xpath("//*[@id=\"howDidYouSelection\"]");
     public static final By JOB_TITLE_TB = By.xpath("//*[@id=\"jobtitle\"]");
@@ -86,8 +87,14 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_WIN_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
-        if (rf.getCountry().equals("united states") || rf.getCountry().equals("canada") )
-            eventWebDriver.findElement(STATE_DDL).sendKeys(rf.getState());
+        switch (rf.getCountry()){
+            case "united states":
+                eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
+                break;
+            case "canada":
+                eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
+                break;
+        }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
         eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());
@@ -116,8 +123,15 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_LINUX_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
-        if (rf.getCountry().equals("united states") || rf.getCountry().equals("canada") )
-            eventWebDriver.findElement(STATE_DDL).sendKeys(rf.getState());
+        eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
+        switch (rf.getCountry()){
+            case "united states":
+                eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
+                break;
+            case "canada":
+                eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
+                break;
+        }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
         eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());
@@ -178,8 +192,15 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_LINUX_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
-        if (rf.getCountry().equals("united states") || rf.getCountry().equals("canada") )
-            eventWebDriver.findElement(STATE_DDL).sendKeys(rf.getState());
+        eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
+        switch (rf.getCountry()){
+            case "united states":
+                eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
+                break;
+            case "canada":
+                eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
+                break;
+        }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
         eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());

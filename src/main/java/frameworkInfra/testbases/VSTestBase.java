@@ -66,7 +66,7 @@ public class VSTestBase extends TestBase {
                 else
                     vsCommands.upgradeVSPreview();
                 ibService.installIB("Latest");
-                ibService.verifyIbServicesRunning();
+                ibService.verifyIbServicesRunning(true, true);
                 break;
 
             //upgrade vs and install IB from vs installer
@@ -76,7 +76,7 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVSWithIB();
                 else
                     vsCommands.upgradeVSPreviewWithIB();
-                ibService.verifyIbServicesRunning();
+                ibService.verifyIbServicesRunning(true, true);
                 break;
 
             //install old IB, install vs and upgrade IB from VS installer
@@ -87,7 +87,7 @@ public class VSTestBase extends TestBase {
                     vsCommands.installVSWithIB();
                 else
                     vsCommands.installVSPreviewWithIB();
-                ibService.verifyIbServicesRunning();
+                ibService.verifyIbServicesRunning(true, true);
                 vsuiService.openVSInstance(VSINSTALLATION, true);
                 SystemActions.killProcess("devenv.exe");
                 break;

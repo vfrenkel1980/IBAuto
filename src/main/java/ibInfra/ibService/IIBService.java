@@ -11,7 +11,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public interface IIBService {
-    
+
     String getIBinstallFolder();
 
     int cleanAndBuild(String command);
@@ -24,12 +24,12 @@ public interface IIBService {
 
     void updateIB(String version);
 
-    static int getIbVersion(){
+    static int getIbVersion() {
         String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
         int version = Integer.parseInt(regVersion);
         version -= 1001000;
         if (test != null)
-            test.log(Status.INFO,"Installed IB version -----> " + version);
+            test.log(Status.INFO, "Installed IB version -----> " + version);
         return version;
     }
 
@@ -51,9 +51,9 @@ public interface IIBService {
 
     boolean verifyExtensionInstalled(String extensionVersion);
 
-    boolean verifyIbServicesRunning();
+    boolean verifyIbServicesRunning(boolean agent, boolean coord);
 
-    String findValueInPacketLog (String keyInLogFile)  throws IOException;
+    String findValueInPacketLog(String keyInLogFile) throws IOException;
 
     void uninstallIB(String version);
 
@@ -62,4 +62,6 @@ public interface IIBService {
     String getVSVersionFromOutputLog(String logPath);
 
     boolean isLicenseLoaded();
+
+    String getCoordinator();
 }

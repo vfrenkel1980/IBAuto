@@ -12,7 +12,7 @@ public class IBInstaller {
     public static final Pattern DesktopTabBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\desktop_tab.png");
     public static final Pattern EnvVarCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\env_variable.png");
     public static final Pattern InstallationPathTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\installation_path.png");
-    public static final Pattern LicenseFile = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\lisense_file.png");
+    public static final Pattern LicenseFile = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\license_file.png");
     public static final Pattern LicenseLoadedOKBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\license_loaded_confirmation.png");
     public static final Pattern NewCoordinatorRB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\new_coordinator.png");
     public static final Pattern OpenLicBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\open_lic.png");

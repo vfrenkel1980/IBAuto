@@ -25,10 +25,9 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class SetupTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
-    public Screen screen = new Screen();
-    public IBUIService ibuiService = new IBUIService();
+    protected IBUIService ibuiService = new IBUIService();
     public IbService ibService = new IbService();
-    public IBUIService.Installer installer = ibuiService.new Installer();
+    protected IBUIService.Installer installer = ibuiService.new Installer();
 
 
     static {
@@ -47,7 +46,8 @@ public class SetupTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result)throws IOException {
+    public void afterMethod(ITestResult result) {
+        ibService.uninstallIB("Latest");
         extent.flush();
     }
 }

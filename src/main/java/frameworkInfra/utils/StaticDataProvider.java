@@ -24,6 +24,7 @@ public class StaticDataProvider {
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
+        public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
     }
 
     public static class URL{
@@ -368,6 +369,7 @@ public class StaticDataProvider {
         public static final String CUSTOM_STEP_VS10_SUPPORT = "CustomStepVs10Support";
         public static final String KEEP_BUILD_STATUS_ICON = "KeepBuildStatusIcon";
         public static final String FOLDER = "Folder";
+        public static final String COORDINATOR_HOST = "CoordHost";
 
     }
 
