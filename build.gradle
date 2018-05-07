@@ -30,6 +30,8 @@ def AgentSettings = project.hasProperty("AgentSettings")
 def UIValidations = project.hasProperty("UIValidations")
 def Setup = project.hasProperty("Setup")
 def WebRegression = project.hasProperty("WebRegression")
+def ENWebRegression = project.hasProperty("ENWebRegression")
+def JPWebRegression = project.hasProperty("JPWebRegression")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -132,6 +134,14 @@ test {
 
         if(WebRegression) {
             suites "src/test/resources/WebRegression.xml"
+        }
+
+        if(ENWebRegression) {
+            suites "src/test/resources/ENWebRegression.xml"
+        }
+
+        if(JPWebRegression) {
+            suites "src/test/resources/JPWebRegression.xml"
         }
     }
 
