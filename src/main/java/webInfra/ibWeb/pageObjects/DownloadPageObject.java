@@ -11,10 +11,10 @@ public class DownloadPageObject {
     /*-------------------MAPPING-------------------*/
     //First stage
 
-    public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download-button\"]");
-    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows-form\"]");
-    public static final By LINUX_REG = By.xpath("//*[@id=\"linux-form\"]");
-    public static final By ENTERPISE_REG = By.xpath("//*[@id=\"enterprise-form\"]");
+    public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download_button\"]");
+    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows_form\"]");
+    public static final By LINUX_REG = By.xpath("//*[@id=\"linux_form\"]");
+    public static final By ENTERPISE_REG = By.xpath("//*[@id=\"enterprise_form\"]");
     public static final By FIRST_NAME_TB = By.xpath("//*[@id=\"name\"]");
     public static final By LAST_NAME_TB = By.xpath("//*[@id=\"lname\"]");
     public static final By EMAIL_TB = By.xpath("//*[@id=\"email\"]");
@@ -22,8 +22,7 @@ public class DownloadPageObject {
     public static final By PASSWORD_CONFIRMATION_TB = By.xpath("//*[@id=\"password_confirmation\"]");
     public static final By PHONE_TB = By.xpath("//*[@id=\"phone\"]");
     public static final By TERMS_CB = By.xpath("//*[@id=\"terms\"]");
-    public static final By SUBMIT_FIRST_WIN_FORM_BTN = By.xpath("//*[@id=\"first-step-submit\"]");
-    public static final By SUBMIT_FIRST_LINUX_FORM_BTN = By.xpath("//Button[@value=\"Next\"]");
+    public static final By SUBMIT_FIRST_FORM_BTN = By.xpath("//*[@id=\"first-step-submit\"]");
 
     //Second stage
     public static final By COUNTRY_SELECTION_DDL = By.xpath("//*[@id=\"countriesSelection\"]");
@@ -84,7 +83,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys(rf.getPass());
         eventWebDriver.findElement(PHONE_TB).sendKeys(rf.getPhone());
         eventWebDriver.findElement(TERMS_CB).click();
-        eventWebDriver.findElement(SUBMIT_FIRST_WIN_FORM_BTN).click();
+        eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
@@ -120,7 +119,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(EMAIL_TB).sendKeys(rf.getEmail());
         eventWebDriver.findElement(PHONE_TB).sendKeys(rf.getPhone());
         eventWebDriver.findElement(TERMS_CB).click();
-        eventWebDriver.findElement(SUBMIT_FIRST_LINUX_FORM_BTN).click();
+        eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
@@ -189,7 +188,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(EMAIL_TB).sendKeys(rf.getEmail());
         eventWebDriver.findElement(PHONE_TB).sendKeys(rf.getPhone());
         eventWebDriver.findElement(TERMS_CB).click();
-        eventWebDriver.findElement(SUBMIT_FIRST_LINUX_FORM_BTN).click();
+        eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
