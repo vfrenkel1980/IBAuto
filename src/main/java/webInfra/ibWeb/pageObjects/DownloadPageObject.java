@@ -66,7 +66,7 @@ public class DownloadPageObject {
     public static final By ADVANCED_REPORTING_CB = By.xpath("//*[@id=\"Advanced_Reporting\"]");
 
 
-    public static final By AWESOME_LBL = By.xpath("//h4[contains(text(),'AWESOME_LBL!')]");
+    public static final By AWESOME_LBL = By.xpath("//*[contains(text(),'AWESOME!')]");
 
 
 

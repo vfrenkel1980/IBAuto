@@ -8,7 +8,7 @@ public class LandingPageTests extends LandingPageTestBase {
 
     @Test(testName = "Registration")
     public void registration(){
-        LandingPage lp = new LandingPage("Landing", "Test", mailAddress, "4illumination", "123456", "israel",
+        LandingPage lp = new LandingPage("Landing", "Test", "automation+2@incredibuild.com", "4illumination", "123456", "israel",
                 "cdf", "nonofyourbussines", "5", false);
         landingPageObject.register(lp);
     }

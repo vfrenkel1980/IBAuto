@@ -10,11 +10,11 @@
     </listeners>
 
     <test name="Detailed">
-        <!--<parameter name="logLevel" value="4"/>-->
+        <parameter name="lang" value="en"/>
         <classes>
-            <class name ="Native.linuxtests.LinuxMultiBuildTests" >
+            <class name ="Web.IBWeb.DownloadFormTests" >
                 <methods>
-                    <include name="Multi" />
+                    <include name="linuxRegistration" />
                 </methods>
             </class>
         </classes>

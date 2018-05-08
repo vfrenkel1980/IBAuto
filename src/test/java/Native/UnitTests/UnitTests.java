@@ -8,12 +8,18 @@ import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.vs.VSUIService;
 import io.appium.java_client.windows.WindowsDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import webInfra.ibWeb.downloadPage.RegistrationForm;
+import webInfra.ibWeb.pageObjects.DownloadPageObject;
 
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.extent;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class UnitTests {
 
@@ -36,7 +42,6 @@ public class UnitTests {
 
     @Test
     public void test2() {
-        IBUIService ibuiService = new IBUIService();
-        ibuiService.startIBUIInstaller("Latest");
+
     }
 }
