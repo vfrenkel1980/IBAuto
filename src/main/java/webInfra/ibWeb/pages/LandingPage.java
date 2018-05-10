@@ -1,4 +1,4 @@
-package webInfra.ibWeb.downloadPage;
+package webInfra.ibWeb.pages;
 
 public class LandingPage {
 

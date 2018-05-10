@@ -2,7 +2,7 @@ package Web.IBWeb;
 
 import frameworkInfra.testbases.web.LandingPageTestBase;
 import org.testng.annotations.Test;
-import webInfra.ibWeb.downloadPage.LandingPage;
+import webInfra.ibWeb.pages.LandingPage;
 
 public class LandingPageTests extends LandingPageTestBase {
 

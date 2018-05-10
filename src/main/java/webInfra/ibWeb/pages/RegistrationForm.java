@@ -1,4 +1,4 @@
-package webInfra.ibWeb.downloadPage;
+package webInfra.ibWeb.pages;
 
 public class RegistrationForm {
 
@@ -37,6 +37,14 @@ public class RegistrationForm {
     boolean parallelBuilds;
     boolean unlimitedInitiators;
     boolean advancedReporting;
+
+    public RegistrationForm(String name, String lname, String email, String pass, String phone) {
+        this.name = name;
+        this.lname = lname;
+        this.email = email;
+        this.pass = pass;
+        this.phone = phone;
+    }
 
     public RegistrationForm(String name, String lname, String email, String pass, String phone, String country, String state,
                             String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,

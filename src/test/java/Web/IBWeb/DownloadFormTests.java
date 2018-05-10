@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
-import webInfra.ibWeb.downloadPage.RegistrationForm;
+import webInfra.ibWeb.pages.RegistrationForm;
 
 
 @Listeners(TestListener.class)
@@ -43,6 +43,11 @@ public class DownloadFormTests extends DownloadPageTestBase{
                 "Israel", "","IB","city", "other", "ballz", true, true,
                 false,false, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);
+    }
+
+    @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
+    public void verifyExistingUser(){
+        downloadPageObject.verifyExistingUserMessage(mailAddress);
     }
 
 

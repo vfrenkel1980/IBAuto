@@ -14,7 +14,7 @@
         <classes>
             <class name ="Web.IBWeb.DownloadFormTests" >
                 <methods>
-                    <include name="linuxRegistration" />
+                    <include name="test" />
                 </methods>
             </class>
         </classes>
