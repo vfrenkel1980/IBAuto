@@ -12,6 +12,7 @@ public class MailService {
     {
         try {
             String subject = "";
+            int timeout = 0;
             Message[] messages;
             Properties properties = new Properties();
             properties.put("mail.store.protocol", "imaps");
@@ -26,8 +27,10 @@ public class MailService {
             emailFolder.open(Folder.READ_ONLY);
 
             do {
+                SystemActions.sleep(5);
+                timeout ++;
                 messages = emailFolder.getMessages();
-            } while (messages.length == 0);
+            } while (messages.length == 0 && timeout < 60);
 
             Message message = messages[0];
             subject = message.getSubject();
