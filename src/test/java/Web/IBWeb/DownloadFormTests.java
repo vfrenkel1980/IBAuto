@@ -29,7 +29,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
-        RegistrationForm rf = new RegistrationForm("linux", "User", "a@aa.com", "123123",
+        RegistrationForm rf = new RegistrationForm("linux", "User", mailAddress2, "123123",
                 "canada", "Alberta","IB","city", "other", "Brain", true, true,
                 false,false, true,false,true,true,true,true,false,
                 true,false,true,true,true,false,true,false,
@@ -39,7 +39,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Enterprise Registration")
     public void enterpriseRegistration(){
-        RegistrationForm rf = new RegistrationForm("enterprise", "User", "b@bb.com", "123123",
+        RegistrationForm rf = new RegistrationForm("enterprise", "User", mailAddress2, "123123",
                 "Israel", "","IB","city", "other", "ballz", true, true,
                 false,false, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);

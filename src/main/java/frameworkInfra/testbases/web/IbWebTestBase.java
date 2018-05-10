@@ -22,7 +22,9 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbWebTestBase extends TestBase {
 
     protected String host = "imap.gmail.com";
-    protected String mailAddress = "automation@incredibuild.com";
+    protected String mailAddress = "incrediautomation@gmail.com";
+    protected String mailAddress2 = "incrediautomation2@gmail.com";
+    protected String mailAddress3 = "incrediautomation3@gmail.com";
     protected String password = "4illumination";
 
     static {
