@@ -24,10 +24,10 @@ public class LandingPageTestBase extends IbWebTestBase {
         eventWebDriver.register(handler);
         switch (lang){
             case "en":
-                eventWebDriver.get("https://en-store.incredibuild.com/incredibuild-codeproject#/");
+                eventWebDriver.get("https://test-store.incredibuild.com/incredibuild-codeproject#/");
                 break;
             case "jp":
-                eventWebDriver.get("https://en-store.incredibuild.com/incredibuild-codeproject#/");
+                eventWebDriver.get("https://test-store.incredibuild.com/incredibuild-codeproject#/");
                 break;
         }
         eventWebDriver.manage().window().maximize();

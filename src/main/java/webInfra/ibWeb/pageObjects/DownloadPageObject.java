@@ -1,5 +1,6 @@
 package webInfra.ibWeb.pageObjects;
 
+import frameworkInfra.utils.SystemActions;
 import jdk.nashorn.internal.scripts.JO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -95,9 +96,9 @@ public class DownloadPageObject {
     public static final By cityshort = By.xpath("//*[contains(text(),'The city field must be at least 2 characters.')]");
     public static final By citynumeric = By.xpath("//*[contains(text(),'The city field may only contain alphabetic characters.')]");
     public static final By howdidyouhearempty = By.xpath("//*[contains(text(),'Please choose how you heard about incredibuild.')]");
-    public static final By jobempty = By.xpath("//*[contains(text(),'The job field is required.')]");
-    public static final By jobshort = By.xpath("//*[contains(text(),'The job field must be at least 2 characters.')]");
-    public static final By jobnumeric = By.xpath("//*[contains(text(),'The job field may only contain alphabetic characters.')]");
+    public static final By jobempty = By.xpath("//*[contains(text(),'The job title field is required.')]");
+    public static final By jobshort = By.xpath("//*[contains(text(),'The job title field must be at least 2 characters.')]");
+    public static final By jobnumeric = By.xpath("//*[contains(text(),'The job title field may only contain alphabetic characters.')]");
 
 
     private EventFiringWebDriver eventWebDriver;
@@ -154,7 +155,6 @@ public class DownloadPageObject {
         eventWebDriver.findElement(TERMS_CB).click();
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
-        eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
             case "united states":
@@ -225,7 +225,6 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).sendKeys(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
-        eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
             case "united states":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
@@ -262,10 +261,15 @@ public class DownloadPageObject {
         Assert.assertTrue(eventWebDriver.findElement(firstnamedigits).isDisplayed());
 
         eventWebDriver.findElement(FIRST_NAME_TB).clear();
+        eventWebDriver.findElement(FIRST_NAME_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(firstnameempty).isDisplayed());
 
+        eventWebDriver.findElement(FIRST_NAME_TB).clear();
         eventWebDriver.findElement(FIRST_NAME_TB).sendKeys("a");
         Assert.assertTrue(eventWebDriver.findElement(firstnameonechar).isDisplayed());
+        eventWebDriver.findElement(FIRST_NAME_TB).clear();
+        eventWebDriver.findElement(FIRST_NAME_TB).sendKeys("Test");
+        Assert.assertTrue(eventWebDriver.findElements(firstnameonechar).isEmpty());
     }
 
     public void validateLastName(){
@@ -273,17 +277,26 @@ public class DownloadPageObject {
         Assert.assertTrue(eventWebDriver.findElement(lastnamedigits).isDisplayed());
 
         eventWebDriver.findElement(LAST_NAME_TB).clear();
+        eventWebDriver.findElement(LAST_NAME_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(lastnameempty).isDisplayed());
 
+        eventWebDriver.findElement(LAST_NAME_TB).clear();
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys("a");
         Assert.assertTrue(eventWebDriver.findElement(lastnameonechar).isDisplayed());
+        eventWebDriver.findElement(LAST_NAME_TB).clear();
+        eventWebDriver.findElement(LAST_NAME_TB).sendKeys("Test");
+        Assert.assertTrue(eventWebDriver.findElements(lastnameonechar).isEmpty());
     }
 
     public void validateEmail(){
         eventWebDriver.findElement(EMAIL_TB).sendKeys("testme");
         Assert.assertTrue(eventWebDriver.findElement(invalidemail).isDisplayed());
         eventWebDriver.findElement(EMAIL_TB).clear();
+        eventWebDriver.findElement(EMAIL_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(emailempty).isDisplayed());
+        eventWebDriver.findElement(EMAIL_TB).clear();
+        eventWebDriver.findElement(EMAIL_TB).sendKeys("Test@test.com");
+        Assert.assertTrue(eventWebDriver.findElements(emailempty).isEmpty());
     }
 
     public void verifyExistingUserMessage(String email) {
@@ -294,12 +307,22 @@ public class DownloadPageObject {
     public void validatePassword() {
         eventWebDriver.findElement(PASSWORD_TB).sendKeys("aaa");
         Assert.assertTrue(eventWebDriver.findElement(shortpassword).isDisplayed());
-        eventWebDriver.findElement(PASSWORD_TB).sendKeys("");
+        eventWebDriver.findElement(PASSWORD_TB).clear();
+        eventWebDriver.findElement(PASSWORD_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(passwordempty).isDisplayed());
+        eventWebDriver.findElement(PASSWORD_TB).clear();
+        eventWebDriver.findElement(PASSWORD_TB).sendKeys("111111");
+        Assert.assertTrue(eventWebDriver.findElements(passwordempty).isEmpty());
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys("aaa");
-        Assert.assertTrue(eventWebDriver.findElement(nonmatchingpassword).isDisplayed());
+        Assert.assertTrue(eventWebDriver.findElement(By.xpath("//*[@id=\"stepOne\"]/div[5]/span")).isDisplayed());
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).clear();
+        eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(passwordconfirmationempty).isDisplayed());
+
+
+        eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).clear();
+        eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys("111111");
+        Assert.assertTrue(eventWebDriver.findElements(passwordconfirmationempty).isEmpty());
     }
 
     public void validatePhone(){
@@ -308,29 +331,45 @@ public class DownloadPageObject {
         eventWebDriver.findElement(PHONE_TB).sendKeys("aa");
         Assert.assertTrue(eventWebDriver.findElement(phonewithchars).isDisplayed());
         eventWebDriver.findElement(PHONE_TB).clear();
+        eventWebDriver.findElement(PHONE_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(phoneempty).isDisplayed());
+        eventWebDriver.findElement(PHONE_TB).clear();
+        eventWebDriver.findElement(PHONE_TB).sendKeys("111111");
+        Assert.assertTrue(eventWebDriver.findElements(phoneempty).isEmpty());
     }
+
     public void validateTerms(){
-        eventWebDriver.findElement(SUBMIT_BTN).click();
+        eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
+        SystemActions.sleep(1);
         Assert.assertTrue(eventWebDriver.findElement(terms).isDisplayed());
+        eventWebDriver.findElement(TERMS_CB).click();
+        Assert.assertFalse(eventWebDriver.findElement(terms).isDisplayed());
     }
 
     public void validateCountry(){
-        eventWebDriver.findElement(COUNTRY_SELECTION_DDL).click();
+        WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).click();
         eventWebDriver.findElement(COMPANY_TB).click();
         Assert.assertTrue(eventWebDriver.findElement(countryempty).isDisplayed());
 
         eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("united states");
         Assert.assertTrue(eventWebDriver.findElement(US_STATE_DDL).isDisplayed());
+        SystemActions.sleep(1);
         eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("canada");
         Assert.assertTrue(eventWebDriver.findElement(CANADA_STATE_DDL).isDisplayed());
+        eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("israel");
+        Assert.assertTrue(eventWebDriver.findElements(countryempty).isEmpty());
     }
 
     public void validateCompany(){
         eventWebDriver.findElement(COMPANY_TB).sendKeys("a");
         Assert.assertTrue(eventWebDriver.findElement(companyshort).isDisplayed());
         eventWebDriver.findElement(COMPANY_TB).clear();
+        eventWebDriver.findElement(COMPANY_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(companyempty).isDisplayed());
+        eventWebDriver.findElement(COMPANY_TB).clear();
+        eventWebDriver.findElement(COMPANY_TB).sendKeys("IB");
+        Assert.assertTrue(eventWebDriver.findElements(companyempty).isEmpty());
     }
 
     public void validateCity(){
@@ -339,13 +378,19 @@ public class DownloadPageObject {
         eventWebDriver.findElement(CITY_TB).sendKeys("a213");
         Assert.assertTrue(eventWebDriver.findElement(citynumeric).isDisplayed());
         eventWebDriver.findElement(CITY_TB).clear();
+        eventWebDriver.findElement(CITY_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(cityempty).isDisplayed());
+        eventWebDriver.findElement(CITY_TB).clear();
+        eventWebDriver.findElement(CITY_TB).sendKeys("Tel Aviv");
+        Assert.assertTrue(eventWebDriver.findElements(cityempty).isEmpty());
     }
 
     public void validateHowDidYou(){
         eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).click();
         eventWebDriver.findElement(JOB_TITLE_TB).click();
         Assert.assertTrue(eventWebDriver.findElement(howdidyouhearempty).isDisplayed());
+        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys("other");
+        Assert.assertFalse(eventWebDriver.findElement(howdidyouhearempty).isDisplayed());
     }
 
     public void validateJob(){
@@ -354,9 +399,24 @@ public class DownloadPageObject {
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys("a213");
         Assert.assertTrue(eventWebDriver.findElement(jobnumeric).isDisplayed());
         eventWebDriver.findElement(JOB_TITLE_TB).clear();
+        eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(jobempty).isDisplayed());
+        eventWebDriver.findElement(JOB_TITLE_TB).clear();
+        eventWebDriver.findElement(JOB_TITLE_TB).sendKeys("BOSS");
+        Assert.assertTrue(eventWebDriver.findElements(jobempty).isEmpty());
     }
 
+    public void validateMailingListNotChecked(){
+        Assert.assertFalse(eventWebDriver.findElement(MAILING_LIST_CB).isSelected());
+    }
+
+    public void clickDownloadButton(){
+        eventWebDriver.findElement(DOWNLOAD_BTN).click();
+    }
+
+    public void clickSubmitFirstForm(){
+        eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
+    }
 
 
     }

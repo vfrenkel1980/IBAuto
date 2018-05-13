@@ -14,7 +14,18 @@
         <classes>
             <class name ="Web.IBWeb.DownloadFormTests" >
                 <methods>
-                    <include name="test" />
+                    <include name="validateFirstName" />
+                    <include name="validateLastName" />
+                    <include name="validateEmail" />
+                    <include name="validatePassword" />
+                    <include name="validatePhone" />
+                    <include name="validateTerms" />
+                    <include name="validateCountry" />
+                    <include name="validateCompany" />
+                    <include name="validateCity" />
+                    <include name="validateHowDidYou" />
+                    <include name="validateJob" />
+                    <include name="validateMailing" />
                 </methods>
             </class>
         </classes>

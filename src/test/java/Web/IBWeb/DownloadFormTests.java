@@ -47,7 +47,70 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
     public void verifyExistingUser(){
+        downloadPageObject.clickDownloadButton();
         downloadPageObject.verifyExistingUserMessage(mailAddress);
+    }
+
+    @Test(testName = "Validate First Name")
+    public void validateFirstName(){
+        downloadPageObject.clickDownloadButton();
+        downloadPageObject.validateFirstName();
+    }
+
+    @Test(testName = "Validate Last Name", dependsOnMethods = { "validateFirstName"})
+    public void validateLastName(){
+        downloadPageObject.validateLastName();
+    }
+
+    @Test(testName = "Validate Email", dependsOnMethods = { "validateLastName"})
+    public void validateEmail(){
+        downloadPageObject.validateEmail();
+    }
+
+    @Test(testName = "Validate Password", dependsOnMethods = { "validateEmail"})
+    public void validatePassword(){
+        downloadPageObject.validatePassword();
+    }
+
+    @Test(testName = "Validate Phone", dependsOnMethods = { "validatePassword"})
+    public void validatePhone(){
+        downloadPageObject.validatePhone();
+    }
+
+    @Test(testName = "Validate Terms", dependsOnMethods = { "validatePhone"})
+    public void validateTerms(){
+        downloadPageObject.validateTerms();
+        downloadPageObject.clickSubmitFirstForm();
+    }
+
+    @Test(testName = "Validate Country", dependsOnMethods = { "validateTerms"})
+    public void validateCountry(){
+        downloadPageObject.validateCountry();
+    }
+
+    @Test(testName = "Validate Company", dependsOnMethods = { "validateCountry"})
+    public void validateCompany(){
+        downloadPageObject.validateCompany();
+    }
+
+    @Test(testName = "Validate City", dependsOnMethods = { "validateCompany"})
+    public void validateCity(){
+        downloadPageObject.validateCity();
+    }
+
+    @Test(testName = "Validate How Did You", dependsOnMethods = { "validateCity"})
+    public void validateHowDidYou(){
+        downloadPageObject.validateHowDidYou();
+    }
+
+    @Test(testName = "Validate Job", dependsOnMethods = { "validateHowDidYou"})
+    public void validateJob(){
+        downloadPageObject.validateJob();
+    }
+
+    @Test(testName = "Validate Mailing", dependsOnMethods = { "validateJob"})
+    public void validateMailing(){
+        downloadPageObject.validateMailingListNotChecked();
     }
 
 
