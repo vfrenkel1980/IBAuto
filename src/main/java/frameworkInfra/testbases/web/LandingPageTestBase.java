@@ -27,7 +27,7 @@ public class LandingPageTestBase extends IbWebTestBase {
                 eventWebDriver.get("https://test-store.incredibuild.com/incredibuild-codeproject#/");
                 break;
             case "jp":
-                eventWebDriver.get("https://test-store.incredibuild.com/incredibuild-codeproject#/");
+                eventWebDriver.get("https://qa-jp-store.incredibuild.com/incredibuild-codeproject#/");
                 break;
         }
         eventWebDriver.manage().window().maximize();
