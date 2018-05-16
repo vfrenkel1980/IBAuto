@@ -72,8 +72,8 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Uninstall IB")
     public void uninstallIb(){
-        ibService.installIB("2284", IbLicenses.UI_LIC);
-/*        ibuiService.startIBUIInstaller("Latest");
+        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibuiService.startIBUIInstaller("Latest");
         try {
             installer.clickNext();
             installer.selectUninstall();
@@ -84,7 +84,7 @@ public class SetupTests extends SetupTestBase {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
             Assert.fail();
         }
-        Assert.assertFalse(ibService.verifyIbServicesRunning(true, true), "Services are running!!!! Should be Uninstalled");*/
+        Assert.assertFalse(ibService.verifyIbServicesRunning(true, true), "Services are running!!!! Should be Uninstalled");
     }
 
     @Test(testName = "Repair IB")
@@ -96,6 +96,24 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.cancelReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+    }
+
+    @Test(testName = "Upgrade IB")
+    public void upgradeIb(){
+        ibService.installIB("2260", IbLicenses.UI_LIC);
+        ibuiService.startIBUIInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.cancelReleaseNotes();
+            installer.cancelRemoteUpdate();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());

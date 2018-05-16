@@ -18,6 +18,8 @@ public interface IIBUIService {
 
         void cancelReleaseNotes() throws FindFailed;
 
+        void cancelRemoteUpdate() throws FindFailed;
+
         void installNewCoordinator() throws FindFailed;
 
         void changeInstallationPath(String path) throws FindFailed;

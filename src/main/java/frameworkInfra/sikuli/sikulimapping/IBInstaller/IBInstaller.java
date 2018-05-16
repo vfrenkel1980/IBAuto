@@ -19,4 +19,5 @@ public class IBInstaller {
     public static final Pattern ReleaseNotesUncheckCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\release_notes.png");
     public static final Pattern TermsUncheckCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\terms.png");
     public static final Pattern Uninstall = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\uninstall.png");
+    public static final Pattern UpdateOtherComputers = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\update_other_computers.png");
 }

@@ -63,6 +63,12 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void cancelRemoteUpdate() throws FindFailed {
+            test.log(Status.INFO, "Removing Remote update CB");
+            screen.wait(IBInstaller.UpdateOtherComputers.similar((float) 0.8),2).click();
+        }
+
+        @Override
         public void installNewCoordinator() throws FindFailed {
             test.log(Status.INFO, "Selecting \"install new coordinator\"");
             screen.wait(IBInstaller.NewCoordinatorRB.similar((float) 0.5),2).click();
