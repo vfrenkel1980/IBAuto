@@ -53,7 +53,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickFinish() throws FindFailed {
             test.log(Status.INFO, "Clicking Finish");
-            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8),2).click();
+            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8),120).click();
         }
 
         @Override
@@ -105,6 +105,12 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Selecting existing coordinator");
             screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.5),2).click();
             screen.type(coordName);
+        }
+
+        @Override
+        public void selectUninstall() throws FindFailed {
+            test.log(Status.INFO, "Selecting uninstall");
+            screen.wait(IBInstaller.Uninstall.similar((float) 0.7),2).click();
         }
     }
 

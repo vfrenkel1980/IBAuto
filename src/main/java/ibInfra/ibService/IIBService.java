@@ -18,7 +18,7 @@ public interface IIBService {
 
     void cleanAndBuildDontWaitTermination(String command);
 
-    void installIB(String version);
+    void installIB(String version, String license);
 
     void installIBnoLoadedLicense(String version);
 

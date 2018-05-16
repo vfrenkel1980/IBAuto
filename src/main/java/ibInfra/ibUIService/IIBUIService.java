@@ -32,6 +32,8 @@ public interface IIBUIService {
 
         void selectCoordinator(String coordName) throws FindFailed;
 
+        void selectUninstall() throws FindFailed;
+
 
     }
 }

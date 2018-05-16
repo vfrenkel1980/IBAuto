@@ -18,4 +18,5 @@ public class IBInstaller {
     public static final Pattern OpenLicBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\open_lic.png");
     public static final Pattern ReleaseNotesUncheckCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\release_notes.png");
     public static final Pattern TermsUncheckCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\terms.png");
+    public static final Pattern Uninstall = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\uninstall.png");
 }

@@ -65,7 +65,7 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVS();
                 else
                     vsCommands.upgradeVSPreview();
-                ibService.installIB("Latest");
+                ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
                 ibService.verifyIbServicesRunning(true, true);
                 break;
 
@@ -82,7 +82,7 @@ public class VSTestBase extends TestBase {
             //install old IB, install vs and upgrade IB from VS installer
             case "3":
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
-                ibService.installIB("2147");
+                ibService.installIB("2147", IbLicenses.VSTESTS_LIC);
                 if (VSINSTALLATION.equals("15"))
                     vsCommands.installVSWithIB();
                 else
@@ -114,7 +114,7 @@ public class VSTestBase extends TestBase {
     public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(VSINSTALLATION + " " + SCENARIO);
+        test.assignCategory("VC: " + VSINSTALLATION + " Scenario: " + SCENARIO);
         log.info(method.getName() + " test started");
     }
 

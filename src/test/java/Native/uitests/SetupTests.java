@@ -69,4 +69,38 @@ public class SetupTests extends SetupTestBase {
         Assert.assertEquals(ibService.getCoordinator(), WindowsMachines.BABYLON, "Current coordinator" + ibService.getCoordinator() + " does not match expected coordinator: "
                 + WindowsMachines.BABYLON);
     }
+
+    @Test(testName = "Uninstall IB")
+    public void uninstallIb(){
+        ibService.installIB("2284", IbLicenses.UI_LIC);
+/*        ibuiService.startIBUIInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.selectUninstall();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertFalse(ibService.verifyIbServicesRunning(true, true), "Services are running!!!! Should be Uninstalled");*/
+    }
+
+    @Test(testName = "Repair IB")
+    public void repairIb(){
+        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibuiService.startIBUIInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.cancelReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+    }
 }

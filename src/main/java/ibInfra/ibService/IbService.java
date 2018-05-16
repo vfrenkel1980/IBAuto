@@ -45,10 +45,10 @@ public class IbService extends TestBase implements IIBService {
 
     //choose what version of IB to install. type "Latest" for latest version
     @Override
-    public void installIB(String version) {
+    public void installIB(String version, String license) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
-        loadIbLicense(IbLicenses.VSTESTS_LIC);
+        loadIbLicense(license);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void loadIbLicense(String license) {
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, IbLicenses.VSTESTS_LIC));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
         SystemActions.sleep(3);
         winService.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
         isLicenseLoaded();
@@ -139,9 +139,9 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public boolean verifyIbServicesRunning(boolean agent, boolean coord) {
-        if (agent)
+        if (agent && !coord)
             return winService.isServiceRunning(WindowsServices.AGENT_SERVICE);
-        else if (coord)
+        else if (!agent && coord)
             return winService.isServiceRunning(WindowsServices.COORD_SERVICE);
         else if (agent && coord)
             return winService.isServiceRunning(WindowsServices.AGENT_SERVICE) && winService.isServiceRunning(WindowsServices.COORD_SERVICE);
