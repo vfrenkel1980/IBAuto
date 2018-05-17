@@ -2,6 +2,7 @@ package Native.uitests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.SetupTestBase;
+import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
@@ -42,6 +43,8 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         Assert.assertEquals(InitIBRoot.IB_ROOT, Locations.DIFFERENT_INSTALLATION_DIRECTORY, "Installed location " + InitIBRoot.IB_ROOT + " does not match expected location: "
                 + Locations.DIFFERENT_INSTALLATION_DIRECTORY);
+        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Install On An Existing Coordinator")
@@ -68,6 +71,8 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, false), "Services are not running!!!!");
         Assert.assertEquals(ibService.getCoordinator(), WindowsMachines.BABYLON, "Current coordinator" + ibService.getCoordinator() + " does not match expected coordinator: "
                 + WindowsMachines.BABYLON);
+        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Uninstall IB")
@@ -102,6 +107,8 @@ public class SetupTests extends SetupTestBase {
             Assert.fail();
         }
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Upgrade IB")
@@ -120,5 +127,7 @@ public class SetupTests extends SetupTestBase {
             Assert.fail();
         }
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }

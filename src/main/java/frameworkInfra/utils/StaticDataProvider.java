@@ -34,7 +34,7 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = InitIBRoot.IB_ROOT + "\\buildconsole.exe ";
+        public static final String BUILD_CONSOLE = "\"" + InitIBRoot.IB_ROOT + "\"" +  "\\buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
@@ -261,7 +261,7 @@ public class StaticDataProvider {
             public static final String PROPERTY_SHEET_3 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\Wrong_Project_Type\\sample.sln\" /%s /cfg=\"Debug|Win32\" /title=\"Property Sheet 3\"";
             public static final String PROPERTY_SHEET_4 = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\ib_problem\\ib_problem.sln\" /%s /cfg=\"Debug|Win32\" /title=\"Property Sheet 4\"";
             public static final String PARENT_NAME_MACRO = "\"C:\\QA\\Simulation\\VC9\\Loader_Tests\\ParentNameMacroBug\\xoreax.sln\" /%s /cfg=\"Debug|Win32\" /title=\"ParentName macro bug.\"";
-            public static final String DEP_EVAL_1 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_1\\RunMe.bat";
+            public static final String DEP_EVAL_1 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_1\\RunMe.bat\"";
             public static final String DEP_EVAL_3 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_3\\DepEval_Test_3.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_4 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_4\\DepEval_Test_4\\DepEval_Test_4.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_5 = "\"C:\\QA\\Simulation\\VC9\\DepEval\\DepEval_Test_5\\DepEval_Test_5.sln\" /%s /cfg=\"debug|win32\"";
@@ -408,6 +408,7 @@ public class StaticDataProvider {
 
     public static class TestProjects{
         public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
+        public static final String TEST_PROJ = Locations.QA_ROOT + "\\Projects\\TestProj\\TestProj.sln /%s /cfg=\"Debug|x86\" /title=\"TestProject\"";
         public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
         public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";

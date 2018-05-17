@@ -129,7 +129,7 @@ public class VSTestBase extends TestBase {
     public void afterClass(){
         test = extent.createTest("AFTER CLASS");
         test.log(Status.INFO, "AFTER CLASS started");
-        test.assignCategory(VSINSTALLATION + " " + SCENARIO);
+        test.assignCategory("VC: " + VSINSTALLATION + " Scenario: " + SCENARIO);
         log.info("AFTER CLASS started");
         ibService.unloadIbLicense();
         SystemActions.sleep(5);
