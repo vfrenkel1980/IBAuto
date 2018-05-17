@@ -41,7 +41,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),40).click();
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),120).click();
         }
 
         @Override
@@ -65,7 +65,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void cancelRemoteUpdate() throws FindFailed {
             test.log(Status.INFO, "Removing Remote update CB");
-            screen.wait(IBInstaller.UpdateOtherComputers.similar((float) 0.8),2).click();
+            screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8),2).click();
         }
 
         @Override
@@ -90,7 +90,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void browseLicense() throws FindFailed {
             test.log(Status.INFO, "Clicking on browse license");
-            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),120).click();
+            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),200).click();
         }
 
         @Override
@@ -116,7 +116,24 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectUninstall() throws FindFailed {
             test.log(Status.INFO, "Selecting uninstall");
-            screen.wait(IBInstaller.Uninstall.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.UninstallRB.similar((float) 0.7),2).click();
+        }
+
+        @Override
+        public void selectManualHelperPorts() throws FindFailed {
+            test.log(Status.INFO, "Selecting manual ports");
+            screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),2).type(InstallationPorts.AGENT_PORT);
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4),2).type(InstallationPorts.HELPER_PORT);
+        }
+
+        @Override
+        public void selectManualCoordPort() throws FindFailed {
+            test.log(Status.INFO, "Selecting manual coordinator ports");
+            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9),2).click();
+            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4),2).type(InstallationPorts.COORDINATOR_PORT);
         }
     }
 

@@ -500,4 +500,13 @@ public class StaticDataProvider {
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
 
     }
+
+    public static class InstallationPorts{
+
+        public static final String AGENT_PORT = "31101";
+        public static final String HELPER_PORT = "31102";
+        public static final String COORDINATOR_PORT = "31100";
+
+
+    }
 }

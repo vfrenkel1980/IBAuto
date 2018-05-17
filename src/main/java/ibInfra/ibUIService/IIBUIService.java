@@ -36,6 +36,9 @@ public interface IIBUIService {
 
         void selectUninstall() throws FindFailed;
 
+        void selectManualHelperPorts() throws FindFailed;
+
+        void selectManualCoordPort() throws FindFailed;
 
     }
 }

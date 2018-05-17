@@ -1,13 +1,18 @@
 package Native.uitests;
 
 import com.aventstack.extentreports.Status;
+import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.SetupTestBase;
 import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import sun.plugin.com.Utils;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class SetupTests extends SetupTestBase {
@@ -75,7 +80,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Uninstall IB")
+    @Test(testName = "UninstallRB IB")
     public void uninstallIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("Latest");
@@ -95,6 +100,8 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Repair IB")
     public void repairIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);
+        winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+        SystemActions.deleteFilesByPrefix(InitIBRoot.IB_ROOT, "*.exe");
         ibuiService.startIBUIInstaller("Latest");
         try {
             installer.clickNext();
@@ -127,6 +134,48 @@ public class SetupTests extends SetupTestBase {
             Assert.fail();
         }
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Verify Port Changes")
+    public void verifyPortChanges(){
+        ibuiService.startIBUIInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickNext();
+            installer.installNewCoordinator();
+            installer.clickNext();
+            installer.clickNext();
+            installer.selectManualHelperPorts();
+            installer.clickNext();
+            installer.selectManualCoordPort();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.browseLicense();
+            installer.browseLicenseNavigateToDesktop();
+            installer.selectLicense();
+            installer.clickNext();
+            installer.clickNext();
+            installer.cancelReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        String coordPort = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", "Port");
+        String agentPort = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", "ForcePortNum");
+        String helpersPort = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Worker", "ForcePortNum");
+
+        Assert.assertEquals(coordPort, InstallationPorts.COORDINATOR_PORT, "Coordinator port found in registry does not match entered port!");
+        Assert.assertEquals(agentPort, InstallationPorts.AGENT_PORT, "Agent port found in registry does not match entered port!");
+        Assert.assertEquals(helpersPort, InstallationPorts.HELPER_PORT, "Helpers port found in registry does not match entered port!");
+
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
