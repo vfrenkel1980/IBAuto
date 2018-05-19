@@ -1,16 +1,13 @@
 package Native.uitests;
 
 import com.aventstack.extentreports.Status;
-import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.SetupTestBase;
-import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import sun.plugin.com.Utils;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
