@@ -298,7 +298,7 @@ public class VmSimVC9Tests extends VmSimTestBase {
 
     @Test(testName = "Build System Self Test 1" , groups = { "Build" })
     public void buildSystemSelfTest1(){
-        int returnCode = winService.runCommandWaitForFinish(Locations.BUILDSYSTEM + ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_1_TEST);
+        int returnCode = winService.runCommandWaitForFinish(IbLocations.BUILDSYSTEM + ProjectsCommands.VC9_VMSIM.BUILD_SYSTEM_SELF_1_TEST);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 

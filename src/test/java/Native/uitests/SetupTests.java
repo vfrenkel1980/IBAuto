@@ -44,7 +44,7 @@ public class SetupTests extends SetupTestBase {
             Assert.fail();
         }
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        Assert.assertEquals(InitIBRoot.IB_ROOT, Locations.DIFFERENT_INSTALLATION_DIRECTORY, "Installed location " + InitIBRoot.IB_ROOT + " does not match expected location: "
+        Assert.assertEquals(IbLocations.IB_ROOT, Locations.DIFFERENT_INSTALLATION_DIRECTORY, "Installed location " + IbLocations.IB_ROOT + " does not match expected location: "
                 + Locations.DIFFERENT_INSTALLATION_DIRECTORY);
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
@@ -99,7 +99,7 @@ public class SetupTests extends SetupTestBase {
     public void repairIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
-        SystemActions.deleteFilesByPrefix(InitIBRoot.IB_ROOT, "*.exe");
+        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT, "*.exe");
         ibuiService.startIBUIInstaller("Latest");
         try {
             installer.clickNext();

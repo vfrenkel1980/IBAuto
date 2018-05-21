@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.aventstack.extentreports.Status.INFO;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
@@ -42,14 +43,21 @@ public class SetupTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite() {
-        int version = IIBService.getIbVersion();
-        ibService.uninstallIB(String.valueOf(version));
+        try {
+            int version = IIBService.getIbVersion();
+            ibService.uninstallIB(String.valueOf(version));
+        }
+        catch (Exception e)
+        {
+            e.getMessage();
+            //test.log(INFO, "Nothing to remove, IB is not installed");
+        }
     }
 
     @BeforeMethod
     public void beforeMethod(Method method, ITestContext context) {
         test = extent.createTest(method.getName());
-        test.log(Status.INFO, method.getName() + " test started");
+        test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
     }
 

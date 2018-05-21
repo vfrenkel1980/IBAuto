@@ -5,9 +5,13 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class StaticDataProvider {
 
-    public static class InitIBRoot{
+    public static class IbLocations {
         public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
-        public static final String LOGS_ROOT = InitIBRoot.IB_ROOT + "\\Logs";
+        public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
+        public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
+        public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
+        public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
+        public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
     }
 
     public static class InitMSBuild{
@@ -25,11 +29,6 @@ public class StaticDataProvider {
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
-
-        public static final String XGCONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
-        public static final String BUILDSYSTEM = "\"" + InitIBRoot.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
-        public static final String BUILDMONITOR = "\"" + InitIBRoot.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
-        public static final String BUILDHISTORY = "\"" + InitIBRoot.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
     }
 
     public static class URL{
@@ -39,13 +38,13 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
+        public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
-        public static final String XLICPROC = InitIBRoot.IB_ROOT + "\\xlicproc /LicenseFile=";
+        public static final String XLICPROC = IbLocations.IB_ROOT + "\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }
@@ -392,7 +391,7 @@ public class StaticDataProvider {
         public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
         public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";
         public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
-        public static final String UNLOAD_IB_LICENSE = "\"" + InitIBRoot.IB_ROOT + "\\CoordMonitor.exe\" /LicenseFile=" + "\"" +InitIBRoot.IB_ROOT + "\\CoordLicense.dat\" /Unload=dummy";
+        public static final String UNLOAD_IB_LICENSE = "\"" + IbLocations.IB_ROOT + "\\CoordMonitor.exe\" /LicenseFile=" + "\"" + IbLocations.IB_ROOT + "\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
