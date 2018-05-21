@@ -50,6 +50,7 @@ public class SetupTestBase extends TestBase {
         catch (Exception e)
         {
             e.getMessage();
+            test.log(INFO, "Nothing to remove, IB is not installed");
         }
     }
 
