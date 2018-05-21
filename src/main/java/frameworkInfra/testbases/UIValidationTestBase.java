@@ -34,7 +34,6 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class UIValidationTestBase extends TestBase {
 
-    private static int ibVersion = 0;
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
     public Screen screen = new Screen();
@@ -50,10 +49,9 @@ public class UIValidationTestBase extends TestBase {
 
 
     static {
-        ibVersion = IIBService.getIbVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + " - UIValidation.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - UIValidation.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
     }

@@ -30,9 +30,10 @@ public class VSIntegrationTestBase extends TestBase {
     protected String projectName = "";
 
     static {
+        ibVersion = IIBService.getIbVersion();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - VSIntegration.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + ibVersion + " - VSIntegration.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
     }
@@ -40,7 +41,7 @@ public class VSIntegrationTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         ibService.disableVsMonitor();
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.updateIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
     }
 
