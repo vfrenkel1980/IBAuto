@@ -66,7 +66,7 @@ public class UIValidationTestBase extends TestBase {
         log.info("BEFORE SUITE started");
         //stop agent service in order to delete history
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
-        SystemActions.deleteFolder(new File(InitIBRoot.IB_ROOT + "\\History"));
+        SystemActions.deleteFolder(new File(IbLocations.IB_ROOT + "\\History"));
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }

@@ -58,8 +58,8 @@ public class WindowsTestBase extends TestBase {
         //kill tray icon
         SystemActions.killProcess(Processes.TRAY_ICON);
         //delete logs folder
-        SystemActions.deleteFilesByPrefix(InitIBRoot.IB_ROOT + "\\logs", "*");
-        SystemActions.deleteFilesByPrefix(InitIBRoot.IB_ROOT + "\\logs\\Helper", "*");
+        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
+        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
@@ -84,7 +84,7 @@ public class WindowsTestBase extends TestBase {
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         //copy logs to backup folder
-        SystemActions.copyFilesByExtension(InitIBRoot.IB_ROOT + "\\logs",
+        SystemActions.copyFilesByExtension(IbLocations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
         //TODO: parse .log for assertion error
         //TODO: parse .txt for access violations
@@ -92,7 +92,7 @@ public class WindowsTestBase extends TestBase {
 
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
-        SystemActions.startProcess(InitIBRoot.IB_ROOT + "\\" + Processes.TRAY_ICON);
+        SystemActions.startProcess(IbLocations.IB_ROOT + "\\" + Processes.TRAY_ICON);
         log.info("Suite finished");
     }
 

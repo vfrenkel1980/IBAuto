@@ -103,7 +103,7 @@ public class IbService extends TestBase implements IIBService {
     public String getExpectedIbVsExtensionVersion() {
         String version;
         try {
-            ZipFile zipFile = new ZipFile(InitIBRoot.IB_ROOT + "\\IncredibuildMenu.vsix");
+            ZipFile zipFile = new ZipFile(IbLocations.IB_ROOT + "\\IncredibuildMenu.vsix");
             zipFile.extractAll(Locations.QA_ROOT + "\\Extracted");
         } catch (ZipException e) {
             e.getMessage();
@@ -187,7 +187,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public boolean isLicenseLoaded() {
-        File file = new File(InitIBRoot.IB_ROOT + "\\CoordLicense.dat");
+        File file = new File(IbLocations.IB_ROOT + "\\CoordLicense.dat");
         if(file.exists()) {
             test.log(Status.INFO, "License is loaded");
             return true;
