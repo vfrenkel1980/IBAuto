@@ -1,10 +1,9 @@
-package frameworkInfra.testbases.linux;
+package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
@@ -44,7 +43,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
     //@Override
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
-        TestBase.log.info("starting before class");
+        log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -60,7 +59,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 
         for (int i=1; i<5; ++i) {
 
-            if(linuxService.startIBService(ipList.get(i))) {
+            if(linuxService.startIBService("ib_server", ipList.get(i))) {
                 String err = "startIBService failed " +ipList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
@@ -68,13 +67,13 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
             }
         }
 
-        if(linuxService.stopIBService(otherGridIPList.get(1))) {
+        if(linuxService.stopIBService("ib_server", otherGridIPList.get(1))) {
             String err = "stopIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
             throw new SkipException("EXITING");
         }
-        TestBase.log.info("finished before class");
+        log.info("finished before class");
     }
 
     @BeforeMethod
@@ -89,8 +88,8 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
     @Override
     @AfterClass
     public void afterClass() {
-        TestBase.log.info("starting after class");
-        if(linuxService.startIBService(otherGridIPList.get(1))) {
+        log.info("starting after class");
+        if(linuxService.startIBService("ib_server", otherGridIPList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
         }
@@ -101,7 +100,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(4));
 
         extent.flush();
-        TestBase.log.info("finished after class");
+        log.info("finished after class");
     }
 
     @AfterSuite

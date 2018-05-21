@@ -447,7 +447,6 @@ public class StaticDataProvider {
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
-        public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
     }
 
     public static class WindowsMachines{
@@ -477,8 +476,6 @@ public class StaticDataProvider {
     public static class LinuxSimulation{
 
         public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
-        public static final String CD_KERNEL4_DIR = "cd /disk2/projects/linux-4.3.3";
-        public static final String CD_KERNEL4_CCACHE_DIR = "cd /disk2/projects/linux-4.3.3-modified";
         public static final String CD_SAMBA_DIR = "cd /disk2/projects/samba-4.0.7";
         public static final String CD_SAMBA2_DIR = "cd /disk2/projects/samba/samba-4.3.3";
         public static final String CD_CPP_DIR = "cd /disk2/projects/cppunit-1.12.1";
@@ -490,7 +487,6 @@ public class StaticDataProvider {
         public static final String CD_GDB_DIR = "cd /disk2/projects/gdb-7.11";
         public static final String CD_GIT_DIR = "cd /disk2/projects/git-2.8.1/";
         public static final String CD_QT_DIR = "cd /disk2/projects/qt-everywhere-opensource-src-4.8.6";
-        public static final String CD_QT_CCACHE_DIR = "cd /disk2/projects/qt-everywhere-opensource-src-4.8.6-modified";
         public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
         public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
         public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
@@ -506,9 +502,6 @@ public class StaticDataProvider {
         public static final String SCONS_BUILD = "ib_console %s -c %s %s scons -j%s";
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
-
-
-        public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
 
     }
 
