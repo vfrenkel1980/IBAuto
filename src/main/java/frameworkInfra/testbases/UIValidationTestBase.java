@@ -93,37 +93,37 @@ public class UIValidationTestBase extends TestBase {
 
         switch (project){
             case "red01":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED01;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED01;
                 projectLocation = UIValidationsProjects.RED01;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red01;
                 break;
             case "red02":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED02;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED02;
                 projectLocation = UIValidationsProjects.RED02;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red02;
                 break;
             case "red03":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED03;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED03;
                 projectLocation = UIValidationsProjects.RED03;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red03;
                 break;
             case "red04":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED04;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED04;
                 projectLocation = UIValidationsProjects.RED04;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red04;
                 break;
             case "red05":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED05;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED05;
                 projectLocation = UIValidationsProjects.RED05;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red05;
                 break;
             case "red06":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED06;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.RED06;
                 projectLocation = UIValidationsProjects.RED06;
                 vsBarPattern = Monitor.Bars.VSRedBar;
                 historyPattern = History.Projects.Red06;
@@ -141,13 +141,13 @@ public class UIValidationTestBase extends TestBase {
                 historyPattern = History.Projects.Red09;
                 break;
             case "yellow01":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.YELLOW01;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.YELLOW01;
                 projectLocation = UIValidationsProjects.YELLOW01;
                 vsBarPattern = Monitor.Bars.VSYellowBar;
                 historyPattern = History.Projects.Yellow01;
                 break;
             case "green01":
-                command = Processes.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.GREEN01;
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.GREEN01;
                 projectLocation = UIValidationsProjects.GREEN01;
                 vsBarPattern = Monitor.Bars.VSGreenBar;
                 historyPattern = History.Projects.Green01;

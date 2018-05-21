@@ -12,7 +12,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: VS2017 C++")
     public void licTestVS2017Cpp() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
+        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -22,7 +22,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: VS2017 CSC")
     public void licTestVS2017Csc() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CSC);
+        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CSC);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -32,7 +32,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: VS2017 PS4")
     public void licTestVS2017PS4() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_PS4_ORBIS);
+        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_PS4_ORBIS);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -42,7 +42,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: VS2015 XBox One")
     public void licTestVS2015XBoxOne() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2015_XBOX_DURANGO);
+        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2015_XBOX_DURANGO);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -52,7 +52,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: Make & Build Tools - MSbuild")
     public void licTestMakeAndBuild_MSbuild() {
-        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.MSBUILD_CPP);
+        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.MSBUILD_CPP);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
@@ -62,7 +62,7 @@ public class LicensingTests extends LicensingTestBase {
 
     @Test(testName = "Licence Test: Make & Build Tools - Jom")
     public void licTestMakeAndBuild_Jom() {
-        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.Processes.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.JOM);
+        exitStatus = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.JOM);
         if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {

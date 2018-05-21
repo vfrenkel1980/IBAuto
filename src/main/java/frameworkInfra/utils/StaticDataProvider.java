@@ -7,6 +7,7 @@ public class StaticDataProvider {
 
     public static class IbLocations {
         public static String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
+        public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
@@ -38,7 +39,7 @@ public class StaticDataProvider {
 
     //processes
     public static class Processes {
-        public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
+        public static final String BUILD_CONSOLE = "buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";

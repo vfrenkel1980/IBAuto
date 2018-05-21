@@ -47,7 +47,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         Assert.assertEquals(IbLocations.IB_ROOT, Locations.DIFFERENT_INSTALLATION_DIRECTORY, "Installed location " + IbLocations.IB_ROOT + " does not match expected location: "
                 + Locations.DIFFERENT_INSTALLATION_DIRECTORY);
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -76,7 +76,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, false), "Services are not running!!!!");
         Assert.assertEquals(ibService.getCoordinator(), WindowsMachines.BABYLON, "Current coordinator" + ibService.getCoordinator() + " does not match expected coordinator: "
                 + WindowsMachines.BABYLON);
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -116,7 +116,7 @@ public class SetupTests extends SetupTestBase {
         }
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -137,7 +137,7 @@ public class SetupTests extends SetupTestBase {
         }
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE  + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -180,7 +180,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertEquals(agentPort, InstallationPorts.AGENT_PORT, "Agent port found in registry does not match entered port!");
         Assert.assertEquals(helpersPort, InstallationPorts.HELPER_PORT, "Helpers port found in registry does not match entered port!");
 
-        int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE  + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }

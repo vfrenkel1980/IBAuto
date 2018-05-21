@@ -21,8 +21,8 @@ public class GeneralWinTests extends BatmanBCTestBase{
     public void verifyMultiBuildSuccess() {
         int instanceCount;
         setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
+        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
         SystemActions.sleep(5);
         instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
         Assert.assertEquals(instanceCount, 2, "Number of running instances does not match");
@@ -33,8 +33,8 @@ public class GeneralWinTests extends BatmanBCTestBase{
     public void verifyMultiBuildFailure() {
         int instanceCount;
         setRegistry("8", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        ibService.cleanAndBuildDontWaitTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
+        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
         SystemActions.sleep(5);
         instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
         Assert.assertEquals(instanceCount, 1, "Number of running instances does not match");
@@ -46,7 +46,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
     @Test(testName = "Verify Backup Coordinator Functionality")
     public void verifyBackupCoordinatorFunctionality() {
-        winService.runCommandDontWaitForTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         SystemActions.sleep(10);
         try {
             winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 1 -u administrator -p 4illumination \\\\"
@@ -85,7 +85,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
     @Test(testName = "Verify BuildSystem Memory Usage During Build")
     public void verifyBuildSystemMemoryUsageDuringBuild() {
-        winService.runCommandDontWaitForTermination(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
     }
