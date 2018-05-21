@@ -25,6 +25,11 @@ public class StaticDataProvider {
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
+
+        public static final String XGCONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
+        public static final String BUILDSYSTEM = "\"" + InitIBRoot.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
+        public static final String BUILDMONITOR = "\"" + InitIBRoot.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
+        public static final String BUILDHISTORY = "\"" + InitIBRoot.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
     }
 
     public static class URL{
@@ -35,12 +40,12 @@ public class StaticDataProvider {
     //processes
     public static class Processes {
         public static final String BUILD_CONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
-        public static final String TRAY_ICON = "\"" + InitIBRoot.IB_ROOT +  "\\xgTrayIcon.exe" + "\"" +" ";
-        public static final String XGCONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
-        public static final String BUILDSYSTEM = "\"" + InitIBRoot.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
-        public static final String BUILDMONITOR = "\"" + InitIBRoot.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
-        public static final String BUILDHISTORY = "\"" + InitIBRoot.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
-        public static final String XLICPROC = "\"" + InitIBRoot.IB_ROOT +"\\xlicproc" + "\"" + " /LicenseFile=";
+        public static final String TRAY_ICON = "xgTrayIcon.exe ";
+        public static final String XGCONSOLE = "xgconsole.exe ";
+        public static final String BUILDSYSTEM = "BuildSystem.exe ";
+        public static final String BUILDMONITOR = "BuildMonitor.exe ";
+        public static final String BUILDHISTORY = "BuildHistory.exe ";
+        public static final String XLICPROC = InitIBRoot.IB_ROOT + "\\xlicproc /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }

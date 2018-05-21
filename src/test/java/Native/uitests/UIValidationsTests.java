@@ -47,7 +47,7 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar(){
-        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        winService.runCommandDontWaitForTermination(Locations.BUILDMONITOR);
         try {
             screen.wait(ibMonBarPattern.similar((float) 0.9),2);
         } catch (FindFailed findFailed) {
@@ -61,7 +61,7 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring(){
-        winService.runCommandDontWaitForTermination(Processes.BUILDHISTORY);
+        winService.runCommandDontWaitForTermination(Locations.BUILDHISTORY);
         try {
             screen.wait(historyPattern.similar((float) 0.8),2);
         } catch (FindFailed findFailed) {
@@ -82,7 +82,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
 
-        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        winService.runCommandDontWaitForTermination(Locations.BUILDMONITOR);
         try {
             screen.wait(Monitor.Tabs.Projects.similar((float) 0.5),2).click();
             screen.wait(progressPattern.similar((float) 0.9),2);
