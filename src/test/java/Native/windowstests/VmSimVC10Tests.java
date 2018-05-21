@@ -215,7 +215,7 @@ public class VmSimVC10Tests extends VmSimTestBase {
 
     @Test(testName = "Configuration test 8 Check 2010 - build" , groups = { "Build" }, dependsOnMethods = { "configurationTest8x32Debug" })
     public void configurationTest8CheckBatch(){
-        int returnCode = winService.runCommandWaitForFinish(Locations.XGCONSOLE + ProjectsCommands.VC10_VMSIM.CONFIGURATION_TEST_8_CHECK);
+        int returnCode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + ProjectsCommands.VC10_VMSIM.CONFIGURATION_TEST_8_CHECK);
         Assert.assertTrue(returnCode == 0 , "Build failed with return code " + returnCode);
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "VC10\\Configuration_Tests\\ConfigurationTest8\\Proj1", "i_was_ran");
     }

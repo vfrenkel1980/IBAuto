@@ -1,24 +1,27 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider.*;
+import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
-import org.sikuli.script.Screen;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.aventstack.extentreports.Status.INFO;
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
@@ -38,10 +41,22 @@ public class SetupTestBase extends TestBase {
         extent.attachReporter(htmlReporter);
     }
 
+    @BeforeSuite
+    public void beforeSuite() {
+        try {
+            int version = IIBService.getIbVersion();
+            ibService.uninstallIB(String.valueOf(version));
+        }
+        catch (Exception e)
+        {
+            e.getMessage();
+        }
+    }
+
     @BeforeMethod
     public void beforeMethod(Method method, ITestContext context) {
         test = extent.createTest(method.getName());
-        test.log(Status.INFO, method.getName() + " test started");
+        test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
     }
 
