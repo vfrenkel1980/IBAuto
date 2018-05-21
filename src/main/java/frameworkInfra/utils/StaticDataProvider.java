@@ -35,12 +35,12 @@ public class StaticDataProvider {
     //processes
     public static class Processes {
         public static final String BUILD_CONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
-        public static final String TRAY_ICON = "xgTrayIcon.exe ";
-        public static final String XGCONSOLE = "xgconsole.exe ";
-        public static final String BUILDSYSTEM = "BuildSystem.exe ";
-        public static final String BUILDMONITOR = "BuildMonitor.exe ";
-        public static final String BUILDHISTORY = "BuildHistory.exe ";
-        public static final String XLICPROC = InitIBRoot.IB_ROOT + "\\xlicproc /LicenseFile=";
+        public static final String TRAY_ICON = "\"" + InitIBRoot.IB_ROOT +  "\\xgTrayIcon.exe" + "\"" +" ";
+        public static final String XGCONSOLE = "\"" + InitIBRoot.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
+        public static final String BUILDSYSTEM = "\"" + InitIBRoot.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
+        public static final String BUILDMONITOR = "\"" + InitIBRoot.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
+        public static final String BUILDHISTORY = "\"" + InitIBRoot.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
+        public static final String XLICPROC = "\"" + InitIBRoot.IB_ROOT +"\\xlicproc /LicenseFile=" + "\"";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }
@@ -211,7 +211,7 @@ public class StaticDataProvider {
             public static final String PROP_INHERITANCE_5_DEBUG = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\PropInheritance5\\PropInheritance5.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String REFERENCES_MACRO_DEBUG = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\ReferencesMacro\\ReferencesMacro.sln\" /%s /cfg=\"Debug|Win32\"";
             public static final String INPUT_PATH_BUG_DEBUG = "\"C:\\QA\\Simulation\\VC8\\Miscellanious\\InputPathBug\\InputPathBug.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String INVALID_DEFINE_SYNTAX_DEBUG = "\"C:\\QA\\Simulation\\VC8\\Invalid_#define_directive_syntax\\Makefiles\\TestIncrediBuild_Win32_msvc8.sln\" %s /cfg=\"MXD_TFW_CONFIG000_Debug|win32\" /title=\"Invalid #define directive syntax\"";
+            public static final String INVALID_DEFINE_SYNTAX_DEBUG = "\"C:\\QA\\Simulation\\VC8\\Invalid_#define_directive_syntax\\Makefiles\\TestIncrediBuild_Win32_msvc8.sln\" /%s /cfg=\"MXD_TFW_CONFIG000_Debug|win32\" /title=\"Invalid #define directive syntax\"";
             public static final String LOADER_TEST_1_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_01_VC8.sln\" /%s /cfg=\"release|Win32\"";
             public static final String LOADER_TEST_2_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_02_VC8.sln\" /%s /cfg=\"release|Win32\"";
             public static final String LOADER_TEST_3_RELEASE = "\"C:\\QA\\Simulation\\VC8\\Loader_Tests\\LoaderTests\\Loader_test_solution_03_VC8.sln\" /%s /cfg=\"release|Win32\"";
@@ -296,7 +296,7 @@ public class StaticDataProvider {
             public static final String DEP_EVAL_4 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_4\\DepEval_Test_4\\DepEval_Test_4.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_5 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_5\\DepEval_Test_5.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_6 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_6\\DepEval_Test_6_VC9.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String DEP_EVAL_7 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_7\\Dep_Eval_Test_7_VC9.sln\" %s /cfg=\"debug|win32\"";
+            public static final String DEP_EVAL_7 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_7\\Dep_Eval_Test_7_VC9.sln\" /%s /cfg=\"debug|win32\"";
             public static final String CONFIGURATION_TEST_1 = "\"C:\\QA\\Simulation\\VC10\\Configuration_Tests\\ConfigurationTest1\\ConfigurationTest1.sln\" /%s /cfg=\"debug|win32\"";
             public static final String CONFIGURATION_TEST_1_NO_UNNEEDED = "\"C:\\QA\\Simulation\\VC10\\Configuration_Tests\\ConfigurationTest1\\ConfigurationTest1.sln\" /%s /preset=\"No_useme_preset\" /title=\"Configuration test 1 Batch Build No unneeded Project marked\"";
             public static final String CONFIGURATION_TEST_1_UNNEEDED = "\"C:\\QA\\Simulation\\VC10\\Configuration_Tests\\ConfigurationTest1\\ConfigurationTest1.sln\" /%s /preset=\"useme_marked\" /title=\"Configuration test 1 Batch Build - Unneeded Project marked\"";
