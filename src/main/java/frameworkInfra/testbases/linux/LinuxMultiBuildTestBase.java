@@ -1,9 +1,10 @@
-package frameworkInfra.testbases;
+package frameworkInfra.testbases.linux;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
@@ -43,7 +44,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
    // @Override
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
-        log.info("starting before class");
+        TestBase.log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -60,7 +61,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
             throw new SkipException("EXITING");
         }
 
-        if(linuxService.startIBService("ib_server", ipList.get(1))) {
+        if(linuxService.startIBService(ipList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
@@ -69,14 +70,14 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
         for (int i=1; i<5; ++i) {
 
-            if(linuxService.stopIBService("ib_server", otherGridIPList.get(i))) {
+            if(linuxService.stopIBService(otherGridIPList.get(i))) {
                 String err = "stopIBService failed " +otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
                 throw new SkipException("EXITING");
             }
         }
-        log.info("finished before class");
+        TestBase.log.info("finished before class");
     }
 
     @BeforeMethod
@@ -91,13 +92,13 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
     @Override
     @AfterClass
     public void afterClass() {
-        log.info("starting after class");
+        TestBase.log.info("starting after class");
         test = extent.createTest("After Class");
         test.assignCategory("AFTER CLASS");
         test.log(Status.INFO, "AFTER CLASS started");
         for (int i = 1; i < 5; ++i) {
 
-            if (linuxService.startIBService("ib_server", otherGridIPList.get(i))) {
+            if (linuxService.startIBService(otherGridIPList.get(i))) {
                 String err = "startIBService failed " + otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
@@ -111,7 +112,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
 
         extent.flush();
-        log.info("finished after class");
+        TestBase.log.info("finished after class");
     }
 
 }
