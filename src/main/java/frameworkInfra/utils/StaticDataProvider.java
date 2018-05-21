@@ -6,7 +6,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 public class StaticDataProvider {
 
     public static class IbLocations {
-        public static final String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
+        public static String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
