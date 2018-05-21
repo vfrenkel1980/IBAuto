@@ -50,7 +50,7 @@ public class SetupTestBase extends TestBase {
         catch (Exception e)
         {
             e.getMessage();
-            //test.log(INFO, "Nothing to remove, IB is not installed");
+            test.log(INFO, "Nothing to remove, IB is not installed");
         }
     }
 
@@ -59,7 +59,6 @@ public class SetupTestBase extends TestBase {
         test = extent.createTest(method.getName());
         test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
-        IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
     }
 
     @AfterMethod
