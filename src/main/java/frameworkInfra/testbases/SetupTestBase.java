@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
@@ -12,6 +13,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
 import java.io.IOException;
@@ -36,6 +38,12 @@ public class SetupTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - Setup.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+    }
+
+    @BeforeSuite
+    public void beforeSuite() {
+        int version = IIBService.getIbVersion();
+        ibService.uninstallIB(String.valueOf(version));
     }
 
     @BeforeMethod
