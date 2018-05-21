@@ -94,7 +94,6 @@ public class SetupTests extends SetupTestBase {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
             Assert.fail();
         }
-        IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertFalse(ibService.verifyIbServicesRunning(true, true), "Services are running!!!! Should be Uninstalled");
     }
 
