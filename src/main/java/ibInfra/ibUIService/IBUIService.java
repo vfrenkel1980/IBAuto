@@ -3,6 +3,7 @@ package ibInfra.ibUIService;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
@@ -111,6 +112,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Selecting existing coordinator");
             screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.5),2).click();
             screen.type(coordName);
+            SystemActions.sleep(2);
         }
 
         @Override

@@ -3,8 +3,6 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
@@ -21,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.aventstack.extentreports.Status.INFO;
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
@@ -50,6 +47,7 @@ public class SetupTestBase extends TestBase {
         catch (Exception e)
         {
             e.getMessage();
+            test.log(INFO, "Nothing to remove, IB is not installed");
         }
     }
 

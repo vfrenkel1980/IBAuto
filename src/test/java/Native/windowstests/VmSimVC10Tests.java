@@ -150,7 +150,7 @@ public class VmSimVC10Tests extends VmSimTestBase {
     @Test(testName = "Configuration test 2 2010 Several Configuration - build" , groups = { "Build" })
     public void configurationTest2SeveralConfigurationx32Debug(){
         int returnCode = ibService.cleanAndBuild(Processes.BUILD_CONSOLE + String.format(ProjectsCommands.VC10_VMSIM.CONFIGURATION_TEST_2_SEVERAL_CONF, "%s"));
-        Assert.assertTrue(returnCode == 2, "Build failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == 3, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Configuration test 3 2010 - build" , groups = { "Build" })
