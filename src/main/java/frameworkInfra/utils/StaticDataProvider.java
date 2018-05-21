@@ -40,7 +40,7 @@ public class StaticDataProvider {
         public static final String BUILDSYSTEM = "\"" + InitIBRoot.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
         public static final String BUILDMONITOR = "\"" + InitIBRoot.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
         public static final String BUILDHISTORY = "\"" + InitIBRoot.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
-        public static final String XLICPROC = "\"" + InitIBRoot.IB_ROOT +"\\xlicproc /LicenseFile=" + "\"";
+        public static final String XLICPROC = "\"" + InitIBRoot.IB_ROOT +"\\xlicproc" + "\"" + " /LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }
