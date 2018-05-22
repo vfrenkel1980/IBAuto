@@ -60,7 +60,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void cancelReleaseNotes() throws FindFailed {
             test.log(Status.INFO, "Removing Release notes CB");
-            screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8),120).click();
+            screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.5),120).click();
         }
 
         @Override
