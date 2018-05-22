@@ -82,8 +82,8 @@ public class VSUIService implements IVSUIService {
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution ')]"))));
+        WebDriverWait wait = new WebDriverWait(driver,90);
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution '\")]"))));
         test.log(Status.INFO, projectPath + " project opened");
     }
 
