@@ -27,7 +27,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        linuxService.killib_db_check(ipList.get(1));
+        linuxService.killibDbCheck(ipList.get(1));
         log.info("finished before suite");
     }
 

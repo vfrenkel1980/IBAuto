@@ -5,17 +5,14 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import frameworkInfra.testbases.LinuxSimTestBase;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import ibInfra.windowscl.WindowsService;
-import org.jdom2.Element;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -120,7 +117,7 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public void killib_db_check(String IP) {
+    public void killibDbCheck(String IP) {
         linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.KILL_IB_DB_CHECK,IP);
     }
 

@@ -32,7 +32,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
         rawIpList2 = XmlParser.getIpList("Machines/MultiInitiators IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
-        linuxService.killib_db_check(ipList.get(1));
+        linuxService.killibDbCheck(ipList.get(1));
 
         ibVersion = getIBVersion();
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");

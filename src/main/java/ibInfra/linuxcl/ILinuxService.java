@@ -16,7 +16,7 @@ public interface ILinuxService {
 
     boolean stopIBService(String service, String IP);
 
-    void killib_db_check(String IP);
+    void killibDbCheck(String IP);
 
     boolean isLinuxOSUbuntu(String IP);
 
