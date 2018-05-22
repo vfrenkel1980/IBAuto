@@ -121,7 +121,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Upgrade IB")
     public void upgradeIb(){
-        ibService.installIB("2260", IbLicenses.UI_LIC);
+        ibService.installIB("2190", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("Latest");
         try {
             installer.clickNext();
