@@ -140,7 +140,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Upgrade IB")
+    @Test(testName = "Downgrade IB")
     public void downgradeIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("2190");
