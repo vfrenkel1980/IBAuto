@@ -45,7 +45,7 @@ public class StaticDataProvider {
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
-        public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
+        public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }

@@ -83,8 +83,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void loadIbLicense(String license) {
-        String out = winService.runCommandGetOutput(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
-        test.log(Status.INFO, out);
+        winService.runCommandGetOutput(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
         SystemActions.sleep(3);
         winService.runCommandWaitForFinish(WindowsCommands.KILL_COORDMON);
         isLicenseLoaded();
