@@ -87,7 +87,7 @@ public class IbService extends TestBase implements IIBService {
     public void loadIbLicense(String license) {
         winService.runCommandGetOutput(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
         SystemActions.sleep(3);
-        SystemActions.killProcess("XLicProc.exe");
+        SystemActions.killProcess("coordmonitor.exe");
         isLicenseLoaded();
     }
 
