@@ -48,6 +48,7 @@ public class IbService extends TestBase implements IIBService {
     public void installIB(String version, String license) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
+        Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         loadIbLicense(license);
     }
 

@@ -82,7 +82,6 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "UninstallRB IB")
     public void uninstallIb(){
-        Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("Latest");
         try {
@@ -100,7 +99,6 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Repair IB")
     public void repairIb(){
-        Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
         SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT, "*.exe");
@@ -123,7 +121,6 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Upgrade IB")
     public void upgradeIb(){
-        Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         ibService.installIB("2190", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("Latest");
         try {
@@ -145,7 +142,6 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Downgrade IB")
     public void downgradeIb(){
-        Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("2190");
         try {
