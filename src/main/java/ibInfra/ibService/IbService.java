@@ -50,6 +50,7 @@ public class IbService extends TestBase implements IIBService {
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Processes.XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
+        WindowsCommands.LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         loadIbLicense(license);
     }
 
@@ -85,9 +86,9 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void loadIbLicense(String license) {
-        winService.runCommandGetOutput(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
+        winService.runCommandDontWaitForTermination(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
         SystemActions.sleep(3);
-        SystemActions.killProcess("xlicproc.exe");
+        SystemActions.killProcess("XLicProc.exe");
         isLicenseLoaded();
     }
 

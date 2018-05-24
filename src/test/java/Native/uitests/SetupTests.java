@@ -51,7 +51,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Install On An Existing Coordinator")
+/*    @Test(testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator(){
         ibuiService.startIBUIInstaller("Latest");
         try {
@@ -78,7 +78,7 @@ public class SetupTests extends SetupTestBase {
                 + WindowsMachines.BABYLON);
         int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+    }*/
 
     @Test(testName = "UninstallRB IB")
     public void uninstallIb(){

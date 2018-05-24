@@ -391,7 +391,7 @@ public class StaticDataProvider {
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
         public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";
-        public static final String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
+        public static String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         public static final String UNLOAD_IB_LICENSE = "\"" + IbLocations.IB_ROOT + "\\CoordMonitor.exe\" /LicenseFile=" + "\"" + IbLocations.IB_ROOT + "\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
