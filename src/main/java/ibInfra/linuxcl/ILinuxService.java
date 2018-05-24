@@ -10,11 +10,11 @@ public interface ILinuxService {
 
     void deleteLogsFolder(List<String> ipList);
 
-    boolean isIBServiceUp(String service, String IP);
+    boolean isIBServiceUp( String IP);
 
-    boolean startIBService(String service, String IP);
+    boolean startIBService( String IP);
 
-    boolean stopIBService(String service, String IP);
+    boolean stopIBService( String IP);
 
     void killibDbCheck(String IP);
 

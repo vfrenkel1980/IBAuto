@@ -54,13 +54,13 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         linuxService.deleteLogsFolder(multiGridIPList);
         log.info("finished delete logs folder");*/
 
-        if(!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
+        if(!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
             extent.flush();
             throw new SkipException("EXITING");
         }
 
-        if(linuxService.startIBService("ib_server", ipList.get(1))) {
+        if(linuxService.startIBService( ipList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
@@ -69,7 +69,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
         for (int i=1; i<5; ++i) {
 
-            if(linuxService.stopIBService("ib_server", otherGridIPList.get(i))) {
+            if(linuxService.stopIBService( otherGridIPList.get(i))) {
                 String err = "stopIBService failed " +otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();
@@ -97,7 +97,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         test.log(Status.INFO, "AFTER CLASS started");
         for (int i = 1; i < 5; ++i) {
 
-            if (linuxService.startIBService("ib_server", otherGridIPList.get(i))) {
+            if (linuxService.startIBService(otherGridIPList.get(i))) {
                 String err = "startIBService failed " + otherGridIPList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
                 extent.flush();

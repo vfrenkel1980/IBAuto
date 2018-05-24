@@ -108,8 +108,8 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public boolean isIBServiceUp(String service, String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES, service));
+    public boolean isIBServiceUp(String IP) {
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES));
         if (res == 0)
             return true;
         else
@@ -122,8 +122,8 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public boolean startIBService(String service, String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES, service));
+    public boolean startIBService(String IP) {
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES));
         if (res == 0)
             return false;
         else
@@ -131,8 +131,8 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public boolean stopIBService(String service, String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES, service));
+    public boolean stopIBService(String IP) {
+        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES));
         if (res == 0)
             return false;
         else
