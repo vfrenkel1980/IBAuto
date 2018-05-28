@@ -143,48 +143,48 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
     }
 
 
-    @Test(testName = "Sim ccache QT prefix")
-    public void SimTestccacheQTprefix(){
-
-        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(2));
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j32", ipList.get(2));
-        String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
-
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel/" + ";" +
-                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..; make -j32", ipList.get(2));
-
-        String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
-        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(2));
-
-        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
-
-//        Assert.assertEquals(exitCode, 0, "Test "+ testName + "failed with Exit code " + exitCode);
-
-        String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
-
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel;"  +
-                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..;" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
-
-        String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
-
-        String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/src/sql/kernel; find -name qsqlquery.cpp -newer ../../../lib/libQtSql.so.4.8.6;", ipList.get(2));
-        newer += linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/lib; find -name libQtScript.so.4.8.6 -newer libQtSql.so.4.8.6;", ipList.get(2));
-
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(2));
-
-        if(!newer.isEmpty())
-            Assert.assertEquals(1, 0, "Test failed - incremental build files" );
-
-
-        if(!noIBsize.equals((withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed" );
-
-        if(!inc_noIBsize.equals((inc_withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental " );
-
-        log.info("finished LinuxSimulationCcacheTests: ccashe size: with IB = " + withIBsize + " without IB = " +
-                noIBsize + "incremental with IB = " + inc_withIBsize+ " without IB = " + inc_noIBsize);
-    }
+//    @Test(testName = "Sim ccache QT prefix")
+//    public void SimTestccacheQTprefix(){
+//
+//        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(2));
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j32", ipList.get(2));
+//        String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
+//
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel/" + ";" +
+//                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..; make -j32", ipList.get(2));
+//
+//        String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
+//        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(2));
+//
+//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
+//
+////        Assert.assertEquals(exitCode, 0, "Test "+ testName + "failed with Exit code " + exitCode);
+//
+//        String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
+//
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel;"  +
+//                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..;" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
+//
+//        String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
+//
+//        String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/src/sql/kernel; find -name qsqlquery.cpp -newer ../../../lib/libQtSql.so.4.8.6;", ipList.get(2));
+//        newer += linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/lib; find -name libQtScript.so.4.8.6 -newer libQtSql.so.4.8.6;", ipList.get(2));
+//
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(2));
+//
+//        if(!newer.isEmpty())
+//            Assert.assertEquals(1, 0, "Test failed - incremental build files" );
+//
+//
+//        if(!noIBsize.equals((withIBsize)))
+//            Assert.assertEquals(1, 0, "Test failed - ccache size changed" );
+//
+//        if(!inc_noIBsize.equals((inc_withIBsize)))
+//            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental " );
+//
+//        log.info("finished LinuxSimulationCcacheTests: ccashe size: with IB = " + withIBsize + " without IB = " +
+//                noIBsize + "incremental with IB = " + inc_withIBsize+ " without IB = " + inc_noIBsize);
+//    }
 }

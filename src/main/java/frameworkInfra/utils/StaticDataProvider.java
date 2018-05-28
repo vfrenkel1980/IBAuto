@@ -442,7 +442,7 @@ public class StaticDataProvider {
        // public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
         public static final String GET_OS =  "cat /proc/version";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
-        public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep %s | grep -v \"grep\"\"";
+        public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep ib_server | grep -v \"grep\"\"";
 		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
         public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";

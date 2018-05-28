@@ -39,13 +39,13 @@ public class LinuxSimTestBase extends LinuxTestBase {
         test.log(Status.INFO, "BEFORE CLASS started");
 
 
-        if (!linuxService.isIBServiceUp("ib_server", ipList.get(0))) {
+        if (!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
         }
 
-        if (!linuxService.isIBServiceUp("ib_server", ipList.get(1))) {
+        if (!linuxService.isIBServiceUp( ipList.get(1))) {
             test.log(Status.ERROR, "IB service in initiator is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
