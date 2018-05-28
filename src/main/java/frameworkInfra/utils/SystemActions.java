@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -98,6 +99,18 @@ public class SystemActions {
         } catch (InterruptedException e) {
             e.getMessage();
         }
+    }
+
+    public static List<String> getAllFilesInDirectory(String path){
+        List<String> results = new ArrayList<String>();
+        File[] files = new File(path).listFiles();
+
+        for (File file : files) {
+            if (file.isFile()) {
+                results.add(file.getName());
+            }
+        }
+        return results;
     }
 
 }

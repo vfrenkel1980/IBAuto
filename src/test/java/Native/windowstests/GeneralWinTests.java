@@ -1,5 +1,6 @@
 package Native.windowstests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
@@ -10,9 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class GeneralWinTests extends BatmanBCTestBase{
 
@@ -90,9 +94,19 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
     }
 
-
-
-
+    @Test(testName = "Verify Errors In Logs")
+    public void verifyErrorsInLogs() {
+        int errorCount = 0;
+        List<String> files = SystemActions.getAllFilesInDirectory(IbLocations.IB_ROOT + "\\logs");
+        for (String file : files) {
+            for (String aERROR_LIST : LogOutput.ERROR_LIST) {
+                if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs" + file, aERROR_LIST))
+                    errorCount++;
+                test.log(Status.INFO, aERROR_LIST + " Appears in " + file);
+            }
+        }
+        Assert.assertFalse(errorCount > 0);
+    }
 
 
 
