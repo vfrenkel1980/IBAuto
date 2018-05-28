@@ -28,6 +28,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         linuxService.killibDbCheck(ipList.get(1));
+        linuxService.deleteLogsFolder(ipList);
         log.info("finished before suite");
     }
 
@@ -50,7 +51,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             extent.flush();
             System.exit(0);
         }
-         linuxService.deleteLogsFolder(ipList);
+
          log.info("finished before class");
     }
 
