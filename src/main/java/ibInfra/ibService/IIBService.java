@@ -12,7 +12,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public interface IIBService {
 
-    String getIBinstallFolder();
+    String getIBInstallFolder();
 
     int cleanAndBuild(String command);
 

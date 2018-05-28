@@ -1,8 +1,11 @@
 package Native.windowstests;
 
 import frameworkInfra.testbases.BatmanBCTestBase;
+import frameworkInfra.utils.RegistryService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
 public class BatmanVC12Tests extends BatmanBCTestBase {
@@ -60,36 +63,47 @@ public class BatmanVC12Tests extends BatmanBCTestBase {
     @Test(testName = "AccountApplicationAuthorization - 2013 debug|NX32 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013DebugNX32Build(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_NX32_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "AccountApplicationAuthorization - 2013 debug|NX64 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013DebugNX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_NX64_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "AccountApplicationAuthorization - 2013 release|NX32 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013ReleaseNX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_NX32_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "AccountApplicationAuthorization - 2013 release|NX64 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013ReleaseNX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_NX64_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "AccountApplicationAuthorization - 2013 release|x64 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013ReleaseX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_X64_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "AccountApplicationAuthorization - 2013 debug|win32 - build" , groups = { "Build" })
     public void accountApplicationAuthorization2013DebugX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.NINTENDO_AAA_X32_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
@@ -139,5 +153,11 @@ public class BatmanVC12Tests extends BatmanBCTestBase {
     public void ps42013ReleaseOrbisBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.PS4_ORBIS_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+        /*------------------------------METHODS------------------------------*/
+
+    private void setRegistry(String required, String keyName){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
     }
 }

@@ -32,6 +32,7 @@ public class UnitTests {
 
     @Test
     public void test2() {
-
+        IbService ibService = new IbService();
+        ibService.loadIbLicense(StaticDataProvider.IbLicenses.UI_LIC);
     }
 }

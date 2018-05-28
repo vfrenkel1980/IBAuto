@@ -26,7 +26,7 @@ public class IbService extends TestBase implements IIBService {
     private WindowsService winService = new WindowsService();
 
     @Override
-    public String getIBinstallFolder() {
+    public String getIBInstallFolder() {
         String IBfolder = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
         return IBfolder;
     }
@@ -196,7 +196,7 @@ public class IbService extends TestBase implements IIBService {
             return true;
         }
         else{
-            test.log(Status.WARNING, "License is NOT loaded");
+            test.log(Status.WARNING, "License is NOT loaded. CoordLicense.dat does not exist in + " + IbLocations.IB_ROOT);
             return false;
         }
     }

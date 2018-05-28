@@ -40,8 +40,8 @@ public class VSIntegrationTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite(){
-        ibService.disableVsMonitor();
         ibService.updateIB("Latest");
+        ibService.disableVsMonitor();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
     }
 
