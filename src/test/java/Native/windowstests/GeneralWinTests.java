@@ -100,7 +100,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
         List<String> files = SystemActions.getAllFilesInDirectory(IbLocations.IB_ROOT + "\\logs");
         for (String file : files) {
             for (String aERROR_LIST : LogOutput.ERROR_LIST) {
-                if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs" + file, aERROR_LIST))
+                if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs\\" + file, aERROR_LIST))
                     errorCount++;
                 test.log(Status.INFO, aERROR_LIST + " Appears in " + file);
             }
