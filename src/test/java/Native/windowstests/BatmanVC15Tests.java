@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.*;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -40,6 +41,10 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 
     @Test(testName = "Chrome release - build" , groups = { "Build" })
     public void chromeReleaseBuild(){
+        if (testName.equals("Minimal")){
+            test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
+            throw new SkipException("Skipped test");
+        }
         winService.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_CLEAN);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);

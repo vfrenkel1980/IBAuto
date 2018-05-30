@@ -5,6 +5,7 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -33,7 +34,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
 
     @BeforeMethod
     @Parameters ({ "logLevel"})
-    public void beforeMethod(Method method, String logLevel){
+    public void beforeMethod(Method method, String logLevel, ITestContext testContext){
         testName = getTestName(method);
         test = extent.createTest(testName);
         if (logLevel.equals("4"))
@@ -42,6 +43,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
             test.assignCategory("Batman CL - Minimal logging");
         test.log(Status.INFO, method.getName() + " test started");
         log.info(method.getName() + " test started");
+        testName = testContext.getName();
     }
 
     @AfterMethod

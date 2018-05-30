@@ -10,6 +10,7 @@ import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class WindowsTestBase extends TestBase {
     private static int ibVersion = 0;
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
+    public String testName = "";
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -68,14 +70,13 @@ public class WindowsTestBase extends TestBase {
 
     @BeforeClass
     @Parameters ({ "logLevel"})
-    public static void init(String logLevel){
+    public void init(String logLevel){
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
         test = extent.createTest("Before Class - Change Logging Level to " + logLevel);
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started - Change Logging Level to" + logLevel);
-
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel );
     }
 
