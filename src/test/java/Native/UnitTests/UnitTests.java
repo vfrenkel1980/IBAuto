@@ -1,12 +1,10 @@
 package Native.UnitTests;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
+import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,18 +39,28 @@ public class UnitTests {
         for (String aNew : news) System.out.println(aNew);
     }
 
-    @Test(testName = "Verify Errors In Logs")
-    public void verifyErrorsInLogs() {
-        int isFailed = 0;
-        List<String> files = SystemActions.getAllFilesInDirectory("C:\\Program Files (x86)\\Incredibuild\\Logs");
-        for (String file : files) {
-            for (String aERROR_LIST : StaticDataProvider.LogOutput.ERROR_LIST) {
-                if(Parser.doesFileContainString("C:\\Program Files (x86)\\Incredibuild\\Logs\\" + file, aERROR_LIST))
-                    isFailed++;
-                //test.log(Status.INFO, aERROR_LIST + " Appears in " + file);
-                System.out.println(aERROR_LIST + " Appears in " + file);
+    @Test(testName = "Ruby2.4 SyncPrivateAssemblies")
+    public void ruby24SyncPrivateAssemblies() {
+        String result = "";
+        int agentCount = 0;
+        IbService ibService = new IbService();
+        WindowsService winService = new WindowsService();
+        List<String> batmanMachineList;
+        List rawBatmanList;
+        rawBatmanList = XmlParser.getIpList("Machines/BatmanGrid.xml");
+        batmanMachineList = XmlParser.breakDownIPList(rawBatmanList);
+        winService.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.MISC_PROJECTS.RUBY_SYNC_PRIVATE_ASSEMBLIES);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "Build failed");
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        for (String machine : batmanMachineList) {
+            if (Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "Agent '" + machine)) {
+                agentCount++;
             }
         }
-        Assert.assertFalse(isFailed > 0);
+        Assert.assertTrue(agentCount > 0, "No agents were assigned to the build");
     }
 }
