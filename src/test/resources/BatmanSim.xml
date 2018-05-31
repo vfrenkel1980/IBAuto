@@ -18,6 +18,7 @@
             <class name ="Native.windowstests.BatmanVC12Tests" />
             <class name ="Native.windowstests.BatmanVC11Tests" />
             <class name ="Native.windowstests.GeneralWinTests" />
+            <class name ="Native.windowstests.BatmanMiscProjTests" />
         </classes>
     </test>
 
@@ -29,6 +30,7 @@
             <class name ="Native.windowstests.BatmanVC14Tests" />
             <class name ="Native.windowstests.BatmanVC12Tests" />
             <class name ="Native.windowstests.BatmanVC11Tests" />
+            <class name ="Native.windowstests.BatmanMiscProjTests" />
         </classes>
     </test>
 </suite>
