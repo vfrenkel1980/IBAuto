@@ -90,7 +90,9 @@ public class GeneralWinTests extends BatmanBCTestBase{
     @Test(testName = "Verify BuildSystem Memory Usage During Build")
     public void verifyBuildSystemMemoryUsageDuringBuild() {
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        SystemActions.sleep(20);
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
     }
 
@@ -102,7 +104,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
             for (String aERROR_LIST : LogOutput.ERROR_LIST) {
                 if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs\\" + file, aERROR_LIST)) {
                     errorCount++;
-                    test.log(Status.INFO, aERROR_LIST + " Appears in " + file);
+                    test.log(Status.WARNING, aERROR_LIST + " Appears in " + file);
                 }
             }
         }
