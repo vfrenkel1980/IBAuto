@@ -1,5 +1,6 @@
 package webInfra.ibWeb.pageObjects;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.SystemActions;
 import jdk.nashorn.internal.scripts.JO;
 import org.openqa.selenium.By;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import webInfra.ibWeb.pages.RegistrationForm;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class DownloadPageObject {
 
@@ -26,6 +29,9 @@ public class DownloadPageObject {
     public static final By PHONE_TB = By.xpath("//*[@id=\"phone\"]");
     public static final By TERMS_CB = By.xpath("//*[@id=\"terms\"]");
     public static final By SUBMIT_FIRST_FORM_BTN = By.xpath("//*[@id=\"first-step-submit\"]");
+
+    public static final By LOGIN_BTN = By.xpath("//a[contains(text(),'Log in')]");
+    public static final By PURCHASE_ONLINE = By.xpath("//a[contains(text(),'Purchase online')]");
 
     //Second stage
     public static final By COUNTRY_SELECTION_DDL = By.xpath("//*[@id=\"countriesSelection\"]");
@@ -416,6 +422,22 @@ public class DownloadPageObject {
 
     public void clickSubmitFirstForm(){
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
+    }
+
+    public void verifyMissingLoginButton(){
+        WebDriverWait wait = new WebDriverWait(eventWebDriver,10);
+        if(wait.until(ExpectedConditions.invisibilityOfElementLocated((LOGIN_BTN))))
+            test.log(Status.INFO,"Login button is not present on the \"CREATE NEW ACCOUNT\" page");
+        else
+            test.log(Status.INFO,"Login button FOUND on the \"CREATE NEW ACCOUNT\" page");
+    }
+
+    public void verifyMissingStoreLink(){
+        WebDriverWait wait = new WebDriverWait(eventWebDriver,10);
+        if(wait.until(ExpectedConditions.invisibilityOfElementLocated((PURCHASE_ONLINE))))
+            test.log(Status.INFO,"Purchase online link is not present on the \"CREATE NEW ACCOUNT\" page");
+        else
+            test.log(Status.INFO,"Purchase online link FOUND on the \"CREATE NEW ACCOUNT\" page");
     }
 
 

@@ -26,7 +26,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class VSTestBase extends TestBase {
 
     protected static int ibVersion = 0;
-    private String SCENARIO = System.getProperty("scenario");
+    private static String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
     public IbService ibService = new IbService();
@@ -37,7 +37,7 @@ public class VSTestBase extends TestBase {
     static {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "-VSExtension.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "_SCENARIO_" + SCENARIO + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
     }

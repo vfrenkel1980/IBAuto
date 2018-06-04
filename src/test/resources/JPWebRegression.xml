@@ -10,7 +10,8 @@
 
     <test name="JapanUnique">
         <classes>
-            <class name ="Web.IBWeb.DownloadFormTests" />
+            <!--<class name ="Web.IBWeb.DownloadFormTests" />-->
+            <class name ="Web.IBWeb.JPSiteValidationTests" />
         </classes>
     </test>
 </suite>

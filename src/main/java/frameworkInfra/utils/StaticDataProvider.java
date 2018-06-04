@@ -7,16 +7,17 @@ public class StaticDataProvider {
 
     public static class IbLocations {
         public static String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
-        public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT +  "\\buildconsole.exe" + "\"" +" ";
+        public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT + "\\buildconsole.exe" + "\"" + " ";
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
-        public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT +  "\\xgconsole.exe" + "\"" +" ";
-        public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT +  "\\BuildSystem.exe" + "\"" +" ";
-        public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT +  "\\BuildMonitor.exe" + "\"" +" ";
-        public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT +  "\\BuildHistory.exe" + "\"" +" ";
+        public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgconsole.exe" + "\"" + " ";
+        public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT + "\\BuildSystem.exe" + "\"" + " ";
+        public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
+        public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
+        public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
     }
 
-    public static class InitMSBuild{
-        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER,"Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
+    public static class InitMSBuild {
+        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
 
     //locations
@@ -32,7 +33,7 @@ public class StaticDataProvider {
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
     }
 
-    public static class URL{
+    public static class URL {
         public static final String VS_PREVIEW_URL = "https://download.visualstudio.microsoft.com/download/pr/11796490/da370bf146a3a1e91ec0ace29e623fdb/vs_Professional.exe";
         public static final String VS_RELEASE_URL = "https://aka.ms/vs/15/release/vs_professional.exe ";
     }
@@ -50,12 +51,12 @@ public class StaticDataProvider {
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
     }
 
-    public static class WindowsServices{
+    public static class WindowsServices {
         public static final String AGENT_SERVICE = "IncrediBuild_Agent";
         public static final String COORD_SERVICE = "IncrediBuild_Coordinator";
     }
 
-    public static class LogOutput{
+    public static class LogOutput {
         public static final String BUILD_SUCCEEDED = "Build succeeded";
         public static final String ERROR = "Error";
         public static final String XDTASKID = "xdTaskID";
@@ -63,11 +64,11 @@ public class StaticDataProvider {
         public static final String AGENT = "Agent";
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
         public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
-        public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error"};
+        public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error", "EReadError"};
 
     }
 
-    public static class VsActions{
+    public static class VsActions {
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
         public static final String CLEAN_SOLUTION = "Clean Solution";
@@ -77,7 +78,7 @@ public class StaticDataProvider {
         public static final String STOP_BUILD = "Stop Build";
     }
 
-    public static class VsDevenvInstallPath{
+    public static class VsDevenvInstallPath {
         public static final String VS2017_RELEASE = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE";
         public static final String VS2017_PREVIEW = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE";
     }
@@ -175,7 +176,7 @@ public class StaticDataProvider {
             public static final String SHADOWMAP_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"release|Durango\"";
         }
 
-        public static class VC7_VMSIM{
+        public static class VC7_VMSIM {
             public static final String BIG_LIB_DEBUG_RELEASE = "\"C:\\QA\\Simulation\\vc7\\BigLib\\BigLib.sln\" /%s /cfg=\"debug|win32,release|win32\" /prj=biglib";
             public static final String QUAKE2 = "C:\\QA\\Simulation\\vc7\\quake2-3.21\\quake2.sln /%s /preset=mypreset";
             public static final String ABIWORD = "C:\\QA\\Simulation\\vc7\\abiword-2.4.6\\MSVC71\\AbiWord.sln /preset=SafeBuild /%s";
@@ -183,7 +184,7 @@ public class StaticDataProvider {
             public static final String VSCAP_RELEASE = "C:\\QA\\Simulation\\vc7\\vscap20s\\vscap.sln /%s /cfg=\"release|win32\"";
         }
 
-        public static class VC6_VMSIM{
+        public static class VC6_VMSIM {
             public static final String NEWS_DEBUG = "C:\\QA\\Simulation\\VC6\\gravity\\news.dsw /%s /cfg=\"win32 debug\" ";
             public static final String HEXEDIT = "C:\\QA\\Simulation\\VC6\\HexEd\\Hexedit.dsw /%s";
             public static final String IFPROJECTS = "C:\\QA\\Simulation\\vc6\\ItemField\\Dev\\Projects\\IFprojects.dsw /%s /prj=contentconsole";
@@ -193,7 +194,7 @@ public class StaticDataProvider {
 
         }
 
-        public static class VC8_VMSIN{
+        public static class VC8_VMSIN {
             public static final String NONTEPAD_PLUS_DEBUG = "C:\\QA\\Simulation\\vc8\\NotePadPP\\PowerEditor\\visual.net\\notepadPlus.vcproj /%s /cfg=\"debug|win32\"";
             public static final String VC8_TEST_DEBUG = "\"C:\\QA\\Simulation\\vc8\\VC8 Test Proj\\VC8 Test Proj.sln\" /%s /cfg=\"debug|mixed platforms\"";
             public static final String MIDL_INTERFACES_DEBUG = "\"C:\\QA\\Simulation\\vc8\\Interfaces\\Interfaces.vcproj\" /%s /cfg=\"debug|win32\"";
@@ -236,7 +237,7 @@ public class StaticDataProvider {
             public static final String ACE_BATCH = "C:\\QA\\simulation\\VC8\\ACE_VC8\\ACE_VC8.bat ";
         }
 
-        public static class VC9_VMSIM{
+        public static class VC9_VMSIM {
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC9\\ACE_VC9\\ACE_vc9.sln\" /%s /cfg=\"debug|win32\"";
             public static final String SCINTILLA = "\"C:\\QA\\Simulation\\Mixed\\scintilla\\vcbuild\\SciLexer.sln\" /%s /cfg=\"debug|win32\"";
             public static final String VC9_ALL = "\"C:\\QA\\Simulation\\VC9\\VC9-all1\\VC9-all1.sln\" /%s /preset=\"ALL_Configurations\" ";
@@ -329,7 +330,7 @@ public class StaticDataProvider {
             public static final String DEPENDENCY_REFERENCE_TEST = "C:\\QA\\simulation\\VC10\\Dependancy_And_Refference_checker\\run_me.bat";
         }
 
-        public static class VC11_VMSIM{
+        public static class VC11_VMSIM {
             public static final String ACE_X32_DEBUG = "C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /%s /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\"";
             public static final String ACE_X32_RELEASE = "C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /%s /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\"";
             public static final String XMBC_X32_DEBUG = "\"C:\\QA\\Simulation\\VC11\\xbmc-vs2012\\project\\VS2010Express\\XBMC for Windows.sln\" /%s /cfg=\"debug (directx)|win32\" /title=\"XBMC 2012 - Debug (DirectX)\" /vsversion=\"vc11\"";
@@ -337,7 +338,7 @@ public class StaticDataProvider {
 
         }
 
-        public static class UIVALIDATIONS{
+        public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
             public static final String GREEN03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green03\\RunMe.bat\"";
@@ -355,7 +356,7 @@ public class StaticDataProvider {
             public static final String RED09 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red09\\RunMe.bat\"";
         }
 
-        public static class ConsoleAppProj{
+        public static class ConsoleAppProj {
             public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
         }
@@ -384,12 +385,12 @@ public class StaticDataProvider {
 
     }
 
-    public static class IbLicenses{
-        public static final String VSTESTS_LIC= "IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic";
+    public static class IbLicenses {
+        public static final String VSTESTS_LIC = "IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic";
         public static final String UI_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - UI automation.IB_lic";
     }
 
-    public static class WindowsCommands{
+    public static class WindowsCommands {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
@@ -412,12 +413,12 @@ public class StaticDataProvider {
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
     }
 
-    public static class MemoryThresholds{
+    public static class MemoryThresholds {
         public static final String _20K = "20000";
         public static final String _200K = "200000";
     }
 
-    public static class TestProjects{
+    public static class TestProjects {
         public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
         public static final String TEST_PROJ = Locations.QA_ROOT + "\\Projects\\TestProj\\TestProj.sln /%s /cfg=\"Debug|x86\" /title=\"TestProject\"";
         public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln";
@@ -428,10 +429,10 @@ public class StaticDataProvider {
         public static final String VC12PROJECT = Locations.QA_ROOT + "\\projects\\vc12project\\vc12project.sln";
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
-        public static final String CONSOLE_APPLICATION_01_BUILDCONSOLE_COMMAND= "\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"Debug|x64\" /title=\"ConsoleApplication Test Project\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+        public static final String CONSOLE_APPLICATION_01_BUILDCONSOLE_COMMAND = "\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"Debug|x64\" /title=\"ConsoleApplication Test Project\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
     }
 
-    public static class UIValidationsProjects{
+    public static class UIValidationsProjects {
         public static final String GREEN01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln";
         public static final String YELLOW01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln";
         public static final String RED01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln";
@@ -442,14 +443,14 @@ public class StaticDataProvider {
         public static final String RED06 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red06\\Red06.sln";
     }
 
-    public static class LinuxCommands{
+    public static class LinuxCommands {
         public static final String PLINK = "plink -pw xoreax xoreax@";
-        public static final String KILL_IB_DB_CHECK =  "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
-       // public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
-        public static final String GET_OS =  "cat /proc/version";
+        public static final String KILL_IB_DB_CHECK = "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
+        // public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
+        public static final String GET_OS = "cat /proc/version";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep ib_server | grep -v \"grep\"\"";
-		public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
+        public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
         public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String BUILD_ID = "BuildId";
@@ -457,18 +458,18 @@ public class StaticDataProvider {
         public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
     }
 
-    public static class WindowsMachines{
+    public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
-        public static final String BABYLON= "babylon";
+        public static final String BABYLON = "babylon";
     }
 
-    public static class LinuxMachines{
+    public static class LinuxMachines {
         public static final String TEST_MACHINE = "192.168.11.82";
         public static final String VM_SIM_1A = "192.168.11.103";
     }
 
-    public static class LicTestPrjBuildConsoleCommands{
+    public static class LicTestPrjBuildConsoleCommands {
 
         public static final String VS2017_CPP = "\\2017\\Cpp\\Cpp.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C++\"";
         public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|Any CPU\" /title=\"License Test - VS2017 C#\"";
@@ -481,7 +482,7 @@ public class StaticDataProvider {
         public static final String XML = "\\xgconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\XML\\XmlSample.xml /title=\"License test - Dev Tools - XML\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
     }
 
-    public static class LinuxSimulation{
+    public static class LinuxSimulation {
 
         public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
         public static final String CD_KERNEL4_DIR = "cd /disk2/projects/linux-4.3.3";
@@ -519,7 +520,7 @@ public class StaticDataProvider {
 
     }
 
-    public static class InstallationPorts{
+    public static class InstallationPorts {
 
         public static final String AGENT_PORT = "31101";
         public static final String HELPER_PORT = "31102";

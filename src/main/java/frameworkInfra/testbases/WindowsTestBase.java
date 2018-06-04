@@ -90,8 +90,6 @@ public class WindowsTestBase extends TestBase {
         SystemActions.copyFilesByExtension(IbLocations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
         //TODO: parse .log for assertion error
-        //TODO: parse .txt for access violations
-
 
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
