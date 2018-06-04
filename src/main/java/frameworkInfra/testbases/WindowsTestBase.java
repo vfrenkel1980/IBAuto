@@ -57,15 +57,17 @@ public class WindowsTestBase extends TestBase {
         verifyRegistry("0", currentStandalone, RegistryKeys.STANDALONE_MODE);
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
         //kill tray icon
         SystemActions.killProcess(Processes.TRAY_ICON);
         //delete logs folder
-        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
         SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
+        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
         //delete build logs folder
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
     }
 
     @BeforeClass
