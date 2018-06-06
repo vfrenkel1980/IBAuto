@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="VSIntegration"  >
 
-    <listeners>
+<!--    <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
@@ -25,7 +25,7 @@
         <classes>
             <class name ="Native.vstests.VSIntegrationTests" />
         </classes>
-    </test>
+    </test>-->
 
     <test name="VSIntegrationTests11">
         <parameter name="VCVersion" value="11"/>
