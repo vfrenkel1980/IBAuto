@@ -2,15 +2,15 @@ package Native.uitests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.SetupTestBase;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.PostgresJDBC;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
+import java.io.File;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -374,6 +374,20 @@ public class SetupTests extends SetupTestBase {
         String installationFile = ibService.getIbConsoleInstallation("Latest");
         int exitCode = winService.runCommandWaitForFinish(installationFile + " /someparam");
         Assert.assertEquals(exitCode, 4, "Installation finished with exit code different than 4!");
+    }
+
+    @Test(testName = "Verify Installation Logs Created")
+    public void verifyInstallationLogsCreated(){
+        String filename = "";
+        String installLogsFolder = System.getProperty("java.io.tmpdir") + "IB_Setup_Logs";
+        SystemActions.deleteFilesByPrefix(installLogsFolder, "IncrediBuild_Setup");
+        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        List<String> files = SystemActions.getAllFilesInDirectory(installLogsFolder);
+        for (String file : files) {
+            if (file.contains("IncrediBuild_Setup"))
+                filename = file;
+        }
+        Assert.assertTrue(new File(installLogsFolder, filename).exists(), "Something went wrong and installation log s not created");
     }
 
 

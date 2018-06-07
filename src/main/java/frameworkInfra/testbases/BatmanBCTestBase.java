@@ -2,7 +2,8 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
@@ -48,7 +49,9 @@ public class BatmanBCTestBase extends WindowsTestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
+        if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PDB_ERROR))
+            LogOutput.PDB_ERROR_TESTS = LogOutput.PDB_ERROR_TESTS + testName + "\n";
+        SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
     }
 
 }

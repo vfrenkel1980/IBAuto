@@ -128,6 +128,11 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertTrue(isPresent, "No agent assigned to build");
     }
 
+    @Test(testName = "Verify PDB Error In Log")
+    public void verifyPDBErrorInLog() {
+        Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
+    }
+
 
 
         /*------------------------------METHODS------------------------------*/

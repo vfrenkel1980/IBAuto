@@ -69,7 +69,8 @@ public class StaticDataProvider {
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
         public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
         public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error", "EReadError"};
-
+        public static final String PDB_ERROR = ".pdb' is corrupted";
+        public static String PDB_ERROR_TESTS = "";
     }
 
     public static class VsActions {
