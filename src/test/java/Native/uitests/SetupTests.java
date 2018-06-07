@@ -358,6 +358,24 @@ public class SetupTests extends SetupTestBase {
         }
     }
 
+    @Test(testName = "Verify Installer Exit Code While Devenv Is Running")
+    public void verifyInstallerExitCodeWhileDevenvIsRunning(){
+        vsuiService.openVSInstance("15", false);
+        Assert.assertEquals(ibService.installIB("Latest"), 2, "Installation finished with exit code different than 2!");
+    }
+
+    @Test(testName = "Verify Successful Installer Exit Code")
+    public void verifySuccessfulInstallerExitCode(){
+        Assert.assertEquals(ibService.installIB("Latest"), 0, "Installation finished with exit code different than 0!");
+    }
+
+    @Test(testName = "Verify Wrong Parameter Installer Exit Code")
+    public void verifyWrongParameterInstallerExitCode(){
+        String installationFile = ibService.getIbConsoleInstallation("Latest");
+        int exitCode = winService.runCommandWaitForFinish(installationFile + " /someparam");
+        Assert.assertEquals(exitCode, 4, "Installation finished with exit code different than 4!");
+    }
+
 
 
     /*-------------------------------METHODS-------------------------------*/

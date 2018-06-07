@@ -20,6 +20,8 @@ public interface IIBService {
 
     void installIB(String version, String license);
 
+    int installIB(String version);
+
     void installIBnoLoadedLicense(String version);
 
     void updateIB(String version);

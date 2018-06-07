@@ -26,8 +26,9 @@ public class GeneralWinTests extends BatmanBCTestBase{
     public void verifyMultiBuildSuccess() {
         int instanceCount;
         setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
+        setRegistry("2", "BuildService", StaticDataProvider.RegistryKeys.MAX_CONCURRENT_BUILDS);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
         SystemActions.sleep(5);
         instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
         Assert.assertEquals(instanceCount, 2, "Number of running instances does not match");

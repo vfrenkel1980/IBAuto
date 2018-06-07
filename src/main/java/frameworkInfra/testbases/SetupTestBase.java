@@ -6,6 +6,7 @@ import frameworkInfra.Listeners.SuiteListener;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
+import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -28,7 +29,7 @@ public class SetupTestBase extends TestBase {
     protected IBUIService ibuiService = new IBUIService();
     public IbService ibService = new IbService();
     protected IBUIService.Installer installer = ibuiService.new Installer();
-
+    protected VSUIService vsuiService = new VSUIService();
 
     static {
         Calendar calendar = Calendar.getInstance();
