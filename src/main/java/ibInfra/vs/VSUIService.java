@@ -101,7 +101,7 @@ public class VSUIService implements IVSUIService {
         nameTB =driver.findElementsByName("Location:");
         nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
         driver.findElementByName("OK").click();
-        SystemActions.sleep(5);
+        driver.findElementByName("Build");
     }
 
     @Override

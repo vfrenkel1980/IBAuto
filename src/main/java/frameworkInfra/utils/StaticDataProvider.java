@@ -408,13 +408,13 @@ public class StaticDataProvider {
         public static String LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         public static final String UNLOAD_IB_LICENSE = "\"" + IbLocations.IB_ROOT + "\\CoordMonitor.exe\" /LicenseFile=" + "\"" + IbLocations.IB_ROOT + "\\CoordLicense.dat\" /Unload=dummy";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
-        public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
+        public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP.Native --includeRecommended -p --norestart";
         public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
         public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
 
         public static final String INSTALL_VSPREVIEW_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
-        public static final String INSTALL_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
+        public static final String INSTALL_VSPREVIEW_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP.Native --includeRecommended -p --norestart";
         public static final String UPDATE_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update -p --norestart";
         public static final String MODIFY_PREVIEW_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
@@ -428,7 +428,7 @@ public class StaticDataProvider {
     public static class TestProjects {
         public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
         public static final String TEST_PROJ = Locations.QA_ROOT + "\\Projects\\TestProj\\TestProj.sln /%s /cfg=\"Debug|x86\" /title=\"TestProject\"";
-        public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln";
+        public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln /%s /cfg=\"Debug|x86\" /title=\"Custom\"";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
         public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";
         public static final String VC10PROJECT = Locations.QA_ROOT + "\\projects\\vc10project\\vc10project.sln";
