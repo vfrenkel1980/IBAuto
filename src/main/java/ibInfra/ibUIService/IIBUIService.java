@@ -6,6 +6,10 @@ public interface IIBUIService {
 
     void startIBUIInstaller(String version);
 
+    String getEntInstallation(String version);
+
+    void startEntInstaller(String version);
+
     String getIbSetupInstallation(String version);
 
     public interface IInstaller{
@@ -16,9 +20,9 @@ public interface IIBUIService {
 
         void clickFinish() throws FindFailed;
 
-        void cancelReleaseNotes() throws FindFailed;
+        void uncheckReleaseNotes() throws FindFailed;
 
-        void cancelRemoteUpdate() throws FindFailed;
+        void uncheckRemoteUpdate() throws FindFailed;
 
         void installNewCoordinator() throws FindFailed;
 
@@ -39,6 +43,20 @@ public interface IIBUIService {
         void selectManualHelperPorts() throws FindFailed;
 
         void selectManualCoordPort() throws FindFailed;
+
+        void uncheckLaunchDashboard() throws FindFailed;
+
+        void uncheckCreateEntShortcut() throws FindFailed;
+
+        void selectDowngrade() throws FindFailed;
+
+        void changeDashboardPort() throws FindFailed;
+
+        void changeEntInstallationLocation(String path) throws FindFailed;
+
+        void verifyInvalidLicenseMessage() throws FindFailed;
+
+        void clickExit() throws FindFailed;
 
     }
 }

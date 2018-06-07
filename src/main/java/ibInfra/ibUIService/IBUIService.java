@@ -29,12 +29,32 @@ public class IBUIService implements IIBUIService {
         File[] listOfFiles = folder.listFiles();
         String fileName = "";
 
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains("ibsetup")&& !listOfFiles[i].getName().contains("console")) {
-                fileName = listOfFiles[i].getAbsolutePath();
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile() && listOfFile.getName().contains("ibsetup") && !listOfFile.getName().contains("console")) {
+                fileName = listOfFile.getAbsolutePath();
             }
         }
         return fileName;
+    }
+
+    @Override
+    public String getEntInstallation(String version) {
+        File folder = new File(Locations.NETWORK_IB_INSTALLATIONS + version);
+        File[] listOfFiles = folder.listFiles();
+        String fileName = "";
+
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile() && listOfFile.getName().contains("ibenterprise")) {
+                fileName = listOfFile.getAbsolutePath();
+            }
+        }
+        return fileName;
+    }
+
+    @Override
+    public void startEntInstaller(String version) {
+        String installationFile = getEntInstallation(version);
+        winService.runCommandDontWaitForTermination(installationFile);
     }
 
     public class Installer implements IInstaller {
@@ -42,7 +62,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),120).click();
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),240).click();
         }
 
         @Override
@@ -54,17 +74,17 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickFinish() throws FindFailed {
             test.log(Status.INFO, "Clicking Finish");
-            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8),120).click();
+            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8),360).click();
         }
 
         @Override
-        public void cancelReleaseNotes() throws FindFailed {
+        public void uncheckReleaseNotes() throws FindFailed {
             test.log(Status.INFO, "Removing Release notes CB");
             screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8),120).click();
         }
 
         @Override
-        public void cancelRemoteUpdate() throws FindFailed {
+        public void uncheckRemoteUpdate() throws FindFailed {
             test.log(Status.INFO, "Removing Remote update CB");
             screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8),2).click();
         }
@@ -91,7 +111,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void browseLicense() throws FindFailed {
             test.log(Status.INFO, "Clicking on browse license");
-            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),200).click();
+            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),600).click();
         }
 
         @Override
@@ -136,6 +156,50 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Selecting manual coordinator ports");
             screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9),2).click();
             screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4),2).type(InstallationPorts.COORDINATOR_PORT);
+        }
+
+        @Override
+        public void uncheckLaunchDashboard() throws FindFailed {
+            test.log(Status.INFO, "Removing \"Launch Dashboard\" CB");
+            screen.wait(IBInstaller.LaunchDashboardCB.similar((float) 0.7),600).click();
+        }
+
+        @Override
+        public void uncheckCreateEntShortcut() throws FindFailed {
+            test.log(Status.INFO, "Removing \"Create Ent. shortcut\" CB");
+            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.7),2).click();
+        }
+
+        @Override
+        public void selectDowngrade() throws FindFailed {
+            test.log(Status.INFO, "Selecting downgrade option");
+            screen.wait(IBInstaller.DowngradeToProRB.similar((float) 0.7),2).click();
+        }
+
+        @Override
+        public void changeDashboardPort() throws FindFailed {
+            test.log(Status.INFO, "Selecting manual dashboard ports");
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9),2).click();
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.4),2).type(InstallationPorts.DASHBOARD_PORT);
+        }
+
+        @Override
+        public void changeEntInstallationLocation(String path) throws FindFailed {
+            test.log(Status.INFO, "Changing Enterprise installation path to: " + path);
+            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5),2).click();
+            screen.type(path);
+        }
+
+        @Override
+        public void verifyInvalidLicenseMessage() throws FindFailed {
+            test.log(Status.INFO, "Validating Invalid License Message");
+            screen.wait(IBInstaller.InvalidLicenseMessage.similar((float) 0.5),600);
+        }
+
+        @Override
+        public void clickExit() throws FindFailed {
+            test.log(Status.INFO, "Clicking Exit");
+            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),2);
         }
     }
 

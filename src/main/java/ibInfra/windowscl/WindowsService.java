@@ -3,25 +3,18 @@ package ibInfra.windowscl;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import org.apache.commons.lang3.StringUtils;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -107,9 +100,23 @@ public class WindowsService extends TestBase implements IWindowsService {
         boolean isRunning = true;
         String output;
         while (isRunning){
-            output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
             System.out.println(output);
             if (output.contains("INFO: No tasks are running")){
+                isRunning = false;
+            }
+        }
+        test.log(Status.INFO, processName + " Finished running");
+    }
+
+    @Override
+    public void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName) {
+        boolean isRunning = true;
+        String output;
+        while (isRunning){
+            output = runCommandGetOutput(Processes.PSLIST + " \\\\" + host +" -u " + user + " -p " + pass + " -e buildsystem");
+            System.out.println(output);
+            if (output.contains("process " + processName + " was not found on" + host)){
                 isRunning = false;
             }
         }
@@ -121,7 +128,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         String output;
         int instanceCount = 0;
         int lastIndex = 0;
-        output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+        output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
         System.out.println(output);
         while(lastIndex != -1){
 
@@ -141,7 +148,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         String output;
         int seconds = 0;
         while (notRunning && seconds < 50) {
-            output = runCommandGetOutput(String.format(StaticDataProvider.WindowsCommands.GET_RUNNING_TASK, processName));
+            output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
             System.out.println(output);
             if (!output.contains("INFO: No tasks are running")) {
                 notRunning = false;

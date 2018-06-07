@@ -7,6 +7,7 @@ public class StaticDataProvider {
 
     public static class IbLocations {
         public static String IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
+        public static final String ENTERPRISE_DIRECTORY = IB_ROOT + " Statistics";
         public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT + "\\buildconsole.exe" + "\"" + " ";
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgconsole.exe" + "\"" + " ";
@@ -31,6 +32,7 @@ public class StaticDataProvider {
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
+        public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
     }
 
     public static class URL {
@@ -49,11 +51,13 @@ public class StaticDataProvider {
         public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
+        public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
     }
 
     public static class WindowsServices {
         public static final String AGENT_SERVICE = "IncrediBuild_Agent";
         public static final String COORD_SERVICE = "IncrediBuild_Coordinator";
+        public static final String ENTERPRISE_SERVICE = "IncredibuildDashboardServer";
     }
 
     public static class LogOutput {
@@ -382,12 +386,15 @@ public class StaticDataProvider {
         public static final String KEEP_BUILD_STATUS_ICON = "KeepBuildStatusIcon";
         public static final String FOLDER = "Folder";
         public static final String COORDINATOR_HOST = "CoordHost";
+        public static final String ENT_INSTALLATION_REG = "DatabaseFolder";
 
     }
 
     public static class IbLicenses {
         public static final String VSTESTS_LIC = "IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic";
         public static final String UI_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - UI automation.IB_lic";
+        public static final String TEST_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - personal Coordinator.IB_lic";
+        public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
     }
 
     public static class WindowsCommands {
@@ -462,6 +469,8 @@ public class StaticDataProvider {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String BABYLON = "babylon";
+        public static final String SECOND_INITIATOR = "VM-W7x64-Clean";
+
     }
 
     public static class LinuxMachines {
@@ -525,6 +534,7 @@ public class StaticDataProvider {
         public static final String AGENT_PORT = "31101";
         public static final String HELPER_PORT = "31102";
         public static final String COORDINATOR_PORT = "31100";
+        public static final String DASHBOARD_PORT = "8001";
 
 
     }

@@ -8,6 +8,7 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tools.ant.ProjectComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -109,6 +110,21 @@ public class GeneralWinTests extends BatmanBCTestBase{
             }
         }
         Assert.assertFalse(errorCount > 0);
+    }
+
+    @Test(testName = "Verify Multi Initiator Assignment")
+    public void verifyMultiInitiatorAssignment() {
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 1 " +
+                "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\" " +
+                "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
+
+        winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator" , "4illumination", "buildsystem");
+        winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" \"c:\\qa\\simulation\\second_initiator_output\"");
+        boolean isPresent = Parser.doesFileContainString(StaticDataProvider.Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt", "Agent '");
+        SystemActions.deleteFile(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt");
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+        Assert.assertTrue(isPresent, "No agent assigned to build");
     }
 
 

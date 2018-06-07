@@ -2,6 +2,8 @@ package Native.uitests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.SetupTestBase;
+import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.PostgresJDBC;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -37,7 +39,7 @@ public class SetupTests extends SetupTestBase {
             installer.selectLicense();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
+            installer.uncheckReleaseNotes();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -47,8 +49,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         Assert.assertEquals(IbLocations.IB_ROOT, Locations.DIFFERENT_INSTALLATION_DIRECTORY, "Installed location " + IbLocations.IB_ROOT + " does not match expected location: "
                 + Locations.DIFFERENT_INSTALLATION_DIRECTORY);
-        int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        runBuildAndAssert();
     }
 
 /*    @Test(testName = "Install On An Existing Coordinator")
@@ -66,7 +67,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
+            installer.uncheckReleaseNotes();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -76,8 +77,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, false), "Services are not running!!!!");
         Assert.assertEquals(ibService.getCoordinator(), WindowsMachines.BABYLON, "Current coordinator" + ibService.getCoordinator() + " does not match expected coordinator: "
                 + WindowsMachines.BABYLON);
-        int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        runBuildAndAssert();
     }*/
 
     @Test(testName = "UninstallRB IB")
@@ -107,7 +107,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
+            installer.uncheckReleaseNotes();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -115,8 +115,7 @@ public class SetupTests extends SetupTestBase {
         }
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        runBuildAndAssert();
     }
 
     @Test(testName = "Upgrade IB")
@@ -127,8 +126,8 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
-            installer.cancelRemoteUpdate();
+            installer.uncheckReleaseNotes();
+            installer.uncheckRemoteUpdate();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -136,8 +135,7 @@ public class SetupTests extends SetupTestBase {
         }
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        runBuildAndAssert();
     }
 
     @Test(testName = "Downgrade IB")
@@ -148,8 +146,8 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
-            installer.cancelRemoteUpdate();
+            installer.uncheckReleaseNotes();
+            installer.uncheckRemoteUpdate();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -157,8 +155,7 @@ public class SetupTests extends SetupTestBase {
         }
         IbLocations.IB_ROOT = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "Folder");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
-        int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        runBuildAndAssert();
     }
 
     @Test(testName = "Verify Port Changes")
@@ -184,7 +181,7 @@ public class SetupTests extends SetupTestBase {
             installer.selectLicense();
             installer.clickNext();
             installer.clickNext();
-            installer.cancelReleaseNotes();
+            installer.uncheckReleaseNotes();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
@@ -200,6 +197,172 @@ public class SetupTests extends SetupTestBase {
         Assert.assertEquals(agentPort, InstallationPorts.AGENT_PORT, "Agent port found in registry does not match entered port!");
         Assert.assertEquals(helpersPort, InstallationPorts.HELPER_PORT, "Helpers port found in registry does not match entered port!");
 
+        runBuildAndAssert();
+    }
+
+    @Test(testName = "Upgrade Pro To Enterprise")
+    public void upgradeProToEnterprise(){
+        ibService.installIB("Latest", IbLicenses.TEST_LIC);
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckLaunchDashboard();
+            installer.uncheckCreateEntShortcut();
+            installer.uncheckReleaseNotes();
+            installer.uncheckRemoteUpdate();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is not running");
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        runBuildAndAssert();
+        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+
+    }
+
+    @Test(testName = "Downgrade Enterprise To Pro")
+    public void downgradeEnterpriseToPro(){
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickNext();
+            installer.installNewCoordinator();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.browseLicense();
+            installer.browseLicenseNavigateToDesktop();
+            installer.selectLicense();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckLaunchDashboard();
+            installer.uncheckCreateEntShortcut();
+            installer.uncheckReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.selectDowngrade();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        runBuildAndAssert();
+    }
+
+    @Test(testName = "Enterprise Clean Installation")
+    public void enterpriseCleanInstallation(){
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickNext();
+            installer.installNewCoordinator();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.browseLicense();
+            installer.browseLicenseNavigateToDesktop();
+            installer.selectLicense();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckLaunchDashboard();
+            installer.uncheckCreateEntShortcut();
+            installer.uncheckReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        runBuildAndAssert();
+        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+    }
+
+    @Test(testName = "Change Enterprise Installation Location And Port")
+    public void changeEnterpriseInstallationLocationAndPort(){
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickNext();
+            installer.installNewCoordinator();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.changeEntInstallationLocation(Locations.DIFFERENT_ENT_INSTALLATION_DIRECTORY);
+            installer.changeDashboardPort();
+            installer.clickNext();
+            installer.clickNext();
+            installer.browseLicense();
+            installer.browseLicenseNavigateToDesktop();
+            installer.selectLicense();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\coordinator", RegistryKeys.ENT_INSTALLATION_REG),
+                Locations.DIFFERENT_ENT_INSTALLATION_DIRECTORY);
+        Parser.doesFileContainString(IbLocations.ENTERPRISE_DIRECTORY + "\\Dashboard\\Apache24\\conf\\httpd.conf", "Listen " + InstallationPorts.DASHBOARD_PORT);
+        runBuildAndAssert();
+        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+    }
+
+    @Test(testName = "Negative Upgrade Pro To Ent With No Ent License")
+    public void negativeUpgradeProToEntWithNoEntLicense(){
+        ibService.installIB("Latest", IbLicenses.NO_ENT_LIC);
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.verifyInvalidLicenseMessage();
+            installer.clickExit();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+    }
+
+
+
+    /*-------------------------------METHODS-------------------------------*/
+
+    private void runBuildAndAssert(){
         int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }

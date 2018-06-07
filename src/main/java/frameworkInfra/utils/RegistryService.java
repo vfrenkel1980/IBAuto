@@ -20,7 +20,6 @@ public class RegistryService extends TestBase{
         }
     }
 
-
     public static String getRegistryKey(HKEY rootKey, String keyPath, String keyName){
         try {
             return Advapi32Util.registryGetStringValue(rootKey, keyPath, keyName);
@@ -28,6 +27,18 @@ public class RegistryService extends TestBase{
             test.log(Status.ERROR, "Failed to get value for " + keyName);
             ex.getMessage();
             return "";
+        }
+    }
+
+    public static void createRegKey(HKEY rootKey, String keyPath, String keyName, String value){
+        if (test != null)
+            test.log(Status.INFO, "Creating " + keyName + ". Setting value to " + value);
+        try{
+            Advapi32Util.registryCreateKey(rootKey, keyPath, keyName);
+            Advapi32Util.registrySetStringValue(rootKey, keyPath, keyName,value);
+        }catch (Exception ex){
+            test.log(Status.ERROR, "Failed to create new registry key with error: " + ex.getMessage());
+            ex.getMessage();
         }
     }
 }

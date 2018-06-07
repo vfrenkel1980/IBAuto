@@ -23,5 +23,12 @@ public class IBInstaller {
     public static final Pattern HelpersPortTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\helpers_port.png");
     public static final Pattern ManualPortSelectionRB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\manual_port_selection.png");
     public static final Pattern CoordinatorPortTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\coordinator_port.png");
+    public static final Pattern EnterpriseShortcutCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\enterprise_shortcut.png");
+    public static final Pattern LaunchDashboardCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\launch_dashboard.png");
+    public static final Pattern DowngradeToProRB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\downgrade_to_pro.png");
+    public static final Pattern DashboardPortTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\dashboard_port.png");
+    public static final Pattern EntInstallationLocationTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\ent_installation_path.png");
+    public static final Pattern InvalidLicenseMessage = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\invalid_license_message.png");
+    public static final Pattern ExitBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\exit.png");
 
 }

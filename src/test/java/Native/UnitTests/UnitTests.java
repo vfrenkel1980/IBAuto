@@ -1,10 +1,10 @@
 package Native.UnitTests;
 
-import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class UnitTests {
 
@@ -34,9 +33,20 @@ public class UnitTests {
     }
 
     @Test
-    public void test2() {
-        List<String> news = SystemActions.getAllFilesInDirectory("C:\\Users\\Mark\\Downloads");
-        for (String aNew : news) System.out.println(aNew);
+    public void test2() throws FindFailed, IOException {
+        IbService ibService = new IbService();
+        ibService.cleanAndBuildDontWaitTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        WindowsService windowsService = new WindowsService();
+        windowsService.runCommandDontWaitForTermination(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 1 " +
+                "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\" " +
+                "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
+
+        windowsService.waitForProcessToFinishOnRemoteMachine(StaticDataProvider.WindowsMachines.SECOND_INITIATOR, "administrator" , "4illumination", "buildsystem");
+        windowsService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" \"c:\\qa\\simulation\\second_initiator_output\"");
+        boolean isPresent = Parser.doesFileContainString(StaticDataProvider.Locations.QA_ROOT + "\\vmsimoutput\\buildlog.txt", "Agent '");
+        SystemActions.deleteFile(StaticDataProvider.Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt");
+        windowsService.waitForProcessToFinish(StaticDataProvider.Processes.BUILDSYSTEM);
+        Assert.assertTrue(isPresent);
     }
 
     @Test(testName = "Ruby2.4 SyncPrivateAssemblies")

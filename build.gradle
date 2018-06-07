@@ -61,6 +61,8 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
     compile group: 'com.github.mmarquee', name: 'ui-automation', version: '0.4.3'
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+
 
 }
 
