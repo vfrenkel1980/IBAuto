@@ -49,6 +49,5 @@ public class LinuxSimulationDockCHrootTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("docker stop IB-Test02", ipList.get(2));
         linuxService.linuxRunSSHCommand("docker rm IB-Test02", ipList.get(2));
         Assert.assertEquals(exitCode, 0, "Test " + testName + " failed with Exit code " + exitCode);
-
     }
 }
