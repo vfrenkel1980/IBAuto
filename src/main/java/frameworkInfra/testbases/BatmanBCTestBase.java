@@ -10,6 +10,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -49,9 +50,11 @@ public class BatmanBCTestBase extends WindowsTestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PDB_ERROR))
-            LogOutput.PDB_ERROR_TESTS = LogOutput.PDB_ERROR_TESTS + testName + "\n";
-        SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        if (new File(Locations.QA_ROOT, "buildlog.txt").exists()) {
+            if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PDB_ERROR))
+                LogOutput.PDB_ERROR_TESTS = LogOutput.PDB_ERROR_TESTS + testName + "\n";
+            SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        }
     }
 
 }
