@@ -56,6 +56,7 @@ public class SetupTestBase extends TestBase {
         test = extent.createTest(method.getName());
         test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
+        log.info("Starting test " + method.getName());
     }
 
     @AfterMethod
