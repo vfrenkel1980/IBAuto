@@ -52,7 +52,7 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
-/*    @Test(testName = "Install On An Existing Coordinator")
+    @Test(enabled = false, testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator(){
         ibuiService.startIBUIInstaller("Latest");
         try {
@@ -78,7 +78,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertEquals(ibService.getCoordinator(), WindowsMachines.BABYLON, "Current coordinator" + ibService.getCoordinator() + " does not match expected coordinator: "
                 + WindowsMachines.BABYLON);
         runBuildAndAssert();
-    }*/
+    }
 
     @Test(testName = "UninstallRB IB")
     public void uninstallIb(){
@@ -331,6 +331,8 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.uncheckReleaseNotes();
+            installer.uncheckLaunchDashboard();
+            installer.uncheckCreateEntShortcut();
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());

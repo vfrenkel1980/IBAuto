@@ -429,7 +429,7 @@ public class StaticDataProvider {
     public static class TestProjects {
         public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
         public static final String TEST_PROJ = Locations.QA_ROOT + "\\Projects\\TestProj\\TestProj.sln /%s /cfg=\"Debug|x86\" /title=\"TestProject\"";
-        public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln /%s /cfg=\"Debug|x86\" /title=\"Custom\"";
+        public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
         public static final String VC9PROJECT = Locations.QA_ROOT + "\\projects\\vc9project\\vc9project.sln";
         public static final String VC10PROJECT = Locations.QA_ROOT + "\\projects\\vc10project\\vc10project.sln";

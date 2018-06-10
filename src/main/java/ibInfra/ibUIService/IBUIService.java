@@ -199,7 +199,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickExit() throws FindFailed {
             test.log(Status.INFO, "Clicking Exit");
-            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),2);
+            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),2).click();
         }
     }
 
