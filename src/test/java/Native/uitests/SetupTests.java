@@ -202,7 +202,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Upgrade Pro To Enterprise")
     public void upgradeProToEnterprise(){
-        ibService.installIB("Latest", IbLicenses.TEST_LIC);
+        ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startEntInstaller("Latest");
         try {
             installer.clickNext();
