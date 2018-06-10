@@ -11,6 +11,7 @@ public class LinuxSimulationDockCHrootTests extends LinuxSimTestBase {
     @Test(testName = "Sim docker kenrel4 run")
     public void SimdDockerKenrel4Run() {
 
+
         linuxService.linuxRunSSHCommand("docker rm IB-Test01", ipList.get(2));
 
         linuxService.linuxRunSSHCommand("/opt/incredibuild/bin/ib_docker run -w /disk2/projects/linux-4.3.3 -v /disk2/projects:/disk2/projects --name IB-Test01 5624cdd7a83e ib_console make clean", ipList.get(2));
@@ -43,7 +44,7 @@ public class LinuxSimulationDockCHrootTests extends LinuxSimTestBase {
         }
 
         linuxService.linuxRunSSHCommand("docker exec IB-Test02 ib_console make clean", ipList.get(2));
-        exitCode = linuxService.linuxRunSSHCommand("docker exec IB-Test02 ib_console --ib-crash -d1 -c Kernel make -j8", ipList.get(2));
+        exitCode = linuxService.linuxRunSSHCommand("docker exec IB-Test02 ib_console --ib-crash -d1 -c chroot_Kernel4 make -j8", ipList.get(2));
         linuxService.linuxRunSSHCommand("docker exec IB-Test02 ib_console make clean", ipList.get(2));
         linuxService.linuxRunSSHCommand("docker stop IB-Test02", ipList.get(2));
         linuxService.linuxRunSSHCommand("docker rm IB-Test02", ipList.get(2));
