@@ -46,9 +46,9 @@ public class LicensingTestBase extends ReleaseTestBase{
                 scenarioDescription = "Clean install - No license loaded";
             case ("2"): //Unloaded license
                 scenarioDescription = "Unloaded license";
-                ibService.loadIBLicenseByXLicProc("C:\\LicenseTests_projects\\Licenses\\IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 SystemActions.sleep(60);
-                ibService.unloadIBLicenseByXLicProc();
+                ibService.unloadIbLicense();
             /*case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIBLicenseByXLicProc("C:\\LicenseTests_projects\\Licenses\\IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");

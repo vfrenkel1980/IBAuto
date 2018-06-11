@@ -31,7 +31,7 @@ public class StaticDataProvider {
         public static final String SYSTEM_APPDATA_TEMP_FOLDER = System.getProperty("java.io.tmpdir");
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
-        public static final String NETWORK_IB_INSTALLATIONS = "\\\\Srv\\Share\\1-IB_Builds\\";
+        public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
         public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
     }
