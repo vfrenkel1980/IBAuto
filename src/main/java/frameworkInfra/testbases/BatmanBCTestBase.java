@@ -55,6 +55,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
                 LogOutput.PDB_ERROR_TESTS = LogOutput.PDB_ERROR_TESTS + testName + "\n";
             SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         }
+        extent.flush();
     }
 
 }

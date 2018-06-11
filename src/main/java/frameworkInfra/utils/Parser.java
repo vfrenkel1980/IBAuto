@@ -45,6 +45,7 @@ public class Parser extends TestBase{
     }
 
     public static boolean doesFileContainString(String filePath, String text){
+        test.log(Status.INFO, "Searching for " + text + " in " + filePath);
         File file = new File(filePath);
         Scanner scanner = null;
         try {
@@ -56,7 +57,7 @@ public class Parser extends TestBase{
                 }
             }
         } catch (FileNotFoundException e) {
-            e.getMessage();
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
         }finally {
             scanner.close();
         }

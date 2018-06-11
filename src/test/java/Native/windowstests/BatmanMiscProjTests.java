@@ -1,5 +1,6 @@
 package Native.windowstests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.StaticDataProvider.Locations;
@@ -8,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class BatmanMiscProjTests extends BatmanBCTestBase {
 
@@ -20,7 +23,7 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "Build failed");
         } catch (IOException e) {
-            e.getMessage();
+            test.log(Status.WARNING, e.getMessage());
         }
         for (String machine : batmanMachineList) {
             if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)) {
