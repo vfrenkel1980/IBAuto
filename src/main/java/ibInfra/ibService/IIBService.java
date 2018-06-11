@@ -22,8 +22,6 @@ public interface IIBService {
 
     int installIB(String version);
 
-    void installIBnoLoadedLicense(String version);
-
     void updateIB(String version);
 
     static int getIbVersion() {
@@ -40,6 +38,10 @@ public interface IIBService {
     void loadIbLicense(String license);
 
     void unloadIbLicense();
+
+    void loadIBLicenseByXLicProc(String license);
+
+    void unloadIBLicenseByXLicProc();
 
     String getIbVsExtensionVersion(String VsDevenvInstallPath);
 
@@ -62,6 +64,8 @@ public interface IIBService {
     void disableVsMonitor();
 
     String getVSVersionFromOutputLog(String logPath);
+
+    void  customPackAllocationOn();
 
     boolean isLicenseLoaded();
 

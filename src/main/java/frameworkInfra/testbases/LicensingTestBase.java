@@ -27,13 +27,8 @@ public class LicensingTestBase extends ReleaseTestBase{
 
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
 
-        ibService.installIBnoLoadedLicense("Latest");
-
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        ibService.installIB("Latest");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
     }
 
     @BeforeClass
@@ -49,8 +44,19 @@ public class LicensingTestBase extends ReleaseTestBase{
         switch (SCENARIO){
             case ("1"): //Clean installation - No IB license loaded
                 scenarioDescription = "Clean install - No license loaded";
-            case ("2"): //No packages aside from agent package
-
+            case ("2"): //Unloaded license
+                scenarioDescription = "Unloaded license";
+                ibService.loadIBLicenseByXLicProc("C:\\LicenseTests_projects\\Licenses\\IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                SystemActions.sleep(60);
+                ibService.unloadIBLicenseByXLicProc();
+            /*case ("3"): //No packages aside from agent package
+                scenarioDescription = "No packages aside from agent package";
+                ibService.loadIBLicenseByXLicProc("C:\\LicenseTests_projects\\Licenses\\IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                ibService.customPackAllocationOn();
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(30);
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
+                SystemActions.sleep(30);*/
         }
     }
 

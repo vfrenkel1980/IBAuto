@@ -61,15 +61,6 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
-    public void installIBnoLoadedLicense(String version) {
-        String installationFile = getIbConsoleInstallation(version);
-        /*winService.runCommandDontWaitForTermination(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
-        winService.waitForProcessToStart(installationFile.substring(installationFile.lastIndexOf('\\') + 1));
-        winService.waitForProcessToFinish(installationFile.substring(installationFile.lastIndexOf('\\') + 1));*/
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
-    }
-
-    @Override
     public void updateIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
@@ -102,6 +93,20 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public void unloadIbLicense() {
         winService.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
+    }
+
+    @Override
+    public void loadIBLicenseByXLicProc(String license) {
+        winService.runCommandWaitForFinish(IbLocations.XLICPROC + "/LoadLicense /LicenseFile=\"" + license + "\"");
+        SystemActions.sleep(5);
+        SystemActions.killProcess("XLicProc.exe");
+    }
+
+    @Override
+    public void unloadIBLicenseByXLicProc() {
+        winService.runCommandWaitForFinish(IbLocations.XLICPROC + "/UnloadLicense");
+        SystemActions.sleep(5);
+        SystemActions.killProcess("XLicProc.exe");
     }
 
     @Override
@@ -185,6 +190,12 @@ public class IbService extends TestBase implements IIBService {
         }
         test.log(Status.INFO, "-----------VS VERSION:  " + result + "-----------");
         return result;
+    }
+
+    @Override
+    public void customPackAllocationOn() {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", "LicenseAllocationOption", "IbQaMode");
+        SystemActions.copyFilesByExtension("C:\\LicenseTests_projects\\CustomAllocation\\", getIBInstallFolder(), "dat", false);
     }
 
     @Override
