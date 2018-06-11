@@ -7,7 +7,12 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Non-Distributed Lic Tests">
+    <test name="1">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+    <test name="2">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
         </classes>

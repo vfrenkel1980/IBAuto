@@ -6,6 +6,7 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
@@ -15,7 +16,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class LicensingTestBase extends ReleaseTestBase{
 
-    private String SCENARIO = System.getProperty("scenario");
+    protected String scenario = "";
     private String scenarioDescription;
 
     @BeforeSuite
@@ -32,7 +33,7 @@ public class LicensingTestBase extends ReleaseTestBase{
     }
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass(ITestContext testContext){
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -41,7 +42,8 @@ public class LicensingTestBase extends ReleaseTestBase{
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
 
-        switch (SCENARIO){
+        scenario = testContext.getName();
+        switch (scenario){
             case ("1"): //Clean installation - No IB license loaded
                 scenarioDescription = "Clean install - No license loaded";
             case ("2"): //Unloaded license
