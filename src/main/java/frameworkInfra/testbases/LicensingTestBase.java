@@ -27,7 +27,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
 
-        ibService.installIB("Latest");
+        ibService.installIBwoLicLoad("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
     }
 
