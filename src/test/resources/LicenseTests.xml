@@ -32,9 +32,9 @@
             <class name ="Native.releasetests.LicensingTests" />
         </classes>
     </test>
-    <test name="6">
+ <!--   <test name="6">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
         </classes>
-    </test>
+    </test>-->
 </suite>

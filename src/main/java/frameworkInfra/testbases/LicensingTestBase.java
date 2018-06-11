@@ -82,12 +82,12 @@ public class LicensingTestBase extends ReleaseTestBase{
                 SystemActions.sleep(5);
                 SystemActions.addPeriodToSystemTime(0, 0, 5);
                 break;
-            case ("6"): //All Allocated Packages are temporary and expired
+            /*case ("6"): //All Allocated Packages are temporary and expired
                 scenarioDescription = "All Allocated Packages are temporary and expired";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018 - expired Maintenance + solutions.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
-                break;
+                break;*/
         }
     }
 
