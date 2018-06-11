@@ -18,6 +18,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
     protected String scenario = "";
     private String scenarioDescription;
+    protected String currentDate = SystemActions.getLocalDateAsString();
 
     @BeforeSuite
     public void beforeSuite(){
@@ -72,6 +73,13 @@ public class LicensingTestBase extends ReleaseTestBase{
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
                 SystemActions.sleep(5);
                 break;
+            case ("5"): //Temp License is Expired
+                scenarioDescription = "Temp License is Expired";
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(5);
+                SystemActions.addPeriodToSystemTime(0, 0, 5);
+                break;
         }
     }
 
@@ -92,6 +100,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         log.info("AFTER CLASS started");
 
         ibService.unloadIbLicense();
+        SystemActions.setLocalDateFromString(currentDate);
     }
 
     @AfterMethod
