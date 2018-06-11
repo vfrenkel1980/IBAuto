@@ -15,6 +15,7 @@ public class StaticDataProvider {
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
+        public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
     }
 
     public static class InitMSBuild {
@@ -388,6 +389,7 @@ public class StaticDataProvider {
         public static final String FOLDER = "Folder";
         public static final String COORDINATOR_HOST = "CoordHost";
         public static final String ENT_INSTALLATION_REG = "DatabaseFolder";
+        public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
 
     }
 

@@ -47,7 +47,13 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
         if (!linuxService.isIBServiceUp( ipList.get(1))) {
-            test.log(Status.ERROR, "IB service in initiator is down... FAILING ALL TESTS!");
+            test.log(Status.ERROR, "IB service in initiator 1 is down... FAILING ALL TESTS!");
+            extent.flush();
+            System.exit(0);
+        }
+
+        if (!linuxService.isIBServiceUp( ipList.get(2))) {
+            test.log(Status.ERROR, "IB service in initiator 2 is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
         }

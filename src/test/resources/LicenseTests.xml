@@ -7,7 +7,22 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Unloaded License">
+    <test name="1">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+    <test name="2">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+    <test name="3">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+    <test name="4">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
         </classes>
