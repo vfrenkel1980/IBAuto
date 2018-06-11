@@ -41,6 +41,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
 
+
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
 
