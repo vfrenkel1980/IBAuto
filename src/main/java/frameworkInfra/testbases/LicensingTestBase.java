@@ -30,6 +30,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
+        ibService.customPackAllocationOn();
     }
 
     @BeforeClass
@@ -58,10 +59,17 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
-                ibService.customPackAllocationOn();
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
+                SystemActions.sleep(5);
+                break;
+            case ("4"): //License Loaded and Agent Unsubscribed
+                scenarioDescription = "License Loaded and Agent Unsubscribed";
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(5);
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
                 SystemActions.sleep(5);
                 break;
         }
@@ -74,6 +82,16 @@ public class LicensingTestBase extends ReleaseTestBase{
         test.assignCategory(scenarioDescription);
         test.log(Status.INFO, "BEFORE METHOD started: " + method + " scenario: " + scenarioDescription);
 
+    }
+
+    @AfterClass
+    public void afterClass(){
+        test = extent.createTest("After Class");
+        test.assignCategory("AFTER CLASS");
+        test.log(Status.INFO, "AFTER CLASS started");
+        log.info("AFTER CLASS started");
+
+        ibService.unloadIbLicense();
     }
 
     @AfterMethod
