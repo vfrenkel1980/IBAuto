@@ -60,6 +60,7 @@ public class Parser extends TestBase{
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
         }finally {
             scanner.close();
+            SystemActions.sleep(2);
         }
         test.log(Status.INFO, "Didn't find " + text + " in BuildLog.txt");
         return false;
