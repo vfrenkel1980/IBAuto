@@ -18,7 +18,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
     protected String scenario = "";
     private String scenarioDescription;
-    protected String currentDate = SystemActions.getLocalDateAsString();
+    String currentDate = "";
 
     @BeforeSuite
     public void beforeSuite(){
@@ -28,6 +28,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         log.info("BEFORE SUITE started");
 
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
+        currentDate = SystemActions.getLocalDateAsString();
 
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
