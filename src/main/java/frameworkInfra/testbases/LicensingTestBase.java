@@ -55,14 +55,15 @@ public class LicensingTestBase extends ReleaseTestBase{
                 SystemActions.sleep(60);
                 ibService.unloadIbLicense();
                 break;
-            /*case ("3"): //No packages aside from agent package
+            case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
-                ibService.loadIBLicenseByXLicProc("C:\\LicenseTests_projects\\Licenses\\IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 ibService.customPackAllocationOn();
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(30);
+                SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
-                SystemActions.sleep(30);*/
+                SystemActions.sleep(5);
+                break;
         }
     }
 
