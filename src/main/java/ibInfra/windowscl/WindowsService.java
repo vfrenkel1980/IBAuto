@@ -116,7 +116,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         while (isRunning){
             output = runCommandGetOutput(Processes.PSLIST + " \\\\" + host +" -u " + user + " -p " + pass + " -e buildsystem");
             System.out.println(output);
-            if (output.contains("process " + processName + " was not found on" + host)){
+            if (output.contains("process " + processName + " was not found on " + host)){
                 isRunning = false;
             }
         }
