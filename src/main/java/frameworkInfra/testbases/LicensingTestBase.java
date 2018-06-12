@@ -18,6 +18,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
     protected String scenario = "";
     private String scenarioDescription;
+    String currentDate = "";
 
     @BeforeSuite
     public void beforeSuite(){
@@ -27,6 +28,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         log.info("BEFORE SUITE started");
 
         SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
+        currentDate = SystemActions.getLocalDateAsString();
 
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
@@ -39,6 +41,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
+
 
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
@@ -72,6 +75,19 @@ public class LicensingTestBase extends ReleaseTestBase{
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
                 SystemActions.sleep(5);
                 break;
+            case ("5"): //Temp License is Expired
+                scenarioDescription = "Temp License is Expired";
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(5);
+                SystemActions.addPeriodToSystemTime(0, 0, 5);
+                break;
+            /*case ("6"): //All Allocated Packages are temporary and expired
+                scenarioDescription = "All Allocated Packages are temporary and expired";
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018 - expired Maintenance + solutions.IB_lic");
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(5);
+                break;*/
         }
     }
 
@@ -92,6 +108,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         log.info("AFTER CLASS started");
 
         ibService.unloadIbLicense();
+        SystemActions.setLocalDateFromString(currentDate);
     }
 
     @AfterMethod

@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -113,4 +115,45 @@ public class SystemActions {
         return results;
     }
 
+    public static void addPeriodToSystemTime(long days, long months, long years){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        String newDate = (now.plusDays(days).plusMonths(months).plusYears(years)).format(formatter);
+        try {
+            test.log(Status.INFO, "Changing machine time to: " + newDate);
+            Runtime.getRuntime().exec("cmd /C date " + newDate);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        sleep(5);
+    }
+
+    public static void subtractPeriodFromSystemTime(long days, long months, long years) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        String newDate = (now.minusDays(days).minusMonths(months).minusYears(years)).format(formatter);
+        try {
+            test.log(Status.INFO, "Changing machine time to: " + newDate);
+            Runtime.getRuntime().exec("cmd /C date " + newDate);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    public static String getLocalDateAsString(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        String newDate = now.format(formatter);
+        test.log(Status.INFO, "Checking local time" + newDate);
+        return newDate;
+    }
+
+    public static void setLocalDateFromString(String date) {
+        try {
+            test.log(Status.INFO, "Changing machine time to: " + date);
+            Runtime.getRuntime().exec("cmd /C date " + date);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
 }

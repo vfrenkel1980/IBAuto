@@ -27,4 +27,14 @@
             <class name ="Native.releasetests.LicensingTests" />
         </classes>
     </test>
+    <test name="5">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+ <!--   <test name="6">
+        <classes>
+            <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>-->
 </suite>
