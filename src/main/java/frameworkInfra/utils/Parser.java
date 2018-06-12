@@ -59,8 +59,9 @@ public class Parser extends TestBase{
         } catch (FileNotFoundException e) {
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
         }finally {
-            scanner.close();
-            SystemActions.sleep(5);
+            if (scanner != null) {
+                scanner.close();
+            }
         }
         test.log(Status.INFO, "Didn't find " + text + " in BuildLog.txt");
         return false;
