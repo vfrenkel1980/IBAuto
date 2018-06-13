@@ -63,7 +63,7 @@ public class Parser extends TestBase{
                 scanner.close();
             }
         }
-        test.log(Status.INFO, "Didn't find " + text + " in BuildLog.txt");
+        test.log(Status.INFO, "Didn't find " + text + " in" + filePath);
         return false;
     }
 

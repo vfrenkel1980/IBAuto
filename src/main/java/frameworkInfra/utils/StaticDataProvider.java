@@ -68,7 +68,7 @@ public class StaticDataProvider {
         public static final String ERROR = "Error";
         public static final String XDTASKID = "xdTaskID";
         public static final String LOCAL = "Local";
-        public static final String AGENT = "Agent";
+        public static final String AGENT = "Agent '";
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
         public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
         public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error", "EReadError"};
