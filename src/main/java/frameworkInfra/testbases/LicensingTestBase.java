@@ -3,9 +3,11 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -19,6 +21,7 @@ public class LicensingTestBase extends ReleaseTestBase{
     protected String scenario = "";
     private String scenarioDescription;
     String currentDate = "";
+    Boolean startTests = false;
 
     @BeforeSuite
     public void beforeSuite(){
@@ -87,6 +90,13 @@ public class LicensingTestBase extends ReleaseTestBase{
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018 - Expired Solutions.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
+                break;
+            case ("7"): //Expired license loading
+                scenarioDescription = "Expired license loading";
+                SystemActions.deleteFile(StaticDataProvider.IbLocations.IB_ROOT + "\\Logs\\XlicProc.log");
+                ibService.loadIbLicense("IncrediBuild - Vlad - expired license JAN 2018.IB_lic");
+                SystemActions.sleep(5);
+                Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.IbLocations.IB_ROOT + "\\Logs\\XlicProc.log", "License has expired and can not be loaded. Please contact sales@incredibuild.com to receive a new license."));
                 break;
         }
     }
