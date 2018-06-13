@@ -402,6 +402,7 @@ public class StaticDataProvider {
         public static final String UI_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - UI automation.IB_lic";
         public static final String TEST_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - personal Coordinator.IB_lic";
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
+        public static final String AGENT_SETTINGS_LIC = "IncrediBuild - Mark Zvuluni - agent settings.IB_lic";
     }
 
     public static class WindowsCommands {
