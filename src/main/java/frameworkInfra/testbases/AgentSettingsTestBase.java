@@ -6,7 +6,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
@@ -18,7 +18,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,18 +50,18 @@ public class AgentSettingsTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
         ibService.updateIB("Latest");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "0");
-        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.LOCAL));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.AGENT));
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "0");
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
         test.log(Status.INFO, "BEFORE SUITE finished");
         log.info("BEFORE SUITE started");
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
-        SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
+        SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         extent.flush();
     }
 
