@@ -7,13 +7,19 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
+import org.sikuli.script.Screen;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -26,6 +32,7 @@ public class AgentSettingsTestBase extends TestBase {
     private static int ibVersion = 0;
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
+    protected Screen screen = new Screen();
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -43,6 +50,7 @@ public class AgentSettingsTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
+        ibService.updateIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "0");
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
@@ -50,6 +58,12 @@ public class AgentSettingsTestBase extends TestBase {
         Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.AGENT));
         test.log(Status.INFO, "BEFORE SUITE finished");
         log.info("BEFORE SUITE started");
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result) throws IOException {
+        SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
+        extent.flush();
     }
 
 }
