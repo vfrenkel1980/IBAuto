@@ -102,7 +102,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
     public void proLicenseVerifyMultiBuildDoesNotWorkWhenAddingRegistry() {
         setRegistry("2", "BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(TestProjects.CON_APP01, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, ProjectsCommands.REBUILD));
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, ProjectsCommands.REBUILD) + "/out=" + Locations.OUTPUT_LOG_FILE);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.MAX_ALLOWED_BUILDS), "Max allowed builds did not appear in the log");
     }
