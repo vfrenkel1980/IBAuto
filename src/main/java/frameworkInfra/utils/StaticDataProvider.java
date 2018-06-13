@@ -72,6 +72,7 @@ public class StaticDataProvider {
         public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error", "EReadError"};
         public static final String PDB_ERROR = ".pdb' is corrupted";
         public static String PDB_ERROR_TESTS = "";
+        public static final String TERMINATION_MESSAGE = "Build terminated at user request";
     }
 
     public static class VsActions {
