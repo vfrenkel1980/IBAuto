@@ -13,12 +13,12 @@ import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -49,14 +49,25 @@ public class AgentSettingsTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
+
         ibService.updateIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "0");
+        SystemActions.sleep(120);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
         test.log(Status.INFO, "BEFORE SUITE finished");
-        log.info("BEFORE SUITE started");
+        log.info("BEFORE SUITE finished");
+    }
+
+    @BeforeMethod
+    public void beforeMethod(Method method){
+        testName = getTestName(method);
+        test = extent.createTest(testName);
+        test.assignCategory("Agent Settings");
+        test.log(Status.INFO, method.getName() + " test started");
+        log.info(method.getName() + " test started");
     }
 
     @AfterMethod
