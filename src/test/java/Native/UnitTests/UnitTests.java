@@ -1,11 +1,13 @@
 package Native.UnitTests;
 
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.velocity.runtime.directive.Parse;
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,19 +37,14 @@ public class UnitTests {
     }
 
     @Test
-    public void test2() throws FindFailed, IOException {
-        IbService ibService = new IbService();
-        String filename = "";
-        String installLogsFolder = System.getProperty("java.io.tmpdir") + "IB_Setup_Logs";
-        SystemActions.deleteFilesByPrefix(installLogsFolder, "IncrediBuild_Setup");
-        ibService.installIB("Latest", StaticDataProvider.IbLicenses.TEST_LIC);
-        List <String> files = SystemActions.getAllFilesInDirectory(installLogsFolder);
-        for (String file : files) {
-            if (file.contains("IncrediBuild_Setup"))
-                filename = file;
-        }
-
-        Assert.assertTrue(new File(installLogsFolder, filename).exists());
+    public void test2(){
+        WindowsService winService = new WindowsService();
+        Screen screen = new Screen();
+        boolean objectMissing = false;
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILDSETTINGS);
+        if (screen.exists(IBSettings.MultiBuildTab, 5) == null)
+            objectMissing = true;
+        Assert.assertTrue(objectMissing, "MultiBuild tab should not be displayed with PRO license");
     }
 
     @Test(testName = "Ruby2.4 SyncPrivateAssemblies")

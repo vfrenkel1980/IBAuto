@@ -1,5 +1,6 @@
 package Native.ibclienttests;
 
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.AgentSettingsTestBase;
 import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
@@ -8,6 +9,7 @@ import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.xml.stream.Location;
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
@@ -86,10 +88,35 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(firstLocal > lastAgent, lastAgent + " appears after Local in output.log" + "local: " + firstLocal + " Agent: " + lastAgent);
     }
 
+    @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
+    public void proLicenseVerifyMultiBuildMissingFromUI() {
+        boolean objectMissing = false;
+        ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
+        if (screen.exists(IBSettings.MultiBuildTab, 5) == null)
+            objectMissing = true;
+        SystemActions.killProcess(Processes.BUILDSETTINGS);
+        Assert.assertTrue(objectMissing, "MultiBuild tab should not be displayed with PRO license");
+    }
 
+    @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
+    public void proLicenseVerifyMultiBuildDoesNotWorkWhenAddingRegistry() {
+        setRegistry("2", "BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, ProjectsCommands.REBUILD));
+        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, ProjectsCommands.REBUILD) + "/out=" + Locations.OUTPUT_LOG_FILE);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.MAX_ALLOWED_BUILDS), "Max allowed builds did not appear in the log");
+    }
 
-
-
+    @Test(testName = "Ent License - Verify MultiBuild Exists In UI")
+    public void entLicenseVerifyMultiBuildExistsInUI() {
+        boolean objectExists = false;
+        ibService.loadIbLicense(IbLicenses.UI_LIC);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
+        if (screen.exists(IBSettings.MultiBuildTab, 5) != null)
+            objectExists = true;
+        SystemActions.killProcess(Processes.BUILDSETTINGS);
+        Assert.assertTrue(objectExists, "MultiBuild tab should not be displayed with PRO license");
+    }
 
 
 

@@ -16,6 +16,7 @@ public class StaticDataProvider {
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
+        public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
     }
 
     public static class InitMSBuild {
@@ -49,6 +50,7 @@ public class StaticDataProvider {
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
+        public static final String BUILDSETTINGS = "BuildSettings.exe ";
         public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
@@ -73,6 +75,7 @@ public class StaticDataProvider {
         public static final String PDB_ERROR = ".pdb' is corrupted";
         public static String PDB_ERROR_TESTS = "";
         public static final String TERMINATION_MESSAGE = "Build terminated at user request";
+        public static final String MAX_ALLOWED_BUILDS = "Maximum number of concurrent builds reached.";
     }
 
     public static class VsActions {
@@ -430,7 +433,6 @@ public class StaticDataProvider {
     }
 
     public static class TestProjects {
-        public static final String CONSOLE_APPLICATION_01 = Locations.QA_ROOT + "\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln";
         public static final String TEST_PROJ = Locations.QA_ROOT + "\\Projects\\TestProj\\TestProj.sln /%s /cfg=\"Debug|x86\" /title=\"TestProject\"";
         public static final String CUSTOM_PROJECT = Locations.QA_ROOT + "\\Projects\\custom\\custom.sln";
         public static final String VC8PROJECT = Locations.QA_ROOT + "\\projects\\vc8project\\vc8project.sln";
@@ -440,7 +442,6 @@ public class StaticDataProvider {
         public static final String VC12PROJECT = Locations.QA_ROOT + "\\projects\\vc12project\\vc12project.sln";
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
-        public static final String CONSOLE_APPLICATION_01_BUILDCONSOLE_COMMAND = "\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"Debug|x64\" /title=\"ConsoleApplication Test Project\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
     }
 
     public static class UIValidationsProjects {
