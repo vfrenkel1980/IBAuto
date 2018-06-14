@@ -18,19 +18,18 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 
-    protected static List<String> otherGridIPList;
-    //protected static LinuxSimTestBase.TestNum testNum = TestNum.MultiIn;
+    private static List<String> otherGridIPList;
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
 
-        rawIpList = XmlParser.getIpList("Machines/MultiInitiators IP list.xml");
+        rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
         ipList = XmlParser.breakDownIPList(rawIpList);
         testNum = TestNum.MultiIn;
-        rawIpList3 = XmlParser.getIpList("Machines/MultiGridIPs.xml");
+        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
         multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
 
-        rawIpList2 = XmlParser.getIpList("Machines/MultiBuild IP list.xml");
+        rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
 
@@ -40,14 +39,12 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         extent.attachReporter(htmlReporter);
     }
 
-    //@Override
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-
 
         linuxService.deleteLogsFolder(multiGridIPList);
 
@@ -77,7 +74,6 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
     }
 
     @BeforeMethod
-    // @Parameters({"cycle"})
     public void beforeMethod(Method method) {
         testName = getTestName(method);
         test = extent.createTest(testName);

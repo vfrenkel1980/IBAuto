@@ -6,7 +6,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
 
 import java.io.BufferedReader;
@@ -102,55 +102,41 @@ public class LinuxService extends TestBase implements ILinuxService {
     public void deleteLogsFolder(List<String> ipList) {
         for (Object machine : ipList) {
             log.info("deleting " + machine);
-            winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + machine + " " + StaticDataProvider.LinuxCommands.DELETE_LOGS);
+            winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
             log.info("deleted " + machine);
         }
     }
 
     @Override
     public boolean isIBServiceUp(String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.CHECK_IB_SERVICES));
-        if (res == 0)
-            return true;
-        else
-            return false;
+        int res = winService.runCommandWaitForFinish(LinuxCommands.PLINK + IP + " " + LinuxCommands.CHECK_IB_SERVICES);
+        return res == 0;
     }
 
     @Override
     public void killibDbCheck(String IP) {
-        linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.KILL_IB_DB_CHECK,IP);
+        linuxRunSSHCommandOutputString(LinuxCommands.KILL_IB_DB_CHECK,IP);
     }
 
     @Override
     public boolean startIBService(String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.START_IB_SERVICES));
-        if (res == 0)
-            return false;
-        else
-            return true;
+        int res = winService.runCommandWaitForFinish(LinuxCommands.PLINK + IP + " " + LinuxCommands.START_IB_SERVICES);
+        return res != 0;
     }
 
     @Override
     public boolean stopIBService(String IP) {
-        int res = winService.runCommandWaitForFinish(StaticDataProvider.LinuxCommands.PLINK + IP + " " + String.format(StaticDataProvider.LinuxCommands.STOP_IB_SERVICES));
-        if (res == 0)
-            return false;
-        else
-            return true;
+        int res = winService.runCommandWaitForFinish(LinuxCommands.PLINK + IP + " " + LinuxCommands.STOP_IB_SERVICES);
+        return res != 0;
     }
 
     @Override
     public boolean isLinuxOSUbuntu(String IP) {
-
-        if(linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP).contains("Ubuntu"))
-            return true;
-        else
-            return false;
-       // return linuxRunSSHCommandOutputString(StaticDataProvider.LinuxCommands.GET_OS,IP);
+        return linuxRunSSHCommandOutputString(LinuxCommands.GET_OS, IP).contains("Ubuntu");
     }
 
     @Override
     public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) {
-        return linuxRunSSHCommandOutputString((String.format(StaticDataProvider.LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
+        return linuxRunSSHCommandOutputString((String.format(LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
     }
 }

@@ -1,17 +1,12 @@
 package frameworkInfra.testbases;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider;
-import frameworkInfra.utils.SystemActions;
-import frameworkInfra.utils.XmlParser;
 import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
@@ -20,7 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import static frameworkInfra.Listeners.SuiteListener.*;
+import static frameworkInfra.Listeners.SuiteListener.extent;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 @Listeners(SuiteListener.class)
 public class LinuxTestBase extends TestBase{
@@ -47,9 +43,6 @@ public class LinuxTestBase extends TestBase{
     @BeforeSuite
     public void linuxSetup(ITestContext testContext) {
         OS = "linux";
-        log.info("starting LinuxTestBase before suite");
-
-        log.info("finished LinuxTestBase before suite");
     }
 
     @AfterMethod

@@ -1,7 +1,6 @@
 package frameworkInfra.Listeners;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.utils.StaticDataProvider;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -65,7 +64,7 @@ public class TestListener implements ITestListener {
         extent.flush();
     }
 
-    public String captureScreenshot(String fileName){
+    private String captureScreenshot(String fileName){
         File destFile = null;
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");

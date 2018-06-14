@@ -44,28 +44,10 @@ public class UnitTests {
         System.out.println(StaticDataProvider.Locations.SYSTEM_APPDATA_TEMP_FOLDER);
     }
 
-    @Test(testName = "Ruby2.4 SyncPrivateAssemblies")
-    public void ruby24SyncPrivateAssemblies() {
-        String result = "";
-        int agentCount = 0;
-        IbService ibService = new IbService();
-        WindowsService winService = new WindowsService();
-        List<String> batmanMachineList;
-        List rawBatmanList;
-        rawBatmanList = XmlParser.getIpList("Machines/BatmanGrid.xml");
-        batmanMachineList = XmlParser.breakDownIPList(rawBatmanList);
-        winService.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.MISC_PROJECTS.RUBY_SYNC_PRIVATE_ASSEMBLIES);
-        try {
-            result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertTrue(result.equals("0"), "Build failed");
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        for (String machine : batmanMachineList) {
-            if (Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "Agent '" + machine)) {
-                agentCount++;
-            }
-        }
-        Assert.assertTrue(agentCount > 0, "No agents were assigned to the build");
+    @Test(testName = "test3")
+    public void test3() {
+        List a = XmlParser.getIpList("test.xml");
+        List newA = XmlParser.breakDownIPList(a);
+
     }
 }

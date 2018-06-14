@@ -18,7 +18,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
-        rawIpList = XmlParser.getIpList("Machines/Simulation IP list.xml");
+        rawIpList = XmlParser.getIpList("Simulation IP list.xml");
         testNum = TestNum.Sim;
 
         ipList = XmlParser.breakDownIPList(rawIpList);

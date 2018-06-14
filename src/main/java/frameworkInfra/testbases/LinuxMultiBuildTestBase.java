@@ -18,19 +18,18 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
-    public static List<String> otherGridIPList;
-   //protected static LinuxSimTestBase.TestNum testNum = TestNum.MultiBuild;
+    private static List<String> otherGridIPList;
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
 
-        rawIpList = XmlParser.getIpList("Machines/MultiBuild IP list.xml");
+        rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
         ipList = XmlParser.breakDownIPList(rawIpList);
         testNum = TestNum.MultiBuild;
-        rawIpList3 = XmlParser.getIpList("Machines/MultiGridIPs.xml");
+        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
         multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
 
-        rawIpList2 = XmlParser.getIpList("Machines/MultiInitiators IP list.xml");
+        rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
 
@@ -40,7 +39,6 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         extent.attachReporter(htmlReporter);
     }
 
-   // @Override
     @BeforeClass
     public void initializeEnv(ITestContext testContext){
         log.info("starting before class");
@@ -48,7 +46,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
 
-        rawIpList2 = XmlParser.getIpList("Machines/MultiInitiators IP list.xml");
+        rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         /*log.info("starting delete logs folder");
         linuxService.deleteLogsFolder(multiGridIPList);
@@ -80,7 +78,6 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
     }
 
     @BeforeMethod
-   // @Parameters({"cycle"})
     public void beforeMethod(Method method) {
         testName = getTestName(method);
         test = extent.createTest(testName);
