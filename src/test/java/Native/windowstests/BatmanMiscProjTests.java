@@ -17,7 +17,6 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
     @Test(testName = "Ruby2.4 SyncPrivateAssemblies")
     public void ruby24SyncPrivateAssemblies() {
         String result = "";
-        int agentCount = 0;
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.RUBY_SYNC_PRIVATE_ASSEMBLIES);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
@@ -25,11 +24,6 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         } catch (IOException e) {
             test.log(Status.WARNING, e.getMessage());
         }
-        for (String machine : batmanMachineList) {
-            if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + machine)) {
-                agentCount++;
-            }
-        }
-        Assert.assertTrue(agentCount > 0, "No agents were assigned to the build");
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 }
