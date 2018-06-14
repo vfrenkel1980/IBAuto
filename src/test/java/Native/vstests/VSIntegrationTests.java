@@ -120,7 +120,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
         vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
         SystemActions.sleep(4);
         vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.SYSTEM_APPDATA_TEMP_FOLDER + "\\IB_BuildOutput.log", LogOutput.TERMINATION_MESSAGE));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.SYSTEM_APPDATA_TEMP_FOLDER + "IB_BuildOutput.log", LogOutput.TERMINATION_MESSAGE));
     }
 
 }

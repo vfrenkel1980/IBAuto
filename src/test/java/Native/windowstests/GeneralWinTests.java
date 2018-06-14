@@ -8,9 +8,9 @@ import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tools.ant.ProjectComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,7 +122,14 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
         winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator" , "4illumination", "buildsystem");
         winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" \"c:\\qa\\simulation\\second_initiator_output\"");
-        boolean isPresent = Parser.doesFileContainString(StaticDataProvider.Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt", "Agent '");
+        boolean isPresent = Parser.doesFileContainString(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt", LogOutput.AGENT);
+        if (isPresent){
+            try {
+                FileUtils.copyFile(new File(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt"), new File(Locations.QA_ROOT + "\\logs\\for_investigation"));
+            } catch (IOException e) {
+                test.log(Status.WARNING, e.getMessage());
+            }
+        }
         SystemActions.deleteFile(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt");
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(isPresent, "No agent assigned to build");

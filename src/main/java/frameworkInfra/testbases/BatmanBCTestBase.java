@@ -32,6 +32,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
         batmanMachineList = XmlParser.breakDownIPList(rawBatmanList);
         rawVmSimList = XmlParser.getIpList("Machines/VmSimGrid.xml");
         vmSimMachineList = XmlParser.breakDownIPList(rawVmSimList);
+        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\logs\\for_investigation\\", "*.txt");
     }
 
     @BeforeMethod

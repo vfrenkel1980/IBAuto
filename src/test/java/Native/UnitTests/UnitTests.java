@@ -41,10 +41,7 @@ public class UnitTests {
         WindowsService winService = new WindowsService();
         Screen screen = new Screen();
         boolean objectMissing = false;
-        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILDSETTINGS);
-        if (screen.exists(IBSettings.MultiBuildTab, 5) == null)
-            objectMissing = true;
-        Assert.assertTrue(objectMissing, "MultiBuild tab should not be displayed with PRO license");
+        System.out.println(StaticDataProvider.Locations.SYSTEM_APPDATA_TEMP_FOLDER);
     }
 
     @Test(testName = "Ruby2.4 SyncPrivateAssemblies")
