@@ -11,6 +11,7 @@ public class StaticDataProvider {
         public static final String BUILD_CONSOLE = "\"" + IbLocations.IB_ROOT + "\\buildconsole.exe" + "\"" + " ";
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgconsole.exe" + "\"" + " ";
+        public static final String IBCONSOLE = "\"" + IbLocations.IB_ROOT + "\\ibconsole.exe" + "\"" + " ";
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT + "\\BuildSystem.exe" + "\"" + " ";
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
@@ -101,6 +102,9 @@ public class StaticDataProvider {
 
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
+            public static final String FAILEDPROJECT_X64_DEBUG = "\"C:\\QA\\Simulation\\projects\\ProjectVC15Failed\\ProjectVC15Failed.sln\"  /cfg=\"debug|x64\" /title=\"Failed Project - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XG_CONSOLE_SAMPLE = StaticDataProvider.IbLocations.XGCONSOLE + " /command=\"\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " +Locations.QA_ROOT +"\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
+            public static final String IB_CONSOLE_FAILEDBUILD = StaticDataProvider.IbLocations.IBCONSOLE + " /command=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
         }
 
         public static class AGENT_SETTINGS {
