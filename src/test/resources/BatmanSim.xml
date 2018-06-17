@@ -31,6 +31,7 @@
             <class name ="Native.windowstests.BatmanVC11Tests" />
             <class name ="Native.windowstests.GeneralWinTests" />
             <class name ="Native.windowstests.BatmanMiscProjTests" />
+            <class name ="Native.windowstests.BatmanExitCodeTests" />
         </classes>
     </test>
 
