@@ -20,7 +20,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOnStandaloneOff() {
         setRegistry("1","Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0","Builder", RegistryKeys.STANDALONE_MODE);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
     }
@@ -29,7 +29,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOffStandaloneOn() {
         setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("1","Builder", RegistryKeys.STANDALONE_MODE);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
     }
@@ -38,7 +38,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOffStandaloneOff() {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
     }
@@ -47,7 +47,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyExtendedLoggingLevel() {
         String result;
         setRegistry("4", "Log" ,RegistryKeys.LOGGING_LEVEL);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         try {
             result = ibService.findValueInPacketLog("LoggingLevel");
             Assert.assertEquals(result, "4");
@@ -60,7 +60,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyMinimalLoggingLevel() {
         String result;
         setRegistry("0", "Log" ,RegistryKeys.LOGGING_LEVEL);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         try {
             result = ibService.findValueInPacketLog("LoggingLevel");
             Assert.assertEquals(result, "0");
@@ -92,7 +92,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void proLicenseVerifyMultiBuildDoesNotWorkWhenAddingRegistry() {
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
         setRegistry("2", "BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, ProjectsCommands.REBUILD) + " /out=" + Locations.OUTPUT_LOG_FILE);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.MAX_ALLOWED_BUILDS), "Max allowed builds did not appear in the log");
     }

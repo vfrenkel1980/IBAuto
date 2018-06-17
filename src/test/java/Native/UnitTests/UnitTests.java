@@ -46,8 +46,6 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3() {
-        List a = XmlParser.getIpList("test.xml");
-        List newA = XmlParser.breakDownIPList(a);
 
     }
 }

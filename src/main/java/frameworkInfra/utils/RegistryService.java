@@ -41,4 +41,8 @@ public class RegistryService extends TestBase{
             ex.getMessage();
         }
     }
+
+    public static boolean doesValueExist(HKEY rootKey, String keyPath, String keyName){
+        return Advapi32Util.registryValueExists(rootKey, keyPath, keyName);
+    }
 }

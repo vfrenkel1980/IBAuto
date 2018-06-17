@@ -64,8 +64,8 @@ public class GeneralWinTests extends BatmanBCTestBase{
             } catch (IOException e) {
                 e.getMessage();
             }
-            int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '");
-            int lastLocal = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Local");
+            int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT);
+            int lastLocal = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL);
 
             Assert.assertTrue(lastAgent > lastLocal, "Last Local task was build after remote tasks. Last Agent: " + lastAgent + " Last Local: " + lastLocal);
         }catch (Exception e){
