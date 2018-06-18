@@ -45,6 +45,9 @@ public class SetupTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite() {
         try {
+            test = extent.createTest("BEFORE SUITE");
+            test.log(INFO,  "BEFORE SUITE test started");
+            test.assignCategory("BEFORE SUITE");
             int version = IIBService.getIbVersion();
             ibService.uninstallIB(String.valueOf(version));
         }

@@ -3,7 +3,7 @@
 <suite name="BatmanSim"  >
     <!-- suite name="Suite Name" -->
     <parameter name="predicted" value="2"/>
-    <parameter name="msBuild" value="0"/>
+    <parameter name="msBuild" value="1"/>
 
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
