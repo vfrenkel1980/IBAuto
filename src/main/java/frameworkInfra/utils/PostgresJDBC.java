@@ -9,7 +9,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class PostgresJDBC extends TestBase {
 
-    public static String getLastValueFromTable(String ip, String username, String password, String db, String select, String table, String coloumn){
+    public static String getLastValueFromTable(String ip, String username, String password, String db, String select, String table, String column, String orderBy){
         Connection c = null;
         Statement stmt = null;
         String value = "";
@@ -19,11 +19,11 @@ public class PostgresJDBC extends TestBase {
                     .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
                             username, password);
             c.setAutoCommit(false);
-            //test.log(Status.INFO,"Connection established to DB");
+            test.log(Status.INFO,"Connection established to DB");
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT " + select + " FROM " + table + " ORDER BY id DESC LIMIT 1" );
+            ResultSet rs = stmt.executeQuery( "SELECT " + select + " FROM " + table + " ORDER BY " + orderBy +" DESC LIMIT 1" );
             while ( rs.next() ) {
-                value = rs.getString(coloumn);
+                value = rs.getString(column);
             }
             rs.close();
             stmt.close();

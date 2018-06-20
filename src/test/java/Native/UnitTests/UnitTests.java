@@ -39,7 +39,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3() {
-        String blah = PostgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds", "id");
-        System.out.println(blah);
+        String expected = PostgresJDBC.getLastValueFromTable("192.168.10.16", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
+        System.out.println(expected);
     }
 }
