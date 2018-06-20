@@ -1,19 +1,14 @@
 package Native.UnitTests;
 
-import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
-import org.apache.velocity.runtime.directive.Parse;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -46,6 +41,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3() {
-
+        String blah = PostgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds", "id");
+        System.out.println(blah);
     }
 }

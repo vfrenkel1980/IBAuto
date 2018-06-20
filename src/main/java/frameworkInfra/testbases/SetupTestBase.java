@@ -1,7 +1,6 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
@@ -22,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.aventstack.extentreports.Status.INFO;
-import static com.aventstack.extentreports.Status.WARNING;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
@@ -44,17 +42,13 @@ public class SetupTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite() {
-        try {
-            test = extent.createTest("BEFORE SUITE");
-            test.log(INFO,  "BEFORE SUITE test started");
-            test.assignCategory("BEFORE SUITE");
-            int version = IIBService.getIbVersion();
+        test = extent.createTest("BEFORE SUITE");
+        test.log(INFO,  "BEFORE SUITE test started");
+        test.assignCategory("BEFORE SUITE");
+        int version = IIBService.getIbVersion();
+        if (version != 0)
             ibService.uninstallIB(String.valueOf(version));
-        }
-        catch (Exception e)
-        {
-            test.log(Status.WARNING, e.getMessage());
-        }
+
     }
 
     @BeforeMethod

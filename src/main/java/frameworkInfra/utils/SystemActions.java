@@ -156,4 +156,17 @@ public class SystemActions {
             e.getMessage();
         }
     }
+
+    public static boolean doesFileExist(String filePath){
+        File file = new File(filePath);
+        return file.exists();
+    }
+
+    public static void copyFile(String src, String dest){
+        try {
+            FileUtils.copyFile(new File(src), new File(dest));
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
+    }
 }

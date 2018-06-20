@@ -37,7 +37,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void compareMSBuildVersion(){
         ConfigurationReader confReader = new ConfigurationReader();
         String actual = vsuiService.getInstalledMSBuildVersion();
-        String expected = confReader.getProperty("MSBuildVersion");
+        String expected = PostgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info", "id");
         test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
         Assert.assertEquals(actual, expected, "Installed MSBuild version does not match expected");
     }

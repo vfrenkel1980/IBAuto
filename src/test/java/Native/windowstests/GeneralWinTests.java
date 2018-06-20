@@ -121,16 +121,14 @@ public class GeneralWinTests extends BatmanBCTestBase{
                 "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
 
         winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator" , "4illumination", "buildsystem");
-        winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" \"c:\\qa\\simulation\\second_initiator_output\"");
-        boolean isPresent = Parser.doesFileContainString(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt", LogOutput.AGENT);
+        winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH );
+        Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
+
+        boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
         if (isPresent){
-            try {
-                FileUtils.copyFile(new File(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt"), new File(Locations.QA_ROOT + "\\logs\\for_investigation"));
-            } catch (IOException e) {
-                test.log(Status.WARNING, e.getMessage());
-            }
+            SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation");
         }
-        SystemActions.deleteFile(Locations.QA_ROOT + "\\second_initiator_output\\buildlog.txt");
+        SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(isPresent, "No agent assigned to build");
     }

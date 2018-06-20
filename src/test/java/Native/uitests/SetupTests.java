@@ -220,7 +220,8 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is not running");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         runBuildAndAssert();
-        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
 
     }
 
@@ -303,7 +304,8 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         runBuildAndAssert();
-        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
     }
 
     @Test(testName = "Change Enterprise Installation Location And Port")
@@ -344,7 +346,8 @@ public class SetupTests extends SetupTestBase {
                 Locations.DIFFERENT_ENT_INSTALLATION_DIRECTORY);
         Parser.doesFileContainString(IbLocations.ENTERPRISE_DIRECTORY + "\\Dashboard\\Apache24\\conf\\httpd.conf", "Listen " + InstallationPorts.DASHBOARD_PORT);
         runBuildAndAssert();
-        Assert.assertEquals(PostgresJDBC.getLastBuildExitCode(), 0 , "DB exit code is: " + PostgresJDBC.getLastBuildExitCode());
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
     }
 
     @Test(testName = "Negative Upgrade Pro To Ent With No Ent License")

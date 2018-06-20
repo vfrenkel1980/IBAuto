@@ -25,11 +25,14 @@ public interface IIBService {
     void updateIB(String version);
 
     static int getIbVersion() {
-        String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
-        int version = Integer.parseInt(regVersion);
-        version -= 1001000;
-        if (test != null)
-            test.log(Status.INFO, "Installed IB version -----> " + version);
+        int version = 0;
+        if (RegistryService.doesValueExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION)) {
+            String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
+            version = Integer.parseInt(regVersion);
+            version -= 1001000;
+            if (test != null)
+                test.log(Status.INFO, "Installed IB version -----> " + version);
+        }
         return version;
     }
 

@@ -119,6 +119,10 @@ public class WindowsService extends TestBase implements IWindowsService {
             if (output.contains("process " + processName + " was not found on " + host)){
                 isRunning = false;
             }
+            if (output.contains("Access is denied.")){
+                isRunning = false;
+            }
+
         }
         test.log(Status.INFO, processName + " Finished running");
     }

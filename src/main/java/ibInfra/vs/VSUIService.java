@@ -107,17 +107,10 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
-        try {
+        if (driver.getCapabilities().getCapability("app").toString().contains("2017"))
             driver.findElementByName("Incredibuild").click();
-        }
-        catch (Exception e){
-            try {
-                driver.findElementByName("IncrediBuild").click();
-            }
-            catch (Exception e1){
-                e.getMessage();
-            }
-        }
+        else
+            driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -127,20 +120,13 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("Build");
-        try {
+        if (driver.getCapabilities().getCapability("app").toString().contains("2017"))
             driver.findElementByName("Incredibuild").click();
-        }
-        catch (Exception e){
-            try {
-                driver.findElementByName("IncrediBuild").click();
-            }
-            catch (Exception e1){
-                e.getMessage();
-            }
-        }
+        else
+            driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
-        SystemActions.sleep(3);
+        SystemActions.sleep(2);
     }
 
     @Override

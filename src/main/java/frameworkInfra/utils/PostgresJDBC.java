@@ -9,29 +9,28 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class PostgresJDBC extends TestBase {
 
-    public static int getLastBuildExitCode(){
+    public static String getLastValueFromTable(String ip, String username, String password, String db, String select, String table, String coloumn){
         Connection c = null;
         Statement stmt = null;
-        int status = 0;
+        String value = "";
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/coordinatordb",
-                            "ib", "ib");
+                    .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
+                            username, password);
             c.setAutoCommit(false);
-            test.log(Status.INFO,"Connection established to DB");
+            //test.log(Status.INFO,"Connection established to DB");
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM public.coord_build ORDER BY id DESC LIMIT 1" );
+            ResultSet rs = stmt.executeQuery( "SELECT " + select + " FROM " + table + " ORDER BY id DESC LIMIT 1" );
             while ( rs.next() ) {
-                status = rs.getInt("status");
+                value = rs.getString(coloumn);
             }
             rs.close();
             stmt.close();
             c.close();
         } catch ( Exception e ) {
             test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
-            e.getMessage();
         }
-        return status;
+        return value;
     }
 }
