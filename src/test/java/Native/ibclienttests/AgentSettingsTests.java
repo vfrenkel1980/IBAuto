@@ -6,6 +6,7 @@ import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibService.IbService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +22,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("1","Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0","Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
+        Assert.assertFalse(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
     }
 

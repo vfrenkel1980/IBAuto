@@ -4,6 +4,7 @@ import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import org.apache.velocity.runtime.directive.Parse;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,10 +34,7 @@ public class UnitTests {
 
     @Test
     public void test2(){
-        WindowsService winService = new WindowsService();
-        Screen screen = new Screen();
-        boolean objectMissing = false;
-        System.out.println(StaticDataProvider.Locations.SYSTEM_APPDATA_TEMP_FOLDER);
+
     }
 
     @Test(testName = "test3")
