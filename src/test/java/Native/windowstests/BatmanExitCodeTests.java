@@ -2,7 +2,6 @@ package Native.windowstests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
@@ -12,29 +11,30 @@ import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.utils.RegistryService.setRegistryKey;
 
 public class BatmanExitCodeTests extends BatmanBCTestBase {
 
-    @Test(testName = "/exitcodebase (SUCCESS = 0) Test")
+    @Test(testName = "Exit Code Base Test 0")
     public void exitCodeBaseTest0() {
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE + " /exitcodebase=10");
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.XG_CONSOLE_SAMPLE);
         Assert.assertTrue(returnCode == 0, "exitCodeBaseTest0 failed with return code " + returnCode);
     }
 
-    @Test(testName = "/exitcodebase (BUILD_ERROR = 1) Test")
+    @Test(testName = "Exit Code Base Test 1")
     public void exitCodeBaseTest1() {
-        int returnCode = winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + ProjectsCommands.MISC_PROJECTS.FAILEDPROJECT_X64_DEBUG + " /exitcodebase");
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG);
         Assert.assertTrue(returnCode == 1, "exitCodeBaseTest1 failed with return code " + returnCode);
     }
 
-    @Test(testName = "/exitcodebase (USER_CANCELED = 2) Test")
+    @Test(testName = "Exit Code Base Test 2")
     public void exitCodeBaseTest2() {
         String result = "";
-        winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.PROJECTVC15_RELEASE_X64 + " /exitcodebase");
+        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_DEBUG_X64);
         SystemActions.sleep(2);
         try {
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
-            SystemActions.sleep(2);
+            SystemActions.sleep(5);
             result = ibService.findValueInPacketLog("ExitCode ");
         } catch (IOException e) {
             test.log(Status.WARNING, e.getMessage());
@@ -42,32 +42,32 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         Assert.assertTrue(result.equals("10002"), "exitCodeBaseTest2 failed with return code " + result);
     }
 
-    @Test(testName = "/exitcodebase (SYSTEM_ERROR = 3) Test")
+    @Test(testName = "Exit Code Base Test 3")
     public void exitCodeBaseTest3() {
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.IB_CONSOLE_FAILEDBUILD + " /exitcodebase=100");
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.IB_CONSOLE_FAILEDBUILD);
         Assert.assertTrue(returnCode == 103, "exitCodeBaseTest3 failed with return code " + returnCode);
     }
 
-    @Test(testName = "/exitcodebase (MAX_BUILDS_REACHED = 4) Test")
+    @Test(testName = "Exit Code Base Test 4")
     public void exitCodeBaseTest4() {
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
-        winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.PROJECTVC15_RELEASE_X64);
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.PROJECTVC10_DEBUG_WIN32);
+        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
     }
 
-    @Test(testName = "/exitcodebase (NO_CORES_AVAILABLE = 5) Test")
+    @Test(testName = "Exit Code Base Test 5")
     public void exitCodeBaseTest5() {
         setBuildServiceRegistry(RegistryKeys.MIN_LOCAL_CORES, "8");
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "2");
-        winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.PROJECTVC10_DEBUG_WIN32);
-        int returnCode = winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.PROJECTVC15_RELEASE_X64 + " /exitcodebase=1000000000000"));
+        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
     }
 
     /*------------------------------METHODS------------------------------*/
 
     private void setBuildServiceRegistry(String keyName, String required) {
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", keyName, required);
+        setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", keyName, required);
     }
 }
