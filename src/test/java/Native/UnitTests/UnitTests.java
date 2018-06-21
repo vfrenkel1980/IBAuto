@@ -4,6 +4,7 @@ import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import org.apache.velocity.runtime.directive.Parse;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,15 +34,12 @@ public class UnitTests {
 
     @Test
     public void test2(){
-        WindowsService winService = new WindowsService();
-        Screen screen = new Screen();
-        boolean objectMissing = false;
-        System.out.println(StaticDataProvider.Locations.SYSTEM_APPDATA_TEMP_FOLDER);
+
     }
 
     @Test(testName = "test3")
     public void test3() {
-        String blah = PostgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds", "id");
-        System.out.println(blah);
+        String expected = PostgresJDBC.getLastValueFromTable("192.168.10.16", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
+        System.out.println(expected);
     }
 }

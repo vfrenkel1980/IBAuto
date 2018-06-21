@@ -28,6 +28,7 @@ public class LinuxTestBase extends TestBase{
     protected static List rawIpList;
     protected static List rawIpList2;
     protected static List rawIpList3;
+    protected static String className;
 
    protected static LinuxSimTestBase.TestNum testNum;
 
@@ -43,11 +44,17 @@ public class LinuxTestBase extends TestBase{
     @BeforeSuite
     public void linuxSetup(ITestContext testContext) {
         OS = "linux";
+        className = getClass().getName();
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-        buildID = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, ipList.get(1));
+
+        int i=1;
+        if (className.contains("Dock"))
+            i=2;
+
+        buildID = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, ipList.get(i));
         test.log(Status.INFO, buildID);
         extent.flush();
     }

@@ -88,7 +88,7 @@ public class Parser extends TestBase{
             while (scanner.hasNextLine()) {
                 line ++;
                 final String lineFromFile = scanner.nextLine();
-                if (searchFor.equals("Local") && !lineFromFile.contains(("LNK"))) {
+                if (searchFor.contains("Local") && !lineFromFile.contains(("LNK"))) {
                     if (lineFromFile.contains(searchFor)) {
                         finalLine = line;
                     }
@@ -125,6 +125,9 @@ public class Parser extends TestBase{
         }
         return firstLine;
     }
+
+
+
 
 
     //usage example

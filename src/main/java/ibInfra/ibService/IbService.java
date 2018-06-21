@@ -9,6 +9,7 @@ import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -16,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -222,6 +224,30 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public String getCoordinator() {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.COORDINATOR_HOST);
+    }
+
+    @Override
+    public boolean verifyAvoidLocal(String filePath){
+        File file = new File(filePath);
+        String currentLine = "";
+        String previousLine = "";
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                previousLine = currentLine;
+                currentLine = scanner.nextLine();
+                if (currentLine.contains(StaticDataProvider.LogOutput.LOCAL)) {
+                    if (!currentLine.contains("LNK") && !previousLine.contains("PreBuild") && !previousLine.contains("PostBuild"))
+                        return false;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }finally {
+            scanner.close();
+        }
+        return true;
     }
 
 

@@ -73,4 +73,6 @@ public interface IIBService {
     boolean isLicenseLoaded();
 
     String getCoordinator();
+
+    boolean verifyAvoidLocal(String filePath);
 }

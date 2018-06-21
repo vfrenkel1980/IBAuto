@@ -220,7 +220,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is not running");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         runBuildAndAssert();
-        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
         Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
 
     }
@@ -304,7 +304,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         runBuildAndAssert();
-        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
         Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
     }
 
@@ -346,7 +346,7 @@ public class SetupTests extends SetupTestBase {
                 Locations.DIFFERENT_ENT_INSTALLATION_DIRECTORY);
         Parser.doesFileContainString(IbLocations.ENTERPRISE_DIRECTORY + "\\Dashboard\\Apache24\\conf\\httpd.conf", "Listen " + InstallationPorts.DASHBOARD_PORT);
         runBuildAndAssert();
-        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status");
+        String exitCode = PostgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
         Assert.assertTrue(exitCode.equals("0") , "DB exit code is: " + exitCode);
     }
 
