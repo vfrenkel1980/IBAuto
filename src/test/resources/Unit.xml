@@ -2,30 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Unit"  >
     <!-- suite name="Suite Name" -->
-<!--    <parameter name="predicted" value="2"/>
-    <parameter name="msBuild" value="0"/>-->
+    <parameter name="predicted" value="2"/>
+    <parameter name="msBuild" value="0"/>
 
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
     <test name="Detailed">
-        <parameter name="lang" value="en"/>
+        <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="Web.IBWeb.DownloadFormTests" >
+            <class name ="Native.UnitTests.UnitTests" >
                 <methods>
-                    <include name="validateFirstName" />
-                    <include name="validateLastName" />
-                    <include name="validateEmail" />
-                    <include name="validatePassword" />
-                    <include name="validatePhone" />
-                    <include name="validateTerms" />
-                    <include name="validateCountry" />
-                    <include name="validateCompany" />
-                    <include name="validateCity" />
-                    <include name="validateHowDidYou" />
-                    <include name="validateJob" />
-                    <include name="validateMailing" />
+                    <include name="test2" />
                 </methods>
             </class>
         </classes>

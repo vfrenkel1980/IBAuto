@@ -3,7 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.EventHandler;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.log4j.Logger;
@@ -38,12 +38,12 @@ public class TestBase {
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
-        SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reportscreenshots/", "*.png");
+        SystemActions.deleteFilesByPrefix("\\\\192.168.10.15\\share\\Automation\\Screenshots\\", "*.png");
 
         //copy latest extent report to backup folder
-        SystemActions.copyFilesByExtension(StaticDataProvider.Locations.WORKSPACE_REPORTS, StaticDataProvider.Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
+        SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);
         //delete HTML report from workspace folder
-        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
+        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
     }
 
     public void log(String data){
