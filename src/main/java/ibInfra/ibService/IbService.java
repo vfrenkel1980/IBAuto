@@ -29,8 +29,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIBInstallFolder() {
-        String IBfolder = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
-        return IBfolder;
+        return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
     }
 
     @Override
@@ -98,20 +97,6 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
-    public void loadIBLicenseByXLicProc(String license) {
-        winService.runCommandWaitForFinish(IbLocations.XLICPROC + "/LoadLicense /LicenseFile=\"" + license + "\"");
-        SystemActions.sleep(5);
-        SystemActions.killProcess("XLicProc.exe");
-    }
-
-    @Override
-    public void unloadIBLicenseByXLicProc() {
-        winService.runCommandWaitForFinish(IbLocations.XLICPROC + "/UnloadLicense");
-        SystemActions.sleep(5);
-        SystemActions.killProcess("XLicProc.exe");
-    }
-
-    @Override
     public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
         return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "\\Extensions\\IncredibuildExtension\\manifest.json", "version");
     }
@@ -133,10 +118,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public boolean verifyIbInstallation(int ibVersion) {
-        if (ibVersion != 0)
-            return true;
-        else
-            return false;
+        return ibVersion != 0;
     }
 
     @Override
@@ -245,7 +227,9 @@ public class IbService extends TestBase implements IIBService {
         } catch (FileNotFoundException e) {
             e.getMessage();
         }finally {
-            scanner.close();
+            if (scanner != null) {
+                scanner.close();
+            }
         }
         return true;
     }

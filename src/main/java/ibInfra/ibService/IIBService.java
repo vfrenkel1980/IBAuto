@@ -42,10 +42,6 @@ public interface IIBService {
 
     void unloadIbLicense();
 
-    void loadIBLicenseByXLicProc(String license);
-
-    void unloadIBLicenseByXLicProc();
-
     String getIbVsExtensionVersion(String VsDevenvInstallPath);
 
     String getExpectedIbVsExtensionVersion();

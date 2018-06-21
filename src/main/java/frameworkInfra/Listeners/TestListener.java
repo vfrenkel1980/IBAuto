@@ -1,6 +1,7 @@
 package frameworkInfra.Listeners;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.StaticDataProvider;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -64,7 +65,7 @@ public class TestListener implements ITestListener {
         extent.flush();
     }
 
-    private String captureScreenshot(String fileName){
+    public String captureScreenshot(String fileName){
         File destFile = null;
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -74,7 +75,7 @@ public class TestListener implements ITestListener {
             String format = ".png";
             fileName = fileName + "_Screenshot";
 
-            String screenShotDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/frameworkInfra/reportscreenshots/";
+            String screenShotDirectory = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
             destFile = new File(screenShotDirectory + fileName + "_" + formatter.format(calendar.getTime()) + format);
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage image = robot.createScreenCapture(screenRect);

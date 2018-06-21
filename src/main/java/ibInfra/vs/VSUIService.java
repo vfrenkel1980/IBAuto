@@ -107,7 +107,7 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
-        if (driver.getCapabilities().getCapability("app").toString().contains("2017"))
+        if (driver.getCapabilities().getCapability("app").toString().contains("2017") || driver.getCapabilities().getCapability("app").toString().contains("9.0"))
             driver.findElementByName("Incredibuild").click();
         else
             driver.findElementByName("IncrediBuild").click();
@@ -120,7 +120,7 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("Build");
-        if (driver.getCapabilities().getCapability("app").toString().contains("2017"))
+        if (driver.getCapabilities().getCapability("app").toString().contains("2017")  || driver.getCapabilities().getCapability("app").toString().contains("9.0"))
             driver.findElementByName("Incredibuild").click();
         else
             driver.findElementByName("IncrediBuild").click();
