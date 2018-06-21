@@ -103,21 +103,20 @@ public class StaticDataProvider {
 
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
-            public static final String FAILEDPROJECT_X64_DEBUG = "\"C:\\QA\\Simulation\\projects\\ProjectVC15Failed\\ProjectVC15Failed.sln\"  /cfg=\"debug|x64\"  /rebuild /title=\"Failed Project - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " +Locations.QA_ROOT +"\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
-            public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /profile=\"C:\\Users\\test\\Documents\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild /AvoidLocal=On";
-            public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccesss.sln\"  /cfg=\"debug|win32\" /title=\"Project VC15 CustomStep Success\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /profile=\"C:\\Users\\test\\Documents\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild /AvoidLocal=On";
-
-            public static final String PROJECTVC15_RELEASE_X64 = IbLocations.BUILD_CONSOLE + TestProjects.VC15PROJECT + " /rebuild /cfg=\"release|x64\" /nowait";
-            public static final String PROJECTVC10_DEBUG_WIN32 = IbLocations.BUILD_CONSOLE + TestProjects.VC10PROJECT + " /rebuild /cfg=\"debug|win32\" /nowait";
-
-
+            public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /profile=\"C:\\Users\\test\\Documents\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
+            public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccesss.sln\"  /cfg=\"debug|win32\" /title=\"Project VC15 CustomStep Success\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /profile=\"C:\\Users\\test\\Documents\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
         }
         public static class EXITCODEBASE {
-            
+            public static final String PROJECTVC15_RELEASE_X64 = IbLocations.BUILD_CONSOLE + TestProjects.VC15PROJECT + " /rebuild /cfg=\"release|x64\" /nowait  /exitcodebase=1000000000000";
+            public static final String PROJECTVC10_DEBUG_WIN32 = IbLocations.BUILD_CONSOLE + TestProjects.VC10PROJECT + " /rebuild /cfg=\"debug|win32\" /nowait /exitcodebase=-8";
+            public static final String IB_CONSOLE_FAILEDBUILD = MISC_PROJECTS.IB_CONSOLE_FAILEDBUILD + " /exitcodebase=100";
+            public static final String PROJECTVC15_DEBUG_X64 = IbLocations.BUILD_CONSOLE + TestProjects.VC15PROJECT + " /rebuild /cfg=\"release|x64\" /exitcodebase";
+            public static final String FAILEDPROJECT_X64_DEBUG = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15Failed\\ProjectVC15Failed.sln\"  /cfg=\"debug|x64\"  /rebuild /title=\"Failed VC15 Project - Exit1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /exitcodebase";
+            public static final String XG_CONSOLE_SAMPLE = ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE + " /exitcodebase=10";
         }
-        }
+
 
         public static class AGENT_SETTINGS {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
@@ -410,6 +409,7 @@ public class StaticDataProvider {
         public static final String COORDINATOR_HOST = "CoordHost";
         public static final String ENT_INSTALLATION_REG = "DatabaseFolder";
         public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
+        public static final String FLAGS = "Flags";
 
     }
 
