@@ -117,7 +117,6 @@ public class StaticDataProvider {
         public static class EXITCODEBASE {
             
         }
-        }
 
         public static class AGENT_SETTINGS {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
@@ -557,7 +556,5 @@ public class StaticDataProvider {
         public static final String HELPER_PORT = "31102";
         public static final String COORDINATOR_PORT = "31100";
         public static final String DASHBOARD_PORT = "8001";
-
-
     }
 }
