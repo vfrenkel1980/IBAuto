@@ -557,7 +557,5 @@ public class StaticDataProvider {
         public static final String HELPER_PORT = "31102";
         public static final String COORDINATOR_PORT = "31100";
         public static final String DASHBOARD_PORT = "8001";
-
-
     }
 }

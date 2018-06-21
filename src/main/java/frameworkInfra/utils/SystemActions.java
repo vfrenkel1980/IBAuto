@@ -11,12 +11,13 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.AgeFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.lang3.time.DateUtils;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.TestBase.log;
@@ -167,6 +168,24 @@ public class SystemActions {
             FileUtils.copyFile(new File(src), new File(dest));
         } catch (IOException e) {
             test.log(Status.WARNING, e.getMessage());
+        }
+    }
+
+    public static void deleteFilesOlderThanX(String dir, int days){
+        try {
+            File directory = new File(dir);
+            if (directory.isDirectory()) {
+                Collection<File> filesToDelete = FileUtils.listFiles(directory,
+                        new AgeFileFilter(DateUtils.addDays(new Date(), -days)), TrueFileFilter.TRUE);
+                for (File file : filesToDelete) {
+                    boolean success = FileUtils.deleteQuietly(file);
+                    if (!success) {
+                        test.log(Status.WARNING,"Cannot delete old file at: " + file.getAbsolutePath());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            test.log(Status.WARNING, "unable to delete files. Failed with error: " + e.getMessage());
         }
     }
 }
