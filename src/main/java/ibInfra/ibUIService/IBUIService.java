@@ -9,6 +9,7 @@ import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
+import org.testng.Assert;
 
 import java.io.File;
 
@@ -216,6 +217,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(pat.similar((float) 0.9),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -226,6 +228,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(pat.similar((float) 0.9),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -236,6 +239,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(pat.similar((float) 0.9),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Monitor Bar with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -246,6 +250,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(pat.similar((float) 0.9),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find History coloring with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -256,6 +261,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(pat.similar((float) 0.9),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Project Color Bar with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -266,6 +272,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(Monitor.Tabs.Projects.similar((float) 0.9),2).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
     }
