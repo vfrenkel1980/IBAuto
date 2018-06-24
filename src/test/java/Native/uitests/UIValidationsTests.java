@@ -1,12 +1,9 @@
 package Native.uitests;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.testbases.UIValidationTestBase;
-import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
-import org.sikuli.script.FindFailed;
-import org.testng.Assert;
+import frameworkInfra.utils.StaticDataProvider.IbLocations;
+import frameworkInfra.utils.StaticDataProvider.VsActions;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
@@ -39,14 +36,12 @@ public class UIValidationsTests extends UIValidationTestBase {
     public void verifyIBMonitorBar(){
         winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
         client.verifyMonitorBarPattern(ibMonBarPattern);
-        SystemActions.killProcess(Processes.BUILDMONITOR);
     }
 
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring(){
         winService.runCommandDontWaitForTermination(IbLocations.BUILDHISTORY);
         client.verifyHistoryColoringPattern(historyPattern);
-        SystemActions.killProcess(Processes.BUILDHISTORY);
     }
 
     @Test(testName = "Verify Projects Tab Coloring")
@@ -61,7 +56,6 @@ public class UIValidationsTests extends UIValidationTestBase {
         winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
         client.clickProjectsTab();
         client.verifyProjectsTabColoring(progressPattern);
-        SystemActions.killProcess(Processes.BUILDMONITOR);
     }
 
 

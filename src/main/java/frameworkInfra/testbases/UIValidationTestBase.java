@@ -194,6 +194,8 @@ public class UIValidationTestBase extends TestBase {
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         vsuiService.killDriver();
+        SystemActions.killProcess(Processes.BUILDHISTORY);
+        SystemActions.killProcess(Processes.BUILDMONITOR);
         extent.flush();
     }
 

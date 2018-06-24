@@ -225,7 +225,7 @@ public class IBUIService implements IIBUIService {
         public void verifyTrayIconPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Tray Icon");
             try {
-                screen.wait(pat.similar((float) 0.9),2);
+                screen.wait(pat.similar((float) 0.8),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -247,9 +247,20 @@ public class IBUIService implements IIBUIService {
         public void verifyHistoryColoringPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for History Coloring");
             try {
-                screen.wait(pat.similar((float) 0.9),2);
+                screen.wait(pat.similar((float) 0.6),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find History coloring with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void clickProjectsTab() {
+            test.log(Status.INFO, "Looking for Projects Tab");
+            try {
+                screen.wait(Monitor.Tabs.Projects.similar((float) 0.7),2).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
                 Assert.fail();
             }
         }
@@ -265,16 +276,6 @@ public class IBUIService implements IIBUIService {
             }
         }
 
-        @Override
-        public void clickProjectsTab() {
-            test.log(Status.INFO, "Looking for Projects Tab");
-            try {
-                screen.wait(Monitor.Tabs.Projects.similar((float) 0.9),2).click();
-            } catch (FindFailed findFailed) {
-                test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
-                Assert.fail();
-            }
-        }
     }
 
 }
