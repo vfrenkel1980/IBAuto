@@ -27,50 +27,26 @@ public class UIValidationsTests extends UIValidationTestBase {
         vsuiService.openVSInstance("15", false);
         vsuiService.openProject(projectLocation);
         vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
-        try {
-            screen.wait(vsBarPattern.similar((float) 0.9),2);
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-            Assert.fail("Failed to find VS Bar on screen");
-        }
+        client.verifyVSBarPattern(vsBarPattern);
     }
 
     @Test(testName = "Verify Tray Icon Color")
     public void verifyTrayIconColor(){
-        try {
-            screen.wait(trayIconPattern.similar((float) 0.8),2);
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-            Assert.fail("Failed to find Matching tray icon color on screen");
-        }
+        client.verifyTrayIconPattern(trayIconPattern);
     }
 
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar(){
         winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
-        try {
-            screen.wait(ibMonBarPattern.similar((float) 0.9),2);
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-            Assert.fail("Failed to find IB Bar on screen");
-        }
-        finally {
-            SystemActions.killProcess(Processes.BUILDMONITOR);
-        }
+        client.verifyMonitorBarPattern(ibMonBarPattern);
+        SystemActions.killProcess(Processes.BUILDMONITOR);
     }
 
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring(){
         winService.runCommandDontWaitForTermination(IbLocations.BUILDHISTORY);
-        try {
-            screen.wait(historyPattern.similar((float) 0.8),2);
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-            Assert.fail("Failed to find matching history/project color on screen");
-        }
-        finally {
-            SystemActions.killProcess(Processes.BUILDHISTORY);
-        }
+        client.verifyHistoryColoringPattern(historyPattern);
+        SystemActions.killProcess(Processes.BUILDHISTORY);
     }
 
     @Test(testName = "Verify Projects Tab Coloring")
@@ -83,15 +59,9 @@ public class UIValidationsTests extends UIValidationTestBase {
         });
 
         winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
-        try {
-            screen.wait(Monitor.Tabs.Projects.similar((float) 0.8),2).click();
-            screen.wait(progressPattern.similar((float) 0.9),2);
-        } catch (FindFailed findFailed) {
-            Assert.fail(findFailed.getMessage());
-        }
-        finally {
-            SystemActions.killProcess(Processes.BUILDMONITOR);
-        }
+        client.clickProjectsTab();
+        client.verifyProjectsTabColoring(progressPattern);
+        SystemActions.killProcess(Processes.BUILDMONITOR);
     }
 
 

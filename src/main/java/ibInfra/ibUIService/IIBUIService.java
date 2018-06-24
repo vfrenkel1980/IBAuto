@@ -1,6 +1,7 @@
 package ibInfra.ibUIService;
 
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Pattern;
 
 public interface IIBUIService {
 
@@ -12,7 +13,7 @@ public interface IIBUIService {
 
     String getIbSetupInstallation(String version);
 
-    public interface IInstaller{
+    interface IInstaller{
 
         void clickNext() throws FindFailed;
 
@@ -58,5 +59,20 @@ public interface IIBUIService {
 
         void clickExit() throws FindFailed;
 
+    }
+
+    interface IClient{
+
+        void verifyVSBarPattern(Pattern pat);
+
+        void verifyTrayIconPattern(Pattern pat);
+
+        void verifyMonitorBarPattern(Pattern pat);
+
+        void verifyHistoryColoringPattern(Pattern pat);
+
+        void verifyProjectsTabColoring(Pattern pat);
+
+        void clickProjectsTab();
     }
 }

@@ -10,8 +10,8 @@ import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Pattern;
@@ -20,7 +20,6 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -36,16 +35,18 @@ public class UIValidationTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
-    public Screen screen = new Screen();
-    public VSUIService vsuiService = new VSUIService();
+    private IBUIService ibuiService = new IBUIService();
+    protected IBUIService.Client client = ibuiService.new Client();
+    protected Screen screen = new Screen();
+    protected VSUIService vsuiService = new VSUIService();
     protected String project = "";
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");
-    protected Pattern vsBarPattern = new Pattern();
-    protected Pattern trayIconPattern = new Pattern();
-    protected Pattern ibMonBarPattern = new Pattern();
-    protected Pattern historyPattern = new Pattern();
-    protected Pattern progressPattern = new Pattern();
+    public Pattern vsBarPattern = new Pattern();
+    public Pattern trayIconPattern = new Pattern();
+    public Pattern ibMonBarPattern = new Pattern();
+    public Pattern historyPattern = new Pattern();
+    public Pattern progressPattern = new Pattern();
 
 
     static {

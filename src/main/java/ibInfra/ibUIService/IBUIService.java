@@ -2,10 +2,12 @@ package ibInfra.ibUIService;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
+import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
 import java.io.File;
@@ -43,11 +45,13 @@ public class IBUIService implements IIBUIService {
         File[] listOfFiles = folder.listFiles();
         String fileName = "";
 
-        for (File listOfFile : listOfFiles) {
-            if (listOfFile.isFile() && listOfFile.getName().contains("ibenterprise")) {
-                fileName = listOfFile.getAbsolutePath();
+        for (File file : listOfFiles) {
+            if (file.isFile() && file.getName().contains("ibenterprise")) {
+                fileName = file.getAbsolutePath();
             }
         }
+        if (fileName.equals(""))
+            test.log(Status.WARNING, "Ent installation file is missing from folder");
         return fileName;
     }
 
@@ -200,6 +204,69 @@ public class IBUIService implements IIBUIService {
         public void clickExit() throws FindFailed {
             test.log(Status.INFO, "Clicking Exit");
             screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),2).click();
+        }
+    }
+
+    public class Client implements IClient{
+
+        @Override
+        public void verifyVSBarPattern(Pattern pat) {
+            test.log(Status.INFO, "Looking for VS Bar");
+            try {
+                screen.wait(pat.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
+        public void verifyTrayIconPattern(Pattern pat) {
+            test.log(Status.INFO, "Looking for Tray Icon");
+            try {
+                screen.wait(pat.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
+        public void verifyMonitorBarPattern(Pattern pat) {
+            test.log(Status.INFO, "Looking for Monitor Bar");
+            try {
+                screen.wait(pat.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find Monitor Bar with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
+        public void verifyHistoryColoringPattern(Pattern pat) {
+            test.log(Status.INFO, "Looking for History Coloring");
+            try {
+                screen.wait(pat.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find History coloring with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
+        public void verifyProjectsTabColoring(Pattern pat) {
+            test.log(Status.INFO, "Looking for Project Color Bar");
+            try {
+                screen.wait(pat.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find Project Color Bar with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
+        public void clickProjectsTab() {
+            test.log(Status.INFO, "Looking for Projects Tab");
+            try {
+                screen.wait(Monitor.Tabs.Projects.similar((float) 0.9),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
+            }
         }
     }
 
