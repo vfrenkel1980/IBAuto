@@ -258,7 +258,7 @@ public class IBUIService implements IIBUIService {
         public void clickProjectsTab() {
             test.log(Status.INFO, "Looking for Projects Tab");
             try {
-                screen.wait(Monitor.Tabs.Projects.similar((float) 0.7),2).click();
+                screen.wait(Monitor.Tabs.Projects.similar((float) 0.5),2).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
                 Assert.fail();

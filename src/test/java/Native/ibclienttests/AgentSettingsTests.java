@@ -94,6 +94,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
         setRegistry("2", "BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS);
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        SystemActions.sleep(10);
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(TestProjects.TEST_PROJ, ProjectsCommands.REBUILD) + " /out=" + Locations.OUTPUT_LOG_FILE);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.MAX_ALLOWED_BUILDS), "Max allowed builds did not appear in the log");
     }
