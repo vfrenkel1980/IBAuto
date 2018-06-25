@@ -34,7 +34,7 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         SystemActions.sleep(2);
         try {
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
-            SystemActions.sleep(5);
+            SystemActions.sleep(10);
             result = ibService.findValueInPacketLog("ExitCode ");
         } catch (IOException e) {
             test.log(Status.WARNING, e.getMessage());
