@@ -126,7 +126,6 @@ public class VSUIService implements IVSUIService {
             driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
-        SystemActions.sleep(2);
     }
 
     @Override
