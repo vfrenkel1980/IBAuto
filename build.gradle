@@ -19,6 +19,7 @@ repositories {
 def UI = project.hasProperty("UI")
 def BatmanSim = project.hasProperty("BatmanSim")
 def VmSim = project.hasProperty("VmSim")
+def RobinSim = project.hasProperty("RobinSim")
 def LinuxCL = project.hasProperty("LinuxCL")
 def LinuxMultiBuild = project.hasProperty("LinuxMultiBuild")
 def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
@@ -90,8 +91,12 @@ test {
         if(BatmanSim) {
             suites "src/test/resources/BatmanSim.xml"
         }
+
         if(VmSim) {
             suites "src/test/resources/VmSim.xml"
+        }
+        if(RobinSim) {
+            suites "src/test/resources/RobinSim.xml"
         }
 
         if(LinuxCL) {

@@ -12,26 +12,26 @@
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="Native.windowstests.BatmanVC15PreviewTests" />
-            <class name ="Native.windowstests.BatmanVC15Tests" />
-            <class name ="Native.windowstests.BatmanVC14Tests" />
-            <class name ="Native.windowstests.BatmanVC12Tests" />
-            <class name ="Native.windowstests.BatmanVC11Tests" />
-            <class name ="Native.windowstests.BatmanMiscProjTests" />
+            <class name ="Native.windowstests.batman.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC15Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC14Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC12Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC11Tests" />
+            <class name ="Native.windowstests.batman.BatmanMiscProjTests" />
         </classes>
     </test>
 
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="Native.windowstests.BatmanVC15PreviewTests" />
-            <class name ="Native.windowstests.BatmanVC15Tests" />
-            <class name ="Native.windowstests.BatmanVC14Tests" />
-            <class name ="Native.windowstests.BatmanVC12Tests" />
-            <class name ="Native.windowstests.BatmanVC11Tests" />
-            <class name ="Native.windowstests.GeneralWinTests" />
-            <class name ="Native.windowstests.BatmanMiscProjTests" />
-            <class name ="Native.windowstests.BatmanExitCodeTests" />
+            <class name ="Native.windowstests.batman.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC15Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC14Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC12Tests" />
+            <class name ="Native.windowstests.batman.BatmanVC11Tests" />
+            <class name ="Native.windowstests.batman.GeneralWinTests" />
+            <class name ="Native.windowstests.batman.BatmanMiscProjTests" />
+            <class name ="Native.windowstests.batman.BatmanExitCodeTests" />
         </classes>
     </test>
 

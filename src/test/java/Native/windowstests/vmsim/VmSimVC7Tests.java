@@ -1,4 +1,4 @@
-package Native.windowstests;
+package Native.windowstests.vmsim;
 
 import frameworkInfra.testbases.VmSimTestBase;
 import org.testng.Assert;

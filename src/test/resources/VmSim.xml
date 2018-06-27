@@ -12,24 +12,24 @@
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="Native.windowstests.VmSimVC6Tests" />
-            <class name ="Native.windowstests.VmSimVC7Tests" />
-            <class name ="Native.windowstests.VmSimVC8Tests" />
-            <class name ="Native.windowstests.VmSimVC9Tests" />
-            <class name ="Native.windowstests.VmSimVC10Tests" />
-            <class name ="Native.windowstests.VmSimVC11Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC6Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC7Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC8Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC9Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC10Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC11Tests" />
         </classes>
     </test>
 
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="Native.windowstests.VmSimVC6Tests" />
-            <class name ="Native.windowstests.VmSimVC7Tests" />
-            <class name ="Native.windowstests.VmSimVC8Tests" />
-            <class name ="Native.windowstests.VmSimVC9Tests" />
-            <class name ="Native.windowstests.VmSimVC10Tests" />
-            <class name ="Native.windowstests.VmSimVC11Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC6Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC7Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC8Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC9Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC10Tests" />
+            <class name ="Native.windowstests.vmsim.VmSimVC11Tests" />
         </classes>
     </test>
 </suite>

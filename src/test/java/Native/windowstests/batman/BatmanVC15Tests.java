@@ -1,4 +1,4 @@
-package Native.windowstests;
+package Native.windowstests.batman;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
@@ -45,8 +45,8 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
             test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
             throw new SkipException("Skipped test");
         }
-        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_CLEAN);
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_RELEASE_BUILD);
+        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 

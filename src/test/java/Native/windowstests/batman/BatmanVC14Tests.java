@@ -1,4 +1,4 @@
-package Native.windowstests;
+package Native.windowstests.batman;
 
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.RegistryService;

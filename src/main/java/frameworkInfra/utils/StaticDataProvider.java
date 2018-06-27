@@ -104,11 +104,12 @@ public class StaticDataProvider {
 
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
-            public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " +Locations.QA_ROOT +"\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
-            public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" +Locations.QA_ROOT +"\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
+            public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
+            public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
         }
+
         public static class EXITCODEBASE {
             public static final String PROJECTVC15_RELEASE_X64 = IbLocations.BUILD_CONSOLE + TestProjects.VC15PROJECT + " /rebuild /cfg=\"release|x64\" /nowait  /exitcodebase=1000000000000";
             public static final String PROJECTVC10_DEBUG_WIN32 = IbLocations.BUILD_CONSOLE + TestProjects.VC10PROJECT + " /rebuild /cfg=\"debug|win32\" /nowait /exitcodebase=-8";
@@ -387,9 +388,17 @@ public class StaticDataProvider {
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
         }
 
-        public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
-        public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
+        public static class CHROME_BATMAN {
+            public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Default -t clean";
+            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
+        }
+
+        public static class CHROME_ROBIN {
+            public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Release -t clean";
+            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /Title=ChromiumVsCLang";
+        }
     }
+
 
     //registry keys
     public static class RegistryKeys {
