@@ -3,14 +3,18 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.jcraft.jsch.JSchException;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.XmlParser;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
@@ -19,7 +23,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
     private static List<String> otherGridIPList;
-
+    private String firstBuild = "";
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
 
@@ -37,6 +41,8 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+
+        firstBuild = getFirstBuild(ipList.get(1));
     }
 
     @BeforeClass
@@ -102,13 +108,36 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
             }
         }
 
-        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_APACHE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_CMAKE_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_GIT_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
 
         extent.flush();
         log.info("finished after class");
     }
+
+    @AfterSuite
+    public void afterSuite() throws JSchException {
+        test = extent.createTest("AFTER SUITE");
+        test.assignCategory("AFTER SUITE");
+        test.log(Status.INFO, "AFTER SUITE" + " test started");
+        boolean isFailed;
+
+        String suiteLastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
+        String output = "res" + dateFormat.format(calendar.getTime());
+        linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output , ipList.get(1));
+        linuxService.getFile(ipList.get(1), "/home/xorex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
+
+        List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\");
+        for (String file: files ) {
+            isFailed = Parser.doesFileContainString(file, "ErrorMessages:");
+            if (isFailed)
+                test.log(Status.WARNING, "Errors found in " + file);
+        }
+    }
+
+
 
 }

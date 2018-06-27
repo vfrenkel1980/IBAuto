@@ -1,10 +1,7 @@
 package ibInfra.linuxcl;
 
 import com.aventstack.extentreports.Status;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
+import com.jcraft.jsch.*;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
@@ -34,7 +31,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setPassword("xoreax");
             session.connect();
             if (test != null) {
-                test.log(Status.INFO, "Successfully connected to " + hostIP);
+                test.log(Status.INFO,"is server connected? " + session.isConnected());
                 test.log(Status.INFO, "Running command " + command);
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
@@ -72,7 +69,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setPassword("xoreax");
             session.connect();
             if (test != null) {
-                test.log(Status.INFO, "Successfully connected to " + hostIP);
+                test.log(Status.INFO,"is server connected? " + session.isConnected());
                 test.log(Status.INFO, "Running command " + command);
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
@@ -97,6 +94,44 @@ public class LinuxService extends TestBase implements ILinuxService {
             return "Unable to get result output from command " + command;
         }
     }
+
+    public void getFile(String hostname, String copyFrom, String copyTo)
+            throws JSchException {
+        JSch jsch = new JSch();
+        Session session = null;
+        session = jsch.getSession("xoreax", hostname, 22);
+        session.setConfig("StrictHostKeyChecking", "no");
+        session.setPassword("xoreax");
+        session.connect();
+        test.log(Status.INFO,"is server connected? " + session.isConnected());
+
+        Channel channel = session.openChannel("sftp");
+        channel.connect();
+        ChannelSftp sftpChannel = (ChannelSftp) channel;
+        try {
+            sftpChannel.get(copyFrom, copyTo, monitor, ChannelSftp.OVERWRITE);
+        } catch (SftpException e) {
+            test.log(Status.INFO,"file was not found: " + copyFrom);
+        }
+        sftpChannel.exit();
+        session.disconnect();
+        test.log(Status.INFO,"Finished getting file from Linux Server...");
+    }
+
+    private final static SftpProgressMonitor monitor = new SftpProgressMonitor() {
+        public void init(final int op, final String source, final String target, final long max) {
+            log.info("sftp start uploading file from:" + source + " to:" + target);
+        }
+
+        public boolean count(final long count) {
+            log.debug("sftp sending bytes: " + count);
+            return true;
+        }
+
+        public void end() {
+            log.info("sftp uploading is done.");
+        }
+    };
 
     @Override
     public void deleteLogsFolder(List<String> ipList) {

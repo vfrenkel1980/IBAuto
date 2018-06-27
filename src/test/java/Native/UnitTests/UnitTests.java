@@ -1,14 +1,16 @@
 package Native.UnitTests;
 
-import frameworkInfra.utils.PostgresJDBC;
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import com.jcraft.jsch.JSchException;
+import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
+import ibInfra.linuxcl.LinuxService;
 import ibInfra.vs.VSUIService;
+import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -33,12 +35,18 @@ public class UnitTests{
 
     @Test(testName = "test2")
     public void test2(){
-        Assert.fail("this is failed");
+        IbService ibService = new IbService();
+        ibService.unloadIbLicense();
     }
 
     @Test(testName = "test3")
     public void test3() {
-        String expected = PostgresJDBC.getLastValueFromTable("192.168.10.16", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status", "id");
-        System.out.println(expected);
+        LinuxService linuxService = new LinuxService();
+        String lastBuild = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY,"192.168.11.118");
+        lastBuild = lastBuild.replace("\n","");
+        int firstBuild = Integer.parseInt(lastBuild) + 1;
+        lastBuild = String.valueOf(firstBuild);
+        System.out.println(lastBuild);
+
     }
 }

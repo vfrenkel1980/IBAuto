@@ -15,9 +15,10 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
     //private String command;
     private String machine;
     private int cycles;
-    private static int activProjects[]= new int[9];
+    private static int activeProjects[]= new int[9];
     private static Random rand = new Random();
     private int randIndex =-1;
+
     public LinuxMultiThreaded ( String machine, int cycles){//(String command, String machine, int cycles){
         this.machine = machine;
         this.cycles = cycles;
@@ -28,7 +29,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
         int exitCode;
         for (int i = 0 ; i < cycles ; i++) {
             test.log(Status.INFO, "starting cycle " +i );
-            String command="";
+            String command = "";
 
             if(linuxService.isLinuxOSUbuntu(machine)) {
 
@@ -37,9 +38,9 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                         do {
                             randIndex = rand.nextInt(9);
                         }
-                        while (activProjects[randIndex] == 1);
+                        while (activeProjects[randIndex] == 1);
 
-                        activProjects[randIndex] = 1;
+                        activeProjects[randIndex] = 1;
                     }
                 }
                 else if (testNum == TestNum.MultiIn)
@@ -112,7 +113,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
 
             if (testNum == TestNum.MultiBuild) {
                 synchronized (this) {
-                    activProjects[randIndex] = 0;
+                    activeProjects[randIndex] = 0;
                 }
             }
         }

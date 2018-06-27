@@ -38,7 +38,7 @@ public class LinuxTestBase extends TestBase{
     protected static String ibVersion = "";
     public LinuxService linuxService = new LinuxService();
 
-    protected Calendar calendar = Calendar.getInstance();
+    public Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
 
     @BeforeSuite
@@ -65,5 +65,11 @@ public class LinuxTestBase extends TestBase{
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
     }
 
+    public String getFirstBuild(String host){
+        String lastBuild = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, host);
+        lastBuild = lastBuild.replace("\n","");
+        int firstBuild = Integer.parseInt(lastBuild) + 1;
+        return String.valueOf(firstBuild);
+    }
 }
 

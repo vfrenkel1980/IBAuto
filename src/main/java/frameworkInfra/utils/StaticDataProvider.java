@@ -37,6 +37,7 @@ public class StaticDataProvider {
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
         public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
         public static final String SECOND_INITIATOR_LOG_PATH = Locations.QA_ROOT + "\\second_initiator_output\\";
+        public static final String LINUX_SCRIPT_OUTPUT = Locations.QA_ROOT + "\\Script_Output\\";
     }
 
     public static class URL {
