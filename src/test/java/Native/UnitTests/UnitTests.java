@@ -34,9 +34,9 @@ public class UnitTests{
     }
 
     @Test(testName = "test2")
-    public void test2(){
-        IbService ibService = new IbService();
-        ibService.unloadIbLicense();
+    public void test2() throws JSchException {
+        LinuxService linuxService = new LinuxService();
+        linuxService.getFile("192.168.10.123", "/home/xoreax/res29_06_2018_192.168.10.123", "x:\\");
     }
 
     @Test(testName = "test3")
