@@ -256,6 +256,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void clickProjectsTab() {
+            SystemActions.sleep(3);
             test.log(Status.INFO, "Looking for Projects Tab");
             try {
                 screen.wait(Monitor.Tabs.Projects.similar((float) 0.8),2).click();

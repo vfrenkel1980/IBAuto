@@ -84,8 +84,6 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public void loadIbLicense(String license) {
-        if (isLicenseLoaded())
-            unloadIbLicense();
         winService.runCommandDontWaitForTermination(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
         SystemActions.sleep(5);
         SystemActions.killProcess("XLicProc.exe");
