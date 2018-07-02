@@ -41,6 +41,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        SystemActions.deleteFilesByPrefix(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\", "res");
 
         firstBuild = getFirstBuild(ipList.get(1));
     }
@@ -127,7 +128,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         String suiteLastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res" + dateFormat.format(calendar.getTime());
-        linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output , ipList.get(1));
+        linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output + "; exit 0" , ipList.get(1));
         linuxService.getFile(ipList.get(1), "/home/xorex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\");
@@ -137,7 +138,4 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
                 test.log(Status.WARNING, "Errors found in " + file);
         }
     }
-
-
-
 }

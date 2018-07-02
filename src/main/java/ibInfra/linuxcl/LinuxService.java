@@ -104,16 +104,16 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setConfig("StrictHostKeyChecking", "no");
             session.setPassword("xoreax");
             session.connect();
-            //test.log(Status.INFO, "Connected to server " + hostname);
+            test.log(Status.INFO, "Connected to server " + hostname);
 
             Channel channel = session.openChannel("sftp");
             channel.connect();
             ChannelSftp sftpChannel = (ChannelSftp) channel;
             try {
                 sftpChannel.get(copyFrom, copyTo, monitor, ChannelSftp.OVERWRITE);
-                //test.log(Status.INFO, "Finished getting file from Linux Server...");
+                test.log(Status.INFO, "Finished getting file from Linux Server...");
             } catch (SftpException e) {
-                //test.log(Status.INFO, "file was not found: " + copyFrom);
+                test.log(Status.INFO, "file was not found: " + copyFrom);
             }
             sftpChannel.exit();
             session.disconnect();

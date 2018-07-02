@@ -50,6 +50,8 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
 
+        SystemActions.deleteFilesByPrefix(Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\", "res");
+
         for (int i = 1 ; i < 5 ; i++){
             firstBuilds.add(getFirstBuild(ipList.get(i)));
         }
