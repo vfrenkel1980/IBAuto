@@ -26,7 +26,7 @@ public interface IIBService {
 
     static int getIbVersion() {
         int version = 0;
-        if (RegistryService.doesValueExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION)) {
+        if (RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT)) {
             String regVersion = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.VERSION);
             version = Integer.parseInt(regVersion);
             version -= 1001000;

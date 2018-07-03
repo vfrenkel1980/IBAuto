@@ -54,9 +54,9 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         setCustomStepSupportRegistry("0");
         addFlagsRegKeyValue("All");
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.PROJECTVC10_CUSTOMSTEP_SUCCESS);
-        Assert.assertTrue(returnCode == 0, "customStepOffSuccessTest failed with return code " + returnCode);
         removeFlagsRegKeyValue("All");
         setCustomStepSupportRegistry("1");
+        Assert.assertTrue(returnCode == 0, "customStepOffSuccessTest failed with return code " + returnCode);
     }
 
     @Test(testName = "IBCustomStep OFF Failed Test")
@@ -64,9 +64,9 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         setCustomStepSupportRegistry("0");
         addFlagsRegKeyValue("All");
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.PROJECTVC15_CUSTOMSTEP_FAIL);
-        Assert.assertTrue(returnCode == 1, "customStepOffFailTest failed with return code " + returnCode);
         removeFlagsRegKeyValue("All");
         setCustomStepSupportRegistry("1");
+        Assert.assertTrue(returnCode == 1, "customStepOffFailTest failed with return code " + returnCode);
     }
 
 
