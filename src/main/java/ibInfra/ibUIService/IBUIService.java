@@ -73,7 +73,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void acceptTerms() throws FindFailed {
             test.log(Status.INFO, "Clicking Accept terms");
-            screen.wait(IBInstaller.TermsUncheckCB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.TermsUncheckCB.similar((float) 0.5),5).click();
         }
 
         @Override
@@ -91,26 +91,26 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckRemoteUpdate() throws FindFailed {
             test.log(Status.INFO, "Removing Remote update CB");
-            screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8),2).click();
+            screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8),5).click();
         }
 
         @Override
         public void installNewCoordinator() throws FindFailed {
             test.log(Status.INFO, "Selecting \"install new coordinator\"");
-            screen.wait(IBInstaller.NewCoordinatorRB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.NewCoordinatorRB.similar((float) 0.5),5).click();
         }
 
         @Override
         public void changeInstallationPath(String path) throws FindFailed {
             test.log(Status.INFO, "Changing installation path to: " + path);
-            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.5),5).click();
             screen.type(path);
         }
 
         @Override
         public void uncheckEnvVar() throws FindFailed {
             test.log(Status.INFO, "Removing Env Vars CB");
-            screen.wait(IBInstaller.EnvVarCB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.EnvVarCB.similar((float) 0.5),5).click();
         }
 
         @Override
@@ -121,13 +121,14 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void browseLicenseNavigateToDesktop() throws FindFailed {
-            screen.wait(IBInstaller.DesktopTabBTN.similar((float) 0.8),2).click();
+            test.log(Status.INFO, "Clicking on Desktop tab");
+            screen.wait(IBInstaller.DesktopTabBTN.similar((float) 0.8),5).click();
         }
 
         @Override
         public void selectLicense() throws FindFailed {
             test.log(Status.INFO, "Selecting license");
-            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7),2).doubleClick();
+            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7),5).doubleClick();
             screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5),10).click();
             test.log(Status.INFO, "License selected");
         }
@@ -135,7 +136,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectCoordinator(String coordName) throws FindFailed {
             test.log(Status.INFO, "Selecting existing coordinator");
-            screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.5),5).click();
             screen.type(coordName);
             SystemActions.sleep(2);
         }
@@ -143,24 +144,24 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectUninstall() throws FindFailed {
             test.log(Status.INFO, "Selecting uninstall");
-            screen.wait(IBInstaller.UninstallRB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.UninstallRB.similar((float) 0.7),5).click();
         }
 
         @Override
         public void selectManualHelperPorts() throws FindFailed {
             test.log(Status.INFO, "Selecting manual ports");
-            screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.7),2).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),2).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),2).type(InstallationPorts.AGENT_PORT);
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.7),2).click();
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4),2).type(InstallationPorts.HELPER_PORT);
+            screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.7),5).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),5).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7),5).type(InstallationPorts.AGENT_PORT);
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.7),5).click();
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4),5).type(InstallationPorts.HELPER_PORT);
         }
 
         @Override
         public void selectManualCoordPort() throws FindFailed {
             test.log(Status.INFO, "Selecting manual coordinator ports");
-            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9),2).click();
-            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4),2).type(InstallationPorts.COORDINATOR_PORT);
+            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9),5).click();
+            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4),5).type(InstallationPorts.COORDINATOR_PORT);
         }
 
         @Override
@@ -172,26 +173,26 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckCreateEntShortcut() throws FindFailed {
             test.log(Status.INFO, "Removing \"Create Ent. shortcut\" CB");
-            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.7),5).click();
         }
 
         @Override
         public void selectDowngrade() throws FindFailed {
             test.log(Status.INFO, "Selecting downgrade option");
-            screen.wait(IBInstaller.DowngradeToProRB.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.DowngradeToProRB.similar((float) 0.7),5).click();
         }
 
         @Override
         public void changeDashboardPort() throws FindFailed {
             test.log(Status.INFO, "Selecting manual dashboard ports");
-            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9),2).click();
-            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.4),2).type(InstallationPorts.DASHBOARD_PORT);
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9),5).click();
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.4),5).type(InstallationPorts.DASHBOARD_PORT);
         }
 
         @Override
         public void changeEntInstallationLocation(String path) throws FindFailed {
             test.log(Status.INFO, "Changing Enterprise installation path to: " + path);
-            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5),2).click();
+            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5),5).click();
             screen.type(path);
         }
 
@@ -204,7 +205,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickExit() throws FindFailed {
             test.log(Status.INFO, "Clicking Exit");
-            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),2).click();
+            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),5).click();
         }
     }
 
@@ -214,7 +215,7 @@ public class IBUIService implements IIBUIService {
         public void verifyVSBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for VS Bar");
             try {
-                screen.wait(pat.similar((float) 0.9),2);
+                screen.wait(pat.similar((float) 0.9),5);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -225,7 +226,7 @@ public class IBUIService implements IIBUIService {
         public void verifyTrayIconPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Tray Icon");
             try {
-                screen.wait(pat.similar((float) 0.8),2);
+                screen.wait(pat.similar((float) 0.8),5);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -236,7 +237,7 @@ public class IBUIService implements IIBUIService {
         public void verifyMonitorBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Monitor Bar");
             try {
-                screen.wait(pat.similar((float) 0.9),2);
+                screen.wait(pat.similar((float) 0.9),5);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Monitor Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -247,7 +248,7 @@ public class IBUIService implements IIBUIService {
         public void verifyHistoryColoringPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for History Coloring");
             try {
-                screen.wait(pat.similar((float) 0.6),2);
+                screen.wait(pat.similar((float) 0.6),5);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find History coloring with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -259,7 +260,7 @@ public class IBUIService implements IIBUIService {
             SystemActions.sleep(3);
             test.log(Status.INFO, "Looking for Projects Tab");
             try {
-                screen.wait(Monitor.Tabs.Projects.similar((float) 0.8),2).click();
+                screen.wait(Monitor.Tabs.Projects.similar((float) 0.8),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -270,7 +271,7 @@ public class IBUIService implements IIBUIService {
         public void verifyProjectsTabColoring(Pattern pat) {
             test.log(Status.INFO, "Looking for Project Color Bar");
             try {
-                screen.wait(pat.similar((float) 0.9),2);
+                screen.wait(pat.similar((float) 0.9),5);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Project Color Bar with error: " + findFailed.getMessage());
                 Assert.fail();
