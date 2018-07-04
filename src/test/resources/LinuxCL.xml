@@ -26,7 +26,7 @@
     <test name="Cycle 3" allow-return-values="true">
         <parameter name="cycle" value="3"/>
         <classes>
-            <!--<class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" /> -->
             <class name ="Native.linuxtests.LinuxSimulationTests" />
         </classes>
     </test>
