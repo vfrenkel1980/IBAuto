@@ -104,7 +104,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         boolean objectMissing = false;
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
         winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
-        if (screen.exists(IBSettings.MultiBuildTab, 5) == null)
+        if (screen.exists(IBSettings.MultiBuildTab, 15) == null)
             objectMissing = true;
         SystemActions.killProcess(Processes.BUILDSETTINGS);
         ibService.loadIbLicense(IbLicenses.AGENT_SETTINGS_LIC);
@@ -116,7 +116,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         boolean objectExists = false;
         ibService.loadIbLicense(IbLicenses.AGENT_SETTINGS_LIC);
         winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
-        if (screen.exists(IBSettings.MultiBuildTab, 5) != null)
+        if (screen.exists(IBSettings.MultiBuildTab, 15) != null)
             objectExists = true;
         SystemActions.killProcess(Processes.BUILDSETTINGS);
         Assert.assertTrue(objectExists, "MultiBuild tab should not be displayed with PRO license");
