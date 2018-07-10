@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -27,16 +28,17 @@ public class LinuxTestBase extends TestBase{
 
     protected static List rawIpList;
     protected static List rawIpList2;
-    protected static List rawIpList3;
     protected static String className;
+    protected static String ENV = System.getProperty("env");
 
-   protected static LinuxSimTestBase.TestNum testNum;
+    protected static LinuxSimTestBase.TestNum testNum;
 
     public static List<String> ipList;
-    public static List<String> multiGridIPList;
+    static List<String> connectedMachinesToGrid;
     public static String buildID;
     protected static String ibVersion = "";
     public LinuxService linuxService = new LinuxService();
+    LinuxDBService linuxDBService = new LinuxDBService();
 
     public Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");

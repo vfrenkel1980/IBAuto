@@ -24,16 +24,22 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
 
     private static List<String> otherGridIPList;
     private String firstBuild = "";
+
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
-
-        rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
+        switch (ENV){
+            case "linuxsim2a":
+                rawIpList = XmlParser.getIpList("MultiBuild IP list.xml");
+                rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
+                break;
+            case "linuxsim2b":
+                rawIpList = XmlParser.getIpList("Secondary MultiBuild IP list.xml");
+                rawIpList2 = XmlParser.getIpList("Secondary MultiInitiators IP list.xml");
+                break;
+        }
         ipList = XmlParser.breakDownIPList(rawIpList);
         testNum = TestNum.MultiBuild;
-        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
-        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
 
-        rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
 
@@ -56,7 +62,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         /*log.info("starting delete logs folder");
-        linuxService.deleteLogsFolder(multiGridIPList);
+        linuxService.deleteLogsFolder(connectedMachinesToGrid);
         log.info("finished delete logs folder");*/
 
         if(!linuxService.isIBServiceUp( ipList.get(0))) {
@@ -125,11 +131,11 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         test.log(Status.INFO, "AFTER SUITE" + " test started");
         boolean isFailed;
 
-        String suiteLastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1));
+        String suiteLastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1)).replaceAll("\n","");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res" + dateFormat.format(calendar.getTime());
         linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output + "; exit 0" , ipList.get(1));
-        linuxService.getFile(ipList.get(1), "/home/xorex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
+        linuxService.getFile(ipList.get(1), "/home/xoraex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\");
         for (String file: files ) {

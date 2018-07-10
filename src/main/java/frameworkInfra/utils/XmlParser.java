@@ -12,7 +12,7 @@ import java.util.List;
 
 public class XmlParser {
 
-    public static List<String> getIpList(String listFile){
+    public static List getIpList(String listFile){
 
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(System.getProperty("user.dir") + "/src/main/resources/Machines/" + listFile);
@@ -20,9 +20,7 @@ public class XmlParser {
         try {
             Document document = (Document) builder.build(xmlFile);
             Element rootNode = document.getRootElement();
-            List list = rootNode.getChildren("ip");
-
-            return list;
+            return rootNode.getChildren("ip");
 
         } catch (IOException | JDOMException io) {
             System.out.println(io.getMessage());

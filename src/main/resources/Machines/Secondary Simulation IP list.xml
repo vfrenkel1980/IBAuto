@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <IP_Addresses>
-   <ip> l1a-u14-coor </ip>
-   <ip> l1a-u12-init </ip>
+   <ip> l1b-u14-coor </ip>
+   <ip> l1b-u12-init </ip>
 
    <ip> 192.168.10.193 </ip> <!--docker-->
 
-   <ip> l1a-u14-h1 </ip>
-   <ip> l1a-cen7-h2 </ip>
-   <ip> l1a-Cen65-h3 </ip>
-   <ip> l1a-U12-h4 </ip>
+   <ip> l1b-cen65-h1 </ip>
+   <ip> l1b-u12-h2 </ip>
+   <ip> l1b-cen7-h3 </ip>
+   <ip> l1b-u14-h4 </ip>
 <!--	<ip> 192.168.11.26 </ip>
 	<ip> 192.168.11.103 </ip>-->
 </IP_Addresses>

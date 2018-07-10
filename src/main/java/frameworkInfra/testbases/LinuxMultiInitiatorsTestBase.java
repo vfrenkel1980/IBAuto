@@ -34,16 +34,23 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
-
-        rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
+        switch (ENV){
+            case "linuxsim2a":
+                rawIpList = XmlParser.getIpList("MultiInitiators IP list.xml");
+                rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
+                break;
+            case "linuxsim2b":
+                rawIpList = XmlParser.getIpList("Secondary MultiInitiators IP list.xml");
+                rawIpList2 = XmlParser.getIpList("Secondary MultiBuild IP list.xml");
+                break;
+        }
         ipList = XmlParser.breakDownIPList(rawIpList);
         testNum = TestNum.MultiIn;
-        rawIpList3 = XmlParser.getIpList("MultiGridIPs.xml");
-        multiGridIPList = XmlParser.breakDownIPList(rawIpList3);
 
-        rawIpList2 = XmlParser.getIpList("MultiBuild IP list.xml");
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
+
+        connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
 
         ibVersion = getIBVersion();
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
@@ -63,8 +70,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-
-        linuxService.deleteLogsFolder(multiGridIPList);
+        linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
         if(!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");

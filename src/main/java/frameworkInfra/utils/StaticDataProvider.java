@@ -485,7 +485,6 @@ public class StaticDataProvider {
     public static class LinuxCommands {
         public static final String PLINK = "plink -pw xoreax xoreax@";
         public static final String KILL_IB_DB_CHECK = "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
-        // public static final String GET_OS =  "lsb_release -d| awk \' {print $2} \'";
         public static final String GET_OS = "cat /proc/version";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep ib_server | grep -v \"grep\"\"";
@@ -495,6 +494,12 @@ public class StaticDataProvider {
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
         public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
+    }
+
+    public static class LinuxDB {
+        public static final String DB_COORD_REPORT= "incredibuildCoordinatorReport.db";
+        public static final String COLUMN_MACHINE = "MachineName";
+        public static final String TABLE_HELPER_MACHINES = "HelperMachines_Monitor";
     }
 
     public static class WindowsMachines {

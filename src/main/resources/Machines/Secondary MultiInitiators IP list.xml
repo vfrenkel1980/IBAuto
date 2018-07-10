@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<IP_Addresses>
+
+    <ip>l2b-u14-coor</ip>
+
+    <ip>l2b-u12-mi1</ip>
+    <ip>l2b-u12-mi2</ip>
+    <ip>l2b-cen65-mi3</ip>
+    <ip>l2b-cen65-mi4</ip>
+
+    <ip>l2b-u12-h1</ip>
+    <ip>l2b-u16-h2</ip>
+    <ip>l2b-cen7-h3</ip>
+
+</IP_Addresses>

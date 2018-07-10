@@ -5,11 +5,13 @@ import com.jcraft.jsch.*;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.windowscl.WindowsService;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import org.apache.commons.collections4.list.SetUniqueList;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -93,6 +95,41 @@ public class LinuxService extends TestBase implements ILinuxService {
             e.printStackTrace();
             return "Unable to get result output from command " + command;
         }
+    }
+
+    @Override
+    public List<String> linuxRunSSHCommandAssignToList(String command, String hostIP) {
+        JSch jsch = new JSch();
+        Session session;
+        List<String> output = SetUniqueList.setUniqueList(new ArrayList<String>());
+        try {
+            session = jsch.getSession("xoreax", hostIP, 22);
+            session.setConfig("StrictHostKeyChecking", "no");
+            //Set password
+            session.setPassword("xoreax");
+            session.connect();
+            if (test != null) {
+                test.log(Status.INFO,"Connected to server " + hostIP);
+                test.log(Status.INFO, "Running command " + command);
+            }
+            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand(command);
+            channelExec.connect();
+
+            InputStream in = channelExec.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.add(line);
+            }
+            channelExec.disconnect();
+        } catch (JSchException | IOException e) {
+            if (test !=null) {
+                test.log(Status.ERROR, "Connection error occurred");
+            }
+            e.printStackTrace();
+        }
+        return output;
     }
 
     public void getFile(String hostname, String copyFrom, String copyTo)
