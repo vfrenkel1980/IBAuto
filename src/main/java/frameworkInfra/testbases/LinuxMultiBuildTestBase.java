@@ -59,8 +59,6 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
 
-        rawIpList2 = XmlParser.getIpList("MultiInitiators IP list.xml");
-        otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         /*log.info("starting delete logs folder");
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
         log.info("finished delete logs folder");*/
