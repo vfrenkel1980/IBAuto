@@ -3,9 +3,9 @@ package Native.UnitTests;
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
 import ibInfra.ibService.IbService;
+import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import ibInfra.vs.VSUIService;
-import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,9 +34,19 @@ public class UnitTests{
     }
 
     @Test(testName = "test2")
-    public void test2() throws JSchException {
-        LinuxService linuxService = new LinuxService();
-        linuxService.getFile("192.168.10.123", "/home/xoreax/res29_06_2018_192.168.10.123", "x:\\");
+    public void test2(){
+        List newList = null;
+        /*LinuxService linuxService = new LinuxService();
+        newList = linuxService.linuxRunSSHCommandAssignToList("/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"SELECT MachineIP from HelperMachines_Monitor\"", "192.168.10.106");
+        for (Object aNewList : newList) {
+            System.out.println(aNewList);
+        }
+        System.out.println(linuxService.linuxRunSSHCommandOutputString("/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"SELECT MachineIP from HelperMachines_Monitor\"", "192.168.10.106"));*/
+        LinuxDBService linuxDBService = new LinuxDBService();
+        newList = linuxDBService.selectAll("incredibuildCoordinatorReport.db", "MachineIP", "HelperMachines_Monitor", "192.168.10.106");
+        for (Object aNewList : newList) {
+            System.out.println(aNewList);
+        }
     }
 
     @Test(testName = "test3")

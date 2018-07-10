@@ -70,6 +70,8 @@ public class LinuxTestBase extends TestBase{
     public String getFirstBuild(String host){
         String lastBuild = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, host);
         lastBuild = lastBuild.replace("\n","");
+        if (lastBuild.equals(""))
+            lastBuild = "0";
         int firstBuild = Integer.parseInt(lastBuild) + 1;
         return String.valueOf(firstBuild);
     }
