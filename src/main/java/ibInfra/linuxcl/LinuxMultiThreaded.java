@@ -8,6 +8,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
+import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
@@ -29,6 +30,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
         int exitCode;
         for (int i = 0 ; i < cycles ; i++) {
             test.log(Status.INFO, "starting cycle " +i );
+            log.info("starting cycle " +i);
             String command = "";
 
             if(linuxService.isLinuxOSUbuntu(machine)) {
@@ -123,5 +125,6 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
         } catch (InterruptedException e) {
             test.log(Status.WARNING, e.getMessage());
         }
+        extent.flush();
     }
 }
