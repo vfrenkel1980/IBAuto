@@ -51,6 +51,10 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         linuxService.killibDbCheck(ipList.get(1));
 
         connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
+        for (int i=0; i < connectedMachinesToGrid.size(); ++i) {
+            if (connectedMachinesToGrid.get(i).contains("."))
+                connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0,connectedMachinesToGrid.get(i).indexOf(".")));
+        }
 
         ibVersion = getIBVersion();
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");

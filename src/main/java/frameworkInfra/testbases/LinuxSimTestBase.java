@@ -43,6 +43,11 @@ public class LinuxSimTestBase extends LinuxTestBase {
         extent.attachReporter(htmlReporter);
         linuxService.killibDbCheck(ipList.get(1));
         connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
+        for (int i=0; i < connectedMachinesToGrid.size(); ++i) {
+            if (connectedMachinesToGrid.get(i).contains("."))
+                connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0,connectedMachinesToGrid.get(i).indexOf(".")));
+        }
+
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
         firstBuild = getFirstBuild(ipList.get(1));
 
