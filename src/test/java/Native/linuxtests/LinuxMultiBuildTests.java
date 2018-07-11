@@ -14,10 +14,10 @@ public class LinuxMultiBuildTests extends LinuxMultiBuildTestBase {
 
         ExecutorService execService = Executors.newFixedThreadPool(4);
 
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 2));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 2));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 2));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 2));
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
