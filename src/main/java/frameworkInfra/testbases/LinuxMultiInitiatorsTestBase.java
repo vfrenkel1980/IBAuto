@@ -118,10 +118,28 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
             test.log(Status.ERROR, err);
         }
 
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(1));
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GPSD_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";", ipList.get(2));
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(3));
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(4));
+        for (int i=1; i<5; ++i){
+            if(linuxService.isLinuxOSUbuntu(ipList.get(i))) {
+
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN , ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN, ipList.get(i));
+            }
+            else{
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GPSD_DIR + ";" + LinuxSimulation.SCONS_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA2_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+                linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL2_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
+            }
+        }
+
+
 
         extent.flush();
         log.info("finished after class");
