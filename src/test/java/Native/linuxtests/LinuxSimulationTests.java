@@ -137,5 +137,4 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";", ipList.get(1));
     }
-
 }

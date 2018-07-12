@@ -111,6 +111,16 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);
         }
+
+        String testsFileName = "ib_tests" + dateFormat.format(calendar.getTime());
+//        int exitCode = linuxService.linuxRunSSHCommand("cd /home/xoreax/ib_tests-1.0.0 && ./run_all_tests.bash /home/xoreax/ib_tests " + " > " + testsFileName, ipList.get(1));
+        String run_all_tests_output = linuxService.linuxRunSSHCommandOutputString("cd /home/xoreax/ib_tests-1.0.0 && ./run_all_tests.bash /home/xoreax/ib_tests" , ipList.get(1));
+
+        if (run_all_tests_output.toLowerCase().contains("abort") || run_all_tests_output.toLowerCase().contains("fail"))
+            test.log(Status.WARNING, "Errors found in " + testsFileName);
+
+//        linuxService.getFile(ipList.get(1), "/home/xoreax/" + testsFileName, Locations.LINUX_SCRIPT_OUTPUT  + testsFileName);
+
     }
 
 }

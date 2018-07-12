@@ -15,10 +15,10 @@ public class LinuxMultiInitiatorTests  extends LinuxMultiInitiatorsTestBase {
 
         ExecutorService execService = Executors.newFixedThreadPool(4);
 
-        execService.execute(new LinuxMultiThreaded(ipList.get(1), 20));
-        execService.execute(new LinuxMultiThreaded(ipList.get(2), 20));
-        execService.execute(new LinuxMultiThreaded(ipList.get(3), 20));
-        execService.execute(new LinuxMultiThreaded(ipList.get(4), 20));
+        execService.execute(new LinuxMultiThreaded(ipList.get(1), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(2), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(3), 250));
+        execService.execute(new LinuxMultiThreaded(ipList.get(4), 250));
 
         execService.shutdown();
         execService.awaitTermination(Long.MAX_VALUE, TimeUnit.MINUTES);
