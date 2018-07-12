@@ -120,7 +120,6 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 
         for (int i=1; i<5; ++i){
             if(linuxService.isLinuxOSUbuntu(ipList.get(i))) {
-
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN , ipList.get(i));
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
@@ -138,9 +137,6 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL2_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
             }
         }
-
-
-
         extent.flush();
         log.info("finished after class");
     }

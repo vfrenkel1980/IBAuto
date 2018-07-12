@@ -35,18 +35,8 @@ public class UnitTests{
 
     @Test(testName = "test2")
     public void test2(){
-        List newList = null;
-        /*LinuxService linuxService = new LinuxService();
-        newList = linuxService.linuxRunSSHCommandAssignToList("/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"SELECT MachineIP from HelperMachines_Monitor\"", "192.168.10.106");
-        for (Object aNewList : newList) {
-            System.out.println(aNewList);
-        }
-        System.out.println(linuxService.linuxRunSSHCommandOutputString("/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"SELECT MachineIP from HelperMachines_Monitor\"", "192.168.10.106"));*/
-        LinuxDBService linuxDBService = new LinuxDBService();
-        newList = linuxDBService.selectAll("incredibuildCoordinatorReport.db", "MachineIP", "HelperMachines_Monitor", "192.168.10.106");
-        for (Object aNewList : newList) {
-            System.out.println(aNewList);
-        }
+        LinuxService linuxService = new LinuxService();
+        System.out.println(linuxService.isLinuxOSUbuntu("l2a-cen65-mi4"));
     }
 
     @Test(testName = "test3")
