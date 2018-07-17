@@ -452,6 +452,7 @@ public class StaticDataProvider {
         public static final String UPDATE_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview update -p --norestart";
         public static final String MODIFY_PREVIEW_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
+        //public static final String COPY_FROM_LINUX_SERVER = "pscp -pw xoreax xoreax@%s:/home/xoreax/linuxrepo/ib_linux/VERSION " + Locations.QA_ROOT;
     }
 
     public static class MemoryThresholds {
@@ -494,12 +495,22 @@ public class StaticDataProvider {
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
         public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
+        public static final String HOME_DIR = "/home/xoreax/";
+        public static final String COPY_FILE_SCP = "sshpass -p xoreax scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s xoreax@%s:/home/xoreax";
+        public static final String EXTRACT_UPGRADE_FILE = "cd /opt/incredibuild/httpd/htdocs/incredibuild; sudo tar xf ~/%s";
+        public static final String GET_IB_VERSION = "ib_console --version";
+        public static final String GET_EPOCH_TIME = "date +%s%3N";
     }
 
     public static class LinuxDB {
         public static final String DB_COORD_REPORT= "incredibuildCoordinatorReport.db";
         public static final String COLUMN_MACHINE = "MachineName";
+        public static final String COLUMN_CONNECTED_SINCE = "ConnectedSince";
+        public static final String COLUMN_VERSION = "IncredibuildVersion";
+        public static final String COLUMN_LICENSED_CORES = "LicensedCores";
+        public static final String COLUMN_TIMESTAMP = "TimeStamp";
         public static final String TABLE_HELPER_MACHINES = "HelperMachines_Monitor";
+        public static final String TABLE_COORDINATOR_STATUS = "Coordinator_Status_Monitor";
     }
 
     public static class WindowsMachines {
@@ -511,8 +522,7 @@ public class StaticDataProvider {
     }
 
     public static class LinuxMachines {
-        public static final String TEST_MACHINE = "192.168.11.82";
-        public static final String VM_SIM_1A = "192.168.11.103";
+        public static final String LINUX_BUILDER = "192.168.10.44";
     }
 
     public static class LicTestPrjBuildConsoleCommands {

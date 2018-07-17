@@ -23,4 +23,18 @@ public interface ILinuxService {
     boolean isLinuxOSUbuntu(String IP);
 
     String runQueryLastBuild(String fieldName, String sqliteTable, String IP);
+
+    void updateIB(String destMachine, String fileName, List<String> grid);
+
+    void copyFileFromLinuxToLinux(String srcMachine, String destMachine, String fileName);
+
+    String getInstallerName(String machineName, String version);
+
+    String getInstallerFolder(String machineName, String version);
+
+    void extractUpgradeFile(String machineName, String file);
+
+    String getIBVersion(String machine);
+
+    void verifyAgentsUpdated(String hostName, String version);
 }

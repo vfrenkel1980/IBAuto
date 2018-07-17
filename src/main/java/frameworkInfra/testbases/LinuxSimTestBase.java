@@ -37,7 +37,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testNum = TestNum.Sim;
         ipList = XmlParser.breakDownIPList(rawIpList);
 
-        ibVersion = getIBVersion();
+        ibVersion = linuxService.getIBVersion(ipList.get(0));
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
@@ -45,11 +45,12 @@ public class LinuxSimTestBase extends LinuxTestBase {
         connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
         for (int i=0; i < connectedMachinesToGrid.size(); ++i) {
             if (connectedMachinesToGrid.get(i).contains("."))
-                connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0,connectedMachinesToGrid.get(i).indexOf(".")));
+                connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
 
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
         firstBuild = getFirstBuild(ipList.get(1));
+        linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
 
         log.info("finished before suite");
     }
@@ -106,7 +107,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         linuxService.getFile(ipList.get(1), "/home/xoraex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "\\");
-        for (String file: files ) {
+        for (String file: files) {
             isFailed = Parser.doesFileContainString(file, "ErrorMessages:");
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);

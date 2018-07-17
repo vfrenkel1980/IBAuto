@@ -10,17 +10,20 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
-public class UnitTests{
+public class UnitTests {
 
     @Test
     public void test() {
         VSUIService vsService = new VSUIService();
         IbService ibService = new IbService();
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT +"\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsService.openVSInstance("15", false);
         vsService.createNewProject("custom");
         vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, "solution", "custom");
@@ -34,19 +37,20 @@ public class UnitTests{
     }
 
     @Test(testName = "test2")
-    public void test2(){
+    public void test2() {
         LinuxService linuxService = new LinuxService();
-        System.out.println(linuxService.isLinuxOSUbuntu("l2a-cen65-mi4"));
+        LinuxDBService linuxDBService = new LinuxDBService();
+        List<String> grid = linuxDBService.selectAll(StaticDataProvider.LinuxDB.DB_COORD_REPORT, StaticDataProvider.LinuxDB.COLUMN_MACHINE, StaticDataProvider.LinuxDB.TABLE_HELPER_MACHINES, "l2a-u14-coor");
+        linuxService.updateIB("l2a-u14-coor", "0.94.81" , grid);
     }
+
 
     @Test(testName = "test3")
-    public void test3() {
+    public void test3 () {
         LinuxService linuxService = new LinuxService();
-        String lastBuild = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY,"192.168.11.118");
-        lastBuild = lastBuild.replace("\n","");
-        int firstBuild = Integer.parseInt(lastBuild) + 1;
-        lastBuild = String.valueOf(firstBuild);
-        System.out.println(lastBuild);
-
+        String installationFilePath = linuxService.getInstallerName(StaticDataProvider.LinuxMachines.LINUX_BUILDER, "0.94.81");
+        String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
+        System.out.println(installationFileName);
     }
+
 }

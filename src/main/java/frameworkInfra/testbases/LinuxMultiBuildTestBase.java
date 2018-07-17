@@ -43,7 +43,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
 
-        ibVersion = getIBVersion();
+        ibVersion = linuxService.getIBVersion(ipList.get(0));
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);

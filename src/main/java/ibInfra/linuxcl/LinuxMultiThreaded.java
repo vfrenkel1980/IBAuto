@@ -29,8 +29,9 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
         SoftAssert softAssert = new SoftAssert();
         int exitCode;
         for (int i = 0 ; i < cycles ; i++) {
-            test.log(Status.INFO, "starting cycle " +i );
-            log.info("starting cycle " +i);
+            test.log(Status.INFO, "starting cycle " + i + " on machine " + machine);
+            log.info("starting cycle " + i + " on machine " + machine);
+            extent.flush();
             String command = "";
 
             if(linuxService.isLinuxOSUbuntu(machine)) {
@@ -109,7 +110,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                         break;
                 }
             }
-            test.log(Status.INFO, "IP " + machine + ": command = " +command );
+            test.log(Status.INFO, "IP " + machine + ": command = " + command );
             exitCode = linuxService.linuxRunSSHCommand(command, machine);
             softAssert.assertEquals(exitCode, 0, "Build Failed");
 

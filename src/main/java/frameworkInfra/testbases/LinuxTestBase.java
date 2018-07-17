@@ -2,7 +2,7 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
@@ -30,6 +30,7 @@ public class LinuxTestBase extends TestBase{
     protected static List rawIpList2;
     protected static String className;
     protected static String ENV = System.getProperty("env");
+    protected static String VERSION = System.getProperty("version");
 
     protected static LinuxSimTestBase.TestNum testNum;
 
@@ -56,19 +57,19 @@ public class LinuxTestBase extends TestBase{
         if (className.contains("Dock"))
             i=2;
 
-        buildID = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, ipList.get(i));
+        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i));
         test.log(Status.INFO, buildID);
         extent.flush();
     }
 
-    protected static String getIBVersion() {
+/*    protected static String getIBVersion() {
         LinuxService runCommand = new LinuxService();
-        ibVersion = runCommand.linuxRunSSHCommandOutputString("ib_console --version", ipList.get(0));
+        ibVersion = runCommand.linuxRunSSHCommandOutputString(LinuxCommands.GET_IB_VERSION, ipList.get(0));
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
-    }
+    }*/
 
     public String getFirstBuild(String host){
-        String lastBuild = linuxService.runQueryLastBuild(StaticDataProvider.LinuxCommands.BUILD_ID, StaticDataProvider.LinuxCommands.BUILD_HISTORY, host);
+        String lastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, host);
         lastBuild = lastBuild.replace("\n","");
         if (lastBuild.equals(""))
             lastBuild = "0";

@@ -83,6 +83,8 @@ test {
     systemProperty 'env', System.properties['env'] ?: 'linuxsim1b'
     systemProperty 'env', System.properties['env'] ?: 'linuxsim2a'
     systemProperty 'env', System.properties['env'] ?: 'linuxsim2b'
+    //Linux version selection
+    systemProperty "version", System.getProperty("version")
 
     // enable TestNG support (default is JUnit)
     useTestNG(){
