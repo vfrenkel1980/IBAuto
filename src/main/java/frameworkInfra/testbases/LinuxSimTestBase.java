@@ -36,8 +36,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
         testNum = TestNum.Sim;
         ipList = XmlParser.breakDownIPList(rawIpList);
-
-        ibVersion = linuxService.getIBVersion(ipList.get(0));
+        log.info("RUNNING VERSION: " + VERSION);
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
@@ -47,10 +46,10 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
-
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
         firstBuild = getFirstBuild(ipList.get(1));
         linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
+        ibVersion = linuxService.getIBVersion(ipList.get(0));
 
         log.info("finished before suite");
     }
