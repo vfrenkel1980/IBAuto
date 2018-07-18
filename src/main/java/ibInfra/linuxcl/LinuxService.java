@@ -33,6 +33,7 @@ public class LinuxService extends TestBase implements ILinuxService {
 
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
+            session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
             session.connect();
@@ -73,6 +74,7 @@ public class LinuxService extends TestBase implements ILinuxService {
         try {
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
+            session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
             session.connect();
@@ -111,6 +113,7 @@ public class LinuxService extends TestBase implements ILinuxService {
         try {
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
+            session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
             session.connect();

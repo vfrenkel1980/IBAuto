@@ -39,9 +39,7 @@ public class UnitTests {
     @Test(testName = "test2")
     public void test2() {
         LinuxService linuxService = new LinuxService();
-        LinuxDBService linuxDBService = new LinuxDBService();
-        List<String> grid = linuxDBService.selectAll(StaticDataProvider.LinuxDB.DB_COORD_REPORT, StaticDataProvider.LinuxDB.COLUMN_MACHINE, StaticDataProvider.LinuxDB.TABLE_HELPER_MACHINES, "l2a-u14-coor");
-        linuxService.updateIB("l2a-u14-coor", "0.94.81" , grid);
+        System.out.println(linuxService.linuxRunSSHCommandOutputString("ls -la", "h-27-cen7-test"));
     }
 
 
