@@ -227,7 +227,7 @@ public class LinuxService extends TestBase implements ILinuxService {
     @Override
     public void updateIB(String destMachine, String version, List<String> grid) {
         String installationFilePath = getInstallerName(LinuxMachines.LINUX_BUILDER, version);
-        //copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, destMachine, installationFilePath);
+        copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, destMachine, installationFilePath);
         String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
         extractUpgradeFile(destMachine, installationFileName);
         SystemActions.sleep(180);

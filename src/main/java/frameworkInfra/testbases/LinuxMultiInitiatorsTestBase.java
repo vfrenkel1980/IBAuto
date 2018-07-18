@@ -65,7 +65,8 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         for (int i = 1 ; i < 5 ; i++){
             firstBuilds.add(getFirstBuild(ipList.get(i)));
         }
-        linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
+        if (!VERSION.equals("current"))
+            linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
         ibVersion = linuxService.getIBVersion(ipList.get(0));
     }
 

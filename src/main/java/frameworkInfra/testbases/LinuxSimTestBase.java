@@ -48,7 +48,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
         firstBuild = getFirstBuild(ipList.get(1));
-        linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
+        if (!VERSION.equals("current"))
+            linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
         ibVersion = linuxService.getIBVersion(ipList.get(0));
 
         log.info("finished before suite");
