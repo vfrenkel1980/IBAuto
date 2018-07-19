@@ -188,17 +188,17 @@ public class StaticDataProvider {
             public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|x64\"";
-            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"debug|orbis\"";
-            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"release|orbis\"";
+            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
         }
 
         public static class VC11_BATMAN {
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2012 - Release\"";
-            public static final String PS4_EDGE_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"debug|orbis\"";
-            public static final String PS4_EDGE_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"release|orbis\"";
-            public static final String PS4_EDGE_ORBIS_PROFILE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"profile|orbis\"";
-            public static final String PS4_GNM_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"debug|orbis\"";
-            public static final String PS4_GNM_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"release|orbis\"";
+            public static final String PS4_EDGE_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_EDGE_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_EDGE_ORBIS_PROFILE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"profile|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
             public static final String SHADOWMAP_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"debug|Durango\"";
             public static final String SHADOWMAP_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"release|Durango\"";
         }
@@ -529,7 +529,7 @@ public class StaticDataProvider {
 
         public static final String VS2017_CPP = "\\2017\\Cpp\\Cpp.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C++\"";
         public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|Any CPU\" /title=\"License Test - VS2017 C#\"";
-        public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" /%s /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\"";
+        public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" /%s /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\" /minwinver=\"7\"";
         public static final String VS2015_XBOX_DURANGO = "\"C:\\Users\\Admin\\Desktop\\Xbox_03_2017_qfe4\\SimpleHDR12\\SimpleHDR12\\Samples\\Graphics\\SimpleHDR12\\SimpleHDR12.sln\" /%s /cfg=\"Debug|Durango\" /title=\"License Test - xBox One\"";
         public static final String MSBUILD_CPP = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && msbuild C:\\LicenseTests_projects\\2017\\Cpp\\Cpp.sln /t:rebuild /property:configuration=\"\"debug\"\";platform=\"\"x86\"\" /m:16 /nodeReuse:False /verbosity:normal\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Msbuild\"";
         public static final String JOM = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && cd C:\\LicenseTests_projects\\Make_and_Build_Tools && jom clean && jom\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Jom\"";
