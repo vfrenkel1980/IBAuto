@@ -3,7 +3,9 @@
    <ip> l1a-u14-coor </ip>
    <ip> l1a-u12-init </ip>
 
-   <ip> 192.168.10.193 </ip> <!--docker-->
+<!--
+   <ip> 192.168.10.193 </ip> &lt;!&ndash;docker&ndash;&gt;
+-->
 
    <ip> l1a-u14-h1 </ip>
    <ip> l1a-cen7-h2 </ip>

@@ -399,7 +399,6 @@ public class StaticDataProvider {
         }
     }
 
-
     //registry keys
     public static class RegistryKeys {
         public static final String MSBUILD = "UseMSBuild";
@@ -435,7 +434,6 @@ public class StaticDataProvider {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
-        public static final String KILL_COORDMON = "taskkill /f /im coordmonitor.exe";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
         public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";

@@ -2,7 +2,6 @@ package ibInfra.linuxcl;
 
 import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.*;
-import frameworkInfra.testbases.LinuxTestBase;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -23,7 +22,6 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class LinuxService extends TestBase implements ILinuxService {
 
     private WindowsService winService = new WindowsService();
-
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
@@ -177,6 +175,7 @@ public class LinuxService extends TestBase implements ILinuxService {
     private final static SftpProgressMonitor monitor = new SftpProgressMonitor() {
         public void init(final int op, final String source, final String target, final long max) {
             log.info("sftp start uploading file from:" + source + " to:" + target);
+            test.log(Status.INFO, "sftp start uploading file from:" + source + " to:" + target);
         }
 
         public boolean count(final long count) {

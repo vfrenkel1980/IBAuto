@@ -1,10 +1,13 @@
 package ibInfra.linuxcl;
 
+import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.testbases.LinuxTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 
 import java.text.SimpleDateFormat;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class LinuxRunScriptThreads extends LinuxTestBase implements Runnable {
 
@@ -26,7 +29,7 @@ public class LinuxRunScriptThreads extends LinuxTestBase implements Runnable {
         try {
             linuxService.getFile(host, "/home/xoreax/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\" + output);
         } catch (JSchException e) {
-            e.printStackTrace();
+            test.log(Status.INFO,e.getMessage());
         }
     }
 }
