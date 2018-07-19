@@ -15,7 +15,7 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 public class BatmanVC15Tests extends BatmanBCTestBase {
 
 
-    @Test(testName = "Audacity 2017 - Debug - build" , groups = { "Build", "Sanity" })
+    @Test(testName = "Audacity 2017 - Debug - build" , groups = { "Build" })
     public void audacityDebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);

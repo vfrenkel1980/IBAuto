@@ -17,6 +17,7 @@ import org.junit.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class LinuxService extends TestBase implements ILinuxService {
@@ -40,6 +41,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
                 test.log(Status.INFO, "Running command " + command);
+                extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);
@@ -81,6 +83,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
                 test.log(Status.INFO, "Running command " + command);
+                extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);
@@ -120,6 +123,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
                 test.log(Status.INFO, "Running command " + command);
+                extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             channelExec.setCommand(command);

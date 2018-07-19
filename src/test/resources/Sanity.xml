@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Sanity"  >
-    <!-- suite name="Suite Name" -->
-    <parameter name="predicted" value="2"/>
-    <parameter name="msBuild" value="0"/>
 
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
     <test name="Sanity">
-        <parameter name="logLevel" value="0"/>
-        <groups>
-            <run>
-                <include name = "Sanity" />
-            </run>
-        </groups>
-
         <classes>
-            <class name ="Native.windowstests.batman.BatmanVC15Tests" />
+            <class name ="Native.sanity.Sanity" />
         </classes>
     </test>
 

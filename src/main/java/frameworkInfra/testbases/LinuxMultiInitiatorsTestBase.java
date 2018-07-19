@@ -148,6 +148,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         test = extent.createTest("AFTER SUITE");
         test.assignCategory("AFTER SUITE");
         test.log(Status.INFO, "AFTER SUITE" + " test started");
+        log.info("starting after suite");
         boolean isFailed;
 
         ExecutorService execService = Executors.newFixedThreadPool(4);
