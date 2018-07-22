@@ -104,11 +104,11 @@ public class LinuxSimTestBase extends LinuxTestBase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res" + dateFormat.format(calendar.getTime());
         linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output + "; exit 0" , ipList.get(1));
-        linuxService.getFile(ipList.get(1), "/home/xoraex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
+        linuxService.getFile(ipList.get(1), LinuxCommands.HOME_DIR + output, Locations.LINUX_SCRIPT_OUTPUT + "\\" + output);
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "\\");
         for (String file: files) {
-            isFailed = Parser.doesFileContainString(file, "ErrorMessages:");
+            isFailed = Parser.doesFileContainString(Locations.LINUX_SCRIPT_OUTPUT + "\\" + file, "ErrorMessages:");
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);
         }

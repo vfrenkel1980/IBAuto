@@ -6,6 +6,7 @@ import ibInfra.ibService.IbService;
 import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import ibInfra.vs.VSUIService;
+import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -37,9 +38,9 @@ public class UnitTests {
     }
 
     @Test(testName = "test2")
-    public void test2() {
-        LinuxService linuxService = new LinuxService();
-        System.out.println(linuxService.linuxRunSSHCommandOutputString("ls -la", "h-27-cen7-test"));
+    public void test2() throws JSchException {
+        WindowsService windowsService = new WindowsService();
+        windowsService.runCommandWaitForFinish("pscp -pw xoreax xoreax@l2a-u12-mi1:/home/xoreax/res20_07_2018_l2a-u12-mi1 " + "c:\\qa\\bla");
     }
 
 

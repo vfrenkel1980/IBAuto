@@ -27,7 +27,7 @@ public class LinuxRunScriptThreads extends LinuxTestBase implements Runnable {
         String output = "res" + dateFormat.format(calendar.getTime()) + "_" + host;
         linuxService.linuxRunSSHCommand("./ib_db_check.py -d MI_ib_db_check_data.py -r " + firstBuilds + "," + suiteLastBuild + " --ignore-aborts > " + output + "; exit 0", host);
         try {
-            linuxService.getFile(host, "/home/xoreax/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\" + output);
+            linuxService.getFile(host, LinuxCommands.HOME_DIR + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\" + output);
         } catch (JSchException e) {
             test.log(Status.INFO,e.getMessage());
         }

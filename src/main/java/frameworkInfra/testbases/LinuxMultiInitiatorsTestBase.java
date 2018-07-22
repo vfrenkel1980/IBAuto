@@ -76,7 +76,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
-        linuxService.deleteLogsFolder(connectedMachinesToGrid);
+        //linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
         if(!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service is down... FAILING ALL TESTS!");
@@ -162,7 +162,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\");
         for (String file: files ) {
-            isFailed = Parser.doesFileContainString(file, "ErrorMessages:");
+            isFailed = Parser.doesFileContainString(Locations.LINUX_SCRIPT_OUTPUT + "MultiInitiator\\" + file, "ErrorMessages:");
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);
         }

@@ -132,12 +132,12 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
         String suiteLastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(1)).replaceAll("\n","");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res" + dateFormat.format(calendar.getTime());
-        linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output + "; exit 0" , ipList.get(1));
-        linuxService.getFile(ipList.get(1), "/home/xoraex/" + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
+        linuxService.linuxRunSSHCommand("./ib_db_check.py -d mb_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " --ignore-aborts > " + output + "; exit 0" , ipList.get(1));
+        linuxService.getFile(ipList.get(1), LinuxCommands.HOME_DIR + output, Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + output);
 
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\");
         for (String file: files ) {
-            isFailed = Parser.doesFileContainString(file, "ErrorMessages:");
+            isFailed = Parser.doesFileContainString(Locations.LINUX_SCRIPT_OUTPUT + "MultiBuild\\" + file, "ErrorMessages:");
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);
         }
