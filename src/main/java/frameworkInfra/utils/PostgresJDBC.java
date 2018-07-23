@@ -19,7 +19,8 @@ public class PostgresJDBC extends TestBase {
                     .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
                             username, password);
             c.setAutoCommit(false);
-            test.log(Status.INFO,"Connection established to DB");
+            if (test !=null)
+                test.log(Status.INFO,"Connection established to DB");
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT " + select + " FROM " + table + " ORDER BY " + orderBy +" DESC LIMIT 1" );
             while ( rs.next() ) {
@@ -29,8 +30,36 @@ public class PostgresJDBC extends TestBase {
             stmt.close();
             c.close();
         } catch ( Exception e ) {
-            test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+            if (test !=null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
         }
         return value;
+    }
+
+    public static int getAllBuildsWhere(String ip, String username, String password, String db, String select, String table, String where){
+        Connection c = null;
+        Statement stmt = null;
+        int count = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
+                            username, password);
+            c.setAutoCommit(false);
+            if (test !=null)
+                test.log(Status.INFO,"Connection established to DB");
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT " + select + " FROM " + table + " WHERE " + where);
+            while ( rs.next() ) {
+                count++;
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            if (test !=null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return count;
     }
 }

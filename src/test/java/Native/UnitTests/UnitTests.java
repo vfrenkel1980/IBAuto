@@ -46,10 +46,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        LinuxService linuxService = new LinuxService();
-        String installationFilePath = linuxService.getInstallerName(StaticDataProvider.LinuxMachines.LINUX_BUILDER, "0.94.81");
-        String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
-        System.out.println(installationFileName);
+        System.out.println(PostgresJDBC.getAllBuildsWhere("localhost", "ib", "ib", "coordinatordb", "*", "public.coord_build", "status=0"));
     }
 
 }
