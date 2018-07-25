@@ -1,7 +1,7 @@
 package Web.IBWeb;
 
 import frameworkInfra.Listeners.TestListener;
-import frameworkInfra.testbases.web.DownloadPageTestBase;
+import frameworkInfra.testbases.web.ibSite.DownloadPageTestBase;
 
 import frameworkInfra.utils.MailService;
 import org.testng.Assert;

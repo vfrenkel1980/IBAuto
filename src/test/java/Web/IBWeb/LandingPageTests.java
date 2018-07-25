@@ -1,6 +1,6 @@
 package Web.IBWeb;
 
-import frameworkInfra.testbases.web.LandingPageTestBase;
+import frameworkInfra.testbases.web.ibSite.LandingPageTestBase;
 import org.testng.annotations.Test;
 import webInfra.ibWeb.pages.LandingPage;
 

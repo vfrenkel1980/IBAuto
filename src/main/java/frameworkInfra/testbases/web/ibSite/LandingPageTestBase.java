@@ -1,10 +1,9 @@
-package frameworkInfra.testbases.web;
+package frameworkInfra.testbases.web.ibSite;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-import webInfra.ibWeb.pageObjects.DownloadPageObject;
 import webInfra.ibWeb.pageObjects.LandingPageObject;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;

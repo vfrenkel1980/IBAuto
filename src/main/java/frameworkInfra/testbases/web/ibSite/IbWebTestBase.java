@@ -1,4 +1,4 @@
-package frameworkInfra.testbases.web;
+package frameworkInfra.testbases.web.ibSite;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;

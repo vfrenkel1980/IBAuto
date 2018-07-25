@@ -8,6 +8,12 @@ import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -51,14 +57,16 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        CoordBuild coordBuild = new CoordBuild("2222", 4, 1235, 12344, "test",
-                10, 0, 1, 1, 4, 1, 1,
-                2, 1, 1, 3, null, null, null, 0,
-                false, "this is the command", false);
-        PostgresJDBC.runFunctionOnCoordBuildTable("localhost", "ib", "ib", "coordinatordb",
-                "public.sp_insert_coord_build", coordBuild);
-        //System.out.println(PostgresJDBC.getAllBuildsWhere("localhost", "ib", "ib", "coordinatordb",
-        //        "*", "public.coord_build", "status=0"));
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
+        WebDriver webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8000/#/material/overview");
+        webDriver.manage().window().maximize();
+        webDriver.findElement(By.xpath("//a[@href=\"#/material/builds\"]")).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
+
+        webDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
+        System.out.println("");
     }
 
 }

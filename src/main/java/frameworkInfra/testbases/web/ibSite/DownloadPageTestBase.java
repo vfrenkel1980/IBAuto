@@ -1,4 +1,4 @@
-package frameworkInfra.testbases.web;
+package frameworkInfra.testbases.web.ibSite;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;

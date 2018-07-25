@@ -1,6 +1,6 @@
 package Web.IBWeb;
 
-import frameworkInfra.testbases.web.JPSiteValidationsTestBase;
+import frameworkInfra.testbases.web.ibSite.JPSiteValidationsTestBase;
 import org.testng.annotations.Test;
 
 public class JPSiteValidationTests extends JPSiteValidationsTestBase {
