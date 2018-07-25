@@ -36,6 +36,7 @@ public class LicensingTestBase extends ReleaseTestBase{
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
         ibService.customPackAllocationOn();
+        SystemActions.sleep(60);
     }
 
     @BeforeClass
