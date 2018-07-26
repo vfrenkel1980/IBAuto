@@ -52,7 +52,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
 
         scenario = testContext.getName();
         switch (scenario){
-            case ("1"): //Valid license with all packages
+            case ("7"): //Valid license with all packages
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
