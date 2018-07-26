@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="LicenseTests"  >
 
-
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
@@ -40,11 +39,6 @@
     <test name="7">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
-        </classes>
-    </test>
-    <test name="7">
-        <classes>
-            <class name ="Native.releasetests.LicensingPositiveTests" />
         </classes>
     </test>
 </suite>
