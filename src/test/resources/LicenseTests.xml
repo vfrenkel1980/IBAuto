@@ -10,7 +10,6 @@
     <test name="1">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
-            <class name ="Native.releasetests.LicensingPositiveTests" />
         </classes>
     </test>
     <test name="2">
@@ -41,6 +40,11 @@
     <test name="7">
         <classes>
             <class name ="Native.releasetests.LicensingTests" />
+        </classes>
+    </test>
+    <test name="1">
+        <classes>
+            <class name ="Native.releasetests.LicensingPositiveTests" />
         </classes>
     </test>
 </suite>
