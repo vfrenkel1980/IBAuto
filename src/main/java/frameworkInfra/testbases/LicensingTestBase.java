@@ -35,8 +35,9 @@ public class LicensingTestBase extends ReleaseTestBase{
 
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
         ibService.customPackAllocationOn();
-        SystemActions.sleep(60);
     }
 
     @BeforeClass
@@ -46,9 +47,6 @@ public class LicensingTestBase extends ReleaseTestBase{
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
 
-
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
 
         scenario = testContext.getName();
         switch (scenario){
@@ -60,8 +58,11 @@ public class LicensingTestBase extends ReleaseTestBase{
                 scenarioDescription = "Unloaded license";
                 test.log(Status.INFO,"2");
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+                SystemActions.sleep(5);
+                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(60);
                 ibService.unloadIbLicense();
+                SystemActions.sleep(5);
                 break;
             case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
