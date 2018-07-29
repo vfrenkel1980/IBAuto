@@ -36,6 +36,8 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
 
         ibService.installIB("Latest");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
         ibService.customPackAllocationOn();
     }
 
@@ -47,8 +49,6 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
         log.info("BEFORE CLASS started");
 
 
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
 
         scenario = testContext.getName();
         switch (scenario){
@@ -56,7 +56,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(60);
                 break;
         }
     }

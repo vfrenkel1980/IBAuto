@@ -27,6 +27,7 @@ def Unit = project.hasProperty("Unit")
 def VSPreview = project.hasProperty("VSPreview")
 def VSIntegration = project.hasProperty("VSIntegration")
 def LicenseTests = project.hasProperty("LicenseTests")
+def PositiveLicenseTests = project.hasProperty("PositiveLicenseTests")
 def AgentSettings = project.hasProperty("AgentSettings")
 def UIValidations = project.hasProperty("UIValidations")
 def Setup = project.hasProperty("Setup")
@@ -133,6 +134,10 @@ test {
 
         if(LicenseTests) {
             suites "src/test/resources/LicenseTests.xml"
+        }
+
+        if(PositiveLicenseTests) {
+            suites "src/test/resources/PositiveLicenseTests.xml"
         }
 
         if(AgentSettings) {
