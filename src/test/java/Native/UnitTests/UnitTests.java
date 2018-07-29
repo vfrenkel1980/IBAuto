@@ -31,19 +31,24 @@ public class UnitTests {
 
     @Test
     public void test() {
-        VSUIService vsService = new VSUIService();
-        IbService ibService = new IbService();
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SAVE_BUILD_PACKET, "1");
-        vsService.openVSInstance("15", false);
-        vsService.createNewProject("custom");
-        vsService.performIbActionFromPrjExplorer(StaticDataProvider.VsActions.REBUILD_SOLUTION, "solution", "custom");
-        String result;
-        try {
-            result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertTrue(result.equals("0"));
-        } catch (IOException e) {
-            e.getMessage();
+        String time = "19h 30m";
+        String time2 = "30m 21s";
+        String hours = "";
+        String minutes = "";
+        String seconds = "";
+        int epoch = 0;
+
+        if (time2.contains("h")){
+            hours = time.substring(0,time.indexOf("h"));
+            minutes = time.substring(time.indexOf(" "), time.indexOf("m")).replaceAll(" ","");
+            epoch = Integer.parseInt(hours) *3600 + Integer.parseInt(minutes)*60;
         }
+        else{
+            minutes = time2.substring(0, time2.indexOf("m"));
+            seconds = time2.substring(time2.indexOf(" "), time2.indexOf("s")).replaceAll(" ","");
+            epoch = Integer.parseInt(minutes) *60 + Integer.parseInt(seconds);
+        }
+        System.out.println(epoch);
     }
 
     @Test(testName = "test2")

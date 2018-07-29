@@ -21,7 +21,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
 
-        vsuiService.openVSInstance("15", false);
+        vsuiService.openVSInstance("15", false, "");
         vsuiService.openProject(projectLocation);
         vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         client.verifyVSBarPattern(vsBarPattern);

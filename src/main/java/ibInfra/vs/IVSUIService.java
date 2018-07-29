@@ -14,7 +14,7 @@ public interface IVSUIService  {
 
     void performIbActionFromPrjExplorer(String action,String type, String solutionName);
 
-    void openVSInstance(String vsinstallation, boolean isFirstActivation);
+    void openVSInstance(String vsinstallation, boolean isFirstActivation, String scenario);
 
     String getInstalledMSBuildVersion();
 

@@ -26,7 +26,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class VSTestBase extends TestBase {
 
     protected static int ibVersion = 0;
-    private static String SCENARIO = System.getProperty("scenario");
+    protected static String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
     public IbService ibService = new IbService();
@@ -88,7 +88,7 @@ public class VSTestBase extends TestBase {
                 else
                     vsCommands.installVSPreviewWithIB();
                 ibService.verifyIbServicesRunning(true, true);
-                vsuiService.openVSInstance(VSINSTALLATION, true);
+                vsuiService.openVSInstance(VSINSTALLATION, true, SCENARIO);
                 SystemActions.killProcess("devenv.exe");
                 break;
 

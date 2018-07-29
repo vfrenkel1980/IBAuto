@@ -107,7 +107,7 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
-        if (driver.getCapabilities().getCapability("app").toString().contains("2017"))
+        if (driver.getCapabilities().getCapability("app").toString().contains("2017") || driver.getCapabilities().getCapability("app").toString().contains("Preview"))
             driver.findElementByName("Incredibuild").click();
         else
             driver.findElementByName("IncrediBuild").click();
@@ -148,11 +148,14 @@ public class VSUIService implements IVSUIService {
     }
 
     @Override
-    public void openVSInstance(String version, boolean isFirstActivation) {
+    public void openVSInstance(String version, boolean isFirstActivation, String scenario) {
         String pathToDevenv = "";
         switch (version) {
             case "preview":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
+                if (scenario.equals("3"))
+                    pathToDevenv = "E:\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
+                else
+                    pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
             case "8":
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 8\\Common7\\IDE\\devenv.exe";
@@ -173,7 +176,10 @@ public class VSUIService implements IVSUIService {
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe";
                 break;
             case "15":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
+                if (scenario.equals("3"))
+                    pathToDevenv = "E:\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
+                else
+                    pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
         try {

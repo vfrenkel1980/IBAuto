@@ -365,7 +365,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Verify Installer Exit Code While Devenv Is Running")
     public void verifyInstallerExitCodeWhileDevenvIsRunning(){
-        vsuiService.openVSInstance("15", false);
+        vsuiService.openVSInstance("15", false, "");
         int exitCode = ibService.installIB("Latest");
         vsuiService.killDriver();
         Assert.assertEquals(exitCode, 2, "Installation finished with exit code different than 2!");
