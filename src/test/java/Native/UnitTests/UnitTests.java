@@ -31,24 +31,23 @@ public class UnitTests {
 
     @Test
     public void test() {
-        String time = "19h 30m";
-        String time2 = "30m 21s";
-        String hours = "";
-        String minutes = "";
-        String seconds = "";
-        int epoch = 0;
+        WindowsService winService = new WindowsService();
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, StaticDataProvider.ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 1 " +
+                "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\" " +
+                "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
 
-        if (time2.contains("h")){
-            hours = time.substring(0,time.indexOf("h"));
-            minutes = time.substring(time.indexOf(" "), time.indexOf("m")).replaceAll(" ","");
-            epoch = Integer.parseInt(hours) *3600 + Integer.parseInt(minutes)*60;
+        winService.waitForProcessToFinishOnRemoteMachine(StaticDataProvider.WindowsMachines.SECOND_INITIATOR, "Administrator" , "4illumination", "buildsystem");
+        winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + StaticDataProvider.Locations.SECOND_INITIATOR_LOG_PATH );
+        Assert.assertTrue(SystemActions.doesFileExist(StaticDataProvider.Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
+
+        boolean isPresent = Parser.doesFileContainString(StaticDataProvider.Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", StaticDataProvider.LogOutput.AGENT);
+        if (isPresent){
+            SystemActions.copyFile(StaticDataProvider.Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", StaticDataProvider.Locations.QA_ROOT + "\\logs\\for_investigation");
         }
-        else{
-            minutes = time2.substring(0, time2.indexOf("m"));
-            seconds = time2.substring(time2.indexOf(" "), time2.indexOf("s")).replaceAll(" ","");
-            epoch = Integer.parseInt(minutes) *60 + Integer.parseInt(seconds);
-        }
-        System.out.println(epoch);
+        SystemActions.deleteFile(StaticDataProvider.Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+        winService.waitForProcessToFinish(StaticDataProvider.Processes.BUILDSYSTEM);
+        Assert.assertTrue(isPresent, "No agent assigned to build");
     }
 
     @Test(testName = "test2")

@@ -115,22 +115,29 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
     @Test(testName = "Verify Multi Initiator Assignment")
     public void verifyMultiInitiatorAssignment() {
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-        winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 1 " +
-                "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"debug|win32\" /title=\"ACE 2012 - Debug\" " +
-                "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
+        try {
+            winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 1 " +
+                    "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"release|win32\" /title=\"ACE 2012 - Debug\" " +
+                    "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
 
-        winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator" , "4illumination", "buildsystem");
-        winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH );
-        Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
+            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildsystem");
+            winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
+            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
 
-        boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
-        if (isPresent){
-            SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation");
+            boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
+            if (isPresent) {
+                SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation");
+            }
+            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+            Assert.assertTrue(isPresent, "No agent assigned to build");
         }
-        SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertTrue(isPresent, "No agent assigned to build");
+        catch (Exception e){
+            e.getMessage();
+        }
+        finally {
+            winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+        }
     }
 
     @Test(testName = "Verify PDB Error In Log")

@@ -176,9 +176,9 @@ public class VSUIService implements IVSUIService {
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe";
                 break;
             case "15":
-                if (scenario.equals("3"))
+             /*   if (scenario.equals("3"))
                     pathToDevenv = "E:\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
-                else
+                else*/
                     pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
