@@ -7,11 +7,14 @@ import frameworkInfra.utils.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import net.sf.cglib.core.Local;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
 
@@ -68,9 +71,9 @@ public class LicensingTestBase extends ReleaseTestBase{
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 break;
             case ("4"): //License Loaded and Agent Unsubscribed
                 scenarioDescription = "License Loaded and Agent Unsubscribed";
@@ -84,8 +87,10 @@ public class LicensingTestBase extends ReleaseTestBase{
                 scenarioDescription = "Temp License is Expired";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 SystemActions.addPeriodToSystemTime(0, 0, 5);
+                SystemActions.sleep(20);
+                System.out.println("Start build");
                 break;
             case ("6"): //All Allocated Packages are temporary and expired
                 scenarioDescription = "All Allocated Packages are temporary and expired";

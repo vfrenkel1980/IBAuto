@@ -118,7 +118,7 @@ public class SystemActions {
 
     public static void addPeriodToSystemTime(long days, long months, long years){
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
         String newDate = (now.plusDays(days).plusMonths(months).plusYears(years)).format(formatter);
         try {
             test.log(Status.INFO, "Changing machine time to: " + newDate);
@@ -143,7 +143,7 @@ public class SystemActions {
 
     public static String getLocalDateAsString(){
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
         String newDate = now.format(formatter);
         test.log(Status.INFO, "Checking local time" + newDate);
         return newDate;
