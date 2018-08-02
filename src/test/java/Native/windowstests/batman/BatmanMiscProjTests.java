@@ -2,8 +2,7 @@ package Native.windowstests.batman;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;

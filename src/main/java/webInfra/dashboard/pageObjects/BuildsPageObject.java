@@ -2,6 +2,8 @@ package webInfra.dashboard.pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BuildsPageObject {
 
@@ -13,19 +15,21 @@ public class BuildsPageObject {
     public static final By H12_TAB = By.xpath("//button[contains(text(),'12H')]");
     public static final By H24_TAB = By.xpath("//button[contains(text(),'24H')]");
     public static final By ALL_TAB = By.xpath("//button[contains(text(),'All')]");
+    public static final By OVERLAY = By.xpath("//*[@id='overlay']");
 
     /*----BUILDS----*/
 
 
     private static EventFiringWebDriver eventWebDriver;
-
+    private WebDriverWait wait;
     public BuildsPageObject(EventFiringWebDriver driver) {
-        this.eventWebDriver = driver;
+        eventWebDriver = driver;
+        wait = new WebDriverWait(eventWebDriver, 10);
     }
 
 
-    public String getSuccesfulBuildsUI() {
-        return eventWebDriver.findElement(By.xpath("//div[@class='md-layout md-gutter-24']//div[2]//div[1]//div[2]//div[1]//div[1]//div[1]//div[1]")).getText();
+    public String getSuccessfulBuildsUI() {
+        return eventWebDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
     }
 
     public String getFailedBuildsUI() {
@@ -53,7 +57,9 @@ public class BuildsPageObject {
     }
 
     public void goToAllTab() {
-        eventWebDriver.findElement(ALL_TAB).click();
+        waitForLoadingScreen();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
+        waitForLoadingScreen();
     }
 
     public int convertStringTimeToEpoch(String time){
@@ -70,6 +76,10 @@ public class BuildsPageObject {
             epoch = Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
         }
         return epoch;
+    }
+
+    public void waitForLoadingScreen(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(OVERLAY));
     }
 
 

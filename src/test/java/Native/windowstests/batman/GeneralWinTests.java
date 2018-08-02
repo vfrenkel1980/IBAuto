@@ -2,7 +2,7 @@ package Native.windowstests.batman;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -10,9 +10,7 @@ import frameworkInfra.utils.SystemActions;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.apache.commons.io.FileUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 

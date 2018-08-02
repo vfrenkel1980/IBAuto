@@ -1,7 +1,7 @@
 package Native.windowstests.batman;
 
 import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;

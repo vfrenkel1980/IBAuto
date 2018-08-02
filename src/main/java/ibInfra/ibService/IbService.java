@@ -4,6 +4,8 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.parsers.CustomJsonParser;
+import frameworkInfra.utils.parsers.Parser;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -66,10 +68,30 @@ public class IbService extends TestBase implements IIBService {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
+    @Override
+    public void updateIBEnt() {
+        String installationFile = getIbConsoleInstallationForEnt();
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
+    }
 
     @Override
     public String getIbConsoleInstallation(String version) {
         String path = Locations.NETWORK_IB_INSTALLATIONS + version;
+        String postFix = "console.exe";
+        String installerName = "";
+        try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), "*" + postFix)) {
+            for (final Path newDirectoryStreamItem : newDirectoryStream) {
+                installerName = String.valueOf(newDirectoryStreamItem);
+            }
+        } catch (final Exception e) {
+            e.getMessage();
+        }
+        return installerName;
+    }
+
+    @Override
+    public String getIbConsoleInstallationForEnt() {
+        String path = Locations.ENT_INSTALLER_PATH;
         String postFix = "console.exe";
         String installerName = "";
         try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), "*" + postFix)) {

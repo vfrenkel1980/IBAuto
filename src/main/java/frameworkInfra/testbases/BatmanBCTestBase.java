@@ -2,10 +2,10 @@ package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import frameworkInfra.utils.XmlParser;
+import frameworkInfra.utils.parsers.XmlParser;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;

@@ -2,10 +2,8 @@ package Native.vstests;
 
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.VSIntegrationTestBase;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.SystemActions;
-import org.apache.velocity.runtime.directive.Parse;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

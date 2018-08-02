@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.databases.PostgresJDBC;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
@@ -31,6 +32,7 @@ public class SetupTestBase extends TestBase {
     public IbService ibService = new IbService();
     protected IBUIService.Installer installer = ibuiService.new Installer();
     protected VSUIService vsuiService = new VSUIService();
+    protected PostgresJDBC postgresJDBC = new PostgresJDBC();
 
     static {
         Calendar calendar = Calendar.getInstance();

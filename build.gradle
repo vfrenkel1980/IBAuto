@@ -35,6 +35,7 @@ def WebRegression = project.hasProperty("WebRegression")
 def ENWebRegression = project.hasProperty("ENWebRegression")
 def JPWebRegression = project.hasProperty("JPWebRegression")
 def Sanity = project.hasProperty("Sanity")
+def Dashboard = project.hasProperty("Dashboard")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.11'
@@ -166,6 +167,10 @@ test {
 
         if(Sanity) {
             suites "src/test/resources/Sanity.xml"
+        }
+
+        if(Dashboard) {
+            suites "src/test/resources/Dashboard.xml"
         }
     }
 

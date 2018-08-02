@@ -3,8 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
@@ -15,7 +14,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +21,6 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;

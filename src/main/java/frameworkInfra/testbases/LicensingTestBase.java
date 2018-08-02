@@ -3,18 +3,15 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
-import net.sf.cglib.core.Local;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
 

@@ -2,19 +2,15 @@ package ibInfra.vs;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.AppiumActions;
-import frameworkInfra.utils.Parser;
-import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class VSUIService implements IVSUIService {

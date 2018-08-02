@@ -1,4 +1,4 @@
-package frameworkInfra.utils;
+package frameworkInfra.utils.parsers;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;

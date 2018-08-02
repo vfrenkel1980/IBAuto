@@ -4,7 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -13,7 +13,6 @@ import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 

@@ -1,45 +1,19 @@
-package frameworkInfra.utils;
+package frameworkInfra.utils.databases;
 
-import frameworkInfra.testbases.TestBase;
 import com.aventstack.extentreports.Status;
 import ibInfra.dataObjects.postgres.CoordBuild;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class PostgresJDBC extends TestBase {
+public class PostgresJDBC implements IDataBase {
 
-    public static String getLastValueFromTable(String ip, String username, String password, String db, String select, String table, String column, String orderBy) {
+    public Connection connectToDb(String ip, String username, String password, String db) {
         Connection c = null;
-        Statement stmt = null;
-        String value = "";
-        try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
-                            username, password);
-            c.setAutoCommit(false);
-            if (test != null)
-                test.log(Status.INFO, "Connection established to DB");
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
-            while (rs.next()) {
-                value = rs.getString(column);
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-            if (test != null)
-                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
-        }
-        return value;
-    }
-
-    public static Connection connectToDb(String ip, String username, String password, String db) {
-        Connection c = null;
-        Statement stmt = null;
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
@@ -56,13 +30,33 @@ public class PostgresJDBC extends TestBase {
         return c;
     }
 
-    public static long getLongFromQuery(String ip, String username, String password, String db, String selectQuery){
+    public String getLastValueFromTable(String ip, String username, String password, String db, String select, String table, String column, String orderBy) {
+        Statement stmt = null;
+        String value = "";
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
+            while (rs.next()) {
+                value = rs.getString(column);
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return value;
+    }
+
+    public long getLongFromQuery(String ip, String username, String password, String db, String select, String table, String where){
         long res = 0;
 
         try {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery(selectQuery);
+            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getLong(1);
         } catch (Exception e) {
@@ -71,12 +65,13 @@ public class PostgresJDBC extends TestBase {
         }
         return res;
     }
-    public static int getIntFromQuery(String ip, String username, String password, String db, String selectQuery){
+
+    public int getIntFromQuery(String ip, String username, String password, String db, String select, String table, String where){
         int res = 0;
         try {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery(selectQuery);
+            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getInt(1);
             rs.close();
@@ -89,18 +84,11 @@ public class PostgresJDBC extends TestBase {
         return res;
     }
 
-    public static int getAllBuildsWhere(String ip, String username, String password, String db, String select, String table, String where) {
-        Connection c = null;
+    public int getAllBuildsWhere(String ip, String username, String password, String db, String select, String table, String where) {
         Statement stmt = null;
         int count = 0;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
-                            username, password);
-            c.setAutoCommit(false);
-            if (test != null)
-                test.log(Status.INFO, "Connection established to DB");
+            Connection c = connectToDb(ip, username, password, db);
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " WHERE " + where);
             while (rs.next()) {
@@ -116,14 +104,10 @@ public class PostgresJDBC extends TestBase {
         return count;
     }
 
-    public static void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
-        Connection c = null;
+    public void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
         Statement stmt = null;
-        String value = "";
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
-                    username, password);
+            Connection c = connectToDb(ip, username, password, db);
             c.setAutoCommit(true);
             if (test != null)
                 test.log(Status.INFO, "Connection established to DB");

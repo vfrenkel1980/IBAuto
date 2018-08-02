@@ -2,15 +2,13 @@ package Native.ibclienttests;
 
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.AgentSettingsTestBase;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IbService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.xml.stream.Location;
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;

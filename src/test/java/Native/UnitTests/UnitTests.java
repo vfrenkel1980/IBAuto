@@ -2,30 +2,20 @@ package Native.UnitTests;
 
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
+import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
-import ibInfra.ibService.IbService;
-import ibInfra.linuxcl.LinuxDBService;
-import ibInfra.linuxcl.LinuxService;
-import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-import java.util.regex.Pattern;
-
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class UnitTests {
 
@@ -52,10 +42,15 @@ public class UnitTests {
 
     @Test(testName = "test2")
     public void test2() throws JSchException {
-        List<CoordBuild> cars= new ArrayList<CoordBuild>();
-        for (int i= 0; i < 5; i++)
-            cars.add(new CoordBuild());
+        List<CoordBuild> coords= new ArrayList<CoordBuild>();
+        PostgresJDBC postgresJDBC = new PostgresJDBC();
+        for (int i= 0; i < 1; i++)
+            coords.add(new CoordBuild());
+        for (CoordBuild coord:coords) {
+            postgresJDBC.runFunctionOnCoordBuildTable("localhost", "ib", "ib", "coordinatordb", "sp_insert_coord_build", coord);
+        }
         System.out.println("");
+
     }
 
 
@@ -68,9 +63,11 @@ public class UnitTests {
         webDriver.findElement(By.xpath("//a[@href=\"#/material/builds\"]")).click();
         WebDriverWait wait = new WebDriverWait(webDriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class='md-spinner md-theme-default md-indeterminate']")));
 
-        webDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
-        System.out.println("");
+        String string = webDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
+        System.out.println(string);
+        webDriver.close();
     }
 
 }

@@ -1,7 +1,7 @@
 package Native.releasetests;
 
 import frameworkInfra.testbases.LicensingTestBase;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;

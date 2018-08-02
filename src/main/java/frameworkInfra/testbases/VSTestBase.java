@@ -6,6 +6,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.databases.PostgresJDBC;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSCommands;
 import ibInfra.vs.VSUIService;
@@ -33,6 +34,7 @@ public class VSTestBase extends TestBase {
     public VSUIService vsuiService = new VSUIService();
     public VSCommands vsCommands = new VSCommands();
     public WindowsService winService = new WindowsService();
+    public PostgresJDBC postgresJDBC = new PostgresJDBC();
 
     static {
         Calendar calendar = Calendar.getInstance();

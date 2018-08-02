@@ -24,6 +24,8 @@ public interface IIBService {
 
     void updateIB(String version);
 
+    void updateIBEnt();
+
     static int getIbVersion() {
         int version = 0;
         if (RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT)) {
@@ -37,6 +39,8 @@ public interface IIBService {
     }
 
     String getIbConsoleInstallation(String version);
+
+    String getIbConsoleInstallationForEnt();
 
     void loadIbLicense(String license);
 

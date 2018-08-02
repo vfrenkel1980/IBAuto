@@ -5,10 +5,10 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.Listeners.SuiteListener;
-import frameworkInfra.utils.Parser;
+import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import frameworkInfra.utils.XmlParser;
+import frameworkInfra.utils.parsers.XmlParser;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 

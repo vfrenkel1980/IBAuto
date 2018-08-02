@@ -4,6 +4,8 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibService.IIBService;
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -36,7 +38,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
         String actual = vsuiService.getInstalledMSBuildVersion();
-        String expected = PostgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info",
+        String expected = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info",
                 "ms_build_support_version", "build_number");
         test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
         Assert.assertEquals(actual, expected, "Installed MSBuild version does not match expected");

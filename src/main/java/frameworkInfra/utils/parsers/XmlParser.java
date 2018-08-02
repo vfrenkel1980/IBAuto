@@ -1,4 +1,4 @@
-package frameworkInfra.utils;
+package frameworkInfra.utils.parsers;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
