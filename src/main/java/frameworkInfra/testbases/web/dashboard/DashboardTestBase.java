@@ -5,6 +5,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import ibInfra.ibService.IbService;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,12 +13,10 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import webInfra.dashboard.pageObjects.BuildsPageObject;
-import webInfra.ibWeb.pageObjects.DownloadPageObject;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
@@ -41,20 +40,18 @@ public class DashboardTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        ibService.updateIBEnt();
-    }
-
-    @BeforeClass
-    public void beforeClass() {
-        test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("http://localhost:8000/#/");
-        eventWebDriver.manage().window().maximize();
-        eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        buildPageObject = new BuildsPageObject(eventWebDriver);
+        ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+
     }
 
     @BeforeMethod
@@ -67,12 +64,11 @@ public class DashboardTestBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
-        if (webDriver != null) {
-            webDriver.quit();
-            eventWebDriver.quit();
-            eventWebDriver.unregister(handler);
-        }
-        webDriver = null;
-        extent.flush();
+
+    }
+
+    @AfterSuite
+    public void afterSuite(){
+        ibService.uninstallIB("Latest");
     }
 }

@@ -14,8 +14,6 @@ public interface IDataBase {
 
     int getIntFromQuery(String ip, String username, String password, String db, String select, String table, String where);
 
-    int getAllBuildsWhere(String ip, String username, String password, String db, String select, String table, String where);
-
     void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb);
 
 }

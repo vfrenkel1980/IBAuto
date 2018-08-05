@@ -84,26 +84,6 @@ public class PostgresJDBC implements IDataBase {
         return res;
     }
 
-    public int getAllBuildsWhere(String ip, String username, String password, String db, String select, String table, String where) {
-        Statement stmt = null;
-        int count = 0;
-        try {
-            Connection c = connectToDb(ip, username, password, db);
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " WHERE " + where);
-            while (rs.next()) {
-                count++;
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-            if (test != null)
-                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
-        }
-        return count;
-    }
-
     public void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
         Statement stmt = null;
         try {

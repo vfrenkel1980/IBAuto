@@ -24,7 +24,7 @@ public interface IIBService {
 
     void updateIB(String version);
 
-    void updateIBEnt();
+    int installEnt();
 
     static int getIbVersion() {
         int version = 0;

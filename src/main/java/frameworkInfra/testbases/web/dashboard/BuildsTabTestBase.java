@@ -1,12 +1,38 @@
 package frameworkInfra.testbases.web.dashboard;
 
 
+import frameworkInfra.Listeners.SuiteListener;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import webInfra.dashboard.pageObjects.BuildsPageObject;
 
+import java.util.concurrent.TimeUnit;
+
+import static frameworkInfra.Listeners.SuiteListener.extent;
+import static frameworkInfra.Listeners.SuiteListener.test;
+
+@Listeners(SuiteListener.class)
 public class BuildsTabTestBase extends DashboardTestBase {
 
     @BeforeClass
     public void beforeClassBuilds(){
+        test = extent.createTest("Before Class");
+        eventWebDriver.get("http://localhost:8000/#/");
+        eventWebDriver.manage().window().maximize();
+        eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        buildPageObject = new BuildsPageObject(eventWebDriver);
         buildPageObject.goToBuildsPage();
+    }
+
+    @AfterClass
+    public void afterClass(){
+        if (webDriver != null) {
+            webDriver.quit();
+            eventWebDriver.quit();
+            eventWebDriver.unregister(handler);
+        }
+        webDriver = null;
+        extent.flush();
     }
 }
