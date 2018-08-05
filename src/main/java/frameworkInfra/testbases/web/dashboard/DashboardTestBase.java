@@ -40,10 +40,6 @@ public class DashboardTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        eventWebDriver = new EventFiringWebDriver(webDriver);
-        eventWebDriver.register(handler);
         ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
@@ -51,7 +47,10 @@ public class DashboardTestBase extends TestBase {
 
     @BeforeClass
     public void beforeClass() {
-
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
+        webDriver = new ChromeDriver();
+        eventWebDriver = new EventFiringWebDriver(webDriver);
+        eventWebDriver.register(handler);
     }
 
     @BeforeMethod
