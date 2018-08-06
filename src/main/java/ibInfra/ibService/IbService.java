@@ -71,7 +71,7 @@ public class IbService extends TestBase implements IIBService {
     @Override
     public int installEnt() {
         String installationFile = getIbConsoleInstallationForEnt();
-        return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
+        return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
 
     @Override
