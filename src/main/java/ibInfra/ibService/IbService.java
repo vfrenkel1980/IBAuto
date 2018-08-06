@@ -91,7 +91,7 @@ public class IbService extends TestBase implements IIBService {
 
     @Override
     public String getIbConsoleInstallationForEnt() {
-        String path = Locations.ENT_INSTALLER_PATH;
+        String path = System.getProperty("user.dir");
         String postFix = "console.exe";
         String installerName = "";
         try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), "*" + postFix)) {
@@ -101,7 +101,7 @@ public class IbService extends TestBase implements IIBService {
         } catch (final Exception e) {
             e.getMessage();
         }
-        return installerName;
+        return installerName.substring(installerName.lastIndexOf("\\") + 1);
     }
 
     @Override

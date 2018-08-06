@@ -5,6 +5,7 @@ import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
+import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -56,18 +57,8 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        WebDriver webDriver = new ChromeDriver();
-        webDriver.get("http://localhost:8000/#/material/overview");
-        webDriver.manage().window().maximize();
-        webDriver.findElement(By.xpath("//a[@href=\"#/material/builds\"]")).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class='md-spinner md-theme-default md-indeterminate']")));
-
-        String string = webDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
-        System.out.println(string);
-        webDriver.close();
+        IbService ibService = new IbService();
+        System.out.println(ibService.getIbConsoleInstallationForEnt());
     }
 
 }

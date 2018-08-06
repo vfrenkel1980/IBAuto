@@ -1,13 +1,7 @@
 package ibInfra.windowscl;
 
 
-import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
-
-import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public interface IWindowsService {
 
