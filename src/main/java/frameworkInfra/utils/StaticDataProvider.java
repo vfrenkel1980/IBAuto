@@ -38,6 +38,7 @@ public class StaticDataProvider {
         public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
         public static final String SECOND_INITIATOR_LOG_PATH = Locations.QA_ROOT + "\\second_initiator_output\\";
         public static final String LINUX_SCRIPT_OUTPUT = Locations.QA_ROOT + "\\Script_Output\\";
+        public static final String ENT_INSTALLER_PATH = "c:\\installer\\";
     }
 
     public static class URL {
@@ -428,7 +429,7 @@ public class StaticDataProvider {
         public static final String TEST_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - personal Coordinator.IB_lic";
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
         public static final String AGENT_SETTINGS_LIC = "IncrediBuild - Mark Zvuluni - agent settings.IB_lic";
-        public static final String DASHBOARD_LIC = "IncrediBuild - Aleksandra - additional tests environment license JUL 2018-Enterprise.IB_lic";
+        public static final String DASHBOARD_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - dashboard tests August 2018.IB_lic";
     }
 
     public static class WindowsCommands {
