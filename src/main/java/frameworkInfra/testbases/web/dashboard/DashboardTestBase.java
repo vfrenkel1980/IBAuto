@@ -47,10 +47,7 @@ public class DashboardTestBase extends TestBase {
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        eventWebDriver = new EventFiringWebDriver(webDriver);
-        eventWebDriver.register(handler);
+
     }
 
     @BeforeMethod
