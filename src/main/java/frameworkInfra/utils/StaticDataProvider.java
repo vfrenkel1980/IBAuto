@@ -59,6 +59,7 @@ public class StaticDataProvider {
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
+        public static final String SQLITE_CONVERTION_TOOL = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDb.exe";
     }
 
     public static class WindowsServices {
@@ -436,6 +437,7 @@ public class StaticDataProvider {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
+        public static final String IB_DOWNGRADE_COMMAND = "%s /downgrade";
         public static final String GET_RUNNING_TASK = "tasklist /fi \"imagename eq %s\"";
         public static final String GET_RUNNING_SERVICE = "tasklist /fi \"services eq %s\"";
         public static final String GET_MEMORY_USAGE = "tasklist /fi \"memusage gt %s\"";

@@ -3,6 +3,7 @@ package Native.UnitTests;
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.databases.SQLiteJDBC;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
@@ -58,7 +59,9 @@ public class UnitTests {
     @Test(testName = "test3")
     public void test3 () {
         IbService ibService = new IbService();
-        System.out.println(ibService.getIbConsoleInstallationForEnt());
+        ibService.decryptSQLiteDB();
+        SQLiteJDBC sqLiteJDBC = new SQLiteJDBC();
+        System.out.println(sqLiteJDBC.getIntFromQuery("","", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)"));
     }
 
 }

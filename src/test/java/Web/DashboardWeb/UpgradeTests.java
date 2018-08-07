@@ -5,11 +5,11 @@ import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class upgradeTests extends upgradeEntTestBase {
+public class UpgradeTests extends upgradeEntTestBase {
 
     @Test(testName = "Perform Upgrade To Ent")
     public void performUpgradeToEnt() {
-        int exitCode = ibService.installEnt();
+        int exitCode = ibService.upgradeToEnt();
         Assert.assertEquals(exitCode, 0, "Enterprise Installation finished with Exit Code different than 0");
     }
 

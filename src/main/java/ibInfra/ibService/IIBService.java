@@ -20,11 +20,13 @@ public interface IIBService {
 
     void installIB(String version, String license);
 
+    int downgradeEntToPro(String version);
+
     int installIB(String version);
 
     void updateIB(String version);
 
-    int installEnt();
+    int upgradeToEnt();
 
     static int getIbVersion() {
         int version = 0;
@@ -75,4 +77,6 @@ public interface IIBService {
     String getCoordinator();
 
     boolean verifyAvoidLocal(String filePath);
+
+    void decryptSQLiteDB();
 }

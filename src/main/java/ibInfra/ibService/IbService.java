@@ -64,12 +64,19 @@ public class IbService extends TestBase implements IIBService {
     }
 
     @Override
+    public int downgradeEntToPro(String version) {
+        String installationFile = getIbConsoleInstallation(version);
+        return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_DOWNGRADE_COMMAND, installationFile));
+    }
+
+    @Override
     public void updateIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
+
     @Override
-    public int installEnt() {
+    public int upgradeToEnt() {
         String installationFile = getIbConsoleInstallationForEnt();
         return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
@@ -254,6 +261,12 @@ public class IbService extends TestBase implements IIBService {
             }
         }
         return true;
+    }
+
+    @Override
+    public void decryptSQLiteDB() {
+        winService.restartService(WindowsServices.COORD_SERVICE);
+        winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
     }
 
 

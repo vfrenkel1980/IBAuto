@@ -7,6 +7,7 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.databases.SQLiteJDBC;
 import ibInfra.ibService.IbService;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -27,6 +28,7 @@ public class DashboardTestBase extends TestBase {
 
     protected BuildsPageObject buildPageObject;
     protected PostgresJDBC postgresJDBC = new PostgresJDBC();
+    protected SQLiteJDBC sqLiteJDBC = new SQLiteJDBC();
     protected IbService ibService = new IbService();
 
     static {

@@ -6,15 +6,21 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Dashboard - Functionality">
+    <test name="Dashboard - Upgrade">
         <classes>
-            <class name ="Web.DashboardWeb.upgradeTests" />
+            <class name ="Web.DashboardWeb.UpgradeTests" />
         </classes>
     </test>
 
     <test name="Dashboard - UI">
         <classes>
             <class name ="Web.DashboardWeb.BuildsTabTests" />
+        </classes>
+    </test>
+
+    <test name="Dashboard - Downgrade">
+        <classes>
+            <class name ="Web.DashboardWeb.DowngradeTests" />
         </classes>
     </test>
 

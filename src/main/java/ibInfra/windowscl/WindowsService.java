@@ -210,6 +210,7 @@ public class WindowsService extends TestBase implements IWindowsService {
         fos.close();
     }
 
+    @Override
     public File getLatestFileFromDir(String dirPath, String substring){
         File dir = new File(dirPath);
         File[] files = dir.listFiles();
@@ -226,6 +227,12 @@ public class WindowsService extends TestBase implements IWindowsService {
             }
         }
         return lastModifiedFile;
+    }
+
+    @Override
+    public void restartService(String serviceName) {
+        runCommandWaitForFinish("net stop " + serviceName);
+        runCommandWaitForFinish("net start " + serviceName);
     }
 
 }

@@ -1,6 +1,7 @@
 package ibInfra.windowscl;
 
 
+import java.io.File;
 import java.io.IOException;
 
 public interface IWindowsService {
@@ -25,6 +26,10 @@ public interface IWindowsService {
 
     void downloadFile(String url, String fileName) throws IOException;
 
+    File getLatestFileFromDir(String dirPath, String substring);
+
     String getHostName();
+
+    void restartService(String serviceName);
 
 }
