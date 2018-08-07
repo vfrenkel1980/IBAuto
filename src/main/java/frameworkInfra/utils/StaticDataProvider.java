@@ -500,6 +500,7 @@ public class StaticDataProvider {
         public static final String HOME_DIR = "/home/xoreax/";
         public static final String COPY_FILE_SCP = "sshpass -p xoreax scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s xoreax@%s:/home/xoreax";
         public static final String EXTRACT_UPGRADE_FILE = "cd /opt/incredibuild/httpd/htdocs/incredibuild; sudo tar xf ~/%s";
+        public static final String EXTRACT_FILE = "tar xvjf %s";
         public static final String GET_IB_VERSION = "ib_console --version";
         public static final String GET_EPOCH_TIME = "date +%s%3N";
     }
@@ -573,6 +574,9 @@ public class StaticDataProvider {
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
 
+        public static final String IB_TESTS = "ib_tests-1.0.0.tar.bz2";
+        public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
+        public static final String RUN_IB_TESTS = "./run_all_tests.bash /tmp/ib_tests/";
 
         public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
 
