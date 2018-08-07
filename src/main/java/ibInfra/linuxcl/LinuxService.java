@@ -244,9 +244,16 @@ public class LinuxService extends TestBase implements ILinuxService {
         Assert.assertEquals(version, getIBVersion(destMachine));
         verifyAgentsUpdated(destMachine, version);
         String ibDBCheckPath = getInstallerFolder(LinuxMachines.LINUX_BUILDER, version) + "/ib_db_check.py";
-        for (String machine: grid) {
+        String  ibTestsPath = getInstallerFolder(LinuxMachines.LINUX_BUILDER, version) + "/ib_tests-1.0.0.tar.bz2";
+
+       for (String machine: grid) {
             if (machine.contains("mb") || machine.contains("mi") || machine.contains("init") )
                 copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, machine, ibDBCheckPath);
+
+            if ( machine.contains("init") ) {
+                copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, machine, ibTestsPath);
+                extractFile(machine, LinuxSimulation.IB_TESTS);
+            }
         }
     }
 
@@ -268,6 +275,11 @@ public class LinuxService extends TestBase implements ILinuxService {
     @Override
     public void extractUpgradeFile(String machineName, String fileName) {
         linuxRunSSHCommand(String.format(LinuxCommands.EXTRACT_UPGRADE_FILE, fileName), machineName);
+    }
+
+    @Override
+    public  void extractFile(String machineName, String filePath) {
+        linuxRunSSHCommand(String.format(LinuxCommands.EXTRACT_FILE, filePath), machineName);
     }
 
     @Override

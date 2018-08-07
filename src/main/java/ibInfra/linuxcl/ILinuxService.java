@@ -34,6 +34,8 @@ public interface ILinuxService {
 
     void extractUpgradeFile(String machineName, String file);
 
+    void extractFile(String machineName, String filePath);
+
     String getIBVersion(String machine);
 
     void verifyAgentsUpdated(String hostName, String version);

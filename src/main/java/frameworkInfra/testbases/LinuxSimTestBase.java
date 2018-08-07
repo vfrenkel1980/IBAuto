@@ -52,6 +52,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
         ibVersion = linuxService.getIBVersion(ipList.get(0));
 
+
         log.info("finished before suite");
     }
 
@@ -90,6 +91,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testName = getTestName(method);
         test = extent.createTest(testName);
         test.assignCategory("Linux Simulation - Cycle " + cycle);
+        test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.log(Status.INFO, method.getName() + " test started");
     }
 
@@ -106,21 +108,19 @@ public class LinuxSimTestBase extends LinuxTestBase {
         linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuild + "," + suiteLastBuild + " > " + output + "; exit 0" , ipList.get(1));
         linuxService.getFile(ipList.get(1), LinuxCommands.HOME_DIR + output, Locations.LINUX_SCRIPT_OUTPUT + "\\" + output);
 
+        String testsFileName = "ib_tests_res_" + dateFormat.format(calendar.getTime());
+        int exitStatus = linuxService.linuxRunSSHCommand(" cd " + LinuxSimulation.IB_TESTS_DIR + " && " + LinuxSimulation.RUN_IB_TESTS + " > " + testsFileName + "; exit 0", ipList.get(1));
+        linuxService.getFile(ipList.get(1), LinuxSimulation.IB_TESTS_DIR + testsFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + testsFileName);
+
         List<String> files = SystemActions.getAllFilesInDirectory(Locations.LINUX_SCRIPT_OUTPUT + "\\");
         for (String file: files) {
             isFailed = Parser.doesFileContainString(Locations.LINUX_SCRIPT_OUTPUT + "\\" + file, "ErrorMessages:");
             if (isFailed)
                 test.log(Status.WARNING, "Errors found in " + file);
+
+            if((exitStatus != 0) && (file.contains("ib_tests_res")))
+                test.log(Status.WARNING, "Errors found in " + file);
         }
-
-        String testsFileName = "ib_tests" + dateFormat.format(calendar.getTime());
-//        int exitCode = linuxService.linuxRunSSHCommand("cd /home/xoreax/ib_tests-1.0.0 && ./run_all_tests.bash /home/xoreax/ib_tests " + " > " + testsFileName, ipList.get(1));
-        String run_all_tests_output = linuxService.linuxRunSSHCommandOutputString("cd /home/xoreax/ib_tests-1.0.0 && ./run_all_tests.bash /home/xoreax/ib_tests" , ipList.get(1));
-
-        if (run_all_tests_output.toLowerCase().contains("abort") || run_all_tests_output.toLowerCase().contains("fail"))
-            test.log(Status.WARNING, "Errors found in " + testsFileName);
-
-//        linuxService.getFile(ipList.get(1), "/home/xoreax/" + testsFileName, Locations.LINUX_SCRIPT_OUTPUT  + testsFileName);
 
     }
 
