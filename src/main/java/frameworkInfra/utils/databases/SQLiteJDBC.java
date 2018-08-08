@@ -44,6 +44,8 @@ public class SQLiteJDBC implements IDataBase {
         try {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getInt(1);

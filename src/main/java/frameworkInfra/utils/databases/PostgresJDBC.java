@@ -36,6 +36,8 @@ public class PostgresJDBC implements IDataBase {
         try {
             Connection c = connectToDb(ip, username, password, db);
             stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running query: SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
             ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
             while (rs.next()) {
                 value = rs.getString(column);
@@ -56,6 +58,8 @@ public class PostgresJDBC implements IDataBase {
         try {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getLong(1);
@@ -71,6 +75,8 @@ public class PostgresJDBC implements IDataBase {
         try {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getInt(1);
@@ -88,10 +94,9 @@ public class PostgresJDBC implements IDataBase {
         Statement stmt = null;
         try {
             Connection c = connectToDb(ip, username, password, db);
-            c.setAutoCommit(true);
-            if (test != null)
-                test.log(Status.INFO, "Connection established to DB");
             stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running function: " + function);
             stmt.executeQuery("SELECT " + function + "(" + "'" + cb.getBuildID() + "'" + "," + cb.getAgentID() + "," +
                     cb.getStartTime() + "," + cb.getEndTime() + "," + "'" + cb.getCaption() + "'" + "," + cb.getTotalLocalTime() + "," + cb.getTotalRemoteTime() + "," +
                     cb.getStatus() + "," + cb.getMaxCoresUsed() + "," + cb.getNumberOfTasks() + "," + cb.getAvgReadyTasks() + "," + cb.getAvgUsedCores() + "," +

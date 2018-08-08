@@ -13,26 +13,26 @@
         </classes>
     </test>
 
-    <test name="ENLandingPage">
+<!--    <test name="ENLandingPage">
         <parameter name="lang" value="en"/>
         <classes>
             <class name ="Web.IBWeb.LandingPageTests" />
         </classes>
-    </test>
+    </test>-->
 
     <!--JAPAN-->
+    <!--
+       <test name="JPWebDownload">
+            <parameter name="lang" value="jp"/>
+            <classes>
+                <class name ="Web.IBWeb.DownloadFormTests" />
+            </classes>
+        </test>
 
-    <test name="JPWebDownload">
-        <parameter name="lang" value="jp"/>
-        <classes>
-            <class name ="Web.IBWeb.DownloadFormTests" />
-        </classes>
-    </test>
-
-    <test name="JPLandingPage">
-        <parameter name="lang" value="jp"/>
-        <classes>
-            <class name ="Web.IBWeb.LandingPageTests" />
-        </classes>
-    </test>
+        <test name="JPLandingPage">
+            <parameter name="lang" value="jp"/>
+            <classes>
+                <class name ="Web.IBWeb.LandingPageTests" />
+            </classes>
+        </test>-->
 </suite>

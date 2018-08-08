@@ -23,7 +23,7 @@ public class DownloadPageTestBase extends IbWebTestBase {
         eventWebDriver.register(handler);
         switch (lang){
             case "en":
-                eventWebDriver.get("https://test-store.incredibuild.com/");
+                eventWebDriver.get("https://test.incredibuild.com/");
                 break;
             case "jp":
                 eventWebDriver.get("https://qa-jp-store.incredibuild.com/register#/regWindows/");
