@@ -269,5 +269,15 @@ public class IbService extends TestBase implements IIBService {
         winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
     }
 
+    @Override
+    public void openBuildMonitor() {
+        do {
+            winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
+        }while (winService.getNumberOfProcessInstances(Processes.BUILDMONITOR) == 0);
+    }
+
+
+
+
 
 }

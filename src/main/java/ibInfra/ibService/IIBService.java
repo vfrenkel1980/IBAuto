@@ -79,4 +79,6 @@ public interface IIBService {
     boolean verifyAvoidLocal(String filePath);
 
     void decryptSQLiteDB();
+
+    void openBuildMonitor();
 }
