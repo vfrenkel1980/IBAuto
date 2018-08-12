@@ -37,7 +37,7 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
+                test.log(Status.INFO, "Running query: SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
             ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " ORDER BY " + orderBy + " DESC LIMIT 1");
             while (rs.next()) {
                 value = rs.getString(column);
@@ -76,7 +76,7 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
+                test.log(Status.INFO, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getInt(1);
@@ -96,7 +96,7 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running function: " + function);
+                test.log(Status.INFO, "Running function: " + function);
             stmt.executeQuery("SELECT " + function + "(" + "'" + cb.getBuildID() + "'" + "," + cb.getAgentID() + "," +
                     cb.getStartTime() + "," + cb.getEndTime() + "," + "'" + cb.getCaption() + "'" + "," + cb.getTotalLocalTime() + "," + cb.getTotalRemoteTime() + "," +
                     cb.getStatus() + "," + cb.getMaxCoresUsed() + "," + cb.getNumberOfTasks() + "," + cb.getAvgReadyTasks() + "," + cb.getAvgUsedCores() + "," +
