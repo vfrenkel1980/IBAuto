@@ -10,7 +10,7 @@ import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 @Listeners(SuiteListener.class)
-public class upgradeEntTestBase extends DashboardTestBase {
+public class UpgradeEntTestBase extends DashboardTestBase {
 
     @BeforeClass
     public void beforeClassUpgradeEnt(){

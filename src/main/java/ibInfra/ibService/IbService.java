@@ -75,6 +75,7 @@ public class IbService extends TestBase implements IIBService {
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
 
+    //this method is for upgrading to ent using the zip file and the command line
     @Override
     public int upgradeToEnt() {
         String installationFile = getIbConsoleInstallationForEnt();

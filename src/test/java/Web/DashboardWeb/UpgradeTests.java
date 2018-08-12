@@ -1,11 +1,11 @@
 package Web.DashboardWeb;
 
-import frameworkInfra.testbases.web.dashboard.upgradeEntTestBase;
+import frameworkInfra.testbases.web.dashboard.UpgradeEntTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class UpgradeTests extends upgradeEntTestBase {
+public class UpgradeTests extends UpgradeEntTestBase {
 
     @Test(testName = "Perform Upgrade To Ent")
     public void performUpgradeToEnt() {
