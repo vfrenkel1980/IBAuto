@@ -34,7 +34,7 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar(){
-        winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
+        ibService.openBuildMonitor();
         client.verifyMonitorBarPattern(ibMonBarPattern);
     }
 
@@ -53,7 +53,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
 
-        winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
+        ibService.openBuildMonitor();
         client.clickProjectsTab();
         client.verifyProjectsTabColoring(progressPattern);
     }
