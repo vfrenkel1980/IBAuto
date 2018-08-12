@@ -392,7 +392,7 @@ public class StaticDataProvider {
 
         public static class CHROME_BATMAN {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
-            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
+            public static final String CHROME_RELEASE_BUILD = IbLocations.BUILD_CONSOLE + " /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
         }
 
         public static class CHROME_ROBIN {
