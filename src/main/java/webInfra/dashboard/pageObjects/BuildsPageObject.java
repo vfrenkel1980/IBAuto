@@ -8,13 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BuildsPageObject {
 
     /*-------------------MAPPING-------------------*/
-    public static final By OVERVIEW_TAB = By.xpath("//a[@href=\"#/material/overview\"]");
-    public static final By AGENTS_TAB = By.xpath("//a[@href=\"#/material/agents\"]");
-    public static final By BUILDS_TAB = By.xpath("//a[@href=\"#/material/builds\"]");
-    public static final By CUSTOM_TAB = By.xpath("//button[contains(text(),'Custom')]");
-    public static final By H12_TAB = By.xpath("//button[contains(text(),'12H')]");
-    public static final By H24_TAB = By.xpath("//button[contains(text(),'24H')]");
-    public static final By ALL_TAB = By.xpath("//button[contains(text(),'All')]");
+    public static final By OVERVIEW_TAB = By.xpath("//button[contains(@class, 'overview_tab')]");
+    public static final By AGENTS_TAB = By.xpath("//button[contains(@class, 'agents_tab')]");
+    public static final By BUILDS_TAB = By.xpath("//button[contains(@class, 'builds_tab')]");
+    public static final By CUSTOM_TAB = By.xpath("//button[contains(Custom,'custom_tab')]");
+    public static final By H12_TAB = By.xpath("//button[contains(@class,'12h_tab')]");
+    public static final By H24_TAB = By.xpath("//button[contains(@class,'24h_tab')]");
+    public static final By TODAY_TAB = By.xpath("//button[contains(@class,'today_tab')]");
+    public static final By ALL_TAB = By.xpath("//button[contains(@class,'all_tab')]");
     public static final By OVERLAY = By.xpath("//*[@id='overlay']");
 
     /*----BUILDS----*/
