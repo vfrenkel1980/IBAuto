@@ -8,17 +8,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BuildsPageObject {
 
     /*-------------------MAPPING-------------------*/
-    public static final By OVERVIEW_TAB = By.xpath("//button[contains(@class, 'overview_tab')]");
-    public static final By AGENTS_TAB = By.xpath("//button[contains(@class, 'agents_tab')]");
-    public static final By BUILDS_TAB = By.xpath("//button[contains(@class, 'builds_tab')]");
-    public static final By CUSTOM_TAB = By.xpath("//button[contains(Custom,'custom_tab')]");
-    public static final By H12_TAB = By.xpath("//button[contains(@class,'12h_tab')]");
-    public static final By H24_TAB = By.xpath("//button[contains(@class,'24h_tab')]");
-    public static final By TODAY_TAB = By.xpath("//button[contains(@class,'today_tab')]");
-    public static final By ALL_TAB = By.xpath("//button[contains(@class,'all_tab')]");
-    public static final By OVERLAY = By.xpath("//*[@id='overlay']");
-
-    /*----BUILDS----*/
+    private static final By OVERVIEW_TAB = By.xpath("//button[contains(@class, 'overview_tab')]");
+    private static final By AGENTS_TAB = By.xpath("//button[contains(@class, 'agents_tab')]");
+    private static final By BUILDS_TAB = By.xpath("//button[contains(@class, 'builds_tab')]");
+    private static final By CUSTOM_TAB = By.xpath("//button[contains(Custom,'custom_tab')]");
+    private static final By H12_TAB = By.xpath("//button[contains(@class,'12h_tab')]");
+    private static final By H24_TAB = By.xpath("//button[contains(@class,'24h_tab')]");
+    private static final By TODAY_TAB = By.xpath("//button[contains(@class,'today_tab')]");
+    private static final By ALL_TAB = By.xpath("//button[contains(@class,'all_tab')]");
+    private static final By OVERLAY = By.xpath("//*[@id='overlay']");
 
 
     private static EventFiringWebDriver eventWebDriver;
@@ -61,22 +59,6 @@ public class BuildsPageObject {
         waitForLoadingScreen();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
         waitForLoadingScreen();
-    }
-
-    public int convertStringTimeToEpoch(String time){
-        int epoch = 0;
-
-        if (time.contains("h")){
-            String hours = time.substring(0,time.indexOf("h"));
-            String minutes = time.substring(time.indexOf(" "), time.indexOf("m")).replaceAll(" ","");
-            epoch = Integer.parseInt(hours) * 3600 + Integer.parseInt(minutes)*60;
-        }
-        else{
-            String minutes = time.substring(0, time.indexOf("m"));
-            String seconds = time.substring(time.indexOf(" "), time.indexOf("s")).replaceAll(" ","");
-            epoch = Integer.parseInt(minutes) * 60 + Integer.parseInt(seconds);
-        }
-        return epoch;
     }
 
     public void waitForLoadingScreen(){

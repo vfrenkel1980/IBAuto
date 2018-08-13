@@ -13,7 +13,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import webInfra.dashboard.helpers.DashboardHelper;
 import webInfra.dashboard.pageObjects.BuildsPageObject;
+import webInfra.dashboard.pageObjects.OverviewPageObject;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,8 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class DashboardTestBase extends TestBase {
 
     protected BuildsPageObject buildPageObject;
+    protected OverviewPageObject overviewPageObject;
+    protected DashboardHelper dashboardHelper = new DashboardHelper();
     protected PostgresJDBC postgresJDBC = new PostgresJDBC();
     protected SQLiteJDBC sqLiteJDBC = new SQLiteJDBC();
     protected IbService ibService = new IbService();
@@ -42,9 +46,9 @@ public class DashboardTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        //ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
+        //ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        //ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
     }
 
     @BeforeClass
@@ -67,6 +71,7 @@ public class DashboardTestBase extends TestBase {
 
     @AfterSuite
     public void afterSuite(){
-        ibService.uninstallIB("Latest");
+        //ibService.uninstallIB("Latest");
     }
+
 }
