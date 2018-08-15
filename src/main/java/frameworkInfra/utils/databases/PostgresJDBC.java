@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.LinkedHashMap;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -59,8 +60,8 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
-            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
+                test.log(Status.WARNING, "Running query: SELECT " + select + " FROM " + table + " WHERE " + where);
+            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " WHERE " + where);
             rs.next();
             res = rs.getLong(1);
         } catch (Exception e) {
@@ -76,8 +77,8 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.INFO, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
-            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
+                test.log(Status.INFO, "Running query: SELECT " + select +  " FROM " + table + " WHERE " + where);
+            ResultSet rs = stmt.executeQuery(" SELECT " + select + " FROM " + table + " WHERE " + where);
             rs.next();
             res = rs.getInt(1);
             rs.close();
@@ -149,4 +150,25 @@ public class PostgresJDBC implements IDataBase {
                 test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
         }
     }
+    public LinkedHashMap<String,String> getLinkedHashMapFromQuery(String ip, String username, String password, String db, String select, String table, String join, String groupBy, String orderBy, int limit) {
+        LinkedHashMap<String, String> res = new LinkedHashMap<String, String>();
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.INFO, "Running query: SELECT " + select + " FROM " + table + " JOIN " + join + " GROUP BY " + groupBy + "ORDER BY " + orderBy + " LIMIT " + limit);
+            ResultSet rs = stmt.executeQuery(" SELECT " + select + " FROM " + table + " JOIN " + join + " GROUP BY " + groupBy + " ORDER BY " + orderBy + " LIMIT " + limit);
+            while (rs.next()) {
+                res.put(rs.getString(1), rs.getString(2));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return res;
+    }
+
 }

@@ -17,6 +17,11 @@ public class BuildsPageObject {
     private static final By TODAY_TAB = By.xpath("//button[contains(@class,'today_tab')]");
     private static final By ALL_TAB = By.xpath("//button[contains(@class,'all_tab')]");
     private static final By OVERLAY = By.xpath("//*[@id='overlay']");
+    private static final By KPI_SUCCEES_BUILDS = By.xpath("//*[@class='successful_builds_lbl']");
+    private static final By KPI_FAILED_BUILDS = By.xpath("//*[@class='failed_builds_lbl']");
+    private static final By KPI_TOTAL_BUILDS = By.xpath("//*[@class='total_builds']");
+    private static final By KPI_AVG_DURATION = By.xpath("//*[@class='avg_build_duration_lbl']");
+    private static final By KPI_DISTRIBUTED_TIME = By.xpath("//*[@class='distributed_lbl']");
 
 
     private static EventFiringWebDriver eventWebDriver;
@@ -28,27 +33,27 @@ public class BuildsPageObject {
 
 
     public String getSuccessfulBuildsUI() {
-        return eventWebDriver.findElement(By.xpath("//*[@id=\"page-content-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div/label")).getText();
+        return eventWebDriver.findElement(KPI_SUCCEES_BUILDS).getText();
     }
 
     public String getFailedBuildsUI() {
-        return eventWebDriver.findElement(By.xpath("//div[@id='page-content-container']//div[@class='grid']//div[2]//div[1]//div[1]//label[1]")).getText();
+        return eventWebDriver.findElement(KPI_FAILED_BUILDS).getText();
     }
     public String getTotalBuildsUI(){
-        return eventWebDriver.findElement(By.xpath("//div[@class='md-layout md-gutter-24']//div[1]//div[1]//div[2]//div[1]//div[1]//div[1]//div[1]")).getText();
+        return eventWebDriver.findElement(KPI_TOTAL_BUILDS).getText();
     }
     public String getAvgBuildDurationUI() {
-        return eventWebDriver.findElement(By.xpath("//div[@class='md-layout md-gutter-24']//div[3]//div[1]//div[2]//div[1]//div[1]//div[1]//div[1]")).getText();
+        return eventWebDriver.findElement(KPI_AVG_DURATION).getText();
     }
 
     public String getDistributedTimeUI() {
-        return eventWebDriver.findElement(By.xpath("//label[contains(text(),'%')]")).getText().replace("%","");
+        return eventWebDriver.findElement(KPI_DISTRIBUTED_TIME).getText();
     }
     public String getTopBuildTimeInitiator(int num) {
-        return eventWebDriver.findElement(By.xpath(".//*[@id='highcharts-z4vqdez-6']/svg/g[9]/text["+num+"]/tspan")).getText();
+        return eventWebDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div/div[4]/div/div[2]/div/div[1]/div/div/*[local-name() = 'svg']/*[local-name() = 'g'][9]/text["+num+"]/tspan")).getText();
     }
     public String getTopBuildTimeDuration(int num) {
-        return eventWebDriver.findElement(By.xpath(".//*[@id='highcharts-z4vqdez-6']/svg/g[6]/g["+num+"]/text/tspan")).getText();
+        return eventWebDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div/div[4]/div/div[2]/div/div[1]/div/div/*[local-name() = 'svg']/*[local-name() = 'g'][6]//*[local-name() = 'g']["+num+"]/text/tspan")).getText();
     }
 
     public void goToBuildsPage() {
