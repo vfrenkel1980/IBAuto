@@ -60,6 +60,16 @@ public class SQLiteJDBC implements IDataBase {
     }
 
     @Override
+    public long getLongFromQuery(String ip, String username, String password, String db, String select, String table) {
+        return 0;
+    }
+
+    @Override
+    public int getIntFromQuery(String ip, String username, String password, String db, String select, String table) {
+        return 0;
+    }
+
+    @Override
     public void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
 
     }

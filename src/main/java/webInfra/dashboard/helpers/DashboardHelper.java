@@ -19,7 +19,7 @@ public class DashboardHelper {
     }
 
     public long getTotalSavedTime() {
-        return postgresJDBC.getLongFromQuery("localhost", "ib", "ib", "coordinatordb", "SUM (saved_time) ", "coord_build ","agent_id NOT IN (0)");
+        return postgresJDBC.getLongFromQuery("localhost", "ib", "ib", "coordinatordb", "SUM (saved_time) ", "coord_build ");
     }
 
     public int getBuildsDistributedCoreHours(String status) {

@@ -14,6 +14,10 @@ public interface IDataBase {
 
     int getIntFromQuery(String ip, String username, String password, String db, String select, String table, String where);
 
+    long getLongFromQuery(String ip, String username, String password, String db, String select, String table);
+
+    int getIntFromQuery(String ip, String username, String password, String db, String select, String table);
+
     void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb);
 
 }

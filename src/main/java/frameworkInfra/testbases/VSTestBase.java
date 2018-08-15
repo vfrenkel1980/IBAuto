@@ -44,6 +44,19 @@ public class VSTestBase extends TestBase {
         extent.attachReporter(htmlReporter);
     }
 
+    /**
+     * This class is used in order to test different scenarios for IB and VS installations.
+     * We use the parameter SCENARIO in order to distinguish between installation scenarios:
+     * 1 - vs installed, install IB from installer
+     * 2 - upgrade vs and install IB from vs installer
+     * 3 - install old IB, install vs and upgrade IB from VS installer
+     * 4 - install vs without IB
+     *
+     * @exception SkipException is thrown in sceanrio 4 in order to avoid performing
+     * test class as IB is not installed in this scenario.
+     *
+     */
+
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");

@@ -17,6 +17,22 @@ public class OverviewTabTests extends OverviewTabTestBase {
     public void verifySavedCost() {
         String savedCostUI = overviewPageObject.getCostSaved();
         long savedCost = dashboardHelper.calculateCostSaved();
-        Assert.assertEquals(savedCost, Long.parseLong(savedCostUI), "Saved time in DB does not match UI");
+        Assert.assertEquals(savedCost, Long.parseLong(savedCostUI), "Saved cost in DB does not match UI");
+    }
+
+    @Test(testName = "Verify Local Processing Time")
+    public void verifyLocalProcessingTime() {
+        long localPTUI = dashboardHelper.convertStringTimeToEpoch(overviewPageObject.getLocalProcessingTime());
+        long localPT = postgresJDBC.getLongFromQuery("localhost", "ib", "ib", "coordinatordb", "SUM (total_local_time) ", "coord_build ");
+        localPT = localPT/1000;
+        Assert.assertEquals(localPT, localPTUI, "Local processing time in DB does not match UI");
+    }
+
+    @Test(testName = "Verify Remote Processing Time")
+    public void verifyRemoteProcessingTime() {
+        long localPTUI = dashboardHelper.convertStringTimeToEpoch(overviewPageObject.getRemoteProcessingTime());
+        long localPT = postgresJDBC.getLongFromQuery("localhost", "ib", "ib", "coordinatordb", "SUM (total_remote_time) ", "coord_build ");
+        localPT = localPT/1000;
+        Assert.assertEquals(localPT, localPTUI, "Local processing time in DB does not match UI");
     }
 }

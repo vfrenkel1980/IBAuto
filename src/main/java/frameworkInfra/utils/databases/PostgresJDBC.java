@@ -90,6 +90,44 @@ public class PostgresJDBC implements IDataBase {
         return res;
     }
 
+    public long getLongFromQuery(String ip, String username, String password, String db, String select, String table){
+        long res = 0;
+
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table);
+            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table);
+            rs.next();
+            res = rs.getLong(1);
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return res;
+    }
+
+    public int getIntFromQuery(String ip, String username, String password, String db, String select, String table){
+        int res = 0;
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.INFO, "Running query: SELECT " + select + "FROM " + table);
+            ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table);
+            rs.next();
+            res = rs.getInt(1);
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return res;
+    }
+
     public void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
         Statement stmt = null;
         try {
