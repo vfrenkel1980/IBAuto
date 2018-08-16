@@ -150,6 +150,7 @@ public class PostgresJDBC implements IDataBase {
                 test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
         }
     }
+
     public LinkedHashMap<String,String> getLinkedHashMapFromQuery(String ip, String username, String password, String db, String select, String table, String join, String groupBy, String orderBy, int limit) {
         LinkedHashMap<String, String> res = new LinkedHashMap<String, String>();
         try {

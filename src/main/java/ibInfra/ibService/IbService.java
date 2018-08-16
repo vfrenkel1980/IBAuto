@@ -34,19 +34,32 @@ public class IbService extends TestBase implements IIBService {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
     }
 
+    /**
+     * perform ib clean and build
+     * @param command the command we run
+     * @return exit code of the command
+     */
     @Override
     public int cleanAndBuild(String command) {
         winService.runCommandWaitForFinish(String.format(command, ProjectsCommands.CLEAN));
         return winService.runCommandWaitForFinish(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
     }
 
+    /**
+     * perform ib clean and build but dont wait for exit code
+     * @param command the command we run
+     */
     @Override
     public void cleanAndBuildDontWaitTermination(String command) {
         winService.runCommandDontWaitForTermination(String.format(command, ProjectsCommands.CLEAN));
         winService.runCommandDontWaitForTermination(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
     }
 
-    //choose what version of IB to install. type "Latest" for latest version
+    /**
+     * Install incredibuild
+     * @param version version that we would like to install, use "Latest" for latest release
+     * @param license license file to use
+     */
     @Override
     public void installIB(String version, String license) {
         String installationFile = getIbConsoleInstallation(version);
@@ -57,31 +70,53 @@ public class IbService extends TestBase implements IIBService {
         loadIbLicense(license);
     }
 
+    /**
+     * perform IB installation without license in order to get the installation exit code
+     * @param version
+     * @return installation command exit code
+     */
     @Override
     public int installIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_COMMAND, installationFile));
     }
 
+    /**
+     * downgrade enterprise edition to pro
+     * @param version enterprise version installed
+     * @return exit code of the downgrade procedure
+     */
     @Override
     public int downgradeEntToPro(String version) {
         String installationFile = getIbConsoleInstallation(version);
         return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_DOWNGRADE_COMMAND, installationFile));
     }
 
+    /**
+     * update IB
+     * @param version version to update to
+     */
     @Override
     public void updateIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
 
-    //this method is for upgrading to ent using the zip file and the command line
+    /**
+     * this method is for upgrading to ent using the zip file and the command line
+     * @return exit code of the upgrade cpmmand
+     */
     @Override
     public int upgradeToEnt() {
         String installationFile = getIbConsoleInstallationForEnt();
         return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UPDATE_COMMAND, installationFile));
     }
 
+    /**
+     * get the console installation exe from directory
+     * @param version the version that we want to get
+     * @return full path to file
+     */
     @Override
     public String getIbConsoleInstallation(String version) {
         String path = Locations.NETWORK_IB_INSTALLATIONS + version;
@@ -97,6 +132,10 @@ public class IbService extends TestBase implements IIBService {
         return installerName;
     }
 
+    /**
+     * get the console installer name from the ent installer path
+     * @return path to console exe
+     */
     @Override
     public String getIbConsoleInstallationForEnt() {
         String path = Locations.ENT_INSTALLER_PATH;
@@ -112,6 +151,10 @@ public class IbService extends TestBase implements IIBService {
         return installerName;
     }
 
+    /**
+     * load IB license file using xlicproc
+     * @param license path to license
+     */
     @Override
     public void loadIbLicense(String license) {
         winService.runCommandDontWaitForTermination(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
@@ -121,16 +164,28 @@ public class IbService extends TestBase implements IIBService {
         isLicenseLoaded();
     }
 
+    /**
+     * unload IB license file using xlicproc
+     */
     @Override
     public void unloadIbLicense() {
         winService.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
     }
 
+    /**
+     * get the ib vs extension version from manifest
+     * @param VsDevenvInstallPath VS manifest path
+     * @return version
+     */
     @Override
     public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
         return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "\\Extensions\\IncredibuildExtension\\manifest.json", "version");
     }
 
+    /**
+     * get the ib vs extension version from manifest in IB installation path
+     * @return version
+     */
     @Override
     public String getExpectedIbVsExtensionVersion() {
         String version;
@@ -145,27 +200,12 @@ public class IbService extends TestBase implements IIBService {
         return version;
     }
 
-
-    @Override
-    public boolean verifyIbInstallation(int ibVersion) {
-        return ibVersion != 0;
-    }
-
-    @Override
-    public boolean verifyExtensionUpgrade(String oldVersion, String newVersion) {
-        return oldVersion.equals(newVersion);
-    }
-
-    @Override
-    public boolean verifyIbUpgrade(int oldVersion, int newVersion) {
-        return oldVersion == newVersion;
-    }
-
-    @Override
-    public boolean verifyExtensionInstalled(String extensionVersion) {
-        return extensionVersion.equals("");
-    }
-
+    /**
+     * verify if incredibuild services are running
+     * @param agent include agent service in check
+     * @param coord include coordinator service in check
+     * @return boolean true/false
+     */
     @Override
     public boolean verifyIbServicesRunning(boolean agent, boolean coord) {
         if (agent && !coord)
@@ -178,19 +218,30 @@ public class IbService extends TestBase implements IIBService {
             return false;
     }
 
+    /**
+     * Uninstall IB using command line
+     * @param version version number to grab the installation frile from
+     */
     @Override
     public void uninstallIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_UNINSTALL_COMMAND, installationFile));
     }
 
-    //disable IB monitor in visual studio
+    /**
+     * disable IB monitor in visual studio
+     */
     @Override
     public void disableVsMonitor() {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\AddIn", "DockAutoOpen", "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\AddIn", "DockAutoOpenFloating", "0");
     }
 
+    /**
+     * grab VS version from IB output log
+     * @param logPath path to log
+     * @return VS version
+     */
     @Override
     public String getVSVersionFromOutputLog(String logPath) {
         Map<String, String> lookFor = new HashMap<String, String>();
@@ -212,6 +263,12 @@ public class IbService extends TestBase implements IIBService {
         SystemActions.copyFilesByExtension("C:\\LicenseTests_projects\\CustomAllocation\\", getIBInstallFolder(), "dat", false);
     }
 
+    /**
+     * find value of requried key in packet log
+     * @param keyInLogFile key to search for
+     * @return value of the required key
+     * @throws IOException read from file
+     */
     @Override
     public String findValueInPacketLog (String keyInLogFile) throws IOException{
         Map<String, String> lookFor = new HashMap<String, String>();
@@ -220,6 +277,10 @@ public class IbService extends TestBase implements IIBService {
         return Parser.retrieveDataFromFile(file, lookFor);
     }
 
+    /**
+     * is the ib license loaded to the machine
+     * @return true/false
+     */
     @Override
     public boolean isLicenseLoaded() {
         File file = new File(IbLocations.IB_ROOT + "\\CoordLicense.dat");
@@ -233,11 +294,20 @@ public class IbService extends TestBase implements IIBService {
         }
     }
 
+    /**
+     * get the coordinator of the current ib agent
+     * @return String - coordinator name
+     */
     @Override
     public String getCoordinator() {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.COORDINATOR_HOST);
     }
 
+    /**
+     * verify ig avoid local exections was turned on on the machine by looking in hte log file
+     * @param filePath path to output log
+     * @return true/false
+     */
     @Override
     public boolean verifyAvoidLocal(String filePath){
         File file = new File(filePath);
@@ -264,12 +334,18 @@ public class IbService extends TestBase implements IIBService {
         return true;
     }
 
+    /**
+     * Decrypt the IB SQLite DB
+     */
     @Override
     public void decryptSQLiteDB() {
         winService.restartService(WindowsServices.COORD_SERVICE);
         winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
     }
 
+    /**
+     * Open build monitor exe
+     */
     @Override
     public void openBuildMonitor() {
         do {

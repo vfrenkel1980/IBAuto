@@ -13,6 +13,10 @@ import java.util.StringJoiner;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * Static class that is all about performing registry actions
+ */
+
 public class RegistryService extends TestBase {
 
     public static void setRegistryKey(HKEY rootKey, String keyPath, String keyName, String value) {
@@ -47,6 +51,7 @@ public class RegistryService extends TestBase {
             ex.getMessage();
         }
     }
+
     public static void addRegKeyValue(HKEY rootKey, String keyPath, String keyName, String required) {
         if (test != null)
             test.log(Status.INFO, "Adding " + required + "value to " + keyName);

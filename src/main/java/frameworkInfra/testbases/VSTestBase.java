@@ -52,7 +52,7 @@ public class VSTestBase extends TestBase {
      * 3 - install old IB, install vs and upgrade IB from VS installer
      * 4 - install vs without IB
      *
-     * @exception SkipException is thrown in sceanrio 4 in order to avoid performing
+     * @exception SkipException is thrown in scenario 4 in order to avoid performing
      * test class as IB is not installed in this scenario.
      *
      */
@@ -73,7 +73,7 @@ public class VSTestBase extends TestBase {
         }
 
         switch (SCENARIO) {
-            //vs installed, install IB from installer
+
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
                 if (VSINSTALLATION.equals("15"))
@@ -84,7 +84,6 @@ public class VSTestBase extends TestBase {
                 ibService.verifyIbServicesRunning(true, true);
                 break;
 
-            //upgrade vs and install IB from vs installer
             case "2":
                 test.log(Status.INFO, "Before class started\n SCENARIO 2: upgrade vs and install IB from vs installer");
                 if (VSINSTALLATION.equals("15"))
@@ -94,7 +93,6 @@ public class VSTestBase extends TestBase {
                 ibService.verifyIbServicesRunning(true, true);
                 break;
 
-            //install old IB, install vs and upgrade IB from VS installer
             case "3":
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
                 ibService.installIB("2147", IbLicenses.VSTESTS_LIC);
@@ -107,7 +105,6 @@ public class VSTestBase extends TestBase {
                 SystemActions.killProcess("devenv.exe");
                 break;
 
-            //install vs without IB
             case "4":
                 test.log(Status.INFO, "Before class started\n SCENARIO 4: install vs without IB");
                 if (VSINSTALLATION.equals("15"))
@@ -118,7 +115,6 @@ public class VSTestBase extends TestBase {
                 extent.flush();
                 throw new SkipException("EXITING");
 
-            //default for testing purpose
             default:
                 break;
         }

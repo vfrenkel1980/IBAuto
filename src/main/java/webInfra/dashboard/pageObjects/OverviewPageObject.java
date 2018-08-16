@@ -14,6 +14,7 @@ public class OverviewPageObject {
 
     private static EventFiringWebDriver eventWebDriver;
     private WebDriverWait wait;
+
     public OverviewPageObject(EventFiringWebDriver driver) {
         eventWebDriver = driver;
         wait = new WebDriverWait(eventWebDriver, 10);

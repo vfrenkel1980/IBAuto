@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.LinkedHashMap;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -72,5 +73,10 @@ public class SQLiteJDBC implements IDataBase {
     @Override
     public void runFunctionOnCoordBuildTable(String ip, String username, String password, String db, String function, CoordBuild cb) {
 
+    }
+
+    @Override
+    public LinkedHashMap<String, String> getLinkedHashMapFromQuery(String ip, String username, String password, String db, String select, String table, String join, String groupBy, String orderBy, int limit) {
+        return null;
     }
 }

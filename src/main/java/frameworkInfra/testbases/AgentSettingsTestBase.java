@@ -41,7 +41,11 @@ public class AgentSettingsTestBase extends TestBase {
         extent.attachReporter(htmlReporter);
     }
 
-    //build a project and verify that both local and agent appear in the log
+    /**
+     * In the before suite we build a project and verify that
+     * both "agent" and "local" appear in the log.
+     */
+
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");

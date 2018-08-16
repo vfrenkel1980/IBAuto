@@ -20,6 +20,10 @@ import java.util.Calendar;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
+/**
+ * This class is used in order to test IB and VS integration across all version of VC
+ */
+
 @Listeners(SuiteListener.class)
 public class VSIntegrationTestBase extends TestBase {
 
@@ -44,6 +48,11 @@ public class VSIntegrationTestBase extends TestBase {
         ibService.disableVsMonitor();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
     }
+
+    /**
+     * @param VCVersion is used in order to assign the correct project path/name for test usage.
+     *                  the parameter is grabbed from the .xml file
+     */
 
     @BeforeClass
     @Parameters({"VCVersion"})

@@ -26,6 +26,12 @@ public class BatmanBCTestBase extends WindowsTestBase {
     protected static List rawVmSimList;
     public static List<String> vmSimMachineList;
 
+    /**
+     * In the before suite we break down the ip list for each of the
+     * simulations env so we can than verify the assignment of the agent to the build
+     * in tests checkBasicAgentAssignment and verifyBuildGroups
+     */
+
     @BeforeSuite
     public void beforeSuite(){
         rawBatmanList = XmlParser.getIpList("BatmanGrid.xml");
@@ -48,6 +54,13 @@ public class BatmanBCTestBase extends WindowsTestBase {
         log.info(method.getName() + " test started");
         testName = testContext.getName();
     }
+
+    /**
+     * After each test we validate that an message stating corrupt pdb's is not found in the log.
+     *
+     * @param result
+     * @throws IOException
+     */
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {

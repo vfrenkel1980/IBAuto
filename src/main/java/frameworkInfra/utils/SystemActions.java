@@ -24,6 +24,11 @@ import static frameworkInfra.testbases.TestBase.log;
 
 public class SystemActions {
 
+    /**
+     * delete all files in folder with a predefined prefix
+     * @param path the path that we want to delete the files
+     * @param filePrefix the prefix for the files to be deleted
+     */
     public static void deleteFilesByPrefix(String path, String filePrefix){
         try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), filePrefix + "*")) {
             for (final Path newDirectoryStreamItem : newDirectoryStream) {
@@ -44,6 +49,13 @@ public class SystemActions {
         path.delete();
     }
 
+    /**
+     * Copy all files with a predefined extension
+     * @param source source location
+     * @param destination destination to copy to
+     * @param extension file extension to be copied
+     * @param useTimeStamp should a timeStamp be created on the destination folder
+     */
     public static void copyFilesByExtension(String source, String destination, String extension, boolean useTimeStamp){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -82,6 +94,10 @@ public class SystemActions {
         }
     }
 
+    /**
+     * delte a single file
+     * @param filePath file to delete
+     */
     public static void deleteFile(String filePath){
         try{
             File file = new File(filePath);
@@ -104,6 +120,11 @@ public class SystemActions {
         }
     }
 
+    /**
+     * List all file in the required directory
+     * @param path dir to list the files
+     * @return List of files in the directory
+     */
     public static List<String> getAllFilesInDirectory(String path){
         List<String> results = new ArrayList<String>();
         File[] files = new File(path).listFiles();
@@ -116,6 +137,12 @@ public class SystemActions {
         return results;
     }
 
+    /**
+     * Add time to machine time
+     * @param days
+     * @param months
+     * @param years
+     */
     public static void addPeriodToSystemTime(long days, long months, long years){
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
@@ -129,6 +156,12 @@ public class SystemActions {
         sleep(5);
     }
 
+    /**
+     * remove time from machine time
+     * @param days
+     * @param months
+     * @param years
+     */
     public static void subtractPeriodFromSystemTime(long days, long months, long years) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
@@ -141,6 +174,10 @@ public class SystemActions {
         }
     }
 
+    /**
+     * get local date
+     * @return String date
+     */
     public static String getLocalDateAsString(){
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
@@ -149,6 +186,10 @@ public class SystemActions {
         return newDate;
     }
 
+    /**
+     * set local date
+     * @param date date to set on machine
+     */
     public static void setLocalDateFromString(String date) {
         try {
             test.log(Status.INFO, "Changing machine time to: " + date);
@@ -158,11 +199,21 @@ public class SystemActions {
         }
     }
 
+    /**
+     * checks if file exists in directory
+     * @param filePath path to check
+     * @return true/false
+     */
     public static boolean doesFileExist(String filePath){
         File file = new File(filePath);
         return file.exists();
     }
 
+    /**
+     * copy file from source to destination
+     * @param src source
+     * @param dest destination
+     */
     public static void copyFile(String src, String dest){
         try {
             FileUtils.copyFile(new File(src), new File(dest));
@@ -171,6 +222,11 @@ public class SystemActions {
         }
     }
 
+    /**
+     * deletes all files older than
+     * @param dir directory to the delete the files
+     * @param days number of days defined to the delete the files
+     */
     public static void deleteFilesOlderThanX(String dir, int days){
         try {
             File directory = new File(dir);

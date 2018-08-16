@@ -6,6 +6,14 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 
+/**
+ * SuiteListener is used to perform desired actions on
+ * before and after suite is run.
+ * We also use this listener in order to initialize the
+ * extent report objects so they can be widely used.
+ */
+
+
 public class SuiteListener implements ISuiteListener {
 
     public static ExtentReports extent;

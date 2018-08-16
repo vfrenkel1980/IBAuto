@@ -8,6 +8,13 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * EventHandler class is used in order to perform desired actions
+ * on each of the methods of the webdriver.
+ * In our case we use these methods in order to log all webdriver actions
+ */
+
+
 public class EventHandler implements WebDriverEventListener {
     @Override
     public void beforeAlertAccept(WebDriver driver) {

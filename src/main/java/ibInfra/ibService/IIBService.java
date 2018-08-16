@@ -52,14 +52,6 @@ public interface IIBService {
 
     String getExpectedIbVsExtensionVersion();
 
-    boolean verifyIbInstallation(int ibVersion);
-
-    boolean verifyExtensionUpgrade(String oldVersion, String newVersion);
-
-    boolean verifyIbUpgrade(int oldVersion, int newVersion);
-
-    boolean verifyExtensionInstalled(String extensionVersion);
-
     boolean verifyIbServicesRunning(boolean agent, boolean coord);
 
     String findValueInPacketLog(String keyInLogFile) throws IOException;

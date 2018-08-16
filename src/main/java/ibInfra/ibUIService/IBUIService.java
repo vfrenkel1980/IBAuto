@@ -20,12 +20,21 @@ public class IBUIService implements IIBUIService {
     private WindowsService winService = new WindowsService();
     private Screen screen = new Screen();
 
+    /**
+     * start the IB ui installer
+     * @param version version to install
+     */
     @Override
     public void startIBUIInstaller(String version) {
         String installationFile = getIbSetupInstallation(version);
         winService.runCommandDontWaitForTermination(installationFile);
     }
 
+    /**
+     * get the path to the installer
+     * @param version version to get
+     * @return full path to the installer
+     */
     @Override
     public String getIbSetupInstallation(String version) {
         File folder = new File(Locations.NETWORK_IB_INSTALLATIONS + version);
@@ -40,6 +49,11 @@ public class IBUIService implements IIBUIService {
         return fileName;
     }
 
+    /**
+     * get the path to the installer
+     * @param version version to get
+     * @return full path to the installer
+     */
     @Override
     public String getEntInstallation(String version) {
         File folder = new File(Locations.NETWORK_IB_INSTALLATIONS + version);
@@ -56,12 +70,19 @@ public class IBUIService implements IIBUIService {
         return fileName;
     }
 
+    /**
+     * start the IB Ent installer
+     * @param version version to install
+     */
     @Override
     public void startEntInstaller(String version) {
         String installationFile = getEntInstallation(version);
         winService.runCommandDontWaitForTermination(installationFile);
     }
 
+    /**
+     * sub class for performing UI actions on the installer
+     */
     public class Installer implements IInstaller {
 
         @Override
@@ -209,6 +230,9 @@ public class IBUIService implements IIBUIService {
         }
     }
 
+    /**
+     * sub class for performing UI actions on the IB client
+     */
     public class Client implements IClient{
 
         @Override

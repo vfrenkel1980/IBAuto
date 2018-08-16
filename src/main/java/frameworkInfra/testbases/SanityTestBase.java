@@ -56,7 +56,7 @@ public class SanityTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result){
         if (new File(StaticDataProvider.Locations.QA_ROOT, "buildlog.txt").exists()) {
             if (Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.PDB_ERROR))
                 StaticDataProvider.LogOutput.PDB_ERROR_TESTS = StaticDataProvider.LogOutput.PDB_ERROR_TESTS + testName + "\n";

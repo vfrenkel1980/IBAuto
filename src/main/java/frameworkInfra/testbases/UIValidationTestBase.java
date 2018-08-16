@@ -30,6 +30,12 @@ import java.util.List;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
+/**
+ * this suite runs several times for each of the colored projects.
+ * Some of the projects run as batch and stored in batchProjects
+ * parameter so some tests will skip them.
+ */
+
 @Listeners(SuiteListener.class)
 public class UIValidationTestBase extends TestBase {
 
@@ -68,6 +74,12 @@ public class UIValidationTestBase extends TestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
 
+    /**
+     * The beforeClass methods recognizes the current project that is running and
+     * assigns the appropriate patterns for recognition.
+     *
+     * @param testContext
+     */
     @BeforeClass
     public void beforeClass(ITestContext testContext){
         test = extent.createTest("Before Class - Running project " + testContext.getName());

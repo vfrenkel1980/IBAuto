@@ -12,10 +12,15 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class GetIsMailRegistered {
 
+    /**
+     * Static method for verifying if the mail is registered to IB
+     * @param email mail address to verify
+     * @return true/false
+     */
     public static boolean isMailRegistered(String email){
 
         try {
-            URL url = new URL("https://test-store.incredibuild.com/authentication/verifyUniqueEmail/" + email);
+            URL url = new URL("https://test.incredibuild.com/authentication/verifyUniqueEmail/" + email);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");

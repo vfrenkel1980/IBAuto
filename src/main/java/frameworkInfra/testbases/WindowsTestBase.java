@@ -37,6 +37,18 @@ public class WindowsTestBase extends TestBase {
         extent.attachReporter(htmlReporter);
     }
 
+    /**
+     * In the before suite we perform the following actions:
+     * 1 - set the default registry values.
+     * 2 - stop services.
+     * 3 - delete logs.
+     * 4 - start services
+     * @param predicted defines whether predicted will be 0/2
+     * @param msBuild defines whether msbuild will be 0/1.
+     *
+     * Both params are grabbed hard coded from the batman/vmsim .xml
+     */
+
     @BeforeSuite
     @Parameters({"predicted", "msBuild"})
     public void setUpEnv(String predicted, String msBuild){
@@ -87,6 +99,10 @@ public class WindowsTestBase extends TestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel );
     }
 
+    /**
+     * We use the after suite in order to backup the client logs
+     */
+
     @AfterSuite
     public void postSimulation(){
         //stop agent service
@@ -94,7 +110,6 @@ public class WindowsTestBase extends TestBase {
         //copy logs to backup folder
         SystemActions.copyFilesByExtension(IbLocations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
-        //TODO: parse .log for assertion error
 
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");

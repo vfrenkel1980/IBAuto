@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * Class to perform actions in VS
+ */
 public class VSUIService implements IVSUIService {
 
     private WindowsService winService = new WindowsService();
@@ -142,6 +145,12 @@ public class VSUIService implements IVSUIService {
         winService.waitForProcessToFinish("buildsystem.exe");
     }
 
+    /**
+     * Open VS instance
+     * @param version version to open
+     * @param isFirstActivation boolean value to apply first activation menus if needed
+     * @param scenario if scenario=3 - install on a different drive
+     */
     @Override
     public void openVSInstance(String version, boolean isFirstActivation, String scenario) {
         String pathToDevenv = "";
@@ -183,7 +192,7 @@ public class VSUIService implements IVSUIService {
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-            SystemActions.sleep(10);
+            SystemActions.sleep(30);
             test.log(Status.INFO, "Visual Studio opened successfully");
             if(isFirstActivation) {
                 try {

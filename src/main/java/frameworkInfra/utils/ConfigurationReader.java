@@ -1,6 +1,7 @@
 package frameworkInfra.utils;
 import java.util.Properties;
 
+@Deprecated
 public class ConfigurationReader {
 
     private Properties configFile;

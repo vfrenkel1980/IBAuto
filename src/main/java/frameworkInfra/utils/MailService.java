@@ -6,6 +6,11 @@ import java.util.Properties;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * Static class that is used in order to check and delete mail.
+ * Current implementation is in Ecommerce site
+ *
+ */
 public class MailService {
 
     public static String checkMail(String host, String user, String password)

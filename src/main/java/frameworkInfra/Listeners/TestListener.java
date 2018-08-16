@@ -19,6 +19,13 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.LinuxTestBase.buildID;
 import static frameworkInfra.testbases.TestBase.OS;
 
+/**
+ * TestListener class is used to perform required actions on
+ * each of the test results.
+ *
+ */
+
+
 public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {

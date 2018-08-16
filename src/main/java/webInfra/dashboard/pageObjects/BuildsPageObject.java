@@ -39,9 +39,11 @@ public class BuildsPageObject {
     public String getFailedBuildsUI() {
         return eventWebDriver.findElement(KPI_FAILED_BUILDS).getText();
     }
+
     public String getTotalBuildsUI(){
         return eventWebDriver.findElement(KPI_TOTAL_BUILDS).getText();
     }
+
     public String getAvgBuildDurationUI() {
         return eventWebDriver.findElement(KPI_AVG_DURATION).getText();
     }
@@ -49,9 +51,11 @@ public class BuildsPageObject {
     public String getDistributedTimeUI() {
         return eventWebDriver.findElement(KPI_DISTRIBUTED_TIME).getText();
     }
+
     public String getTopBuildTimeInitiator(int num) {
         return eventWebDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div/div[4]/div/div[2]/div/div[1]/div/div/*[local-name() = 'svg']/*[local-name() = 'g'][9]/text["+num+"]/tspan")).getText();
     }
+
     public String getTopBuildTimeDuration(int num) {
         return eventWebDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div/div[4]/div/div[2]/div/div[1]/div/div/*[local-name() = 'svg']/*[local-name() = 'g'][6]//*[local-name() = 'g']["+num+"]/text/tspan")).getText();
     }

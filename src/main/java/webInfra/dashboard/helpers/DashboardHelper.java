@@ -2,6 +2,11 @@ package webInfra.dashboard.helpers;
 
 import frameworkInfra.utils.databases.PostgresJDBC;
 
+import java.util.LinkedHashMap;
+
+/**
+ * Helper class that contains helper functions for the dahsboard projects
+ */
 public class DashboardHelper {
 
     private PostgresJDBC postgresJDBC = new PostgresJDBC();
@@ -52,5 +57,9 @@ public class DashboardHelper {
             return 0;
         else
             return costSaved;
+    }
+
+    public LinkedHashMap<String, String> getAllBuildsTopInitiatorAgentsTime(int limit) {
+        return postgresJDBC.getLinkedHashMapFromQuery("localhost", "ib", "ib", "coordinatordb", "SUM(c.end_time - c.start_time)AS t , a.name", "coord_build as c", "agent as a ON c.agent_id = a.id", "name", "t  DESC", limit);
     }
 }

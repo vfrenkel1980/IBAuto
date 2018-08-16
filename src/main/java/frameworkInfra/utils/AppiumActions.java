@@ -12,6 +12,10 @@ import java.util.NoSuchElementException;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * Static class that is used in order to perform custom and advanced Appium actions
+ */
+
 public class AppiumActions {
 
     public static void rightClick(WebElement element, WindowsDriver driver) {

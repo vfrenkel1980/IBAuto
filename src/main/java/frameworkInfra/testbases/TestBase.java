@@ -21,6 +21,10 @@ import java.lang.reflect.Method;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * This is the generic TestBase that all other testBases extend from.
+ */
+
 @Listeners(SuiteListener.class)
 public class TestBase {
 

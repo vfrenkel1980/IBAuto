@@ -3,6 +3,10 @@ import java.time.Instant;
 import java.util.Random;
 import java.util.UUID;
 
+/**
+ * this class is used to initialize an object for the coord_build table in the dashboard project
+ */
+
 public class CoordBuild {
 
     private String buildID;
@@ -29,6 +33,32 @@ public class CoordBuild {
     private String commandText;
     private boolean predicted;
 
+    /**
+     * initialize the object with given parameters
+     * @param buildID
+     * @param agentID
+     * @param startTime
+     * @param endTime
+     * @param caption
+     * @param totalLocalTime
+     * @param totalRemoteTime
+     * @param status
+     * @param maxCoresUsed
+     * @param numberOfTasks
+     * @param avgReadyTasks
+     * @param avgUsedCores
+     * @param maxReadyTasks
+     * @param biIssuer
+     * @param ciIssuer
+     * @param buildType
+     * @param productName
+     * @param userName
+     * @param groupName
+     * @param savedTime
+     * @param avoidLocal
+     * @param commandText
+     * @param predicted
+     */
     public CoordBuild(String buildID, int agentID, int startTime, int endTime, String caption, int totalLocalTime, int totalRemoteTime, int status, int maxCoresUsed,
                       int numberOfTasks, int avgReadyTasks, int avgUsedCores, int maxReadyTasks, int biIssuer, int ciIssuer, int buildType, String productName,
                       String userName, String groupName, int savedTime, boolean avoidLocal, String commandText, boolean predicted) {
@@ -57,6 +87,9 @@ public class CoordBuild {
         this.predicted = predicted;
     }
 
+    /**
+     * initialize a random values object
+     */
     public CoordBuild() {
         Random rand = new Random();
         Instant instant = Instant.now();
