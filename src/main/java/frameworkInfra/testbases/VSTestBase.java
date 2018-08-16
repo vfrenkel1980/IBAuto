@@ -132,7 +132,8 @@ public class VSTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(Method method,ITestResult result) throws IOException {
-        SystemActions.copyFile(Locations.OUTPUT_LOG_FILE, "z:\\buildLog_" + method.getName() + "_" + "SCENARIO_" + SCENARIO + ".txt");
+        if (result.getStatus() == 2)
+            SystemActions.copyFile(Locations.OUTPUT_LOG_FILE, "\\\\ryzen\\simulation_logs\\buildLog_" + method.getName() + "_" + "SCENARIO_" + SCENARIO + ".txt");
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         vsuiService.killDriver();
         extent.flush();
