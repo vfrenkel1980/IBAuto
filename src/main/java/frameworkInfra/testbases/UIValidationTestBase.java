@@ -77,8 +77,7 @@ public class UIValidationTestBase extends TestBase {
     /**
      * The beforeClass methods recognizes the current project that is running and
      * assigns the appropriate patterns for recognition.
-     *
-     * @param testContext
+     * @param testContext testng test info
      */
     @BeforeClass
     public void beforeClass(ITestContext testContext){

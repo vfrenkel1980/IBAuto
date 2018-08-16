@@ -58,8 +58,8 @@ public class BatmanBCTestBase extends WindowsTestBase {
     /**
      * After each test we validate that an message stating corrupt pdb's is not found in the log.
      *
-     * @param result
-     * @throws IOException
+     * @param result testng  test result
+     * @throws IOException exceptions thrown for not being able to read log
      */
 
     @AfterMethod

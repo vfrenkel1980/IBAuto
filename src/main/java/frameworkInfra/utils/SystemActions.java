@@ -139,9 +139,9 @@ public class SystemActions {
 
     /**
      * Add time to machine time
-     * @param days
-     * @param months
-     * @param years
+     * @param days days
+     * @param months months
+     * @param years years
      */
     public static void addPeriodToSystemTime(long days, long months, long years){
         LocalDateTime now = LocalDateTime.now();
@@ -158,9 +158,9 @@ public class SystemActions {
 
     /**
      * remove time from machine time
-     * @param days
-     * @param months
-     * @param years
+     * @param days days
+     * @param months months
+     * @param years years
      */
     public static void subtractPeriodFromSystemTime(long days, long months, long years) {
         LocalDateTime now = LocalDateTime.now();

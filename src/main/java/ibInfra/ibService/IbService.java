@@ -72,7 +72,7 @@ public class IbService extends TestBase implements IIBService {
 
     /**
      * perform IB installation without license in order to get the installation exit code
-     * @param version
+     * @param version version to install
      * @return installation command exit code
      */
     @Override

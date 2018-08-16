@@ -13,12 +13,12 @@
         </classes>
     </test>
 
-<!--    <test name="ENLandingPage">
+    <test name="ENLandingPage">
         <parameter name="lang" value="en"/>
         <classes>
             <class name ="Web.IBWeb.LandingPageTests" />
         </classes>
-    </test>-->
+    </test>
 
     <!--JAPAN-->
     <!--

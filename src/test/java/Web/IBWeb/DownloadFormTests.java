@@ -19,7 +19,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         String mailSubject;
         RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
                 "555954","united states", "alaska", "IB", "MOHA", "other",
-                "KING", false, true, false, true, false);
+                "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
         mailSubject = MailService.checkMail(host, mailAddress, password);
@@ -31,17 +31,17 @@ public class DownloadFormTests extends DownloadPageTestBase{
     public void linuxRegistration(){
         RegistrationForm rf = new RegistrationForm("linux", "User", mailAddress2, "123123",
                 "canada", "Alberta","IB","city", "other", "Brain", true, true,
-                false,false, true,false,true,true,true,true,false,
-                true,false,true,true,true,false,true,false,
-                true,true);
+                false,false, true, true, true, false, true,false,true,true,
+                true,true,false,true,false,true,true,true,false,true,
+                false,true,true);
         downloadPageObject.registerLinuxUser(rf);
     }
 
     @Test(testName = "Enterprise Registration")
     public void enterpriseRegistration(){
         RegistrationForm rf = new RegistrationForm("enterprise", "User", mailAddress2, "123123",
-                "Israel", "","IB","city", "other", "ballz", true, true,
-                false,false, true,true,true,true);
+                "Israel", "","IB","city", "other", "ballz", true, true,false,
+                false, false, false, false, true, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);
     }
 

@@ -61,7 +61,6 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
-        SystemActions.deleteFilesByPrefix("z:\\", "*");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;

@@ -17,6 +17,10 @@ public class RegistrationForm {
     boolean cshort;
     boolean cslong;
     boolean java;
+    boolean unreal;
+    boolean unity;
+    boolean tfs;
+    boolean jenkins;
     boolean mailing;
     boolean multicore;
     boolean aix;
@@ -48,7 +52,7 @@ public class RegistrationForm {
 
     public RegistrationForm(String name, String lname, String email, String pass, String phone, String country, String state,
                             String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java, boolean mailing){
+                            boolean java, boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean mailing){
         this.name = name;
         this.lname = lname;
         this.email = email;
@@ -64,12 +68,16 @@ public class RegistrationForm {
         this.cshort = cshort;
         this.cslong = cslong;
         this.java = java;
+        this.unreal = unreal;
+        this.unity = unity;
+        this.tfs = tfs;
+        this.jenkins = jenkins;
         this.mailing = mailing;
     }
 
     public RegistrationForm(String name, String lname, String email, String phone, String country, String state,
                             String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java, boolean multicore, boolean aix, boolean x32bit, boolean maven, boolean solaris,
+                            boolean java,  boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean multicore, boolean aix, boolean x32bit, boolean maven, boolean solaris,
                             boolean gradle, boolean ant, boolean scientific, boolean clearcase, boolean yocto,
                             boolean docker, boolean android, boolean intel, boolean arm, boolean centos, boolean earlier,
                             boolean mailing){
@@ -87,6 +95,10 @@ public class RegistrationForm {
         this.cshort = cshort;
         this.cslong = cslong;
         this.java = java;
+        this.unreal = unreal;
+        this.unity = unity;
+        this.tfs = tfs;
+        this.jenkins = jenkins;
         this.mailing = mailing;
         this.multicore = multicore;
         this.aix = aix;
@@ -108,7 +120,7 @@ public class RegistrationForm {
 
     public RegistrationForm(String name, String lname, String email, String phone, String country, String state,
                             String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java, boolean parallelBuilds, boolean unlimitedInitiators, boolean advancedReporting, boolean mailing){
+                            boolean java,  boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean parallelBuilds, boolean unlimitedInitiators, boolean advancedReporting, boolean mailing){
         this.name = name;
         this.lname = lname;
         this.email = email;
@@ -123,6 +135,10 @@ public class RegistrationForm {
         this.cshort = cshort;
         this.cslong = cslong;
         this.java = java;
+        this.unreal = unreal;
+        this.unity = unity;
+        this.tfs = tfs;
+        this.jenkins = jenkins;
         this.mailing = mailing;
         this.parallelBuilds = parallelBuilds;
         this.unlimitedInitiators = unlimitedInitiators;
@@ -188,6 +204,22 @@ public class RegistrationForm {
 
     public boolean isJava() {
         return java;
+    }
+
+    public boolean isUnreal() {
+        return unreal;
+    }
+
+    public boolean isUnity() {
+        return unity;
+    }
+
+    public boolean isTfs() {
+        return tfs;
+    }
+
+    public boolean isJenkins() {
+        return jenkins;
     }
 
     public boolean isMailing() {

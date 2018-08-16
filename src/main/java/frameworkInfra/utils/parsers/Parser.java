@@ -16,19 +16,7 @@ public class Parser extends TestBase{
      * @param filePath the path of the file to search in
      * @param lookFor the key that we search the file to retrieve the value
      * @return value that we found using the key we sent
-     * @throws IOException
-     *
-     *
-     * example
-     *
-     *         Map<String, String> lookFor = new HashMap<String, String>();
-     *         lookFor.put("version", "version");
-     *         try {
-     *             result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
-     *         } catch (IOException e) {
-     *             e.getMessage();
-     *         }
-     *         result = result.substring(0,result.indexOf(","));
+     * @throws IOException exception for not being able to read the file
      */
     public static String retrieveDataFromFile(String filePath, Map<String, String> lookFor) throws IOException {
         BufferedReader in = null;
@@ -98,6 +86,9 @@ public class Parser extends TestBase{
 
     /**
      * get the last line index that a string appears in
+     * @param filePath full path to file
+     * @param searchFor String to search for within the file
+     * @return number of line String appears in
      */
     public static int getLastLineForString(String filePath, String searchFor){
         test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
@@ -126,6 +117,9 @@ public class Parser extends TestBase{
 
     /**
      * get the first line index that a string appears in
+     * @param filePath full path to file
+     * @param searchFor String to search for within the file
+     * @return number of the line
      */
     public static int getFirstLineForString(String filePath, String searchFor){
         test.log(Status.INFO, "Starting to look for first appearance of " + searchFor + " in " + filePath);
@@ -151,4 +145,15 @@ public class Parser extends TestBase{
         return firstLine;
     }
 
+
+    /*example
+
+              Map<String, String> lookFor = new HashMap<String, String>();
+              lookFor.put("version", "version");
+              try {
+                  result = Parser.retrieveDataFromFile("C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", lookFor);
+              } catch (IOException e) {
+                  e.getMessage();
+              }
+              result = result.substring(0,result.indexOf(","));*/
 }

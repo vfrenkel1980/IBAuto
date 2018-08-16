@@ -2,7 +2,6 @@ package webInfra.ibWeb.pageObjects;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.SystemActions;
-import jdk.nashorn.internal.scripts.JO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,7 +19,7 @@ public class DownloadPageObject {
     public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download_button\"]");
     public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows_form\"]");
     public static final By LINUX_REG = By.xpath("//*[@id=\"linux_form\"]");
-    public static final By ENTERPISE_REG = By.xpath("//*[@id=\"enterprise_form\"]");
+    public static final By ENTERPRISE_REG = By.xpath("//*[@id=\"enterprise_form\"]");
     public static final By FIRST_NAME_TB = By.xpath("//*[@id=\"name\"]");
     public static final By LAST_NAME_TB = By.xpath("//*[@id=\"lname\"]");
     public static final By EMAIL_TB = By.xpath("//*[@id=\"email\"]");
@@ -42,10 +41,14 @@ public class DownloadPageObject {
     public static final By HOW_DID_YOU_HEAR_DDL = By.xpath("//*[@id=\"howDidYouSelection\"]");
     public static final By JOB_TITLE_TB = By.xpath("//*[@id=\"jobtitle\"]");
 
-    public static final By CPP_CB = By.xpath("//*[@id=\"C++\"]");
-    public static final By CSSHORT_CB = By.xpath("//*[@id=\"C#short\"]");
-    public static final By CSLONG_CB = By.xpath("//*[@id=\"C#long compilation time\"]");
+    public static final By CPP_CB = By.xpath("//*[@id=\"C++ Build\"]");
+    public static final By CSSHORT_CB = By.xpath("//*[@id=\"C#, < 5min compilation time\"]");
+    public static final By CSLONG_CB = By.xpath("//*[@id=\"C#, long compilation time\"]");
     public static final By JAVA_CB = By.xpath("//*[@id=\"Java Build\"]");
+    public static final By UNREAL_CB = By.xpath("//*[@id=\"Unreal\"]");
+    public static final By UNITY_CB = By.xpath("//*[@id=\"C#Unity\"]");
+    public static final By TFS_CB = By.xpath("//*[@id=\"TFS\"]");
+    public static final By JENKINS_CB = By.xpath("//*[@id=\"Jenkins\"]");
     public static final By MAILING_LIST_CB = By.xpath("//*[@id=\"mailinglist\"]");
     public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//*[@id=\"free-dev-submit\"]");
     public static final By SUBMIT_BTN = By.xpath("//Button[@value=\"Submit\"]");
@@ -62,7 +65,7 @@ public class DownloadPageObject {
     public static final By SCIENTIFIC_CB = By.xpath("//*[@id=\"Scientific_Linux_5.5\"]");
     public static final By YOCTO_CB = By.xpath("//*[@id=\"Yocto\"]");
     public static final By CLEARCASE_CB = By.xpath("//*[@id=\"ClearCase\"]");
-    public static final By DOCKER_CB = By.xpath("//*[@id=\"Docker_Constrains\"]");
+    public static final By DOCKER_CB = By.xpath("//*[@id=\"Docker_Containers\"]");
     public static final By ANDROID_CB = By.xpath("//*[@id=\"Android\"]");
     public static final By INTEL_CB = By.xpath("//*[@id=\"Intel_Compiler\"]");
     public static final By ARM_CB = By.xpath("//*[@id=\"ARM\"]");
@@ -70,8 +73,8 @@ public class DownloadPageObject {
     public static final By EARLIER_CB = By.xpath("//*[@id=\"Linux_Early\"]");
 
     //Enterprise CB
-    public static final By PARALEL_BUILDS_CB = By.xpath("//*[@id=\"Paralel_Builds\"]");
-    public static final By UNLIMITED_INITIATORE_CB = By.xpath("//*[@id=\"Unlimited_Initiators\"]");
+    public static final By PARALLEL_BUILDS_CB = By.xpath("//*[@id=\"Paralel_Builds\"]");
+    public static final By UNLIMITED_INITIATORS_CB = By.xpath("//*[@id=\"Unlimited_Initiators\"]");
     public static final By ADVANCED_REPORTING_CB = By.xpath("//*[@id=\"Advanced_Reporting\"]");
 
 
@@ -145,6 +148,14 @@ public class DownloadPageObject {
             eventWebDriver.findElement(CSLONG_CB).click();
         if (rf.isJava())
             eventWebDriver.findElement(JAVA_CB).click();
+        if (rf.isUnreal())
+            eventWebDriver.findElement(UNREAL_CB).click();
+        if (rf.isUnity())
+            eventWebDriver.findElement(UNITY_CB).click();
+        if (rf.isTfs())
+            eventWebDriver.findElement(TFS_CB).click();
+        if (rf.isJenkins())
+            eventWebDriver.findElement(JENKINS_CB).click();
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(FREE_DEV_SUBMIT_BTN).click();
@@ -181,6 +192,14 @@ public class DownloadPageObject {
             eventWebDriver.findElement(CSLONG_CB).click();
         if (rf.isJava())
             eventWebDriver.findElement(JAVA_CB).click();
+        if (rf.isUnreal())
+            eventWebDriver.findElement(UNREAL_CB).click();
+        if (rf.isUnity())
+            eventWebDriver.findElement(UNITY_CB).click();
+        if (rf.isTfs())
+            eventWebDriver.findElement(TFS_CB).click();
+        if (rf.isJenkins())
+            eventWebDriver.findElement(JENKINS_CB).click();
         if (rf.isMulticore())
             eventWebDriver.findElement(MULTICORE_RB).click();
         if (rf.isAix())
@@ -221,7 +240,7 @@ public class DownloadPageObject {
 
     public void registerEnterpriseUser(RegistrationForm rf){
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
-        eventWebDriver.findElement(ENTERPISE_REG).click();
+        eventWebDriver.findElement(ENTERPRISE_REG).click();
         WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(FIRST_NAME_TB)).sendKeys(rf.getName());
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys(rf.getLname());
@@ -250,10 +269,18 @@ public class DownloadPageObject {
             eventWebDriver.findElement(CSLONG_CB).click();
         if (rf.isJava())
             eventWebDriver.findElement(JAVA_CB).click();
+        if (rf.isUnreal())
+            eventWebDriver.findElement(UNREAL_CB).click();
+        if (rf.isUnity())
+            eventWebDriver.findElement(UNITY_CB).click();
+        if (rf.isTfs())
+            eventWebDriver.findElement(TFS_CB).click();
+        if (rf.isJenkins())
+            eventWebDriver.findElement(JENKINS_CB).click();
         if (rf.isParallelBuilds())
-            eventWebDriver.findElement(PARALEL_BUILDS_CB).click();
+            eventWebDriver.findElement(PARALLEL_BUILDS_CB).click();
         if (rf.isUnlimitedInitiators())
-            eventWebDriver.findElement(UNLIMITED_INITIATORE_CB).click();
+            eventWebDriver.findElement(UNLIMITED_INITIATORS_CB).click();
         if (rf.isAdvancedReporting())
             eventWebDriver.findElement(ADVANCED_REPORTING_CB).click();
         if (rf.isMailing())
