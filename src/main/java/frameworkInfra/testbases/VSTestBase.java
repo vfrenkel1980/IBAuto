@@ -15,6 +15,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 import org.testng.annotations.*;
+import org.testng.internal.Systematiser;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -60,6 +61,7 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
+        SystemActions.deleteFilesByPrefix("z:\\", "*");
 
         if (VSINSTALLATION.toLowerCase().equals("preview")){
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
@@ -130,7 +132,8 @@ public class VSTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(Method method,ITestResult result) throws IOException {
+        SystemActions.copyFile(Locations.OUTPUT_LOG_FILE, "z:\\buildLog_" + method.getName() + "_" + "SCENARIO_" + SCENARIO + ".txt");
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
         vsuiService.killDriver();
         extent.flush();
