@@ -94,7 +94,7 @@ public class TestBase {
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
         String file = windowsService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
         String suite = context.getCurrentXmlTest().getSuite().getName();
-        String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration", suite);
+        String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
         SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + ".html");
         SystemActions.deleteFile(destFile);
