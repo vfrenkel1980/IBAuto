@@ -109,7 +109,7 @@ public class TestBase {
         HtmlParser.copyLinesToNewFile(file,destFile,0,23);
         HtmlParser.copyLinesToNewFile(file,destFile,desiredLine - 1,desiredLine + 33);
         HtmlParser.copyLinesToNewFile(file,destFile,numberOfLines - 37,numberOfLines);
-        HtmlParser.replaceStringInFile(destFile, "<body class='extent standard default hide-overflow '>", "<body>" + suiteId);
+        HtmlParser.replaceStringInFile(destFile, "<body class='extent standard default hide-overflow '>", "<body>");
         HtmlParser.replaceStringInFile(destFile, "parent-analysis", "parent-analysis" + suiteId);
         HtmlParser.replaceStringInFile(destFile, "child-analysis", "child-analysis" + suiteId);
         HtmlParser.replaceStringInFile(destFile, "exceptionsGrandChild: 0,", addVersionNumber);
