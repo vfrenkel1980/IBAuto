@@ -1,0 +1,17 @@
+{
+  "AgentSettings": 1,
+  "BatmanSim": 2,
+  "Dashboard": 3,
+  "LicenseTests": 4,
+  "LinuxCL": 5,
+  "LinuxMultiBuild": 6,
+  "LinuxMultiInitiator": 7,
+  "PositiveLicenseTests": 8,
+  "RobinSim": 9,
+  "Setup": 10,
+  "UIValidations": 11,
+  "VmSim": 12,
+  "VSIntegration": 13,
+  "VSPreview": 14,
+  "WebRegression": 15
+}

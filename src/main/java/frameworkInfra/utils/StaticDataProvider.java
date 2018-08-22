@@ -34,6 +34,7 @@ public class StaticDataProvider {
         public static final String OUTPUT_LOG_FILE = QA_ROOT + "\\buildLog.txt";
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
+        public static final String NETWORK_REPORTS_FOLDER = "\\\\192.168.10.15\\share\\Automation\\Reports\\";
         public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
         public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
         public static final String SECOND_INITIATOR_LOG_PATH = Locations.QA_ROOT + "\\second_initiator_output\\";

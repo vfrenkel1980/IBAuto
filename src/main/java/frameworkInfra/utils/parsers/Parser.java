@@ -122,7 +122,8 @@ public class Parser extends TestBase{
      * @return number of the line
      */
     public static int getFirstLineForString(String filePath, String searchFor){
-        test.log(Status.INFO, "Starting to look for first appearance of " + searchFor + " in " + filePath);
+        if (test != null)
+            test.log(Status.INFO, "Starting to look for first appearance of " + searchFor + " in " + filePath);
         int line = 0;
         int firstLine = 0;
         File file = new File(filePath);

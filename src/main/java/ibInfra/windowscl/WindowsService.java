@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class WindowsService extends TestBase implements IWindowsService {
+public class WindowsService implements IWindowsService {
 
     @Override
     public int runCommandWaitForFinish(String command) {

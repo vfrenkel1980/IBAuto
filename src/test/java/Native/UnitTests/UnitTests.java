@@ -4,10 +4,13 @@ import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.databases.SQLiteJDBC;
+import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.FileFileFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,7 +19,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class UnitTests {
@@ -58,10 +66,32 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        IbService ibService = new IbService();
-        ibService.decryptSQLiteDB();
-        SQLiteJDBC sqLiteJDBC = new SQLiteJDBC();
-        System.out.println(sqLiteJDBC.getIntFromQuery("","", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)"));
+/*        String file = "C:\\Users\\Mark\\Desktop\\TestOutput20_08_2018_07_38_56 - 2433.html";
+        String destFile = "\\\\192.168.10.15\\share\\Automation\\Reports\\" + "TestResultReport.html";
+        SystemActions.deleteFile(destFile);
+        String addVersionNumber = "exceptionsGrandChild: 0,\n" +
+                "\t\t\t\tversionNumber: TEST";
+        String orgScript = "<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>";
+        String desiredScript= "<script src='../static/js/jquery_bundle.js' type='text/javascript'></script>\n" +
+                "\t\t\t<script src='../static/js/extent.js' type='text/javascript'></script>";
+        int numberOfLines = HtmlParser.countLinesInFile(file);
+        int desiredLine = Parser.getFirstLineForString(file, "<div id='test-view-charts' class='subview-full'>");
+        HtmlParser.copyLinesToNewFile(file,destFile,0,23);
+        HtmlParser.copyLinesToNewFile(file,destFile,desiredLine - 1,desiredLine + 33);
+        HtmlParser.copyLinesToNewFile(file,destFile,numberOfLines - 37,numberOfLines);
+        HtmlParser.replaceStringInFile(destFile, "parent-analysis", "parent-analysis-TEST");
+        HtmlParser.replaceStringInFile(destFile, "child-analysis", "child-analysis-TEST");
+        HtmlParser.replaceStringInFile(destFile, "exceptionsGrandChild: 0,", addVersionNumber);
+        HtmlParser.replaceStringInFile(destFile, orgScript, desiredScript);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
+        SystemActions.copyFile(file, "\\\\192.168.10.15\\share\\Automation\\Reports\\" + "test" + "\\" + "test" + "_" + formatter.format(calendar.getTime()) + ".html");*/
+        File directory = new File(StaticDataProvider.Locations.NETWORK_REPORTS_FOLDER + "test");
+        File[] files = directory.listFiles((FileFilter) FileFileFilter.FILE);
+        if (files.length > 3) {
+            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
+            SystemActions.deleteFile(files[files.length - 1].getPath());
+        }
     }
 
 }
