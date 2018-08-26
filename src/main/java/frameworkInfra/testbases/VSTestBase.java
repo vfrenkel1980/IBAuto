@@ -177,7 +177,7 @@ public class VSTestBase extends TestBase {
         String suite = VSINSTALLATION + "_" + SCENARIO;
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/VSScenariosClassId.json", suite);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
-        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "VSVERSION_" + VSINSTALLATION + "_SCENARIO" + SCENARIO + "_" + version + ".html");
+        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
         SystemActions.deleteFile(destFile);
         filterOlderReports(suite);
         String addVersionNumber = "exceptionsGrandChild: 0,\n" +
