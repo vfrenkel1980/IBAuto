@@ -60,7 +60,7 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + " FROM " + table + " WHERE " + where);
+                test.log(Status.INFO, "Running query: SELECT " + select + " FROM " + table + " WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " WHERE " + where);
             rs.next();
             res = rs.getLong(1);
@@ -98,7 +98,7 @@ public class PostgresJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table);
+                test.log(Status.INFO, "Running query: SELECT " + select + "FROM " + table);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table);
             rs.next();
             res = rs.getLong(1);

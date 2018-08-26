@@ -4,6 +4,7 @@ import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.databases.SQLiteJDBC;
+import frameworkInfra.utils.parsers.CustomJsonParser;
 import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
@@ -86,12 +87,10 @@ public class UnitTests {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
         SystemActions.copyFile(file, "\\\\192.168.10.15\\share\\Automation\\Reports\\" + "test" + "\\" + "test" + "_" + formatter.format(calendar.getTime()) + ".html");*/
-        File directory = new File(StaticDataProvider.Locations.NETWORK_REPORTS_FOLDER + "test");
-        File[] files = directory.listFiles((FileFilter) FileFileFilter.FILE);
-        if (files.length > 3) {
-            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
-            SystemActions.deleteFile(files[files.length - 1].getPath());
-        }
+        String suite = "BatmanSim";
+        String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
+        System.out.println(suiteId);
+
     }
 
 }

@@ -9,6 +9,7 @@ import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.CustomJsonParser;
 import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
@@ -48,6 +49,7 @@ public class TestBase {
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
     private WindowsService windowsService = new WindowsService();
+    private IbService ibService = new IbService();
 
 
     @BeforeSuite
@@ -90,13 +92,14 @@ public class TestBase {
      * @param context used to get the suite name
      */
     private void generateCustomReport(ITestContext context){
+        String version = getVersionFromInstaller("Latest");
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
         String file = windowsService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
-        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + ".html");
+        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
         SystemActions.deleteFile(destFile);
         filterOlderReports(suite);
         String addVersionNumber = "exceptionsGrandChild: 0,\n" +
@@ -130,4 +133,8 @@ public class TestBase {
 
     }
 
+    private String getVersionFromInstaller(String version){
+        String installer = ibService.getIbConsoleInstallation(version);
+        return installer.replaceAll("\\D+","");
+    }
 }

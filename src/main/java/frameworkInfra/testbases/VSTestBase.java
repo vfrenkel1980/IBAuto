@@ -81,7 +81,6 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVS();
                 else
                     vsCommands.upgradeVSPreview();
-                SystemActions.sleep(90);
                 ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
                 ibService.verifyIbServicesRunning(true, true);
                 break;
