@@ -213,6 +213,7 @@ public class VSTestBase extends TestBase {
 
     private String getVersionFromInstaller(String version){
         String installer = ibService.getIbConsoleInstallation(version);
+        installer = installer.substring(installer.lastIndexOf("\\"));
         return installer.replaceAll("\\D+","");
     }
 

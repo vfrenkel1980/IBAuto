@@ -416,6 +416,7 @@ public class IbService implements IIBService {
      */
     private String getVersionFromInstaller(String version){
         String installer = getIbConsoleInstallation(version);
+        installer = installer.substring(installer.lastIndexOf("\\"));
         return installer.replaceAll("\\D+","");
     }
 

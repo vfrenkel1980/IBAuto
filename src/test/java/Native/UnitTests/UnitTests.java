@@ -68,8 +68,10 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        VSUIService vsuiService = new VSUIService();
-        System.out.println(vsuiService.getInstalledMSBuildVersion());
+        IbService ibService = new IbService();
+        String installer = ibService.getIbConsoleInstallation("Latest");
+        installer = installer.substring(installer.lastIndexOf("\\"));
+        System.out.println(installer.replaceAll("\\D+",""));
 
     }
 
