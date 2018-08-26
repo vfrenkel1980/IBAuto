@@ -116,7 +116,7 @@ public class VSUIService implements IVSUIService {
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
-        winService.waitForProcessToFinish("buildsystem.exe");
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
     @Override
