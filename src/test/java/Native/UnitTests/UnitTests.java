@@ -9,6 +9,7 @@ import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
+import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
@@ -67,29 +68,8 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-/*        String file = "C:\\Users\\Mark\\Desktop\\TestOutput20_08_2018_07_38_56 - 2433.html";
-        String destFile = "\\\\192.168.10.15\\share\\Automation\\Reports\\" + "TestResultReport.html";
-        SystemActions.deleteFile(destFile);
-        String addVersionNumber = "exceptionsGrandChild: 0,\n" +
-                "\t\t\t\tversionNumber: TEST";
-        String orgScript = "<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>";
-        String desiredScript= "<script src='../static/js/jquery_bundle.js' type='text/javascript'></script>\n" +
-                "\t\t\t<script src='../static/js/extent.js' type='text/javascript'></script>";
-        int numberOfLines = HtmlParser.countLinesInFile(file);
-        int desiredLine = Parser.getFirstLineForString(file, "<div id='test-view-charts' class='subview-full'>");
-        HtmlParser.copyLinesToNewFile(file,destFile,0,23);
-        HtmlParser.copyLinesToNewFile(file,destFile,desiredLine - 1,desiredLine + 33);
-        HtmlParser.copyLinesToNewFile(file,destFile,numberOfLines - 37,numberOfLines);
-        HtmlParser.replaceStringInFile(destFile, "parent-analysis", "parent-analysis-TEST");
-        HtmlParser.replaceStringInFile(destFile, "child-analysis", "child-analysis-TEST");
-        HtmlParser.replaceStringInFile(destFile, "exceptionsGrandChild: 0,", addVersionNumber);
-        HtmlParser.replaceStringInFile(destFile, orgScript, desiredScript);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
-        SystemActions.copyFile(file, "\\\\192.168.10.15\\share\\Automation\\Reports\\" + "test" + "\\" + "test" + "_" + formatter.format(calendar.getTime()) + ".html");*/
-        String suite = "BatmanSim";
-        String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
-        System.out.println(suiteId);
+        VSUIService vsuiService = new VSUIService();
+        System.out.println(vsuiService.getInstalledMSBuildVersion());
 
     }
 

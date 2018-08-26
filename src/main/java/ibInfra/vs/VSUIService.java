@@ -14,7 +14,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,20 +48,22 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public String getInstalledMSBuildVersion() {
-        Map<String, String> lookFor = new HashMap<String, String>();
         String installedBuild = "";
-        lookFor.put("version", "version");
         WindowsService windowsService = new WindowsService();
-        String out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD);
+        String out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
         try {
             FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
-            installedBuild = Parser.retrieveDataFromFile(Locations.QA_ROOT + "\\out.txt", lookFor);
+            BufferedReader input = new BufferedReader(new FileReader(Locations.QA_ROOT + "\\out.txt"));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                installedBuild = line;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
             SystemActions.deleteFile(Locations.QA_ROOT + "\\out.txt");
         }
-        installedBuild = installedBuild.substring(0, installedBuild.indexOf(" "));
         return installedBuild;
     }
 

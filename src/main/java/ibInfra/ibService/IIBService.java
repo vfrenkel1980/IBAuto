@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
+import org.testng.ITestContext;
 
 import java.io.IOException;
 
@@ -73,4 +74,8 @@ public interface IIBService {
     void decryptSQLiteDB();
 
     void openBuildMonitor();
+
+    void generateCustomReport(ITestContext context);
+
+
 }

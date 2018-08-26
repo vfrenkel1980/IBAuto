@@ -5,21 +5,25 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.CustomJsonParser;
+import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.FileFileFilter;
+import org.testng.ITestContext;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -351,6 +355,68 @@ public class IbService implements IIBService {
         do {
             winService.runCommandDontWaitForTermination(IbLocations.BUILDMONITOR);
         }while (winService.getNumberOfProcessInstances(Processes.BUILDMONITOR) == 0);
+    }
+
+
+    /**
+     * Generates a custom HTML report derived from the full extent report
+     * and saves the result in network automation\reports folder
+     * @param context used to get the suite name
+     */
+    public void generateCustomReport(ITestContext context){
+        String version = getVersionFromInstaller("Latest");
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
+        String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
+        String suite = context.getCurrentXmlTest().getSuite().getName();
+        String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
+        String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
+        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
+        SystemActions.deleteFile(destFile);
+        filterOlderReports(suite);
+        String addVersionNumber = "exceptionsGrandChild: 0,\n" +
+                "\t\t\t\tversionNumber: " + suiteId;
+        String orgScript = "<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>";
+        String desiredScript= "<script src='../static/js/jquery_bundle.js' type='text/javascript'></script>\n" +
+                "\t\t\t<script src='../static/js/extent.js' type='text/javascript'></script>";
+        int numberOfLines = HtmlParser.countLinesInFile(file);
+        int desiredLine = Parser.getFirstLineForString(file, "<div id='test-view-charts' class='subview-full'>");
+        HtmlParser.copyLinesToNewFile(file,destFile,0,23);
+        HtmlParser.copyLinesToNewFile(file,destFile,desiredLine - 1,desiredLine + 33);
+        HtmlParser.copyLinesToNewFile(file,destFile,numberOfLines - 37,numberOfLines);
+        HtmlParser.replaceStringInFile(destFile, "<body class='extent standard default hide-overflow '>", "<body>");
+        HtmlParser.replaceStringInFile(destFile, "parent-analysis", "parent-analysis" + suiteId);
+        HtmlParser.replaceStringInFile(destFile, "child-analysis", "child-analysis" + suiteId);
+        HtmlParser.replaceStringInFile(destFile, "exceptionsGrandChild: 0,", addVersionNumber);
+        HtmlParser.replaceStringInFile(destFile, orgScript, desiredScript);
+    }
+
+    /**
+     * Keep 10 latest files inside a folder
+     * @param suite the name of the folder inside the automation folder in Y:
+     */
+    private void filterOlderReports(String suite){
+        File directory = new File(StaticDataProvider.Locations.NETWORK_REPORTS_FOLDER + suite);
+        File[] files = directory.listFiles((FileFilter) FileFileFilter.FILE);
+        int numberOfFiles = 0;
+        if (files != null) {
+            numberOfFiles = files.length;
+        }
+        if (numberOfFiles > 10) {
+            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
+            SystemActions.deleteFile(files[0].getPath());
+        }
+
+    }
+
+    /**
+     * Get the version number of the installer in order to present in report
+     * @param version what folder to look in (currently set to always "Latest")
+     * @return version number
+     */
+    private String getVersionFromInstaller(String version){
+        String installer = getIbConsoleInstallation(version);
+        return installer.replaceAll("\\D+","");
     }
 
 
