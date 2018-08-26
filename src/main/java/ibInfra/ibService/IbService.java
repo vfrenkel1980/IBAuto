@@ -25,7 +25,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 
-public class IbService extends TestBase implements IIBService {
+public class IbService implements IIBService {
 
     private WindowsService winService = new WindowsService();
 
