@@ -33,7 +33,7 @@ public class WindowsService implements IWindowsService {
             Process pr = rt.exec(command);
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 
-            while((line=input.readLine()) != null) {
+            while ((line = input.readLine()) != null) {
                 System.out.println(line);
             }
 
@@ -42,9 +42,9 @@ public class WindowsService implements IWindowsService {
             if (test != null) {
                 test.log(Status.INFO, "Command " + command + " - Completed Successfully");
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             test.log(Status.ERROR, "Failed to run command.\n" +
-                    "Command: " + command +"\n"+
+                    "Command: " + command + "\n" +
                     e.getMessage());
             exitStatus = 1;
         }
@@ -63,9 +63,9 @@ public class WindowsService implements IWindowsService {
             if (test != null) {
                 test.log(Status.INFO, "Command " + command + " - Completed Successfully");
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             test.log(Status.ERROR, "Failed to run command.\n" +
-                    "Command: " + command +"\n"+
+                    "Command: " + command + "\n" +
                     e.getMessage());
         }
     }
@@ -87,9 +87,9 @@ public class WindowsService implements IWindowsService {
             pr.waitFor();
             System.out.println("Command " + command + " - Completed Successfully");
             return commandOutput.toString();
-        } catch(Exception e) {
+        } catch (Exception e) {
             test.log(Status.ERROR, "Failed to run command.\n" +
-                    "Command: " + command +"\n"+
+                    "Command: " + command + "\n" +
                     e.getMessage());
             return "Unable to get result output from command " + command;
         }
@@ -99,10 +99,10 @@ public class WindowsService implements IWindowsService {
     public void waitForProcessToFinish(String processName) {
         boolean isRunning = true;
         String output;
-        while (isRunning){
+        while (isRunning) {
             output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
             System.out.println(output);
-            if (output.contains("INFO: No tasks are running")){
+            if (output.contains("INFO: No tasks are running")) {
                 isRunning = false;
             }
         }
@@ -113,13 +113,13 @@ public class WindowsService implements IWindowsService {
     public void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName) {
         boolean isRunning = true;
         String output;
-        while (isRunning){
-            output = runCommandGetOutput(Processes.PSLIST + " \\\\" + host +" -u " + user + " -p " + pass + " -e buildsystem");
+        while (isRunning) {
+            output = runCommandGetOutput(Processes.PSLIST + " \\\\" + host + " -u " + user + " -p " + pass + " -e " + processName);
             System.out.println(output);
-            if (output.contains("process " + processName + " was not found on " + host)){
+            if (output.contains("process " + processName + " was not found on " + host)) {
                 isRunning = false;
             }
-            if (output.contains("Access is denied.") || output.contains("Failed to take process snapshot on")){
+            if (output.contains("Access is denied.") || output.contains("Failed to take process snapshot on")) {
                 isRunning = false;
             }
         }
@@ -133,10 +133,10 @@ public class WindowsService implements IWindowsService {
         int lastIndex = 0;
         output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
         System.out.println(output);
-        while(lastIndex != -1){
-            lastIndex = output.indexOf(processName,lastIndex);
-            if(lastIndex != -1){
-                instanceCount ++;
+        while (lastIndex != -1) {
+            lastIndex = output.indexOf(processName, lastIndex);
+            if (lastIndex != -1) {
+                instanceCount++;
                 lastIndex += processName.length();
             }
         }
@@ -165,7 +165,7 @@ public class WindowsService implements IWindowsService {
         List<ProcessInfo> processesList = JProcesses.getProcessList();
         String pid = "";
         for (final ProcessInfo processInfo : processesList) {
-            if (processInfo.getName().contains(processName)){
+            if (processInfo.getName().contains(processName)) {
                 pid = processInfo.getPid();
             }
         }
@@ -176,13 +176,13 @@ public class WindowsService implements IWindowsService {
     public boolean isServiceRunning(String serviceName) {
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec("sc query "+ serviceName);
+            process = Runtime.getRuntime().exec("sc query " + serviceName);
         } catch (IOException e) {
             e.getMessage();
         }
         Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
-        while(reader.hasNextLine())
-            if(reader.nextLine().contains(serviceName))
+        while (reader.hasNextLine())
+            if (reader.nextLine().contains(serviceName))
                 return true;
         return false;
     }
@@ -211,7 +211,7 @@ public class WindowsService implements IWindowsService {
     }
 
     @Override
-    public File getLatestFileFromDir(String dirPath, String substring){
+    public File getLatestFileFromDir(String dirPath, String substring) {
         File dir = new File(dirPath);
         File[] files = dir.listFiles();
         if (files == null || files.length == 0) {
@@ -220,7 +220,7 @@ public class WindowsService implements IWindowsService {
 
         File lastModifiedFile = files[0];
         for (int i = 1; i < files.length; i++) {
-            if (files[i].getName().length() > 5){
+            if (files[i].getName().length() > 5) {
                 if (lastModifiedFile.lastModified() < files[i].lastModified() && files[i].getName().contains(substring)) {
                     lastModifiedFile = files[i];
                 }
