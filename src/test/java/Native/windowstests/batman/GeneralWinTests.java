@@ -119,7 +119,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
                     "\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole\" C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln /rebuild /cfg=\"release|win32\" /title=\"ACE 2012 - Debug\" " +
                     "/out=\"C:\\QA\\simulation\\buildlog.txt\" /showagent /showcmd /showtime");
             SystemActions.sleep(1);
-            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildsystem");
+            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
             Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
 
@@ -134,7 +134,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
             e.getMessage();
         }
         finally {
-            winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+            winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
         }
     }
 
