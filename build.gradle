@@ -73,6 +73,11 @@ dependencies {
 }
 
 test {
+    testLogging {
+        // set options for log level LIFECYCLE
+        events "failed"
+        exceptionFormat "short"
+    }
     ignoreFailures = true
     //scenario parameter for VStests
     systemProperty 'scenario', System.properties['scenario'] ?: '0'

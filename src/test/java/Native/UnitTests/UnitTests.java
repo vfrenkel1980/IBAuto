@@ -53,25 +53,16 @@ public class UnitTests {
     }
 
     @Test(testName = "test2")
-    public void test2() throws JSchException {
-        List<CoordBuild> coords= new ArrayList<CoordBuild>();
-        PostgresJDBC postgresJDBC = new PostgresJDBC();
-        for (int i= 0; i < 1; i++)
-            coords.add(new CoordBuild());
-        for (CoordBuild coord:coords) {
-            postgresJDBC.runFunctionOnCoordBuildTable("localhost", "ib", "ib", "coordinatordb", "sp_insert_coord_build", coord);
-        }
-        System.out.println("");
-
+    public void test2() {
+        System.out.println("this is a test");
+        Assert.assertEquals(0,0);
     }
 
 
     @Test(testName = "test3")
     public void test3 () {
-        IbService ibService = new IbService();
-        String installer = ibService.getIbConsoleInstallation("Latest");
-        installer = installer.substring(installer.lastIndexOf("\\"));
-        System.out.println(installer.replaceAll("\\D+",""));
+        System.out.println("this is a test 2");
+        Assert.assertEquals(0,1);
 
     }
 

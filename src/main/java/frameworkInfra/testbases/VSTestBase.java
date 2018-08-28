@@ -123,6 +123,7 @@ public class VSTestBase extends TestBase {
                     vsCommands.installVSPreviewWithoutIB();
                 test.log(Status.PASS, "");
                 extent.flush();
+                generateCustomReport();
                 throw new SkipException("EXITING");
 
             default:

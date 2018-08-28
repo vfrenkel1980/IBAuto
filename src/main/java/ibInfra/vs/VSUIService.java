@@ -184,9 +184,9 @@ public class VSUIService implements IVSUIService {
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe";
                 break;
             case "15":
-             /*   if (scenario.equals("3"))
+                if (scenario.equals("3"))
                     pathToDevenv = "E:\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
-                else*/
+                else
                     pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
@@ -196,7 +196,7 @@ public class VSUIService implements IVSUIService {
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-            SystemActions.sleep(30);
+            SystemActions.sleep(60);
             test.log(Status.INFO, "Visual Studio opened successfully");
             if(isFirstActivation) {
                 try {
