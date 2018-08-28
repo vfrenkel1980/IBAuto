@@ -24,7 +24,7 @@ public class RobinTests extends RobinTestBase {
 
     @Test(testName = "Audacity 2017 - Debug - build" , groups = { "Build" })
     public void audacityDebugBuild(){
-        int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_ROBIN.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }
