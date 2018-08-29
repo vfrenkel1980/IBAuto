@@ -41,10 +41,10 @@ public class DownloadPageObject {
     public static final By HOW_DID_YOU_HEAR_DDL = By.xpath("//*[@id=\"howDidYouSelection\"]");
     public static final By JOB_TITLE_TB = By.xpath("//*[@id=\"jobtitle\"]");
 
-    public static final By CPP_CB = By.xpath("//*[@id=\"C++ Build\"]");
-    public static final By CSSHORT_CB = By.xpath("//*[@id=\"C#, < 5min compilation time\"]");
-    public static final By CSLONG_CB = By.xpath("//*[@id=\"C#, long compilation time\"]");
-    public static final By JAVA_CB = By.xpath("//*[@id=\"Java Build\"]");
+    public static final By CPP_CB = By.xpath("//*[@value=\"C++ Build\"]");
+    public static final By CSSHORT_CB = By.xpath("//*[@value=\"C#, < 5min compilation time\"]");
+    public static final By CSLONG_CB = By.xpath("//*[@value=\"C#, long compilation time\"]");
+    public static final By JAVA_CB = By.xpath("//*[@value=\"Java Build\"]");
     public static final By UNREAL_CB = By.xpath("//*[@id=\"Unreal\"]");
     public static final By UNITY_CB = By.xpath("//*[@id=\"C#Unity\"]");
     public static final By TFS_CB = By.xpath("//*[@id=\"TFS\"]");
@@ -290,7 +290,7 @@ public class DownloadPageObject {
     }
 
     public void validateFirstName(){
-        eventWebDriver.findElement(FIRST_NAME_TB).sendKeys("1");
+        eventWebDriver.findElement(FIRST_NAME_TB).sendKeys("11");
         Assert.assertTrue(eventWebDriver.findElement(firstnamedigits).isDisplayed());
 
         eventWebDriver.findElement(FIRST_NAME_TB).clear();
@@ -306,7 +306,7 @@ public class DownloadPageObject {
     }
 
     public void validateLastName(){
-        eventWebDriver.findElement(LAST_NAME_TB).sendKeys("1");
+        eventWebDriver.findElement(LAST_NAME_TB).sendKeys("11");
         Assert.assertTrue(eventWebDriver.findElement(lastnamedigits).isDisplayed());
 
         eventWebDriver.findElement(LAST_NAME_TB).clear();

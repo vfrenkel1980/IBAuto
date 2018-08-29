@@ -1,5 +1,6 @@
 package webInfra.ibWeb.pageObjects;
 
+import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -52,6 +53,7 @@ public class LandingPageObject {
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(TERMS_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
+        SystemActions.sleep(3);
+        eventWebDriver.findElement(AWESOME_LBL);
     }
 }
