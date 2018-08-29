@@ -43,7 +43,7 @@ public class WindowsService implements IWindowsService {
                 test.log(Status.INFO, "Command " + command + " - Completed Successfully");
             }
         } catch (Exception e) {
-            test.log(Status.WARNING, "Failed to run command.\n" +
+            test.log(Status.ERROR, "Failed to run command.\n" +
                     "Command: " + command + "\n" +
                     e.getMessage());
             exitStatus = 1;
@@ -64,7 +64,7 @@ public class WindowsService implements IWindowsService {
                 test.log(Status.INFO, "Command " + command + " - Completed Successfully");
             }
         } catch (Exception e) {
-            test.log(Status.ERROR, "Failed to run command.\n" +
+            test.log(Status.WARNING, "Failed to run command.\n" +
                     "Command: " + command + "\n" +
                     e.getMessage());
         }
