@@ -17,9 +17,9 @@ public class DownloadPageObject {
     //First stage
 
     public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download_button\"]");
-    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows_form\"]");
-    public static final By LINUX_REG = By.xpath("//*[@id=\"linux_form\"]");
-    public static final By ENTERPRISE_REG = By.xpath("//*[@id=\"enterprise_form\"]");
+    public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows\"]");
+    public static final By LINUX_REG = By.xpath("//*[@id=\"linux\"]");
+    public static final By ENTERPRISE_REG = By.xpath("//*[@id=\"enterprise\"]");
     public static final By FIRST_NAME_TB = By.xpath("//*[@id=\"name\"]");
     public static final By LAST_NAME_TB = By.xpath("//*[@id=\"lname\"]");
     public static final By EMAIL_TB = By.xpath("//*[@id=\"email\"]");
