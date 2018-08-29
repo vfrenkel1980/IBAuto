@@ -159,6 +159,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(FREE_DEV_SUBMIT_BTN).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
 
     public void registerLinuxUser(RegistrationForm rf){
