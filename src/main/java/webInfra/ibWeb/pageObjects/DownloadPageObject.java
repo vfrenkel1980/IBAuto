@@ -81,33 +81,33 @@ public class DownloadPageObject {
     public static final By AWESOME_LBL = By.xpath("//*[contains(text(),'AWESOME!')]");
 
 
-    public static final By firstnamedigits = By.xpath("//*[contains(text(),'The first name field may only contain alphabetic characters as well as spaces.')]");
-    public static final By firstnameempty = By.xpath("//*[contains(text(),'The first name field is required.')]");
-    public static final By firstnameonechar = By.xpath("//*[contains(text(),'The first name field must be at least 2 characters.')]");
-    public static final By lastnamedigits = By.xpath("//*[contains(text(),'The last name field may only contain alphabetic characters as well as spaces.')]");
-    public static final By lastnameempty = By.xpath("//*[contains(text(),'The last name field is required.')]");
-    public static final By lastnameonechar = By.xpath("//*[contains(text(),'The last name field must be at least 2 characters.')]");
+    public static final By firstnamedigits = By.xpath("//*[contains(text(),'The First Name field may only contain alphabetic characters as well as spaces.')]");
+    public static final By firstnameempty = By.xpath("//*[contains(text(),'The First Name field is required.')]");
+    public static final By firstnameonechar = By.xpath("//*[contains(text(),'The First Name field must be at least 2 characters.')]");
+    public static final By lastnamedigits = By.xpath("//*[contains(text(),'The Last Name field may only contain alphabetic characters as well as spaces.')]");
+    public static final By lastnameempty = By.xpath("//*[contains(text(),'The Last Name field is required.')]");
+    public static final By lastnameonechar = By.xpath("//*[contains(text(),'The Last Name field must be at least 2 characters.')]");
     public static final By invalidemail = By.xpath("//*[contains(text(),'Please insert a valid email address')]");
     public static final By existingemail = By.xpath("//*[contains(text(),'The email you entered is already registered in the system.')]");
-    public static final By emailempty = By.xpath("//*[contains(text(),'The email field is required.')]");
-    public static final By passwordempty = By.xpath("//*[contains(text(),'The password field is required.')]");
-    public static final By passwordconfirmationempty = By.xpath("//*[contains(text(),'The password confirmation field is required.')]");
-    public static final By shortpassword = By.xpath("//*[contains(text(),'The password field must be at least 6 characters.')]");
+    public static final By emailempty = By.xpath("//*[contains(text(),'The Email field is required.')]");
+    public static final By passwordempty = By.xpath("//*[contains(text(),'The Password field is required.')]");
+    public static final By passwordconfirmationempty = By.xpath("//*[contains(text(),'The Password Confirmation field is required.')]");
+    public static final By shortpassword = By.xpath("//*[contains(text(),'The Password field must be at least 6 characters.')]");
     public static final By nonmatchingpassword = By.xpath("//*[contains(text(),'The passwords don't match, please type the same password.')]");
-    public static final By invalidphone = By.xpath("//*[contains(text(),'The phone field must be at least 6 characters.')]");
-    public static final By phonewithchars = By.xpath("//*[contains(text(),'The phone field may only contain numeric characters.')]");
-    public static final By phoneempty = By.xpath("//*[contains(text(),'The phone field is required.')]");
+    public static final By invalidphone = By.xpath("//*[contains(text(),'The Phone Number field must be at least 6 characters.')]");
+    public static final By phonewithchars = By.xpath("//*[contains(text(),'The Phone Number field may only contain numeric characters.')]");
+    public static final By phoneempty = By.xpath("//*[contains(text(),'The Phone Number field is required.')]");
     public static final By terms = By.xpath("//*[contains(text(),'Please confirm our term and conditions.')]");
     public static final By countryempty = By.xpath("//*[contains(text(),'The country field is required.')]");
-    public static final By companyempty = By.xpath("//*[contains(text(),'The company field is required.')]");
-    public static final By companyshort = By.xpath("//*[contains(text(),'The company field must be at least 2 characters.')]");
-    public static final By cityempty = By.xpath("//*[contains(text(),'The city field is required.')]");
-    public static final By cityshort = By.xpath("//*[contains(text(),'The city field must be at least 2 characters.')]");
-    public static final By citynumeric = By.xpath("//*[contains(text(),'The city field may only contain alphabetic characters.')]");
+    public static final By companyempty = By.xpath("//*[contains(text(),'The Company field is required.')]");
+    public static final By companyshort = By.xpath("//*[contains(text(),'The Company field must be at least 2 characters.')]");
+    public static final By cityempty = By.xpath("//*[contains(text(),'The City field is required.')]");
+    public static final By cityshort = By.xpath("//*[contains(text(),'The City field must be at least 2 characters.')]");
+    public static final By citynumeric = By.xpath("//*[contains(text(),'The City field may only contain alphabetic characters as well as spaces.')]");
     public static final By howdidyouhearempty = By.xpath("//*[contains(text(),'Please choose how you heard about incredibuild.')]");
-    public static final By jobempty = By.xpath("//*[contains(text(),'The job title field is required.')]");
-    public static final By jobshort = By.xpath("//*[contains(text(),'The job title field must be at least 2 characters.')]");
-    public static final By jobnumeric = By.xpath("//*[contains(text(),'The job title field may only contain alphabetic characters.')]");
+    public static final By jobempty = By.xpath("//*[contains(text(),'The Job Title field is required.')]");
+    public static final By jobshort = By.xpath("//*[contains(text(),'The Job Title field must be at least 2 characters.')]");
+    public static final By jobnumeric = By.xpath("//*[contains(text(),'The Job Title field may only contain alphabetic characters as well as spaces.')]");
 
 
     private EventFiringWebDriver eventWebDriver;
@@ -347,7 +347,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(PASSWORD_TB).sendKeys("111111");
         Assert.assertTrue(eventWebDriver.findElements(passwordempty).isEmpty());
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys("aaa");
-        Assert.assertTrue(eventWebDriver.findElement(By.xpath("//*[@id=\"stepOne\"]/div[5]/span")).isDisplayed());
+        //Assert.assertTrue(eventWebDriver.findElement(nonmatchingpassword).isDisplayed());
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).clear();
         eventWebDriver.findElement(PASSWORD_CONFIRMATION_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(passwordconfirmationempty).isDisplayed());
