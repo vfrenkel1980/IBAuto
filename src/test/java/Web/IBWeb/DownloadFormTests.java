@@ -94,7 +94,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.validateMailingListNotChecked();
     }
 
-    @Test(testName = "Windows Registration")
+    @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
         String mailSubject;
         RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
