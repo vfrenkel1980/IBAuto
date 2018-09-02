@@ -109,6 +109,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
     public void verifyExistingUser(){
+        downloadPageObject.clickLogout();
         downloadPageObject.clickDownloadButton();
         downloadPageObject.verifyExistingUserMessage(mailAddress);
     }

@@ -79,6 +79,7 @@ public class DownloadPageObject {
 
 
     public static final By AWESOME_LBL = By.xpath("//*[contains(text(),'AWESOME!')]");
+    public static final By LOGOUT_BTN = By.xpath("//*[contains(text(),'Logout')]");
 
 
     public static final By firstnamedigits = By.xpath("//*[contains(text(),'The First Name field may only contain alphabetic characters as well as spaces.')]");
@@ -468,5 +469,8 @@ public class DownloadPageObject {
             test.log(Status.INFO,"Purchase online link FOUND on the \"CREATE NEW ACCOUNT\" page");
     }
 
-
+    public void clickLogout(){
+        eventWebDriver.findElement(LOGOUT_BTN).click();
     }
+
+}
