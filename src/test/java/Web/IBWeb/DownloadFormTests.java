@@ -14,19 +14,6 @@ import webInfra.ibWeb.pages.RegistrationForm;
 @Listeners(TestListener.class)
 public class DownloadFormTests extends DownloadPageTestBase{
 
-    @Test(testName = "Windows Registration")
-    public void windowsRegistration(){
-        String mailSubject;
-        RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
-                "555954","united states", "alaska", "IB", "MOHA", "other",
-                "KING", false, true, false, true, true, false, false, true, false);
-        downloadPageObject.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
-        mailSubject = MailService.checkMail(host, mailAddress, password);
-        Assert.assertEquals(mailSubject, "Sandbox: Your IncrediBuild Download and License Files");
-        MailService.deleteMail(host, mailAddress, password);
-    }
-
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
         RegistrationForm rf = new RegistrationForm("linux", "User", mailAddress2, "123123",
@@ -45,20 +32,14 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.registerEnterpriseUser(rf);
     }
 
-    @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
-    public void verifyExistingUser(){
-        downloadPageObject.clickDownloadButton();
-        downloadPageObject.verifyExistingUserMessage(mailAddress);
-    }
-
     @Test(testName = "Validate First Name")
     public void validateFirstName(){
-        downloadPageObject.clickDownloadButton();
         downloadPageObject.validateFirstName();
     }
 
     @Test(testName = "Validate Last Name", dependsOnMethods = { "validateFirstName"})
     public void validateLastName(){
+        downloadPageObject.clickDownloadButton();
         downloadPageObject.validateLastName();
     }
 
@@ -113,5 +94,23 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.validateMailingListNotChecked();
     }
 
+    @Test(testName = "Windows Registration")
+    public void windowsRegistration(){
+        String mailSubject;
+        RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
+                "555954","united states", "alaska", "IB", "MOHA", "other",
+                "KING", false, true, false, true, true, false, false, true, false);
+        downloadPageObject.createNewFreeDevWinAccount(rf);
+        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
+        mailSubject = MailService.checkMail(host, mailAddress, password);
+        Assert.assertEquals(mailSubject, "Sandbox: Your IncrediBuild Download and License Files");
+        MailService.deleteMail(host, mailAddress, password);
+    }
+
+    @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
+    public void verifyExistingUser(){
+        downloadPageObject.clickDownloadButton();
+        downloadPageObject.verifyExistingUserMessage(mailAddress);
+    }
 
 }
