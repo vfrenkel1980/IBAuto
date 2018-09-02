@@ -366,7 +366,7 @@ public class IbService implements IIBService {
     public void generateCustomReport(ITestContext context){
         String version = getVersionFromInstaller("Latest");
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);

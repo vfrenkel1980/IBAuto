@@ -34,12 +34,12 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Validate First Name")
     public void validateFirstName(){
+        downloadPageObject.clickDownloadButton();
         downloadPageObject.validateFirstName();
     }
 
     @Test(testName = "Validate Last Name", dependsOnMethods = { "validateFirstName"})
     public void validateLastName(){
-        downloadPageObject.clickDownloadButton();
         downloadPageObject.validateLastName();
     }
 
