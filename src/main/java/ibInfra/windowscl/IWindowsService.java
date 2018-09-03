@@ -14,7 +14,7 @@ public interface IWindowsService {
 
     void waitForProcessToFinish(String processName);
 
-    void waitForProcessToFinishOnRemoteMachine(String host,String user, String pass, String processName);
+    void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName);
 
     int getNumberOfProcessInstances(String processName);
 
@@ -32,4 +32,7 @@ public interface IWindowsService {
 
     void restartService(String serviceName);
 
+    long getTodayMidnight();
+
+    long getNowWOSeconds();
 }

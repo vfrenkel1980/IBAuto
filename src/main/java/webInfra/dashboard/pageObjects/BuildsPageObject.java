@@ -64,15 +64,31 @@ public class BuildsPageObject {
         eventWebDriver.findElement(BUILDS_TAB).click();
     }
 
-    public void goToAllTab() {
+    public void goToTab(String t) {
         waitForLoadingScreen();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'All')]"))).click();
+            By tab = null;
+            switch (t) {
+                case "All":
+                    tab = ALL_TAB;
+                    break;
+                case "Today":
+                    tab = TODAY_TAB;
+                    break;
+                case "H12":
+                    tab = H12_TAB;
+                    break;
+                case "H24":
+                    tab = H24_TAB;
+                    break;
+                default:
+                    return;
+            }
+        wait.until(ExpectedConditions.elementToBeClickable(tab)).click();
         waitForLoadingScreen();
     }
 
     public void waitForLoadingScreen(){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(OVERLAY));
     }
-
 
 }

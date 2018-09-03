@@ -6,49 +6,146 @@ import org.testng.annotations.Test;
 import java.util.LinkedHashMap;
 
 public class BuildsTabTests extends BuildsTabTestBase {
+    private static final String ALL = "All";
+    private static final String TODAY = "Today";
+    private static final String H24 = "H24";
+    private static final String H12 = "H12";
 
-    @Test(testName = "Builds KPI All Executed Builds")
-    public void buildsAllKPIExecutedBuilds() {
-        buildPageObject.goToAllTab();
+//ALL
+    @Test(testName = "Verify Builds All KPI Executed")
+    public void verifyBuildsAllKPIExecuted() {
+        buildPageObject.goToTab(ALL);
         String successBuildsUI = buildPageObject.getSuccessfulBuildsUI();
         String failedBuildsUI = buildPageObject.getFailedBuildsUI();
         String totalBuildsUI = buildPageObject.getTotalBuildsUI();
-        int successBuilds = dashboardHelper.getAllBuilds("0");
-        int failedBuilds = dashboardHelper.getAllBuilds("1, 2");
+        int successBuilds = dashboardHelper.getBuilds("0", ALL);
+        int failedBuilds = dashboardHelper.getBuilds("1, 2", ALL);
         int totalBuilds = successBuilds + failedBuilds;
-        Assert.assertEquals(successBuildsUI, Integer.toString(successBuilds), "Successful builds values are different");
-        Assert.assertEquals(failedBuildsUI, Integer.toString(failedBuilds), "Failed builds values are different");
-        Assert.assertEquals(totalBuildsUI, Integer.toString(totalBuilds), "Failed builds values are different");
+        Assert.assertEquals(successBuildsUI, Integer.toString(successBuilds), "Successful builds values in DB don't match UI");
+        Assert.assertEquals(failedBuildsUI, Integer.toString(failedBuilds), "Failed builds values in DB don't match UI");
+        Assert.assertEquals(totalBuildsUI, Integer.toString(totalBuilds), "Failed builds values in DB don't match UI");
     }
 
-    @Test(testName = "Builds KPI All Avg Build Duration")
-    public void buildsAllKPIAvgBuildDuration() {
-        buildPageObject.goToAllTab();
+    @Test(testName = "Verify Builds All KPI Avg Duration")
+    public void verifyBuildsAllKPIAvgDuration() {
+        buildPageObject.goToTab(ALL);
         long avgBuildDurUI = dashboardHelper.convertStringTimeToEpoch(buildPageObject.getAvgBuildDurationUI()) * 1000;
-        long avgBuildDur = dashboardHelper.getBuildsDuration("0,1,2") / dashboardHelper.getAllBuilds("0,1,2");
-        Assert.assertEquals(avgBuildDurUI, avgBuildDur, "Builds KPI Avg Build Duration values are different");
+        long avgBuildDur = dashboardHelper.getAvgBuildDuration("0,1,2", ALL);
+        Assert.assertEquals(avgBuildDurUI, avgBuildDur, "Builds KPI Avg Build Duration values in DB don't match UI");
     }
 
-    @Test(testName = "Builds KPI Distributed Time All")
-    public void buildsAllKPIDistributedTime() {
-        buildPageObject.goToAllTab();
+    @Test(testName = "Verify Builds All KPI Distributed Time")
+    public void verifyBuildsAllKPIDistributedTime() {
+        buildPageObject.goToTab(ALL);
         String distributedTimeUI = buildPageObject.getDistributedTimeUI();
-        int allBuildsDistributedTime = dashboardHelper.getBuildsDistributedCoreHours("0,1,2") / dashboardHelper.getBuildsDurationCoreHours("0,1,2") * 100;
-        Assert.assertEquals(distributedTimeUI, Integer.toString(allBuildsDistributedTime), "Builds KPI Distributed Time values are different");
+        int procentDistributedTime = dashboardHelper.getBuildsDistributedCoreHours("0,1,2", ALL) / dashboardHelper.getBuildsDurationCoreHours("0,1,2", ALL) * 100;
+        Assert.assertEquals(distributedTimeUI, Integer.toString(procentDistributedTime), "Builds KPI Distributed Time values in DB don't match UI");
     }
 
-    @Test(testName = "Builds KPI All Top 5 Build Time")
-    public void BuildsKPIAllTop5BuildTime() {
-        buildPageObject.goToAllTab();
-        LinkedHashMap<String, String> topInitiators = dashboardHelper.getAllBuildsTopInitiatorAgentsTime(5);
+    @Test(testName = "Verify Builds All KPI Top 5 Build Time", enabled=false)
+    public void verifyBuildsAllKPITop5BuildTime() {
+        buildPageObject.goToTab(ALL);
+        LinkedHashMap<String, String> topInitiators = dashboardHelper.getAllBuildsTopInitiatorAgentsTime(5,ALL);
         for (int i = 0; i <= 5; i++) {
             String topInitiatorDurationUI = buildPageObject.getTopBuildTimeInitiator(i+1);
             String topInitiatorNameUI = buildPageObject.getTopBuildTimeInitiator(i+1);
             String topInitiatorDuration = (String) topInitiators.values().toArray()[i];
             String topInitiatorName  = (String) topInitiators.keySet().toArray()[i];
-            Assert.assertEquals(topInitiatorDurationUI, topInitiatorDuration, " All Builds Top # "+i+" Initiator Duration time is dismatch ");
-            Assert.assertEquals(topInitiatorNameUI, topInitiatorName, " All Builds Top # "+i+" Initiator name is dismatch ");
+            Assert.assertEquals(topInitiatorDurationUI, topInitiatorDuration, " All Builds Top # "+i+" Initiator Duration times in DB don't match UI ");
+            Assert.assertEquals(topInitiatorNameUI, topInitiatorName, " All Builds Top # "+i+" Initiator names in DB don't match UI");
         }
     }
 
+//TODAY
+    @Test(testName = "Verify Builds Today KPI Executed")
+    public void verifyBuildsTodayKPIExecuted() {
+        buildPageObject.goToTab(TODAY);
+        String successBuildsUI = buildPageObject.getSuccessfulBuildsUI();
+        String failedBuildsUI = buildPageObject.getFailedBuildsUI();
+        String totalBuildsUI = buildPageObject.getTotalBuildsUI();
+        int successBuilds = dashboardHelper.getBuilds("0", TODAY);
+        int failedBuilds = dashboardHelper.getBuilds("1, 2", TODAY);
+        int totalBuilds = successBuilds + failedBuilds;
+        Assert.assertEquals(successBuildsUI, Integer.toString(successBuilds), "Successful builds values in DB don't match UI");
+        Assert.assertEquals(failedBuildsUI, Integer.toString(failedBuilds), "Failed builds values in DB don't match UI");
+        Assert.assertEquals(totalBuildsUI, Integer.toString(totalBuilds), "Failed builds values in DB don't match UI");
+    }
+
+    @Test(testName = "Verify Builds Today KPI Avg Duration")
+    public void verifyBuildsTodayKPIAvgDuration() {
+        buildPageObject.goToTab(TODAY);
+        long avgBuildDurUI = dashboardHelper.convertStringTimeToEpoch(buildPageObject.getAvgBuildDurationUI()) * 1000;
+        long avgBuildDur = dashboardHelper.getAvgBuildDuration("0,1,2", TODAY);
+        Assert.assertEquals(avgBuildDurUI, avgBuildDur, "Builds KPI Avg Build Duration values in DB don't match UI");
+    }
+
+    @Test(testName = "Verify Builds Today KPI Distributed Time")
+    public void verifyBuildsTodayKPIDistributedTime() {
+        buildPageObject.goToTab(TODAY);
+        String distributedTimeUI = buildPageObject.getDistributedTimeUI();
+        int procentDistributedTime = dashboardHelper.getBuildsDistributedCoreHours("0,1,2", TODAY) / dashboardHelper.getBuildsDurationCoreHours("0,1,2", TODAY) * 100;
+        Assert.assertEquals(distributedTimeUI, Integer.toString(procentDistributedTime), "Builds KPI Distributed Time values in DB don't match UI");
+    }
+
+//12H
+    @Test(testName = "Verify Builds 12H KPI Executed")
+    public void verifyBuilds12HKPIExecuted() {
+        buildPageObject.goToTab(H12);
+        String successBuildsUI = buildPageObject.getSuccessfulBuildsUI();
+        String failedBuildsUI = buildPageObject.getFailedBuildsUI();
+        String totalBuildsUI = buildPageObject.getTotalBuildsUI();
+        int successBuilds = dashboardHelper.getBuilds("0", H12);
+        int failedBuilds = dashboardHelper.getBuilds("1, 2", H12);
+        int totalBuilds = successBuilds + failedBuilds;
+        Assert.assertEquals(successBuildsUI, Integer.toString(successBuilds), "Successful builds values in DB don't match UI");
+        Assert.assertEquals(failedBuildsUI, Integer.toString(failedBuilds), "Failed builds values in DB don't match UI");
+        Assert.assertEquals(totalBuildsUI, Integer.toString(totalBuilds), "Failed builds values in DB don't match UI");
+    }
+
+    @Test(testName = "Verify Builds 12H KPI Avg Duration")
+    public void verifyBuilds12HKPIAvgDuration() {
+        buildPageObject.goToTab(H12);
+        long avgBuildDurUI = dashboardHelper.convertStringTimeToEpoch(buildPageObject.getAvgBuildDurationUI()) * 1000;
+        long avgBuildDur = dashboardHelper.getAvgBuildDuration("0,1,2", H12);
+        Assert.assertEquals(avgBuildDurUI, avgBuildDur, "Builds KPI Avg Build Duration values in DB don't match UI");
+    }
+
+    @Test(testName = "Verify Builds 12H KPI Distributed Time")
+    public void verifyBuilds12HKPIDistributedTime() {
+        buildPageObject.goToTab(H12);
+        String distributedTimeUI = buildPageObject.getDistributedTimeUI();
+        int procentDistributedTime = dashboardHelper.getBuildsDistributedCoreHours("0,1,2", H12) / dashboardHelper.getBuildsDurationCoreHours("0,1,2", H12) * 100;
+        Assert.assertEquals(distributedTimeUI, Integer.toString(procentDistributedTime), "Builds KPI Distributed Time values in DB don't match UI");
+    }
+
+//24H
+    @Test(testName = "Verify Builds 24H KPI Executed")
+    public void verifyBuilds24HKPIExecuted() {
+        buildPageObject.goToTab(H24);
+        String successBuildsUI = buildPageObject.getSuccessfulBuildsUI();
+        String failedBuildsUI = buildPageObject.getFailedBuildsUI();
+        String totalBuildsUI = buildPageObject.getTotalBuildsUI();
+        int successBuilds = dashboardHelper.getBuilds("0", H24);
+        int failedBuilds = dashboardHelper.getBuilds("1, 2", H24);
+        int totalBuilds = successBuilds + failedBuilds;
+        Assert.assertEquals(successBuildsUI, Integer.toString(successBuilds), "Successful builds values in DB don't match UI");
+        Assert.assertEquals(failedBuildsUI, Integer.toString(failedBuilds), "Failed builds values in DB don't match UI");
+        Assert.assertEquals(totalBuildsUI, Integer.toString(totalBuilds), "Failed builds values in DB don't match UI");
+    }
+
+    @Test(testName = "Verify Builds 24H KPI Avg Duration")
+    public void verifyBuilds24HKPIAvgDuration() {
+        buildPageObject.goToTab(H24);
+        long avgBuildDurUI = dashboardHelper.convertStringTimeToEpoch(buildPageObject.getAvgBuildDurationUI()) * 1000;
+        long avgBuildDur = dashboardHelper.getAvgBuildDuration("0,1,2", H24);
+        Assert.assertEquals(avgBuildDurUI, avgBuildDur, "Builds KPI Avg Build Duration values in DB don't match UI");
+    }
+
+    @Test(testName = "Builds 24H KPI Distributed Time")
+    public void verifyBuilds24HKPIDistributedTime() {
+        buildPageObject.goToTab(H24);
+        String distributedTimeUI = buildPageObject.getDistributedTimeUI();
+        int procentDistributedTime = dashboardHelper.getBuildsDistributedCoreHours("0,1,2", H24) / dashboardHelper.getBuildsDurationCoreHours("0,1,2", H24) * 100;
+        Assert.assertEquals(distributedTimeUI, Integer.toString(procentDistributedTime), "Builds KPI Distributed Time values in DB don't match UI");
+    }
 }
