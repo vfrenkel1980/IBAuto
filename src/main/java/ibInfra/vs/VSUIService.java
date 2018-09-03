@@ -196,20 +196,20 @@ public class VSUIService implements IVSUIService {
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-            SystemActions.sleep(60);
             test.log(Status.INFO, "Visual Studio opened successfully");
+            SystemActions.sleep(30);
             if(isFirstActivation) {
                 try {
                     SystemActions.sleep(10);
                     vsFirstActivation();
                 } catch (Exception e) {
-                    e.getMessage();
+                    test.log(Status.ERROR, "Failed set VS first activation: ------>" + e.getMessage());
                 }
                 finally {
                     driver.quit();
                 }
             }
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             test.log(Status.ERROR, "Failed to open VS with following error: ------>" + e.getMessage());
         }
 
