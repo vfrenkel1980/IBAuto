@@ -14,6 +14,8 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -233,6 +235,19 @@ public class WindowsService implements IWindowsService {
     public void restartService(String serviceName) {
         runCommandWaitForFinish("net stop " + serviceName);
         runCommandWaitForFinish("net start " + serviceName);
+    }
+    @Override
+    public long getTodayMidnight() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime midnight = now.toLocalDate().atStartOfDay();
+        return Timestamp.valueOf(midnight).getTime();
+    }
+
+    @Override
+    public long getNowWOSeconds() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nowWOSeconds = now.withSecond(0).withNano(0);
+        return Timestamp.valueOf(nowWOSeconds).getTime();
     }
 
 }
