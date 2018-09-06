@@ -412,7 +412,7 @@ public class StaticDataProvider {
 
         public static class CHROME_ROBIN {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
-            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
 
         public static class VC15_ROBIN {
