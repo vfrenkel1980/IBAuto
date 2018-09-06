@@ -174,6 +174,7 @@ public class IbService implements IIBService {
     @Override
     public void unloadIbLicense() {
         winService.runCommandWaitForFinish(WindowsCommands.UNLOAD_IB_LICENSE);
+        SystemActions.killProcess("XLicProc.exe");
     }
 
     /**
