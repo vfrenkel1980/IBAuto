@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
@@ -101,6 +103,7 @@ public class VSTestBase extends TestBase {
                 else
                     vsCommands.upgradeVSPreviewWithIB();
                 ibService.verifyIbServicesRunning(true, true);
+                setMsBuildRegValue();
                 break;
 
             case "3":
@@ -113,6 +116,7 @@ public class VSTestBase extends TestBase {
                 ibService.verifyIbServicesRunning(true, true);
                 vsuiService.openVSInstance(VSINSTALLATION, true, SCENARIO);
                 SystemActions.killProcess("devenv.exe");
+                setMsBuildRegValue();
                 break;
 
             case "4":
@@ -163,6 +167,11 @@ public class VSTestBase extends TestBase {
         generateCustomReport();
     }
 
+    private void setMsBuildRegValue(){
+        String msBuildVer = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info",
+                "ms_build_support_version", "build_number");
+        RegistryService.createRegKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "MSBuildMaxSupportedVersion15.0", msBuildVer);
+    }
 
 
 

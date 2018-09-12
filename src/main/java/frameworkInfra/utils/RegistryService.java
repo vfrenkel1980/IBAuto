@@ -44,7 +44,6 @@ public class RegistryService extends TestBase {
         if (test != null)
             test.log(Status.INFO, "Creating " + keyName + ". Setting value to " + value);
         try {
-            Advapi32Util.registryCreateKey(rootKey, keyPath, keyName);
             Advapi32Util.registrySetStringValue(rootKey, keyPath, keyName, value);
         } catch (Exception ex) {
             test.log(Status.ERROR, "Failed to create new registry key with error: " + ex.getMessage());
