@@ -295,7 +295,7 @@ public class IbService implements IIBService {
             return true;
         }
         else{
-            test.log(Status.WARNING, "License is NOT loaded. CoordLicense.dat does not exist in + " + IbLocations.IB_ROOT);
+            test.log(Status.WARNING, "License is NOT loaded. CoordLicense.dat does not exist in " + IbLocations.IB_ROOT);
             return false;
         }
     }
