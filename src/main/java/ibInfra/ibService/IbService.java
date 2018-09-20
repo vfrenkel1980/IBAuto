@@ -162,7 +162,7 @@ public class IbService implements IIBService {
     @Override
     public void loadIbLicense(String license) {
         winService.runCommandDontWaitForTermination(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
-        SystemActions.sleep(5);
+        SystemActions.sleep(10);
         SystemActions.killProcess("XLicProc.exe");
         SystemActions.killProcess("CoordMonitor.exe");
         isLicenseLoaded();
