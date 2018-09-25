@@ -403,6 +403,8 @@ public class StaticDataProvider {
         public static class ConsoleAppProj {
             public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fail.sln /%s /cfg=\"Debug|x86\"";
+            public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
+
         }
 
         public static class CHROME_BATMAN {
@@ -444,7 +446,7 @@ public class StaticDataProvider {
     }
 
     public static class IbLicenses {
-        public static final String VSTESTS_LIC = "IncrediBuild - Mark Zvuluni - tests VS preview.IB_lic";
+        public static final String VSTESTS_LIC = "IncrediBuild - Mark Zvuluni - tests predicted SEP 2018.IB_lic";
         public static final String UI_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - UI automation.IB_lic";
         public static final String TEST_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - personal Coordinator.IB_lic";
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";

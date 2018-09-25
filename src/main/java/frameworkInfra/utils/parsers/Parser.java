@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class Parser extends TestBase{
+public class Parser{
 
     /**
      * Used in order to get data from file using key,value
@@ -72,6 +72,31 @@ public class Parser extends TestBase{
         }
         test.log(Status.INFO, "Didn't find " + text + " in" + filePath);
         return false;
+    }
+
+    public static String getValueAccordingToString(String filePath, String text, String searchFor){
+        test.log(Status.INFO, "Searching for " + text + " in " + filePath);
+        File file = new File(filePath);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine().toLowerCase();
+                if(lineFromFile.contains(text.toLowerCase())) {
+                    if(lineFromFile.contains(searchFor.toLowerCase())) {
+                        return lineFromFile.substring(lineFromFile.lastIndexOf(searchFor.toLowerCase()) + searchFor.length() + 1 , lineFromFile.length() - 1);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
+        test.log(Status.INFO, "Didn't find " + text + " in" + filePath);
+        return "";
     }
 
     public static String getFileToParse(String path, String prefix){

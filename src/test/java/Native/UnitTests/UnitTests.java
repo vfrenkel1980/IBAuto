@@ -13,6 +13,7 @@ import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
+import org.apache.velocity.runtime.directive.Parse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class UnitTests {
 
@@ -61,9 +64,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        System.out.println("this is a test 2");
-        Assert.assertEquals(0,1);
-
+        System.out.println(Parser.getValueAccordingToString("C:\\Users\\Mark\\Desktop\\1.txt", "DependencyProject2.cpp", "Local CPU"));
     }
 
 }

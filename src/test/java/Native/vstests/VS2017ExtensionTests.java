@@ -10,6 +10,7 @@ import ibInfra.ibService.IIBService;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
+import java.io.File;
 import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
@@ -38,10 +39,10 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
         String actual = vsuiService.getInstalledMSBuildVersion();
-        String expected = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info",
-                "ms_build_support_version", "build_number");
+        int expected = postgresJDBC.getIntFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
+                "build_number=" + ibVersion);
         test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
-        Assert.assertEquals(actual, expected, "Installed MSBuild version does not match expected");
+        Assert.assertEquals(actual, Integer.toString(expected), "Installed MSBuild version does not match expected");
     }
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
@@ -218,6 +219,22 @@ public class VS2017ExtensionTests extends VSTestBase {
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.XDSPECULATIVETASKID));
     }
+
+    @Test(testName = "Predicted With Project Dependency. Predicted 2, MSBuild 1")
+    public void predictedWithProjectDependency(){
+        setRegistry("2", RegistryKeys.PREDICTED);
+        setRegistry("1", RegistryKeys.MSBUILD);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.DEPENDENCY_PROJECT, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED));
+        String task1 = Parser.getValueAccordingToString(Locations.OUTPUT_LOG_FILE,"DependencyProject2.cpp", "Local CPU");
+        String task2 = Parser.getValueAccordingToString(Locations.OUTPUT_LOG_FILE,"DependencyProject.cpp)", "Local CPU");
+        Assert.assertNotEquals(task1, "", "Could not find project in log");
+        Assert.assertNotEquals(task1, task2, "Both tasks run on the same core");
+
+        File ibmsbhlpLog = new File(IbLocations.LOGS_ROOT + "\\IBMSBHLP.log");
+        Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
+    }
+
 
     /*------------------------------METHODS------------------------------*/
 
