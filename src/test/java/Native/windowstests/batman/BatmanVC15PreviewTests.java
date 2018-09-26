@@ -35,12 +35,6 @@ public class BatmanVC15PreviewTests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Check that \"Predicted\" execution is enable: VS2017 Preview")
-    public void checkForPredictedExecutionWithoutMSBuild() {
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15Preview_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PREDICTED_DISABLED));
-    }
-
     @Test(testName = "Check if IBMSBHLP.log created")
     public void checkIBMSBHLPlogCreation(){
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15Preview_BATMAN.AUDACITY_X32_DEBUG, "%s"));
