@@ -81,6 +81,7 @@ test {
     systemProperty 'scenario', System.properties['scenario'] ?: '2'
     systemProperty 'scenario', System.properties['scenario'] ?: '3'
     systemProperty 'scenario', System.properties['scenario'] ?: '4'
+    systemProperty 'scenario', System.properties['scenario'] ?: '5'
     //VSinstallation parameter for VStests
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: '15'
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: 'preview'

@@ -3,10 +3,7 @@ package frameworkInfra.utils.databases;
 import com.aventstack.extentreports.Status;
 import ibInfra.dataObjects.postgres.CoordBuild;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.LinkedHashMap;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -20,7 +17,7 @@ public class PostgresJDBC implements IDataBase {
             c = DriverManager
                     .getConnection("jdbc:postgresql://" + ip + ":5432/" + db,
                             username, password);
-            c.setAutoCommit(false);
+            c.setAutoCommit(true);
             if (test != null)
                 test.log(Status.INFO, "Connection established to DB");
         } catch (Exception e) {
@@ -170,6 +167,21 @@ public class PostgresJDBC implements IDataBase {
                 test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
         }
         return res;
+    }
+
+    @Override
+    public void insertDataToTable(String ip, String username, String password, String db, String table, String columns, String values) {
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            if (test != null)
+                test.log(Status.INFO, "Running query: INSERT into " + table + " (" + columns + ") " + "VALUES " + " (" + values + ");");
+            PreparedStatement stmt = c.prepareStatement("INSERT into " + table + " (" + columns + ") " + "VALUES " + "(" + values + ")");
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
     }
 
 }

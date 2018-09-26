@@ -21,7 +21,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Check version of VS")
     public void getVsVersion(){
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        ibService.getVSVersionFromOutputLog(Locations.OUTPUT_LOG_FILE);
+        vsVersion = ibService.getVSVersionFromOutputLog(Locations.OUTPUT_LOG_FILE);
     }
 
     @Test(testName = "Check version of installed IB extension")
@@ -36,13 +36,14 @@ public class VS2017ExtensionTests extends VSTestBase {
         ibVersion = IIBService.getIbVersion();
     }
 
+    //TODO add the special reg to create buildlog, build in test and verify to avoid dependency
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
-        String actual = vsuiService.getInstalledMSBuildVersion();
+        String msBuildVersion = vsuiService.getInstalledMSBuildVersion();
         int expected = postgresJDBC.getIntFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
                 "build_number=" + ibVersion);
-        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + actual);
-        Assert.assertEquals(actual, Integer.toString(expected), "Installed MSBuild version does not match expected");
+        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + msBuildVersion);
+        Assert.assertEquals(msBuildVersion, Integer.toString(expected), "Installed MSBuild version does not match expected");
     }
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
@@ -233,6 +234,15 @@ public class VS2017ExtensionTests extends VSTestBase {
 
         File ibmsbhlpLog = new File(IbLocations.LOGS_ROOT + "\\IBMSBHLP.log");
         Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
+    }
+
+    @Test(testName = "Write Data To DB")
+    public void writeDataToDB() {
+        if (SCENARIO.equals("2")) {
+            ibVsInstallationName = SystemActions.findFileInDirectoryRecursivly("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017");
+            postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_release_versioning",
+                    "vs_version, ib_version, msbuild_version, ib_installer_name", vsVersion + ", " + ibVersion + ", " + installedMsBuildVersion + ", " + ibVsInstallationName);
+        }
     }
 
 

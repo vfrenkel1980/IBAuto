@@ -12,6 +12,7 @@ import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.parsers.CustomJsonParser;
 import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSCommands;
 import ibInfra.vs.VSUIService;
@@ -22,7 +23,6 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 import org.testng.annotations.*;
-import org.testng.internal.Systematiser;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -39,6 +39,9 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class VSTestBase extends TestBase {
 
     protected static int ibVersion = 0;
+    protected static String installedMsBuildVersion = "";
+    protected static String vsVersion = "";
+    protected static String ibVsInstallationName = "";
     protected static String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
@@ -62,7 +65,8 @@ public class VSTestBase extends TestBase {
      * 1 - vs installed, install IB from installer
      * 2 - upgrade vs and install IB from vs installer
      * 3 - install old IB, install vs and upgrade IB from VS installer
-     * 4 - install vs without IB
+     * 4 - upgrade VS and install a custom IB installer from VS(changed in the registry)
+     * 5 - install vs without IB
      *
      * @exception SkipException is thrown in scenario 4 in order to avoid performing
      * test class as IB is not installed in this scenario.
@@ -72,7 +76,6 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
-
         if (VSINSTALLATION.toLowerCase().equals("preview")){
             devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
         } else {
@@ -92,8 +95,10 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVS();
                 else
                     vsCommands.upgradeVSPreview();
+                ibVersion = IIBService.getIbVersion();
                 ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
                 ibService.verifyIbServicesRunning(true, true);
+
                 break;
 
             case "2":
@@ -120,7 +125,26 @@ public class VSTestBase extends TestBase {
                 break;
 
             case "4":
-                test.log(Status.INFO, "Before class started\n SCENARIO 4: install vs without IB");
+                String integratedIBVersion = "";
+                test.log(Status.INFO, "Before class started\n SCENARIO 4: upgrade vs and install a custom IB installer from VS");
+                if (SCENARIO.equals("preview")) {
+                    integratedIBVersion = getLatestInstallerVersion("preview");
+                } else
+                    integratedIBVersion = getLatestInstallerVersion("release");
+                createCustomKeyAndChangeVSIntegratedIbInstaller(integratedIBVersion);
+
+                if (VSINSTALLATION.equals("15")) {
+                    vsCommands.upgradeVSWithIB();
+                }
+                else {
+                    vsCommands.upgradeVSPreviewWithIB();
+                }
+                ibService.verifyIbServicesRunning(true, true);
+                setMsBuildRegValue();
+                break;
+
+            case "5":
+                test.log(Status.INFO, "Before class started\n SCENARIO 5: install vs without IB");
                 if (VSINSTALLATION.equals("15"))
                     vsCommands.installVSWithoutIB();
                 else
@@ -170,10 +194,31 @@ public class VSTestBase extends TestBase {
     private void setMsBuildRegValue(){
         String msBuildVer = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "Windows_builds_ib_info",
                 "ms_build_support_version", "build_number");
-        RegistryService.createRegKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "MSBuildMaxSupportedVersion15.0", msBuildVer);
+        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", "MSBuildMaxSupportedVersion15.0", msBuildVer);
     }
 
+    /**
+     * get the IB version that is integrated in the latest VS installation and set the name of the installer into ibVsInstallationName.
+     * @param distribution choose between release/preview
+     * @return return the ib build number
+     */
+    private String getLatestInstallerVersion(String distribution){
+        ibVsInstallationName = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
+                "vs_" + distribution + "_versioning", "ib_installer_name", "vs_version");
+        return postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "vs_" + distribution + "_versioning",
+                "ib_version", "vs_version");
+    }
 
+    /**
+     * Creates a new Folder key with the name of the required IB installation.
+     * Changes the integrated VS version of IB to the required one
+     * @param version the IB version that will be installed with VS
+     */
+    private void createCustomKeyAndChangeVSIntegratedIbInstaller(String version){
+        RegistryService.createRootRegistryFolder(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + ibVsInstallationName + "_console.exe");
+        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + version + "_console.exe", "debugger",
+                Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + ibVsInstallationName + "_console.exe %1 %2");
+    }
 
     /**
      * Generates a custom HTML report derived from the full extent report

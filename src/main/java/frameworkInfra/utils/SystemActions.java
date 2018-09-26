@@ -244,4 +244,21 @@ public class SystemActions {
             test.log(Status.WARNING, "unable to delete files. Failed with error: " + e.getMessage());
         }
     }
+
+    public static String findFileInDirectoryRecursivly(String directory, String fileName){
+        File root = new File(directory);
+        String returnPath = "";
+        try {
+            Collection files = FileUtils.listFiles(root, null, true);
+
+            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
+                File file = (File) iterator.next();
+                if (file.getName().contains(fileName))
+                    returnPath = file.getName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnPath;
+    }
 }

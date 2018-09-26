@@ -2,6 +2,7 @@ package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinReg.HKEY;
 import frameworkInfra.testbases.TestBase;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 /**
@@ -34,13 +36,13 @@ public class RegistryService extends TestBase {
         try {
             return Advapi32Util.registryGetStringValue(rootKey, keyPath, keyName);
         } catch (Exception ex) {
-            test.log(Status.ERROR, "Failed to get value for " + keyName);
             ex.getMessage();
+            test.log(Status.ERROR, "Failed to get value for " + keyName);
             return "";
         }
     }
 
-    public static void createRegKey(HKEY rootKey, String keyPath, String keyName, String value) {
+    public static void createRegValue(HKEY rootKey, String keyPath, String keyName, String value) {
         if (test != null)
             test.log(Status.INFO, "Creating " + keyName + ". Setting value to " + value);
         try {
@@ -80,5 +82,16 @@ public class RegistryService extends TestBase {
 
     public static boolean doesKeyExist(HKEY rootKey, String keyPath) {
         return Advapi32Util.registryKeyExists(rootKey, keyPath);
+    }
+
+    public static void createRootRegistryFolder(HKEY rootKey,String path) {
+        if (!doesKeyExist(HKEY_LOCAL_MACHINE, path)) {
+            try {
+                Advapi32Util.registryCreateKey(rootKey, path);
+            } catch (Win32Exception e) {
+                e.getMessage();
+                test.log(Status.ERROR, "Failed to create new key folder in " + path);
+            }
+        }
     }
 }

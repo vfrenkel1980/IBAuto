@@ -86,4 +86,15 @@ public interface IDataBase {
 
     LinkedHashMap<String,String> getLinkedHashMapFromQuery(String ip, String username, String password, String db, String select, String table, String join, String groupBy, String orderBy, int limit);
 
+    /**
+     * Used in order to insert rows to an existing table
+     * @param ip db machine ip
+     * @param username db username
+     * @param password user's password
+     * @param db DB
+     * @param columns the columns you would like to enter data into
+     * @param values the values you would like to add
+     */
+    void insertDataToTable(String ip, String username, String password, String db, String table, String columns, String values);
+
 }

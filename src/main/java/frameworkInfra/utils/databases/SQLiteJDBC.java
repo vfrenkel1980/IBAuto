@@ -79,4 +79,9 @@ public class SQLiteJDBC implements IDataBase {
     public LinkedHashMap<String, String> getLinkedHashMapFromQuery(String ip, String username, String password, String db, String select, String table, String join, String groupBy, String orderBy, int limit) {
         return null;
     }
+
+    @Override
+    public void insertDataToTable(String ip, String username, String password, String db, String table, String columns, String values) {
+
+    }
 }

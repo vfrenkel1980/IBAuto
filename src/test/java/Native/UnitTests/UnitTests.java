@@ -11,6 +11,7 @@ import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
 import org.apache.velocity.runtime.directive.Parse;
@@ -25,10 +26,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -64,7 +62,20 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        System.out.println(Parser.getValueAccordingToString("C:\\Users\\Mark\\Desktop\\1.txt", "DependencyProject2.cpp", "Local CPU"));
-    }
+        File root = new File("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages");
+        String fileName = "incredibuild_vs2017";
+        try {
+            boolean recursive = true;
 
+            Collection files = FileUtils.listFiles(root, null, recursive);
+
+            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
+                File file = (File) iterator.next();
+                if (file.getName().contains(fileName))
+                    System.out.println(file.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
