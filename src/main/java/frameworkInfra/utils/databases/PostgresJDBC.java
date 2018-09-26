@@ -88,6 +88,27 @@ public class PostgresJDBC implements IDataBase {
         return res;
     }
 
+    @Override
+    public String getStringFromQuery(String ip, String username, String password, String db, String select, String table, String where) {
+        String res = "";
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            Statement stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.INFO, "Running query: SELECT " + select +  " FROM " + table + " WHERE " + where);
+            ResultSet rs = stmt.executeQuery(" SELECT " + select + " FROM " + table + " WHERE " + where);
+            rs.next();
+            res = rs.getString(1);
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return res;
+    }
+
     public long getLongFromQuery(String ip, String username, String password, String db, String select, String table){
         long res = 0;
 

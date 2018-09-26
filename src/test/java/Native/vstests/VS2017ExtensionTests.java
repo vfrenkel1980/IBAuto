@@ -39,10 +39,10 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
         installedMsBuildVersion = vsuiService.getInstalledMSBuildVersion();
-        int expected = postgresJDBC.getIntFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
+        String expected = postgresJDBC.getStringFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
                 "build_number=" + ibVersion);
         test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + installedMsBuildVersion);
-        Assert.assertEquals(installedMsBuildVersion, Integer.toString(expected), "Installed MSBuild version does not match expected");
+        Assert.assertEquals(installedMsBuildVersion, expected, "Installed MSBuild version does not match expected");
     }
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")

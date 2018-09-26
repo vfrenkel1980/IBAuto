@@ -61,6 +61,11 @@ public class SQLiteJDBC implements IDataBase {
     }
 
     @Override
+    public String getStringFromQuery(String ip, String username, String password, String db, String select, String table, String where) {
+        return "";
+    }
+
+    @Override
     public long getLongFromQuery(String ip, String username, String password, String db, String select, String table) {
         return 0;
     }

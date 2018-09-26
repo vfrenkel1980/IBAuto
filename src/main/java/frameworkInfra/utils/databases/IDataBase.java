@@ -50,6 +50,19 @@ public interface IDataBase {
     int getIntFromQuery(String ip, String username, String password, String db, String select, String table, String where);
 
     /**
+     * Used to get the int value from query
+     * @param ip db machine ip
+     * @param username db username
+     * @param password user's password
+     * @param db DB
+     * @param select what to select from query
+     * @param table db table
+     * @param where condition for selection
+     * @return String value
+     */
+    String getStringFromQuery(String ip, String username, String password, String db, String select, String table, String where);
+
+    /**
      * Used to get the long value from query without WHERE statement
      * @param ip db machine ip
      * @param username db username
