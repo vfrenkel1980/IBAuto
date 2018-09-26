@@ -14,6 +14,7 @@ import ibInfra.windowscl.WindowsService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
+import org.apache.tools.ant.DirectoryScanner;
 import org.apache.velocity.runtime.directive.Parse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -62,20 +63,12 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        File root = new File("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages");
-        String fileName = "incredibuild_vs2017";
-        try {
-            boolean recursive = true;
-
-            Collection files = FileUtils.listFiles(root, null, recursive);
-
-            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
-                File file = (File) iterator.next();
-                if (file.getName().contains(fileName))
-                    System.out.println(file.getName());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setIncludes(new String[]{"**/incredibuild_vs2017*.log"});
+        scanner.setBasedir("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages");
+        scanner.setCaseSensitive(false);
+        scanner.scan();
+        String[] files = scanner.getIncludedFiles();
+        files[0].substring(files[0].lastIndexOf("\\") + 1);
     }
 }

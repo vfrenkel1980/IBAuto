@@ -4,7 +4,6 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.VSTestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibService.IIBService;
 import org.testng.annotations.Test;
@@ -39,11 +38,11 @@ public class VS2017ExtensionTests extends VSTestBase {
     //TODO add the special reg to create buildlog, build in test and verify to avoid dependency
     @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
     public void compareMSBuildVersion(){
-        String msBuildVersion = vsuiService.getInstalledMSBuildVersion();
+        installedMsBuildVersion = vsuiService.getInstalledMSBuildVersion();
         int expected = postgresJDBC.getIntFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
                 "build_number=" + ibVersion);
-        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + msBuildVersion);
-        Assert.assertEquals(msBuildVersion, Integer.toString(expected), "Installed MSBuild version does not match expected");
+        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + installedMsBuildVersion);
+        Assert.assertEquals(installedMsBuildVersion, Integer.toString(expected), "Installed MSBuild version does not match expected");
     }
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
@@ -239,9 +238,10 @@ public class VS2017ExtensionTests extends VSTestBase {
     @Test(testName = "Write Data To DB")
     public void writeDataToDB() {
         if (SCENARIO.equals("2")) {
-            ibVsInstallationName = SystemActions.findFileInDirectoryRecursivly("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017");
+            ibVsInstallationName = SystemActions.findFileInDirectoryRecursively("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017*.exe");
             postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_release_versioning",
-                    "vs_version, ib_version, msbuild_version, ib_installer_name", vsVersion + ", " + ibVersion + ", " + installedMsBuildVersion + ", " + ibVsInstallationName);
+                    "vs_version, ib_version, msbuild_version, ib_installer_name",
+                    "\'" + vsVersion + "\', \'" + ibVersion + "\', \'" + installedMsBuildVersion + "\', \'" + ibVsInstallationName + "\'");
         }
     }
 

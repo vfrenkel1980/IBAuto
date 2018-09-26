@@ -255,7 +255,7 @@ public class IbService implements IIBService {
         String result = "";
 
         try {
-            result = Parser.retrieveDataFromFile(logPath, lookFor);
+            result = Parser.retrieveDataFromFile(logPath, lookFor).substring(1);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,7 @@ import org.apache.commons.io.filefilter.AgeFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.tools.ant.DirectoryScanner;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.TestBase.log;
@@ -245,20 +246,13 @@ public class SystemActions {
         }
     }
 
-    public static String findFileInDirectoryRecursivly(String directory, String fileName){
-        File root = new File(directory);
-        String returnPath = "";
-        try {
-            Collection files = FileUtils.listFiles(root, null, true);
-
-            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
-                File file = (File) iterator.next();
-                if (file.getName().contains(fileName))
-                    returnPath = file.getName();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return returnPath;
+    public static String findFileInDirectoryRecursively(String directory, String fileName) {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setIncludes(new String[]{"**/" + fileName});
+        scanner.setBasedir(directory);
+        scanner.setCaseSensitive(false);
+        scanner.scan();
+        String[] files = scanner.getIncludedFiles();
+        return files[0].substring(files[0].lastIndexOf("\\") + 1);
     }
 }
