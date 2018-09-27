@@ -35,14 +35,15 @@ public class VS2017ExtensionTests extends VSTestBase {
         ibVersion = IIBService.getIbVersion();
     }
 
-    //TODO add the special reg to create buildlog, build in test and verify to avoid dependency
-    @Test(testName = "Compare MSBuild Version", dependsOnMethods = {"executeVSBuild"})
+    @Test(testName = "Compare MSBuild Version")
     public void compareMSBuildVersion(){
         installedMsBuildVersion = vsuiService.getInstalledMSBuildVersion();
-        String expected = postgresJDBC.getStringFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
-                "build_number=" + ibVersion);
-        test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + installedMsBuildVersion);
-        Assert.assertEquals(installedMsBuildVersion, expected, "Installed MSBuild version does not match expected");
+        if (SCENARIO.equals("1")) {
+            String expected = postgresJDBC.getStringFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
+                    "build_number=" + ibVersion);
+            test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + installedMsBuildVersion);
+            Assert.assertEquals(installedMsBuildVersion, expected, "Installed MSBuild version does not match expected");
+        }
     }
 
     @Test(testName = "IncrediBuild execution from VS2017 menu bar")
@@ -235,7 +236,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
     }
 
-    @Test(testName = "Write Data To DB")
+    @Test(testName = "Write Data To DB", dependsOnMethods = {"compareMSBuildVersion"})
     public void writeDataToDB() {
         if (SCENARIO.equals("2")) {
             ibVsInstallationName = SystemActions.findFileInDirectoryRecursively("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017*.exe");
