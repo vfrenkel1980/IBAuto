@@ -33,7 +33,7 @@ public class VmSimVC8Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "VC8 Ogre 2005 - Debug x32 - build" , groups = { "Build" })
+    @Test(testName = "VC8 Ogre 2005 - Debug x32 - build" , groups = { "Build" }, enabled = false)
     public void vc8Ogre2005DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC8_VMSIN.VC8_OGRE_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);

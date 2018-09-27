@@ -68,6 +68,12 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 1, "customStepOffFailTest failed with return code " + returnCode);
     }
 
+    @Test(testName = "Verify @<response file> In Cmd Command Test")
+    public void verifyResponseFileInCMDCommandTest(){
+        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_SAMPLE_WITH_RESPONSE_FILE);
+        Assert.assertTrue(returnCode == 1, "@ResponseFileInCMDCommandTest failed with return code " + returnCode);
+    }
+
 
     /*------------------------------METHODS------------------------------*/
 
