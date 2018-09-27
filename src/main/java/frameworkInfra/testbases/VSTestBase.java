@@ -42,6 +42,7 @@ public class VSTestBase extends TestBase {
     protected static String installedMsBuildVersion = "";
     protected static String vsVersion = "";
     protected static String ibVsInstallationName = "";
+    protected static String integratedIBVersion = "";
     protected static String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
@@ -125,7 +126,6 @@ public class VSTestBase extends TestBase {
                 break;
 
             case "4":
-                String integratedIBVersion = "";
                 test.log(Status.INFO, "Before class started\n SCENARIO 4: upgrade vs and install a custom IB installer from VS");
                 if (SCENARIO.equals("preview")) {
                     integratedIBVersion = getLatestInstallerVersion("preview");
@@ -198,9 +198,10 @@ public class VSTestBase extends TestBase {
     }
 
     /**
-     * get the IB version that is integrated in the latest VS installation and set the name of the installer into ibVsInstallationName.
+     * set the IB version that is integrated in the latest VS installation and set the name of the installer into ibVsInstallationName.
+     *
      * @param distribution choose between release/preview
-     * @return return the ib build number
+     * @return return the latest ib build number
      */
     private String getLatestInstallerVersion(String distribution){
         ibVsInstallationName = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
@@ -217,7 +218,7 @@ public class VSTestBase extends TestBase {
     private void createCustomKeyAndChangeVSIntegratedIbInstaller(String version){
         RegistryService.createRootRegistryFolder(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + ibVsInstallationName + "_console.exe");
         RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + version + "_console.exe", "debugger",
-                Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + ibVsInstallationName + "_console.exe %1 %2");
+                Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + integratedIBVersion + "_console.exe %1 %2");
     }
 
     /**
