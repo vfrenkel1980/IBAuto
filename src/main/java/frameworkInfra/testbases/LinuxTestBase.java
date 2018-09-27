@@ -22,7 +22,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 @Listeners(SuiteListener.class)
 public class LinuxTestBase extends TestBase{
 
-    public enum TestNum{
+    public enum TestType{
         MultiBuild, MultiIn, Sim
     }
 
@@ -32,7 +32,7 @@ public class LinuxTestBase extends TestBase{
     protected static String ENV = System.getProperty("env");
     protected static String VERSION = System.getProperty("version");
 
-    protected static LinuxSimTestBase.TestNum testNum;
+    protected static LinuxSimTestBase.TestType testType;
 
     public static List<String> ipList;
     static List<String> connectedMachinesToGrid;

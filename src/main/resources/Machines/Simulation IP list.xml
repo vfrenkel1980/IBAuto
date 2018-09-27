@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <IP_Addresses>
+
    <ip> l1a-u14-coor </ip>
    <ip> l1a-u12-init </ip>
+   <ip> l1a-u12-docker </ip>
+   <ip> l1a-u12-ccache </ip>
 
 <!--
    <ip> 192.168.10.193 </ip> &lt;!&ndash;docker&ndash;&gt;
@@ -11,6 +14,7 @@
    <ip> l1a-cen7-h2 </ip>
    <ip> l1a-Cen65-h3 </ip>
    <ip> l1a-U12-h4 </ip>
+
 <!--	<ip> 192.168.11.26 </ip>
 	<ip> 192.168.11.103 </ip>-->
 </IP_Addresses>

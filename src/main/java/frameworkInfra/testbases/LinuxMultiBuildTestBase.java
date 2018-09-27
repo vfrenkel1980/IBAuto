@@ -38,7 +38,7 @@ public class LinuxMultiBuildTestBase extends LinuxTestBase{
                 break;
         }
         ipList = XmlParser.breakDownIPList(rawIpList);
-        testNum = TestNum.MultiBuild;
+        testType = TestType.MultiBuild;
 
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));

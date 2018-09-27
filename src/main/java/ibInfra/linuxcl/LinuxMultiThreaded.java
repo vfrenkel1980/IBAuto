@@ -36,7 +36,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
 
             if(linuxService.isLinuxOSUbuntu(machine)) {
 
-                if (testNum == TestNum.MultiBuild) {
+                if (testType == TestType.MultiBuild) {
                     synchronized (this) {
                         do {
                             randIndex = rand.nextInt(9);
@@ -46,7 +46,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                         activeProjects[randIndex] = 1;
                     }
                 }
-                else if (testNum == TestNum.MultiIn)
+                else if (testType == TestType.MultiIn)
                     randIndex = rand.nextInt(9);
 
                 switch (randIndex) {
@@ -114,7 +114,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
             exitCode = linuxService.linuxRunSSHCommand(command, machine);
             softAssert.assertEquals(exitCode, 0, "Build Failed");
 
-            if (testNum == TestNum.MultiBuild) {
+            if (testType== TestType.MultiBuild) {
                 synchronized (this) {
                     activeProjects[randIndex] = 0;
                 }
