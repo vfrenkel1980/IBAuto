@@ -601,6 +601,8 @@ public class StaticDataProvider {
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
         public static final String RUN_IB_TESTS = "./run_all_tests.bash /tmp/ib_tests/";
 
+        public static final String CHROOT_KERNEL4_DIR = "/projects/linux-4.3.3";
+
         public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
 
     }

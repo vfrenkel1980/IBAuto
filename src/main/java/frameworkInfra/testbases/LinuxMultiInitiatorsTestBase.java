@@ -41,7 +41,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
                 break;
         }
         ipList = XmlParser.breakDownIPList(rawIpList);
-        testNum = TestNum.MultiIn;
+        testType = TestType.MultiIn;
         log.info("RUNNING VERSION: " + VERSION);
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
@@ -91,7 +91,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         }
 
         if(linuxService.stopIBService(otherGridIPList.get(1))) {
-            String err = "stopIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
+            String err = "stopIBService failed " +otherGridIPList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
             extent.flush();
             throw new SkipException("EXITING");
@@ -111,12 +111,13 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
     @AfterClass
     public void afterClass() {
         log.info("starting after class");
+        for (int i=1; i<5; ++i){
+
         if(linuxService.startIBService(otherGridIPList.get(1))) {
             String err = "startIBService failed " +ipList.get(1) + "... FAILING ALL TESTS!";
             test.log(Status.ERROR, err);
         }
 
-        for (int i=1; i<5; ++i){
             if(linuxService.isLinuxOSUbuntu(ipList.get(i))) {
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN, ipList.get(i));
                 linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN , ipList.get(i));

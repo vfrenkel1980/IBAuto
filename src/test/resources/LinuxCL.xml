@@ -8,12 +8,13 @@
     </listeners>
 
     <test name="Cycle 1" allow-return-values="true">
-        <parameter name="cycle" value="1"/>
-        <classes>
-            <!--<class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />-->
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
+    <parameter name="cycle" value="1"/>
+    <classes>
+        <class name ="Native.linuxtests.LinuxSimulationCcacheTests" />
+        <class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />
+        <class name ="Native.linuxtests.LinuxSimulationTests" />
+    </classes>
+</test>
 
     <test name="Cycle 2" allow-return-values="true">
         <parameter name="cycle" value="2"/>
