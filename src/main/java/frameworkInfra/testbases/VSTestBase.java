@@ -216,8 +216,9 @@ public class VSTestBase extends TestBase {
      * @param version the IB version that will be installed with VS
      */
     private void createCustomKeyAndChangeVSIntegratedIbInstaller(String version){
-        RegistryService.createRootRegistryFolder(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + ibVsInstallationName + "_console.exe");
-        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.VS_CUSTOM_IB_INSTALLER + "ibsetup" + version + "_console.exe", "debugger",
+        String keyPath = Locations.VS_CUSTOM_IB_INSTALLER + ibVsInstallationName;
+        RegistryService.createRootRegistryFolder(HKEY_LOCAL_MACHINE, keyPath);
+        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, keyPath, "debugger",
                 Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + integratedIBVersion + "_console.exe %1 %2");
     }
 
