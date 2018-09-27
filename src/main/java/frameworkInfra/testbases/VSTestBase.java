@@ -42,7 +42,7 @@ public class VSTestBase extends TestBase {
     protected static String installedMsBuildVersion = "";
     protected static String vsVersion = "";
     protected static String ibVsInstallationName = "";
-    protected static String integratedIBVersion = "";
+    protected static String latestIBVersion = "";
     protected static String SCENARIO = System.getProperty("scenario");
     public String VSINSTALLATION = System.getProperty("vsinstallation");
     public String devenvPath = "";
@@ -128,10 +128,10 @@ public class VSTestBase extends TestBase {
             case "4":
                 test.log(Status.INFO, "Before class started\n SCENARIO 4: upgrade vs and install a custom IB installer from VS");
                 if (SCENARIO.equals("preview")) {
-                    integratedIBVersion = getLatestInstallerVersion("preview");
+                    latestIBVersion = getLatestInstallerVersion("preview");
                 } else
-                    integratedIBVersion = getLatestInstallerVersion("release");
-                createCustomKeyAndChangeVSIntegratedIbInstaller(integratedIBVersion);
+                    latestIBVersion = getLatestInstallerVersion("release");
+                createCustomKeyAndChangeVSIntegratedIbInstaller(latestIBVersion);
 
                 if (VSINSTALLATION.equals("15")) {
                     vsCommands.upgradeVSWithIB();
@@ -206,8 +206,8 @@ public class VSTestBase extends TestBase {
     private String getLatestInstallerVersion(String distribution){
         ibVsInstallationName = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
                 "vs_" + distribution + "_versioning", "ib_installer_name", "vs_version");
-        return postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "vs_" + distribution + "_versioning",
-                "ib_version", "vs_version");
+        return postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "windows_builds_ib_info",
+                "build_number", "build_number");
     }
 
     /**
@@ -219,7 +219,7 @@ public class VSTestBase extends TestBase {
         String keyPath = Locations.VS_CUSTOM_IB_INSTALLER + ibVsInstallationName;
         RegistryService.createRootRegistryFolder(HKEY_LOCAL_MACHINE, keyPath);
         RegistryService.createRegValue(HKEY_LOCAL_MACHINE, keyPath, "debugger",
-                Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + integratedIBVersion + "_console.exe %1 %2");
+                Locations.NETWORK_IB_INSTALLATIONS + version + "\\" + "ibsetup" + latestIBVersion + "_console.exe %1 %2");
     }
 
     /**
