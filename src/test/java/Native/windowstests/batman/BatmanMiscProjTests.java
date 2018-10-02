@@ -70,8 +70,14 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify @<response file> In Cmd Command Test")
     public void verifyResponseFileInCMDCommandTest(){
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_SAMPLE_WITH_RESPONSE_FILE);
-        Assert.assertTrue(returnCode == 1, "@ResponseFileInCMDCommandTest failed with return code " + returnCode);
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_SAMPLE_WITH_RESPONSE_FILE);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "@ResponseFileInCMDCommandTest failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
     }
 
 
