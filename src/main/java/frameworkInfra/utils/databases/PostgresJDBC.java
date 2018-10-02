@@ -205,4 +205,48 @@ public class PostgresJDBC implements IDataBase {
         }
     }
 
+    @Override
+    public String getSingleValueWithCondition(String ip, String username, String password, String db, String select, String table, String where) {
+        Statement stmt = null;
+        String value = "";
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.INFO, "Running query: SELECT " + select + " FROM " + table + " WHERE " + where + " LIMIT 1");
+            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " WHERE " + where + " LIMIT 1");
+            rs.next();
+            value = rs.getString(1);
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return value;
+    }
+
+    @Override
+    public String getTheNthRowFromEnd(String ip, String username, String password, String db, String select, String table, int row) {
+        Statement stmt = null;
+        String value = "";
+        try {
+            Connection c = connectToDb(ip, username, password, db);
+            stmt = c.createStatement();
+            if (test != null)
+                test.log(Status.INFO, "Running query: SELECT " + select + " FROM " + table + " LIMIT 1 OFFSET (SELECT COUNT (*)-" + row + " FROM " + table + ")");
+            ResultSet rs = stmt.executeQuery("SELECT " + select + " FROM " + table + " LIMIT 1 OFFSET (SELECT COUNT (*)-" + row + " FROM " + table + ")");
+            rs.next();
+            value = rs.getString(1);
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            if (test != null)
+                test.log(Status.WARNING, "DB operation failed with error: " + e.getMessage());
+        }
+        return value;
+    }
+
 }

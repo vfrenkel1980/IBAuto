@@ -11,6 +11,7 @@ import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
+import javafx.geometry.Pos;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
@@ -63,12 +64,12 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        DirectoryScanner scanner = new DirectoryScanner();
-        scanner.setIncludes(new String[]{"**/incredibuild_vs2017*.log"});
-        scanner.setBasedir("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages");
-        scanner.setCaseSensitive(false);
-        scanner.scan();
-        String[] files = scanner.getIncludedFiles();
-        files[0].substring(files[0].lastIndexOf("\\") + 1);
+        PostgresJDBC postgresJDBC = new PostgresJDBC();
+        String previousScheme = postgresJDBC.getTheNthRowFromEnd("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "postgres_schema_version", 2);
+        System.out.println(previousScheme);
+        String versionToInstall = postgresJDBC.getSingleValueWithCondition("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
+                "windows_builds_ib_info", "postgres_db_version=\'" + previousScheme + "\'");
+        System.out.println(versionToInstall);
+
     }
 }

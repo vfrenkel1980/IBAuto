@@ -14,6 +14,7 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName = "Install Older Schema")
     public void installOlderSchema() {
+        //TODO: just like ent. get latest sql db version and install the matching build (instead of 2026)
         ibService.installIB("2026", IbLicenses.DASHBOARD_LIC);
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         int successful = sqLiteJDBC.getIntFromQuery("", "", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
@@ -29,8 +30,11 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName = "Upgrade To Older Version Of Ent", dependsOnMethods = "upgradeIBToLatestSchema")
     public void upgradeToOlderVersionOfEnt() {
+        String previousScheme = postgresJDBC.getTheNthRowFromEnd("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "postgres_schema_version", 2);
+        String versionToInstall = postgresJDBC.getSingleValueWithCondition("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
+                "windows_builds_ib_info", "postgres_db_version=\'" + previousScheme + "\'");
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        ibuiService.startEntInstaller("2173");
+        ibuiService.startEntInstaller(versionToInstall);
         try {
             installer.clickNext();
             installer.clickNext();

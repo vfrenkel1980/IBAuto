@@ -110,4 +110,30 @@ public interface IDataBase {
      */
     void insertDataToTable(String ip, String username, String password, String db, String table, String columns, String values);
 
+    /**
+     * Used in order to get a single value from table that answers a condition
+     * @param ip db machine ip
+     * @param username db username
+     * @param password user's password
+     * @param db DB
+     * @param select what to select from query
+     * @param table db table
+     * @param where condition to meet
+     * @return single String value
+     */
+    String getSingleValueWithCondition(String ip, String username, String password, String db, String select, String table, String where);
+
+    /**
+     *Used in order to retrieve the Nth row from the end of the table
+     * @param ip db machine ip
+     * @param username db username
+     * @param password user's password
+     * @param db DB
+     * @param select what to select from query
+     * @param table db table
+     * @param row row number from the end to retrieve
+     * @return Nth row from the end of the table
+     */
+    String getTheNthRowFromEnd(String ip, String username, String password, String db, String select, String table, int row);
+
 }

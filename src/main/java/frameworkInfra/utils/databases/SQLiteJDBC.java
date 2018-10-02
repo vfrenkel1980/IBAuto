@@ -89,4 +89,14 @@ public class SQLiteJDBC implements IDataBase {
     public void insertDataToTable(String ip, String username, String password, String db, String table, String columns, String values) {
 
     }
+
+    @Override
+    public String getSingleValueWithCondition(String ip, String username, String password, String db, String select, String table, String where) {
+        return null;
+    }
+
+    @Override
+    public String getTheNthRowFromEnd(String ip, String username, String password, String db, String select, String table, int row) {
+        return null;
+    }
 }
