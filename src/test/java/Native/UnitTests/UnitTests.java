@@ -67,9 +67,7 @@ public class UnitTests {
         PostgresJDBC postgresJDBC = new PostgresJDBC();
         String previousScheme = postgresJDBC.getTheNthRowFromEnd("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "postgres_schema_version", 2);
         System.out.println(previousScheme);
-        String versionToInstall = postgresJDBC.getSingleValueWithCondition("192.168.10.73", "postgres", "postgres123", "release_manager", "*",
-                "windows_builds_ib_info", "postgres_db_version=\'" + previousScheme + "\'");
-        System.out.println(versionToInstall);
+
 
     }
 }
