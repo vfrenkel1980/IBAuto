@@ -112,7 +112,7 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
             }
             test.log(Status.INFO, "IP " + machine + ": command = " + command );
             exitCode = linuxService.linuxRunSSHCommand(command, machine);
-            softAssert.assertEquals(exitCode, 0, "Build Failed");
+            softAssert.assertTrue(exitCode <= 0,  "Build command:" + command + " Failed");
 
             if (testType== TestType.MultiBuild) {
                 synchronized (this) {

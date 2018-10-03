@@ -13,7 +13,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Kernel", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -23,7 +23,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Apache", "", "32"), ipList.get(simClassType.ordinal()));
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -34,7 +34,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Samba", "env JOBS=32", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -45,7 +45,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cpp", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -56,7 +56,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","MySQL", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";",ipList.get(simClassType.ordinal()));
     }
@@ -67,7 +67,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.B2_BUILD, "--ib-crash -d1 --f", "Boost", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -78,7 +78,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -89,7 +89,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","GDB", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -100,7 +100,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Git", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -111,7 +111,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","QT", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -122,7 +122,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.SCONS_BUILD,"--ib-crash -d1 --f","MongoDB", "", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MONGODB_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
@@ -133,7 +133,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
                 String.format(LinuxSimulation.NINJA_BUILD,"--ib-crash -d1 --f","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(simClassType.ordinal()));
 
 
-        Assert.assertEquals(exitCode, 0, "Test failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
