@@ -229,11 +229,27 @@ public class LinuxService extends TestBase implements ILinuxService {
         return linuxRunSSHCommandOutputString(LinuxCommands.GET_OS, IP).contains("Ubuntu");
     }
 
+    /**
+     * jughggjmkuk y,kuj,jk,j
+     * mjh,kjk,jk,j,j
+     * @param fieldName
+     * @param sqliteTable
+     * @param IP
+     * @return
+     *
+     * mjhmjhjm
+     */
     @Override
     public String runQueryLastBuild(String fieldName, String sqliteTable, String IP) {
         return linuxRunSSHCommandOutputString((String.format(LinuxCommands.RUN_SQLITE_Q, fieldName, sqliteTable)),IP);
     }
 
+    /**
+     *
+     * @param destMachine
+     * @param version
+     * @param grid
+     */
     @Override
     public void updateIB(String destMachine, String version, List<String> grid) {
         String installationFilePath = getInstallerName(LinuxMachines.LINUX_BUILDER, version);
@@ -264,7 +280,7 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public String getInstallerName(String machineName, String version) {
-        return LinuxCommands.HOME_DIR + linuxRunSSHCommandOutputString("find . -name \"*upgrade_" + version + ".tar*\"", machineName).substring(2).replaceAll("\n","") ;
+        return LinuxCommands.HOME_DIR + linuxRunSSHCommandOutputString("find . -name \"incredibuild_upgrade_" + version + ".x86_64-i686.tar*\"", machineName).substring(2).replaceAll("\n","") ;
     }
 
     @Override

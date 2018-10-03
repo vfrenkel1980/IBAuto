@@ -24,10 +24,10 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class LinuxSimTestBase extends LinuxTestBase {
 
     public enum SimClassType{
-        None, JenSim, Dock, Ccache
+        None, GenSim, Dock, Ccache, Thirty2Bit
     }
 
-    private static int NumInitators = 3;
+    private static int NumInitators = 4;
 
     private String className = this.getClass().getName();
     private static List<String> firstBuilds = new ArrayList<String>();
@@ -81,8 +81,10 @@ public class LinuxSimTestBase extends LinuxTestBase {
             simClassType=SimClassType.Ccache;
         else if(className.contains("DockCHrootTests"))
             simClassType=SimClassType.Dock;
+        else if(className.contains("Linux32BitTests"))
+            simClassType=SimClassType.Thirty2Bit;
         else
-            simClassType=SimClassType.JenSim;
+            simClassType=SimClassType.GenSim;
 
         if (!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
@@ -132,7 +134,9 @@ public class LinuxSimTestBase extends LinuxTestBase {
             linuxService.startIBService(ipList.get(i));
             lastBuilds.add(linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i).replaceAll("\n", "")).replaceAll("\n", ""));
 
-            linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuilds.get(i-1) + "," + lastBuilds.get(i-1) + " > " + scriptFileName + "; exit 0", ipList.get(i));
+            if(Integer.parseInt(lastBuilds.get(i-1)) >= Integer.parseInt(firstBuilds.get(i-1)))
+              linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuilds.get(i-1) + "," + lastBuilds.get(i-1) + " > " + scriptFileName + "; exit 0", ipList.get(i));
+
             linuxService.getFile(ipList.get(i), LinuxCommands.HOME_DIR + scriptFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + scriptFileName);
         }
 

@@ -27,7 +27,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 --f", "SimTestCcacheKernel4ln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
-        Assert.assertEquals(exitCode, 0, "Test " + testName + "failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <=0, "Test " + testName + "failed with Exit code " + exitCode);
 
         String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
@@ -68,7 +68,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheKernel4prefix", "", "32"), ipList.get(simClassType.ordinal()));
 
-        Assert.assertEquals(exitCode, 0, "Test "+ testName + "failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test "+ testName + "failed with Exit code " + exitCode);
 
         String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
         // linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal());
@@ -109,7 +109,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
-        Assert.assertEquals(exitCode, 0, "Test "+ testName + "failed with Exit code " + exitCode);
+        Assert.assertTrue(exitCode <= 0, "Test "+ testName + "failed with Exit code " + exitCode);
 
         String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
