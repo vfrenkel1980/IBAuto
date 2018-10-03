@@ -24,7 +24,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class LinuxSimTestBase extends LinuxTestBase {
 
     public enum SimClassType{
-        None, JenSim, Dock, Ccache, Thirty2Bit
+        None, GenSim, Dock, Ccache, Thirty2Bit
     }
 
     private static int NumInitators = 4;
@@ -84,7 +84,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         else if(className.contains("Linux32BitTests"))
             simClassType=SimClassType.Thirty2Bit;
         else
-            simClassType=SimClassType.JenSim;
+            simClassType=SimClassType.GenSim;
 
         if (!linuxService.isIBServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
