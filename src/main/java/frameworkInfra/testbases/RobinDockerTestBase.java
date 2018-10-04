@@ -14,14 +14,16 @@ public class RobinDockerTestBase extends RobinTestBase{
     @BeforeClass
     @Parameters({ "logLevel"})
     public void startDocker(String logLevel){
-        try{
-            test.log(Status.INFO, "Starting service");
-            Runtime.getRuntime().exec("powershell.exe Start-Service docker");
-            test.log(Status.INFO, "Starting container");
-            Runtime.getRuntime().exec("docker start -ai affectionate_swartz");
-            test.log(Status.INFO,"Container started");
+        executeCMD("powershell.exe Start-Service docker","Starting service");
+        executeCMD("docker start -ai affectionate_swartz","Starting container");
+    }
+
+    private void executeCMD(String command, String logMessage) {
+        try {
+            test.log(Status.INFO, logMessage);
+            Runtime.getRuntime().exec(command);
         } catch (IOException e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 }
