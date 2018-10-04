@@ -13,6 +13,7 @@
         <parameter name="logLevel" value="0"/>
         <classes>
             <class name ="Native.windowstests.robin.RobinTests" />
+            <class name ="Native.windowstests.robin.RobinDockerTests" />
         </classes>
     </test>
 

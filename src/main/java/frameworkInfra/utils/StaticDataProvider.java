@@ -424,6 +424,12 @@ public class StaticDataProvider {
         public static class VC15_ROBIN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
+        public static class DOCKER_ROBIN {
+            public static final String MONO_X64_DEBUG = "\"C:\\projects\\mono-master\\msvc\\mono.sln\" /%s /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\"";
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
+        }
+
+
     }
 
     //registry keys
