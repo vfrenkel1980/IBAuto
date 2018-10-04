@@ -8,15 +8,6 @@ import org.testng.annotations.Test;
 
 public class RobinDockerTests extends RobinDockerTestBase {
 
-    @Test(testName = "Verify Docker IB Build Updated")
-    public void verifyDockerIBBuildUpdated(){
-        if(ibVersion != IIBService.getIbVersion()) {
-            winService.waitForProcessToFinish("BuildService.exe");
-            winService.waitForProcessToStart("BuildService.exe");
-        }
-        Assert.assertTrue(ibVersion == IIBService.getIbVersion(),"IB build is not compatible");
-    }
-
     @Test(testName = "Docker Mono - Debug - Build")
     public void dockerMonoDebugBuild() {
         int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.DOCKER_ROBIN.MONO_X64_DEBUG, "%s"));
