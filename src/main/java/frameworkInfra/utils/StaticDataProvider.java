@@ -21,7 +21,7 @@ public class StaticDataProvider {
     }
 
     public static class InitMSBuild {
-        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
+        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, "Software\\WOW6432Node\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
 
     //locations
