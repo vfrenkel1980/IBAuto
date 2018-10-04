@@ -29,7 +29,8 @@ public class LicensingMiscTests extends LicensingTestBase {
     public void verifyAlocatedPackagesSaved(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\",\"C# Yearly\"");
+        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
+        returncode += winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (returncode + exitStatus == 0) {
