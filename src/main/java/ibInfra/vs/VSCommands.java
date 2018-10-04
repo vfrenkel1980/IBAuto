@@ -89,7 +89,7 @@ public class VSCommands implements IVSCommands {
     public void uninstallIbExtension() {
 
     }
-
+    //TODO: remove this section when latest version hist VS
     private void changeFirstActivationRegistry(){
         int version = IIBService.getIbVersion();
         if (version > 2456)
