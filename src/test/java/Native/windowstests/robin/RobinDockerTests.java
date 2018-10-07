@@ -10,13 +10,13 @@ public class RobinDockerTests extends RobinDockerTestBase {
 
     @Test(testName = "Docker Mono - Debug - Build")
     public void dockerMonoDebugBuild() {
-        int returnCode = ibService.cleanAndBuild("docker exec -it affectionate_swartz " + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.DOCKER_ROBIN.MONO_X64_DEBUG, "%s"));
+        int returnCode = winService.runCommandWaitForFinish(DockerCommands.WIN10_DOC_CONTAINER_EXE + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.DOCKER_ROBIN.MONO_X64_DEBUG));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Docker Audacity 2017 - Debug - build", groups = {"Build"})
     public void dockerAudacityDebugBuild() {
-        int returnCode = ibService.cleanAndBuild("docker exec -it affectionate_swartz "+IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.DOCKER_ROBIN.AUDACITY_X32_DEBUG, "%s"));
+        int returnCode = winService.runCommandWaitForFinish(DockerCommands.WIN10_DOC_CONTAINER_EXE + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.DOCKER_ROBIN.AUDACITY_X32_DEBUG));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }
