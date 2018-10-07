@@ -57,7 +57,7 @@ public class VSUIService implements IVSUIService {
         if (version > 2457)
             out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
         else
-            out = windowsService.runCommandGetOutput(InitMSBuild.OLD_MSBUILD + " /version");
+            out = windowsService.runCommandGetOutput(InitOLDMSBuild.OLD_MSBUILD + " /version");
         try {
             FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
             BufferedReader input = new BufferedReader(new FileReader(Locations.QA_ROOT + "\\out.txt"));
