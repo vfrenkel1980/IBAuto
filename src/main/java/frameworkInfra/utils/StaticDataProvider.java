@@ -21,7 +21,12 @@ public class StaticDataProvider {
     }
 
     public static class InitMSBuild {
-        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
+        public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, "Software\\WOW6432Node\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
+    }
+
+    //TODO: remove this section when latest version hist VS
+    public static class InitOLDMSBuild {
+        public static final String OLD_MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_CURRENT_USER, "Software\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
 
     //locations
@@ -422,6 +427,12 @@ public class StaticDataProvider {
         public static class VC15_ROBIN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
+        public static class DOCKER_ROBIN {
+            public static final String MONO_X64_DEBUG = "\"C:\\projects\\mono-master\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\"";
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
+        }
+
+
     }
 
     //registry keys
@@ -478,6 +489,10 @@ public class StaticDataProvider {
         public static final String MODIFY_PREVIEW_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION_VSPREVIEW = "C:\\QA\\Simulation\\VSintallation\\vs_professional_preview modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
         //public static final String COPY_FROM_LINUX_SERVER = "pscp -pw xoreax xoreax@%s:/home/xoreax/linuxrepo/ib_linux/VERSION " + Locations.QA_ROOT;
+    }
+
+    public static class DockerCommands {
+        public static final String WIN10_DOC_CONTAINER_EXE ="docker exec -i affectionate_swartz ";
     }
 
     public static class MemoryThresholds {

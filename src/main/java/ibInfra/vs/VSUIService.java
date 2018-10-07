@@ -5,6 +5,7 @@ import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibService.IIBService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.FileUtils;
@@ -49,8 +50,14 @@ public class VSUIService implements IVSUIService {
     @Override
     public String getInstalledMSBuildVersion() {
         String installedBuild = "";
+        String out = "";
         WindowsService windowsService = new WindowsService();
-        String out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
+        //TODO: remove this section when latest version hist VS
+        int version = IIBService.getIbVersion();
+        if (version > 2457)
+            out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
+        else
+            out = windowsService.runCommandGetOutput(InitOLDMSBuild.OLD_MSBUILD + " /version");
         try {
             FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
             BufferedReader input = new BufferedReader(new FileReader(Locations.QA_ROOT + "\\out.txt"));
