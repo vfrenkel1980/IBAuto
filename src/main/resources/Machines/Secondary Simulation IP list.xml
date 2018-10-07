@@ -5,6 +5,7 @@
    <ip> l1b-u12-init </ip>
    <ip> l1b-u12-docker </ip>
    <ip> l1b-u12-ccache </ip>
+   <ip> l1a-u12i386 </ip>
 
    <!--<ip> 192.168.10.193 </ip> &lt;!&ndash;docker&ndash;&gt;-->
 
