@@ -25,9 +25,11 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
-        String extensionVersion = ibService.getIbVsExtensionVersion(devenvPath);
-        String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();
-        Assert.assertTrue(extensionVersion.equals(expectedExtensionVersion), "Expected Extension Version: " + expectedExtensionVersion + "-------" + "Installed Extension Version: " + extensionVersion);
+        if (!SCENARIO.equals("4")) {
+            String extensionVersion = ibService.getIbVsExtensionVersion(devenvPath);
+            String expectedExtensionVersion = ibService.getExpectedIbVsExtensionVersion();
+            Assert.assertEquals(extensionVersion, expectedExtensionVersion, "Expected Extension Version: " + expectedExtensionVersion + "-------" + "Installed Extension Version: " + extensionVersion);
+        }
     }
 
     @Test(testName = "Get Installed IB Version")
