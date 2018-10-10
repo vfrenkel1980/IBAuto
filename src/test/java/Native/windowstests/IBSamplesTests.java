@@ -2,7 +2,7 @@ package Native.windowstests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.WindowsTestBase;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify 7Z Sample1 Test")
     public void verify7ZSample1Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_7Z_1);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_7Z_1)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verify7ZSample1Test failed with exit code " + result);
@@ -27,7 +27,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify 7Z Sample2 Test")
     public void verify7ZSample2Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_7Z_2);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_7Z_2)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verify7ZSample2Test failed with exit code " + result);
@@ -39,7 +39,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify GZip Sample1 Test")
     public void verifyGZipSample1Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_GZIP_1);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_GZIP_1)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyGZipSample1Test failed with exit code " + result);
@@ -51,7 +51,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify GZip Sample2 Test")
     public void verifyGZipSample2Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_GZIP_2);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_GZIP_2)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyGZipSample2Test failed with exit code " + result);
@@ -63,7 +63,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify WinRAR Sample1 Test")
     public void verifyWinRARSample1Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_WINRAR_1);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_WINRAR_1)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyWinRARSample1Test failed with exit code " + result);
@@ -75,7 +75,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify WinRAR Sample2 Test")
     public void verifyWinRARSample2Test() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.COMPRESSION_WINRAR_2);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.COMPRESSION_WINRAR_2)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyWinRARSample2Test failed with exit code " + result);
@@ -87,7 +87,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify DevTools XGE Sample Test")
     public void verifyDevToolsXGESampleTest() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.DEVTOOLS_XGE);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.DEVTOOLS_XGE)+"\".\\run XGE.bat\"");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsXGESampleTest failed with exit code " + result);
@@ -99,7 +99,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify DevTools Submission Sample Test")
     public void verifyDevToolsSubmissionSampleTest() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.DEVTOOLS_SUBMISSION);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.DEVTOOLS_SUBMISSION)+".\\BatchFileExecution.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsSubmissionSampleTest failed with exit code " + result);
@@ -111,7 +111,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify DevTools XML Sample Test")
     public void verifyDevToolsXMLSampleTest() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.DEVTOOLS_XML);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.DEVTOOLS_XML)+".\\BatchFile.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsXMLSampleTest failed with exit code " + result);
@@ -123,7 +123,7 @@ public class IBSamplesTests extends WindowsTestBase {
     @Test(testName = "Verify Nconvert Sample Test")
     public void verifyNconvertSampleTest() {
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.NCONVERT);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.NCONVERT)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyNconvertSampleTest failed with exit code " + result);
@@ -134,9 +134,8 @@ public class IBSamplesTests extends WindowsTestBase {
 
     @Test(testName = "Verify Ffmpeg Sample Test")
     public void verifyFfmpegSampleTest() {
-
         String result = "";
-        winService.runCommandWaitForFinish(StaticDataProvider.IBSamplesLocations.FFMPEG);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.FFMPEG)+".\\RunMe.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyFfmpegSampleTest failed with exit code " + result);
@@ -146,10 +145,10 @@ public class IBSamplesTests extends WindowsTestBase {
     }
 
 
-    @Test(testName = "Verify Jom Sample Test", enabled = false)
+    @Test(testName = "Verify Jom Sample Test")
     public void verifyJomSampleTest() {
         String result = "";
-        winService.runCommandWaitForFinish("cmd /c c: && cd C:\\QA\\Simulation\\projects\\Samples\\Make And Build Tools\\Jom\\ && " + StaticDataProvider.IBSamplesLocations.JOM);
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.JOM)+".\\RunJomSample.bat");
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyJomSampleTest failed with exit code " + result);
