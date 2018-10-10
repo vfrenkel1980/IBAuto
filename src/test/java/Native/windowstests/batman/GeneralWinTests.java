@@ -37,8 +37,8 @@ public class GeneralWinTests extends BatmanBCTestBase{
     public void verifyMultiBuildFailure() {
         int instanceCount;
         setRegistry("8", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
-        ibService.cleanAndBuildDontWaitTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, "%s"));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
         SystemActions.sleep(5);
         instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
         Assert.assertEquals(instanceCount, 1, "Number of running instances does not match");
@@ -142,8 +142,6 @@ public class GeneralWinTests extends BatmanBCTestBase{
     public void verifyPDBErrorInLog() {
         Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
     }
-
-
 
         /*------------------------------METHODS------------------------------*/
 

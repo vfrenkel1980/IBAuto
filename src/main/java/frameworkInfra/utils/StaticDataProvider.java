@@ -20,6 +20,21 @@ public class StaticDataProvider {
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
     }
 
+    public static class IBSamplesLocations {
+        public static final String COMPRESSION_7Z_1 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\7z\\Sample1\\RunMe.bat" + "\"" + " ";
+        public static final String COMPRESSION_7Z_2 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\7z\\Sample2\\RunMe.bat" + "\"" + " ";
+        public static final String COMPRESSION_GZIP_1 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\GZip\\Sample1\\RunMe.bat" + "\"" + " ";
+        public static final String COMPRESSION_GZIP_2 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\GZip\\Sample2\\RunMe.bat" + "\"" + " ";
+        public static final String COMPRESSION_WINRAR_1 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\WinRar\\Sample1\\RunMe.bat" + "\"" + " ";
+        public static final String COMPRESSION_WINRAR_2 = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Compression Acceleration\\WinRar\\Sample2\\RunMe.bat" + "\"" + " ";
+        public static final String DEVTOOLS_XGE = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\DevTools Interfaces Usage Samples\\Interception Interface\\run XGE.bat" + "\"" + " ";
+        public static final String DEVTOOLS_SUBMISSION = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\DevTools Interfaces Usage Samples\\Submission Interface\\BatchFileExecution.bat" + "\"" + " ";
+        public static final String DEVTOOLS_XML = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\DevTools Interfaces Usage Samples\\XML Interface\\BatchFile.bat" + "\"" + " ";
+        public static final String NCONVERT = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Image Processing\\Nconvert\\RunMe.bat" + "\"" + " ";
+        public static final String FFMPEG = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Video Conversion\\Ffmpeg\\RunMe.bat" + "\"" + " ";
+        public static final String JOM = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Make And Build Tools\\Jom\\RunJomSample.bat" + "\"" + " ";
+    }
+
     public static class InitMSBuild {
         public static final String MSBUILD = "\"" + RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, "Software\\WOW6432Node\\Xoreax\\IncrediBuild\\VSDirs\\15.0", "VSProductDir") + "\\MSBuild\\15.0\\Bin\\msbuild.exe\"";
     }
