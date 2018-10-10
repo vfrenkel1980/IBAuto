@@ -53,25 +53,18 @@ public class GeneralWinTests extends BatmanBCTestBase{
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         SystemActions.sleep(10);
         try {
-            winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 1 -u administrator -p 4illumination \\\\"
+            winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u administrator -p 4illumination \\\\"
                     + WindowsMachines.BABYLON + " cmd.exe /c \"net stop " + WindowsServices.COORD_SERVICE + "\"");
             winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-            try {
-                String result = ibService.findValueInPacketLog("ExitCode ");
-                Assert.assertTrue(result.equals("0") || result.equals("2"), "Build failed with exit code " + result);
-            } catch (IOException e) {
-                e.getMessage();
-            }
-            int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT);
-            int lastLocal = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL);
-
-            Assert.assertTrue(lastAgent > lastLocal, "Last Local task was build after remote tasks. Last Agent: " + lastAgent + " Last Local: " + lastLocal);
+            int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+            Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
         }catch (Exception e){
             e.getMessage();
         }
         finally {
-            winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 1 -u administrator -p 4illumination \\\\"
-                    + StaticDataProvider.WindowsMachines.BABYLON + " cmd.exe /c \"net start " + WindowsServices.COORD_SERVICE + "\"");
+            winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u administrator -p 4illumination \\\\"
+                    + WindowsMachines.BABYLON + " cmd.exe /c \"net start " + WindowsServices.COORD_SERVICE + "\"");
         }
     }
 
