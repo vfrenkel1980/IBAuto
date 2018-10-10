@@ -27,6 +27,8 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -64,9 +66,21 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        PostgresJDBC postgresJDBC = new PostgresJDBC();
-        String previousScheme = postgresJDBC.getTheNthRowFromEnd("192.168.10.73", "postgres", "postgres123", "release_manager", "*", "postgres_schema_version", 2);
-        System.out.println(previousScheme);
+        Path parentFolder = Paths.get("c:\\qa");
+
+        Optional<File> mostRecentFolder =
+                Arrays
+                        .stream(Objects.requireNonNull(parentFolder.toFile().listFiles()))
+                        .filter(File::isDirectory)
+                        .max(
+                                (f1, f2) -> Long.compare(f1.lastModified(),
+                                        f2.lastModified()));
+        if (mostRecentFolder.isPresent()) {
+            File mostRecent = mostRecentFolder.get();
+            System.out.println(mostRecent.getPath());
+        } else {
+            System.out.println("empty");
+        }
 
 
     }

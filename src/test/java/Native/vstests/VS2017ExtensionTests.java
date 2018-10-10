@@ -242,9 +242,18 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void writeDataToDB() {
         if (SCENARIO.equals("2")) {
             ibVsInstallationName = SystemActions.findFileInDirectoryRecursively("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017*.exe");
-            postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_release_versioning",
-                    "vs_version, ib_version, msbuild_version, ib_installer_name",
-                    "\'" + vsVersion + "\', \'" + ibVersion + "\', \'" + installedMsBuildVersion + "\', \'" + ibVsInstallationName + "\'");
+            switch (VSINSTALLATION) {
+                case "15":
+                postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_release_versioning",
+                        "vs_version, ib_version, msbuild_version, ib_installer_name",
+                        "\'" + vsVersion + "\', \'" + ibVersion + "\', \'" + installedMsBuildVersion + "\', \'" + ibVsInstallationName + "\'");
+                break;
+                case "preview":
+                    postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_preview_versioning",
+                            "vs_version, ib_version, msbuild_version, ib_installer_name",
+                            "\'" + vsVersion + "\', \'" + ibVersion + "\', \'" + installedMsBuildVersion + "\', \'" + ibVsInstallationName + "\'");
+                    break;
+            }
         }
     }
 

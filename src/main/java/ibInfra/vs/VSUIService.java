@@ -202,7 +202,7 @@ public class VSUIService implements IVSUIService {
             test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             test.log(Status.INFO, "Visual Studio opened successfully");
             SystemActions.sleep(30);
             if(isFirstActivation) {
