@@ -20,6 +20,7 @@
             <class name ="Native.windowstests.vmsim.VmSimVC11Tests" />
             <class name ="Native.windowstests.vmsim.VmSimVC15Tests" />
             <class name ="Native.windowstests.vmsim.VmSimVC15PreviewTests" />
+            <class name ="Native.windowstests.IBSamplesTests" />
         </classes>
     </test>
 
@@ -34,6 +35,7 @@
             <class name ="Native.windowstests.vmsim.VmSimVC11Tests" />
             <class name ="Native.windowstests.vmsim.VmSimVC15Tests" />
             <class name ="Native.windowstests.vmsim.VmSimVC15PreviewTests" />
+            <class name ="Native.windowstests.IBSamplesTests" />
         </classes>
     </test>
 </suite>
