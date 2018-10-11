@@ -1,7 +1,7 @@
 package Native.windowstests;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.WindowsTestBase;
+import frameworkInfra.testbases.WindowsSimTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class IBSamplesTests extends WindowsTestBase {
+public class IBSamplesTests extends WindowsSimTestBase {
 
     @Test(testName = "Verify 7Z Sample1 Test")
     public void verify7ZSample1Test() {
