@@ -250,4 +250,8 @@ public class WindowsService implements IWindowsService {
         return Timestamp.valueOf(nowWOSeconds).getTime();
     }
 
+    @Override
+    public String changeCurDirTo(String path) {
+        return "cmd /c c: && cd " + path + " && ";
+    }
 }

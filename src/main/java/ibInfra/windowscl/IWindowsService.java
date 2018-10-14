@@ -35,4 +35,6 @@ public interface IWindowsService {
     long getTodayMidnight();
 
     long getNowWOSeconds();
+
+    String changeCurDirTo(String path);
 }
