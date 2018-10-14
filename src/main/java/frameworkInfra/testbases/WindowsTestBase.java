@@ -6,12 +6,16 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -96,6 +100,23 @@ public class WindowsTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started - Change Logging Level to" + logLevel);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel );
+    }
+
+    /**
+     * After each test we validate that an message stating corrupt pdb's is not found in the log.
+     *
+     * @param result testng  test result
+     * @throws IOException exceptions thrown for not being able to read log
+     */
+
+    @AfterMethod
+    public void afterMethod(ITestResult result) throws IOException {
+        if (new File(Locations.QA_ROOT, "buildlog.txt").exists()) {
+            if (Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.PDB_ERROR))
+                LogOutput.PDB_ERROR_TESTS = LogOutput.PDB_ERROR_TESTS + testName + "\n";
+            SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        }
+        extent.flush();
     }
 
     /**
