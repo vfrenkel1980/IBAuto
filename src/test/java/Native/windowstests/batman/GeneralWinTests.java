@@ -131,6 +131,14 @@ public class GeneralWinTests extends BatmanBCTestBase{
         }
     }
 
+    @Test(testName = "Verify Predicted Disabled Build")
+    public void verifyPredictedDisabledBuild() {
+        setRegistry("0", "Builder", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
+        setRegistry("2", "Builder", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
     @Test(testName = "Verify PDB Error In Log")
     public void verifyPDBErrorInLog() {
         Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
