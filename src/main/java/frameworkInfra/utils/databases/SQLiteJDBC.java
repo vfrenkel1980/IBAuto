@@ -17,6 +17,7 @@ public class SQLiteJDBC implements IDataBase {
     public Connection connectToDb(String ip, String username, String password, String db) {
         Connection c = null;
         try {
+            Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:C:/Program Files (x86)/IncrediBuild/decrypted_db.db");
             c.setAutoCommit(false);
             if (test != null)
