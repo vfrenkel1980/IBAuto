@@ -52,19 +52,16 @@ public class DBSchemasTests extends DBSchemasTestBase {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
             Assert.fail();
         }
-        int successful = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_utilization_hour ", "status IN (0) AND build_type IN (1,3)");
+        int successful = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 0, "Number of successful builds does not match expected");
     }
 
     @Test(testName = "Upgrade To Latest Version Of Ent", dependsOnMethods = "upgradeToOlderVersionOfEnt")
     public void upgradeToLatestVersionOfEnt() {
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        int utilBeforeUpgrade = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "agent_id NOT IN (0)");
         ibService.upgradeToEnt();
-        int utilAfterUpgrade = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "agent_id NOT IN (0)");
         int successful = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 1, "Number of successful builds does not match expected");
-        Assert.assertEquals(utilBeforeUpgrade, utilAfterUpgrade, "Coord utilization hour table values do not match between upgrade!");
     }
 
     @Test(testName = "Downgrade To Latest Pro Schema", dependsOnMethods = "upgradeToLatestVersionOfEnt")
@@ -78,12 +75,9 @@ public class DBSchemasTests extends DBSchemasTestBase {
     @Test(testName = "Upgrade Pro To Latest Ent", dependsOnMethods = "downgradeToLatestProSchema")
     public void upgradeProToLatestEnt() {
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
-        int utilBeforeUpgrade = sqLiteJDBC.getIntFromQuery("", "", "", "coordinatordb", "COUNT(*) ", "coord_build ", "agent_id NOT IN (0)");
         ibService.upgradeToEnt();
-        int utilAfterUpgrade = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "agent_id NOT IN (0)");
         int successful = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 1, "Number of successful builds does not match expected");
-        Assert.assertEquals(utilBeforeUpgrade, utilAfterUpgrade, "Coord utilization hour table values do not match between upgrade!");
     }
 
 
