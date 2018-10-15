@@ -81,7 +81,8 @@ public class StaticDataProvider {
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
-        public static final String SQLITE_CONVERTION_TOOL = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDb.exe";
+        public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
+        public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
     }
 
     public static class WindowsServices {

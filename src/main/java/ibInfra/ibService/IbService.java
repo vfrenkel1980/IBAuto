@@ -1,7 +1,6 @@
 package ibInfra.ibService;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.CustomJsonParser;
@@ -344,9 +343,13 @@ public class IbService implements IIBService {
      * Decrypt the IB SQLite DB
      */
     @Override
-    public void decryptSQLiteDB() {
+    public void decryptSQLiteDB(String revision) {
         winService.restartService(WindowsServices.COORD_SERVICE);
-        winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
+        if (revision.equals("new"))
+            winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL_NEW + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
+        else
+            winService.runCommandWaitForFinish(Processes.SQLITE_CONVERTION_TOOL_OLD + " \"" + IbLocations.IB_ROOT + "\" " + "decrypted_db.db");
+
     }
 
     /**
