@@ -48,7 +48,7 @@ public class DBSchemasTestBase extends TestBase {
 
     @AfterSuite
     public void afterSuite(){
-        ibService.uninstallIB("Latest");
+        //ibService.uninstallIB("Latest");
     }
 
 
