@@ -20,6 +20,7 @@ def UI = project.hasProperty("UI")
 def BatmanSim = project.hasProperty("BatmanSim")
 def VmSim = project.hasProperty("VmSim")
 def RobinSim = project.hasProperty("RobinSim")
+def AlfredSim = project.hasProperty("AlfredSim")
 def LinuxCL = project.hasProperty("LinuxCL")
 def LinuxMultiBuild = project.hasProperty("LinuxMultiBuild")
 def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
@@ -114,6 +115,9 @@ test {
             suites "src/test/resources/RobinSim.xml"
         }
 
+        if(AlfredSim) {
+            suites "src/test/resources/AlfredSim.xml"
+        }
         if(LinuxCL) {
             suites "src/test/resources/LinuxCL.xml"
         }

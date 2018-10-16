@@ -20,9 +20,9 @@ public class AlfredTestBase extends WindowsTestBase{
         testName = getTestName(method);
         test = extent.createTest(testName);
         if (logLevel.equals("4"))
-            test.assignCategory("Robin Cl - Detailed logging");
+            test.assignCategory("Alfred CL - Detailed logging");
         if (logLevel.equals("0"))
-            test.assignCategory("Robin CL - Minimal logging");
+            test.assignCategory("Alfred CL - Minimal logging");
         test.log(Status.INFO, method.getName() + " test started");
         log.info(method.getName() + " test started");
     }
