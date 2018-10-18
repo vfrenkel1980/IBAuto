@@ -36,5 +36,11 @@ public interface IWindowsService {
 
     long getNowWOSeconds();
 
+    boolean renameFile (String absoluteOldFilePath, String newName) throws IOException;
+
+    boolean deleteFile (String absoluteFilePath);
+
     String changeCurDirTo(String path);
+
+    String getWindowsTEMPfolder();
 }

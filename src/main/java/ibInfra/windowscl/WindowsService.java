@@ -251,7 +251,36 @@ public class WindowsService implements IWindowsService {
     }
 
     @Override
+    public boolean renameFile(String absoluteOldFilePath, String newName) throws IOException {
+        File oldFile = new File(absoluteOldFilePath);
+        String newFilePath = oldFile.getAbsolutePath().replace(oldFile.getName(), "") + newName;
+        File newFile = new File(newFilePath);
+        if (newFile.exists())
+            throw new java.io.IOException("file exists");
+        boolean success = oldFile.renameTo(newFile);
+        if (!success)
+            return false;
+        return true;
+    }
+
+    @Override
     public String changeCurDirTo(String path) {
         return "cmd /c c: && cd " + path + " && ";
+    }
+
+    @Override
+    public String getWindowsTEMPfolder(){
+        String path = System.getProperty("java.io.tmpdir");
+        return path;
+    }
+
+    @Override
+    public boolean deleteFile (String absoluteFilePath){
+        File file = new File(absoluteFilePath);
+        boolean success = file.delete();
+        if (!success){
+            return false;
+        }
+        return true;
     }
 }
