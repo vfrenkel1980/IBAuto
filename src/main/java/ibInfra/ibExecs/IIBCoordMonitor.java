@@ -25,7 +25,7 @@ public class IIBCoordMonitor implements ibCoordMonitor {
 
         String absoluteFilePath = pathToFile + filename;
         File file = new File(absoluteFilePath);
-        winService.runCommandWaitForFinish(StaticDataProvider.Processes.XGCOORDCONSOLE + "/exportstatus=\"" + absoluteFilePath +"\"");
+        winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/exportstatus=\"" + absoluteFilePath +"\"");
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
