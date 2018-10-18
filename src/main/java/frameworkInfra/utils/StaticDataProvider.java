@@ -82,7 +82,8 @@ public class StaticDataProvider {
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
         public static final String PSEXEC = Locations.QA_ROOT + "\\Tools\\PStools\\PsExec.exe";
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
-        public static final String SQLITE_CONVERTION_TOOL = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDb.exe";
+        public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
+        public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
     }
 
     public static class WindowsServices {
@@ -403,6 +404,12 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" /VSversion=15";
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" /VSversion=15";
+        }
+
+        public static class VC15_ALFRED {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String BLENDER_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Debug|x64\" /title=\"Blender 2017 - Debug\"";
+            public static final String MONO_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Mono\\msvc\\mono.sln\" /%s /cfg=\"release|x64\" /title=\"Mono 2017 - Release x64\"";
         }
 
         public static class UIVALIDATIONS {

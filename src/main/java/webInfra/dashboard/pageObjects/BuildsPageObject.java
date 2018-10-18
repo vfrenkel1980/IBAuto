@@ -49,7 +49,7 @@ public class BuildsPageObject {
     }
 
     public String getDistributedTimeUI() {
-        return eventWebDriver.findElement(KPI_DISTRIBUTED_TIME).getText();
+        return eventWebDriver.findElement(KPI_DISTRIBUTED_TIME).getText().replace("%","");
     }
 
     public String getTopBuildTimeInitiator(int num) {

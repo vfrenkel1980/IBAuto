@@ -17,7 +17,7 @@ public class DowngradeTests extends DashboardTestBase {
     public void verifyProDBAfterBuildingProjects() {
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        ibService.decryptSQLiteDB();
+        ibService.decryptSQLiteDB("new");
         int successful = sqLiteJDBC.getIntFromQuery("", "", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         int failed = sqLiteJDBC.getIntFromQuery("", "", "", "", "COUNT(*) ", "coord_build ", "status IN (1) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 2, "Number of successful builds does not match expected");

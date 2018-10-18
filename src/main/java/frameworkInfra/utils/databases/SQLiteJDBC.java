@@ -17,6 +17,7 @@ public class SQLiteJDBC implements IDataBase {
     public Connection connectToDb(String ip, String username, String password, String db) {
         Connection c = null;
         try {
+            Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:C:/Program Files (x86)/IncrediBuild/decrypted_db.db");
             c.setAutoCommit(false);
             if (test != null)
@@ -46,7 +47,7 @@ public class SQLiteJDBC implements IDataBase {
             Connection c = connectToDb(ip, username, password, db);
             Statement stmt = c.createStatement();
             if (test != null)
-                test.log(Status.WARNING, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
+                test.log(Status.INFO, "Running query: SELECT " + select + "FROM " + table + "WHERE " + where);
             ResultSet rs = stmt.executeQuery("SELECT " + select + "FROM " + table + "WHERE " + where);
             rs.next();
             res = rs.getInt(1);
