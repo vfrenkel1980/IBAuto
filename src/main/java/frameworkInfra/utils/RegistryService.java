@@ -36,8 +36,7 @@ public class RegistryService extends TestBase {
         try {
             return Advapi32Util.registryGetStringValue(rootKey, keyPath, keyName);
         } catch (Exception ex) {
-            ex.getMessage();
-            test.log(Status.ERROR, "Failed to get value for " + keyName);
+            test.log(Status.ERROR, "Failed to get value for " + keyName + "with error: " + ex.getMessage());
             return "";
         }
     }
