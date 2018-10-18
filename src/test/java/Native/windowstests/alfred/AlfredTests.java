@@ -18,4 +18,10 @@ public class AlfredTests extends AlfredTestBase {
         int returnCode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_ALFRED.MONO_X64_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
+
+    @Test(testName = "Blender 2017 - Debug - build" , groups = { "Build" })
+    public void blender2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_ALFRED.BLENDER_X64_DEBUG, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
 }
