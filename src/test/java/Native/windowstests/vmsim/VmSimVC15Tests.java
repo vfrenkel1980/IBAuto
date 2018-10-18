@@ -26,7 +26,7 @@ public class VmSimVC15Tests extends VmSimTestBase {
     }
 
     @Test(testName = "Blender 2017 - Release - build" , groups = { "Build" })
-    public void blender2015ReleaseBuild(){
+    public void blender2017ReleaseBuild(){
         int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_VMSIM.BLENDER_X64_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
