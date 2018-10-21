@@ -6,6 +6,8 @@
    <ip> l1a-u12-docker </ip>
    <ip> l1a-u12-ccache </ip>
    <ip> l1a-u12i386 </ip>
+   <ip> l1a-u16-bazel </ip>
+
 
 <!--
    <ip> 192.168.10.193 </ip> &lt;!&ndash;docker&ndash;&gt;

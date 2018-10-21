@@ -24,10 +24,10 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 public class LinuxSimTestBase extends LinuxTestBase {
 
     public enum SimClassType{
-        None, GenSim, Dock, Ccache, Thirty2Bit
+        None, GenSim, Dock, Ccache, Thirty2Bit, Bazel
     }
 
-    private static int NumInitators = 4;
+    private static int NumInitators = 5;
 
     private String className = this.getClass().getName();
     private static List<String> firstBuilds = new ArrayList<String>();
@@ -83,6 +83,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
             simClassType=SimClassType.Dock;
         else if(className.contains("Linux32BitTests"))
             simClassType=SimClassType.Thirty2Bit;
+        else if(className.contains("Bazel"))
+            simClassType=SimClassType.Bazel;
         else
             simClassType=SimClassType.GenSim;
 
