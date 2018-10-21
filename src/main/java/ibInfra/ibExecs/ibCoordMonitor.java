@@ -16,4 +16,6 @@ public interface ibCoordMonitor {
 
     void waitForAgentIsUpdated(String agentName) throws ParserConfigurationException, SAXException, IOException;
 
+    boolean checkIfAgentIsHelper (String initiatorName, String agentName) throws IOException, SAXException, ParserConfigurationException;
+
 }

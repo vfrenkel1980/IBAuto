@@ -1,10 +1,16 @@
 package Native.releasetests;
 
 import frameworkInfra.testbases.LicensingPositiveTestBase;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 public class LicensingPositiveTests extends LicensingPositiveTestBase {
 
@@ -22,22 +28,38 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
 
     @Test(testName = "Licence Positive Test: VS2017 CSC")
     public void licTestVS2017Csc() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CSC);
-        if (exitStatus == 0) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
-        } else {
-            Assert.assertTrue(false, "Build wasn't executed correctly");
+        IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
+        int counter = 0;
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CSC);
+        SystemActions.sleep(2);
+        while (winService.isProcessRunning(StaticDataProvider.Processes.BUILDSYSTEM)){
+            try {
+                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")){
+                    counter++;
+                }
+            } catch (IOException | SAXException | ParserConfigurationException e) {
+                e.printStackTrace();
+            }
         }
+        Assert.assertTrue(counter > 0);
     }
 
     @Test(testName = "Licence Test: VS2017 PS4")
     public void licTestVS2017PS4() {
-        exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_PS4_ORBIS);
-        if (exitStatus == 0) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "(Agent '"));
-        } else {
-            Assert.assertTrue(false, "Build wasn't executed correctly");
+        IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
+        int counter = 0;
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_PS4_ORBIS);
+        SystemActions.sleep(2);
+        while (winService.isProcessRunning(StaticDataProvider.Processes.BUILDSYSTEM)){
+            try {
+                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")){
+                    counter++;
+                }
+            } catch (IOException | SAXException | ParserConfigurationException e) {
+                e.printStackTrace();
+            }
         }
+        Assert.assertTrue(counter > 0);
     }
 
     @Test(testName = "Licence Test: VS2015 XBox One")
