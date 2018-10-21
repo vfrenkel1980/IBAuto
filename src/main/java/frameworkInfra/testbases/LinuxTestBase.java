@@ -50,17 +50,17 @@ public class LinuxTestBase extends TestBase{
         className = getClass().getName();
     }
 
-    @AfterMethod
-    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
-
-        int i=1;
-        if (className.contains("Dock"))
-            i=2;
-
-        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i));
-        test.log(Status.INFO, buildID);
-        extent.flush();
-    }
+//    @AfterMethod
+//    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
+//
+//        int i=1;
+//        if (className.contains("Dock"))
+//            i=2;
+//
+//        buildID = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i));
+//        test.log(Status.INFO, buildID);
+//        extent.flush();
+//    }
 
 /*    protected static String getIBVersion() {
         LinuxService runCommand = new LinuxService();

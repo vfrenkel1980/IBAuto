@@ -605,6 +605,7 @@ public class StaticDataProvider {
 
         public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
         public static final String CD_KERNEL4_DIR = "cd /disk2/projects/linux-4.3.3";
+        public static final String CD_KERNEL4_SANITY_DIR = "cd /home/xoreax//projects/linux-4.3.3";
         public static final String CD_32BIT_KERNEL_DIR = "cd /home/xoreax/linux-2.6.34.14";
         public static final String CD_KERNEL4_CCACHE_DIR = "cd /disk2/projects/linux-4.3.3-modified";
         public static final String CD_SAMBA_DIR = "cd /disk2/projects/samba-4.0.7";
@@ -622,17 +623,20 @@ public class StaticDataProvider {
         public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
         public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
         public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
+        public static final String CD_TENSOR_DIR = "cd /home/xoreax/tensorflow";
 
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";
         public static final String B2_CLEAN = "./b2 clean";
         public static final String NINJA_CLEAN = "ninja -C out/Release -t clean";
+        public static final String BAZEL_CLEAN = " /home/xoreax/bin/bazel clean";
 
         //placement strings: 1)flags 2)caption 3)env 4)processes
         public static final String MAKE_BUILD = "ib_console %s -c %s %s make -j%s";
         public static final String SCONS_BUILD = "ib_console %s -c %s %s scons -j%s";
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
+        public static final String BAZEL_BUILD = "ib_console %s -c %s %s  /home/xoreax/bin/bazel build --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
 
         public static final String IB_TESTS = "ib_tests-1.0.0.tar.bz2";
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
