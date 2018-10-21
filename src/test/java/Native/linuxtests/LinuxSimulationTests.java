@@ -27,17 +27,17 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
-//
-//    @Test(testName = "Sim Samba")
-//    public void SimTestSamba(){
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Samba", "env JOBS=32", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//    }
+
+    @Test(testName = "Sim Samba")
+    public void SimTestSamba(){
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Samba", "env JOBS=32", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+    }
 
     @Test(testName = "Sim Cpp")
     public void SimTestCpp(){
@@ -50,61 +50,61 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
     }
 
-//    @Test(testName = "Sim MySQL")
-//    public void SimTestMySQL(){
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","MySQL", "", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";",ipList.get(simClassType.ordinal()));
-//    }
-//
-//    @Test(testName = "Sim Boost")
-//    public void SimTestBoost() {
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";" +
-//                String.format(LinuxSimulation.B2_BUILD, "--ib-crash -d1 --f", "Boost", "", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//    }
-//
-//    @Test(testName = "Sim Cmake")
-//    public void SimTestCmake(){
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//    }
-//
-//    @Test(testName = "Sim GDB")
-//    public void SimTestGDB(){
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","GDB", "", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//    }
-//
-//    @Test(testName = "Sim Git")
-//    public void SimTestGit(){
-//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Git", "", "32"), ipList.get(simClassType.ordinal()));
-//
-//
-//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-//
-//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//    }
-//
+    @Test(testName = "Sim MySQL")
+    public void SimTestMySQL(){
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","MySQL", "", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";",ipList.get(simClassType.ordinal()));
+    }
+
+    @Test(testName = "Sim Boost")
+    public void SimTestBoost() {
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";" +
+                String.format(LinuxSimulation.B2_BUILD, "--ib-crash -d1 --f", "Boost", "", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";", ipList.get(simClassType.ordinal()));
+    }
+
+    @Test(testName = "Sim Cmake")
+    public void SimTestCmake(){
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Cmake", "", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+    }
+
+    @Test(testName = "Sim GDB")
+    public void SimTestGDB(){
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","GDB", "", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+    }
+
+    @Test(testName = "Sim Git")
+    public void SimTestGit(){
+        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Git", "", "32"), ipList.get(simClassType.ordinal()));
+
+
+        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+
+        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+    }
+
 //    @Test(testName = "Sim QT")
 //    public void SimTestQT(){
 //        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +

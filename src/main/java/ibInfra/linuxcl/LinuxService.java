@@ -35,6 +35,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
+            command = ". ~/.profile; " + command;
             session.connect();
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
@@ -42,6 +43,7 @@ public class LinuxService extends TestBase implements ILinuxService {
                 extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setPty(true);
             channelExec.setCommand(command);
             channelExec.connect();
 
@@ -77,6 +79,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
+            command = ". ~/.profile; " + command;
             session.connect();
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
@@ -84,6 +87,7 @@ public class LinuxService extends TestBase implements ILinuxService {
                 extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setPty(true);
             channelExec.setCommand(command);
             channelExec.connect();
 
@@ -117,6 +121,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setConfig("UserKnownHostsFile", "/dev/null");
             //Set password
             session.setPassword("xoreax");
+            command = ". ~/.profile; " + command;
             session.connect();
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
@@ -124,6 +129,7 @@ public class LinuxService extends TestBase implements ILinuxService {
                 extent.flush();
             }
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setPty(true);
             channelExec.setCommand(command);
             channelExec.connect();
 
