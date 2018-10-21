@@ -112,6 +112,20 @@ public class WindowsService implements IWindowsService {
     }
 
     @Override
+    public boolean isProcessRunning(String processName){
+        boolean isRunning = true;
+        String output;
+        output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
+        System.out.println(output);
+        if (output.contains("INFO: No tasks are running")) {
+            isRunning = false;
+        }
+        test.log(Status.INFO, processName + " Finished running");
+        System.out.println(isRunning);
+        return isRunning;
+    }
+
+    @Override
     public void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName) {
         boolean isRunning = true;
         String output;

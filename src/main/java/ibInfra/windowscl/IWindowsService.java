@@ -14,6 +14,8 @@ public interface IWindowsService {
 
     void waitForProcessToFinish(String processName);
 
+    boolean isProcessRunning(String processName);
+
     void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName);
 
     int getNumberOfProcessInstances(String processName);

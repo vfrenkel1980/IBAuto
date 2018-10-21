@@ -93,9 +93,34 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         String localVer = getAgentVersion(coordAgent);
         String remoteVer = getAgentVersion(agentName);
         String remoteStatus = getAgentStatus(agentName);
-        System.out.println("LocalVer: " + localVer + "; RemoteVer: " + remoteVer + " RemoteStatus: " + remoteStatus);
         if (!localVer.equals(remoteVer) | !remoteStatus.equals("True")){
             waitForAgentIsUpdated(agentName);
         }
+    }
+
+    @Override
+    public boolean checkIfAgentIsHelper (String initiatorName, String agentName) throws IOException, SAXException, ParserConfigurationException {
+        SystemActions.sleep(1);
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String absolutePathToFile = winService.getWindowsTEMPfolder() + timestamp + ".xml";
+        Document docXML = exportCoordMonitorDataToXML(winService.getWindowsTEMPfolder(), timestamp + ".xml");
+        docXML.getDocumentElement().normalize();
+
+        NodeList nList = docXML.getElementsByTagName("Agent");
+
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node node = nList.item(temp);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                Element eElement = (Element) node;
+                if (eElement.getAttribute("Host").equals(agentName.toUpperCase()) && eElement.getAttribute("WorkingForAgents").equals(initiatorName.substring(0, 1).toUpperCase() + initiatorName.substring(1))){
+                    winService.deleteFile(absolutePathToFile);
+                    return true;
+                }
+            }
+        }
+        winService.deleteFile(absolutePathToFile);
+        return false;
     }
 }
