@@ -18,6 +18,7 @@ public class StaticDataProvider {
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
+        public static final String IB_SHORTCUTS = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\IncrediBuild";
     }
 
     public static class IBSamplesLocations {
@@ -47,6 +48,7 @@ public class StaticDataProvider {
     //locations
     public static class Locations {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
+        public static final String IB_HKCU_REG_ROOT = "SOFTWARE\\Xoreax";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
@@ -130,6 +132,7 @@ public class StaticDataProvider {
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
             public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
+            public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
