@@ -123,6 +123,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             session.setPassword("xoreax");
             command = ". ~/.profile; " + command;
             session.connect();
+
             if (test != null) {
                 test.log(Status.INFO,"Connected to server " + hostIP);
                 test.log(Status.INFO, "Running command " + command);
