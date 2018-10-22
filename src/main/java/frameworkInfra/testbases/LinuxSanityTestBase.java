@@ -12,6 +12,7 @@ import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.parsers.XmlParser;
+import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -52,16 +53,15 @@ public class LinuxSanityTestBase extends LinuxTestBase {
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
 
-        try {
-           log.info( "Reverting machine ");
-            Runtime.getRuntime().exec("cmd vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-            Runtime.getRuntime().exec("cmd vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-            Runtime.getRuntime().exec("cmd vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-        } catch (IOException e) {
-            e.getMessage();
-        }
-
+        WindowsService windowsService = new WindowsService();
+        windowsService.runCommandWaitForFinish(" vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        SystemActions.sleep(10);
+        windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" test1");
+        SystemActions.sleep(30);
+        windowsService.runCommandWaitForFinish("cmd vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        SystemActions.sleep(30);
 //clean - no IB
+
 
 //        linuxService.killibDbCheck(SanityHostName);
 
