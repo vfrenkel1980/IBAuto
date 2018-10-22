@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="LinuxMultiBuild"  >
+    <!-- suite name="Suite Name" -->
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="LinuxMultiBuild" allow-return-values="true">
+        <parameter name="cycle" value=" "/>
+        <classes>
+            <class name ="Native.linuxtests.LinuxSanityTests" />
+        </classes>
+    </test>
+
+</suite>
