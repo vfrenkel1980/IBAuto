@@ -15,6 +15,7 @@ import frameworkInfra.utils.parsers.XmlParser;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,27 +23,28 @@ import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
 
+
 @Listeners(SuiteListener.class)
 public class LinuxSanityTestBase extends LinuxTestBase {
 
     private String className = this.getClass().getName();
     static List<String>  HostNameList;
-    private static String SanityHostName = "l1a-u16-STests";
-    private static String CoorHostName = "l2b-u14-coor";
+    protected static String SanityHostName = "l1a-u16-STests";
+    private static String CoorHostName = "l1a-u14-coor";
     private static String firstBuild = new String();
     private static String lastBuild = new String();
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
-//        switch (ENV){
-//            case "linuxsim1a":
-//                rawIpList = XmlParser.getIpList("Simulation IP list.xml");
-//                break;
-//            case "linuxsim1b":
-//                rawIpList = XmlParser.getIpList("Secondary Simulation IP list.xml");
-//                break;
-//        }
+        switch (ENV){
+            case "linuxsim1a":
+                rawIpList = XmlParser.getIpList("Simulation IP list.xml");
+                break;
+            case "linuxsim1b":
+                rawIpList = XmlParser.getIpList("Secondary Simulation IP list.xml");
+                break;
+        }
 //        testType = TestType.Sanity;
 //        ipList = XmlParser.breakDownIPList(rawIpList);
         log.info("RUNNING VERSION: " + VERSION);
@@ -50,7 +52,18 @@ public class LinuxSanityTestBase extends LinuxTestBase {
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
 
-        linuxService.killibDbCheck(SanityHostName);
+        try {
+           log.info( "Reverting machine ");
+            Runtime.getRuntime().exec("cmd vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+            Runtime.getRuntime().exec("cmd vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+            Runtime.getRuntime().exec("cmd vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+//clean - no IB
+
+//        linuxService.killibDbCheck(SanityHostName);
 
 //        connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
 //        for (int i=0; i < connectedMachinesToGrid.size(); ++i) {
@@ -101,12 +114,11 @@ public class LinuxSanityTestBase extends LinuxTestBase {
     }
 
     @BeforeMethod
-    @Parameters({"cycle"})
-    public void beforeMethod(Method method, String cycle) {
+//    @Parameters({"cycle"})
+    public void beforeMethod(Method method) {
         testName = getTestName(method);
         test = extent.createTest(testName);
-        test.assignCategory("Linux Simulation - Cycle " + cycle);
-        test.assignCategory("Linux Simulation - Cycle " + cycle);
+        test.assignCategory("Linux Sanity BeforeMethod");
         test.log(Status.INFO, method.getName() + " test started");
     }
 

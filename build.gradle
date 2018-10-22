@@ -6,7 +6,6 @@ apply plugin: 'application'
 
 mainClassName = 'Native.uitests.VSTest'
 
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -22,6 +21,7 @@ def VmSim = project.hasProperty("VmSim")
 def RobinSim = project.hasProperty("RobinSim")
 def AlfredSim = project.hasProperty("AlfredSim")
 def LinuxCL = project.hasProperty("LinuxCL")
+def LinuxSanity = project.hasProperty("LinuxSanity")
 def LinuxMultiBuild = project.hasProperty("LinuxMultiBuild")
 def LinuxMultiInitiator = project.hasProperty("LinuxMultiInitiator")
 def Unit = project.hasProperty("Unit")
@@ -184,6 +184,9 @@ test {
 
         if(DBSchemas) {
             suites "src/test/resources/DBSchemas.xml"
+        }
+        if(LinuxSanity) {
+            suites "src/test/resources/LinuxSanity.xml"
         }
     }
 
