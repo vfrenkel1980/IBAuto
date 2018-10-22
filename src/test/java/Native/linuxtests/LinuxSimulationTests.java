@@ -17,27 +17,27 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
 //
 //        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
 //    }
-
-    @Test(testName = "Sim Apache")
-    public void SimTestApache(){
-        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Apache", "", "32"), ipList.get(simClassType.ordinal()));
-
-        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-    }
-
-    @Test(testName = "Sim Samba")
-    public void SimTestSamba(){
-        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Samba", "env JOBS=32", "32"), ipList.get(simClassType.ordinal()));
-
-
-        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
-
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
-    }
+//
+//    @Test(testName = "Sim Apache")
+//    public void SimTestApache(){
+//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Apache", "", "32"), ipList.get(simClassType.ordinal()));
+//
+//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+//
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+//    }
+//
+//    @Test(testName = "Sim Samba")
+//    public void SimTestSamba(){
+//        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
+//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Samba", "env JOBS=32", "32"), ipList.get(simClassType.ordinal()));
+//
+//
+//        Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
+//
+//        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
+//    }
 
     @Test(testName = "Sim Cpp")
     public void SimTestCpp(){

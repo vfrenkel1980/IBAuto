@@ -48,7 +48,7 @@
 
     <test name="Cycle 6" allow-return-values="true">
         <parameter name="cycle" value="6"/>
-        <classes>->
+        <classes>
             <class name ="Native.linuxtests.LinuxSimulationTests" />
         </classes>
     </test>
@@ -81,41 +81,41 @@
         </classes>
     </test>
 
-    <test name="Cycle 11" allow-return-values="true">
-        <parameter name="cycle" value="11"/>
-        <classes>
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
+    <!--<test name="Cycle 11" allow-return-values="true">-->
+        <!--<parameter name="cycle" value="11"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
 
-    <test name="Cycle 12" allow-return-values="true">
-        <parameter name="cycle" value="12"/>
-        <classes>
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
+    <!--<test name="Cycle 12" allow-return-values="true">-->
+        <!--<parameter name="cycle" value="12"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
 
-    <test name="Cycle 13" allow-return-values="true">
-        <parameter name="cycle" value="13"/>
-        <classes>
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
+    <!--<test name="Cycle 13" allow-return-values="true">-->
+        <!--<parameter name="cycle" value="13"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
 
-    <test name="Cycle 14" allow-return-values="true">
-        <parameter name="cycle" value="14"/>
-        <classes>
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
+    <!--<test name="Cycle 14" allow-return-values="true">-->
+        <!--<parameter name="cycle" value="14"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
 
-    <test name="Cycle 15" allow-return-values="true">
-        <parameter name="cycle" value="15"/>
-        <classes>
-            <class name ="Native.linuxtests.LinuxSimulationTests" />
-        </classes>
-    </test>
-
+    <!--<test name="Cycle 15" allow-return-values="true">-->
+        <!--<parameter name="cycle" value="15"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxSimulationTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
+<!---->
     <!--<test name="Cycle 16" allow-return-values="true">-->
         <!--<parameter name="cycle" value="16"/>-->
         <!--<classes>-->
