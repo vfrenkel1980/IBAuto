@@ -106,6 +106,8 @@ public class StaticDataProvider {
         public static String PDB_ERROR_TESTS = "";
         public static final String TERMINATION_MESSAGE = "Build terminated at user request";
         public static final String MAX_ALLOWED_BUILDS = "Maximum number of concurrent builds reached.";
+        public static final String BUILDSERVICE_STOPPED = "The connection with Build Sevice has terminated. Start again Build Service for activating Build Monitor";
+        public static final String BUILDSERVICE_STOPPED_FAIL = "Connection terminated while waiting for reply from local connection: Server is not reachable";
     }
 
     public static class VsActions {
