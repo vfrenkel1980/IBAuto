@@ -81,13 +81,17 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         }
     }
 
-    @Test(testName= "Verify BuildMon  - Agent Service stopped")
-    public void verifyBuildMonAgentServicestopped(){
+    @Test(testName = "Verify BuildMon  - Agent Service stopped")
+    public void verifyBuildMonAgentServiceStopped() {
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE);
         SystemActions.sleep(5);
-        winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
-        Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT+"\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
-        Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT+"\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
+        try {
+            winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+            Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
+            Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
+        } catch (Exception e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
         winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
     }
 
