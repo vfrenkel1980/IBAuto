@@ -166,7 +166,8 @@ public class StaticDataProvider {
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-
+            public static final String ANDROIDCPP_ARM64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidCPP1\\AndroidCPP1.sln\" /%s /cfg=\"Debug|ARM64\" /title=\"Android CPP -Debug ARM64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String ANDROIDCS_ANYCPU_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidAppCS\\AndroidAppCS.sln\" /%s /cfg=\"Debug|Any CPU\" /title=\"Android CS -Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
         public static class VC14_BATMAN {
