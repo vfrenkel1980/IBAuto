@@ -1,5 +1,6 @@
 package Native.UnitTests;
 
+import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.JSchException;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
@@ -66,22 +67,19 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        Path parentFolder = Paths.get("c:\\qa");
-
+        Path parentFolder = Paths.get("c:\\qa\\simulation");
         Optional<File> mostRecentFolder =
                 Arrays
                         .stream(Objects.requireNonNull(parentFolder.toFile().listFiles()))
                         .filter(File::isDirectory)
-                        .max(
+                        .min(
                                 (f1, f2) -> Long.compare(f1.lastModified(),
                                         f2.lastModified()));
         if (mostRecentFolder.isPresent()) {
-            File mostRecent = mostRecentFolder.get();
-            System.out.println(mostRecent.getPath());
-        } else {
-            System.out.println("empty");
-        }
+            File oldestFile = mostRecentFolder.get();
 
+            System.out.println(oldestFile.getPath());
+        }
 
     }
 }

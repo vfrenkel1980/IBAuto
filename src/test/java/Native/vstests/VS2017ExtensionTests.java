@@ -238,7 +238,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         Assert.assertFalse(ibmsbhlpLog.exists(), "IBMSBHLP.log file was created during the \"Predicted\" execution");
     }
 
-    @Test(testName = "Write Data To DB", dependsOnMethods = {"compareMSBuildVersion"})
+    @Test(testName = "Write Data To DB")
     public void writeDataToDB() {
         if (SCENARIO.equals("2")) {
             ibVsInstallationName = SystemActions.findFileInDirectoryRecursively("C:\\ProgramData\\Microsoft\\VisualStudio\\Packages", "incredibuild_vs2017*.exe");
