@@ -228,6 +228,18 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Clicking Exit");
             screen.wait(IBInstaller.ExitBtn.similar((float) 0.7),5).click();
         }
+
+        @Override
+        public void clickCustom() throws FindFailed {
+            test.log(Status.INFO, "Clicking Custom");
+            screen.wait(IBInstaller.CustomTab.similar((float) 0.7),5).click();
+        }
+
+        @Override
+        public void selectSingleUseVM() throws FindFailed {
+            test.log(Status.INFO, "Selecting Single Use VM");
+            screen.wait(IBInstaller.SingleUseVMCB.similar((float) 0.7),5).click();
+        }
     }
 
     /**

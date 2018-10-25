@@ -83,6 +83,35 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    @Test(testName = "Install Single Use VM")
+    public void installSingleUseVM(){
+        ibuiService.startIBUIInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickCustom();
+            installer.selectSingleUseVM();
+            installer.clickNext();
+            installer.selectCoordinator(WindowsMachines.BABYLON);
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
+        Assert.assertFalse(ibService.verifyIbServicesRunning(true, false), "Services are running after SingleUseVM install!!!!");
+        winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
+        Assert.assertTrue(ibService.verifyIbServicesRunning(true, false), "Services are not running!!!!");
+        runBuildAndAssert();
+    }
+
     @Test(testName = "Uninstall IB")
     public void uninstallIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);

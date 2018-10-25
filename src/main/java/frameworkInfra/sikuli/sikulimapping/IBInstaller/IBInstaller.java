@@ -30,5 +30,7 @@ public class IBInstaller {
     public static final Pattern EntInstallationLocationTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\ent_installation_path.png");
     public static final Pattern InvalidLicenseMessage = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\invalid_license_message.png");
     public static final Pattern ExitBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\exit.png");
+    public static final Pattern CustomTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\custom.png");
+    public static final Pattern SingleUseVMCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\single_use_VM.png");
 
 }
