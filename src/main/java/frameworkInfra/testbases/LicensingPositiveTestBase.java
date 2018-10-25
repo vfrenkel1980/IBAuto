@@ -6,9 +6,15 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.dataObjects.ibObjects.IbCoordMonAgent;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
@@ -40,7 +46,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
     }
 
     @BeforeClass
-    public void beforeClass(ITestContext testContext){
+    public void beforeClass(ITestContext testContext) throws ParserConfigurationException, SAXException, IOException {
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
@@ -54,7 +60,8 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(60);
+                IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
+                coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
                 break;
         }
     }
@@ -80,7 +87,12 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
     }
 
     @AfterMethod
-    public void afterMethod2(){
+    public void afterMethod2(ITestResult result){
+        try {
+            winService.renameFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE, result.getMethod().getMethodName()+"_SCENARIO_"+scenario+"_positive.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
     }
 

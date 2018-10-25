@@ -14,6 +14,8 @@ public interface IWindowsService {
 
     void waitForProcessToFinish(String processName);
 
+    boolean isProcessRunning(String processName);
+
     void waitForProcessToFinishOnRemoteMachine(String host, String user, String pass, String processName);
 
     int getNumberOfProcessInstances(String processName);
@@ -36,5 +38,11 @@ public interface IWindowsService {
 
     long getNowWOSeconds();
 
+    boolean renameFile (String absoluteOldFilePath, String newName) throws IOException;
+
+    boolean deleteFile (String absoluteFilePath);
+
     String changeCurDirTo(String path);
+
+    String getWindowsTEMPfolder();
 }

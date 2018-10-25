@@ -2,6 +2,7 @@ package Native.windowstests.batman;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.StaticDataProvider.Locations;
@@ -78,6 +79,20 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         } catch (IOException e) {
             test.log(Status.WARNING, e.getMessage());
         }
+    }
+
+    @Test(testName = "Verify BuildMon  - Agent Service stopped")
+    public void verifyBuildMonAgentServiceStopped() {
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE);
+        SystemActions.sleep(5);
+        try {
+            winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+            Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
+            Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
+        } catch (Exception e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
+        winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
     }
 
 

@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class SetupTests extends SetupTestBase {
@@ -82,7 +83,7 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
-    @Test(testName = "UninstallRB IB")
+    @Test(testName = "Uninstall IB")
     public void uninstallIb(){
         ibService.installIB("Latest", IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("Latest");
@@ -229,34 +230,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Downgrade Enterprise To Pro")
     public void downgradeEnterpriseToPro(){
-        ibuiService.startEntInstaller("Latest");
-        try {
-            installer.clickNext();
-            installer.clickNext();
-            installer.acceptTerms();
-            installer.clickNext();
-            installer.clickNext();
-            installer.installNewCoordinator();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.browseLicense();
-            installer.browseLicenseNavigateToDesktop();
-            installer.selectLicense();
-            installer.clickNext();
-            installer.clickNext();
-            installer.uncheckLaunchDashboard();
-            installer.uncheckCreateEntShortcut();
-            installer.uncheckReleaseNotes();
-            installer.clickFinish();
-        } catch (FindFailed e) {
-            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
-            Assert.fail();
-        }
+        installEnterprise();
         ibuiService.startEntInstaller("Latest");
         try {
             installer.clickNext();
@@ -275,34 +249,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Enterprise Clean Installation")
     public void enterpriseCleanInstallation(){
-        ibuiService.startEntInstaller("Latest");
-        try {
-            installer.clickNext();
-            installer.clickNext();
-            installer.acceptTerms();
-            installer.clickNext();
-            installer.clickNext();
-            installer.installNewCoordinator();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.clickNext();
-            installer.browseLicense();
-            installer.browseLicenseNavigateToDesktop();
-            installer.selectLicense();
-            installer.clickNext();
-            installer.clickNext();
-            installer.uncheckLaunchDashboard();
-            installer.uncheckCreateEntShortcut();
-            installer.uncheckReleaseNotes();
-            installer.clickFinish();
-        } catch (FindFailed e) {
-            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
-            Assert.fail();
-        }
+        installEnterprise();
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.ENTERPRISE_SERVICE), WindowsServices.ENTERPRISE_SERVICE + " is running, should be stopped");
         Assert.assertTrue(ibService.verifyIbServicesRunning(true, true), "Services are not running!!!!");
         runBuildAndAssert();
@@ -399,12 +346,63 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(new File(installLogsFolder, filename).exists(), "Something went wrong and installation log s not created");
     }
 
+    @Test(testName = "Verify Pro Uninstall Leftovers")
+    public void verifyProUninstallLeftovers() {
+        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        runBuildAndAssert();
+        ibService.uninstallIB("Latest");
+        Assert.assertFalse(RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT),"HKLM wasn't removed in verifyProUninstallLeftovers test");
+        Assert.assertFalse(RegistryService.doesKeyExist(HKEY_CURRENT_USER, Locations.IB_HKCU_REG_ROOT), "HKCU wasn't removed in verifyProUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_ROOT), "IB root folder wasn't removed in verifyProUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_SHORTCUTS), "Start menu shortcuts weren't removed in verifyProUninstallLeftovers test");
+    }
 
+    @Test(testName = "Verify Enterprise Uninstall Leftovers ")
+    public void verifyEnterpriseUninstallLeftovers() {
+        installEnterprise();
+        runBuildAndAssert();
+        ibService.uninstallIB("Latest");
+        Assert.assertFalse(RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT),"HKLM wasn't removed in verifyEnterpriseUninstallLeftovers test");
+        Assert.assertFalse(RegistryService.doesKeyExist(HKEY_CURRENT_USER, Locations.IB_HKCU_REG_ROOT), "HKCU wasn't removed in verifyEnterpriseUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_ROOT), "IB root folder wasn't removed in verifyEnterpriseUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.ENTERPRISE_DIRECTORY), "IB Statistic folder wasn't removed in verifyEnterpriseUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_SHORTCUTS), "Start menu shortcuts weren't removed in verifyEnterpriseUninstallLeftovers test");
+    }
 
     /*-------------------------------METHODS-------------------------------*/
 
     private void runBuildAndAssert(){
         int returnCode = ibService.cleanAndBuild("\"" + IbLocations.IB_ROOT + "\\" + Processes.BUILD_CONSOLE + "\" " + String.format(TestProjects.TEST_PROJ, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+    private void installEnterprise() {
+        ibuiService.startEntInstaller("Latest");
+        try {
+            installer.clickNext();
+            installer.clickNext();
+            installer.acceptTerms();
+            installer.clickNext();
+            installer.clickNext();
+            installer.installNewCoordinator();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.clickNext();
+            installer.browseLicense();
+            installer.browseLicenseNavigateToDesktop();
+            installer.selectLicense();
+            installer.clickNext();
+            installer.clickNext();
+            installer.uncheckLaunchDashboard();
+            installer.uncheckCreateEntShortcut();
+            installer.uncheckReleaseNotes();
+            installer.clickFinish();
+        } catch (FindFailed e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+            Assert.fail();
+        }
     }
 }

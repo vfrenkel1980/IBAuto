@@ -18,6 +18,7 @@ public class StaticDataProvider {
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
+        public static final String IB_SHORTCUTS = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\IncrediBuild";
     }
 
     public static class IBSamplesLocations {
@@ -47,6 +48,7 @@ public class StaticDataProvider {
     //locations
     public static class Locations {
         public static final String IB_REG_ROOT = "SOFTWARE\\WOW6432Node\\Xoreax\\IncrediBuild";
+        public static final String IB_HKCU_REG_ROOT = "SOFTWARE\\Xoreax";
         public static final String QA_ROOT = "c:\\QA\\Simulation";
         public static final String VS_INSTALL_DIR = "c:\\QA\\Simulation\\VSintallation";
         public static final String WORKSPACE_REPORTS = System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\reports";
@@ -104,6 +106,8 @@ public class StaticDataProvider {
         public static String PDB_ERROR_TESTS = "";
         public static final String TERMINATION_MESSAGE = "Build terminated at user request";
         public static final String MAX_ALLOWED_BUILDS = "Maximum number of concurrent builds reached.";
+        public static final String BUILDSERVICE_STOPPED = "The connection with Build Sevice has terminated. Start again Build Service for activating Build Monitor";
+        public static final String BUILDSERVICE_STOPPED_FAIL = "Connection terminated while waiting for reply from local connection: Server is not reachable";
     }
 
     public static class VsActions {
@@ -130,6 +134,7 @@ public class StaticDataProvider {
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
             public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
+            public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
@@ -163,7 +168,8 @@ public class StaticDataProvider {
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-
+            public static final String ANDROIDCPP_ARM64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidCPP1\\AndroidCPP1.sln\" /%s /cfg=\"Debug|ARM64\" /title=\"Android CPP -Debug ARM64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String ANDROIDCS_ANYCPU_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidAppCS\\AndroidAppCS.sln\" /%s /cfg=\"Debug|Any CPU\" /title=\"Android CS -Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
         public static class VC14_BATMAN {
@@ -405,6 +411,12 @@ public class StaticDataProvider {
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" /VSversion=15";
         }
 
+        public static class VC15_ALFRED {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String BLENDER_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Debug|x64\" /title=\"Blender 2017 - Debug\"";
+            public static final String MONO_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Mono\\msvc\\mono.sln\" /%s /cfg=\"release|x64\" /title=\"Mono 2017 - Release x64\"";
+        }
+
         public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
@@ -585,8 +597,8 @@ public class StaticDataProvider {
     public static class LicTestPrjBuildConsoleCommands {
 
         public static final String VS2017_CPP = "\\2017\\Cpp\\Cpp.sln /%s /cfg=\"Debug|x86\" /title=\"License Test - VS2017 C++\"";
-        public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /%s /cfg=\"Debug|Any CPU\" /title=\"License Test - VS2017 C#\"";
-        public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" /%s /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\" /minwinver=\"7\"";
+        public static final String VS2017_CSC = "\\2017\\CSC\\CSC.sln /rebuild /cfg=\"Debug|Any CPU\" /title=\"License Test - VS2017 C#\"";
+        public static final String VS2017_PS4_ORBIS = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\audio_video\\api_libspeech_recognition\\speech_recognition_samples.sln\" /rebuild /cfg=\"Debug|ORBIS\" /title=\"License Test - PS4\" /minwinver=\"7\"";
         public static final String VS2015_XBOX_DURANGO = "\"C:\\Users\\Admin\\Desktop\\Xbox_03_2017_qfe4\\SimpleHDR12\\HDRReconstruction12\\Samples\\Graphics\\HDRReconstruction12\\HDRReconstruction12.sln\" /%s /cfg=\"Debug|Durango\" /title=\"License Test - xBox One\"";
         public static final String MSBUILD_CPP = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && msbuild C:\\LicenseTests_projects\\2017\\Cpp\\Cpp.sln /t:rebuild /property:configuration=\"\"debug\"\";platform=\"\"x86\"\" /m:16 /nodeReuse:False /verbosity:normal\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Msbuild\"";
         public static final String JOM = "/command=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools\\VsDevCmd.bat && cd C:\\LicenseTests_projects\\Make_and_Build_Tools && jom clean && jom\" /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime /title=\"License test - Make & Build Tools - Jom\"";
@@ -599,6 +611,7 @@ public class StaticDataProvider {
 
         public static final String CD_KERNEL_DIR = "cd /disk2/projects/linux-2.6.34.14";
         public static final String CD_KERNEL4_DIR = "cd /disk2/projects/linux-4.3.3";
+        public static final String CD_KERNEL4_SANITY_DIR = "cd /home/xoreax//projects/linux-4.3.3";
         public static final String CD_32BIT_KERNEL_DIR = "cd /home/xoreax/linux-2.6.34.14";
         public static final String CD_KERNEL4_CCACHE_DIR = "cd /disk2/projects/linux-4.3.3-modified";
         public static final String CD_SAMBA_DIR = "cd /disk2/projects/samba-4.0.7";
@@ -616,17 +629,20 @@ public class StaticDataProvider {
         public static final String CD_MONGODB_DIR = "cd /disk2/projects/mongodb-src-r3.2.6";
         public static final String CD_CHROMIUM_DIR = "cd /disk2/projects/chromium/src/";
         public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
+        public static final String CD_TENSOR_DIR = "cd /home/xoreax/tensorflow";
 
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";
         public static final String B2_CLEAN = "./b2 clean";
         public static final String NINJA_CLEAN = "ninja -C out/Release -t clean";
+        public static final String BAZEL_CLEAN = " bazel clean --expunge";
 
         //placement strings: 1)flags 2)caption 3)env 4)processes
         public static final String MAKE_BUILD = "ib_console %s -c %s %s make -j%s";
         public static final String SCONS_BUILD = "ib_console %s -c %s %s scons -j%s";
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
+        public static final String BAZEL_BUILD = "ib_console %s -c %s %s  bazel build --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
 
         public static final String IB_TESTS = "ib_tests-1.0.0.tar.bz2";
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
