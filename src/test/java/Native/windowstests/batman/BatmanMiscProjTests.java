@@ -85,6 +85,7 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         SystemActions.sleep(3);
         try {
             winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+            SystemActions.sleep(1);
             Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
             Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
         } catch (Exception e) {
