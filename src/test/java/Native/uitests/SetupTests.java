@@ -83,7 +83,7 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
-    @Test(testName = "Install Single Use VM")
+    @Test(enabled = false, testName = "Install Single Use VM")
     public void installSingleUseVM(){
         ibuiService.startIBUIInstaller("Latest");
         try {
