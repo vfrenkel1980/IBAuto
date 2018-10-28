@@ -13,5 +13,7 @@
   "VmSim": "12",
   "VSIntegration": "13",
   "VSPreview": "14",
-  "WebRegression": "15"
+  "WebRegression": "15",
+  "DBSchemas": "16"
+
 }
