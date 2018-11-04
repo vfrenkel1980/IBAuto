@@ -59,6 +59,10 @@ public interface IIBUIService {
 
         void clickExit() throws FindFailed;
 
+        void clickCustom() throws FindFailed;
+
+        void selectSingleUseVM() throws FindFailed;
+
     }
 
     interface IClient{

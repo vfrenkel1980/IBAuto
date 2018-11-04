@@ -54,14 +54,13 @@ public class LinuxSanityTestBase extends LinuxTestBase {
         extent.attachReporter(htmlReporter);
 
         WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(" vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-        SystemActions.sleep(10);
+//        windowsService.runCommandWaitForFinish(" vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+//        SystemActions.sleep(10);
         windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" test1");
         SystemActions.sleep(30);
-        windowsService.runCommandWaitForFinish("cmd vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-        SystemActions.sleep(30);
-//clean - no IB
-
+//        windowsService.runCommandWaitForFinish("cmd vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+//        SystemActions.sleep(30);
+//  clean - no IB
 
 //        linuxService.killibDbCheck(SanityHostName);
 
