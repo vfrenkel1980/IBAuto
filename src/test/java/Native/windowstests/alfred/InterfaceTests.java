@@ -78,7 +78,7 @@ public class InterfaceTests extends InterfacesTestBase{
 
     @Test(testName = "XGConsole Single Parameter")
     public void xgConsoleSingleParameter(){
-        int exitCode = winService.runCommandWaitForFinish(Processes.XGCONSOLE + ProjectsCommands.INTERFACES.XGCONSOLE_SINGLE_PARAM);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.INTERFACES.XGCONSOLE_SINGLE_PARAM);
         Assert.assertEquals(exitCode, 0, "Build exit code is different then 0");
     }
 
@@ -110,7 +110,7 @@ public class InterfaceTests extends InterfacesTestBase{
     @Test(testName = "XGCoordConsole No Params")
     public void xgCoordConsoleNoParams(){
         String output = winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE);
-        Assert.assertTrue(output.contains("General Options:"), "No param error does not appear in log");
+        Assert.assertTrue(output.contains("Options:"), "No param error does not appear in log");
     }
 
 /*    //TODO: ask Vlad how to verify this
