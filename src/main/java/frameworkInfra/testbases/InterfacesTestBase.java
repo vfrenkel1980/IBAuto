@@ -16,7 +16,7 @@ import java.util.Calendar;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
 @Listeners(SuiteListener.class)
-public class InterfacesTestBase extends TestBase {
+public class InterfacesTestBase extends AlfredTestBase{
 
     protected IbService ibService = new IbService();
     protected WindowsService winService = new WindowsService();
