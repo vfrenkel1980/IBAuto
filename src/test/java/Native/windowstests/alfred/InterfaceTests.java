@@ -96,7 +96,7 @@ public class InterfaceTests extends InterfacesTestBase{
 
     @Test(testName = "XGCoordConsole Export Status")
     public void xgCoordConsoleExportStatus(){
-        winService.waitForProcessToFinish(Processes.XGCOORDCONSOLE + ProjectsCommands.INTERFACES.EXPORT_STATUS);
+        winService.runCommandWaitForFinish(Processes.XGCOORDCONSOLE + ProjectsCommands.INTERFACES.EXPORT_STATUS);
         Assert.assertTrue(SystemActions.doesFileExist("c:\\qa\\simulation\\coordexport.xml"));
     }
 
