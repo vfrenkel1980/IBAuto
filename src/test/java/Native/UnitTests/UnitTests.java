@@ -26,8 +26,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -67,19 +73,56 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        Path parentFolder = Paths.get("c:\\qa\\simulation");
-        Optional<File> mostRecentFolder =
-                Arrays
-                        .stream(Objects.requireNonNull(parentFolder.toFile().listFiles()))
-                        .filter(File::isDirectory)
-                        .min(
-                                (f1, f2) -> Long.compare(f1.lastModified(),
-                                        f2.lastModified()));
-        if (mostRecentFolder.isPresent()) {
-            File oldestFile = mostRecentFolder.get();
+        final String username = "incrediautomation@gmail.com";
+        final String password = "4illumination";
 
-            System.out.println(oldestFile.getPath());
+        // setting gmail smtp properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        // check the authentication
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("incrediautomation@gmail.com"));
+
+            // recipients email address
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("mark.zvuluni@incredibuild.com, vlad.levishev@incredibuild.com"));
+
+            // add the Subject of email
+            message.setSubject("MS VS Integrated tests report");
+
+            Multipart multipart = new MimeMultipart();
+
+            // add the body message
+            BodyPart bodyPart = new MimeBodyPart();
+            bodyPart.setText("This email has an attachment. Please find the attach file. Thank You");
+            multipart.addBodyPart(bodyPart);
+
+            // attach the file
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.attachFile(new File("C:\\Reports\\vsreport.html"));
+            multipart.addBodyPart(mimeBodyPart);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+
+            System.out.println("Email Sent Successfully");
+
+        } catch (MessagingException | IOException e) {
+            e.printStackTrace();
         }
+    }
 
     }
-}

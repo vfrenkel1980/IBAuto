@@ -75,6 +75,7 @@ public class StaticDataProvider {
         public static final String BUILD_CONSOLE = "buildconsole.exe ";
         public static final String TRAY_ICON = "xgTrayIcon.exe ";
         public static final String XGCONSOLE = "xgconsole.exe ";
+        public static final String XGCOORDCONSOLE = "xgcoordconsole.exe ";
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
@@ -108,6 +109,8 @@ public class StaticDataProvider {
         public static final String MAX_ALLOWED_BUILDS = "Maximum number of concurrent builds reached.";
         public static final String BUILDSERVICE_STOPPED = "The connection with Build Sevice has terminated. Start again Build Service for activating Build Monitor";
         public static final String BUILDSERVICE_STOPPED_FAIL = "Connection terminated while waiting for reply from local connection: Server is not reachable";
+        public static final String INVALID_PARAM_ERROR = "Fatal Error: Invalid/conflicting options specified:";
+        public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
     }
 
     public static class VsActions {
@@ -455,9 +458,24 @@ public class StaticDataProvider {
         public static class VC15_ROBIN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
+
         public static class DOCKER_ROBIN {
             public static final String MONO_X64_DEBUG = "\"C:\\projects\\mono-master\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\"";
             public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
+        }
+
+        public static class INTERFACES {
+            public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String BUILDCONSOLE_NO_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln";
+            public static final String IBCONSOLE_MULTIPLE_PARAMS = "c:\\QA\\Simulation\\Samples\\ibconsole\\runme.bat";
+            public static final String OPEN_MONITOR_ONLY = "/openmonitor";
+            public static final String IBCONSOLE_INVALID_PARAM = "/command=\"ipconfig\" /invalid";
+            public static final String XGCONSOLE_SUCCESS = "\"C:\\QA\\Simulation\\Samples\\xgconsole\\run XGE.bat\"";
+            public static final String XGCONSOLE_SINGLE_PARAM = "\"C:\\QA\\Simulation\\Samples\\xgconsole\\run XGE_one param.bat\"";
+            public static final String RESET_CACHES = "/resetallfilecaches";
+            public static final String EXPORT_STATUS = "/exportstatus=\"c:\\qa\\simulation\\coordexport.xml\"";
+            public static final String XGSUBMIT_BATCH = "\"C:\\QA\\Simulation\\Samples\\xgsubmit_xgwait\\BatchFileExecution.bat\"";
         }
 
 
@@ -507,7 +525,7 @@ public class StaticDataProvider {
         public static final String UNLOAD_IB_LICENSE = "\"" + IbLocations.IB_ROOT + "\\xlicproc.exe\" /unloadlicense";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP.Native --includeRecommended -p --norestart --path cache=\"E:\\cache\" --path shared=\"E:\\shared\" --path install=\"E:\\Microsoft Visual Studio\\2017\\Professional\"";
-        public static final String UPDATE_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --includeRecommended -p --norestart";
+        public static final String UPDATE_VS= "C:\\QA\\Simulation\\VSintallation\\vs_professional update --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\vs_professional modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
 

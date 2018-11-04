@@ -2,7 +2,9 @@ package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -254,5 +256,24 @@ public class SystemActions {
         scanner.scan();
         String[] files = scanner.getIncludedFiles();
         return files[0].substring(files[0].lastIndexOf("\\") + 1);
+    }
+
+    public static void appendToFile (String file, String text) {
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(text);
+            bw.newLine();
+            bw.flush();
+        } catch (IOException e) {
+            test.log(Status.INFO, "Failed with exception: " + e.getMessage());
+        } finally {
+            if (bw != null) try {
+                bw.close();
+            } catch (IOException e2) {
+                test.log(Status.INFO, "Failed with exception: " + e2.getMessage());
+            }
+        }
+
     }
 }

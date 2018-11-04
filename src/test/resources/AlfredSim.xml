@@ -20,6 +20,7 @@
         <parameter name="logLevel" value="4"/>
         <classes>
             <class name ="Native.windowstests.alfred.AlfredTests" />
+            <class name ="Native.windowstests.alfred.InterfaceTests" />
         </classes>
     </test>
 

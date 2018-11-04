@@ -43,7 +43,7 @@ public class VSCommands implements IVSCommands {
 
     @Override
     public void upgradeVS() {
-        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VS_WITH_IB);
+        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VS);
         winService.waitForProcessToStart("vs_bootstrapper.exe");
         winService.waitForProcessToFinish("vs_bootstrapper.exe");
         winService.waitForProcessToStart("vs_installer.exe");
