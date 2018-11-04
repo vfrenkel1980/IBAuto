@@ -37,7 +37,7 @@ public class InterfaceTests extends InterfacesTestBase{
 
     @Test(testName = "IBConsole Multiple Parameters Success")
     public void ibConsoleMultipleParametersSuccess(){
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.INTERFACES.IBCONSOLE_MULTIPLE_PARAMS);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.INTERFACES.IBCONSOLE_MULTIPLE_PARAMS);
         Assert.assertEquals(exitCode, 0, "Build exit code is different then 0");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "ibconsoletest"), "Title not shown in the output file");
     }
@@ -113,12 +113,12 @@ public class InterfaceTests extends InterfacesTestBase{
         Assert.assertTrue(output.contains("General Options:"), "No param error does not appear in log");
     }
 
-    //TODO: ask Vlad how to verify this
+/*    //TODO: ask Vlad how to verify this
     @Test(testName = "XGSubmit XGWait Integration")
     public void xgSubmitXGWaitIntegration(){
         winService.runCommandWaitForFinish(ProjectsCommands.INTERFACES.XGSUBMIT_BATCH);
 
-    }
+    }*/
 
 
 }

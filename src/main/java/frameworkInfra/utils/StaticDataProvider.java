@@ -469,8 +469,8 @@ public class StaticDataProvider {
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_NO_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln";
             public static final String IBCONSOLE_MULTIPLE_PARAMS = "c:\\QA\\Simulation\\Samples\\ibconsole\\runme.bat";
-            public static final String OPEN_MONITOR_ONLY = "/openmonitor";
-            public static final String IBCONSOLE_INVALID_PARAM = "/command=\"ipconfig\" /invalid";
+            public static final String OPEN_MONITOR_ONLY = "/openmonitor /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String IBCONSOLE_INVALID_PARAM = "/command=\"ipconfig\" /invalid /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String XGCONSOLE_SUCCESS = "\"C:\\QA\\Simulation\\Samples\\xgconsole\\run XGE.bat\"";
             public static final String XGCONSOLE_SINGLE_PARAM = "\"C:\\QA\\Simulation\\Samples\\xgconsole\\run XGE_one param.bat\"";
             public static final String RESET_CACHES = "/resetallfilecaches";
