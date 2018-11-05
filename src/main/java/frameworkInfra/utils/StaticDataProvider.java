@@ -465,7 +465,7 @@ public class StaticDataProvider {
         }
 
         public static class INTERFACES {
-            public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln /rebuild /cfg=\"debug|win32\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild /cfg=\"debug|win32\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_NO_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln";
             public static final String IBCONSOLE_MULTIPLE_PARAMS = "c:\\QA\\Simulation\\Samples\\ibconsole\\runme.bat";
