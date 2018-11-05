@@ -21,6 +21,7 @@ public class LandingPageObject {
     public static final By PASSWORD_TB = By.xpath("//*[@id=\"password\"]");
     public static final By PASSWORD_CONFIRMATION_TB = By.xpath("//*[@id=\"password_confirmation\"]");
     public static final By TERMS_CB = By.xpath("//*[@id=\"terms\"]");
+    public static final By PRIVACY_CB = By.xpath("//*[@id=\"privacy\"]");
     public static final By MAILING_LIST_CB = By.xpath("//*[@id=\"mailing_list\"]");
     public static final By SUBMIT_BTN = By.xpath("//button[@type='button' and contains(.,'BOOST MY BUILD')]");
     public static final By AWESOME_LBL = By.xpath("//*[contains(text(),'Awesome')]");
@@ -51,6 +52,7 @@ public class LandingPageObject {
         if (lp.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(TERMS_CB).click();
+        eventWebDriver.findElement(PRIVACY_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }

@@ -100,7 +100,7 @@ public class DownloadPageObject {
     public static final By phonewithchars = By.xpath("//*[contains(text(),'The Phone Number field may only contain numeric characters.')]");
     public static final By phoneempty = By.xpath("//*[contains(text(),'The Phone Number field is required.')]");
     public static final By terms = By.xpath("//*[contains(text(),'Please confirm our term and conditions.')]");
-    public static final By countryempty = By.xpath("//*[contains(text(),'The country field is required.')]");
+    public static final By countryempty = By.xpath("//*[contains(text(),'The Country field is required.')]");
     public static final By companyempty = By.xpath("//*[contains(text(),'The Company field is required.')]");
     public static final By companyshort = By.xpath("//*[contains(text(),'The Company field must be at least 2 characters.')]");
     public static final By cityempty = By.xpath("//*[contains(text(),'The City field is required.')]");
