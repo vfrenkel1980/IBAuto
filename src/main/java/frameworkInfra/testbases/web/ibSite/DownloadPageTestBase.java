@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import webInfra.ibWeb.pageObjects.DownloadPageObject;
 
+import java.util.concurrent.TimeUnit;
+
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -20,6 +22,7 @@ public class DownloadPageTestBase extends IbWebTestBase {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
+        eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eventWebDriver.register(handler);
         switch (lang){
             case "en":
