@@ -3,11 +3,13 @@ package webInfra.ibWeb.pageObjects;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import webInfra.ibWeb.pages.RegistrationForm;
+import webInfra.ibWeb.pages.UpdateInfoForm;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -17,6 +19,8 @@ public class DownloadPageObject {
     //First stage
 
     public static final By DOWNLOAD_BTN = By.xpath("//*[@id=\"download_button\"]");
+    public static final By EDIT_INFO_BTN = By.xpath("//*[@class=\"fa fa-edit fa-2x\"]");
+    public static final By EDIT_ACCOUNT_BTN = By.xpath("//*[@href=\"#/update-info\"]");
     public static final By WINDOWS_REG = By.xpath("//*[@id=\"windows\"]");
     public static final By LINUX_REG = By.xpath("//*[@id=\"linux\"]");
     public static final By ENTERPRISE_REG = By.xpath("//*[@id=\"enterprise\"]");
@@ -111,6 +115,14 @@ public class DownloadPageObject {
     public static final By jobshort = By.xpath("//*[contains(text(),'The Job Title field must be at least 2 characters.')]");
     public static final By jobnumeric = By.xpath("//*[contains(text(),'The Job Title field may only contain alphabetic characters as well as spaces.')]");
 
+    //update info page
+    public static final By UPDATE_FNAME = By.xpath("//*[@id=\"firstName\"]");
+    public static final By UPDATE_LNAME = By.xpath("//*[@id=\"lastName\"]");
+    public static final By UPDATE_PHONE = By.xpath("//*[@id=\"phone\"]");
+    public static final By UPDATE_COUNTRY = By.xpath("//*[@id=\"countriesSelection\"]");
+    public static final By UPDATE_CITY = By.xpath("//*[@id=\"city\"]");
+    public static final By UPDATE_COMPANY = By.xpath("//*[@id=\"company\"]");
+    public static final By THANK_YOU_LABEL = By.xpath("//*[@class=\"thankyou-text\"]");
 
     private EventFiringWebDriver eventWebDriver;
 
@@ -453,6 +465,14 @@ public class DownloadPageObject {
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
     }
 
+    public void clickEditInfoButton(){
+        eventWebDriver.findElement(EDIT_INFO_BTN).click();
+    }
+
+    public void clickEditAccountButton(){
+        eventWebDriver.findElement(EDIT_ACCOUNT_BTN).click();
+    }
+
     public void clickSubmitFirstForm(){
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
     }
@@ -471,6 +491,35 @@ public class DownloadPageObject {
             test.log(Status.INFO,"Purchase online link is not present on the \"CREATE NEW ACCOUNT\" page");
         else
             test.log(Status.INFO,"Purchase online link FOUND on the \"CREATE NEW ACCOUNT\" page");
+    }
+
+    public void updateUserInfo(UpdateInfoForm uif){
+        clickDownloadButton();
+        clickEditAccountButton();
+        clickEditInfoButton();
+        WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(UPDATE_FNAME));
+        eventWebDriver.findElement(UPDATE_FNAME).sendKeys(Keys.chord(Keys.CONTROL, "a",Keys.DELETE),uif.getName());
+        eventWebDriver.findElement(UPDATE_LNAME).sendKeys(Keys.chord(Keys.CONTROL, "a",Keys.DELETE),uif.getLname());
+        eventWebDriver.findElement(UPDATE_PHONE).sendKeys(Keys.chord(Keys.CONTROL, "a",Keys.DELETE),uif.getPhone());
+        eventWebDriver.findElement(UPDATE_COMPANY).sendKeys(Keys.chord(Keys.CONTROL, "a",Keys.DELETE),uif.getCompany());
+        eventWebDriver.findElement(UPDATE_CITY).sendKeys(Keys.chord(Keys.CONTROL, "a",Keys.DELETE),uif.getCity());
+        eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys(uif.getCountry());
+        eventWebDriver.findElement(SUBMIT_BTN).click();
+    }
+
+    public void verifyUpdatedUserInfo(UpdateInfoForm uif){
+        WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(THANK_YOU_LABEL));
+        Assert.assertTrue(eventWebDriver.findElement(THANK_YOU_LABEL).isDisplayed(), "Update thank you message is not displayed");
+        eventWebDriver.navigate().refresh();
+        SystemActions.sleep(3);
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_FNAME).getAttribute("value"), uif.getName(), "First name was not updated");
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_LNAME).getAttribute("value"), uif.getLname(), "Last name was not updated");
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_PHONE).getAttribute("value"), uif.getPhone(), "Phone was not updated");
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_CITY).getAttribute("value"), uif.getCity(), "city was not updated");
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_COMPANY).getAttribute("value"), uif.getCompany(), "Company was not updated");
+        Assert.assertEquals(eventWebDriver.findElement(UPDATE_COUNTRY).getAttribute("value"), "FR", "Country was not updated");
     }
 
     public void clickLogout(){

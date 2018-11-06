@@ -9,6 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
 import webInfra.ibWeb.pages.RegistrationForm;
+import webInfra.ibWeb.pages.UpdateInfoForm;
 
 
 @Listeners(TestListener.class)
@@ -107,7 +108,15 @@ public class DownloadFormTests extends DownloadPageTestBase{
         MailService.deleteMail(host, mailAddress, password);
     }
 
-    @Test(testName = "Verify Existing User", dependsOnMethods = { "windowsRegistration"})
+    @Test(testName = "Verify Change Details", dependsOnMethods = { "windowsRegistration"} )
+    public void verifyChangeDetails(){
+        UpdateInfoForm uif = new UpdateInfoForm("firstName", "lastName", "222222", "France",
+                "newCom", "cityName");
+        downloadPageObject.updateUserInfo(uif);
+        downloadPageObject.verifyUpdatedUserInfo(uif);
+    }
+
+    @Test(testName = "Verify Existing User", dependsOnMethods = { "verifyChangeDetails"})
     public void verifyExistingUser(){
         downloadPageObject.clickLogout();
         downloadPageObject.clickDownloadButton();
