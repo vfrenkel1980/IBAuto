@@ -130,10 +130,6 @@ test {
             suites "src/test/resources/LinuxMultiInitiator.xml"
         }
 
-        if(LinuxSanity) {
-            suites "src/test/resources/LinuxSanity.xml"
-        }
-
         if(Unit) {
             suites "src/test/resources/Unit.xml"
         }
@@ -189,7 +185,9 @@ test {
         if(DBSchemas) {
             suites "src/test/resources/DBSchemas.xml"
         }
-
+        if(LinuxSanity) {
+            suites "src/test/resources/LinuxSanity.xml"
+        }
     }
 
 }
