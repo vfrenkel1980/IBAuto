@@ -59,6 +59,29 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
+
+        if (!linuxService.isIBServiceUp( ipList.get(0))) {
+            test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
+            extent.flush();
+            System.exit(0);
+        }
+
+
+        if (!VERSION.equals("current"))
+            linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
+        ibVersion = linuxService.getIBVersion(ipList.get(0));
+
+        log.info("finished before suite");
+    }
+
+
+    @BeforeClass
+    public void initializeEnv(ITestContext testContext) {
+        log.info("starting before class");
+        test = extent.createTest("Before Class");
+        test.assignCategory("BEFORE CLASS");
+        test.log(Status.INFO, "BEFORE CLASS started");
+
         if(className.contains("CcacheTests"))
             simClassType=SimClassType.Ccache;
         else if(className.contains("DockCHrootTests"))
@@ -70,11 +93,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
         else
             simClassType=SimClassType.GenSim;
 
-        if (!linuxService.isIBServiceUp( ipList.get(0))) {
-            test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
-            extent.flush();
-            System.exit(0);
-        }
 
         for (int i=1; i <= NumInitators; ++i) {
             if ((i == simClassType.ordinal()) && (linuxService.startIBService(ipList.get(i)))) {
@@ -91,25 +109,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         for (int i=1; i <= NumInitators; ++i)
             firstBuilds.add(getFirstBuild(ipList.get(i)));
 
-        if (!VERSION.equals("current"))
-            linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
-        ibVersion = linuxService.getIBVersion(ipList.get(0));
-
-        log.info("finished before suite");
+        log.info("finished before class");
     }
-
-
-//    @BeforeClass
-//    public void initializeEnv(ITestContext testContext) {
-//        log.info("starting before class");
-//        test = extent.createTest("Before Class");
-//        test.assignCategory("BEFORE CLASS");
-//        test.log(Status.INFO, "BEFORE CLASS started");
-//
-//
-//
-//        log.info("finished before class");
-//    }
 
     @BeforeMethod
     @Parameters({"cycle"})
