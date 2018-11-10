@@ -141,6 +141,24 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Test(testName = "Verify BuildMon  - Agent Service stopped")
+    public void verifyBuildMonAgentServiceStopped() {
+        winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE_LONG + " /openmonitor");
+        SystemActions.sleep(1);
+        try {
+            winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+            SystemActions.sleep(5);
+            Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
+            Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
+        } catch (Exception e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+        finally {
+            winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
+            SystemActions.killProcess(Processes.BUILDMONITOR);
+        }
+    }
+
     @Test(testName = "Verify PDB Error In Log")
     public void verifyPDBErrorInLog() {
         Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
