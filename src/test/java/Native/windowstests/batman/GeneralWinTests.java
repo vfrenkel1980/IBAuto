@@ -141,7 +141,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Verify BuildMon  - Agent Service stopped")
+    @Test(enabled = false, testName = "Verify BuildMon  - Agent Service stopped")
     public void verifyBuildMonAgentServiceStopped() {
         winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE_LONG + " /openmonitor");
         SystemActions.sleep(1);
