@@ -49,7 +49,7 @@ public class UIValidationTestBase extends TestBase {
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");
     public Pattern vsBarPattern = new Pattern();
-    public Pattern trayIconPattern = new Pattern();
+    public Pattern trayIconPattern = IBSettings.TrayIcon.Green;
     public Pattern ibMonBarPattern = new Pattern();
     public Pattern historyPattern = new Pattern();
     public Pattern progressPattern = new Pattern();
@@ -207,6 +207,8 @@ public class UIValidationTestBase extends TestBase {
         vsuiService.killDriver();
         SystemActions.killProcess(Processes.BUILDHISTORY);
         SystemActions.killProcess(Processes.BUILDMONITOR);
+        SystemActions.killProcess(Processes.COORDMONITOR);
+        SystemActions.killProcess(Processes.AGENTSETTINGS);
         extent.flush();
     }
 

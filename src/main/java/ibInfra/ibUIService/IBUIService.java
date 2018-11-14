@@ -3,6 +3,9 @@ package ibInfra.ibUIService;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
+import frameworkInfra.sikuli.sikulimapping.IBStatusBars.IBStatusBars;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
@@ -12,7 +15,9 @@ import org.sikuli.script.Screen;
 import org.testng.Assert;
 
 import java.io.File;
+import java.util.concurrent.ExecutionException;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class IBUIService implements IIBUIService {
@@ -313,6 +318,160 @@ public class IBUIService implements IIBUIService {
                 Assert.fail();
             }
         }
+
+        @Override
+        public void openMonitorFromTray() {
+            //test.log(Status.INFO, "Opening Monitor from tray");
+            try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
+                screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open monitor with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void openHistoryFromTray() {
+            test.log(Status.INFO, "Opening History from tray");
+            try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
+                screen.wait(IBSettings.TrayIcon.historyTray.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open history with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void openCoordMonitorFromTray() {
+            test.log(Status.INFO, "Opening Coordinator Monitor from tray");
+            try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open coordinator monitor with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void openAgentSettingsFromTray() {
+            test.log(Status.INFO, "Opening Agent Settings from tray");
+            try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
+                screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyBuildMonitorOpened() {
+            boolean objectExists = false;
+            if (screen.exists(IBStatusBars.buildMonitor, 15) == null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find Build Monitor windows");
+        }
+
+        @Override
+        public void verifyBuildHistoryOpened() {
+            boolean objectExists = false;
+            if (screen.exists(IBStatusBars.buildHistory, 15) == null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find Build History Window");
+        }
+
+        @Override
+        public void verifyCoordinatorMonitorOpened() {
+            boolean objectExists = false;
+            if (screen.exists(IBStatusBars.coordinatorMonitor, 15) == null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find Coordinator monitor Window");
+        }
+
+        @Override
+        public void verifyAgentSettingsOpened() {
+            boolean objectExists = false;
+            if (screen.exists(IBStatusBars.agentSettings, 15) == null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find Agent Settings Window");
+        }
+
+        @Override
+        public void clickClearHistory() {
+            test.log(Status.INFO, "Clicking on Clear History");
+            try {
+                screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void changeCpuUtilCores() {
+            try {
+                screen.wait(IBSettings.CpuUtilTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.CpuUtilNumOfCoresTB.similar((float) 0.9),5).click();
+                screen.type("2");
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.ConfirmationBtn2.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void changeStartupPageToProjects() {
+            try {
+                screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.StartingPageProgressDdl.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.StartingPageProjectsDdl.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyProjectsPageIsOpen() {
+            try{
+            boolean objectExists = false;
+            if (screen.exists(IBSettings.SelectedProjectsTab, 15) == null)
+                objectExists = true;
+            Assert.assertFalse(objectExists, "Monitor did not open in Projects page");
+            } catch (Exception e){
+                e.getMessage();
+            }
+            finally {
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\monitor", "StartPage", "Progress");
+                SystemActions.killProcess(Processes.BUILDMONITOR);
+            }
+        }
+
+        @Override
+        public void enableOutputOptions() {
+            try {
+                screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OutputTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.ShowAgentNameCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.ShowCommandLineCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
 
     }
 

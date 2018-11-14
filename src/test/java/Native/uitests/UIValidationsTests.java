@@ -58,6 +58,30 @@ public class UIValidationsTests extends UIValidationTestBase {
         client.verifyProjectsTabColoring(progressPattern);
     }
 
+    @Test(testName = "Verify Monitor Opened From Tray")
+    public void verifyMonitorOpenedFromTray(){
+        client.openMonitorFromTray();
+        client.verifyBuildMonitorOpened();
+    }
+
+    @Test(testName = "Verify History Opened From Tray")
+    public void verifyHistoryFromTray(){
+        client.openHistoryFromTray();
+        client.verifyBuildHistoryOpened();
+    }
+
+    @Test(testName = "Verify Coord Monitor Opened From Tray")
+    public void verifyCoordMonitorOpenedFromTray(){
+        client.openCoordMonitorFromTray();
+        client.verifyCoordinatorMonitorOpened();
+    }
+
+    @Test(testName = "Verify Agent Settings Opened From Tray")
+    public void verifyAgentSettingsOpenedFromTray(){
+        client.openAgentSettingsFromTray();
+        client.verifyAgentSettingsOpened();
+    }
+
 
 
 }

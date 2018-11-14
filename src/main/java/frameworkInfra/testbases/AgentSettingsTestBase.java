@@ -10,6 +10,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
@@ -31,6 +32,8 @@ public class AgentSettingsTestBase extends TestBase {
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
     protected Screen screen = new Screen();
+    private IBUIService ibuiService = new IBUIService();
+    protected IBUIService.Client client = ibuiService.new Client();
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -77,6 +80,13 @@ public class AgentSettingsTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        extent.flush();
+    }
+
+    @AfterClass
+    public void afterClass(){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FORCE_CPU_INITIATOR, "0");
+        winService.restartService(WindowsServices.AGENT_SERVICE);
         extent.flush();
     }
 

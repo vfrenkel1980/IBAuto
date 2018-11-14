@@ -141,6 +141,25 @@ public class SystemActions {
     }
 
     /**
+     * List all file in the required directory
+     * @param path dir to list the files
+     * @return List of files in the directory
+     */
+
+    public static int countAllFilesInDirectory(String path){
+        File file = new File(path);
+        File[] files = file.listFiles();
+        int count = 0;
+        for (File f : files)
+            if (f.isDirectory())
+                count += countAllFilesInDirectory(f.getPath());
+            else
+                count++;
+
+        return count;
+    }
+
+    /**
      * Add time to machine time
      * @param days days
      * @param months months

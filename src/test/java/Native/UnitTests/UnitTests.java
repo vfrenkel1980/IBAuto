@@ -2,6 +2,7 @@ package Native.UnitTests;
 
 import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.JSchException;
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.databases.SQLiteJDBC;
@@ -10,6 +11,7 @@ import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.dataObjects.postgres.CoordBuild;
 import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
 import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import javafx.geometry.Pos;
@@ -23,6 +25,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sikuli.script.Pattern;
+import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -73,56 +77,14 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        final String username = "incrediautomation@gmail.com";
-        final String password = "4illumination";
-
-        // setting gmail smtp properties
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        // check the authentication
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-
-        try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("incrediautomation@gmail.com"));
-
-            // recipients email address
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("mark.zvuluni@incredibuild.com, vlad.levishev@incredibuild.com"));
-
-            // add the Subject of email
-            message.setSubject("MS VS Integrated tests report");
-
-            Multipart multipart = new MimeMultipart();
-
-            // add the body message
-            BodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setText("This email has an attachment. Please find the attach file. Thank You");
-            multipart.addBodyPart(bodyPart);
-
-            // attach the file
-            MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.attachFile(new File("C:\\Reports\\vsreport.html"));
-            multipart.addBodyPart(mimeBodyPart);
-
-            message.setContent(multipart);
-
-            Transport.send(message);
-
-            System.out.println("Email Sent Successfully");
-
-        } catch (MessagingException | IOException e) {
-            e.printStackTrace();
-        }
+        IbService ibService = new IbService();
+        IBUIService ibuiService = new IBUIService();
+        IBUIService.Client client = ibuiService.new Client();
+        WindowsService winService = new WindowsService();
+        //ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
+        client.changeStartupPageToProjects();
+        winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.BUILDMONITOR);
+        client.verifyProjectsPageIsOpen();
     }
-
-    }
+}

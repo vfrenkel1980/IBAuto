@@ -79,6 +79,8 @@ public class StaticDataProvider {
         public static final String BUILDSYSTEM = "BuildSystem.exe ";
         public static final String BUILDMONITOR = "BuildMonitor.exe ";
         public static final String BUILDHISTORY = "BuildHistory.exe ";
+        public static final String AGENTSETTINGS = "BuildSettings.exe ";
+        public static final String COORDMONITOR = "CoordMonitor.exe ";
         public static final String BUILDSETTINGS = "BuildSettings.exe ";
         public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
@@ -501,6 +503,7 @@ public class StaticDataProvider {
         public static final String ENT_INSTALLATION_REG = "DatabaseFolder";
         public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
         public static final String FLAGS = "Flags";
+        public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
 
     }
 

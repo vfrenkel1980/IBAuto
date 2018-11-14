@@ -2,14 +2,17 @@ package Native.ibclienttests;
 
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.AgentSettingsTestBase;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.windowscl.WindowsService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -119,6 +122,56 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         SystemActions.killProcess(Processes.BUILDSETTINGS);
         Assert.assertTrue(objectExists, "MultiBuild tab should not be displayed with PRO license");
     }
+
+    @Test(testName = "Verify Build History")
+    public void verifyBuildHistoryByDate() {
+        String currentDate = SystemActions.getLocalDateAsString();
+        SystemActions.setLocalDateFromString("11-11-21");
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        winService.restartService(WindowsServices.AGENT_SERVICE);
+        int numOfHistoryFiles = SystemActions.countAllFilesInDirectory(StaticDataProvider.IbLocations.IB_ROOT + "\\history");
+        SystemActions.setLocalDateFromString(currentDate);
+        Assert.assertEquals(2, numOfHistoryFiles, "Files in history folder are not deleted");
+    }
+
+    @Test(testName = "Verify Build History")
+    public void verifyBuildHistoryByClick() {
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.clickClearHistory();
+        int numOfHistoryFiles = SystemActions.countAllFilesInDirectory(StaticDataProvider.IbLocations.IB_ROOT + "\\history");
+        Assert.assertEquals(2, numOfHistoryFiles, "Files in history folder are not deleted");
+    }
+
+    @Test(testName = "Verify CPU Utilization")
+    public void verifyCPUUtilization() {
+        winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
+        client.changeCpuUtilCores();
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "Core #2"));
+    }
+
+    @Test(testName = "Change Default Start Page")
+    public void changeDefaultStartPage() {
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.changeStartupPageToProjects();
+        winService.runCommandDontWaitForTermination(Processes.BUILDMONITOR);
+        client.verifyProjectsPageIsOpen();
+    }
+
+    @Test(testName = "Verify Output Options")
+    public void verifyOutputOptions() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.enableOutputOptions();
+        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "rebuild"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"));
+        //TODO: when showcmd bug is fixed, add the assertion (9897)
+        //Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, ""));
+
+    }
+
+
 
 
 

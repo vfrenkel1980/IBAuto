@@ -78,5 +78,31 @@ public interface IIBUIService {
         void verifyProjectsTabColoring(Pattern pat);
 
         void clickProjectsTab();
+
+        void openMonitorFromTray();
+
+        void openHistoryFromTray();
+
+        void openCoordMonitorFromTray();
+
+        void openAgentSettingsFromTray();
+
+        void verifyBuildMonitorOpened();
+
+        void verifyBuildHistoryOpened();
+
+        void verifyCoordinatorMonitorOpened();
+
+        void verifyAgentSettingsOpened();
+
+        void clickClearHistory();
+
+        void changeCpuUtilCores();
+
+        void changeStartupPageToProjects();
+
+        void verifyProjectsPageIsOpen();
+
+        void enableOutputOptions();
     }
 }
