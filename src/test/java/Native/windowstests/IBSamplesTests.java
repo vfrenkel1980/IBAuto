@@ -20,7 +20,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verify7ZSample1Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verify7ZSample2Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyGZipSample1Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyGZipSample2Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -68,7 +68,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyWinRARSample1Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyWinRARSample2Test failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -92,7 +92,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsXGESampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsSubmissionSampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyDevToolsXMLSampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyNconvertSampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -140,7 +140,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyFfmpegSampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 
@@ -153,7 +153,7 @@ public class IBSamplesTests extends WindowsSimTestBase {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "verifyJomSampleTest failed with exit code " + result);
         } catch (IOException e) {
-            test.log(Status.WARNING, e.getMessage());
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
     }
 

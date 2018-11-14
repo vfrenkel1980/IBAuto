@@ -59,8 +59,13 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
-        for (int i=1; i <= NumInitators; ++i)
-            firstBuilds.add(getFirstBuild(ipList.get(i)));
+
+        if (!linuxService.isIBServiceUp( ipList.get(0))) {
+            test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
+            extent.flush();
+            System.exit(0);
+        }
+
 
         if (!VERSION.equals("current"))
             linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
@@ -88,11 +93,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
         else
             simClassType=SimClassType.GenSim;
 
-        if (!linuxService.isIBServiceUp( ipList.get(0))) {
-            test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
-            extent.flush();
-            System.exit(0);
-        }
 
         for (int i=1; i <= NumInitators; ++i) {
             if ((i == simClassType.ordinal()) && (linuxService.startIBService(ipList.get(i)))) {
@@ -105,6 +105,9 @@ public class LinuxSimTestBase extends LinuxTestBase {
                 test.log(Status.ERROR, err);
             }
         }
+
+        for (int i=1; i <= NumInitators; ++i)
+            firstBuilds.add(getFirstBuild(ipList.get(i)));
 
         log.info("finished before class");
     }

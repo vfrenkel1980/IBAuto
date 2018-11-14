@@ -138,8 +138,8 @@ public class StaticDataProvider {
 
         public static class MISC_PROJECTS {
             public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
-            public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\"";
-            public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe\"  " + Locations.QA_ROOT + "\"\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe\" 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
+            public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\" ";
+            public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
@@ -518,6 +518,7 @@ public class StaticDataProvider {
 
     public static class WindowsCommands {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
+        public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s  /install /Components=Agent,oneuse /Coordinator=" + WindowsMachines.BABYLON;
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
         public static final String IB_DOWNGRADE_COMMAND = "%s /downgrade";
@@ -608,6 +609,7 @@ public class StaticDataProvider {
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "VM-W7x64-Clean";
+        public static final String SINGLE_USE_WIN10_HLPR = " -s -u admin -p 4illumination \\Sr3-w10-c";
 
     }
 

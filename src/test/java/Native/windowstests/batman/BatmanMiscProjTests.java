@@ -79,24 +79,6 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         }
     }
 
-    @Test(testName = "Verify BuildMon  - Agent Service stopped")
-    public void verifyBuildMonAgentServiceStopped() {
-        winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE + " /openmonitor");
-        SystemActions.sleep(3);
-        try {
-            winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
-            Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
-            Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
-        } catch (Exception e) {
-            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
-        }
-        finally {
-            winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
-            SystemActions.killProcess(Processes.BUILDMONITOR);
-        }
-    }
-
-
     /*------------------------------METHODS------------------------------*/
 
     private void setCustomStepSupportRegistry(String required) {
