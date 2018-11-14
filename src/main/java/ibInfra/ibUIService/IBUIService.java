@@ -472,6 +472,20 @@ public class IBUIService implements IIBUIService {
             }
         }
 
+        @Override
+        public boolean verifyMultipleBuildsTab() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+            if (screen.exists(IBSettings.MultiBuildTab, 15) != null)
+                return true;
+            else
+                return false;
+        }
+
 
     }
 

@@ -81,7 +81,7 @@ public class SystemActions {
 
     public static void killProcess(String process){
         try{
-            test.log(Status.INFO, "Killing process " + process);
+            //test.log(Status.INFO, "Killing process " + process);
             Runtime.getRuntime().exec("TASKKILL /F /IM " + process);
         } catch (IOException e) {
             e.getMessage();

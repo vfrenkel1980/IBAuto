@@ -102,25 +102,22 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
     public void proLicenseVerifyMultiBuildMissingFromUI() {
-        boolean objectMissing = false;
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
         winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
-        if (screen.exists(IBSettings.MultiBuildTab, 15) == null)
-            objectMissing = true;
+        boolean isPresent = client.verifyMultipleBuildsTab();
         SystemActions.killProcess(Processes.BUILDSETTINGS);
         ibService.loadIbLicense(IbLicenses.AGENT_SETTINGS_LIC);
-        Assert.assertTrue(objectMissing, "MultiBuild tab should not be displayed with PRO license");
+        Assert.assertFalse(isPresent, "MultiBuild tab should not be displayed with PRO license");
     }
 
     @Test(testName = "Ent License - Verify MultiBuild Exists In UI")
     public void entLicenseVerifyMultiBuildExistsInUI() {
-        boolean objectExists = false;
         ibService.loadIbLicense(IbLicenses.AGENT_SETTINGS_LIC);
         winService.runCommandDontWaitForTermination(IbLocations.BUILDSETTINGS);
-        if (screen.exists(IBSettings.MultiBuildTab, 15) != null)
-            objectExists = true;
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILDSETTINGS);
+        boolean isPresent = client.verifyMultipleBuildsTab();
         SystemActions.killProcess(Processes.BUILDSETTINGS);
-        Assert.assertTrue(objectExists, "MultiBuild tab should not be displayed with PRO license");
+        Assert.assertTrue(isPresent, "MultiBuild tab should not be displayed with PRO license");
     }
 
     @Test(testName = "Verify Build History")

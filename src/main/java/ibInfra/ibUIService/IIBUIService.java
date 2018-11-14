@@ -104,5 +104,7 @@ public interface IIBUIService {
         void verifyProjectsPageIsOpen();
 
         void enableOutputOptions();
+
+        boolean verifyMultipleBuildsTab();
     }
 }
