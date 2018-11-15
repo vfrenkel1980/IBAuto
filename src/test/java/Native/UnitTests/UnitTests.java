@@ -77,9 +77,8 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        IbService ibService = new IbService();
-        IBUIService ibuiService = new IBUIService();
         VSUIService vsuiService = new VSUIService();
-        vsuiService.openVSInstance("15", true, "3");
+        vsuiService.openVSInstance("15", true, "");
+        vsuiService.performIbActionFromMenu("rebuild");
     }
 }

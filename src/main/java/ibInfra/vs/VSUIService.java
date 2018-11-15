@@ -116,11 +116,12 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
-        WebElement ibMenu;
-        ibMenu = driver.findElementByName("Incredibuild");
-        if (ibMenu == null)
-            ibMenu = driver.findElementByName("IncrediBuild");
-        ibMenu.click();
+        List<WebElement> ibElements = null;
+        ibElements =driver.findElementsByName("Incredibuild");
+        if (ibElements.size() == 0) {
+            ibElements = driver.findElementsByName("IncrediBuild");
+        }
+        ibElements.get(1).click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -130,11 +131,12 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("Build");
-        WebElement ibMenu;
-        ibMenu = driver.findElementByName("Incredibuild");
-        if (ibMenu == null)
-            ibMenu = driver.findElementByName("IncrediBuild");
-        ibMenu.click();
+        List<WebElement> ibElements = null;
+        ibElements =driver.findElementsByName("Incredibuild");
+        if (ibElements.size() == 0) {
+            ibElements = driver.findElementsByName("IncrediBuild");
+        }
+        ibElements.get(1).click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
     }
@@ -201,11 +203,11 @@ public class VSUIService implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS" + version);
+            //test.log(Status.INFO, "Opening VS" + version);
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            test.log(Status.INFO, "Visual Studio opened successfully");
+            //test.log(Status.INFO, "Visual Studio opened successfully");
             SystemActions.sleep(30);
             if(isFirstActivation) {
                 try {
