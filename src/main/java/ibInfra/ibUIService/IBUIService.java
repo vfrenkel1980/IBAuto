@@ -321,7 +321,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void openMonitorFromTray() {
-            //test.log(Status.INFO, "Opening Monitor from tray");
+            test.log(Status.INFO, "Opening Monitor from tray");
             try {
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9),5).click();

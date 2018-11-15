@@ -79,14 +79,7 @@ public class UnitTests {
     public void test3 () {
         IbService ibService = new IbService();
         IBUIService ibuiService = new IBUIService();
-        IBUIService.Client client = ibuiService.new Client();
-        WindowsService winService = new WindowsService();
-        Screen screen = new Screen();
-        boolean objectExists = false;
-        //ibService.loadIbLicense(StaticDataProvider.IbLicenses.AGENT_SETTINGS_LIC);
-        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILDSETTINGS);
-        boolean isPresent = client.verifyMultipleBuildsTab();
-        SystemActions.killProcess(StaticDataProvider.Processes.BUILDSETTINGS);
-        Assert.assertTrue(isPresent, "MultiBuild tab should not be displayed with PRO license");
+        VSUIService vsuiService = new VSUIService();
+        vsuiService.openVSInstance("15", true, "3");
     }
 }

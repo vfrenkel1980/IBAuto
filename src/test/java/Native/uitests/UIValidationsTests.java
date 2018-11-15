@@ -60,24 +60,40 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     @Test(testName = "Verify Monitor Opened From Tray")
     public void verifyMonitorOpenedFromTray(){
+        if (!project.equals("green01")){
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
         client.openMonitorFromTray();
         client.verifyBuildMonitorOpened();
     }
 
     @Test(testName = "Verify History Opened From Tray")
     public void verifyHistoryFromTray(){
+        if (!project.equals("green01")){
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
         client.openHistoryFromTray();
         client.verifyBuildHistoryOpened();
     }
 
     @Test(testName = "Verify Coord Monitor Opened From Tray")
     public void verifyCoordMonitorOpenedFromTray(){
+        if (!project.equals("green01")){
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
         client.openCoordMonitorFromTray();
         client.verifyCoordinatorMonitorOpened();
     }
 
     @Test(testName = "Verify Agent Settings Opened From Tray")
     public void verifyAgentSettingsOpenedFromTray(){
+        if (!project.equals("green01")){
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
         client.openAgentSettingsFromTray();
         client.verifyAgentSettingsOpened();
     }
