@@ -121,7 +121,7 @@ public class VSUIService implements IVSUIService {
         if (ibElements.size() == 0) {
             ibElements = driver.findElementsByName("IncrediBuild");
         }
-        ibElements.get(1).click();
+        ibElements.get(0).click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -136,7 +136,7 @@ public class VSUIService implements IVSUIService {
         if (ibElements.size() == 0) {
             ibElements = driver.findElementsByName("IncrediBuild");
         }
-        ibElements.get(1).click();
+        ibElements.get(0).click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
     }
