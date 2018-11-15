@@ -110,7 +110,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
     public void SimTestQT(){
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 //String.format(LinuxSimulation.MAKE_BUILD,"","QT", "", "32"), ipList.get(simClassType.ordinal()));
-                  String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","QT", "", "32"), ipList.get(simClassType.ordinal()));
+                  String.format(LinuxSimulation.MAKE_BUILD,"","QT", "", "32"), ipList.get(simClassType.ordinal()));
 
         Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
 
