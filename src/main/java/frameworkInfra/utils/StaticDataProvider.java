@@ -392,6 +392,7 @@ public class StaticDataProvider {
             public static final String CONFIGURATION_TEST_10 = "\"C:\\QA\\Simulation\\VC10\\Configuration_Tests\\ConfigurationTest10\\app\\app.sln\" /project app /projectconfig \"Release|Win32\" /%s  /title=\"Configuration Test 10\"";
             public static final String SINGLE_INVERTED_COMMA = "C:\\QA\\simulation\\VC10\\single_inverted_comma_in_path\\AutomiseRun.bat /%s";
             public static final String DEPENDENCY_REFERENCE_TEST = "C:\\QA\\simulation\\VC10\\Dependancy_And_Refference_checker\\run_me.bat";
+            public static final String WXWIDGETS_X32_DEBUG = "\"C:\\QA\\simulation\\VC10\\wxWidgets-3.0.4\\build\\msw\\wx_vc10.sln\" /%s /cfg=\"debug|win32\" /title=\"WxWidgets 2010 - Debug x32\"";
         }
 
         public static class VC11_VMSIM {
@@ -407,6 +408,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 - Release\"";
+            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC15\\wxWidgets-3.0.4\\build\\msw\\wx_vc15.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2017 - Debug x32\"";
         }
 
         public static class VC15Preview_VMSIM {
