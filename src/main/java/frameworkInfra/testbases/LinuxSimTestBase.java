@@ -57,7 +57,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
-        linuxService.deleteLogsFolder(connectedMachinesToGrid);
+ //       linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
         if (!linuxService.isIBServiceUp( ipList.get(0))) {
