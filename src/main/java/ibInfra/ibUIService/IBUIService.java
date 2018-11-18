@@ -403,6 +403,7 @@ public class IBUIService implements IIBUIService {
         public void clickClearHistory() {
             test.log(Status.INFO, "Clicking on Clear History");
             try {
+                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -414,6 +415,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeCpuUtilCores() {
             try {
+                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9),5).click();

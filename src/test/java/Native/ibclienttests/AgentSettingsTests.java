@@ -161,8 +161,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyOutputOptions() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableOutputOptions();
-        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "rebuild"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"));
+        String output = winService.runCommandGetOutput(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "rebuild"));
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FLAGS, "");
+        Assert.assertTrue(output.contains("Agent '"), "Could not find Agents in build output");
         //TODO: when showcmd bug is fixed, add the assertion (9897)
         //Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, ""));
 
