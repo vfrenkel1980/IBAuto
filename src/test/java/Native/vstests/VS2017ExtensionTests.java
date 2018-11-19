@@ -23,7 +23,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         vsVersion = ibService.getVSVersionFromOutputLog(Locations.OUTPUT_LOG_FILE);
     }
 
-    /*@Test(testName = "Check version of installed IB extension")
+    @Test(testName = "Check version of installed IB extension")
     public void checkInstalledExtension(){
         if (!SCENARIO.equals("4")) {
             String extensionVersion = ibService.getIbVsExtensionVersion(devenvPath);
@@ -255,7 +255,7 @@ public class VS2017ExtensionTests extends VSTestBase {
                     break;
             }
         }
-    }*/
+    }
 
 
     /*------------------------------METHODS------------------------------*/

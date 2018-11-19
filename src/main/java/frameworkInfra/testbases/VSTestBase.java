@@ -96,9 +96,9 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVS();
                 else
                     vsCommands.upgradeVSPreview();
-/*                ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
+                ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
                 ibVersion = IIBService.getIbVersion();
-                ibService.verifyIbServicesRunning(true, true);*/
+                ibService.verifyIbServicesRunning(true, true);
 
                 break;
 
