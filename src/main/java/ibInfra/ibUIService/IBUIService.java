@@ -415,12 +415,12 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeCpuUtilCores() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                //screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilNumOfCoresTB.similar((float) 0.9),5).click();
-                screen.type("2");
+                screen.type("1");
                 screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ConfirmationBtn2.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();

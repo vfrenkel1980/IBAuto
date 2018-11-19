@@ -37,5 +37,4 @@ public class IBSettings {
     public static final Pattern ShowAgentNameCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_agent_name.png");
     public static final Pattern ShowCommandLineCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_command_line.png");
     public static final Pattern InitiatorTab = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\initiator_tab.png");
-
 }
