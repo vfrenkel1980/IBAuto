@@ -86,6 +86,7 @@ public class AgentSettingsTestBase extends TestBase {
     @AfterClass
     public void afterClass(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FORCE_CPU_INITIATOR, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FLAGS, "");
         winService.restartService(WindowsServices.AGENT_SERVICE);
         extent.flush();
     }
