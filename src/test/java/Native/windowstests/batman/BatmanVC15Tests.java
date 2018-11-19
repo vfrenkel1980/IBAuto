@@ -63,7 +63,11 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-
+    @Test(enabled = false, testName = "Core CLR - Debug - build" , groups = { "Build" })
+    public void coreCLRDebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.CORECLR_X64_DEBUG, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
 
     @Test(testName = "Check that \"Predicted\" execution is enable: VS2017 Release")
     public void checkForPredictedExecutionWithoutMSBuild() {
