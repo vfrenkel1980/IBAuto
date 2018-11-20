@@ -405,7 +405,7 @@ public class IBUIService implements IIBUIService {
             try {
                 screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9),5).click();
-                screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.6),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
                 Assert.fail();
