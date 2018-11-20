@@ -57,7 +57,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
- //       linuxService.deleteLogsFolder(connectedMachinesToGrid);
+        linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
         if (!linuxService.isIBServiceUp( ipList.get(0))) {
@@ -67,9 +67,18 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
 
-        if (!VERSION.equals("current"))
+        if (!VERSION.equals("current")) {
+
+            for (int i=1; i <= NumInitators; ++i) {
+                if (linuxService.startIBService(ipList.get(i))) {
+                    test.log(Status.ERROR, "IB service in initiator " + i + " is down... FAILING ALL TESTS!");
+                    extent.flush();
+                    System.exit(0);
+                }
+            }
             linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
-        ibVersion = linuxService.getIBVersion(ipList.get(0));
+        }
+            ibVersion = linuxService.getIBVersion(ipList.get(0));
 
         log.info("finished before suite");
     }
