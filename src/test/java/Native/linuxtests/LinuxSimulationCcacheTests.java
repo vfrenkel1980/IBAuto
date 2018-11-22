@@ -10,6 +10,8 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 
     private  String env = "export PATH=/usr/lib/ccache:$PATH; ";
+    private static int KernelCcacheSize = 519268;
+    private static int QTernelCcacheSize = 669948;
 
     @Test(testName = "Sim ccache kenrel4 ln")
     public void SimTestCcacheKernel4ln() {
@@ -21,7 +23,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_KERNEL4_DIR + "/kernel; touch kmod.c kprobes.c ksysfs.c kthread.c; cd ..; make -j16", ipList.get(simClassType.ordinal()));
 
         String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-
+        log.info("1) inc_noIBsize = " + inc_noIBsize);
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
@@ -62,7 +64,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 
 
         String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-
+        log.info("2) inc_noIBsize = " + inc_noIBsize);
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
@@ -99,13 +101,13 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
         linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j32", ipList.get(simClassType.ordinal()));
         String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-
+        log.info("3) noIBsize = " + noIBsize);
         linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_QT_DIR + "/src/sql/kernel/" + ";" +
                 "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..; make -j32", ipList.get(simClassType.ordinal()));
 
         String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
-
+        log.info("4)QT: inc_noIBsize = " + inc_noIBsize);
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
