@@ -492,7 +492,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void stopAgentService() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                //screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.StopServiceBtn.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
