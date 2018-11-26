@@ -292,6 +292,11 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
+    public String getInstallationFileerName(String machineName, String version) {
+        return linuxRunSSHCommandOutputString("find /opt/incredibuild/ -name \"incredibuild_" + version + "-x86_64-i686.bin\"", machineName).replaceAll("\n","") ;
+    }
+
+    @Override
     public String getInstallerFolder(String machineName, String version) {
         return LinuxCommands.HOME_DIR + linuxRunSSHCommandOutputString("find . -name \"*" + version + "-release*\" -type d", machineName).substring(2).replaceAll("\n","") ;
     }
@@ -330,5 +335,19 @@ public class LinuxService extends TestBase implements ILinuxService {
                     test.log(Status.WARNING, "Version found on " + machine[0] + " is " + machine[2] + " Should be " + version);
             }
         }
+    }
+
+    @Override
+    public int installIB(String machineName, String version, String flags, String coord, String binSource,String instFolder, boolean isCoord) {
+        String installationFilePath = getInstallationFileerName(binSource, version);
+        copyFileFromLinuxToLinux(binSource, machineName, installationFilePath);
+        String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
+        String installCommand = "sudo ./" + installationFileName + flags;
+
+        if(!isCoord)
+            installCommand += coord + " -A " + instFolder;
+        installCommand +=  " -A " + instFolder;
+
+        return linuxRunSSHCommand(installCommand, machineName);
     }
 }

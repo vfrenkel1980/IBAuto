@@ -32,6 +32,8 @@ public interface ILinuxService {
 
     String getInstallerFolder(String machineName, String version);
 
+    String getInstallationFileerName (String machineName, String version);
+
     void extractUpgradeFile(String machineName, String file);
 
     void extractFile(String machineName, String filePath);
@@ -39,4 +41,6 @@ public interface ILinuxService {
     String getIBVersion(String machine);
 
     void verifyAgentsUpdated(String hostName, String version);
+
+    int installIB(String machineName, String version, String flags, String coord, String binSource,String instFolder, boolean isCoord);
 }
