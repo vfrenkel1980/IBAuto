@@ -120,7 +120,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(isPresent, "MultiBuild tab should not be displayed with PRO license");
     }
 
-    @Test(testName = "Verify Build History")
+    @Test(testName = "Verify Build History By Date")
     public void verifyBuildHistoryByDate() {
         String currentDate = SystemActions.getLocalDateAsString();
         SystemActions.setLocalDateFromString("11-11-21");
@@ -131,7 +131,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(2, numOfHistoryFiles, "Files in history folder are not deleted");
     }
 
-    @Test(testName = "Verify Build History")
+    @Test(testName = "Verify Build History By Click")
     public void verifyBuildHistoryByClick() {
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -165,7 +165,27 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(output.contains("Agent '"), "Could not find Agents in build output");
         //TODO: when showcmd bug is fixed, add the assertion (9897)
         //Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, ""));
+    }
 
+    @Test(testName = "Stop Agent Service")
+    public void stopAgentService() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.stopAgentService();
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is running, should be stopped.");
+    }
+
+    @Test(testName = "Start Agent Service", dependsOnMethods = {"stopAgentService"})
+    public void startAgentService() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.startAgentService();
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, should be running.");
+    }
+
+    @Test(testName = "Restart Agent Service", dependsOnMethods = {"startAgentService"})
+    public void restartAgentService() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.restartAgentService();
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, should be running.");
     }
 
 

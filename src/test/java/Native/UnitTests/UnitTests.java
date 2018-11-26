@@ -77,8 +77,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        VSUIService vsuiService = new VSUIService();
-        vsuiService.openVSInstance("15", true, "");
-        vsuiService.performIbActionFromMenu("rebuild");
+        WindowsService winSer = new WindowsService();
+        winSer.isServiceRunning("incredibuild_agent");
     }
 }

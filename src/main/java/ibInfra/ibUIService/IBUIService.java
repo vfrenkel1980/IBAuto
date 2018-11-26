@@ -405,7 +405,8 @@ public class IBUIService implements IIBUIService {
             try {
                 screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9),5).click();
-                screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.6),5).click();
+                screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5),10).click();
+                SystemActions.sleep(10);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -486,6 +487,40 @@ public class IBUIService implements IIBUIService {
                 return true;
             else
                 return false;
+        }
+
+        @Override
+        public void stopAgentService() {
+            try {
+                //screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.StopServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void startAgentService() {
+            try {
+                screen.wait(IBSettings.StartServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void restartAgentService() {
+            try {
+                screen.wait(IBSettings.RestartServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
         }
 
 

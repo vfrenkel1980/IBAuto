@@ -198,7 +198,7 @@ public class WindowsService implements IWindowsService {
         }
         Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
         while (reader.hasNextLine())
-            if (reader.nextLine().contains(serviceName))
+            if (reader.nextLine().contains("RUNNING"))
                 return true;
         return false;
     }

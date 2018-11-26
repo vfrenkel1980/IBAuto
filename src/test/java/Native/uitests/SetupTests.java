@@ -394,7 +394,7 @@ public class SetupTests extends SetupTestBase {
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT),"HKLM wasn't removed in verifyEnterpriseUninstallLeftovers test");
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_CURRENT_USER, Locations.IB_HKCU_REG_ROOT), "HKCU wasn't removed in verifyEnterpriseUninstallLeftovers test");
         Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_ROOT), "IB root folder wasn't removed in verifyEnterpriseUninstallLeftovers test");
-        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.ENTERPRISE_DIRECTORY), "IB Statistic folder wasn't removed in verifyEnterpriseUninstallLeftovers test");
+        Assert.assertFalse(SystemActions.doesFileExist(IbLocations.ENTERPRISE_DIRECTORY), "IB Statistic folder wasn't removed from " + IbLocations.ENTERPRISE_DIRECTORY);
         Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_SHORTCUTS), "Start menu shortcuts weren't removed in verifyEnterpriseUninstallLeftovers test");
     }
 

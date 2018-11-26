@@ -37,4 +37,7 @@ public class IBSettings {
     public static final Pattern ShowAgentNameCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_agent_name.png");
     public static final Pattern ShowCommandLineCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_command_line.png");
     public static final Pattern InitiatorTab = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\initiator_tab.png");
+    public static final Pattern StartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\start_service.png");
+    public static final Pattern StopServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\stop_service.png");
+    public static final Pattern RestartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\restart_service.png");
 }

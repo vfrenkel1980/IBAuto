@@ -106,5 +106,11 @@ public interface IIBUIService {
         void enableOutputOptions();
 
         boolean verifyMultipleBuildsTab();
+
+        void stopAgentService();
+
+        void startAgentService();
+
+        void restartAgentService();
     }
 }
