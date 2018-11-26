@@ -489,6 +489,40 @@ public class IBUIService implements IIBUIService {
                 return false;
         }
 
+        @Override
+        public void stopAgentService() {
+            try {
+                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.StopServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void startAgentService() {
+            try {
+                screen.wait(IBSettings.StartServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void restartAgentService() {
+            try {
+                screen.wait(IBSettings.RestartServiceBtn.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
 
     }
 
