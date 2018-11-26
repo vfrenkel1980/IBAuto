@@ -44,7 +44,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
 
         exitCode =  linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL4_SANITY_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD, "", "Sanity_Kernel", "", "32"), SanityHostName);
-        Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCleanTests - kernel failed with Exit code " + exitCode);
+        Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCleanTestsPlus - kernel failed with Exit code " + exitCode);
     }
 
     @Test(testName = "Sim Sanity coord kernel")
@@ -58,9 +58,10 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         windowsService.runCommandWaitForFinish(" vmrun start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
         SystemActions.sleep(30);
 
-        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxCommands.UNINSTALL_IB, SanityHostName);
+        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxCommands.UNINSTALL_IB, SanityHostName);
+        Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCoordTests - uninstall failed with Exit code " + exitCode);
 
-        int exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -C", CoorHostName, CoorHostName, "/etc/incredibuild/", true);
+        exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -C", CoorHostName, CoorHostName, "/etc/incredibuild/", true);
         Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCoordTests - install failed with Exit code " + exitCode);
 
         exitCode = linuxService.installIB(SanityHelpName, VERSION, " -i -S -O ", SanityHostName, CoorHostName, "/etc/incredibuild/", false);
