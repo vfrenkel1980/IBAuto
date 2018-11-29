@@ -32,15 +32,28 @@ public class LinuxSanityTestBase extends LinuxTestBase {
 
     private String className = this.getClass().getName();
     static List<String>  HostNameList = new ArrayList<String>();
-    protected static String SanityHostName = "l1a-u16-STests";
-    protected static String CoorHostName = "l1a-u14-coor";
-    protected static String SanityHelpName = "l1a-u14-snih";
+    protected static String SanityHostName;
+    protected static String CoorHostName;
+    protected static String SanityHelpName;
 //    private static String firstBuild = new String();
 //    private static String lastBuild = new String();
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
+        switch (ENV){
+            case "linuxsim1a":
+                SanityHostName = "l1a-u16-STests";
+                CoorHostName = "l1a-u14-coor";
+                SanityHelpName = "l1a-u14-snih";
+                break;
+            case "linuxsim1b":
+                SanityHostName = "l1b-u16-STests";
+                CoorHostName = "l1b-u14-coor";
+                SanityHelpName = "l1b-u14-snih";
+                break;
+        }
+
         log.info("RUNNING VERSION: " + VERSION);
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - Sanity.html");
         extent = new ExtentReports();
