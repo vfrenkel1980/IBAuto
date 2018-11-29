@@ -31,7 +31,7 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     public void exitCodeBaseTest2() {
         String result = "";
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_DEBUG_X64);
-        SystemActions.sleep(2);
+        SystemActions.sleep(5);
         try {
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.sleep(10);
