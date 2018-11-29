@@ -585,6 +585,7 @@ public class StaticDataProvider {
         public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
         public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
+        public static final String RUN_SQLITE_DELETE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"DELETE FROM %s where %s=\\\"%s.incredibuild.local\\\";\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
         public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
@@ -594,6 +595,7 @@ public class StaticDataProvider {
         public static final String EXTRACT_FILE = "tar xvjf %s";
         public static final String GET_IB_VERSION = "ib_console --version";
         public static final String GET_EPOCH_TIME = "date +%s%3N";
+        public static final String UNINSTALL_IB = "sudo /opt/incredibuild/management/uninstall.sh";
     }
 
     public static class LinuxDB {
@@ -676,7 +678,13 @@ public class StaticDataProvider {
 
         public static final String CHROOT_KERNEL4_DIR = "/projects/linux-4.3.3";
 
-        public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
+        //  public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
+
+    }
+
+    public static class VMrunCommands {
+
+
 
     }
 
