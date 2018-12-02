@@ -167,7 +167,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         //Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, ""));
     }
 
-    @Test(testName = "Stop Agent Service")
+    @Test(testName = "Stop Agent Service", dependsOnMethods = {"verifyTaskTerminationOnHighCPUConsumption"})
     public void stopAgentService() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.stopAgentService();
