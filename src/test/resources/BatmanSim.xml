@@ -34,6 +34,7 @@
             <class name ="Native.windowstests.batman.BatmanMiscProjTests" />
             <class name ="Native.windowstests.batman.BatmanExitCodeTests" />
             <class name ="Native.windowstests.IBSamplesTests" />
+            <class name ="Native.windowstests.CommonTests" />
         </classes>
     </test>
 
