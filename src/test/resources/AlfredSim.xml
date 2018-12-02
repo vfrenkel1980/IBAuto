@@ -21,6 +21,7 @@
         <classes>
             <class name ="Native.windowstests.alfred.AlfredTests" />
             <class name ="Native.windowstests.alfred.InterfaceTests" />
+            <class name ="Native.windowstests.CommonTests" />
         </classes>
     </test>
 

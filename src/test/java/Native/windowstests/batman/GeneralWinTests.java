@@ -91,21 +91,6 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
     }
 
-    @Test(testName = "Verify Errors In Logs")
-    public void verifyErrorsInLogs() {
-        int errorCount = 0;
-        List<String> files = SystemActions.getAllFilesInDirectory(IbLocations.IB_ROOT + "\\logs");
-        for (String file : files) {
-            for (String aERROR_LIST : LogOutput.ERROR_LIST) {
-                if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs\\" + file, aERROR_LIST)) {
-                    errorCount++;
-                    test.log(Status.WARNING, aERROR_LIST + " Appears in " + file);
-                }
-            }
-        }
-        Assert.assertFalse(errorCount > 0);
-    }
-
     @Test(testName = "Verify Multi Initiator Assignment")
     public void verifyMultiInitiatorAssignment() {
         try {
