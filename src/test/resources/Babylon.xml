@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="BatmanSim"  >
+<suite name="Babylon"  >
     <!-- suite name="Suite Name" -->
     <parameter name="predicted" value="2"/>
     <parameter name="msBuild" value="0"/>

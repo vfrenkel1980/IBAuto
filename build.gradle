@@ -118,6 +118,9 @@ test {
         if(AlfredSim) {
             suites "src/test/resources/AlfredSim.xml"
         }
+        if(Babylon) {
+            suites "src/test/resources/Babylon.xml"
+        }
         if(LinuxCL) {
             suites "src/test/resources/LinuxCL.xml"
         }
@@ -165,7 +168,7 @@ test {
         if(WebRegression) {
             suites "src/test/resources/WebRegression.xml"
         }
-
+        
         if(ENWebRegression) {
             suites "src/test/resources/ENWebRegression.xml"
         }
