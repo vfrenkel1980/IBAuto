@@ -16,9 +16,12 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity clean kernel")
     public void LinuxSanityCleanTests() {
 
+        log.info("starting LinuxSanityCleanTests");
         WindowsService windowsService = new WindowsService();
+        log.info("starting vmrun revertToSnapshot");
         windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
+        SystemActions.sleep(30);
+        log.info("starting vmrun start");
         windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
 
@@ -33,9 +36,12 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity clean kernel plus")
     public void LinuxSanityCleanTestsPlus() {
 
+        log.info("starting LinuxSanityCleanTestsPlus");
         WindowsService windowsService = new WindowsService();
+        log.info("starting vmrun revertToSnapshot");
         windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
+        SystemActions.sleep(30);
+        log.info("starting vmrun start");
         windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
 
@@ -50,10 +56,13 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity coord kernel")
     public void LinuxSanityCoordTests() {
 
+        log.info("starting LinuxSanityCoordTests");
         WindowsService windowsService = new WindowsService();
+        log.info("starting vmrun revertToSnapshot");
         windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"Coordinator istalled\"");
         windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
+        SystemActions.sleep(30);
+        log.info("starting vmrun start");
         windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         windowsService.runCommandWaitForFinish(" vmrun start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
         SystemActions.sleep(30);
