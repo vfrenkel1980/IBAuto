@@ -460,6 +460,11 @@ public class StaticDataProvider {
             public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
 
+        public static class QT_BATMAN {
+            public static final String QT_CLEAN = "D:\\QA\\qt5\\CleanQT.bat";
+            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat";
+        }
+
         public static class VC15_ROBIN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
