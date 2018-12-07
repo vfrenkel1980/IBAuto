@@ -72,11 +72,15 @@ public class IbService implements IIBService {
         WindowsCommands.LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         loadIbLicense(license);
     }
-
+    /**
+     * perform IB Simgle use installation
+     * @param version version to install
+     * @return installation command exit code
+     */
     @Override
     public void installSingleUseIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_SINGLEUSE_COMMAND, installationFile));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_SINGLE_USE_COMMAND, installationFile));
     }
 
     /**

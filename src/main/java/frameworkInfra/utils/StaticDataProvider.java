@@ -531,7 +531,7 @@ public class StaticDataProvider {
 
     public static class WindowsCommands {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
-        public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s  /install /Components=Agent,oneuse /Coordinator=" + WindowsMachines.BABYLON;
+        public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s /install /Components=oneuse,Agent /ADDTOPATH=ON /Coordinator=" + WindowsMachines.BABYLON;
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
         public static final String IB_DOWNGRADE_COMMAND = "%s /downgrade";
