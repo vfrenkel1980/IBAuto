@@ -21,6 +21,7 @@ def VmSim = project.hasProperty("VmSim")
 def RobinSim = project.hasProperty("RobinSim")
 def AlfredSim = project.hasProperty("AlfredSim")
 def Babylon = project.hasProperty("Babylon")
+def Phoenix = project.hasProperty("Phoenix")
 def LinuxCL = project.hasProperty("LinuxCL")
 def LinuxSanity = project.hasProperty("LinuxSanity")
 def LinuxMultiBuild = project.hasProperty("LinuxMultiBuild")
@@ -121,6 +122,9 @@ test {
         }
         if(Babylon) {
             suites "src/test/resources/Babylon.xml"
+        }
+        if(Phoenix) {
+            suites "src/test/resources/Phoenix.xml"
         }
         if(LinuxCL) {
             suites "src/test/resources/LinuxCL.xml"

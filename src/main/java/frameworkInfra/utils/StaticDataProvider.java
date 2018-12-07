@@ -425,6 +425,11 @@ public class StaticDataProvider {
             public static final String MONO_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Mono\\msvc\\mono.sln\" /%s /cfg=\"release|x64\" /title=\"Mono 2017 - Release x64\"";
         }
 
+        public static class VC15_PHOENIX {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
+            public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"";
+        }
+
         public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
