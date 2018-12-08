@@ -54,6 +54,10 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 
     @Test(testName = "Qt release - build" , groups = { "Build" })
     public void qtReleaseBuild() {
+        if (testName.equals("Minimal")){
+            test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
+            throw new SkipException("Skipped test");
+        }
         winService.runCommandWaitForFinish(ProjectsCommands.QT_BATMAN.QT_CLEAN);
         winService.runCommandWaitForFinish(ProjectsCommands.QT_BATMAN.QT_BUILD);
         String result = "";
