@@ -19,11 +19,11 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCleanTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
+        int exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH +  " \"clean - no IB\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
         log.info("starting vmrun start");
-        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
         SystemActions.sleep(30);
         log.info("vmrun start  exited with " + exitCode);
 
@@ -43,11 +43,11 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCleanTestsPlus");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
+        int exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH +  " \"clean - no IB\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
         log.info("starting vmrun start");
-        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
         SystemActions.sleep(30);
         log.info("vmrun start  exited with " + exitCode);
 
@@ -67,7 +67,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCoordTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + "\"Coordinator installed\"");
+        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + "\"Coordinator istalled\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
         exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\" \"clean - no IB\"");
@@ -75,7 +75,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("revertToSnapshot exited with " + exitCode);
 
         log.info("starting vmrun start");
-        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
         SystemActions.sleep(30);
         log.info("vmrun start exited with " + exitCode);
         exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
