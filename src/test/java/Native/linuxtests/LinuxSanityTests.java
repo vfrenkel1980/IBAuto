@@ -19,11 +19,11 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCleanTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode =  windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
+        int exitCode =  windowsService.runCommandWaitForFinish("\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\" revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
         log.info("starting vmrun start");
-        exitCode = windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        exitCode = windowsService.runCommandWaitForFinish(" \"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\" start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
         log.info("vmrun start  exited with " + exitCode);
 
