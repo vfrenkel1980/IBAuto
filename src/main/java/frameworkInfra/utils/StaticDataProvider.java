@@ -669,7 +669,8 @@ public class StaticDataProvider {
         public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
         public static final String CD_TENSOR_DIR = "cd /home/xoreax/tensorflow";
 
-        public static final String  SANITY_VM_PATH = "\"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"";
+        public static final String SANITY_VM_PATH = "\"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"";
+        public static final String SANITY_HELPER_VM_PATH = "\"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"";
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";
         public static final String B2_CLEAN = "./b2 clean";

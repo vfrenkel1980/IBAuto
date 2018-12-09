@@ -67,10 +67,10 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCoordTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + "\"Coordinator istalled\"");
+        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + " \"Coordinator istalled\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
-        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\" \"clean - no IB\"");
+        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH + " \"clean - no IB\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
 
@@ -78,7 +78,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
         SystemActions.sleep(30);
         log.info("vmrun start exited with " + exitCode);
-        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " + StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH);
         SystemActions.sleep(30);
         log.info("vmrun start helper exited with " + exitCode);
 
