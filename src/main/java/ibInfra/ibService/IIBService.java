@@ -21,6 +21,8 @@ public interface IIBService {
 
     void installIB(String version, String license);
 
+    void installSingleUseIB(String version);
+
     int downgradeEntToPro(String version);
 
     int installIB(String version);
@@ -76,6 +78,10 @@ public interface IIBService {
     void openBuildMonitor();
 
     void generateCustomReport(ITestContext context);
+
+    void agentServiceStart();
+
+    void agentServiceStop();
 
 
 }

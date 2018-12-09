@@ -9,6 +9,7 @@ import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.*;
@@ -49,6 +50,24 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Qt release - build" , groups = { "Build" })
+    public void qtReleaseBuild() {
+        if (testName.equals("Minimal")){
+            test.log(Status.SKIP, "Skipping QT test on Minimal logging");
+            throw new SkipException("Skipped test");
+        }
+        winService.runCommandWaitForFinish(ProjectsCommands.QT_BATMAN.QT_CLEAN);
+        winService.runCommandWaitForFinish(ProjectsCommands.QT_BATMAN.QT_BUILD);
+        String result = "";
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "Build failed");
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
     @Test(enabled = false, testName = "Android CPP - Debug - build" , groups = { "Build" })

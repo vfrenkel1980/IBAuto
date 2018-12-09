@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Phoenix"  >
+    <!-- suite name="Suite Name" -->
+    <parameter name="predicted" value="2"/>
+    <parameter name="msBuild" value="0"/>
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="Minimal">
+        <parameter name="logLevel" value="0"/>
+        <classes>
+            <class name ="Native.windowstests.phoenix.PhoenixSingleUseVMTests" />
+        </classes>
+    </test>
+
+</suite>
