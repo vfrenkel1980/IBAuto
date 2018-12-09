@@ -67,7 +67,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("-------------------- starting LinuxSanityCoordTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
-        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + " \"Coordinator istalled\"");
+        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + " \"Coordinator installed\"");
         SystemActions.sleep(30);
         log.info("revertToSnapshot exited with " + exitCode);
         exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH + " \"clean - no IB\"");
