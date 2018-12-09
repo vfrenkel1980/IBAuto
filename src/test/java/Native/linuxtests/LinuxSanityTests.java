@@ -25,7 +25,7 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("starting vmrun start");
         exitCode = windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
-        log.info(" vmrun start  exited with " + exitCode);
+        log.info("vmrun start  exited with " + exitCode);
 
         exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
         log.info("installIB exited with " + exitCode);
@@ -77,10 +77,10 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
         log.info("starting vmrun start");
         exitCode =  windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
-        log.info(" vmrun start exited with " + exitCode);
+        log.info("vmrun start exited with " + exitCode);
         exitCode = windowsService.runCommandWaitForFinish(" vmrun start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
         SystemActions.sleep(30);
-        log.info(" vmrun start helper exited with " + exitCode);
+        log.info("vmrun start helper exited with " + exitCode);
 
         exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxCommands.UNINSTALL_IB, SanityHostName);
         Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCoordTests - uninstall failed with Exit code " + exitCode);
