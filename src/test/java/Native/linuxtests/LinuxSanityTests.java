@@ -16,12 +16,12 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity clean kernel")
     public void LinuxSanityCleanTests() {
 
-        log.info("starting LinuxSanityCleanTests");
+        log.info("-------------------- starting LinuxSanityCleanTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
         int exitCode =  windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
         SystemActions.sleep(30);
-        log.info(" revertToSnapshot exited with " + exitCode);
+        log.info("revertToSnapshot exited with " + exitCode);
         log.info("starting vmrun start");
         exitCode = windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
@@ -40,16 +40,16 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity clean kernel plus")
     public void LinuxSanityCleanTestsPlus() {
 
-        log.info("starting LinuxSanityCleanTestsPlus");
+        log.info("-------------------- starting LinuxSanityCleanTestsPlus");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
         int exitCode = windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
         SystemActions.sleep(30);
-        log.info(" revertToSnapshot exited with " + exitCode);
+        log.info("revertToSnapshot exited with " + exitCode);
         log.info("starting vmrun start");
         exitCode = windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
         SystemActions.sleep(30);
-        log.info(" vmrun start  exited with " + exitCode);
+        log.info("vmrun start  exited with " + exitCode);
 
         exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -Z 20 -G 8888 -D -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
         log.info("installIB exited with " + exitCode);
@@ -64,15 +64,15 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity coord kernel")
     public void LinuxSanityCoordTests() {
 
-        log.info("starting LinuxSanityCoordTests");
+        log.info("-------------------- starting LinuxSanityCoordTests");
         WindowsService windowsService = new WindowsService();
         log.info("starting vmrun revertToSnapshot");
         int exitCode = windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"Coordinator istalled\"");
         SystemActions.sleep(30);
-        log.info(" revertToSnapshot exited with " + exitCode);
+        log.info("revertToSnapshot exited with " + exitCode);
         exitCode =  windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\" \"clean - no IB\"");
         SystemActions.sleep(30);
-        log.info(" revertToSnapshot exited with " + exitCode);
+        log.info("revertToSnapshot exited with " + exitCode);
 
         log.info("starting vmrun start");
         exitCode =  windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
