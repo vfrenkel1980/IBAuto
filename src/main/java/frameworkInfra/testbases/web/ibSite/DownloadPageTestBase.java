@@ -16,7 +16,6 @@ public class DownloadPageTestBase extends IbWebTestBase {
     protected DownloadPageObject downloadPageObject;
 
     @BeforeClass
-    @Parameters({"lang"})
     public void setUpEnv(String lang) {
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
@@ -24,14 +23,7 @@ public class DownloadPageTestBase extends IbWebTestBase {
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eventWebDriver.register(handler);
-        switch (lang){
-            case "en":
-                eventWebDriver.get("https://test.incredibuild.com/");
-                break;
-            case "jp":
-                eventWebDriver.get("https://qa-jp-store.incredibuild.com/register#/regWindows/");
-                break;
-        }
+        eventWebDriver.get("https://test.incredibuild.com/");
         eventWebDriver.manage().window().maximize();
         downloadPageObject = new DownloadPageObject(eventWebDriver);
     }

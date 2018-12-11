@@ -22,10 +22,10 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbWebTestBase extends TestBase {
 
     protected String host = "imap.gmail.com";
-    protected String mailAddress = "incrediautomation@gmail.com";
-    protected String mailAddress2 = "incrediautomation2@gmail.com";
-    protected String mailAddress3 = "incrediautomation3@gmail.com";
-    protected String password = "4illumination";
+    public static String mailAddress = "incrediautomation@gmail.com";
+    protected static String mailAddress2 = "incrediautomation2@gmail.com";
+    protected static String mailAddress3 = "incrediautomation3@gmail.com";
+    protected static String password = "4illumination";
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -36,11 +36,10 @@ public class IbWebTestBase extends TestBase {
     }
 
     @BeforeMethod
-    @Parameters({"lang"})
-    public void beforeMethod(Method method, ITestContext context, String lang){
+    public void beforeMethod(Method method, ITestContext context){
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(context.getName() + " - " + lang);
+        test.assignCategory(context.getName());
         log.info(method.getName() + " test started");
     }
 

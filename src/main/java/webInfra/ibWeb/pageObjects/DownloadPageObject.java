@@ -8,7 +8,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import webInfra.ibWeb.pages.RegistrationForm;
+import webInfra.ibWeb.pages.WindowsRegistrationForm;
 import webInfra.ibWeb.pages.UpdateInfoForm;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -130,7 +130,7 @@ public class DownloadPageObject {
         this.eventWebDriver = driver;
     }
 
-    public void createNewFreeDevWinAccount(RegistrationForm rf){
+    public void createNewFreeDevWinAccount(WindowsRegistrationForm rf){
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
         WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(FIRST_NAME_TB)).sendKeys(rf.getName());
@@ -177,7 +177,7 @@ public class DownloadPageObject {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
 
-    public void registerLinuxUser(RegistrationForm rf){
+    public void registerLinuxUser(WindowsRegistrationForm rf){
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
         eventWebDriver.findElement(LINUX_REG).click();
         WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
@@ -255,7 +255,7 @@ public class DownloadPageObject {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
 
-    public void registerEnterpriseUser(RegistrationForm rf){
+    public void registerEnterpriseUser(WindowsRegistrationForm rf){
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
         eventWebDriver.findElement(ENTERPRISE_REG).click();
         WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
@@ -531,7 +531,9 @@ public class DownloadPageObject {
     }
 
     public void clickLogout(){
-        eventWebDriver.findElement(LOGOUT_BTN).click();
+        eventWebDriver.findElement(DOWNLOAD_BTN).click();
+        if (eventWebDriver.findElement(LOGOUT_BTN).isDisplayed())
+            eventWebDriver.findElement(LOGOUT_BTN).click();
     }
 
 }

@@ -1,6 +1,6 @@
 package webInfra.ibWeb.pages;
 
-public class RegistrationForm {
+public class WindowsRegistrationForm {
 
     String name;
     String lname;
@@ -42,7 +42,7 @@ public class RegistrationForm {
     boolean unlimitedInitiators;
     boolean advancedReporting;
 
-    public RegistrationForm(String name, String lname, String email, String pass, String phone) {
+    public WindowsRegistrationForm(String name, String lname, String email, String pass, String phone) {
         this.name = name;
         this.lname = lname;
         this.email = email;
@@ -50,9 +50,9 @@ public class RegistrationForm {
         this.phone = phone;
     }
 
-    public RegistrationForm(String name, String lname, String email, String pass, String phone, String country, String state,
-                            String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java, boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean mailing){
+    public WindowsRegistrationForm(String name, String lname, String email, String pass, String phone, String country, String state,
+                                   String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
+                                   boolean java, boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean mailing){
         this.name = name;
         this.lname = lname;
         this.email = email;
@@ -75,12 +75,12 @@ public class RegistrationForm {
         this.mailing = mailing;
     }
 
-    public RegistrationForm(String name, String lname, String email, String phone, String country, String state,
-                            String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java,  boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean multicore, boolean aix, boolean x32bit, boolean maven, boolean solaris,
-                            boolean gradle, boolean ant, boolean scientific, boolean clearcase, boolean yocto,
-                            boolean docker, boolean android, boolean intel, boolean arm, boolean centos, boolean earlier,
-                            boolean mailing){
+    public WindowsRegistrationForm(String name, String lname, String email, String phone, String country, String state,
+                                   String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
+                                   boolean java, boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean multicore, boolean aix, boolean x32bit, boolean maven, boolean solaris,
+                                   boolean gradle, boolean ant, boolean scientific, boolean clearcase, boolean yocto,
+                                   boolean docker, boolean android, boolean intel, boolean arm, boolean centos, boolean earlier,
+                                   boolean mailing){
         this.name = name;
         this.lname = lname;
         this.email = email;
@@ -118,9 +118,9 @@ public class RegistrationForm {
         this.earlier = earlier;
     }
 
-    public RegistrationForm(String name, String lname, String email, String phone, String country, String state,
-                            String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
-                            boolean java,  boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean parallelBuilds, boolean unlimitedInitiators, boolean advancedReporting, boolean mailing){
+    public WindowsRegistrationForm(String name, String lname, String email, String phone, String country, String state,
+                                   String company, String city, String how, String job, boolean cpp, boolean cshort, boolean cslong,
+                                   boolean java, boolean unreal, boolean unity, boolean tfs, boolean jenkins, boolean parallelBuilds, boolean unlimitedInitiators, boolean advancedReporting, boolean mailing){
         this.name = name;
         this.lname = lname;
         this.email = email;

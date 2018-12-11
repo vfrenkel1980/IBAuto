@@ -14,21 +14,13 @@ public class LandingPageTestBase extends IbWebTestBase {
     protected LandingPageObject landingPageObject;
 
     @BeforeClass
-    @Parameters({"lang"})
-    public void setUpEnv(String lang) {
+    public void setUpEnv() {
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        switch (lang){
-            case "en":
-                eventWebDriver.get("https://test.incredibuild.com/incredibuild-codeproject#/");
-                break;
-            case "jp":
-                eventWebDriver.get("https://qa-jp-store.incredibuild.com/incredibuild-codeproject#/");
-                break;
-        }
+        eventWebDriver.get("https://test.incredibuild.com/incredibuild-codeproject#/");
         eventWebDriver.manage().window().maximize();
         landingPageObject = new LandingPageObject(eventWebDriver);
     }

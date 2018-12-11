@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
-import webInfra.ibWeb.pages.RegistrationForm;
+import webInfra.ibWeb.pages.WindowsRegistrationForm;
 import webInfra.ibWeb.pages.UpdateInfoForm;
 
 
@@ -17,7 +17,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
-        RegistrationForm rf = new RegistrationForm("linux", "User", mailAddress2, "123123",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", mailAddress2, "123123",
                 "canada", "Alberta","IB","city", "other", "Brain", true, true,
                 false,false, true, true, true, false, true,false,true,true,
                 true,true,false,true,false,true,true,true,false,true,
@@ -27,7 +27,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Enterprise Registration")
     public void enterpriseRegistration(){
-        RegistrationForm rf = new RegistrationForm("enterprise", "User", mailAddress2, "123123",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("enterprise", "User", mailAddress2, "123123",
                 "Israel", "","IB","city", "other", "ballz", true, true,false,
                 false, false, false, false, true, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);
@@ -98,13 +98,12 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
         String mailSubject;
-        RegistrationForm rf = new RegistrationForm("Win", "User", mailAddress, "4illumination",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddress, "4illumination",
                 "555954","united states", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
-        mailSubject = MailService.checkMail(host, mailAddress, password);
-        Assert.assertEquals(mailSubject, "Sandbox: Your IncrediBuild Download and License Files");
+        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License Files"));
         MailService.deleteMail(host, mailAddress, password);
     }
 
