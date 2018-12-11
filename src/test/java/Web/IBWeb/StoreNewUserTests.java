@@ -12,7 +12,7 @@ public class StoreNewUserTests extends StoreTestBase {
 
     @Test(testName = "Login")
     public void login(){
-        signupPageObject.logIn(mailAddress, password);
+        signupPageObject.logIn(mailAddress3, password);
     }
 
 /*    @Test(testName = "Sign New User")
@@ -37,7 +37,7 @@ public class StoreNewUserTests extends StoreTestBase {
     @Test(testName = "Add Agents And Solutions And Check Pricing", dependsOnMethods = {"verifyMissingAgentPopUp"})
     public void addAgentsAndSolutionsAndCheckPricing(){
         storePageObject.changeNumberOfDevMachines("3");
-        storePageObject.changeNumOfCores();
+        storePageObject.changeNumOfCores("16");
         storePageObject.addMoreMachines();
         storePageObject.addSolutionsFromList();
         storePageObject.addSolutionByName(wiiU);
@@ -97,7 +97,7 @@ public class StoreNewUserTests extends StoreTestBase {
         sum = "$" + Integer.toString(2 * devToolsPrice) + ".00";
         Assert.assertEquals(cartPageObject.getTotalSum(), sum, "Cart sum did not match expected sum.");
         cartPageObject.removeItemFromCart(devTools);
-        storePageObject.verifyStorePageLoaded();
+        Assert.assertTrue(storePageObject.verifyStorePageLoaded(), "Store page did not load");
     }
 
     @Test(testName = "Select Solution And Continue To Payment", dependsOnMethods = {"selectSolutionsAndRemoveThemFromCart"})
@@ -132,8 +132,8 @@ public class StoreNewUserTests extends StoreTestBase {
     @Test(testName = "Verify License IN Mail", dependsOnMethods = {"verifyPaymentSuccess"})
     public void verifyLicenseInMail(){
         SystemActions.sleep(60);
-        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password,"Sandbox: Incredibuild License File"));
-        MailService.deleteMail(host, mailAddress, password);
+        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress3, password,"Sandbox: Incredibuild License File"));
+        MailService.deleteMail(host, mailAddress3, password);
     }
 
 

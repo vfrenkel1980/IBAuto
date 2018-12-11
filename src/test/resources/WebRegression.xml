@@ -6,7 +6,7 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <!--<test name="ENWebDownload">
+    <test name="ENWebDownload">
         <classes>
             <class name ="Web.IBWeb.DownloadFormTests" />
         </classes>
@@ -16,11 +16,12 @@
         <classes>
             <class name ="Web.IBWeb.LandingPageTests" />
         </classes>
-    </test>-->
+    </test>
 
     <test name="ENStore">
         <classes>
             <class name ="Web.IBWeb.StoreNewUserTests" />
+            <class name ="Web.IBWeb.StoreExistingUserTests" />
         </classes>
     </test>
 

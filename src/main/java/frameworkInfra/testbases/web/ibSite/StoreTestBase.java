@@ -19,6 +19,7 @@ public class StoreTestBase extends IbWebTestBase{
     protected StorePageObject storePageObject;
     protected CartPageObject cartPageObject;
     protected TranzilaPageObject tranzilaPageObject;
+    protected DownloadPageObject downloadPageObject;
     protected SignupPage sp;
 
     @BeforeClass
@@ -32,11 +33,11 @@ public class StoreTestBase extends IbWebTestBase{
         eventWebDriver.get("https://test.incredibuild.com/ibonlinestore/signup#/signUp");
         eventWebDriver.manage().window().maximize();
         signupPageObject = new SignupPageObject(eventWebDriver);
-        sp = new SignupPage("New", " User", mailAddress, "111111", password, "France", "", "Com", "Paris",
-                mailAddress, "Tester");
+        sp = new SignupPage("New", " User", mailAddress3, "111111", password, "France", "", "Com", "Paris",
+                mailAddress3, "Tester");
         storePageObject = new StorePageObject(eventWebDriver);
         cartPageObject = new CartPageObject(eventWebDriver);
         tranzilaPageObject = new TranzilaPageObject(eventWebDriver);
-
+        downloadPageObject = new DownloadPageObject(eventWebDriver);
     }
 }

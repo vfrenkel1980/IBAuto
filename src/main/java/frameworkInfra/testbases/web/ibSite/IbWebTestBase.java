@@ -25,6 +25,7 @@ public class IbWebTestBase extends TestBase {
     public static String mailAddress = "incrediautomation@gmail.com";
     protected static String mailAddress2 = "incrediautomation2@gmail.com";
     protected static String mailAddress3 = "incrediautomation3@gmail.com";
+    protected static String mailAddress4 = "incrediautomation4@gmail.com";
     protected static String password = "4illumination";
 
     static {

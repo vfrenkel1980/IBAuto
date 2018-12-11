@@ -97,7 +97,6 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
-        String mailSubject;
         WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddress, "4illumination",
                 "555954","united states", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);

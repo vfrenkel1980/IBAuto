@@ -16,7 +16,7 @@ public class DownloadPageTestBase extends IbWebTestBase {
     protected DownloadPageObject downloadPageObject;
 
     @BeforeClass
-    public void setUpEnv(String lang) {
+    public void setUpEnv() {
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();

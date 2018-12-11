@@ -89,7 +89,7 @@ public class StorePageObject {
     public void enterStoreExistingLicense(SignupPage sp){
         wait.until(ExpectedConditions.visibilityOfElementLocated(ENTER_STORE)).click();
         eventWebDriver.findElement(SELECT_EXISTING_LICENSE_CB).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(I_UNDERSTAND_BTN)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(I_UNDERSTAND_BTN)).click();
         Select license = new Select(eventWebDriver.findElement(EXISTING_LICENSES_DDL));
         license.selectByVisibleText(sp.getLicenseeName());
         SystemActions.sleep(1);
@@ -118,7 +118,8 @@ public class StorePageObject {
     }
 
     public void continueToCheckoutPopup(){
-        eventWebDriver.findElement(CONTINUE_TO_CHECKOUT_POPUP_BTN).click();
+        SystemActions.sleep(1);
+        wait.until(ExpectedConditions.elementToBeClickable(CONTINUE_TO_CHECKOUT_POPUP_BTN)).click();
     }
 
     public boolean verifyNoAgentsSelectedPopUP(){
@@ -134,9 +135,34 @@ public class StorePageObject {
         eventWebDriver.findElement(NUM_OF_DEV_MACHINES_TB).sendKeys(numOfAgents);
     }
 
-    public void changeNumOfCores(){
+    public void changeNumOfCores(String cores){
         Select numOfCores = new Select(eventWebDriver.findElement(NUM_OF_CORES_DDL));
-        numOfCores.selectByIndex(2);
+        switch (cores){
+            case "4":
+                numOfCores.selectByIndex(0);
+                break;
+            case "8":
+                numOfCores.selectByIndex(1);
+                break;
+            case "16":
+                numOfCores.selectByIndex(2);
+                break;
+            case "32":
+                numOfCores.selectByIndex(3);
+                break;
+            case "64":
+                numOfCores.selectByIndex(4);
+                break;
+            case "12":
+                numOfCores.selectByIndex(5);
+                break;
+            case "48":
+                numOfCores.selectByIndex(6);
+                break;
+            case "24":
+                numOfCores.selectByIndex(7);
+                break;
+        }
     }
 
     public void addMoreMachines(){
@@ -170,6 +196,8 @@ public class StorePageObject {
         solutions.selectByVisibleText(xbox1);
         solutions.selectByVisibleText(playstation);
         solutions.selectByVisibleText(wiiU);
+        solutions.selectByVisibleText(nintendo3Ds);
+        solutions.selectByVisibleText(csharp);
     }
 
     public void removeSolutionFromList(String solName){
@@ -187,11 +215,13 @@ public class StorePageObject {
         }
     }
 
-    public void cancelBundlePopup(){
+    public void  cancelBundlePopup(){
+        SystemActions.sleep(1);
         wait.until(ExpectedConditions.elementToBeClickable(BUNDLE_POPUP_CANCEL_BTN)).click();
     }
 
     public void approveBundlePopup(){
+        SystemActions.sleep(1);
         wait.until(ExpectedConditions.elementToBeClickable(BUNDLE_POPUP_PURCHASE_BTN)).click();
     }
 
