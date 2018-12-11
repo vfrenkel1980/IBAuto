@@ -425,6 +425,11 @@ public class StaticDataProvider {
             public static final String MONO_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Mono\\msvc\\mono.sln\" /%s /cfg=\"release|x64\" /title=\"Mono 2017 - Release x64\"";
         }
 
+        public static class VC15_PHOENIX {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
+            public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"";
+        }
+
         public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
@@ -458,6 +463,11 @@ public class StaticDataProvider {
         public static class CHROME_ROBIN {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
             public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+        }
+
+        public static class QT_BATMAN {
+            public static final String QT_CLEAN = "D:\\QA\\qt5\\CleanQT.bat";
+            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat";
         }
 
         public static class VC15_ROBIN {
@@ -521,7 +531,7 @@ public class StaticDataProvider {
 
     public static class WindowsCommands {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
-        public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s  /install /Components=Agent,oneuse /Coordinator=" + WindowsMachines.BABYLON;
+        public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s /install /Components=oneuse,Agent /ADDTOPATH=ON /Coordinator=" + WindowsMachines.BABYLON;
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
         public static final String IB_DOWNGRADE_COMMAND = "%s /downgrade";
@@ -659,6 +669,8 @@ public class StaticDataProvider {
         public static final String CD_GPSD_DIR = "cd /disk2/projects/gpsd-3.10";
         public static final String CD_TENSOR_DIR = "cd /home/xoreax/tensorflow";
 
+        public static final String SANITY_VM_PATH = "\"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"";
+        public static final String SANITY_HELPER_VM_PATH = "\"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"";
         public static final String MAKE_CLEAN = "make clean";
         public static final String SCONS_CLEAN = "scons -c";
         public static final String B2_CLEAN = "./b2 clean";
@@ -684,6 +696,7 @@ public class StaticDataProvider {
 
     public static class VMrunCommands {
 
+        public static final String VMRUN =  "\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\"";
 
 
     }

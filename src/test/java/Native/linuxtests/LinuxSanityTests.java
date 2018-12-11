@@ -16,13 +16,17 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     @Test(testName = "Sim Sanity clean kernel")
     public void LinuxSanityCleanTests() {
 
+
         WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
-        windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        log.info("starting vmrun revertToSnapshot");
+        int exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH +  " \"clean - no IB\"");
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCleanTests - revertToSnapshot failed with Exit code " + exitCode);
+        SystemActions.sleep(30);
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCleanTests - start failed with Exit code " + exitCode);
         SystemActions.sleep(30);
 
-        int exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
+        exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
         Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCleanTests - install1 failed with Exit code " + exitCode);
 
         exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL4_SANITY_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
@@ -34,12 +38,14 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     public void LinuxSanityCleanTestsPlus() {
 
         WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
-        windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
+        int exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH +  " \"clean - no IB\"");
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCleanTestsPlus - revertToSnapshot failed with Exit code " + exitCode);
+        SystemActions.sleep(30);
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCleanTestsPlus - start failed with Exit code " + exitCode);
         SystemActions.sleep(30);
 
-        int exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -Z 20 -G 8888 -D -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
+        exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -Z 20 -G 8888 -D -O ", CoorHostName, CoorHostName, "/etc/incredibuild/", false);
         Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCleanTestsPlus - install failed with Exit code " + exitCode);
 
         exitCode =  linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_KERNEL4_SANITY_DIR + ";" + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + ";" +
@@ -51,14 +57,22 @@ public class LinuxSanityTests extends LinuxSanityTestBase {
     public void LinuxSanityCoordTests() {
 
         WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\" \"Coordinator istalled\"");
-        windowsService.runCommandWaitForFinish(" vmrun revertToSnapshot  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\" \"clean - no IB\"");
-        SystemActions.sleep(10);
-        windowsService.runCommandWaitForFinish(" vmrun start  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-        windowsService.runCommandWaitForFinish(" vmrun start  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
+        int exitCode = windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH + " \"Coordinator installed\"");
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCoordTests - revertToSnapshot coord failed with Exit code " + exitCode);
+        SystemActions.sleep(30);
+        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " revertToSnapshot " +  StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH + " \"clean - no IB\"");
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCoordTests - revertToSnapshot helper failed with Exit code " + exitCode);
         SystemActions.sleep(30);
 
-        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxCommands.UNINSTALL_IB, SanityHostName);
+
+        exitCode =  windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH );
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCoordTests - start coord failed with Exit code " + exitCode);
+        SystemActions.sleep(30);
+        exitCode = windowsService.runCommandWaitForFinish(StaticDataProvider.VMrunCommands.VMRUN + " start " + StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH);
+        Assert.assertTrue((exitCode == 0), "Sim LinuxSanityCoordTests - start helper failed with Exit code " + exitCode);
+        SystemActions.sleep(30);
+
+        exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxCommands.UNINSTALL_IB, SanityHostName);
         Assert.assertTrue((exitCode <= 0), "Sim LinuxSanityCoordTests - uninstall failed with Exit code " + exitCode);
 
         exitCode = linuxService.installIB(SanityHostName, VERSION, " -i -S -C", CoorHostName, CoorHostName, "/etc/incredibuild/", true);

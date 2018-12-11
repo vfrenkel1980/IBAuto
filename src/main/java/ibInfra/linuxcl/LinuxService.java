@@ -57,7 +57,7 @@ public class LinuxService extends TestBase implements ILinuxService {
             exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
                 if (test != null)
-                test.log(Status.ERROR, "Failed to run command.\n" +
+                test.log(Status.WARNING, "Failed to run command.\n" +
                         "Command: " + command);
             }
             session.disconnect();

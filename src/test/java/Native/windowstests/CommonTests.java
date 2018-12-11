@@ -1,6 +1,6 @@
 package Native.windowstests;
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.WindowsTestBase;
+import frameworkInfra.testbases.WindowsSimTestBase;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class CommonTests extends WindowsTestBase {
+public class CommonTests extends WindowsSimTestBase {
 
     @Test(testName = "Verify Errors In Logs")
     public void verifyErrorsInLogs() {

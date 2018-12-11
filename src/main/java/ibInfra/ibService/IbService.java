@@ -72,6 +72,16 @@ public class IbService implements IIBService {
         WindowsCommands.LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         loadIbLicense(license);
     }
+    /**
+     * perform IB Simgle use installation
+     * @param version version to install
+     * @return installation command exit code
+     */
+    @Override
+    public void installSingleUseIB(String version) {
+        String installationFile = getIbConsoleInstallation(version);
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_SINGLE_USE_COMMAND, installationFile));
+    }
 
     /**
      * perform IB installation without license in order to get the installation exit code
@@ -225,7 +235,7 @@ public class IbService implements IIBService {
 
     /**
      * Uninstall IB using command line
-     * @param version version number to grab the installation frile from
+     * @param version version number to grab the installation file from
      */
     @Override
     public void uninstallIB(String version) {
@@ -394,6 +404,17 @@ public class IbService implements IIBService {
         HtmlParser.replaceStringInFile(destFile, "child-analysis", "child-analysis" + suiteId);
         HtmlParser.replaceStringInFile(destFile, "exceptionsGrandChild: 0,", addVersionNumber);
         HtmlParser.replaceStringInFile(destFile, orgScript, desiredScript);
+    }
+
+    @Override
+    public void agentServiceStart() {
+        winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
+    }
+
+    @Override
+    public void agentServiceStop() {
+        winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+
     }
 
     /**

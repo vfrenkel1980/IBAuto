@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
-
+import frameworkInfra.utils.StaticDataProvider;
 
 @Listeners(SuiteListener.class)
 public class LinuxSanityTestBase extends LinuxTestBase {
@@ -76,8 +76,8 @@ public class LinuxSanityTestBase extends LinuxTestBase {
         test.log(Status.INFO, "AFTER SUITE" + " test started");
 
         WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(" vmrun stop  \"F:\\VMs\\l2b-u16-S_Tests\\l2b-u16-S_Tests.vmx\"");
-        windowsService.runCommandWaitForFinish(" vmrun stop  \"E:\\NewSim VM's\\l1a-u14-snih\\l1a-u14-snih.vmx\"");
+        windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " stop " +  StaticDataProvider.LinuxSimulation.SANITY_VM_PATH);
+        windowsService.runCommandWaitForFinish( StaticDataProvider.VMrunCommands.VMRUN + " stop " +  StaticDataProvider.LinuxSimulation.SANITY_HELPER_VM_PATH);
     }
 
 }
