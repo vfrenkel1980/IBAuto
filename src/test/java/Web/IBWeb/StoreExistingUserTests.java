@@ -78,8 +78,8 @@ public class StoreExistingUserTests extends StoreTestBase {
     @Test(testName = "Verify License IN Mail", dependsOnMethods = {"verifyPaymentSuccess"})
     public void verifyLicenseInMail(){
         SystemActions.sleep(60);
-        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress3, password,"Sandbox: Incredibuild License File"));
-        MailService.deleteMail(host, mailAddress3, password);
+        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password,"Sandbox: Incredibuild License File"));
+        MailService.deleteMail(host, mailAddress, password);
     }
 
 }
