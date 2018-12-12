@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import webInfra.ibWeb.pages.WindowsRegistrationForm;
@@ -152,7 +153,9 @@ public class DownloadPageObject {
                 break;
         }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
-        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
+        SystemActions.sleep(1);
+        Select howDidYouHear = new Select(eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL));
+        howDidYouHear.selectByVisibleText("Other");
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());
         if (rf.isCpp())
             eventWebDriver.findElement(CPP_CB).click();
@@ -180,7 +183,7 @@ public class DownloadPageObject {
     public void registerLinuxUser(WindowsRegistrationForm rf){
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
         eventWebDriver.findElement(LINUX_REG).click();
-        WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
+        WebDriverWait wait = new WebDriverWait(eventWebDriver, 60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(FIRST_NAME_TB)).sendKeys(rf.getName());
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys(rf.getLname());
         eventWebDriver.findElement(EMAIL_TB).sendKeys(rf.getEmail());
@@ -198,7 +201,8 @@ public class DownloadPageObject {
                 break;
         }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
-        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
+        Select howDidYouHear = new Select(eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL));
+        howDidYouHear.selectByVisibleText("Other");
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());
         if (rf.isCpp())
             eventWebDriver.findElement(CPP_CB).click();
@@ -276,7 +280,9 @@ public class DownloadPageObject {
                 break;
         }
         eventWebDriver.findElement(CITY_TB).sendKeys(rf.getCity());
-        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys(rf.getHow());
+        SystemActions.sleep(1);
+        Select howDidYouHear = new Select(eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL));
+        howDidYouHear.selectByVisibleText("Other");
         eventWebDriver.findElement(JOB_TITLE_TB).sendKeys(rf.getJob());
         if (rf.isCpp())
             eventWebDriver.findElement(CPP_CB).click();
@@ -399,14 +405,16 @@ public class DownloadPageObject {
 
     public void validateCountry(){
         WebDriverWait wait = new WebDriverWait(eventWebDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL)).click();
-        eventWebDriver.findElement(COMPANY_TB).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL));
+        Select country = new Select(eventWebDriver.findElement(COUNTRY_SELECTION_DDL));
+        country.selectByVisibleText("Angola");
+        country.selectByVisibleText("Choose your Country");
         Assert.assertTrue(eventWebDriver.findElement(countryempty).isDisplayed());
 
-        eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("united states");
+        country.selectByVisibleText("United States");
         Assert.assertTrue(eventWebDriver.findElement(US_STATE_DDL).isDisplayed());
         SystemActions.sleep(1);
-        eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("canada");
+        country.selectByVisibleText("Canada");
         Assert.assertTrue(eventWebDriver.findElement(CANADA_STATE_DDL).isDisplayed());
         eventWebDriver.findElement(COUNTRY_SELECTION_DDL).sendKeys("israel");
         Assert.assertTrue(eventWebDriver.findElements(countryempty).isEmpty());

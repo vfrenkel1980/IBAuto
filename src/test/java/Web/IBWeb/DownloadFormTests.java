@@ -17,7 +17,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
-        WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", mailAddress2, "123123",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", "blah@blah.com", "123123",
                 "canada", "Alberta","IB","city", "other", "Brain", true, true,
                 false,false, true, true, true, false, true,false,true,true,
                 true,true,false,true,false,true,true,true,false,true,
@@ -65,7 +65,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.clickSubmitFirstForm();
     }
 
-    @Test(testName = "Validate Country", dependsOnMethods = { "validateTerms"})
+    @Test(testName = "Validate Country"/*, dependsOnMethods = { "validateTerms"}*/)
     public void validateCountry(){
         downloadPageObject.validateCountry();
     }

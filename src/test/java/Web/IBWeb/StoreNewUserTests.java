@@ -10,17 +10,17 @@ import static webInfra.ibWeb.pageObjects.StorePageObject.*;
 
 public class StoreNewUserTests extends StoreTestBase {
 
-    @Test(testName = "Login")
+/*    @Test(testName = "Login")
     public void login(){
         signupPageObject.logIn(mailAddress3, password);
-    }
-
-/*    @Test(testName = "Sign New User")
-    public void signNewUser(){
-        signupPageObject.signUpNewUser(sp);
     }*/
 
-    @Test(testName = "Enter Store", dependsOnMethods = {"login"})
+    @Test(testName = "Sign New User")
+    public void signNewUser(){
+        signupPageObject.signUpNewUser(sp);
+    }
+
+    @Test(testName = "Enter Store", dependsOnMethods = {"signNewUser"})
     public void enterStore(){
         storePageObject.enterStoreExistingLicense(sp);
     }
