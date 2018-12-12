@@ -65,7 +65,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.clickSubmitFirstForm();
     }
 
-    @Test(testName = "Validate Country"/*, dependsOnMethods = { "validateTerms"}*/)
+    @Test(testName = "Validate Country", dependsOnMethods = { "validateTerms"})
     public void validateCountry(){
         downloadPageObject.validateCountry();
     }
