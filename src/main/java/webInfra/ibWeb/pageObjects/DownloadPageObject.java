@@ -445,10 +445,11 @@ public class DownloadPageObject {
     }
 
     public void validateHowDidYou(){
-        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).click();
-        eventWebDriver.findElement(JOB_TITLE_TB).click();
+        Select howDidYouHear = new Select(eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL));
+        howDidYouHear.selectByVisibleText("Other");
+        howDidYouHear.selectByVisibleText("How did you hear about IncrediBuild?");
         Assert.assertTrue(eventWebDriver.findElement(howdidyouhearempty).isDisplayed());
-        eventWebDriver.findElement(HOW_DID_YOU_HEAR_DDL).sendKeys("other");
+        howDidYouHear.selectByVisibleText("Other");
         Assert.assertFalse(eventWebDriver.findElement(howdidyouhearempty).isDisplayed());
     }
 
