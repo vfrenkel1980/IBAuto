@@ -370,7 +370,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyBuildMonitorOpened() {
             boolean objectExists = false;
-            if (screen.exists(IBStatusBars.buildMonitor, 15) == null)
+            if (screen.exists(IBStatusBars.buildMonitor, 15) != null)
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find Build Monitor windows");
         }
@@ -378,7 +378,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyBuildHistoryOpened() {
             boolean objectExists = false;
-            if (screen.exists(IBStatusBars.buildHistory, 15) == null)
+            if (screen.exists(IBStatusBars.buildHistory, 15) != null)
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find Build History Window");
         }
@@ -386,7 +386,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyCoordinatorMonitorOpened() {
             boolean objectExists = false;
-            if (screen.exists(IBStatusBars.coordinatorMonitor, 15) == null)
+            if (screen.exists(IBStatusBars.coordinatorMonitor, 15) != null)
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find Coordinator monitor Window");
         }
@@ -394,7 +394,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyAgentSettingsOpened() {
             boolean objectExists = false;
-            if (screen.exists(IBStatusBars.agentSettings, 15) == null)
+            if (screen.exists(IBStatusBars.agentSettings, 15) != null)
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find Agent Settings Window");
         }

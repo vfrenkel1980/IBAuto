@@ -13,10 +13,10 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  */
 public class MailService {
 
-    public static String checkMail(String host, String user, String password)
+    public static boolean checkMailBySubject(String host, String user, String password, String subject)
     {
         try {
-            String subject = "";
+            boolean isPresent = false;
             int timeout = 0;
             Message[] messages;
             Properties properties = new Properties();
@@ -37,8 +37,12 @@ public class MailService {
                 messages = emailFolder.getMessages();
             } while (messages.length == 0 && timeout < 60);
 
-            Message message = messages[0];
-            subject = message.getSubject();
+            for (Message message : messages) {
+                if (message.getSubject().equals(subject))
+                    isPresent = true;
+            }
+            /*Message message = messages[0];
+            subject = message.getSubject();*/
 
                 /*System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
@@ -48,11 +52,12 @@ public class MailService {
             emailFolder.close(false);
             store.close();
 
-            return subject;
+            return isPresent;
+
 
         } catch (Exception e) {
             test.log(Status.WARNING, "Failed to retrieve Email message with error: " + e.getMessage());
-            return "";
+            return false;
         }
     }
 

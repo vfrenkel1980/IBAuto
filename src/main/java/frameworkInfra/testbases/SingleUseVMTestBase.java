@@ -7,6 +7,7 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.RegistryService.*;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
@@ -63,7 +64,7 @@ public class SingleUseVMTestBase extends TestBase{
         ibService.installSingleUseIB("Latest");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "1");
-        //add to build group
+        customPackAllocationOn();
     }
 
     @AfterMethod
@@ -71,4 +72,10 @@ public class SingleUseVMTestBase extends TestBase{
         ibService.uninstallIB("Latest");
     }
 
+
+
+    public void customPackAllocationOn() {
+        winService.runCommandWaitForFinish("cmd /D REG ADD \\\\babylon\\HKLM\\SOFTWARE\\Wow6432Node\\Xoreax\\IncrediBuild\\Coordinator /v LicenseAllocationOption /t REG_SZ /d \"IbQaMode\" /f");
+        winService.runCommandWaitForFinish("copy \\babylon\\c$\\CustomAllocation\\agentList.dat \\babylon\\c$\\Program Files (x86)\\IncrediBuild");
+    }
 }
