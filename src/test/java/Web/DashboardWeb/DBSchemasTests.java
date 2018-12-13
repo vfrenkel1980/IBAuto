@@ -82,14 +82,14 @@ public class DBSchemasTests extends DBSchemasTestBase {
         Assert.assertEquals(successful, 1, "Number of successful builds does not match expected");
     }
 
-    @Test(testName= "Verify ExitCodeBase in Ent DB", dependsOnMethods = "Upgrade Pro To Latest Ent")
+    @Test(testName= "Verify ExitCodeBase in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
     public void verifyExitCodeBaseInEntDB(){
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL_EXIT3 + " /exitcodebase " , "%s"));
         String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "* ", "coord_build ", "status","end_time");
         Assert.assertTrue(latest.equals("3"), "Exitcode base errorlevel does not match expected");
     }
 
-    @Test(testName= "Verify Predicted Off Exitcode in Ent DB", dependsOnMethods = "Verify ExitCodeBase in Ent DB")
+    @Test(testName= "Verify Predicted Off Exitcode in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
     public void verifyPredictedOffExitCodeInEntDB(){
         setRegistry("0", RegistryKeys.PREDICTED);
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
