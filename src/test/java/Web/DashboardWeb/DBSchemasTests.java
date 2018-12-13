@@ -85,9 +85,9 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName= "Verify ExitCodeBase in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
     public void verifyExitCodeBaseInEntDB(){
-        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS + " /exitcodebase " , "%s"));
-        SystemActions.sleep(5);
-        SystemActions.killProcess(Processes.BUILD_CONSOLE);
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS_REBUILD+" /exitcodebase "));
+        SystemActions.sleep(4);
+        SystemActions.killProcess(StaticDataProvider.Processes.BUILD_CONSOLE);
         SystemActions.sleep(5);
         String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", " status ", "coord_build ", "status","end_time");
         Assert.assertTrue(latest.equals("4"), "Exitcode base errorlevel does not match expected");
@@ -97,9 +97,9 @@ public class DBSchemasTests extends DBSchemasTestBase {
     public void verifyPredictedOffExitCodeInEntDB(){
         setRegistry("0", RegistryKeys.PREDICTED);
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        int latest = postgresJDBC.getIntFromQuery("localhost", "ib", "ib", "coordinatordb", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
+        String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", " status ", "coord_build ", "status","end_time");
         setRegistry("2", RegistryKeys.PREDICTED);
-        Assert.assertEquals(latest, 1, "Exitcode should be overwritten from -1 to 1");
+        Assert.assertTrue(latest.equals("1"), "Exitcode should be overwritten from -1 to 1");
     }
 
     /*------------------------------METHODS------------------------------*/
