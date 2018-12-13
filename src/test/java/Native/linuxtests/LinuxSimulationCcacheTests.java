@@ -10,20 +10,18 @@ import static frameworkInfra.utils.StaticDataProvider.*;
 public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 
     private  String env = "export PATH=/usr/lib/ccache:$PATH; ";
-    private static int KernelCcacheSize = 519268;
-    private static int QTernelCcacheSize = 669948;
+    private static int KernelLnCcacheSize = 519296;
+    private static int KernelPrefixCcacheSize = 5512;
+    private static int QTernelCcacheSize = 670376;
+
+
+    private boolean isWithinSize (int size, int compareTo) {
+        return ((size < (compareTo * 1.01) ) && (size > (compareTo * 0.99) ));
+    }
 
     @Test(testName = "Sim ccache kenrel4 ln")
     public void SimTestCcacheKernel4ln() {
 
-        log.info("starting ccache kenrel4 ln class");
-        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j16", ipList.get(simClassType.ordinal()));
-        String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_KERNEL4_DIR + "/kernel; touch kmod.c kprobes.c ksysfs.c kthread.c; cd ..; make -j16", ipList.get(simClassType.ordinal()));
-
-        String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        log.info("1) inc_noIBsize = " + inc_noIBsize);
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
@@ -47,24 +45,16 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         if (!newer.isEmpty())
             Assert.assertEquals(1, 0, "Test failed - incremental build files");
 
-        if (!noIBsize.equals((withIBsize)))
+        if(!isWithinSize(Integer.parseInt(withIBsize.replace("\n","")), KernelLnCcacheSize))
             Assert.assertEquals(1, 0, "Test failed - ccache size changed");
 
-        if (!inc_noIBsize.equals((inc_withIBsize)))
+        if(!isWithinSize(Integer.parseInt(inc_withIBsize.replace("\n","")), KernelLnCcacheSize))
             Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental ");
     }
 
     @Test(testName = "Sim ccache kenrel4 prefix")
     public void SimTestccacheKernel4prefix(){
 
-        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand( LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j16", ipList.get(simClassType.ordinal()));
-        String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + "/kernel; touch kmod.c kprobes.c ksysfs.c kthread.c; cd ..; make -j16", ipList.get(simClassType.ordinal()));
-
-
-        String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        log.info("2) inc_noIBsize = " + inc_noIBsize);
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
@@ -87,27 +77,18 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         if(!newer.isEmpty())
             Assert.assertEquals(1, 0, "Test failed - incremental build files" );
 
-        if(!noIBsize.equals((withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed" );
+        if(!isWithinSize(Integer.parseInt(withIBsize.replace("\n","")), KernelPrefixCcacheSize))
+            Assert.assertEquals(1, 0, "Test failed - ccache size changed");
 
-        if(!inc_noIBsize.equals((inc_withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental " );
-
+        if(!isWithinSize(Integer.parseInt(inc_withIBsize.replace("\n","")), KernelPrefixCcacheSize))
+            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental ");
     }
 
     @Test(testName = "Sim ccache QT ln")
     public void SimTestccacheQTln(){
 
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" + "make -j32", ipList.get(simClassType.ordinal()));
-        String noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        log.info("3) noIBsize = " + noIBsize);
-        linuxService.linuxRunSSHCommand(env + LinuxSimulation.CD_QT_DIR + "/src/sql/kernel/" + ";" +
-                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..; make -j32", ipList.get(simClassType.ordinal()));
 
-        String inc_noIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
-        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
-        log.info("4)QT: inc_noIBsize = " + inc_noIBsize);
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
                 String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
@@ -121,20 +102,19 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 
         String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
-        String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/src/sql/kernel; find -name qsqlquery.cpp -newer ../../../lib/libQtSql.so.4.8.6;", ipList.get(simClassType.ordinal()));
-        newer += linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/lib; find -name libQtScript.so.4.8.6 -newer libQtSql.so.4.8.6;", ipList.get(simClassType.ordinal()));
+        String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel; find -name qsqlquery.cpp -newer ../../../lib/libQtSql.so.4.8.6;", ipList.get(simClassType.ordinal()));
+        newer += linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_QT_DIR + "/lib; find -name libQtScript.so.4.8.6 -newer libQtSql.so.4.8.6;", ipList.get(simClassType.ordinal()));
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal()));
 
         if(!newer.isEmpty())
             Assert.assertEquals(1, 0, "Test failed - incremental build files" );
 
-        if(!noIBsize.equals((withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed" );
+        if(!isWithinSize(Integer.parseInt(withIBsize.replace("\n","")), QTernelCcacheSize))
+            Assert.assertEquals(1, 0, "Test failed - ccache size changed");
 
-        if(!inc_noIBsize.equals((inc_withIBsize)))
-            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental " );
-
+        if(!isWithinSize(Integer.parseInt(inc_withIBsize.replace("\n","")), QTernelCcacheSize))
+            Assert.assertEquals(1, 0, "Test failed - ccache size changed - incremental ");
     }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------

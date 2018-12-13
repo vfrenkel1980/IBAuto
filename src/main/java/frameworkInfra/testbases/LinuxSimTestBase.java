@@ -57,7 +57,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
-        linuxService.deleteLogsFolder(connectedMachinesToGrid);
+//        linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
         if (!linuxService.isIBServiceUp( ipList.get(0))) {
@@ -148,10 +148,10 @@ public class LinuxSimTestBase extends LinuxTestBase {
             linuxService.startIBService(ipList.get(i));
             lastBuilds.add(linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i).replaceAll("\n", "")).replaceAll("\n", ""));
 
-            if(Integer.parseInt(lastBuilds.get(i-1)) >= Integer.parseInt(firstBuilds.get(i-1)))
-              linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuilds.get(i-1) + "," + lastBuilds.get(i-1) + " > " + scriptFileName + "; exit 0", ipList.get(i));
-
-            linuxService.getFile(ipList.get(i), LinuxCommands.HOME_DIR + scriptFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + scriptFileName);
+            if(Integer.parseInt(lastBuilds.get(i-1)) >= Integer.parseInt(firstBuilds.get(i-1))) {
+                linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuilds.get(i - 1) + "," + lastBuilds.get(i - 1) + " > " + scriptFileName + "; exit 0", ipList.get(i));
+                linuxService.getFile(ipList.get(i), LinuxCommands.HOME_DIR + scriptFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + scriptFileName);
+            }
         }
 
         String testsFileName = "ib_tests_res_" + dateFormat.format(calendar.getTime());
