@@ -5,6 +5,7 @@ import frameworkInfra.testbases.web.dashboard.DBSchemasTestBase;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -84,9 +85,12 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName= "Verify ExitCodeBase in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
     public void verifyExitCodeBaseInEntDB(){
-        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL_EXIT3 + " /exitcodebase " , "%s"));
-        String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", "* ", "coord_build ", "status","end_time");
-        Assert.assertTrue(latest.equals("3"), "Exitcode base errorlevel does not match expected");
+        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS + " /exitcodebase " , "%s"));
+        SystemActions.sleep(5);
+        SystemActions.killProcess(Processes.BUILD_CONSOLE);
+        SystemActions.sleep(5);
+        String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", " status ", "coord_build ", "status","end_time");
+        Assert.assertTrue(latest.equals("4"), "Exitcode base errorlevel does not match expected");
     }
 
     @Test(testName= "Verify Predicted Off Exitcode in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")

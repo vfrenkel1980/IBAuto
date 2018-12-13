@@ -451,7 +451,6 @@ public class StaticDataProvider {
         public static class ConsoleAppProj {
             public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fail.sln /%s /cfg=\"Debug|x86\"";
-            public static final String CONSOLE_APP_FAIL_EXIT3 = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fai.sln /%s /cfg=\"Debug|x86\"";
             public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
 
         }
