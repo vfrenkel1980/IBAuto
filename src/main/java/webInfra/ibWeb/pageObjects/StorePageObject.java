@@ -42,7 +42,8 @@ public class StorePageObject {
     private static final By DEV_TOOLS_BUNDLE_BTN = By.xpath("//*[contains(text(),'IB410')]/following-sibling::button[@id=\"orderBundleButt\"]");
     private static final By BUNDLE_POPUP_PURCHASE_BTN = By.xpath("//a[text() = 'Purchase']");
     private static final By BUNDLE_POPUP_CANCEL_BTN = By.xpath("//a[contains(text(),'Cancel')]");
-
+    private static final By PROCEED_POPUP_BTN = By.xpath("//a[text() = 'Proceed']");
+    private static final By GO_BACK_POPUP_BTN = By.xpath("//a[text() = 'Go back']");
 
 
     //available solutions
@@ -228,6 +229,15 @@ public class StorePageObject {
     public boolean verifyStorePageLoaded(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_MORE_MACHINES_BTN));
         return eventWebDriver.findElement(ADD_MORE_MACHINES_BTN).isDisplayed();
+    }
+
+    public boolean verifyMoreAgentsThanSolutions(){
+        return eventWebDriver.findElement(PROCEED_POPUP_BTN).isDisplayed();
+    }
+
+    public void clickGoBackPopupBtn(){
+        SystemActions.sleep(1);
+        wait.until(ExpectedConditions.elementToBeClickable(GO_BACK_POPUP_BTN)).click();
     }
 
 

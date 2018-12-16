@@ -100,7 +100,23 @@ public class StoreNewUserTests extends StoreTestBase {
         Assert.assertTrue(storePageObject.verifyStorePageLoaded(), "Store page did not load");
     }
 
-    @Test(testName = "Select Solution And Continue To Payment", dependsOnMethods = {"selectSolutionsAndRemoveThemFromCart"})
+    @Test(testName = "Select More Solutions Than Agents", dependsOnMethods = {"selectSolutionsAndRemoveThemFromCart"})
+    public void selectMoreSolutionsThanAgents(){
+        storePageObject.addSolutionByName(vsC);
+        storePageObject.addSolutionByName(vsC);
+        storePageObject.addSolutionByName(vsC);
+        storePageObject.changeNumOfCores("2");
+        storePageObject.continueToCheckout();
+        storePageObject.verifyMoreAgentsThanSolutions();
+        storePageObject.clickGoBackPopupBtn();
+        storePageObject.reduceSolutionByName(vsC);
+        storePageObject.reduceSolutionByName(vsC);
+        storePageObject.reduceSolutionByName(vsC);
+        storePageObject.reduceSolutionByName(vsC);
+        storePageObject.changeNumOfCores("1");
+    }
+
+    @Test(testName = "Select Solution And Continue To Payment", dependsOnMethods = {"selectMoreSolutionsThanAgents"})
     public void selectSolutionAndContinueToPayment(){
         storePageObject.addSolutionByName(vsC);
         storePageObject.continueToCheckout();
