@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.parsers.XmlParser;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -21,7 +22,7 @@ public class BatmanBCTestBase extends WindowsTestBase {
     public static List<String> batmanMachineList;
     protected static List rawVmSimList;
     public static List<String> vmSimMachineList;
-
+    public PostgresJDBC postgresJDBC = new PostgresJDBC();
     /**
      * In the before suite we break down the ip list for each of the
      * simulations env so we can than verify the assignment of the agent to the build
