@@ -607,6 +607,7 @@ public class StaticDataProvider {
         public static final String GET_IB_VERSION = "ib_console --version";
         public static final String GET_EPOCH_TIME = "date +%s%3N";
         public static final String UNINSTALL_IB = "sudo /opt/incredibuild/management/uninstall.sh";
+        public static final String IB_APPLY_UPDATE = "sudo /opt/incredibuild/management/ib_apply_upgrade.sh %s";
     }
 
     public static class LinuxDB {
