@@ -294,7 +294,7 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public String getInstallationFileerName(String machineName, String version) {
-        return linuxRunSSHCommandOutputString("find /opt/incredibuild/ -name \"incredibuild_" + version + "-x86_64-i686.bin\"", machineName).replaceAll("\n","") ;
+        return linuxRunSSHCommandOutputString("find /opt/incredibuild/ -name \"incredibuild_" + version + ".x86_64-i686.bin\"", machineName).replaceAll("\n","") ;
     }
 
     @Override
