@@ -450,6 +450,7 @@ public class StaticDataProvider {
 
         public static class ConsoleAppProj {
             public static final String CONSOLE_APP_SUCCESS = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /%s /cfg=\"Debug|x86\"";
+            public static final String CONSOLE_APP_SUCCESS_REBUILD = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fail.sln /%s /cfg=\"Debug|x86\"";
             public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
 
@@ -598,7 +599,7 @@ public class StaticDataProvider {
         public static final String RUN_SQLITE_DELETE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"DELETE FROM %s where %s=\\\"%s.incredibuild.local\\\";\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
-        public static final String DU_TOTAL_ONLY = "du -hs ~/.ccache/ | cut -f 1";
+        public static final String DU_TOTAL_ONLY = "du -s ~/.ccache/ | cut -f 1";
         public static final String HOME_DIR = "/home/xoreax/";
         public static final String COPY_FILE_SCP = "sshpass -p xoreax scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s xoreax@%s:/home/xoreax";
         public static final String EXTRACT_UPGRADE_FILE = "cd /opt/incredibuild/httpd/htdocs/incredibuild; sudo tar xf ~/%s";

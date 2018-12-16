@@ -9,6 +9,7 @@ import frameworkInfra.utils.databases.PostgresJDBC;
 import frameworkInfra.utils.databases.SQLiteJDBC;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
+import ibInfra.windowscl.WindowsService;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -25,6 +26,7 @@ public class DBSchemasTestBase extends TestBase {
 
     protected PostgresJDBC postgresJDBC = new PostgresJDBC();
     protected SQLiteJDBC sqLiteJDBC = new SQLiteJDBC();
+    public WindowsService winService = new WindowsService();
     protected IbService ibService = new IbService();
     protected IBUIService ibuiService = new IBUIService();
     protected IBUIService.Installer installer = ibuiService.new Installer();

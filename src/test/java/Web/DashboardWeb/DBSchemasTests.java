@@ -2,12 +2,15 @@ package Web.DashboardWeb;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.web.dashboard.DBSchemasTestBase;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class DBSchemasTests extends DBSchemasTestBase {
@@ -80,5 +83,29 @@ public class DBSchemasTests extends DBSchemasTestBase {
         Assert.assertEquals(successful, 1, "Number of successful builds does not match expected");
     }
 
+    @Test(enabled=false,testName= "Verify ExitCodeBase in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
+    public void verifyExitCodeBaseInEntDB(){
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS_REBUILD+" /exitcodebase "));
+        SystemActions.sleep(6);
+        SystemActions.killProcess(StaticDataProvider.Processes.BUILD_CONSOLE);
+        SystemActions.sleep(8);
+        String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", " status ", "coord_build ", "status","end_time");
+        Assert.assertTrue(latest.equals("4"), "Exitcode base errorlevel does not match expected. Found status "+latest);
+    }
+
+    @Test(testName= "Verify Predicted Off Exitcode in Ent DB", dependsOnMethods = "upgradeProToLatestEnt")
+    public void verifyPredictedOffExitCodeInEntDB(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        String latest = postgresJDBC.getLastValueFromTable("localhost", "ib", "ib", "coordinatordb", " status ", "coord_build ", "status","end_time");
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(latest.equals("1"), "Exitcode should be overwritten from -1 to 1. Found status "+latest);
+    }
+
+    /*------------------------------METHODS------------------------------*/
+
+    private void setRegistry(String required, String keyName){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
+    }
 
 }
