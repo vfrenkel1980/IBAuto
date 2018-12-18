@@ -428,8 +428,8 @@ public class StaticDataProvider {
         public static class VC15_PHOENIX {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"";
+            public static final String CONSAPP_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"release|x64\" /title=\"Cons App 2017 - Release\"";
         }
-
         public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
@@ -518,7 +518,7 @@ public class StaticDataProvider {
         public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
-
+        public static final String RESET_SINGLE_USE = "ibat";
     }
 
     public static class IbLicenses {
@@ -607,6 +607,7 @@ public class StaticDataProvider {
         public static final String GET_IB_VERSION = "ib_console --version";
         public static final String GET_EPOCH_TIME = "date +%s%3N";
         public static final String UNINSTALL_IB = "sudo /opt/incredibuild/management/uninstall.sh";
+        public static final String IB_APPLY_UPDATE = "sudo /opt/incredibuild/management/ib_apply_upgrade.sh %s";
     }
 
     public static class LinuxDB {

@@ -263,7 +263,8 @@ public class LinuxService extends TestBase implements ILinuxService {
         String installationFilePath = getInstallerName(LinuxMachines.LINUX_BUILDER, version);
         copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, destMachine, installationFilePath);
         String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
-        extractUpgradeFile(destMachine, installationFileName);
+        //extractUpgradeFile(destMachine, installationFileName);
+        linuxRunSSHCommand(String.format(LinuxCommands.IB_APPLY_UPDATE, installationFileName), destMachine);
         SystemActions.sleep(180);
         Assert.assertEquals(version, getIBVersion(destMachine));
         verifyAgentsUpdated(destMachine, version);
