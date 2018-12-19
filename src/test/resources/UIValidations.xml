@@ -97,5 +97,10 @@
         </classes>
     </test>
 
+    <test name="white01">
+        <classes>
+            <class name ="Native.uitests.UIValidationsTests" />
+        </classes>
+    </test>
 
 </suite>
