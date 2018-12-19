@@ -79,10 +79,7 @@ public class VSTestBase extends TestBase {
     @BeforeClass
     public void setUpEnv() {
         test = extent.createTest("Before Class");
-        if (VSINSTALLATION.toLowerCase().equals("preview")){
-            devenvPath = VsDevenvInstallPath.VS2019_PREVIEW;
-        } else {
-            devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
+        if (!VSINSTALLATION.toLowerCase().equals("preview")){
             try {
                 winService.downloadFile(URL.VS_RELEASE_URL, Locations.VS_INSTALL_DIR + "\\vs_professional.exe");
             } catch (IOException e) {
@@ -159,6 +156,10 @@ public class VSTestBase extends TestBase {
             default:
                 break;
         }
+        if (VSINSTALLATION.equals("15"))
+            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "//VSDirs//15.0","VSProductDir");
+        else
+            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "//VSDirs//16.0","VSProductDir");
         extent.flush();
     }
 
