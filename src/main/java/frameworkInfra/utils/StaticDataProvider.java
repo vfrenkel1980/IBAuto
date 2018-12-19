@@ -437,6 +437,7 @@ public class StaticDataProvider {
             public static final String GREEN04 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green04\\RunMe.bat\"";
             public static final String GREEN05 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green05\\RunMe.bat\"";
             public static final String YELLOW01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln\" /rebuild /cfg=\"debug|x86\" /title=Yellow01";
+            public static final String WHITE01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\White01\\White01\\White01.sln\" /rebuild /cfg=\"debug|x86\" /title=Yellow01";
             public static final String RED01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln\" /rebuild /cfg=\"debug|x86\" /title=Red01";
             public static final String RED02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln\" /rebuild /cfg=\"debug|x86\" /title=Red02";
             public static final String RED03 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln\" /rebuild /cfg=\"debug|x86\" /title=Red03";
@@ -573,6 +574,7 @@ public class StaticDataProvider {
     public static class UIValidationsProjects {
         public static final String GREEN01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln";
         public static final String YELLOW01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Yellow\\Yellow01\\Yellow01.sln";
+        public static final String WHITE01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\White\\White01\\White01.sln";
         public static final String RED01 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red01\\Red01.sln";
         public static final String RED02 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red02\\Red02.sln";
         public static final String RED03 = Locations.QA_ROOT + "\\IB_ColorMarking_test\\Red\\Red03\\Red03.sln";

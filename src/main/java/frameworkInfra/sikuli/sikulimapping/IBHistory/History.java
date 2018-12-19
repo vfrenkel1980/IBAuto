@@ -12,6 +12,7 @@ public class History {
         public static final Pattern Green05 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildHistory\\green05_history.png");
 
         public static final Pattern Yellow01 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildHistory\\yellow01_history.png");
+        public static final Pattern White01 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildHistory\\white01_history.png");
 
         public static final Pattern Red01 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildHistory\\red01_history.png");
         public static final Pattern Red02 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildHistory\\red02_history.png");
