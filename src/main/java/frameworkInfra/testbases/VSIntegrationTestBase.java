@@ -91,7 +91,7 @@ public class VSIntegrationTestBase extends TestBase {
                     projectName = "vc15project";
                     break;
             }
-            vsuiService.openProject(projectPath);
+            vsuiService.openProject(projectPath, "15");
         }catch (Exception e){
             e.getMessage();
         }

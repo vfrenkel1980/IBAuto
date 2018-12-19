@@ -16,24 +16,24 @@ public class VSCommands implements IVSCommands {
 
 
     @Override
-    public void installVSWithIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WITH_IB);
+    public void installVSWithIB(String installer) {
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.INSTALL_VS_WITH_IB, installer));
         winService.waitForProcessToStart("vs_installer.exe");
         winService.waitForProcessToFinish("vs_installer.exe");
         changeFirstActivationRegistry();
     }
 
     @Override
-    public void installVSWithoutIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VS_WO_IB);
+    public void installVSWithoutIB(String installer) {
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.INSTALL_VS_WO_IB, installer));
         winService.waitForProcessToStart("vs_installer.exe");
         winService.waitForProcessToFinish("vs_installer.exe");
     }
 
     @Override
-    public void upgradeVSWithIB() {
-        upgradeVS();
-        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_ADD_INCREDIBUILD);
+    public void upgradeVSWithIB(String installer) {
+        upgradeVS(installer);
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.MODIFY_ADD_INCREDIBUILD, installer));
         winService.waitForProcessToFinish("vs_professional.exe");
         winService.waitForProcessToStart("vs_installer.exe");
         winService.waitForProcessToFinish("vs_installer.exe");
@@ -42,43 +42,8 @@ public class VSCommands implements IVSCommands {
     }
 
     @Override
-    public void upgradeVS() {
-        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VS);
-        winService.waitForProcessToStart("vs_bootstrapper.exe");
-        winService.waitForProcessToFinish("vs_bootstrapper.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void installVSPreviewWithIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WITH_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        changeFirstActivationRegistry();
-    }
-
-    @Override
-    public void installVSPreviewWithoutIB() {
-        winService.runCommandWaitForFinish(WindowsCommands.INSTALL_VSPREVIEW_WO_IB);
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-    }
-
-    @Override
-    public void upgradeVSPreviewWithIB() {
-        upgradeVSPreview();
-        winService.runCommandWaitForFinish(WindowsCommands.MODIFY_PREVIEW_ADD_INCREDIBUILD);
-        winService.waitForProcessToFinish("vs_professional_preview.exe");
-        winService.waitForProcessToStart("vs_installer.exe");
-        winService.waitForProcessToFinish("vs_installer.exe");
-        ibService.loadIbLicense(IbLicenses.VSTESTS_LIC);
-        changeFirstActivationRegistry();
-    }
-
-    @Override
-    public void upgradeVSPreview() {
-        winService.runCommandWaitForFinish(WindowsCommands.UPDATE_VSPREVIEW);
+    public void upgradeVS(String installer) {
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.UPDATE_VS, installer));
         winService.waitForProcessToStart("vs_bootstrapper.exe");
         winService.waitForProcessToFinish("vs_bootstrapper.exe");
         winService.waitForProcessToStart("vs_installer.exe");

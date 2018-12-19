@@ -39,8 +39,8 @@ public class VS2017ExtensionTests extends VSTestBase {
 
     @Test(testName = "Compare MSBuild Version")
     public void compareMSBuildVersion(){
-        installedMsBuildVersion = vsuiService.getInstalledMSBuildVersion();
         if (SCENARIO.equals("1")) {
+            installedMsBuildVersion = vsuiService.getInstalledMSBuildVersion();
             String expected = postgresJDBC.getStringFromQuery("192.168.10.73", "postgres", "postgres123", "release_manager", "ms_build_support_version", "Windows_builds_ib_info",
                     "build_number=" + ibVersion);
             test.log(Status.INFO, "Expected: " + expected + " <-------> Actual: " + installedMsBuildVersion);
@@ -53,7 +53,7 @@ public class VS2017ExtensionTests extends VSTestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsuiService.openVSInstance(VSINSTALLATION, false, SCENARIO);
         SystemActions.sleep(20);
-        vsuiService.createNewProject("custom");
+        vsuiService.createNewProject("custom", VSINSTALLATION);
         vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
@@ -68,7 +68,7 @@ public class VS2017ExtensionTests extends VSTestBase {
     public void executeVSBuildExplorer(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsuiService.openVSInstance(VSINSTALLATION, false, SCENARIO);
-        vsuiService.openProject(TestProjects.CUSTOM_PROJECT);
+        vsuiService.openProject(TestProjects.CUSTOM_PROJECT, VSINSTALLATION);
         vsuiService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "custom");
         String result;
         try {

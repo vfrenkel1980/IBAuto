@@ -22,7 +22,7 @@ public class UIValidationsTests extends UIValidationTestBase {
         });
 
         vsuiService.openVSInstance("15", false, "");
-        vsuiService.openProject(projectLocation);
+        vsuiService.openProject(projectLocation, "15");
         vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         client.verifyVSBarPattern(vsBarPattern);
     }

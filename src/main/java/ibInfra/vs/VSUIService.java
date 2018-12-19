@@ -83,34 +83,56 @@ public class VSUIService implements IVSUIService {
         driver = null;
     }
 
+    //TODO: once 2019 is released change all values of 15 from simulations to 16
+    //e.g. VSIntegrationTestBase
     @Override
-    public void openProject(String projectPath) {
-        driver.findElementByName("File").click();
-        driver.findElementByName("Open").click();
-        driver.findElementByName("Project/Solution...").click();
+    public void openProject(String projectPath, String version) {
+
+        if (version.equals("16")){
+            driver.findElementByName("Open a project or solution").click();
+        }
+        else {
+            driver.findElementByName("File").click();
+            driver.findElementByName("Open").click();
+            driver.findElementByName("Project/Solution...").click();
+        }
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
         WebDriverWait wait = new WebDriverWait(driver,90);
+        driver.getPageSource();
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution '\")]"))));
         test.log(Status.INFO, projectPath + " project opened");
     }
 
     @Override
-    public void createNewProject(String projectName) {
+    public void createNewProject(String projectName, String version) {
         List<WebElement> nameTB;
-        List<WebElement> locationTB;
-        driver.findElementByName("File").click();
-        driver.findElementByName("New").click();
-        driver.findElementByName("Project...").click();
-        SystemActions.sleep(3);
-        driver.findElementByName("Windows Console Application").click();
-        nameTB =driver.findElementsByName("Name:");
-        nameTB.get(1).sendKeys(projectName);
-        nameTB =driver.findElementsByName("Location:");
-        nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
-        driver.findElementByName("OK").click();
-        driver.findElementByName("Build");
+        if (version.equals("16")){
+            driver.findElementByName("Create a new project").click();
+            driver.findElementByName("Windows Console Application").click();
+            driver.findElementByName("Next").click();
+            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
+            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
+            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
+            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
+            driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
+        }
+        else{
+            driver.findElementByName("File").click();
+            driver.findElementByName("New").click();
+            driver.findElementByName("Project...").click();
+            SystemActions.sleep(3);
+            driver.findElementByName("Windows Console Application").click();
+            nameTB =driver.findElementsByName("Name:");
+            nameTB.get(1).sendKeys(projectName);
+            nameTB =driver.findElementsByName("Location:");
+            nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
+            driver.findElementByName("OK").click();
+        }
+        WebDriverWait wait = new WebDriverWait(driver,90);
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[@Name=\"Build\"]"))));
+
     }
 
     @Override
@@ -174,7 +196,7 @@ public class VSUIService implements IVSUIService {
                 if (scenario.equals("3"))
                     pathToDevenv = "E:\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
                 else
-                    pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
+                    pathToDevenv = VsDevenvInstallPath.VS2019_PREVIEW + "\\devenv.exe";
                 break;
             case "8":
                 pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 8\\Common7\\IDE\\devenv.exe";
@@ -203,11 +225,15 @@ public class VSUIService implements IVSUIService {
         }
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            test.log(Status.INFO, "Opening VS" + version);
+            if (test != null) {
+                test.log(Status.INFO, "Opening VS" + version);
+            }
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            test.log(Status.INFO, "Visual Studio opened successfully");
+            if (test != null) {
+                test.log(Status.INFO, "Visual Studio opened successfully");
+            }
             SystemActions.sleep(30);
             if(isFirstActivation) {
                 try {

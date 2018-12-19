@@ -4,9 +4,9 @@ public interface IVSUIService  {
 
     void vsFirstActivation();
 
-    void openProject(String projectPath);
+    void openProject(String projectPath, String version);
 
-    void createNewProject(String projectName);
+    void createNewProject(String projectName, String version);
 
     void performIbActionFromMenu(String action);
 

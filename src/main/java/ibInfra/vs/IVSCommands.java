@@ -2,21 +2,13 @@ package ibInfra.vs;
 
 public interface IVSCommands {
 
-    void installVSWithIB();
+    void installVSWithIB(String installer);
 
-    void installVSWithoutIB();
+    void installVSWithoutIB(String installer);
 
-    void upgradeVSWithIB();
+    void upgradeVSWithIB(String installer);
 
-    void upgradeVS();
-
-    void installVSPreviewWithIB();
-
-    void installVSPreviewWithoutIB();
-
-    void upgradeVSPreviewWithIB();
-
-    void upgradeVSPreview();
+    void upgradeVS(String installer);
 
     void uninstallIbExtension();
 }

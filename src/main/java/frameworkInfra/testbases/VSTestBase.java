@@ -51,6 +51,8 @@ public class VSTestBase extends TestBase {
     public VSCommands vsCommands = new VSCommands();
     public WindowsService winService = new WindowsService();
     public PostgresJDBC postgresJDBC = new PostgresJDBC();
+    protected static final String RELEASE_2017 = "vs_Professional";
+    protected static final String PREVIEW_2019 = "vs_enterprise_2019_preview";
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -78,7 +80,7 @@ public class VSTestBase extends TestBase {
     public void setUpEnv() {
         test = extent.createTest("Before Class");
         if (VSINSTALLATION.toLowerCase().equals("preview")){
-            devenvPath = VsDevenvInstallPath.VS2017_PREVIEW;
+            devenvPath = VsDevenvInstallPath.VS2019_PREVIEW;
         } else {
             devenvPath = VsDevenvInstallPath.VS2017_RELEASE;
             try {
@@ -93,9 +95,9 @@ public class VSTestBase extends TestBase {
             case "1":
                 test.log(Status.INFO, "Before class started\n SCENARIO 1: vs installed, install IB from installer");
                 if (VSINSTALLATION.equals("15"))
-                    vsCommands.upgradeVS();
+                    vsCommands.upgradeVS(RELEASE_2017);
                 else
-                    vsCommands.upgradeVSPreview();
+                    vsCommands.upgradeVS(PREVIEW_2019);
                 ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
                 ibVersion = IIBService.getIbVersion();
                 ibService.verifyIbServicesRunning(true, true);
@@ -105,9 +107,9 @@ public class VSTestBase extends TestBase {
             case "2":
                 test.log(Status.INFO, "Before class started\n SCENARIO 2: upgrade vs and install IB from vs installer");
                 if (VSINSTALLATION.equals("15"))
-                    vsCommands.upgradeVSWithIB();
+                    vsCommands.upgradeVSWithIB(RELEASE_2017);
                 else
-                    vsCommands.upgradeVSPreviewWithIB();
+                    vsCommands.upgradeVSWithIB(PREVIEW_2019);
                 ibService.verifyIbServicesRunning(true, true);
                 setMsBuildRegValue();
                 break;
@@ -116,9 +118,9 @@ public class VSTestBase extends TestBase {
                 test.log(Status.INFO, "Before class started\n SCENARIO 3: install old IB, install vs and upgrade IB from VS installer");
                 ibService.installIB("2147", IbLicenses.VSTESTS_LIC);
                 if (VSINSTALLATION.equals("15"))
-                    vsCommands.installVSWithIB();
+                    vsCommands.installVSWithIB(RELEASE_2017);
                 else
-                    vsCommands.installVSPreviewWithIB();
+                    vsCommands.installVSWithIB(PREVIEW_2019);
                 ibService.verifyIbServicesRunning(true, true);
                 vsuiService.openVSInstance(VSINSTALLATION, true, SCENARIO);
                 SystemActions.killProcess("devenv.exe");
@@ -134,10 +136,10 @@ public class VSTestBase extends TestBase {
                 createCustomKeyAndChangeVSIntegratedIbInstaller(latestIBVersion);
 
                 if (VSINSTALLATION.equals("15")) {
-                    vsCommands.upgradeVSWithIB();
+                    vsCommands.upgradeVSWithIB(RELEASE_2017);
                 }
                 else {
-                    vsCommands.upgradeVSPreviewWithIB();
+                    vsCommands.upgradeVSWithIB(PREVIEW_2019);
                 }
                 ibService.verifyIbServicesRunning(true, true);
                 setMsBuildRegValue();
@@ -146,9 +148,9 @@ public class VSTestBase extends TestBase {
             case "5":
                 test.log(Status.INFO, "Before class started\n SCENARIO 5: install vs without IB");
                 if (VSINSTALLATION.equals("15"))
-                    vsCommands.installVSWithoutIB();
+                    vsCommands.installVSWithoutIB(RELEASE_2017);
                 else
-                    vsCommands.installVSPreviewWithoutIB();
+                    vsCommands.installVSWithoutIB(PREVIEW_2019);
                 test.log(Status.PASS, "");
                 extent.flush();
                 generateCustomReport();

@@ -77,7 +77,8 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        WindowsService winSer = new WindowsService();
-        winSer.isServiceRunning("incredibuild_agent");
+        VSUIService vsuiService = new VSUIService();
+        vsuiService.openVSInstance("preview", false, "");
+        vsuiService.openProject("\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\"", "16");
     }
 }
