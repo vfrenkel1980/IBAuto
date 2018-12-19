@@ -2,8 +2,8 @@ package Native.uitests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.UIValidationTestBase;
-import frameworkInfra.utils.StaticDataProvider.IbLocations;
-import frameworkInfra.utils.StaticDataProvider.VsActions;
+import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
@@ -20,10 +20,13 @@ public class UIValidationsTests extends UIValidationTestBase {
                 throw new SkipException("Skipped test");
             }
         });
-
         vsuiService.openVSInstance("15", false, "");
         vsuiService.openProject(projectLocation, "15");
         vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
+        if (project.contains("white")){
+            SystemActions.sleep(7);
+            SystemActions.killProcess(Processes.BUILD_CONSOLE);
+        }
         client.verifyVSBarPattern(vsBarPattern);
     }
 

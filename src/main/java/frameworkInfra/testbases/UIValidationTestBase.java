@@ -176,6 +176,12 @@ public class UIValidationTestBase extends TestBase {
                 command = ProjectsCommands.UIVALIDATIONS.GREEN05;
                 historyPattern = History.Projects.Green05;
                 break;
+            case "white01":
+                command = IbLocations.BUILD_CONSOLE + ProjectsCommands.UIVALIDATIONS.WHITE01;
+                projectLocation = UIValidationsProjects.WHITE01;
+                vsBarPattern = Monitor.Bars.VSWhiteBar;
+                historyPattern = History.Projects.White01;
+                break;
         }
         if (project.contains("red")){
             trayIconPattern = IBSettings.TrayIcon.Red;
@@ -189,8 +195,18 @@ public class UIValidationTestBase extends TestBase {
             trayIconPattern = IBSettings.TrayIcon.Green;
             ibMonBarPattern = Monitor.Bars.IBGreenBar;
             progressPattern = Monitor.Progress.Green;
+        }else if (project.contains("white")){
+            trayIconPattern = IBSettings.TrayIcon.Green;
+            ibMonBarPattern = Monitor.Bars.IBWhiteBar;
+            progressPattern = Monitor.Progress.White;
         }
-        winService.runCommandWaitForFinish(command);
+        if (project.contains("white")){
+            winService.runCommandDontWaitForTermination(command);
+            SystemActions.sleep(7);
+            SystemActions.killProcess(Processes.BUILD_CONSOLE);
+        }else {
+            winService.runCommandWaitForFinish(command);
+        }
     }
 
     @BeforeMethod
