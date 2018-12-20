@@ -2,6 +2,8 @@ package frameworkInfra.utils.parsers;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.TestBase;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.DirectoryScanner;
 import java.io.*;
 import java.util.Map;
@@ -169,6 +171,24 @@ public class Parser{
             scanner.close();
         }
         return firstLine;
+    }
+
+    public static int countOccurencesInFile(String filePath, String lookFor) {
+        test.log(Status.INFO, "Looking for number of occurrences of " + lookFor + " in" + filePath);
+        File file = new File(filePath);
+        int count = 0;
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine().toLowerCase();
+                if (lineFromFile.contains(lookFor.toLowerCase())) {
+                    count++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }
+        test.log(Status.INFO, "Didn't find " + lookFor + " in" + filePath);
+        return count;
     }
 
 

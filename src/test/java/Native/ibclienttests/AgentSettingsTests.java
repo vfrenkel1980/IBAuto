@@ -8,6 +8,7 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
+import org.apache.velocity.runtime.directive.Parse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -197,6 +198,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"));
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableLimitOfCoresPerBuild();
+    }
+
+    @Test(testName = "Verify Build With Errors")
+    public void verifyBuildWithErrors() {
+        setRegistry("All", "Builder", "Flags");
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.DONE_BUILDING_PROJECT), 10);
     }
 
 

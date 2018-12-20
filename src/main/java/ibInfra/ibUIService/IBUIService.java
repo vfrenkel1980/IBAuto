@@ -542,6 +542,7 @@ public class IBUIService implements IIBUIService {
             try {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.DisableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to disable core limit with error: " + findFailed.getMessage());
                 Assert.fail();

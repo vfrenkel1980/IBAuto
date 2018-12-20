@@ -114,6 +114,7 @@ public class StaticDataProvider {
         public static final String BUILDSERVICE_STOPPED_FAIL = "Connection terminated while waiting for reply from local connection: Server is not reachable";
         public static final String INVALID_PARAM_ERROR = "Fatal Error: Invalid/conflicting options specified:";
         public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
+        public static final String DONE_BUILDING_PROJECT = "Done Building Project";
     }
 
     public static class VsActions {
