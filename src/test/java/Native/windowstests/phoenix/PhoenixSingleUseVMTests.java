@@ -57,7 +57,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         setUp();
         setUnsubscribeTimeOnCoord(300);
         ibService.agentServiceStop();
-        SystemActions.sleep(290);
+        SystemActions.sleep(285);
         ibService.agentServiceStart();
         try {
             ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.AUDACITY_X32_DEBUG, "%s"));
