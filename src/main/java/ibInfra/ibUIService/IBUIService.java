@@ -549,6 +549,38 @@ public class IBUIService implements IIBUIService {
             }
         }
 
+        @Override
+        public void enableSchedulingAndVerifyIcon() {
+            try {
+                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.EnableSchedulingCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+                boolean objectExists = false;
+                if (screen.exists(IBSettings.DisabledTrayIcon, 15) != null)
+                    objectExists = true;
+                Assert.assertTrue(objectExists, "Icon did not change to disabled");
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable scheduling with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void disableSchedulingAndVerifyIcon() {
+            try {
+                screen.wait(IBSettings.DisableSchedulingCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+                boolean objectExists = false;
+                if (screen.exists(IBSettings.TrayIcon.Green, 15) != null)
+                    objectExists = true;
+                Assert.assertTrue(objectExists, "Could not find Build History Window");
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable scheduling with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
 
     }
 

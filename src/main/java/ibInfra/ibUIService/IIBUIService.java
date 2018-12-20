@@ -116,5 +116,9 @@ public interface IIBUIService {
         void limitNumberOfCoresPerBuild();
 
         void disableLimitOfCoresPerBuild();
+
+        void enableSchedulingAndVerifyIcon();
+
+        void disableSchedulingAndVerifyIcon();
     }
 }

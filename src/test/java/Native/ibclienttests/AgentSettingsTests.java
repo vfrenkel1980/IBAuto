@@ -207,6 +207,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.DONE_BUILDING_PROJECT), 10);
     }
 
+    @Test(testName = "Enable Scheduling And Verify Tray Icon")
+    public void enableSchedulingAndVerifyTrayIcon() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.enableSchedulingAndVerifyIcon();
+        client.disableSchedulingAndVerifyIcon();
+    }
+
 
 
         /*------------------------------METHODS------------------------------*/
