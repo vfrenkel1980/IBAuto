@@ -194,8 +194,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.limitNumberOfCoresPerBuild();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #1)"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #1)"), "Didn't find core 1 for helper");
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"), "Found core 2 for helper");
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableLimitOfCoresPerBuild();
     }
@@ -211,6 +211,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void enableSchedulingAndVerifyTrayIcon() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableSchedulingAndVerifyIcon();
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableSchedulingAndVerifyIcon();
     }
 
