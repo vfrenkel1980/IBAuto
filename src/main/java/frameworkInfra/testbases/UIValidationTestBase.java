@@ -204,6 +204,7 @@ public class UIValidationTestBase extends TestBase {
             winService.runCommandDontWaitForTermination(command);
             SystemActions.sleep(7);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
+            SystemActions.sleep(5);
         }else {
             winService.runCommandWaitForFinish(command);
         }
