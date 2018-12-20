@@ -10,6 +10,7 @@ import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -51,6 +52,8 @@ public class SingleUseVMTestBase extends TestBase {
         int version = IIBService.getIbVersion();
         if (version != 0)
             ibService.uninstallIB(String.valueOf(version));
+        autoSubscribeSUVM("1");
+        setUnsubscribeTimeOnCoord(30);
         customPackAllocationOn();
     }
 
@@ -61,7 +64,8 @@ public class SingleUseVMTestBase extends TestBase {
         test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
         log.info("Starting test " + method.getName());
-        ibService.installSingleUseIB("Latest");
+        int exit = ibService.installSingleUseIB("Latest");
+        Assert.assertTrue(exit == 0, "Single-use  incrediBuild installation failed");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "1");
     }
@@ -71,8 +75,24 @@ public class SingleUseVMTestBase extends TestBase {
         ibService.uninstallIB("Latest");
     }
 
+    /*------------------------------METHODS------------------------------*/
     public void customPackAllocationOn() {
-        winService.runCommandWaitForFinish("REG ADD \\\\BABYLON\\HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Xoreax\\IncrediBuild\\Coordinator /v LicenseAllocationOption /t REG_SZ /d \"IbQaMode\" /f");
-        winService.runCommandWaitForFinish("copy \\BABYLON\\c$\\CustomAllocation\\agentsList.dat \\babylon\\c$\\Program Files (x86)\\IncrediBuild");
+        winService.runCommandWaitForFinish("REG ADD \\\\" + WindowsMachines.BABYLON + "\\HKLM\\" + Locations.IB_REG_ROOT + "\\Coordinator /v LicenseAllocationOption /t REG_SZ /d \"IbQaMode\" /f");
+        winService.runCommandWaitForFinish("copy \"\\" + WindowsMachines.BABYLON + "\\c$\\CustomAllocation\\agentsList.dat\" \"\\babylon\\c$\\Program Files (x86)\\IncrediBuild\"");
+    }
+
+    public void autoSubscribeSUVM(String value) {
+        winService.runCommandWaitForFinish("REG ADD \\\\" + WindowsMachines.BABYLON + "\\HKLM\\" + Locations.IB_REG_ROOT + "\\Coordinator /v AutoSubscribeCloudNode /t REG_SZ /d " + value + " /f");
+        coordServiceRestart();
+    }
+
+    public void coordServiceRestart() {
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + "net stop \"" + WindowsServices.COORD_SERVICE + "\"");
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + "net start \"" + WindowsServices.COORD_SERVICE + "\"");
+    }
+
+    public void setUnsubscribeTimeOnCoord(int time) {
+        winService.runCommandWaitForFinish("REG ADD \\\\" + WindowsMachines.BABYLON + "\\HKLM\\" + Locations.IB_REG_ROOT + "\\Coordinator /v OfflinePeriodCloudNode /t REG_SZ /d " + time + " /f");
+        coordServiceRestart();
     }
 }

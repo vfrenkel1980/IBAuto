@@ -63,6 +63,7 @@ public class StaticDataProvider {
         public static final String LINUX_SCRIPT_OUTPUT = Locations.QA_ROOT + "\\Script_Output\\";
         public static final String ENT_INSTALLER_PATH = "c:\\bld\\";
         public static final String VS_CUSTOM_IB_INSTALLER = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\";
+        public static final String EXPORT_COORDMON_FILE = QA_ROOT + "\\coordmon.xml";
     }
 
     public static class URL {

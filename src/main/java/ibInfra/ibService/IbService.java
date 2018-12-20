@@ -73,14 +73,14 @@ public class IbService implements IIBService {
         loadIbLicense(license);
     }
     /**
-     * perform IB Simgle use installation
+     * Install single-use incredibuild agent
      * @param version version to install
      * @return installation command exit code
      */
     @Override
-    public void installSingleUseIB(String version) {
+    public int installSingleUseIB(String version) {
         String installationFile = getIbConsoleInstallation(version);
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_SINGLE_USE_COMMAND, installationFile));
+        return winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_SINGLE_USE_COMMAND, installationFile));
     }
 
     /**
