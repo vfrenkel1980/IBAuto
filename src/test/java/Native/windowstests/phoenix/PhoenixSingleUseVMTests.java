@@ -48,7 +48,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         ibService.agentServiceStop();
         SystemActions.sleep(23);
         ibService.agentServiceStart();
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
@@ -60,7 +60,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         SystemActions.sleep(290);
         ibService.agentServiceStart();
         try {
-            ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
+            ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.AUDACITY_X32_DEBUG, "%s"));
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
         } catch (Exception e) {
             e.getMessage();
