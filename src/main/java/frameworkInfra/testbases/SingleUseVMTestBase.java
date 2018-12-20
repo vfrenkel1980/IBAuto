@@ -78,7 +78,7 @@ public class SingleUseVMTestBase extends TestBase {
     /*------------------------------METHODS------------------------------*/
     public void customPackAllocationOn() {
         winService.runCommandWaitForFinish("REG ADD \\\\" + WindowsMachines.BABYLON + "\\HKLM\\" + Locations.IB_REG_ROOT + "\\Coordinator /v LicenseAllocationOption /t REG_SZ /d \"IbQaMode\" /f");
-        winService.runCommandWaitForFinish("copy \"\\" + WindowsMachines.BABYLON + "\\c$\\CustomAllocation\\agentsList.dat\" \"\\babylon\\c$\\Program Files (x86)\\IncrediBuild\"");
+        winService.runCommandWaitForFinish("copy \"\\\\" + WindowsMachines.BABYLON + "\\c$\\CustomAllocation\\agentsList.dat\" \"\\\\babylon\\c$\\Program Files (x86)\\IncrediBuild\"");
     }
 
     public void autoSubscribeSUVM(String value) {
