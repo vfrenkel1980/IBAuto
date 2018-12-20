@@ -21,7 +21,7 @@ public interface IIBService {
 
     void installIB(String version, String license);
 
-    void installSingleUseIB(String version);
+    int installSingleUseIB(String version);
 
     int downgradeEntToPro(String version);
 

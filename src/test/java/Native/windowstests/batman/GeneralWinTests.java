@@ -147,10 +147,17 @@ public class GeneralWinTests extends BatmanBCTestBase{
         String msBuildSupportedVersion = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", " ms_build_support_version ", "windows_builds_ib_info ", "ms_build_support_version","build_number");
         setRegistry("15.4.8.50001","Builder", "MSBuildMaxSupportedVersion15.0");
         SystemActions.killProcess(StaticDataProvider.Processes.TRAY_ICON);
+        SystemActions.sleep(2);
         SystemActions.startProcess(StaticDataProvider.Processes.TRAY_ICON);
-        SystemActions.sleep(150);
-        String result = getRegistry("Builder", "MSBuildMaxSupportedVersion15.0");
-        Assert.assertFalse(msBuildSupportedVersion.equals(result), "The MSBuild version is not updated");
+        int timer = 0;
+        String result = "";
+        while(!msBuildSupportedVersion.equals(result)&& timer <= 200){
+            result = getRegistry("Builder", "MSBuildMaxSupportedVersion15.0");
+            int timeout = 10;
+            SystemActions.sleep(timeout);
+            timer+=timeout;
+        }
+        Assert.assertTrue(msBuildSupportedVersion.equals(result), "The MSBuild version is not updated. Found value " + result);
     }
 
     @Test(testName = "Verify PDB Error In Log")
