@@ -40,4 +40,10 @@ public class IBSettings {
     public static final Pattern StartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\start_service.png");
     public static final Pattern StopServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\stop_service.png");
     public static final Pattern RestartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\restart_service.png");
+
+    public static final Pattern EnableLimitNumOFCoresPerBuildCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_limit_cores_to_build_cb.png");
+    public static final Pattern DisableLimitNumOFCoresPerBuildCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_limit_cores_to_build_cb.png");
+    public static final Pattern NumOfCoresPerBuild = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\cores_per_build_tb.png");
+
+
 }

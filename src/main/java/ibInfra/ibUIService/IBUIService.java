@@ -15,7 +15,6 @@ import org.sikuli.script.Screen;
 import org.testng.Assert;
 
 import java.io.File;
-import java.util.concurrent.ExecutionException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -416,7 +415,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeCpuUtilCores() {
             try {
-                //screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9),5).click();
@@ -519,6 +518,32 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void limitNumberOfCoresPerBuild() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.EnableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.NumOfCoresPerBuild.similar((float) 0.9),5).click();
+                screen.type("4");
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable core limit per build with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void disableLimitOfCoresPerBuild() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.DisableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to disable core limit with error: " + findFailed.getMessage());
                 Assert.fail();
             }
         }

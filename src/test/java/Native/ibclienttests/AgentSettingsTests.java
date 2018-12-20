@@ -188,8 +188,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, should be running.");
     }
 
-
-
+    @Test(testName = "Verify Core Limit Per Build Limitation")
+    public void verifyCoreLimitPerBuildLimitation() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.limitNumberOfCoresPerBuild();
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #1)"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"));
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.disableLimitOfCoresPerBuild();
+    }
 
 
 

@@ -112,5 +112,9 @@ public interface IIBUIService {
         void startAgentService();
 
         void restartAgentService();
+
+        void limitNumberOfCoresPerBuild();
+
+        void disableLimitOfCoresPerBuild();
     }
 }
