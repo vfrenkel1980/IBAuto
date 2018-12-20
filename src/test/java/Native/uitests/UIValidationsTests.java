@@ -24,8 +24,8 @@ public class UIValidationsTests extends UIValidationTestBase {
         vsuiService.openProject(projectLocation, "15");
         if (project.contains("white")){
             vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-            SystemActions.sleep(7);
-            SystemActions.killProcess(Processes.BUILD_CONSOLE);
+            SystemActions.sleep(10);
+            vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
         }else {
             vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         }
