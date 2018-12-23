@@ -157,9 +157,9 @@ public class VSTestBase extends TestBase {
                 break;
         }
         if (VSINSTALLATION.equals("15"))
-            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "//VSDirs//15.0","VSProductDir");
+            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\VSDirs\\15.0","VSProductDir");
         else
-            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "//VSDirs//16.0","VSProductDir");
+            devenvPath = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\VSDirs\\16.0","VSProductDir");
         extent.flush();
     }
 
