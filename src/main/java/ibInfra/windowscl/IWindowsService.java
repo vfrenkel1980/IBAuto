@@ -2,7 +2,9 @@ package ibInfra.windowscl;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public interface IWindowsService {
 
@@ -45,4 +47,6 @@ public interface IWindowsService {
     String changeCurDirTo(String path);
 
     String getWindowsTEMPfolder();
+
+    ArrayList<String> textFileToList(String filepath);
 }

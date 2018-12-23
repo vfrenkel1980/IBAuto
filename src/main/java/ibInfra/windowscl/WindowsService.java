@@ -16,6 +16,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -286,6 +287,25 @@ public class WindowsService implements IWindowsService {
     public String getWindowsTEMPfolder(){
         String path = System.getProperty("java.io.tmpdir");
         return path;
+    }
+
+    @Override
+    public ArrayList<String> textFileToList(String filepath){
+        Scanner s = null;
+        ArrayList<String> list = new ArrayList();
+        try {
+            s = new Scanner(new File(filepath));
+            while (s.hasNextLine()){
+                list.add(s.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            test.log(Status.ERROR, "File not found.\n" +
+                    e.getMessage());
+        }finally {
+            s.close();
+        }
+        return list;
     }
 
     @Override
