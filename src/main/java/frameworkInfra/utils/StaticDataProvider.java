@@ -625,6 +625,7 @@ public class StaticDataProvider {
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "VM-W7x64-Clean";
+        public static final String FASTRING = "sr4-w10-fastring";
         public static final String SINGLE_USE_WIN10_HLPR = " -s -u admin -p 4illumination \\Sr3-w10-c";
 
     }
