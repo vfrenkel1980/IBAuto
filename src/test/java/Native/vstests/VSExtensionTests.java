@@ -15,7 +15,7 @@ import java.io.IOException;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class VS2017ExtensionTests extends VSTestBase {
+public class VSExtensionTests extends VSTestBase {
 
     @Test(testName = "Check version of VS")
     public void getVsVersion(){

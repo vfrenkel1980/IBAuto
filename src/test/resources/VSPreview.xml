@@ -8,7 +8,7 @@
 
     <test name="VSTests">
         <classes>
-            <class name ="Native.vstests.VS2017ExtensionTests" />
+            <class name ="Native.vstests.VSExtensionTests" />
         </classes>
     </test>
 </suite>
