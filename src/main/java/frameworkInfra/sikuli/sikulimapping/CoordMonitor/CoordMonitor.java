@@ -13,4 +13,5 @@ public class CoordMonitor {
     public static final Pattern UnsubscribedAgentValidation = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\unsubscribedValidation.png");
     public static final Pattern SubscribeAgentMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\subscribeMenu.png");
     public static final Pattern SubscribedAgentValidation = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\subscribedValidation.png");
+    public static final Pattern AllowRemoteAdministrationMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\allowRemoteAdministration.png");
 }

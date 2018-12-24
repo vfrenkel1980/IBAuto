@@ -666,6 +666,18 @@ public class IBUIService implements IIBUIService {
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find agent subscribed verification");
         }
+
+        @Override
+        public void clickAllowRemoteAdministration() {
+            test.log(Status.INFO, "Clicking allow remote administration");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to click allow remote administration, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
     }
 
 }

@@ -140,6 +140,8 @@ public interface IIBUIService {
 
         void verifyAgentIsSubscribed();
 
+        void clickAllowRemoteAdministration();
+
 
 
 
