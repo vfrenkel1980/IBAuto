@@ -121,4 +121,29 @@ public interface IIBUIService {
 
         void disableSchedulingAndVerifyIcon();
     }
+
+    interface ICoordinator{
+
+        void disableAsHelper();
+
+        void verifyHelperIsDisabled();
+
+        void enableAsHelper();
+
+        void verifyHelperIsEnabled();
+
+        void unsubscribeAgent();
+
+        void verifyAgentIsUnsubscribed();
+
+        void subscribeAgent();
+
+        void verifyAgentIsSubscribed();
+
+        void clickAllowRemoteAdministration();
+
+
+
+
+    }
 }

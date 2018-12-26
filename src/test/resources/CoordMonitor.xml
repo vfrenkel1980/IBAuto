@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="VSPreview"  >
+<suite name="CoordMonitor"  >
+    <!-- suite name="Suite Name" -->
 
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="VSTests">
+    <test name="Test" allow-return-values="true">
         <classes>
-            <class name ="Native.vstests.VSExtensionTests" />
+            <class name ="Native.coordMonitor.CoordMonitorTests" />
         </classes>
     </test>
 </suite>

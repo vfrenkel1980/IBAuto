@@ -77,8 +77,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        VSUIService vsuiService = new VSUIService();
-        vsuiService.openVSInstance("preview", false, "");
-        vsuiService.openProject("\"C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln\"", "16");
+        WindowsService windowsService = new WindowsService();
+        windowsService.runCommandWaitForFinish(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 ipconfig 2>c:\\qa\\simulation\\buildlog.txt");
     }
 }

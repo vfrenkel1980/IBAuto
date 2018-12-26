@@ -1,6 +1,7 @@
 package ibInfra.ibUIService;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
@@ -582,6 +583,101 @@ public class IBUIService implements IIBUIService {
         }
 
 
+    }
+
+    public class Coordinator implements ICoordinator {
+
+        @Override
+        public void disableAsHelper() {
+            test.log(Status.INFO, "Disabling agent as helper");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to disable as helper, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyHelperIsDisabled() {
+            boolean objectExists = false;
+            if (screen.exists(CoordMonitor.DisabledAgentValidation, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find agent disabled verification");
+        }
+
+        @Override
+        public void enableAsHelper() {
+            test.log(Status.INFO, "Enabling agent as helper");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.EnableAsHelperMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable as helper, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyHelperIsEnabled() {
+            boolean objectExists = false;
+            if (screen.exists(CoordMonitor.EnabledAgentValidation, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find agent enabled verification");
+        }
+
+        @Override
+        public void unsubscribeAgent() {
+            test.log(Status.INFO, "Unsubscribing agent as helper");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to unsubscribe agent, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyAgentIsUnsubscribed() {
+            boolean objectExists = false;
+            if (screen.exists(CoordMonitor.UnsubscribedAgentValidation, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find agent unsubscribed verification");
+        }
+
+        @Override
+        public void subscribeAgent() {
+            test.log(Status.INFO, "Subscribing agent as helper");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to subscribe agent, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyAgentIsSubscribed() {
+            boolean objectExists = false;
+            if (screen.exists(CoordMonitor.SubscribedAgentValidation, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find agent subscribed verification");
+        }
+
+        @Override
+        public void clickAllowRemoteAdministration() {
+            test.log(Status.INFO, "Clicking allow remote administration");
+            try {
+                screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to click allow remote administration, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
     }
 
 }

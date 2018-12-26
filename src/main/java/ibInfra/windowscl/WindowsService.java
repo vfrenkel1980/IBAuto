@@ -87,6 +87,11 @@ public class WindowsService implements IWindowsService {
                 commandOutput.append(line);
                 commandOutput.append('\n');
             }
+            BufferedReader input2 = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+            while ((line = input2.readLine()) != null) {
+                commandOutput.append(line);
+                commandOutput.append('\n');
+            }
             pr.waitFor();
             System.out.println("Command " + command + " - Completed Successfully");
             return commandOutput.toString();
