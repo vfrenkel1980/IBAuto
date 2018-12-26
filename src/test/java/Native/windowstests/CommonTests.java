@@ -19,8 +19,12 @@ public class CommonTests extends WindowsSimTestBase {
         for (String file : files) {
             for (String aERROR_LIST : LogOutput.ERROR_LIST) {
                 if(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs\\" + file, aERROR_LIST)) {
-                    errorCount++;
-                    test.log(Status.WARNING, aERROR_LIST + " Appears in " + file);
+                    for(String aIGNORE_ERROR_LIST : winService.textFileToList(Locations.IGNORE_ERRORS_LIST)) {
+                        if (!Parser.doesFileContainString(IbLocations.IB_ROOT + "\\logs\\" + file, aIGNORE_ERROR_LIST)) {
+                            errorCount++;
+                            test.log(Status.WARNING, aERROR_LIST + " Appears in " + file);
+                        }
+                    }
                 }
             }
         }
