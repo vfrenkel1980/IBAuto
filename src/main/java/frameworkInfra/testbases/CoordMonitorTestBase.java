@@ -52,7 +52,7 @@ public class CoordMonitorTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
 
-        winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
+        winService.runCommandDontWaitForTermination(IbLocations.COORDMONITOR);
     }
 
     @BeforeMethod

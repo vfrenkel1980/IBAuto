@@ -18,6 +18,7 @@ public class StaticDataProvider {
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
+        public static final String COORDMONITOR = "\"" + IbLocations.IB_ROOT + "\\coordmonitor.exe" + "\"" + " ";
         public static final String IB_SHORTCUTS = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\IncrediBuild";
     }
 
