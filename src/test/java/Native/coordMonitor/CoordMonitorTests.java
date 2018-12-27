@@ -2,6 +2,7 @@ package Native.coordMonitor;
 
 import frameworkInfra.testbases.CoordMonitorTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -52,5 +53,19 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
         Assert.assertTrue(out.contains("error code 4"), "successfully ran /RESETALLFILECACHES - should FAIL");
+    }
+
+    @Test(testName = "Stop Coordinator Service", dependsOnMethods = {"disableRemoteAdministration"})
+    public void stopCoordinatorService() {
+        coordinator.stopCoordService();
+        SystemActions.sleep(3);
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not stop");
+    }
+
+    @Test(testName = "Start Coordinator Service", dependsOnMethods = {"disableRemoteAdministration"})
+    public void startCoordinatorService() {
+        coordinator.startCoordService();
+        SystemActions.sleep(3);
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not start");
     }
 }

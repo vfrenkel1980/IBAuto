@@ -142,6 +142,10 @@ public interface IIBUIService {
 
         void clickAllowRemoteAdministration();
 
+        void stopCoordService();
+
+        void startCoordService();
+
 
 
 
