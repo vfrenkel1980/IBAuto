@@ -3,6 +3,7 @@ package Native.windowstests.batman;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.RegistryService;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
@@ -158,12 +159,14 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "Xbox_One_Mix - 2015 debug|Durango - build" , groups = { "Build" })
+    @Ignore
     public void xboxOneMix2015DebugDurangoBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.XBOX_ONE_MIX_DEBUG_DURANGO, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Xbox_One_Mix - 2015 release|Durango - build" , groups = { "Build" })
+    @Ignore
     public void xboxOneMix2015ReleaseDurangoBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.XBOX_ONE_MIX_RELEASE_DURANGO, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);

@@ -3,6 +3,7 @@ package Native.windowstests.alfred;
 import frameworkInfra.testbases.AlfredTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AlfredTests extends AlfredTestBase {
@@ -20,6 +21,7 @@ public class AlfredTests extends AlfredTestBase {
     }
 
     @Test(testName = "Blender 2017 - Debug - build" , groups = { "Build" })
+    @Ignore
     public void blender2017DebugBuild(){
         int returnCode = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.VC15_ALFRED.BLENDER_X64_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
