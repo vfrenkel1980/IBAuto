@@ -41,14 +41,24 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Chrome release - build" , groups = { "Build" })
-    public void chromeReleaseBuild(){
+//    @Test(testName = "Chrome release - build" , groups = { "Build" })
+//    public void chromeReleaseBuild(){
+//        if (testName.equals("Minimal")){
+//            test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
+//            throw new SkipException("Skipped test");
+//        }
+//        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN);
+//        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_BUILD);
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+
+    @Test(testName = "Chrome X64 GN - build" , groups = { "Build" })
+    public void chromeX64NGBuild(){
         if (testName.equals("Minimal")){
             test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
             throw new SkipException("Skipped test");
         }
-        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN);
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_BUILD);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.CHROME_X64_GN, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
