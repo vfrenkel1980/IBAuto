@@ -51,7 +51,8 @@ public class CoordMonitorTestBase extends TestBase {
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
-
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "0");
         winService.runCommandDontWaitForTermination(IbLocations.COORDMONITOR);
     }
 
