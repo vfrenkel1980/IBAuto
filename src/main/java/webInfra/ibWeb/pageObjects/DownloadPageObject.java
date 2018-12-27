@@ -147,7 +147,7 @@ public class DownloadPageObject {
         country.selectByVisibleText(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
-            case "united states":
+            case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
             case "canada":
@@ -197,7 +197,7 @@ public class DownloadPageObject {
         country.selectByVisibleText(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
-            case "united states":
+            case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
             case "canada":
@@ -278,7 +278,7 @@ public class DownloadPageObject {
         country.selectByVisibleText(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
-            case "united states":
+            case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
             case "canada":
@@ -417,7 +417,7 @@ public class DownloadPageObject {
         country.selectByVisibleText("Choose your Country");
         Assert.assertTrue(eventWebDriver.findElement(countryempty).isDisplayed());
 
-        country.selectByVisibleText("United States");
+        country.selectByVisibleText("USA");
         Assert.assertTrue(eventWebDriver.findElement(US_STATE_DDL).isDisplayed());
         SystemActions.sleep(1);
         country.selectByVisibleText("Canada");
