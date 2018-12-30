@@ -18,7 +18,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
         WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", "blah@blah.com", "123123",
-                "canada", "Alberta","IB","city", "other", "Brain", true, true,
+                "Canada", "Alberta","IB","city", "other", "Brain", true, true,
                 false,false, true, true, true, false, true,false,true,true,
                 true,true,false,true,false,true,true,true,false,true,
                 false,true,true);

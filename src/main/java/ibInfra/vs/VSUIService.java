@@ -88,19 +88,19 @@ public class VSUIService implements IVSUIService {
     @Override
     public void openProject(String projectPath, String version) {
 
-        if (version.equals("16")){
-            driver.findElementByName("Open a project or solution").click();
-        }
-        else {
+        if (version.equals("15")){
             driver.findElementByName("File").click();
             driver.findElementByName("Open").click();
             driver.findElementByName("Project/Solution...").click();
+        }
+        else {
+            driver.findElementByName("Open a project or solution").click();
         }
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
         WebDriverWait wait = new WebDriverWait(driver,90);
-        driver.getPageSource();
+        driver.switchTo().window(driver.getWindowHandle());
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution '\")]"))));
         test.log(Status.INFO, projectPath + " project opened");
     }
@@ -108,17 +108,7 @@ public class VSUIService implements IVSUIService {
     @Override
     public void createNewProject(String projectName, String version) {
         List<WebElement> nameTB;
-        if (version.equals("16")){
-            driver.findElementByName("Create a new project").click();
-            driver.findElementByName("Windows Console Application").click();
-            driver.findElementByName("Next").click();
-            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
-            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
-            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
-            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
-            driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
-        }
-        else{
+        if (version.equals("15")){
             driver.findElementByName("File").click();
             driver.findElementByName("New").click();
             driver.findElementByName("Project...").click();
@@ -130,7 +120,19 @@ public class VSUIService implements IVSUIService {
             nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
             driver.findElementByName("OK").click();
         }
+        else{
+            driver.findElementByName("Create a new project").click();
+            driver.findElementByName("Windows Console Application").click();
+            driver.findElementByName("Next").click();
+            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
+            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
+            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
+            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
+            driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
+        }
         WebDriverWait wait = new WebDriverWait(driver,90);
+        //in vs2019 the following command will switch to the new opened windows (a new session)
+        driver.switchTo().window(driver.getWindowHandle());
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[@Name=\"Build\"]"))));
 
     }

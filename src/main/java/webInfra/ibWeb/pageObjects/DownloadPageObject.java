@@ -150,7 +150,7 @@ public class DownloadPageObject {
             case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
-            case "canada":
+            case "Canada":
                 eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
                 break;
         }
@@ -200,7 +200,7 @@ public class DownloadPageObject {
             case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
-            case "canada":
+            case "Canada":
                 eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
                 break;
         }
@@ -281,7 +281,7 @@ public class DownloadPageObject {
             case "USA":
                 eventWebDriver.findElement(US_STATE_DDL).sendKeys(rf.getState());
                 break;
-            case "canada":
+            case "Canada":
                 eventWebDriver.findElement(CANADA_STATE_DDL).sendKeys(rf.getState());
                 break;
         }
