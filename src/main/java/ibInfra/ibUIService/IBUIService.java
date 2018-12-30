@@ -631,6 +631,7 @@ public class IBUIService implements IIBUIService {
         public void unsubscribeAgent() {
             test.log(Status.INFO, "Unsubscribing agent as helper");
             try {
+                SystemActions.sleep(5);
                 screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
                 screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.8),15).click();
             } catch (FindFailed findFailed) {
@@ -651,6 +652,7 @@ public class IBUIService implements IIBUIService {
         public void subscribeAgent() {
             test.log(Status.INFO, "Subscribing agent as helper");
             try {
+                SystemActions.sleep(5);
                 screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8),15).rightClick();
                 screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.8),15).click();
             } catch (FindFailed findFailed) {
