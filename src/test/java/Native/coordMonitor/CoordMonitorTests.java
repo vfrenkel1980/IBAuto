@@ -48,7 +48,7 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(out.contains("error code 4"), "successfully ran /RESETALLFILECACHES - should FAIL");
     }
 
-    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"allowRemoteAdministration"})
+    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"disableRemoteAdministration"})
     public void allowRemoteAdministration() {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
