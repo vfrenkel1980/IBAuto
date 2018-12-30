@@ -25,8 +25,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0","Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
-        Assert.assertFalse(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
+        Assert.assertFalse(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE), "failed to verify avoid local in output log");
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
     @Test(testName = "Avoid local Execution turned OFF, Standalone ON")
@@ -34,8 +34,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("1","Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
     }
 
     @Test(testName = "Avoid local Execution turned OFF, Standalone OFF")
@@ -43,8 +43,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
     @Test(testName = "Verify Extended logging level")
@@ -205,7 +205,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyBuildWithErrors() {
         setRegistry("All", "Builder", "Flags");
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.DONE_BUILDING_PROJECT), 10);
+        Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED), 8);
     }
 
     @Test(testName = "Enable Scheduling And Verify Tray Icon")

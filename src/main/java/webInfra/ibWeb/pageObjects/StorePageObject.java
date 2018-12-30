@@ -100,7 +100,6 @@ public class StorePageObject {
 
     public void enterStoreNoLicense(){
         eventWebDriver.findElement(ENTER_STORE).click();
-        eventWebDriver.findElement(CREATE_NEW_LICENSE_CB).click();
         eventWebDriver.findElement(NEW_LICENSE_NAME_TB).sendKeys("NewLic");
         eventWebDriver.findElement(NEW_LICENSE_MAIL_TB).sendKeys(mailAddress);
         eventWebDriver.findElement(CONTINUE_BTN).click();
@@ -115,7 +114,7 @@ public class StorePageObject {
     }
 
     public void continueToCheckout(){
-        eventWebDriver.findElement(CONTINUE_TO_CHECKOUT_BTN).click();
+        wait.until(ExpectedConditions.elementToBeClickable(CONTINUE_TO_CHECKOUT_BTN)).click();
     }
 
     public void continueToCheckoutPopup(){
