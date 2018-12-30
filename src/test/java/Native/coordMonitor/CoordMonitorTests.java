@@ -41,18 +41,18 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Agent is not listed in build log, should be subscribed");
     }
 
-    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"subscribeAgent"})
-    public void allowRemoteAdministration() {
-        coordinator.clickAllowRemoteAdministration();
-        String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
-        Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
-    }
-
-    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"allowRemoteAdministration"})
+    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"subscribeAgent"})
     public void disableRemoteAdministration() {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
         Assert.assertTrue(out.contains("error code 4"), "successfully ran /RESETALLFILECACHES - should FAIL");
+    }
+
+    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"allowRemoteAdministration"})
+    public void allowRemoteAdministration() {
+        coordinator.clickAllowRemoteAdministration();
+        String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
+        Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
     }
 
     @Test(testName = "Stop Coordinator Service", dependsOnMethods = {"disableRemoteAdministration"})
