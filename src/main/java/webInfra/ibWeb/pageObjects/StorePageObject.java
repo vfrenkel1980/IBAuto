@@ -100,6 +100,7 @@ public class StorePageObject {
 
     public void enterStoreNoLicense(){
         eventWebDriver.findElement(ENTER_STORE).click();
+        wait.until(ExpectedConditions.elementToBeClickable(NEW_LICENSE_MAIL_TB));
         eventWebDriver.findElement(NEW_LICENSE_NAME_TB).sendKeys("NewLic");
         eventWebDriver.findElement(NEW_LICENSE_MAIL_TB).sendKeys(mailAddress);
         eventWebDriver.findElement(CONTINUE_BTN).click();
@@ -110,6 +111,7 @@ public class StorePageObject {
     }
 
     public void reduceSolutionByName(String solName){
+        SystemActions.sleep(3);
         eventWebDriver.findElement(By.xpath(String.format(REDUCE_SOLUTIONS, solName))).click();
     }
 
@@ -235,8 +237,8 @@ public class StorePageObject {
     }
 
     public void clickGoBackPopupBtn(){
-        SystemActions.sleep(1);
-        wait.until(ExpectedConditions.elementToBeClickable(GO_BACK_POPUP_BTN)).click();
+        SystemActions.sleep(3);
+        eventWebDriver.findElement(GO_BACK_POPUP_BTN).click();
     }
 
 

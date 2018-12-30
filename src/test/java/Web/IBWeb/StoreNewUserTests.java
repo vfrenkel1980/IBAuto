@@ -105,7 +105,7 @@ public class StoreNewUserTests extends StoreTestBase {
         storePageObject.addSolutionByName(vsC);
         storePageObject.addSolutionByName(vsC);
         storePageObject.addSolutionByName(vsC);
-        storePageObject.changeNumOfCores("2");
+        storePageObject.changeNumberOfDevMachines("2");
         storePageObject.continueToCheckout();
         storePageObject.verifyMoreAgentsThanSolutions();
         storePageObject.clickGoBackPopupBtn();
@@ -113,7 +113,7 @@ public class StoreNewUserTests extends StoreTestBase {
         storePageObject.reduceSolutionByName(vsC);
         storePageObject.reduceSolutionByName(vsC);
         storePageObject.reduceSolutionByName(vsC);
-        storePageObject.changeNumOfCores("1");
+        storePageObject.changeNumberOfDevMachines("0");
     }
 
     @Test(testName = "Select Solution And Continue To Payment", dependsOnMethods = {"selectMoreSolutionsThanAgents"})
