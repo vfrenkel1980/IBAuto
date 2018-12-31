@@ -37,7 +37,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
 
     @Test(testName = "SU VM Coord Mon Test")
     public void suVMFCoordMonTest() {
-        setUp();
+        ibService.agentServiceStart();
         exportCoordMon();
         Assert.assertTrue(Parser.doesFileContainString(Locations.EXPORT_COORDMON_FILE, "phoenix"), "Single Use vm is not displayed on coordinator monitor");
     }
