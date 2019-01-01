@@ -557,7 +557,9 @@ public class StaticDataProvider {
     }
 
     public static class DockerCommands {
-        public static final String WIN10_DOC_CONTAINER_EXE ="docker exec -i affectionate_swartz ";
+        public static final String WIN10_DOC_CONTAINER = " affectionate_swartz ";
+        public static final String DOCKER_EXEC ="docker exec -i ";
+        public static final String DOCKER_START_CONTAINER ="docker start -ai ";
     }
 
     public static class MemoryThresholds {
