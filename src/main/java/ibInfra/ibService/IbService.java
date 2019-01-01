@@ -194,7 +194,7 @@ public class IbService implements IIBService {
      */
     @Override
     public String getIbVsExtensionVersion(String VsDevenvInstallPath) {
-        return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "\\Extensions\\IncredibuildExtension\\manifest.json", "version");
+        return CustomJsonParser.getValueFromKey(VsDevenvInstallPath + "\\Common7\\IDE\\Extensions\\IncredibuildExtension\\manifest.json", "version");
     }
 
     /**
