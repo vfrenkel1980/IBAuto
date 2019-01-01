@@ -97,13 +97,14 @@ public class GeneralWinTests extends BatmanBCTestBase{
             SystemActions.sleep(25);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
-            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"));
-
+            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"),"buildLog.txt on SECOND_INITIATOR_LOG_PATH is not exist");
             boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
+            test.log(Status.INFO, "buildlog isPresent value is "+isPresent);
             if (isPresent) {
                 SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
+                test.log(Status.INFO, "Locations.QA_ROOT \\logs\\for_investigation\\buildlog.txt");
             }
-            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+           // SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
             Assert.assertTrue(isPresent, "No agent assigned to build");
         }
         catch (Exception e){
