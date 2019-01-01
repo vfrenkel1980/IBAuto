@@ -100,7 +100,11 @@ public class VSUIService implements IVSUIService {
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
         WebDriverWait wait = new WebDriverWait(driver,90);
-        driver.switchTo().window(driver.getWindowHandle());
+        try {
+            driver.switchTo().window(driver.getWindowHandle());
+        } catch (Exception e){
+            driver.switchTo().window(driver.getWindowHandle());
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution '\")]"))));
         test.log(Status.INFO, projectPath + " project opened");
     }
@@ -132,7 +136,11 @@ public class VSUIService implements IVSUIService {
         }
         WebDriverWait wait = new WebDriverWait(driver,90);
         //in vs2019 the following command will switch to the new opened windows (a new session)
-        driver.switchTo().window(driver.getWindowHandle());
+        try {
+            driver.switchTo().window(driver.getWindowHandle());
+        } catch (Exception e){
+            driver.switchTo().window(driver.getWindowHandle());
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[@Name=\"Build\"]"))));
 
     }
