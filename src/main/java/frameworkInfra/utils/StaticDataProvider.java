@@ -147,7 +147,7 @@ public class StaticDataProvider {
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
-            public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @"+Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
+            public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
         }
 
         public static class EXITCODEBASE {
@@ -181,6 +181,7 @@ public class StaticDataProvider {
             public static final String ANDROIDCS_ANYCPU_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidAppCS\\AndroidAppCS.sln\" /%s /cfg=\"Debug|Any CPU\" /title=\"Android CS -Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CORECLR_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\coreclr-2.1.6\\bin\\obj\\Windows_NT.x64.Debug\\CoreCLR.sln\" /%s /cfg=\"debug|x64\" /title=\"Core CLR 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CHROME_X64_GN = "\"D:\\chromium\\src\\out\\Default\\all.sln\" /%s /cfg=\"GN|x64\" /title=\"Chrome x64 GN build\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String AUDACITY_SECOND_INITIATOR = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"  /showagent /showcmd /showtime /log=\"c:\\QA\\Simulation\\buildLog.txt\"";
         }
 
         public static class VC14_BATMAN {
@@ -435,6 +436,7 @@ public class StaticDataProvider {
             public static final String ACE_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"";
             public static final String CONSAPP_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln\" /%s /cfg=\"release|x64\" /title=\"Cons App 2017 - Release\"";
         }
+
         public static class UIVALIDATIONS {
             public static final String GREEN01 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green01\\Green01.sln\" /rebuild /cfg=\"debug|x86\" /title=Green01";
             public static final String GREEN02 = "\"C:\\QA\\Simulation\\IB_ColorMarking_test\\Green\\Green02\\RunMe.bat\"";
@@ -549,14 +551,16 @@ public class StaticDataProvider {
         public static final String UNLOAD_IB_LICENSE = "\"" + IbLocations.IB_ROOT + "\\xlicproc.exe\" /unloadlicense";
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\%s --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\%s --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP.Native --includeRecommended -p --norestart --path cache=\"E:\\cache\" --path shared=\"E:\\shared\" --path install=\"E:\\Microsoft Visual Studio\\2017\\Professional\"";
-        public static final String UPDATE_VS= "C:\\QA\\Simulation\\VSintallation\\%s update --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
+        public static final String UPDATE_VS = "C:\\QA\\Simulation\\VSintallation\\%s update --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\%s modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\%s modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
 
     }
 
     public static class DockerCommands {
-        public static final String WIN10_DOC_CONTAINER_EXE ="docker exec -i affectionate_swartz ";
+        public static final String WIN10_DOC_CONTAINER = "affectionate_swartz";
+        public static final String DOCKER_EXEC = "docker exec -i ";
+        public static final String DOCKER_START_CONTAINER = "docker start -ai ";
     }
 
     public static class MemoryThresholds {
@@ -612,7 +616,7 @@ public class StaticDataProvider {
     }
 
     public static class LinuxDB {
-        public static final String DB_COORD_REPORT= "incredibuildCoordinatorReport.db";
+        public static final String DB_COORD_REPORT = "incredibuildCoordinatorReport.db";
         public static final String COLUMN_MACHINE = "MachineName";
         public static final String COLUMN_CONNECTED_SINCE = "ConnectedSince";
         public static final String COLUMN_VERSION = "IncredibuildVersion";
@@ -626,10 +630,8 @@ public class StaticDataProvider {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String BABYLON = "babylon";
-        public static final String SECOND_INITIATOR = "VM-W7x64-Clean";
+        public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
-        public static final String SINGLE_USE_WIN10_HLPR = " -s -u admin -p 4illumination \\Sr3-w10-c";
-
     }
 
     public static class LinuxMachines {
@@ -700,7 +702,7 @@ public class StaticDataProvider {
 
     public static class VMrunCommands {
 
-        public static final String VMRUN =  "\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\"";
+        public static final String VMRUN = "\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\"";
 
 
     }
