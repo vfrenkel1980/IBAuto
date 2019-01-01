@@ -552,8 +552,8 @@ public class StaticDataProvider {
         public static final String INSTALL_VS_WO_IB = "C:\\QA\\Simulation\\VSintallation\\%s --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
         public static final String INSTALL_VS_WITH_IB = "C:\\QA\\Simulation\\VSintallation\\%s --add Microsoft.VisualStudio.Workload.NativeDesktop --add Component.Incredibuild --add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP.Native --includeRecommended -p --norestart --path cache=\"E:\\cache\" --path shared=\"E:\\shared\" --path install=\"E:\\Microsoft Visual Studio\\2017\\Professional\"";
         public static final String UPDATE_VS = "C:\\QA\\Simulation\\VSintallation\\%s update --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended -p --norestart";
-        public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\%s modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" --add Component.Incredibuild --includeRecommended -p";
-        public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\%s modify --installpath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\Preview\\Professional\" --remove Component.Incredibuild -p";
+        public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\%s modify --add Component.Incredibuild --includeRecommended -p";
+        public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\%s modify  --remove Component.Incredibuild -p";
 
     }
 
