@@ -68,6 +68,7 @@ public class CoordMonitorTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result){
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        ibService.coordServiceStart();
         extent.flush();
     }
 }

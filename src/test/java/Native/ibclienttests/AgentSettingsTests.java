@@ -25,7 +25,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0","Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
-        Assert.assertFalse(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE), "failed to verify avoid local in output log");
+        Assert.assertTrue(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE), "failed to verify avoid local in output log");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
