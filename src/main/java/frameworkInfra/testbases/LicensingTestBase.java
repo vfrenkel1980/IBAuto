@@ -91,14 +91,14 @@ public class LicensingTestBase extends ReleaseTestBase{
                 break;
             case ("6"): //All Allocated Packages are temporary and expired
                 scenarioDescription = "All Allocated Packages are temporary and expired";
-                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018 - Expired Solutions.IB_lic");
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic");
                 winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
                 break;
             case ("7"): //Expired license loading
                 scenarioDescription = "Expired license loading";
                 SystemActions.deleteFile(StaticDataProvider.IbLocations.IB_ROOT + "\\Logs\\XlicProc.log");
-                ibService.loadIbLicense("IncrediBuild - Vlad - expired license JAN 2018.IB_lic");
+                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment December 2018 - license expired.IB_lic");
                 SystemActions.sleep(5);
                 Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.IbLocations.IB_ROOT + "\\Logs\\XlicProc.log", "License has expired and can not be loaded. Please contact sales@incredibuild.com to receive a new license."));
                 break;

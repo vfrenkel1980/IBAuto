@@ -11,7 +11,7 @@ public class LicensingMiscTests extends LicensingTestBase {
 
     @Test(testName = "Verify Expired Package Output")
     public void verifyExpiredPackageOutput(){
-        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018 - Expired Solutions.IB_lic");
+        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic");
         int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(5);
         int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
