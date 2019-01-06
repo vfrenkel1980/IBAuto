@@ -527,6 +527,9 @@ public class StaticDataProvider {
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
         public static final String RESET_SINGLE_USE = "ibat";
+        public static final String VS_INSTALL_DIR = "InstallDir";
+        public static final String VS_PRODUCT_DIR = "VSProductDir";
+        public static final String VS_INSTALLED = "Installed";
     }
 
     public static class IbLicenses {

@@ -398,6 +398,18 @@ public class SetupTests extends SetupTestBase {
         Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_SHORTCUTS), "Start menu shortcuts weren't removed in verifyEnterpriseUninstallLeftovers test");
     }
 
+    @Test(testName = "Verify VS_Integrated Parameter")
+    public void verifyVSIntegratedParameter() {
+        boolean isRunning = false;
+        String process = ibService.getIbConsoleInstallation("Latest");
+        winService.runCommandDontWaitForTermination(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /vs_integrated", process));
+        while (winService.isProcessRunning(process.substring(process.lastIndexOf("\\") + 1)))
+            if (winService.isProcessRunning("vsixinstaller.exe"))
+                isRunning = true;
+
+        Assert.assertFalse(isRunning, "VSIXIstaller running, shouldn't be");
+    }
+
     /*-------------------------------METHODS-------------------------------*/
 
     private void runBuildAndAssert(){

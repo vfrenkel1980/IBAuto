@@ -126,7 +126,8 @@ public class WindowsService implements IWindowsService {
         if (output.contains("INFO: No tasks are running")) {
             isRunning = false;
         }
-        test.log(Status.INFO, processName + " Finished running");
+        if (test != null)
+            test.log(Status.INFO, processName + " Finished running");
         System.out.println(isRunning);
         return isRunning;
     }

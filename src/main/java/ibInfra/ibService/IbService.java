@@ -72,6 +72,7 @@ public class IbService implements IIBService {
         WindowsCommands.LOAD_IB_LICENSE = Processes.XLICPROC + "\"" + Locations.QA_ROOT + "\\License\\%s\"";
         loadIbLicense(license);
     }
+
     /**
      * Install single-use incredibuild agent
      * @param version version to install
@@ -300,11 +301,13 @@ public class IbService implements IIBService {
     public boolean isLicenseLoaded() {
         File file = new File(IbLocations.IB_ROOT + "\\CoordLicense.dat");
         if(file.exists()) {
-            test.log(Status.INFO, "License is loaded");
+            if (test != null)
+                test.log(Status.INFO, "License is loaded");
             return true;
         }
         else{
-            test.log(Status.WARNING, "License is NOT loaded. CoordLicense.dat does not exist in " + IbLocations.IB_ROOT);
+            if (test != null)
+                test.log(Status.WARNING, "License is NOT loaded. CoordLicense.dat does not exist in " + IbLocations.IB_ROOT);
             return false;
         }
     }
