@@ -323,6 +323,7 @@ public class IBUIService implements IIBUIService {
         public void openMonitorFromTray() {
             test.log(Status.INFO, "Opening Monitor from tray");
             try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -335,6 +336,7 @@ public class IBUIService implements IIBUIService {
         public void openHistoryFromTray() {
             test.log(Status.INFO, "Opening History from tray");
             try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.historyTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -347,6 +349,7 @@ public class IBUIService implements IIBUIService {
         public void openCoordMonitorFromTray() {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -359,6 +362,7 @@ public class IBUIService implements IIBUIService {
         public void openAgentSettingsFromTray() {
             test.log(Status.INFO, "Opening Agent Settings from tray");
             try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -404,6 +408,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Clicking on Clear History");
             try {
                 screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.GeneralTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5),10).click();
                 SystemActions.sleep(10);
