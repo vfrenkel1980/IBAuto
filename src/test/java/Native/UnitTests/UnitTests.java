@@ -77,7 +77,7 @@ public class UnitTests {
 
     @Test(testName = "test3")
     public void test3 () {
-        WindowsService windowsService = new WindowsService();
-        windowsService.runCommandWaitForFinish(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 ipconfig 2>c:\\qa\\simulation\\buildlog.txt");
+        IbService ibService = new IbService();
+        ibService.verifyAvoidLocal("C:\\Users\\Mark\\Desktop\\buildLog.txt");
     }
 }

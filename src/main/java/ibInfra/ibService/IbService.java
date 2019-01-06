@@ -412,6 +412,11 @@ public class IbService implements IIBService {
     }
 
     @Override
+    public void coordServiceStart() {
+        winService.runCommandWaitForFinish("net start \"" + WindowsServices.COORD_SERVICE + "\"");
+    }
+
+    @Override
     public void agentServiceStop() {
         winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
 

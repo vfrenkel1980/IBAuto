@@ -81,6 +81,8 @@ public interface IIBService {
 
     void agentServiceStart();
 
+    void coordServiceStart();
+
     void agentServiceStop();
 
 
