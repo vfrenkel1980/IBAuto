@@ -83,14 +83,14 @@ public class WindowsTestBase extends TestBase {
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
         //kill tray icon
         SystemActions.killProcess(Processes.TRAY_ICON);
-        //delete logs folder
         suiteName = getSuiteName(context);
         if (!suiteName.equals("Babylon")) {
+            //delete logs folder
             SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
             SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
+            //delete build logs folder
+            SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         }
-        //delete build logs folder
-        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
