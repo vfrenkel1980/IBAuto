@@ -24,7 +24,6 @@ public class CommonTests extends WindowsSimTestBase {
         boolean isFail = false;
         List<String> files = SystemActions.getAllFilesInDirectory(IbLocations.IB_ROOT + "\\logs");
         for (String file : files) {
-            errorList.clear();
             try (Scanner sc = new Scanner(new File(IbLocations.IB_ROOT + "\\logs\\" + file))) {
                 while (sc.hasNext(LogOutput.START_LOG_PATTERN)) {
                     String[] header = sc.nextLine().split("--*");
