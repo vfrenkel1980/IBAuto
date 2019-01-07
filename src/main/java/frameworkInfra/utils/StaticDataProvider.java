@@ -1,5 +1,10 @@
 package frameworkInfra.utils;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Pattern;
+
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -107,7 +112,7 @@ public class StaticDataProvider {
         public static final String AGENT = "Agent '";
         public static final String XDSPECULATIVETASKID = "xdSpeculativeTaskID";
         public static final String PREDICTED_DISABLED = "IncrediBuild's Predictive Execution feature has been disabled:";
-        public static final String[] ERROR_LIST = {"EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException"};
+        public static final Set<String> ERROR_LIST;
         public static final String PDB_ERROR = ".pdb' is corrupted";
         public static String PDB_ERROR_TESTS = "";
         public static final String TERMINATION_MESSAGE = "Build terminated at user request";
@@ -117,6 +122,12 @@ public class StaticDataProvider {
         public static final String INVALID_PARAM_ERROR = "Fatal Error: Invalid/conflicting options specified:";
         public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
         public static final String DONE_BUILDING_PROJECT = "Done Building Project";
+        public static final Pattern START_LOG_PATTERN = Pattern.compile("^[----------].*");
+
+        static {
+            ERROR_LIST = new HashSet<>();
+            ERROR_LIST.addAll(Arrays.asList("EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException","Exception"));
+        }
     }
 
     public static class VsActions {
