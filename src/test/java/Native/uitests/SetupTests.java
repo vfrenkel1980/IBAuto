@@ -410,6 +410,39 @@ public class SetupTests extends SetupTestBase {
         Assert.assertFalse(isRunning, "VSIXIstaller running, shouldn't be");
     }
 
+    @Test(testName = "Verify Console Installation Port Flags")
+    public void verifyConsoleInstallationPortFlags() {
+        String process = ibService.getIbConsoleInstallation("Latest");
+        winService.runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /AGENT:SERVICEPORT=25000" +
+                " /AGENT:HELPERPORT=25001 /COORD:SERVICEPORT=25002", process));
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.COORD_PORT), "25002");
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.SERVICE_PORT), "25000");
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Worker", RegistryKeys.SERVICE_PORT), "25001");
+    }
+
+    @Test(testName = "Verify Console Installation Cache Flag")
+    public void verifyConsoleInstallationCacheFlag() {
+        String process = ibService.getIbConsoleInstallation("Latest");
+        winService.runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /AGENT:FILECACHE=1024", process));
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Shadow", RegistryKeys.CACHE_SIZE), "1024");
+    }
+
+    @Test(testName = "Install Agent Only")
+    public void InstallAgentOnly() {
+        String process = ibService.getIbConsoleInstallation("Latest");
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components:agent /", process));
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, agent installed?");
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is running, is coordinator installed?");
+    }
+
+    @Test(testName = "Install Coordinator Only")
+    public void InstallCoordinatorOnly() {
+        String process = ibService.getIbConsoleInstallation("Latest");
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components:Coordinator /", process));
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is not running, Coord installed?");
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent is running, is agent installed?");
+    }
+
     /*-------------------------------METHODS-------------------------------*/
 
     private void runBuildAndAssert(){
