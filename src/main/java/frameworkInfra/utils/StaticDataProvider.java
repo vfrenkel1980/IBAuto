@@ -122,7 +122,7 @@ public class StaticDataProvider {
         public static final String INVALID_PARAM_ERROR = "Fatal Error: Invalid/conflicting options specified:";
         public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
         public static final String DONE_BUILDING_PROJECT = "Done Building Project";
-        public static final Pattern START_LOG_PATTERN = Pattern.compile("^[----------].*");
+        public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
 
         static {
             ERROR_LIST = new HashSet<>();
