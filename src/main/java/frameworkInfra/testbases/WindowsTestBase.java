@@ -11,6 +11,7 @@ import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -30,6 +31,7 @@ public class WindowsTestBase extends TestBase {
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
     public String testName = "";
+    public String suiteName = "";
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -46,22 +48,23 @@ public class WindowsTestBase extends TestBase {
      * 2 - stop services.
      * 3 - delete logs.
      * 4 - start services
-     * @param predicted defines whether predicted will be 0/2
-     * @param msBuild defines whether msbuild will be 0/1.
      *
-     * Both params are grabbed hard coded from the batman/vmsim .xml
+     * @param predicted defines whether predicted will be 0/2
+     * @param msBuild   defines whether msbuild will be 0/1.
+     *                  <p>
+     *                  Both params are grabbed hard coded from the batman/vmsim .xml
      */
 
     @BeforeSuite
     @Parameters({"predicted", "msBuild"})
-    public void setUpEnv(String predicted, String msBuild){
+    public void setUpEnv(String predicted, String msBuild, ITestContext context) {
         test = extent.createTest("Before Suite");
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
 
-        if (!RegistryService.doesValueExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET)){
-            RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
+        if (!RegistryService.doesValueExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.SAVE_BUILD_PACKET)) {
+            RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         }
         String currentMsBuildReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.MSBUILD);
         String currentPredictedReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.PREDICTED);
@@ -80,26 +83,29 @@ public class WindowsTestBase extends TestBase {
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
         //kill tray icon
         SystemActions.killProcess(Processes.TRAY_ICON);
-        //delete logs folder
-        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
-        SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
-        //delete build logs folder
-        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
+        suiteName = getSuiteName(context);
+        if (!suiteName.equals("Babylon")) {
+            //delete logs folder
+            SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
+            SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
+            //delete build logs folder
+            SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\BuildLogs\\", "*");
+        }
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
     }
 
     @BeforeClass
-    @Parameters ({ "logLevel"})
-    public void init(String logLevel){
+    @Parameters({"logLevel"})
+    public void init(String logLevel) {
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
         test = extent.createTest("Before Class - Change Logging Level to " + logLevel);
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started - Change Logging Level to" + logLevel);
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel );
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Log", RegistryKeys.LOGGING_LEVEL, logLevel);
     }
 
     /**
@@ -124,24 +130,34 @@ public class WindowsTestBase extends TestBase {
      */
 
     @AfterSuite
-    public void postSimulation(){
+    public void postSimulation(ITestContext context) {
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
+        SystemActions.killProcess(Processes.TRAY_ICON);
         //copy logs to backup folder
         SystemActions.copyFilesByExtension(IbLocations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
-
+        suiteName = getSuiteName(context);
+        if (suiteName.equals("Babylon")) {
+            SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
+            SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
+        }
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
         SystemActions.startProcess(IbLocations.IB_ROOT + "\\" + Processes.TRAY_ICON);
         log.info("Suite finished");
     }
 
-    private void verifyRegistry(String required, String current, String keyName){
-        if (!required.equals(current)){
+    private void verifyRegistry(String required, String current, String keyName) {
+        if (!required.equals(current)) {
             RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
         }
     }
 
+    public static String getSuiteName(ITestContext context) {
+        return context.getCurrentXmlTest().getSuite().getName();
+    }
 
 }

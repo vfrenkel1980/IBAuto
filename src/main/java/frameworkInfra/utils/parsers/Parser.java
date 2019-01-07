@@ -1,22 +1,20 @@
 package frameworkInfra.utils.parsers;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.TestBase;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.DirectoryScanner;
+
 import java.io.*;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class Parser{
+public class Parser {
 
     /**
      * Used in order to get data from file using key,value
+     *
      * @param filePath the path of the file to search in
-     * @param lookFor the key that we search the file to retrieve the value
+     * @param lookFor  the key that we search the file to retrieve the value
      * @return value that we found using the key we sent
      * @throws IOException exception for not being able to read the file
      */
@@ -30,11 +28,10 @@ public class Parser{
             e.getMessage();
         }
 
-        while((line = in.readLine()) != null)
-        {
+        while ((line = in.readLine()) != null) {
             for (Map.Entry<String, String> entry : lookFor.entrySet()) {
-                if (line.contains(entry.getKey())){
-                    pulledData = line.substring(line.lastIndexOf(entry.getValue())+ entry.getValue().length(), line.length());
+                if (line.contains(entry.getKey())) {
+                    pulledData = line.substring(line.lastIndexOf(entry.getValue()) + entry.getValue().length(), line.length());
                     //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
                     //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();
                     pulledData = pulledData.replaceAll("[+={}^':\"]", "").trim();
@@ -53,55 +50,41 @@ public class Parser{
 //        }
     }
 
-    public static boolean doesFileContainString(String filePath, String text){
+    public static boolean doesFileContainString(String filePath, String text) {
         test.log(Status.INFO, "Searching for " + text + " in " + filePath);
-        File file = new File(filePath);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                final String lineFromFile = scanner.nextLine().toLowerCase();
-                if(lineFromFile.contains(text.toLowerCase())) {
+        try (Scanner sc = new Scanner(new File(filePath))) {
+            while (sc.hasNextLine()) {
+                final String lineFromFile = sc.nextLine().toLowerCase();
+                if (lineFromFile.contains(text.toLowerCase())) {
                     return true;
                 }
             }
         } catch (FileNotFoundException e) {
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
-        }finally {
-            if (scanner != null) {
-                scanner.close();
-            }
         }
         test.log(Status.INFO, "Didn't find " + text + " in" + filePath);
         return false;
     }
 
-    public static String getValueAccordingToString(String filePath, String text, String searchFor){
+    public static String getValueAccordingToString(String filePath, String text, String searchFor) {
         test.log(Status.INFO, "Searching for " + text + " in " + filePath);
-        File file = new File(filePath);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 final String lineFromFile = scanner.nextLine().toLowerCase();
-                if(lineFromFile.contains(text.toLowerCase())) {
-                    if(lineFromFile.contains(searchFor.toLowerCase())) {
-                        return lineFromFile.substring(lineFromFile.lastIndexOf(searchFor.toLowerCase()) + searchFor.length() + 1 , lineFromFile.length() - 1);
+                if (lineFromFile.contains(text.toLowerCase())) {
+                    if (lineFromFile.contains(searchFor.toLowerCase())) {
+                        return lineFromFile.substring(lineFromFile.lastIndexOf(searchFor.toLowerCase()) + searchFor.length() + 1, lineFromFile.length() - 1);
                     }
                 }
             }
         } catch (FileNotFoundException e) {
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
-        }finally {
-            if (scanner != null) {
-                scanner.close();
-            }
         }
         test.log(Status.INFO, "Didn't find " + text + " in" + filePath);
         return "";
     }
 
-    public static String getFileToParse(String path, String prefix){
+    public static String getFileToParse(String path, String prefix) {
         DirectoryScanner scanner = new DirectoryScanner();
         scanner.setIncludes(new String[]{prefix});
         scanner.setBasedir(path);
@@ -113,20 +96,18 @@ public class Parser{
 
     /**
      * get the last line index that a string appears in
-     * @param filePath full path to file
+     *
+     * @param filePath  full path to file
      * @param searchFor String to search for within the file
      * @return number of line String appears in
      */
-    public static int getLastLineForString(String filePath, String searchFor){
+    public static int getLastLineForString(String filePath, String searchFor) {
         test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
         int line = 0;
         int finalLine = 0;
-        File file = new File(filePath);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
-                line ++;
+                line++;
                 final String lineFromFile = scanner.nextLine();
                 if (searchFor.contains("Local") && !lineFromFile.contains(("LNK"))) {
                     if (lineFromFile.contains(searchFor)) {
@@ -136,39 +117,33 @@ public class Parser{
             }
         } catch (FileNotFoundException e) {
             e.getMessage();
-        }finally {
-            scanner.close();
         }
         return finalLine;
     }
 
     /**
      * get the first line index that a string appears in
-     * @param filePath full path to file
+     *
+     * @param filePath  full path to file
      * @param searchFor String to search for within the file
      * @return number of the line
      */
-    public static int getFirstLineForString(String filePath, String searchFor){
+    public static int getFirstLineForString(String filePath, String searchFor) {
         if (test != null)
             test.log(Status.INFO, "Starting to look for first appearance of " + searchFor + " in " + filePath);
         int line = 0;
         int firstLine = 0;
-        File file = new File(filePath);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
-                line ++;
+                line++;
                 final String lineFromFile = scanner.nextLine();
-                if(lineFromFile.contains(searchFor)) {
+                if (lineFromFile.contains(searchFor)) {
                     firstLine = line;
                     return firstLine;
                 }
             }
         } catch (FileNotFoundException e) {
             e.getMessage();
-        }finally {
-            scanner.close();
         }
         return firstLine;
     }
@@ -190,7 +165,7 @@ public class Parser{
         test.log(Status.INFO, "Didn't find " + lookFor + " in" + filePath);
         return count;
     }
-
+}
 
     /*example
 
@@ -202,4 +177,4 @@ public class Parser{
                   e.getMessage();
               }
               result = result.substring(0,result.indexOf(","));*/
-}
+
