@@ -130,18 +130,22 @@ public class WindowsTestBase extends TestBase {
      */
 
     @AfterSuite
-    public void postSimulation() {
+    public void postSimulation(ITestContext context) {
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
+        SystemActions.killProcess(Processes.TRAY_ICON);
         //copy logs to backup folder
         SystemActions.copyFilesByExtension(IbLocations.IB_ROOT + "\\logs",
                 Locations.QA_ROOT + "\\logs\\Post Simulation Client Logs\\Post_simulation__log_backup_", ".log", true);
+        suiteName = getSuiteName(context);
         if (suiteName.equals("Babylon")) {
             SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs\\Helper", "*");
             SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT + "\\logs", "*");
         }
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
+        winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
         SystemActions.startProcess(IbLocations.IB_ROOT + "\\" + Processes.TRAY_ICON);
         log.info("Suite finished");
     }
