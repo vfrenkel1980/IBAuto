@@ -52,8 +52,6 @@ public class CommonTests extends WindowsSimTestBase {
                                         break;
                                     }
                                 }
-                            } else {
-                                break;
                             }
                         }
                     }
