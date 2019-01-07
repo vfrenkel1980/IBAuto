@@ -32,26 +32,29 @@ public class CommonTests extends WindowsSimTestBase {
 
                     while (sc.hasNextLine()) {
                         String str = sc.nextLine();
-                        str = str.substring(0, str.indexOf(" "));
-                        if (LogOutput.ERROR_LIST.contains(str)) {
-                            error += ("\n" + str);
+                        int i = str.indexOf(" ");
+                        if (i > 0) {
+                            str = str.substring(0, i);
+                            if (LogOutput.ERROR_LIST.contains(str)) {
+                                error += ("\n" + str);
 
-                            while (sc.hasNextLine()) {
-                                str = sc.nextLine();
-                                if (!str.isEmpty() && !Locations.IGNORE_ERRORS_LIST.contains(str)) {
-                                    String errorMessage = error + "\n" + str + " Appears in " + file;
-                                    if(!errorList.contains(errorMessage)){
-                                        test.log(Status.WARNING, errorMessage);
-                                        errorList.add(errorMessage);
-                                        isFail = true;
+                                while (sc.hasNextLine()) {
+                                    str = sc.nextLine();
+                                    if (!str.isEmpty() && !Locations.IGNORE_ERRORS_LIST.contains(str)) {
+                                        String errorMessage = error + "\n" + str + " Appears in " + file;
+                                        if (!errorList.contains(errorMessage)) {
+                                            test.log(Status.WARNING, errorMessage);
+                                            errorList.add(errorMessage);
+                                            isFail = true;
+                                        }
+                                    }
+                                    if (!str.isEmpty()) {
+                                        break;
                                     }
                                 }
-                                if (!str.isEmpty()) {
-                                    break;
-                                }
+                            } else {
+                                break;
                             }
-                        } else {
-                            break;
                         }
                     }
                 }
