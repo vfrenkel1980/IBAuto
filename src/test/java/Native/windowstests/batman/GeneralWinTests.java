@@ -167,6 +167,16 @@ public class GeneralWinTests extends BatmanBCTestBase{
         Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
     }
 
+    @Test(testName = "Verify CIbuild Flag")
+    public void verifyCIbuildFlag() {
+        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
+    }
+
+
+
         /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {

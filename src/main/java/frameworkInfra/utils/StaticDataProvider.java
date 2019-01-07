@@ -538,6 +538,9 @@ public class StaticDataProvider {
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
         public static final String RESET_SINGLE_USE = "ibat";
+        public static final String COORD_PORT = "CoordPort";
+        public static final String SERVICE_PORT = "ForcePortNum";
+        public static final String CACHE_SIZE = "Size";
         public static final String VS_INSTALL_DIR = "InstallDir";
         public static final String VS_PRODUCT_DIR = "VSProductDir";
         public static final String VS_INSTALLED = "Installed";
@@ -554,6 +557,7 @@ public class StaticDataProvider {
 
     public static class WindowsCommands {
         public static final String IB_INSTALL_COMMAND = "%s /install /Components=Coordinator,Agent /ADDTOPATH=ON";
+        public static final String IB_INSTALL_NO_PARAMS = "%s /install ";
         public static final String IB_INSTALL_SINGLE_USE_COMMAND = "%s /install /Components=oneuse,Agent /ADDTOPATH=ON /Coordinator=" + WindowsMachines.BABYLON;
         public static final String IB_UNINSTALL_COMMAND = "%s /uninstall";
         public static final String IB_UPDATE_COMMAND = "%s /update";
