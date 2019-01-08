@@ -126,7 +126,7 @@ public class StaticDataProvider {
 
         static {
             ERROR_LIST = new HashSet<>();
-            ERROR_LIST.addAll(Arrays.asList("EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException","Exception"));
+            ERROR_LIST.addAll(Arrays.asList("EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException"));
         }
     }
 

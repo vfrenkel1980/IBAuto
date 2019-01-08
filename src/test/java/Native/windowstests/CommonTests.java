@@ -40,9 +40,9 @@ public class CommonTests extends WindowsSimTestBase {
                                 while (sc.hasNextLine() && !sc.hasNext(LogOutput.START_LOG_PATTERN)) {
                                     str = sc.nextLine();
                                     if (!str.isEmpty() && !Locations.IGNORE_ERRORS_LIST.contains(str)) {
-                                        String errorMessage = error + "\n" + str + " Appears in " + file;
+                                        String errorMessage = error + ": \"" + str + "\" appears in " + file;
                                         if (!errorList.contains(errorMessage)) {
-                                            test.log(Status.WARNING, date + "\n" + errorMessage);
+                                            test.log(Status.WARNING, date + ": " + errorMessage);
                                             errorList.add(errorMessage);
                                             isFail = true;
                                         }
