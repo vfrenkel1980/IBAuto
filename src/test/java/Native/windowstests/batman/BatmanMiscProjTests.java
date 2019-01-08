@@ -21,7 +21,33 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
     @Test(testName = "Ruby2 4 SyncPrivateAssemblies")
     public void ruby24SyncPrivateAssemblies() {
         String result = "";
-        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.RUBY_SYNC_PRIVATE_ASSEMBLIES);
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.RUBY_24);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "Build failed");
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+    }
+
+    @Test(testName = "Ruby2 5 SyncPrivateAssemblies")
+    public void ruby25SyncPrivateAssemblies() {
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.RUBY_25);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "Build failed");
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+    }
+
+    @Test(testName = "Ruby2 6 SyncPrivateAssemblies")
+    public void ruby26SyncPrivateAssemblies() {
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.RUBY_26);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"), "Build failed");

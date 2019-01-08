@@ -152,7 +152,9 @@ public class StaticDataProvider {
         public static final String REBUILD = "rebuild ";
 
         public static class MISC_PROJECTS {
-            public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
+            public static final String RUBY_24 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
+            public static final String RUBY_25 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.5\\run.bat";
+            public static final String RUBY_26 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.6\\run.bat";
             public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\" ";
             public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
