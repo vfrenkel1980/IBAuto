@@ -96,7 +96,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
                     String.format("\"C:\\Program Files\\Xoreax\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
             SystemActions.sleep(25);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
-            SystemActions.sleep(2);
+            SystemActions.sleep(10);
             Assert.assertTrue(SystemActions.doesFileExist("r:\\QA\\Simulation\\buildLog.txt"),"buildLog.txt on r:\\QA\\Simulation is not exist");
             int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
             Assert.assertTrue(copyReturnCode==0, "xcopy return code is "+copyReturnCode);
