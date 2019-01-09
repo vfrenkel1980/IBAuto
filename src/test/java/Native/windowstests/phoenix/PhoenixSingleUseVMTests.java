@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 /**
- * Single-use Virtual Machine Image functional tests<br>
+ * @brief Single-use Virtual Machine Image functional tests<br>
  * Requires Enterprise license<br>
  * vm: Phoenix on srv-3
+ * @image html C:\Users\Aleksandra\Pictures\phoenix-niurka-neo-genesis.jpg
  */
-
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /**
-     * Sanity e2e workflow test.<br>
+     * @brief Sanity e2e workflow test.<br>
      * Checks:<br>
      *  <ul>
      *      <li>the agent service is down on first use;</li>
@@ -36,7 +36,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
+     * @brief Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
      * Checks:<br>
      * <ul>
      *     <li>the build is not distributed</li>
@@ -57,7 +57,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.<br>
+     * @brief Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.<br>
      * Checks:<br>
      * <ul>
      *     <li>the exported coordinator monitor file contains the agent name</li>
@@ -71,7 +71,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     *Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
+     * @brief Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
      * Checks:<br>
      * <ul>
      *     <li>the build is distributed after goes offline for 23 sec (OfflinePeriodCloudNode time == 30(default)</li>
@@ -88,7 +88,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     *Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
+     * @brief Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
      * Checks:<br>
      * <ul>
      *     <li>the build is distributed after goes offline for 285 sec (OfflinePeriodCloudNode time == 300(max)</li>
@@ -113,7 +113,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     *Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
+     * @brief Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
      * Checks:<br>
      * <ul>
      *     <li>the build is not distributed after goes offline for 40 sec (OfflinePeriodCloudNode time == 30(default)</li>
@@ -133,7 +133,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     *Verify the single use RESET feature.<br>
+     * @brief Verify the single use RESET feature.<br>
      * Checks:<br>
      * <ul>
      *     <li>the agent service is stoped after single use vm reset</li>
@@ -182,4 +182,5 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     public String getIbatRegKey() {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.RESET_SINGLE_USE);
     }
+
 }
