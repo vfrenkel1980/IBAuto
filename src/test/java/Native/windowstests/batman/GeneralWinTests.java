@@ -107,7 +107,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
                 SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
                 test.log(Status.INFO, "Locations.QA_ROOT \\logs\\for_investigation\\buildlog.txt");
             }
-            // SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
             Assert.assertTrue(isPresent, "No agent assigned to build");
         } catch (Exception e) {
             e.getMessage();
