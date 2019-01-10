@@ -227,6 +227,8 @@ public class VmSimVC10Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Ignore
+    //TODO: return to sim after bug fix (Ticket #9956)
     @Test(testName = "WxWidgets 2010 - Debug x32- build" , groups = { "Build" })
     public void wxWidgets2010Debugx32build(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC10_VMSIM.WXWIDGETS_X32_DEBUG, "%s"));
