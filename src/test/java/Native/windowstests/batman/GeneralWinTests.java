@@ -96,8 +96,8 @@ public class GeneralWinTests extends BatmanBCTestBase {
             SystemActions.sleep(30);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             SystemActions.sleep(10);
-            Assert.assertTrue(SystemActions.doesFileExist("\\\\" + WindowsMachines.SECOND_INITIATOR + "\\c$\\QA\\Simulation\\buildLog.txt"), "buildLog.txt on \\Sr3-w7-vs\\c$\\QA\\Simulation path is not exist");
-            int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"\\\\"+WindowsMachines.SECOND_INITIATOR + "\\c$\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
+            Assert.assertTrue(SystemActions.doesFileExist("r:\\QA\\Simulation\\buildLog.txt"), "buildLog.txt on r:\\QA\\Simulation path is not exist");
+            int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH  +" /Y");
             Assert.assertTrue(copyReturnCode == 0, "xcopy return code is " + copyReturnCode);
             SystemActions.sleep(2);
             Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"), "buildLog.txt on is not copied to Batman");
