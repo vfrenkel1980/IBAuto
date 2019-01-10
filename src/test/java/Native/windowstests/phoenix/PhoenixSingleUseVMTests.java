@@ -14,7 +14,6 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
  * @brief Single-use Virtual Machine Image functional tests<br>
  * Requires Enterprise license<br>
  * vm: Phoenix on srv-3
- * @image html C:\Users\Aleksandra\Pictures\phoenix-niurka-neo-genesis.jpg
  */
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /**

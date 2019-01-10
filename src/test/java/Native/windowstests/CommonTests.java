@@ -9,10 +9,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -21,6 +18,7 @@ public class CommonTests extends WindowsSimTestBase {
     @Test(testName = "Verify Errors In Logs")
     public void verifyErrorsInLogs() {
         Set<String> errorList = new HashSet<>();
+        ArrayList<String> ignoreList = winService.textFileToList(Locations.IGNORE_ERRORS_LIST);
         boolean isFail = false;
         List<String> files = SystemActions.getAllFilesInDirectory(IbLocations.IB_ROOT + "\\logs");
         for (String file : files) {
@@ -39,7 +37,7 @@ public class CommonTests extends WindowsSimTestBase {
 
                                 while (sc.hasNextLine() && !sc.hasNext(LogOutput.START_LOG_PATTERN)) {
                                     str = sc.nextLine();
-                                    if (!str.isEmpty() && !str.contains(Locations.IGNORE_ERRORS_LIST)) {
+                                    if (!str.isEmpty() && !ignoreList.contains(str)) {
                                         String errorMessage = error + ": \"" + str + "\" appears in " + file;
                                         if (!errorList.contains(errorMessage)) {
                                             test.log(Status.WARNING, date + ": " + errorMessage);
