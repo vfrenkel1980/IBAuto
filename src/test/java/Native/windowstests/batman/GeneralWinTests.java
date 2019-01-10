@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class GeneralWinTests extends BatmanBCTestBase{
+public class GeneralWinTests extends BatmanBCTestBase {
 
 
     @Test(testName = "Verify MultiBuild Success")
@@ -58,10 +58,9 @@ public class GeneralWinTests extends BatmanBCTestBase{
             int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, "%s"));
             Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
-        }
-        finally {
+        } finally {
             winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u administrator -p 4illumination \\\\"
                     + WindowsMachines.BABYLON + " cmd.exe /c \"net start " + WindowsServices.COORD_SERVICE + "\"");
         }
@@ -94,27 +93,25 @@ public class GeneralWinTests extends BatmanBCTestBase{
             winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
                     String.format("\"C:\\Program Files\\Xoreax\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
-            SystemActions.sleep(25);
+            SystemActions.sleep(30);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             SystemActions.sleep(10);
-            Assert.assertTrue(SystemActions.doesFileExist("r:\\QA\\Simulation\\buildLog.txt"),"buildLog.txt on r:\\QA\\Simulation is not exist");
-            int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
-            Assert.assertTrue(copyReturnCode==0, "xcopy return code is "+copyReturnCode);
+            Assert.assertTrue(SystemActions.doesFileExist("\\\\" + WindowsMachines.SECOND_INITIATOR + "\\c$\\QA\\Simulation\\buildLog.txt"), "buildLog.txt on \\Sr3-w7-vs\\c$\\QA\\Simulation path is not exist");
+            int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"\\\\"+WindowsMachines.SECOND_INITIATOR + "\\c$\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH);
+            Assert.assertTrue(copyReturnCode == 0, "xcopy return code is " + copyReturnCode);
             SystemActions.sleep(2);
-            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"),"buildLog.txt on is not copied to Batman");
+            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"), "buildLog.txt on is not copied to Batman");
             boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
-            test.log(Status.INFO, "buildlog isPresent value is "+isPresent);
+            test.log(Status.INFO, "buildlog isPresent value is " + isPresent);
             if (isPresent) {
                 SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
                 test.log(Status.INFO, "Locations.QA_ROOT \\logs\\for_investigation\\buildlog.txt");
             }
-           // SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+            // SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
             Assert.assertTrue(isPresent, "No agent assigned to build");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
-        }
-        finally {
+        } finally {
             winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
         }
     }
@@ -138,8 +135,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
             Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
         } catch (Exception e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
-        }
-        finally {
+        } finally {
             winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
             SystemActions.killProcess(Processes.BUILDMONITOR);
         }
@@ -147,19 +143,19 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
     @Test(testName = "Verify MsBuild version is updated for VS install")
     public void verifyMsBuildversionIsUpdatedForVSInstall() {
-        setRegistry( "1","Builder", "AutomaticPredictedUpdate");
-        String msBuildSupportedVersion = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", " ms_build_support_version ", "windows_builds_ib_info ", "ms_build_support_version","build_number");
-        setRegistry("15.4.8.50001","Builder", "MSBuildMaxSupportedVersion15.0");
+        setRegistry("1", "Builder", "AutomaticPredictedUpdate");
+        String msBuildSupportedVersion = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", " ms_build_support_version ", "windows_builds_ib_info ", "ms_build_support_version", "build_number");
+        setRegistry("15.4.8.50001", "Builder", "MSBuildMaxSupportedVersion15.0");
         SystemActions.killProcess(StaticDataProvider.Processes.TRAY_ICON);
         SystemActions.sleep(2);
         SystemActions.startProcess(StaticDataProvider.Processes.TRAY_ICON);
         int timer = 0;
         String result = "";
-        while(!msBuildSupportedVersion.equals(result)&& timer <= 200){
+        while (!msBuildSupportedVersion.equals(result) && timer <= 200) {
             result = getRegistry("Builder", "MSBuildMaxSupportedVersion15.0");
             int timeout = 10;
             SystemActions.sleep(timeout);
-            timer+=timeout;
+            timer += timeout;
         }
         Assert.assertTrue(msBuildSupportedVersion.equals(result), "The MSBuild version is not updated. Found value " + result);
     }
@@ -179,7 +175,7 @@ public class GeneralWinTests extends BatmanBCTestBase{
 
 
 
-        /*------------------------------METHODS------------------------------*/
+    /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
