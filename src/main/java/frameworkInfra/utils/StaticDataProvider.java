@@ -126,7 +126,7 @@ public class StaticDataProvider {
 
         static {
             ERROR_LIST = new HashSet<>();
-            ERROR_LIST.addAll(Arrays.asList("EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException","Exception"));
+            ERROR_LIST.addAll(Arrays.asList("EAccessViolation", "EWin32Error", "EReadError", "EPgNativeException"));
         }
     }
 
@@ -152,7 +152,9 @@ public class StaticDataProvider {
         public static final String REBUILD = "rebuild ";
 
         public static class MISC_PROJECTS {
-            public static final String RUBY_SYNC_PRIVATE_ASSEMBLIES = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
+            public static final String RUBY_24 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
+            public static final String RUBY_25 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.5\\run.bat";
+            public static final String RUBY_26 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.6\\run.bat";
             public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\" ";
             public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
             public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
@@ -502,6 +504,7 @@ public class StaticDataProvider {
         public static class INTERFACES {
             public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild /cfg=\"debug|win32\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String BUILDCONSOLE_MISSING_PROFILE = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /title=\"buildconsoleMissingProgile\" /profile=\"idontExist\" /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_NO_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln";
             public static final String IBCONSOLE_MULTIPLE_PARAMS = "c:\\QA\\Simulation\\Samples\\ibconsole\\runme.bat";
             public static final String OPEN_MONITOR_ONLY = "/openmonitor /out=" + Locations.OUTPUT_LOG_FILE;

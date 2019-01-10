@@ -1,2 +1,4 @@
 Failed to restore thread desktop: The requested resource is in use
 An existing connection was forcibly closed by the remote host
+Failed to restore thread desktop: The requested resource is in use
+Failed to shutdown peer socket: An existing connection was forcibly closed by the remote host

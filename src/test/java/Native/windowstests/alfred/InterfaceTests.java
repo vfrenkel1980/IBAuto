@@ -113,6 +113,12 @@ public class InterfaceTests extends InterfacesTestBase{
         Assert.assertTrue(output.contains("Options:"), "No param error does not appear in log");
     }
 
+    @Test(testName="Verify Missing Profile Warning")
+    public void verifyMissingProfileWarning(){
+        winService.runCommandWaitForFinish(Processes.BUILD_CONSOLE + ProjectsCommands.INTERFACES.BUILDCONSOLE_MISSING_PROFILE);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Custom profile is missing"), "The warning message about missing profile is not displayed in the output log");
+    }
+
 /*    //TODO: ask Vlad how to verify this
     @Test(testName = "XGSubmit XGWait Integration")
     public void xgSubmitXGWaitIntegration(){

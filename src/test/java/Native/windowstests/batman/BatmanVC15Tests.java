@@ -53,7 +53,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 //    }
 
     @Test(testName = "Chrome X64 GN - build" , groups = { "Build" })
-    public void chromeX64NGBuild(){
+    public void chromeX64GNBuild(){
         if (testName.equals("Minimal")){
             test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
             throw new SkipException("Skipped test");

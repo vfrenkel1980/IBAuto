@@ -10,8 +10,22 @@ import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+/**
+ * @brief Single-use Virtual Machine Image functional tests<br>
+ * Requires Enterprise license<br>
+ * vm: Phoenix on srv-3
+ * @image html C:\Users\Aleksandra\Pictures\phoenix-niurka-neo-genesis.jpg
+ */
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
-
+    /**
+     * @brief Sanity e2e workflow test.<br>
+     * Checks:<br>
+     *  <ul>
+     *      <li>the agent service is down on first use;</li>
+     *      <li> the build is executed successfully;</li>
+     *      <li> the build was distributed.</li>
+     *  </ul>
+     */
     @Test(testName = "SU VM First Use Build Test")
     public void suVMFirstUseBuildTest() {
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is running, should not be running.");
@@ -21,6 +35,13 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
+    /**
+     * @brief Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the build is not distributed</li>
+     * </ul>
+     */
     @Test(testName = "SU VM Auto Assign Packages Disabled Test")
     public void suVMAutoAssignPackagesDisabledTest() {
         try {
@@ -35,6 +56,13 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         }
     }
 
+    /**
+     * @brief Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the exported coordinator monitor file contains the agent name</li>
+     * </ul>
+     */
     @Test(testName = "SU VM Coord Mon Test")
     public void suVMFCoordMonTest() {
         ibService.agentServiceStart();
@@ -42,6 +70,13 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.EXPORT_COORDMON_FILE, "phoenix"), "Single Use vm is not displayed on coordinator monitor");
     }
 
+    /**
+     * @brief Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the build is distributed after goes offline for 23 sec (OfflinePeriodCloudNode time == 30(default)</li>
+     * </ul>
+     */
     @Test(testName = "SU VM Stop Service Positive Test")
     public void suVMStopServicePositiveTest() {
         setUp();
@@ -52,8 +87,15 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
-    @Test(testName = "SU VM Stop Service Custom Time Positive Test")
-    public void suVMStopServiceCustomTimePositiveTest() {
+    /**
+     * @brief Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the build is distributed after goes offline for 285 sec (OfflinePeriodCloudNode time == 300(max)</li>
+     * </ul>
+     */
+    @Test(testName = "SU VM Stop Service Max Time Positive Test")
+    public void suVMStopServiceMaxTimePositiveTest() {
         setUp();
         setUnsubscribeTimeOnCoord(300);
         ibService.agentServiceStop();
@@ -70,6 +112,14 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         }
     }
 
+    /**
+     * @brief Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the build is not distributed after goes offline for 40 sec (OfflinePeriodCloudNode time == 30(default)</li>
+     *     <li> the exported coordinator monitor file doesn't contain the agent name</li>
+     * </ul>
+     */
     @Test(testName = "SU VM Stop Service Negative Test")
     public void sUVMStopServiceNegativeTest() {
         setUp();
@@ -82,10 +132,19 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.EXPORT_COORDMON_FILE, "phoenix"), "Single Use vm is displayed on coordinator monitor");
     }
 
+    /**
+     * @brief Verify the single use RESET feature.<br>
+     * Checks:<br>
+     * <ul>
+     *     <li>the agent service is stoped after single use vm reset</li>
+     *     <li> ibat regKey is changed from 2 to 1 after single use vm reset</li>
+     *     <li> the build is distributed after agent service is started, agent subscribed and packages allocated</li>
+     * </ul>
+     */
     @Test(testName = "SU VM Reset Test")
     public void suVMResetTest() {
         setUp();
-        ;
+        //TODO: reset single use vm once when Feature request  10128 is implemented
         //reset single use vm Feature request  10128
         //workaround to previous line
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.RESET_SINGLE_USE, "1");
@@ -123,4 +182,5 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     public String getIbatRegKey() {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.RESET_SINGLE_USE);
     }
+
 }
