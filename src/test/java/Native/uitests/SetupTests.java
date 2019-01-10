@@ -415,7 +415,7 @@ public class SetupTests extends SetupTestBase {
         String process = ibService.getIbConsoleInstallation("Latest");
         winService.runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /AGENT:SERVICEPORT=25000" +
                 " /AGENT:HELPERPORT=25001 /COORD:SERVICEPORT=25002", process));
-        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.COORD_PORT), "25002");
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.COORD_PORT), "25002");
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.SERVICE_PORT), "25000");
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Worker", RegistryKeys.SERVICE_PORT), "25001");
     }
@@ -430,7 +430,7 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Install Agent Only")
     public void InstallAgentOnly() {
         String process = ibService.getIbConsoleInstallation("Latest");
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components:agent /", process));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components=agent", process));
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, agent installed?");
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is running, is coordinator installed?");
     }
@@ -438,7 +438,7 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Install Coordinator Only")
     public void InstallCoordinatorOnly() {
         String process = ibService.getIbConsoleInstallation("Latest");
-        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components:Coordinator /", process));
+        winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components=Coordinator", process));
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is not running, Coord installed?");
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent is running, is agent installed?");
     }

@@ -538,7 +538,7 @@ public class StaticDataProvider {
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
         public static final String RESET_SINGLE_USE = "ibat";
-        public static final String COORD_PORT = "CoordPort";
+        public static final String COORD_PORT = "Port";
         public static final String SERVICE_PORT = "ForcePortNum";
         public static final String CACHE_SIZE = "Size";
         public static final String VS_INSTALL_DIR = "InstallDir";

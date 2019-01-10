@@ -41,7 +41,21 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Agent is not listed in build log, should be subscribed");
     }
 
-    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"subscribeAgent"})
+    @Test(testName = "Stop Coordinator Service", dependsOnMethods = {"subscribeAgent"})
+    public void stopCoordinatorService() {
+        coordinator.stopCoordService();
+        SystemActions.sleep(3);
+        Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not stop");
+    }
+
+    @Test(testName = "Start Coordinator Service", dependsOnMethods = {"stopCoordinatorService"})
+    public void startCoordinatorService() {
+        coordinator.startCoordService();
+        SystemActions.sleep(3);
+        Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not start");
+    }
+
+    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"startCoordinatorService"})
     public void disableRemoteAdministration() {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
@@ -55,17 +69,5 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
     }
 
-    @Test(testName = "Stop Coordinator Service", dependsOnMethods = {"disableRemoteAdministration"})
-    public void stopCoordinatorService() {
-        coordinator.stopCoordService();
-        SystemActions.sleep(3);
-        Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not stop");
-    }
 
-    @Test(testName = "Start Coordinator Service", dependsOnMethods = {"stopCoordinatorService"})
-    public void startCoordinatorService() {
-        coordinator.startCoordService();
-        SystemActions.sleep(3);
-        Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not start");
-    }
 }
