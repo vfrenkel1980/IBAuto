@@ -194,7 +194,7 @@ public class StaticDataProvider {
             public static final String ANDROIDCS_ANYCPU_DEBUG = "\"C:\\QA\\Simulation\\VC15\\Android\\AndroidAppCS\\AndroidAppCS.sln\" /%s /cfg=\"Debug|Any CPU\" /title=\"Android CS -Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CORECLR_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\coreclr-2.1.6\\bin\\obj\\Windows_NT.x64.Debug\\CoreCLR.sln\" /%s /cfg=\"debug|x64\" /title=\"Core CLR 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CHROME_X64_GN = "\"D:\\chromium\\src\\out\\Default\\all.sln\" /%s /cfg=\"GN|x64\" /title=\"Chrome x64 GN build\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String AUDACITY_SECOND_INITIATOR = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"  /showagent /showcmd /showtime /log=\"c:\\QA\\Simulation\\buildLog.txt\"";
+            public static final String AUDACITY_SECOND_INITIATOR = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"  /showagent /showcmd /showtime /log=\"\\\\batman\\QA\\Simulation\\second_initiator_output\\buildLog.txt\"";
         }
 
         public static class VC14_BATMAN {
@@ -547,6 +547,8 @@ public class StaticDataProvider {
         public static final String VS_INSTALL_DIR = "InstallDir";
         public static final String VS_PRODUCT_DIR = "VSProductDir";
         public static final String VS_INSTALLED = "Installed";
+        public static final String MSBUILD_SUPPORTED_VERSION_15 = "MSBuildMaxSupportedVersion15.0";
+        public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
     }
 
     public static class IbLicenses {

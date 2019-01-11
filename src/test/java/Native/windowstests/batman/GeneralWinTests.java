@@ -96,11 +96,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
             SystemActions.sleep(30);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             SystemActions.sleep(10);
-            Assert.assertTrue(SystemActions.doesFileExist("r:\\QA\\Simulation\\buildLog.txt"), "buildLog.txt on r:\\QA\\Simulation path is not exist");
-            int copyReturnCode = winService.runCommandWaitForFinish("xcopy \"r:\\QA\\Simulation\\buildLog.txt\" " + Locations.SECOND_INITIATOR_LOG_PATH  +" /Y");
-            Assert.assertTrue(copyReturnCode == 0, "xcopy return code is " + copyReturnCode);
-            SystemActions.sleep(2);
-            Assert.assertTrue(SystemActions.doesFileExist(Locations.SECOND_INITIATOR_LOG_PATH + "buildLog.txt"), "buildLog.txt on is not copied to Batman");
+            Assert.assertTrue(SystemActions.doesFileExist("c:\\QA\\Simulation\\second_initiator_output\\buildLog.txt"), "buildLog.txt on r:\\QA\\Simulation path is not exist");
             boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
             test.log(Status.INFO, "buildlog isPresent value is " + isPresent);
             if (isPresent) {
@@ -143,16 +139,16 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify MsBuild version is updated for VS install")
     public void verifyMsBuildversionIsUpdatedForVSInstall() {
-        setRegistry("1", "Builder", "AutomaticPredictedUpdate");
+        setRegistry("1", "Builder", RegistryKeys.AUTO_PREDICTED_UPDATE);
         String msBuildSupportedVersion = postgresJDBC.getLastValueFromTable("192.168.10.73", "postgres", "postgres123", "release_manager", " ms_build_support_version ", "windows_builds_ib_info ", "ms_build_support_version", "build_number");
-        setRegistry("15.4.8.50001", "Builder", "MSBuildMaxSupportedVersion15.0");
+        setRegistry("15.4.8.50001", "Builder", RegistryKeys.MSBUILD_SUPPORTED_VERSION_15);
         SystemActions.killProcess(StaticDataProvider.Processes.TRAY_ICON);
         SystemActions.sleep(2);
         SystemActions.startProcess(StaticDataProvider.Processes.TRAY_ICON);
         int timer = 0;
         String result = "";
         while (!msBuildSupportedVersion.equals(result) && timer <= 200) {
-            result = getRegistry("Builder", "MSBuildMaxSupportedVersion15.0");
+            result = getRegistry("Builder", RegistryKeys.MSBUILD_SUPPORTED_VERSION_15);
             int timeout = 10;
             SystemActions.sleep(timeout);
             timer += timeout;
@@ -167,7 +163,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify CIbuild Flag")
     public void verifyCIbuildFlag() {
-        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + "/quickvalidate");
+        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate");
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
