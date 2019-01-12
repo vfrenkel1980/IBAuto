@@ -6,6 +6,7 @@ import frameworkInfra.utils.*;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -52,6 +53,9 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 //        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
 //    }
 
+    /** @bug #10217 New "Chromium" Visual Studio 2017 solution doesn't compile with IncrediBuild*
+     * @TODO Return to simulation after #10217 bug fix "support vs2017 cromuium solution     */
+    @Ignore
     @Test(testName = "Chrome X64 GN - build" , groups = { "Build" })
     public void chromeX64GNBuild(){
         if (testName.equals("Minimal")){
