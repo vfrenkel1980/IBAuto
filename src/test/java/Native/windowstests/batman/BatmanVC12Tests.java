@@ -156,14 +156,14 @@ public class BatmanVC12Tests extends BatmanBCTestBase {
     @Test(testName = "PS4 - 2013 debug|Orbis SDK4 - build", groups = {"Build"})
     public void ps42013DebugOrbisSDK4Build() {
         changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.PS4_ORBIS_DEBUG, "%s"));
+        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.PS4_ORBIS_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "PS4 - 2013 release|Orbis SDK4 - build", groups = {"Build"})
     public void ps42013ReleaseOrbisSDK4Build() {
         changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.PS4_ORBIS_RELEASE, "%s"));
+        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.PS4_ORBIS_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
