@@ -256,17 +256,17 @@ public class StaticDataProvider {
             public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|x64\"";
-            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 3\" /cfg=\"release|orbis\" /minwinver=\"7\"";
         }
 
         public static class VC11_BATMAN {
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2012 - Release\"";
-            public static final String PS4_EDGE_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_EDGE_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
-            public static final String PS4_EDGE_ORBIS_PROFILE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /cfg=\"profile|orbis\" /minwinver=\"7\"";
-            public static final String PS4_GNM_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_GNM_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_EDGE_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 2\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_EDGE_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 2\" /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_EDGE_ORBIS_PROFILE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Profile Sample 2\" /cfg=\"profile|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"release|orbis\" /minwinver=\"7\"";
             public static final String SHADOWMAP_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"debug|Durango\"";
             public static final String SHADOWMAP_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"release|Durango\"";
         }
@@ -439,7 +439,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 - Release\"";
-            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC15\\wxWidgets-3.0.4\\build\\msw\\wx_vc15.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2017 - Debug x32\"";
+            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC15\\wxWidgets-3.1.2\\build\\msw\\wx_vc15.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2017 - Debug x64\"";
         }
 
         public static class VC15Preview_VMSIM {

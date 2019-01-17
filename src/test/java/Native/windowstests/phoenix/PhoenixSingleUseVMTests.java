@@ -1,5 +1,6 @@
 package Native.windowstests.phoenix;
 
+
 import frameworkInfra.testbases.SingleUseVMTestBase;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -10,20 +11,29 @@ import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
+
 /**
- * @brief Single-use Virtual Machine Image functional tests<br>
- * Requires Enterprise license<br>
- * vm: Phoenix on srv-3
+ * @brief<b> Single-use VM functional tests</b>
+ * @details Requires Enterprise license <br>
+ * vm: Phoenix on <br> srv-3
  */
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /**
-     * @brief Sanity e2e workflow test.<br>
-     * Checks:<br>
-     *  <ul>
-     *      <li>the agent service is down on first use;</li>
-     *      <li> the build is executed successfully;</li>
-     *      <li> the build was distributed.</li>
-     *  </ul>
+     * @test Sanity e2e workflow test.<br>
+     * <table>
+     * <tr>
+     * <th>Preconditions</th>
+     * <th>Description</th>
+     * <th>Expected result</th>
+     * <tr>
+     * <td>no preconditions
+     * <td> no steps
+     * <td><ul>
+     * <li>the agent service is down on first use;
+     * <li> the build is executed successfully;
+     * <li> the build was distributed.
+     * </ul>
+     * </table>
      */
     @Test(testName = "SU VM First Use Build Test")
     public void suVMFirstUseBuildTest() {
@@ -35,11 +45,25 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
-     * Checks:<br>
-     * <ul>
-     *     <li>the build is not distributed</li>
-     * </ul>
+     * @test Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
+     *
+     * <table>
+     * <tr>
+     * <th>Preconditions</th>
+     * <th>Description</th>
+     * <th>Expected result</th>
+     * <tr>
+     * <td>Auto subscribe setting is off</th>
+     * <td><ul>
+     * <li>set up</li>
+     * <li>Run CONSAPP_X64_RELEASE clean&build</li>
+     * <td><ul>
+     * <li>the agent service is down on first use;
+     * <li> the build is executed successfully;
+     * <li> the build is distributed.</li></ul>
+     * </table>
+     * @bug no bugs
+     * @todo do nothing
      */
     @Test(testName = "SU VM Auto Assign Packages Disabled Test")
     public void suVMAutoAssignPackagesDisabledTest() {
@@ -56,11 +80,12 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.<br>
-     * Checks:<br>
-     * <ul>
-     *     <li>the exported coordinator monitor file contains the agent name</li>
-     * </ul>
+     * @brief Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.
+     * @pre Preconditions
+     * @test Steps: no steps
+     * @result Expected behavior:<br>
+     * the exported coordinator monitor file contains the agent name
+     * @post Postconditions
      */
     @Test(testName = "SU VM Coord Mon Test")
     public void suVMFCoordMonTest() {
@@ -70,10 +95,10 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
+     * @test Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
      * Checks:<br>
      * <ul>
-     *     <li>the build is distributed after goes offline for 23 sec (OfflinePeriodCloudNode time == 30(default)</li>
+     * <li>the build is distributed after goes offline for 23 sec (OfflinePeriodCloudNode time == 30(default)</li>
      * </ul>
      */
     @Test(testName = "SU VM Stop Service Positive Test")
@@ -87,10 +112,10 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
+     * @test Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
      * Checks:<br>
      * <ul>
-     *     <li>the build is distributed after goes offline for 285 sec (OfflinePeriodCloudNode time == 300(max)</li>
+     * <li>the build is distributed after goes offline for 285 sec (OfflinePeriodCloudNode time == 300(max)</li>
      * </ul>
      */
     @Test(testName = "SU VM Stop Service Max Time Positive Test")
@@ -112,11 +137,11 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
+     * @test Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
      * Checks:<br>
      * <ul>
-     *     <li>the build is not distributed after goes offline for 40 sec (OfflinePeriodCloudNode time == 30(default)</li>
-     *     <li> the exported coordinator monitor file doesn't contain the agent name</li>
+     * <li>the build is not distributed after goes offline for 40 sec (OfflinePeriodCloudNode time == 30(default)</li>
+     * <li> the exported coordinator monitor file doesn't contain the agent name</li>
      * </ul>
      */
     @Test(testName = "SU VM Stop Service Negative Test")
@@ -132,12 +157,12 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify the single use RESET feature.<br>
+     * @test Verify the single use RESET feature.<br>
      * Checks:<br>
      * <ul>
-     *     <li>the agent service is stoped after single use vm reset</li>
-     *     <li> ibat regKey is changed from 2 to 1 after single use vm reset</li>
-     *     <li> the build is distributed after agent service is started, agent subscribed and packages allocated</li>
+     * <li>the agent service is stoped after single use vm reset</li>
+     * <li> ibat regKey is changed from 2 to 1 after single use vm reset</li>
+     * <li> the build is distributed after agent service is started, agent subscribed and packages allocated</li>
      * </ul>
      */
     @Test(testName = "SU VM Reset Test")
