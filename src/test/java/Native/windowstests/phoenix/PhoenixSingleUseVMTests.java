@@ -13,30 +13,25 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 
 /**
- * @brief<b> Single-use VM functional tests</b>
+ * @brief<b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/65538/Single-use+Virtual+Machine+Image"><b>Single-use VM Enterprise feature</b></a> tests</b>
  * @details Requires Enterprise license <br>
- * vm: Phoenix on <br> srv-3
+ * vm: Phoenix on srv-3<br>
+ *     etc...
  */
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /**
-     * @test Sanity e2e workflow test.<br>
-     * <table>
-     * <tr>
-     * <th>Preconditions</th>
-     * <th>Description</th>
-     * <th>Expected result</th>
-     * <tr>
-     * <td>no preconditions
-     * <td> no steps
-     * <td><ul>
-     * <li>the agent service is down on first use;
-     * <li> the build is executed successfully;
-     * <li> the build was distributed.
-     * </ul>
-     * </table>
+     * @test SingleUse VM sanity e2e workflow test.<br>
+     * @preConditions{ }
+     * @steps{
+     * -# Start agent service and subscribe agent;
+     * -# Clean&build ConsApp.}
+     * @expectedResult{
+     * - Agent service is down after install (before 1st step);
+     * - Build is succeeded;
+     * - Build is distributed.}
      */
-    @Test(testName = "SU VM First Use Build Test")
-    public void suVMFirstUseBuildTest() {
+    @Test(testName = "SingleUse VM e2e flow Test")
+    public void singleUseVME2EflowTest() {
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is running, should not be running.");
         setUp();
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
@@ -45,28 +40,17 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @test Verify that the packages are not allocated automatically when AutoSubscribeCloudNode is off<br>
-     *
-     * <table>
-     * <tr>
-     * <th>Preconditions</th>
-     * <th>Description</th>
-     * <th>Expected result</th>
-     * <tr>
-     * <td>Auto subscribe setting is off</th>
-     * <td><ul>
-     * <li>set up</li>
-     * <li>Run CONSAPP_X64_RELEASE clean&build</li>
-     * <td><ul>
-     * <li>the agent service is down on first use;
-     * <li> the build is executed successfully;
-     * <li> the build is distributed.</li></ul>
-     * </table>
-     * @bug no bugs
-     * @todo do nothing
+     * @test Verify that the packages are not allocated automatically to single use agent when AutoSubscribe is turned off<br>
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;
+     * @li Auto subscribe setting (AutoSubscribeCloudNode regKey)is off}
+     * @steps{ Clean&build ConsApp.}
+     * @expectedResult{
+     * The build is distributed.}
      */
-    @Test(testName = "SU VM Auto Assign Packages Disabled Test")
-    public void suVMAutoAssignPackagesDisabledTest() {
+    @Test(testName = "SingleUse VM Auto Assign Disabled Test")
+    public void singleUseVMAutoAssignDisabledTest() {
         try {
             autoSubscribeSUVM("0");
             setUp();
@@ -80,15 +64,15 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @brief Verify that the single use agent is displayed on the coordinator monitor after the agent service is started.
-     * @pre Preconditions
-     * @test Steps: no steps
-     * @result Expected behavior:<br>
-     * the exported coordinator monitor file contains the agent name
-     * @post Postconditions
+     * @test Verify that the single use agent is displayed on the coordinator monitor after the start of agent service.
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;}
+     * @steps{ Export coordinator monitor}
+     * @expectedResult{ Single use agent is displayed on the coordinator monitor}
      */
-    @Test(testName = "SU VM Coord Mon Test")
-    public void suVMFCoordMonTest() {
+    @Test(testName = "SingleUse VM Coord Mon Test")
+    public void singleUseVMFCoordMonTest() {
         ibService.agentServiceStart();
         exportCoordMon();
         Assert.assertTrue(Parser.doesFileContainString(Locations.EXPORT_COORDMON_FILE, "phoenix"), "Single Use vm is not displayed on coordinator monitor");
@@ -96,13 +80,19 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
 
     /**
      * @test Verify that the single use agent is not destroyed when it goes offline for less than OfflinePeriodCloudNode time<br>
-     * Checks:<br>
-     * <ul>
-     * <li>the build is distributed after goes offline for 23 sec (OfflinePeriodCloudNode time == 30(default)</li>
-     * </ul>
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;
+     * @li OfflinePeriodCloudNode time == 30(default);}
+     * @steps{
+     * @li Stop agent service;
+     * @li Wait for 23 seconds;
+     * @li Start agent service;
+     * @li Clean&build Audacity.}
+     * @expectedResult{ Build is distributed.}
      */
-    @Test(testName = "SU VM Stop Service Positive Test")
-    public void suVMStopServicePositiveTest() {
+    @Test(testName = "SingleUse VM Stop Service Positive Test")
+    public void singleUseVMStopServicePositiveTest() {
         setUp();
         ibService.agentServiceStop();
         SystemActions.sleep(23);
@@ -113,13 +103,19 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
 
     /**
      * @test Verify that the single use agent is not destroyed when it goes offline less than OfflinePeriodCloudNode time (max time)<br>
-     * Checks:<br>
-     * <ul>
-     * <li>the build is distributed after goes offline for 285 sec (OfflinePeriodCloudNode time == 300(max)</li>
-     * </ul>
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;
+     * @li OfflinePeriodCloudNode time == 300(max);}
+     * @steps{
+     * @li Stop agent service;
+     * @li Wait for 285 seconds;
+     * @li Start agent service;
+     * @li Clean&build Audacity.}
+     * @expectedResult{ Build is distributed.}
      */
-    @Test(testName = "SU VM Stop Service Max Time Positive Test")
-    public void suVMStopServiceMaxTimePositiveTest() {
+    @Test(testName = "SingleUse VM Stop Service Max Time Positive Test")
+    public void singleUseVMStopServiceMaxTimePositiveTest() {
         setUp();
         setUnsubscribeTimeOnCoord(300);
         ibService.agentServiceStop();
@@ -138,14 +134,22 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
 
     /**
      * @test Verify that the single use agent is destroyed when it goes offline for more than OfflinePeriodCloudNode time<br>
-     * Checks:<br>
-     * <ul>
-     * <li>the build is not distributed after goes offline for 40 sec (OfflinePeriodCloudNode time == 30(default)</li>
-     * <li> the exported coordinator monitor file doesn't contain the agent name</li>
-     * </ul>
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;
+     * @li OfflinePeriodCloudNode time == 30(default);}
+     * @steps{
+     * @li Stop agent service;
+     * @li Wait for 40 seconds;
+     * @li Start agent service;
+     * @li Clean&build ConsApp;
+     * @li Export coordinator monitor}
+     * @expectedResult{
+     * @li Build is not distributed;
+     * @li Agent is not displayed on the Exported coordinator monitor}
      */
-    @Test(testName = "SU VM Stop Service Negative Test")
-    public void sUVMStopServiceNegativeTest() {
+    @Test(testName = "SingleUse VM Stop Service Negative Test")
+    public void singleUseVMStopServiceNegativeTest() {
         setUp();
         ibService.agentServiceStop();
         SystemActions.sleep(40);
@@ -157,18 +161,26 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     /**
-     * @test Verify the single use RESET feature.<br>
-     * Checks:<br>
-     * <ul>
-     * <li>the agent service is stoped after single use vm reset</li>
-     * <li> ibat regKey is changed from 2 to 1 after single use vm reset</li>
-     * <li> the build is distributed after agent service is started, agent subscribed and packages allocated</li>
-     * </ul>
+     * @test Verify the single use <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/65538/Single-use+Virtual+Machine+Image#Single-useVirtualMachineImage-ResetSingle-UseVM">RESET feature</a>.<br>
+     * @preConditions{
+     * @li Agent service is started;
+     * @li Agent is subscribed;
+     * }
+     * @steps{
+     * @li Reset SingleUse VM on coordinator;
+     * @li Wait for 99 seconds;
+     * @li SetUp;
+     * @li Clean&build ConsApp.}
+     * @expectedResult{
+     * @li Agent service is stopped after single use vm reset;
+     * @li ibat regKey is changed from 2 to 1 after single use vm reset;
+     * @li Build is distributed after agent service is started (agent subscribed and packages allocated).}
+     *
+     * @todo implement reset single use vm once when Feature request  10128 is implemented
      */
-    @Test(testName = "SU VM Reset Test")
-    public void suVMResetTest() {
+    @Test(testName = "SingleUse VM Reset Test")
+    public void singleUseVMResetTest() {
         setUp();
-        //TODO: reset single use vm once when Feature request  10128 is implemented
         //reset single use vm Feature request  10128
         //workaround to previous line
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\BuildService", RegistryKeys.RESET_SINGLE_USE, "1");
