@@ -1,5 +1,6 @@
 package Native.ibclienttests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.AgentSettingsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -12,27 +13,33 @@ import org.apache.velocity.runtime.directive.Parse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Avoid local Execution turned ON, Standalone OFF")
     public void avoidLocalExecutionTurnedOnStandaloneOff() {
-        setRegistry("1","Builder", RegistryKeys.AVOID_LOCAL);
-        setRegistry("0","Builder", RegistryKeys.STANDALONE_MODE);
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         Assert.assertTrue(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE), "failed to verify avoid local in output log");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
     @Test(testName = "Avoid local Execution turned OFF, Standalone ON")
     public void avoidLocalExecutionTurnedOffStandaloneOn() {
-        setRegistry("0","Builder", RegistryKeys.AVOID_LOCAL);
-        setRegistry("1","Builder", RegistryKeys.STANDALONE_MODE);
+        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("1", "Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
@@ -50,7 +57,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Verify Extended logging level")
     public void verifyExtendedLoggingLevel() {
         String result;
-        setRegistry("4", "Log" ,RegistryKeys.LOGGING_LEVEL);
+        setRegistry("4", "Log", RegistryKeys.LOGGING_LEVEL);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         try {
             result = ibService.findValueInPacketLog("LoggingLevel");
@@ -63,7 +70,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Verify Minimal logging level")
     public void verifyMinimalLoggingLevel() {
         String result;
-        setRegistry("0", "Log" ,RegistryKeys.LOGGING_LEVEL);
+        setRegistry("0", "Log", RegistryKeys.LOGGING_LEVEL);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         try {
             result = ibService.findValueInPacketLog("LoggingLevel");
@@ -76,16 +83,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Verify Task Termination On High CPU Consumption")
     public void verifyTaskTerminationOnHighCPUConsumption() {
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, ProjectsCommands.CLEAN));
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD) );
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
         SystemActions.sleep(7);
-        for (int i = 0 ; i < 2 ; i++) {
+        for (int i = 0; i < 2; i++) {
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
                     " cmd.exe /c " + Processes.NOTHING);
         }
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
         int firstLocal = Parser.getFirstLineForString(Locations.OUTPUT_LOG_FILE, "Local");
-        for (int i = 0 ; i < 2 ; i++) {
+        for (int i = 0; i < 2; i++) {
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
                     " cmd.exe /c \"TASKKILL /F /IM nothing.exe\"");
         }
@@ -119,7 +126,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.BUILDSETTINGS);
         boolean isPresent = client.verifyMultipleBuildsTab();
         SystemActions.killProcess(Processes.BUILDSETTINGS);
-        Assert.assertTrue(isPresent, "MultiBuild tab should not be displayed with PRO license");
+        Assert.assertTrue(isPresent, "MultiBuild tab should be displayed with PRO license");
     }
 
     @Test(testName = "Verify Build History By Date")
@@ -216,11 +223,57 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         client.disableSchedulingAndVerifyIcon();
     }
 
+    @Test(testName = "Verify PDB File Limit 1")
+    public void verifyPDBFileLimit1() {
+        Set<String> agentsList = new HashSet<>();
+        setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        try (Scanner sc = new Scanner(new File(Locations.OUTPUT_LOG_FILE))) {
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                int start = line.indexOf("(Agent '");
+                if (start >= 0) {
+                    line = line.substring(start+8);
+                    int end = line.indexOf("'");
+                    agentsList.add(line.substring(0, end));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }
+        int pdbLimit = agentsList.size();
+        Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + pdbLimit);
+        setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+    }
+
+    @Test(testName = "Verify PDB File Limit Unchecked")
+    public void verifyPDBFileLimitUnchecked() {
+        Set<String> agentsList = new HashSet<>();
+        setRegistry("0", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        try (Scanner sc = new Scanner(new File(Locations.OUTPUT_LOG_FILE))) {
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                int start = line.indexOf("(Agent '");
+                if (start >= 0) {
+                    line = line.substring(start+8);
+                    int end = line.indexOf("'");
+                    agentsList.add(line.substring(0, end));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }
+        int pdbLimit = agentsList.size();
+        Assert.assertTrue(pdbLimit > 1, "PDB File Limit should be >=2, but found " + pdbLimit);
+        setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+    }
 
 
-        /*------------------------------METHODS------------------------------*/
 
-    private void setRegistry(String required, String folder, String keyName){
+    /*------------------------------METHODS------------------------------*/
+
+    private void setRegistry(String required, String folder, String keyName) {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
     }
 }

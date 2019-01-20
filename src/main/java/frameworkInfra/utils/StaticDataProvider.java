@@ -183,6 +183,7 @@ public class StaticDataProvider {
 
         public static class AGENT_SETTINGS {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+            public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /showagent /showcmd /showtime";
         }
 
         public static class VC15Preview_BATMAN {
@@ -486,7 +487,6 @@ public class StaticDataProvider {
             public static final String CONSOLE_APP_SUCCESS_REBUILD = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fail.sln /%s /cfg=\"Debug|x86\"";
             public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
-
         }
 
         public static class CHROME_BATMAN {
@@ -561,6 +561,7 @@ public class StaticDataProvider {
         public static final String VS_INSTALLED = "Installed";
         public static final String MSBUILD_SUPPORTED_VERSION_15 = "MSBuildMaxSupportedVersion15.0";
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
+        public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
     }
 
     public static class IbLicenses {
