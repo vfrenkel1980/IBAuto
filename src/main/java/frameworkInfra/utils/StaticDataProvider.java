@@ -119,6 +119,7 @@ public class StaticDataProvider {
         public static final String MAX_ALLOWED_BUILDS = "Maximum number of concurrent builds reached.";
         public static final String BUILDSERVICE_STOPPED = "The connection with Build Sevice has terminated. Start again Build Service for activating Build Monitor";
         public static final String BUILDSERVICE_STOPPED_FAIL = "Connection terminated while waiting for reply from local connection: Server is not reachable";
+        public static final String BUILDMONITOR_ACCESS_VIOLATION = "Access violation at address 006AF46E in module 'BuildMonitor.exe'";
         public static final String INVALID_PARAM_ERROR = "Fatal Error: Invalid/conflicting options specified:";
         public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
         public static final String DONE_BUILDING_PROJECT = "Done Building Project";

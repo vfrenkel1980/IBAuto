@@ -116,8 +116,8 @@ public class GeneralWinTests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(enabled = false, testName = "Verify BuildMon  - Agent Service stopped")
-    public void verifyBuildMonAgentServiceStopped() {
+    @Test(enabled = false, testName = "Verify BuildMon - Agent Service stopped During Build")
+    public void verifyBuildMonAgentServiceStoppedDuringBuild() {
         winService.runCommandDontWaitForTermination(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE_LONG + " /openmonitor");
         SystemActions.sleep(1);
         try {
@@ -125,6 +125,21 @@ public class GeneralWinTests extends BatmanBCTestBase {
             SystemActions.sleep(5);
             Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED_FAIL));
             Assert.assertTrue(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDSERVICE_STOPPED));
+        } catch (Exception e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        } finally {
+            winService.runCommandWaitForFinish("net start \"" + WindowsServices.AGENT_SERVICE + "\"");
+            SystemActions.killProcess(Processes.BUILDMONITOR);
+        }
+    }
+
+    @Test(enabled = false, testName = "Verify BuildMon  - Agent Service stopped")
+    public void verifyBuildMonAgentServiceStopped() {
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE_LONG + " /openmonitor");
+        try {
+            winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+            ibService.openBuildMonitor();
+            Assert.assertFalse(Parser.doesFileContainString(IbLocations.LOGS_ROOT + "\\BuildMonitor.log", LogOutput.BUILDMONITOR_ACCESS_VIOLATION));
         } catch (Exception e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         } finally {
