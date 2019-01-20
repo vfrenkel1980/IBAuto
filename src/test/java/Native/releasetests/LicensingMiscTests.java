@@ -25,7 +25,7 @@ public class LicensingMiscTests extends LicensingTestBase {
         }
     }
 
-    @Test(testName = "Verify Alocated Packages Saved CoordService Restart")
+    @Test(testName = "Verify Allocated Packages Saved CoordService Restart")
     public void verifyAlocatedPackagesSavedCoordServiceRestart(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
@@ -43,11 +43,11 @@ public class LicensingMiscTests extends LicensingTestBase {
         }
     }
 
-    @Test(testName = "Verify Alocated Packages Saved Reload License")
+    @Test(testName = "Verify Allocated Packages Saved Reload License")
     public void verifyAlocatedPackagesSavedReloadLicense(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocateall");
+        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocateAll");
         ibService.unloadIbLicense();
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
         SystemActions.sleep(5);

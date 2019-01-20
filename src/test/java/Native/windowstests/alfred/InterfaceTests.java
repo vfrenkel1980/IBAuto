@@ -5,6 +5,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class InterfaceTests extends InterfacesTestBase{
@@ -116,6 +117,15 @@ public class InterfaceTests extends InterfacesTestBase{
     @Test(testName="Verify Missing Profile Warning")
     public void verifyMissingProfileWarning(){
         winService.runCommandWaitForFinish(Processes.BUILD_CONSOLE + ProjectsCommands.INTERFACES.BUILDCONSOLE_MISSING_PROFILE);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Custom profile is missing"), "The warning message about missing profile is not displayed in the output log");
+    }
+
+    //TODO: Enable test when Bug 9130 would be fixed
+    @Ignore
+    @Test(testName="Verify Not XML Missing Profile Warning")
+    public void verifyNotXMLMissingProfileWarning(){
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.INTERFACES.IBCONSOLE_NOTEXIST_PROFILE);
+        Assert.assertEquals(exitCode, 0, "Build exit code is different then 0");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Custom profile is missing"), "The warning message about missing profile is not displayed in the output log");
     }
 
