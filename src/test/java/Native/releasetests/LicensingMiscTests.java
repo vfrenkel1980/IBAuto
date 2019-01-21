@@ -12,6 +12,7 @@ public class LicensingMiscTests extends LicensingTestBase {
     @Test(testName = "Verify Expired Package Output")
     public void verifyExpiredPackageOutput(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic");
+        SystemActions.sleep(30);
         int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(5);
         int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
@@ -28,6 +29,7 @@ public class LicensingMiscTests extends LicensingTestBase {
     @Test(testName = "Verify Allocated Packages Saved CoordService Restart")
     public void verifyAlocatedPackagesSavedCoordServiceRestart(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+        SystemActions.sleep(30);
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
         returncode += winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
@@ -46,9 +48,11 @@ public class LicensingMiscTests extends LicensingTestBase {
     @Test(testName = "Verify Allocated Packages Saved Reload License")
     public void verifyAlocatedPackagesSavedReloadLicense(){
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+        SystemActions.sleep(30);
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocateAll");
         ibService.unloadIbLicense();
+        SystemActions.sleep(5);
         ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
         SystemActions.sleep(5);
         int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);

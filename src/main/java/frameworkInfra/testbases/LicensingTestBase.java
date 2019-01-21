@@ -122,7 +122,8 @@ public class LicensingTestBase extends ReleaseTestBase{
         log.info("AFTER CLASS started");
 
         ibService.unloadIbLicense();
-        SystemActions.setLocalDateFromString(currentDate);
+        //SystemActions.setLocalDateFromString(currentDate);
+        SystemActions.addPeriodToSystemTime(0, 0, -5);
     }
 
     @AfterMethod
