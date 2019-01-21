@@ -518,7 +518,7 @@ public class StaticDataProvider {
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_MISSING_PROFILE = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /title=\"buildconsoleMissingProgile\" /profile=\"idontExist\" /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_NO_PARAMS = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln";
-            public static final String IBCONSOLE_MULTIPLE_PARAMS = "cd \\runme.bat";
+            public static final String IBCONSOLE_MULTIPLE_PARAMS = "C:\\QA\\Simulation\\Samples\\ibconsole\\runme.bat";
             public static final String OPEN_MONITOR_ONLY = "/openmonitor /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String IBCONSOLE_INVALID_PARAM = "/command=\"ipconfig\" /invalid /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String XGCONSOLE_SUCCESS = "\"C:\\QA\\Simulation\\Samples\\xgconsole\\run XGE.bat\"";
@@ -526,7 +526,7 @@ public class StaticDataProvider {
             public static final String RESET_CACHES = "/resetallfilecaches";
             public static final String EXPORT_STATUS = "/exportstatus=\"c:\\qa\\simulation\\coordexport.xml\"";
             public static final String XGSUBMIT_BATCH = "\"C:\\QA\\Simulation\\Samples\\xgsubmit_xgwait\\BatchFileExecution.bat\"";
-            public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsoletest\" /profile=\"profileNotExists.profile\"";
+            public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
         }
 
