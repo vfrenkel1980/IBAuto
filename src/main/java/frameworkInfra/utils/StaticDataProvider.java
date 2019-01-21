@@ -183,7 +183,7 @@ public class StaticDataProvider {
 
         public static class AGENT_SETTINGS {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
-            public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /showagent /showcmd /showtime";
+            public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
         }
 
         public static class VC15Preview_BATMAN {

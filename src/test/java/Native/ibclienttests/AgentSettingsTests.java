@@ -238,11 +238,11 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
                     agentsList.add(line.substring(0, end));
                 }
             }
+            int pdbLimit = agentsList.size();
+            Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + pdbLimit);
         } catch (FileNotFoundException e) {
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
         }
-        int pdbLimit = agentsList.size();
-        Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + pdbLimit);
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
     }
 
@@ -261,11 +261,11 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
                     agentsList.add(line.substring(0, end));
                 }
             }
+            int pdbLimit = agentsList.size();
+            Assert.assertTrue(pdbLimit > 1, "PDB File Limit should be >=2, but found " + pdbLimit);
         } catch (FileNotFoundException e) {
             test.log(Status.INFO, "Failed with error: " + e.getMessage());
         }
-        int pdbLimit = agentsList.size();
-        Assert.assertTrue(pdbLimit > 1, "PDB File Limit should be >=2, but found " + pdbLimit);
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
     }
 
