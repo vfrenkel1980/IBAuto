@@ -573,6 +573,11 @@ public class StaticDataProvider {
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
         public static final String AGENT_SETTINGS_LIC = "IncrediBuild - Mark Zvuluni - agent settings.IB_lic";
         public static final String DASHBOARD_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - dashboard tests August 2018.IB_lic";
+        //lic tests
+        public static final String VALID_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic";
+        public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic";
+        public static final String EXPIRED_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - license expired.IB_lic";
+        public static final String VALID_NO_UTESTS_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018 Without Unit Tests.IB_lic";
     }
 
     public static class WindowsCommands {
@@ -593,7 +598,6 @@ public class StaticDataProvider {
         public static final String MODIFY_ADD_INCREDIBUILD = "C:\\QA\\Simulation\\VSintallation\\%s --add Component.Incredibuild --includeRecommended -p";
         public static final String REMOVE_IB_EXTENSION = "C:\\QA\\Simulation\\VSintallation\\%s --remove Component.Incredibuild -p";
         public static final String REFRESH_ENV_VARS = "C:\\ProgramData\\chocolatey\\bin\\RefreshEnv.cmd && ";
-
     }
 
     public static class DockerCommands {
@@ -688,6 +692,7 @@ public class StaticDataProvider {
         public static final String INTERCEPTION = "\\ibconsole.exe /command=\"cmd /c \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\spawner \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\sleep 5\"\" \"\" \" /profile=C:\\LicenseTests_projects\\Dev_Tools\\Interception\\profile.xml /title=\"License test - Dev Tools - Interception\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String SUBMITION = "\\ibconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\Submition\\Batch.bat /title=\"License test - Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String XML = "\\xgconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\XML\\XmlSample.xml /title=\"License test - Dev Tools - XML\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+        public static final String UNIT_TEST = "cd \"C:\\QA\\Simulation\\projects\\gtest\\build\" && ibconsole.exe /command=\"ctest -C Release -VV --parallel 20\" /avoidlocal=on  /showagent /out=" + Locations.OUTPUT_LOG_FILE +" /title=\"GOOGLE TEST\" /test=ctest";
     }
 
     public static class LinuxSimulation {

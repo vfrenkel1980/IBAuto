@@ -227,6 +227,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyPDBFileLimit1() {
         Set<String> agentsList = new HashSet<>();
         setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        SystemActions.sleep(1);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
         try (Scanner sc = new Scanner(new File(Locations.OUTPUT_LOG_FILE))) {
             while (sc.hasNext()) {

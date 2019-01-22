@@ -4,7 +4,7 @@ import com.aventstack.extentreports.Status;
 import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.dataObjects.ibObjects.IbCoordMonAgent;
 import ibInfra.ibExecs.IIBCoordMonitor;
@@ -35,13 +35,13 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
 
-        SystemActions.deleteFilesByPrefix(StaticDataProvider.Locations.WORKSPACE_REPORTS, "Test");
+        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         currentDate = SystemActions.getLocalDateAsString();
 
         ibService.installIB("Latest");
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE, "0");
-        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL, "1");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.STANDALONE_MODE, "0");
+        RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "1");
         ibService.customPackAllocationOn();
     }
 
@@ -58,8 +58,8 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
         switch (scenario){
             case ("1"): //Valid license with all packages
                 scenarioDescription = "Valid license with all packages";
-                ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
-                winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                ibService.loadIbLicense(IbLicenses.VALID_LIC);
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
                 coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
                 break;
@@ -89,11 +89,11 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
     @AfterMethod
     public void afterMethod2(ITestResult result){
         try {
-            winService.renameFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE, result.getMethod().getMethodName()+"_SCENARIO_"+scenario+"_positive.txt");
+            winService.renameFile(Locations.OUTPUT_LOG_FILE, result.getMethod().getMethodName()+"_SCENARIO_"+scenario+"_positive.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
+        SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
     }
 
 
