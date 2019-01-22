@@ -100,4 +100,14 @@ public class LicensingTests extends LicensingTestBase {
             Assert.assertTrue(false, "Build wasn't executed correctly");
         }
     }
+
+    @Test(testName = "Licence Test: Unit Tests")
+    public void licTestUnitTests() {
+        exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        if (exitStatus == 0) {
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+        } else {
+            Assert.assertTrue(false, "Build wasn't executed correctly");
+        }
+    }
 }

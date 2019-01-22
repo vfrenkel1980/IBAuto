@@ -1,26 +1,32 @@
 package Native.releasetests;
 
 import frameworkInfra.testbases.LicensingTestBase;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ibInfra.ibExecs.IIBCoordMonitor;
 
 public class LicensingMiscTests extends LicensingTestBase {
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     @Test(testName = "Verify Expired Package Output")
     public void verifyExpiredPackageOutput(){
-        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic");
-        SystemActions.sleep(30);
-        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        ibService.loadIbLicense(IbLicenses.EXPIRED_SOLUTIONS_LIC);
+        try {
+            coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(5);
-        int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
+        int exitStatus = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (returncode + exitStatus == 0) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
             //   Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for Microsoft Visual Studio C/C++"));
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "The \"IncrediBuild for Microsoft Visual Studio C/C++\" license is required"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "The \"IncrediBuild for Microsoft Visual Studio C/C++\" license is required"));
         } else {
             Assert.assertTrue(false, "Verify Expired Package Output Test failed");
         }
@@ -28,18 +34,22 @@ public class LicensingMiscTests extends LicensingTestBase {
 
     @Test(testName = "Verify Allocated Packages Saved CoordService Restart")
     public void verifyAlocatedPackagesSavedCoordServiceRestart(){
-        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
-        SystemActions.sleep(30);
-        winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
-        returncode += winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
-        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+        ibService.loadIbLicense(IbLicenses.VALID_LIC);
+        try {
+            coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
+        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
+        winService.restartService(WindowsServices.COORD_SERVICE);
         SystemActions.sleep(5);
-        int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
+        int exitStatus = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (returncode + exitStatus == 0) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
             //   Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for Microsoft Visual Studio C/C++"));
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
         } else {
             Assert.assertTrue(false, "Verify Alocated Packages Saved CoordService Restart Test failed");
         }
@@ -47,22 +57,53 @@ public class LicensingMiscTests extends LicensingTestBase {
 
     @Test(testName = "Verify Allocated Packages Saved Reload License")
     public void verifyAlocatedPackagesSavedReloadLicense(){
-        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
-        SystemActions.sleep(30);
-        winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/deallocateAll");
+        ibService.loadIbLicense(IbLicenses.VALID_LIC);
+        try {
+            coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocateAll");
         ibService.unloadIbLicense();
         SystemActions.sleep(5);
-        ibService.loadIbLicense("IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic");
+        ibService.loadIbLicense(IbLicenses.VALID_LIC);
         SystemActions.sleep(5);
-        int exitStatus = ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.Locations.LICENSE_TEST_PROJECTS + StaticDataProvider.LicTestPrjBuildConsoleCommands.VS2017_CPP);
+        int exitStatus = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (returncode + exitStatus == 0) {
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "One of the following licenses is required in order to run this build in distributed mode"));
             //   Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for Microsoft Visual Studio C/C++"));
-            Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for C#"));
         } else {
             Assert.assertTrue(false, "Verify Alocated Packages Saved Reload License Test failed");
         }
     }
 
+    @Test(testName = "Verify Allocated Packages Saved Upgrade License")
+    public void verifyAlocatedPackagesSavedUpgradeLicense(){
+        ibService.loadIbLicense(IbLicenses.VALID_NO_UTESTS_LIC);
+        try {
+            coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        SystemActions.sleep(5);
+        ibService.loadIbLicense(IbLicenses.VALID_LIC);
+        SystemActions.sleep(5);
+        returncode += winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        try {
+            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "coordExport.xml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (returncode == 0) {
+            Assert.assertFalse(Parser.doesFileContainString(Locations.QA_ROOT+ "\\coordExport.xml", "IncrediBuild for NUnit"));
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Test Tools Acceleration license is missing"));
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for Unit Tests (Yearly)"));
+        } else {
+            Assert.assertTrue(false, "Build wasn't executed correctly");
+        }
+    }
 }
