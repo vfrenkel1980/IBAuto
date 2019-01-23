@@ -186,7 +186,7 @@ public class SystemActions {
      */
     public static void subtractPeriodFromSystemTime(long days, long months, long years) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
         String newDate = (now.minusDays(days).minusMonths(months).minusYears(years)).format(formatter);
         try {
             test.log(Status.INFO, "Changing machine time to: " + newDate);
