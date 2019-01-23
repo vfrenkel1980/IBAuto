@@ -12,9 +12,18 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
-
+/**
+ * @brief<b> <b> Common tests for all windows build simulations</b>
+ * @details
+ */
 public class CommonTests extends WindowsSimTestBase {
 
+    /**
+     * @test Verify errors in all log files of IncrediBuild
+     * @pre{ }
+     * @steps{ }
+     * @result{ }
+     */
     @Test(testName = "Verify Errors In Logs")
     public void verifyErrorsInLogs() {
         Set<String> errorList = new HashSet<>();
