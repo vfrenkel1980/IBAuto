@@ -32,6 +32,7 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Agent is listed in build log, should be unsubscribed");
     }
+    
 
     @Test(testName = "Subscribe Agent", dependsOnMethods = {"unsubscribeAgent"})
     public void subscribeAgent() {
