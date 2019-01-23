@@ -83,7 +83,6 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
         log.info("AFTER CLASS started");
 
         ibService.unloadIbLicense();
-        SystemActions.setLocalDateFromString(currentDate);
     }
 
     @AfterMethod

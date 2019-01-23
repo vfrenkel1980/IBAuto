@@ -64,7 +64,8 @@ public class LicensingMiscTests extends LicensingTestBase {
             e.printStackTrace();
         }
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
+        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
         ibService.unloadIbLicense();
         SystemActions.sleep(5);
         ibService.loadIbLicense(IbLicenses.VALID_LIC);
