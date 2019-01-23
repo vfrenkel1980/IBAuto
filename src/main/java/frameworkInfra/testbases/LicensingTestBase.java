@@ -115,14 +115,20 @@ public class LicensingTestBase extends ReleaseTestBase{
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass(ITestContext testContext){
         test = extent.createTest("After Class");
         test.assignCategory("AFTER CLASS");
         test.log(Status.INFO, "AFTER CLASS started");
         log.info("AFTER CLASS started");
 
         ibService.unloadIbLicense();
-        SystemActions.subtractPeriodFromSystemTime(0, 0, 5);
+        scenario = testContext.getName();
+        switch (scenario) {
+            case ("5"):
+                SystemActions.subtractPeriodFromSystemTime(0, 0, 5);
+                SystemActions.sleep(20);
+                break;
+        }
     }
 
     @AfterMethod
