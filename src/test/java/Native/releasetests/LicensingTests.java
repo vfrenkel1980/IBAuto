@@ -4,6 +4,7 @@ import frameworkInfra.testbases.LicensingTestBase;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class LicensingTests extends LicensingTestBase {
@@ -101,6 +102,10 @@ public class LicensingTests extends LicensingTestBase {
         }
     }
 
+    /**
+     * @bug 10375
+     */
+    @Ignore
     @Test(testName = "Licence Test: Unit Tests")
     public void licTestUnitTests() {
         exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);

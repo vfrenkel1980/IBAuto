@@ -5,6 +5,7 @@ import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -123,6 +124,10 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
         }
     }
 
+    /**
+     * @bug 10375
+     */
+    @Ignore
     @Test(testName = "Licence Test: Unit Tests")
     public void licTestUnitTests() {
         exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);

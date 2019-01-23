@@ -5,6 +5,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ibInfra.ibExecs.IIBCoordMonitor;
 
@@ -80,6 +81,11 @@ public class LicensingMiscTests extends LicensingTestBase {
         }
     }
 
+
+    /**
+     * @bug 10375
+     */
+    @Ignore
     @Test(testName = "Verify Allocated Packages Saved Upgrade License")
     public void verifyAlocatedPackagesSavedUpgradeLicense(){
         ibService.loadIbLicense(IbLicenses.VALID_NO_UTESTS_LIC);
