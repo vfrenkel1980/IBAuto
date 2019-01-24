@@ -124,10 +124,6 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
         }
     }
 
-    /**
-     * @bug 10375
-     */
-    @Ignore
     @Test(testName = "Licence Test: Unit Tests")
     public void licTestUnitTests() {
         exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);

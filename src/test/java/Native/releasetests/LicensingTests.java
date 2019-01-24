@@ -92,6 +92,10 @@ public class LicensingTests extends LicensingTestBase {
         }
     }
 
+
+    /**
+     * @bug 10384 in scenario 3: No packages allocated (valid license)
+     */
     @Test(testName = "Licence Test: Dev Tools - XML")
     public void licTestDevTools_XML() {
         exitStatus = winService.runCommandWaitForFinish(ibService.getIBInstallFolder() + LicTestPrjBuildConsoleCommands.XML);
@@ -102,10 +106,6 @@ public class LicensingTests extends LicensingTestBase {
         }
     }
 
-    /**
-     * @bug 10375
-     */
-    @Ignore
     @Test(testName = "Licence Test: Unit Tests")
     public void licTestUnitTests() {
         exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);

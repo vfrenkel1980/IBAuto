@@ -13,7 +13,7 @@ import java.util.*;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 /**
- * @brief<b> <b> Common tests for all windows build simulations</b>
+ * @brief <b> Common tests for all windows build simulations</b>
  * @details
  */
 public class CommonTests extends WindowsSimTestBase {
