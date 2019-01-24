@@ -154,6 +154,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
         client.changeCpuUtilCores();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FORCE_CPU_INITIATOR, "0");
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
 
