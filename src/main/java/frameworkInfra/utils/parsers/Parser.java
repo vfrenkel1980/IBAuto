@@ -1,7 +1,10 @@
 package frameworkInfra.utils.parsers;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.SystemActions;
 import org.apache.tools.ant.DirectoryScanner;
+import org.testng.Assert;
 
 import java.io.*;
 import java.util.*;
@@ -164,6 +167,24 @@ public class Parser {
         }
         test.log(Status.INFO, "Didn't find " + lookFor + " in" + filePath);
         return count;
+    }
+
+    public static Set<String> getHelperCoreNumber(String filePath) {
+        Set<String> agentsList = new HashSet<>();
+        try (Scanner sc = new Scanner(new File(filePath))) {
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                int start = line.indexOf("(Agent '");
+                if (start >= 0) {
+                    line = line.substring(start + 8);
+                    int end = line.indexOf("'");
+                    agentsList.add(line.substring(0, end));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }
+        return agentsList;
     }
 }
 

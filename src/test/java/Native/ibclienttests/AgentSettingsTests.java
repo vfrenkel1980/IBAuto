@@ -230,22 +230,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        try (Scanner sc = new Scanner(new File(Locations.OUTPUT_LOG_FILE))) {
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                int start = line.indexOf("(Agent '");
-                if (start >= 0) {
-                    line = line.substring(start+8);
-                    int end = line.indexOf("'");
-                    agentsList.add(line.substring(0, end));
-                }
-            }
-            int pdbLimit = agentsList.size();
-            Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + pdbLimit);
-        } catch (FileNotFoundException e) {
-            test.log(Status.INFO, "Failed with error: " + e.getMessage());
-        }
+        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + helperNumber);
     }
 
     @Test(testName = "Verify PDB File Limit Unchecked")
@@ -255,25 +242,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        try (Scanner sc = new Scanner(new File(Locations.OUTPUT_LOG_FILE))) {
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                int start = line.indexOf("(Agent '");
-                if (start >= 0) {
-                    line = line.substring(start+8);
-                    int end = line.indexOf("'");
-                    agentsList.add(line.substring(0, end));
-                }
-            }
-            int pdbLimit = agentsList.size();
-            Assert.assertTrue(pdbLimit > 1, "PDB File Limit should be >=2, but found " + pdbLimit);
-        } catch (FileNotFoundException e) {
-            test.log(Status.INFO, "Failed with error: " + e.getMessage());
-        }
+        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        Assert.assertTrue(helperNumber > 1, "PDB File Limit should be >=2, but found " + helperNumber);
     }
-
-
 
     /*------------------------------METHODS------------------------------*/
 
