@@ -225,19 +225,17 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Verify PDB File Limit 1")
     public void verifyPDBFileLimit1() {
-        Set<String> agentsList = new HashSet<>();
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
         int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
-        Assert.assertTrue(agentsList.size() == 1, "PDB File Limit should be 1, but found " + helperNumber);
+        Assert.assertTrue(helperNumber == 1, "PDB File Limit should be 1, but found " + helperNumber);
     }
 
     @Test(testName = "Verify PDB File Limit Unchecked")
     public void verifyPDBFileLimitUnchecked() {
-        Set<String> agentsList = new HashSet<>();
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         setRegistry("0", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
