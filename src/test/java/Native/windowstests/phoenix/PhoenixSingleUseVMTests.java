@@ -169,7 +169,8 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
      * @steps{
      * - Reset SingleUse VM on coordinator;
      * - Wait for 99 seconds;
-     * - SetUp;
+     * - Agent service is started;
+     * - Agent is subscribed;
      * - Clean&build ConsApp.}
      * @result{
      * - Agent service is stopped after single use vm reset;
