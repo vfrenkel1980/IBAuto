@@ -88,7 +88,7 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
 /*---------------------------------METHODS----------------------------------------------*/
     public void restartTrayIcon(){
         SystemActions.killProcess(Processes.TRAY_ICON);
-        SystemActions.sleep(2);
+        SystemActions.sleep(8);
         SystemActions.startProcess(Processes.TRAY_ICON);
     }
 
