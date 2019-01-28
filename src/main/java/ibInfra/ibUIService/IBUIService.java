@@ -373,22 +373,24 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void verifyAllowEnableDisableAsHelperDisabledFromTray() {
-            boolean objectExists = false;
             test.log(Status.INFO, "Verify allow enable/disable as helper disabled");
             openTray();
-            if (screen.exists(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray, 15) != null)
-                objectExists = true;
-            Assert.assertTrue(objectExists, "Could not find allow enable/disable as helper disabled");
+            try {
+                screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 1),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable/disable as  helper is not denied from tray, failed with error: " + findFailed.getMessage());
+            }
         }
 
         @Override
         public void verifyAgentEnabledAsHelperFromTray() {
-            boolean objectExists = false;
             test.log(Status.INFO, "Verify Agent is enabled as helper from tray");
             openTray();
-            if (screen.exists(IBSettings.TrayIcon.enabledAsHelperTray, 15) != null)
-                objectExists = true;
-            Assert.assertTrue(objectExists, "Could not find enabled as helper from tray");
+            try {
+                screen.wait(IBSettings.TrayIcon.enabledAsHelperTray.similar((float) 1),2);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find enabled as helper from tray, failed with error: " + findFailed.getMessage());
+            }
         }
 
         public void openTray(){
