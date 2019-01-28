@@ -13,6 +13,8 @@ public class IBSettings {
         public static final Pattern historyTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\history_tray.png");
         public static final Pattern agentSettingsTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\agent_settings_tray.png");
         public static final Pattern coordMonitorTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\coord_mon_tray.png");
+        public static final Pattern enableDisableAsHelperDeniedTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enable_disable_as_helper_denied.png");
+        public static final Pattern enabledAsHelperTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enabled_as_helper_tray.png");
     }
 
 /*    public static final Pattern network = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkTab.png");

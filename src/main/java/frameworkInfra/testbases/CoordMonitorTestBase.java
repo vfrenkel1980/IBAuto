@@ -35,6 +35,7 @@ public class CoordMonitorTestBase extends TestBase {
     public IbService ibService = new IbService();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
+    protected IBUIService.Client client = ibuiService.new Client();
 
     static {
         int ibVersion = IIBService.getIbVersion();

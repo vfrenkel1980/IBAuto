@@ -372,6 +372,35 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void verifyAllowEnableDisableAsHelperDisabledFromTray() {
+            boolean objectExists = false;
+            test.log(Status.INFO, "Verify allow enable/disable as helper disabled");
+            openTray();
+            if (screen.exists(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find allow enable/disable as helper disabled");
+        }
+
+        @Override
+        public void verifyAgentEnabledAsHelperFromTray() {
+            boolean objectExists = false;
+            test.log(Status.INFO, "Verify Agent is enabled as helper from tray");
+            openTray();
+            if (screen.exists(IBSettings.TrayIcon.enabledAsHelperTray, 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find enabled as helper from tray");
+        }
+
+        public void openTray(){
+            try {
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open tray-icon menu, failed with error: " + findFailed.getMessage());
+            }
+        }
+
+        @Override
         public void verifyBuildMonitorOpened() {
             boolean objectExists = false;
             if (screen.exists(IBStatusBars.buildMonitor, 15) != null)
@@ -682,6 +711,18 @@ public class IBUIService implements IIBUIService {
                 screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.8),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to click allow remote administration, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void clickAllowEnableDisableAsHelper() {
+            test.log(Status.INFO, "Clicking allow Enable Disable as helper");
+            try {
+                screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.8),15).rightClick();
+                screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.8),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
                 Assert.fail();
             }
         }

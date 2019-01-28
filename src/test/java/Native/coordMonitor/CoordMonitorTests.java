@@ -56,7 +56,21 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not start");
     }
 
-    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"startCoordinatorService"})
+    @Test(testName = "Deny Enable/Disable As Helper", dependsOnMethods = {"startCoordinatorService"})
+    public void denyEnableDisableAsHelper() {
+        coordinator.clickAllowEnableDisableAsHelper();
+        restartTrayIcon();
+        client.verifyAllowEnableDisableAsHelperDisabledFromTray();
+    }
+
+    @Test(testName = "Allow Enable/Disable As Helper", dependsOnMethods = {"denyEnableDisableAgentAsHelper"})
+    public void allowEnableDisableAsHelper() {
+        coordinator.clickAllowEnableDisableAsHelper();
+        restartTrayIcon();
+        client.verifyAgentEnabledAsHelperFromTray();
+    }
+
+    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"allowEnableDisableAgentAsHelper"})
     public void disableRemoteAdministration() {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
@@ -70,5 +84,12 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
     }
 
+
+/*---------------------------------METHODS----------------------------------------------*/
+    public void restartTrayIcon(){
+        SystemActions.killProcess(Processes.TRAY_ICON);
+        SystemActions.sleep(2);
+        SystemActions.startProcess(Processes.TRAY_ICON);
+    }
 
 }

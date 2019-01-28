@@ -87,6 +87,10 @@ public interface IIBUIService {
 
         void openAgentSettingsFromTray();
 
+        void verifyAllowEnableDisableAsHelperDisabledFromTray();
+
+        void verifyAgentEnabledAsHelperFromTray();
+
         void verifyBuildMonitorOpened();
 
         void verifyBuildHistoryOpened();
@@ -141,6 +145,8 @@ public interface IIBUIService {
         void verifyAgentIsSubscribed();
 
         void clickAllowRemoteAdministration();
+
+        void clickAllowEnableDisableAsHelper();
 
         void stopCoordService();
 
