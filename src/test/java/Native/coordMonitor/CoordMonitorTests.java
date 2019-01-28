@@ -63,14 +63,14 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         client.verifyAllowEnableDisableAsHelperDisabledFromTray();
     }
 
-    @Test(testName = "Allow Enable/Disable As Helper", dependsOnMethods = {"denyEnableDisableAgentAsHelper"})
+    @Test(testName = "Allow Enable/Disable As Helper", dependsOnMethods = {"denyEnableDisableAsHelper"})
     public void allowEnableDisableAsHelper() {
         coordinator.clickAllowEnableDisableAsHelper();
         restartTrayIcon();
         client.verifyAgentEnabledAsHelperFromTray();
     }
 
-    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"allowEnableDisableAgentAsHelper"})
+    @Test(testName = "Disable Remote Administration", dependsOnMethods = {"allowEnableDisableAsHelper"})
     public void disableRemoteAdministration() {
         coordinator.clickAllowRemoteAdministration();
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
