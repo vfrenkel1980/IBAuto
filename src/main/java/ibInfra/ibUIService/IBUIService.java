@@ -379,6 +379,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 1),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable/disable as  helper is not denied from tray, failed with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -390,6 +391,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.TrayIcon.enabledAsHelperTray.similar((float) 1),2);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find enabled as helper from tray, failed with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -399,6 +401,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open tray-icon menu, failed with error: " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
