@@ -393,8 +393,7 @@ public class IBUIService implements IIBUIService {
 
         public void openTray(){
             try {
-                screen.hover(IBSettings.TrayIcon.Green.similar((float) 0.9));
-                SystemActions.sleep(2);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open tray-icon menu, failed with error: " + findFailed.getMessage());
