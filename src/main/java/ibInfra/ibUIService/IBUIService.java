@@ -323,7 +323,7 @@ public class IBUIService implements IIBUIService {
         public void openMonitorFromTray() {
             test.log(Status.INFO, "Opening Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -336,7 +336,7 @@ public class IBUIService implements IIBUIService {
         public void openHistoryFromTray() {
             test.log(Status.INFO, "Opening History from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.historyTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -349,7 +349,7 @@ public class IBUIService implements IIBUIService {
         public void openCoordMonitorFromTray() {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
@@ -362,7 +362,7 @@ public class IBUIService implements IIBUIService {
         public void openAgentSettingsFromTray() {
             test.log(Status.INFO, "Opening Agent Settings from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5);
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9),5).rightClick();
                 screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
