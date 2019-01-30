@@ -49,11 +49,6 @@ public class SingleUseVMTestBase extends TestBase {
         test.assignCategory("BEFORE SUITE");
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
-        int version = IIBService.getIbVersion();
-        if (version != 0)
-            ibService.uninstallIB(String.valueOf(version));
-        autoSubscribeSUVM("1");
-        setUnsubscribeTimeOnCoord(30);
         customPackAllocationOn();
     }
 
