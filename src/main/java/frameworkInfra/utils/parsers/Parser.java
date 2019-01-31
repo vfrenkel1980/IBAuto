@@ -169,7 +169,7 @@ public class Parser {
         return count;
     }
 
-    public static Set<String> getHelperCoreNumber(String filePath) {
+    public static Set<String> getHelperCores(String filePath) {
         Set<String> agentsList = new HashSet<>();
         try (Scanner sc = new Scanner(new File(filePath))) {
             while (sc.hasNext()) {
