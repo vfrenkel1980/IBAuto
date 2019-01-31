@@ -90,7 +90,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
                     " cmd.exe /c " + Processes.NOTHING);
         }
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+        int lastAgent = Parser.getLastLineIndexForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
         int firstLocal = Parser.getFirstLineForString(Locations.OUTPUT_LOG_FILE, "Local");
         for (int i = 0; i < 2; i++) {
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
@@ -232,7 +232,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         Assert.assertTrue(helperNumber == 1, "PDB File Limit should be 1, but found " + helperNumber);
     }
@@ -243,7 +243,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         Assert.assertTrue(helperNumber > 1, "PDB File Limit should be >=2, but found " + helperNumber);
     }

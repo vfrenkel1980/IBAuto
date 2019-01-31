@@ -67,6 +67,7 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
+                SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
@@ -75,6 +76,7 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("4"): //License Loaded and Agent Unsubscribed
                 scenarioDescription = "License Loaded and Agent Unsubscribed";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
+                SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
@@ -83,6 +85,7 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("5"): //Temp License is Expired
                 scenarioDescription = "Temp License is Expired";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
+                SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
                 SystemActions.addPeriodToSystemTime(0, 0, 5);
@@ -92,6 +95,7 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("6"): //All Allocated Packages are temporary and expired
                 scenarioDescription = "All Allocated Packages are temporary and expired";
                 ibService.loadIbLicense(IbLicenses.EXPIRED_SOLUTIONS_LIC);
+                SystemActions.sleep(5);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(5);
                 break;
@@ -139,6 +143,7 @@ public class LicensingTestBase extends ReleaseTestBase{
 
     @AfterSuite
     public void afterSuite(){
+        SystemActions.setLocalDateFromString(currentDate);
         ibService.uninstallIB("Latest");
     }
 
