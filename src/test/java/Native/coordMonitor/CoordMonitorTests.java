@@ -45,14 +45,14 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
     @Test(testName = "Stop Coordinator Service", dependsOnMethods = {"subscribeAgent"})
     public void stopCoordinatorService() {
         coordinator.stopCoordService();
-        SystemActions.sleep(3);
+        SystemActions.sleep(5);
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not stop");
     }
 
     @Test(testName = "Start Coordinator Service", dependsOnMethods = {"stopCoordinatorService"})
     public void startCoordinatorService() {
         coordinator.startCoordService();
-        SystemActions.sleep(3);
+        SystemActions.sleep(5);
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coordinator service is did not start");
     }
 
