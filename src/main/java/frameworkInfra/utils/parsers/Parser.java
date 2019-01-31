@@ -104,7 +104,7 @@ public class Parser {
      * @param searchFor String to search for within the file
      * @return number of line String appears in
      */
-    public static int getLastLineForString(String filePath, String searchFor) {
+    public static int getLastLineIndexForString(String filePath, String searchFor) {
         test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
         int line = 0;
         int finalLine = 0;
