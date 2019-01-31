@@ -66,8 +66,16 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
     @Test(testName = "Allow Enable/Disable As Helper", dependsOnMethods = {"denyEnableDisableAsHelper"})
     public void allowEnableDisableAsHelper() {
         coordinator.clickAllowEnableDisableAsHelper();
-        restartTrayIcon();
+        SystemActions.sleep(35);
         client.verifyAgentEnabledAsHelperFromTray();
+    }
+
+    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"allowEnableDisableAsHelper"})
+    public void allowRemoteAdministration() {
+        coordinator.clickAllowRemoteAdministration();
+        SystemActions.sleep(2);
+        String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
+        Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
     }
 
     @Test(testName = "Disable Remote Administration", dependsOnMethods = {"allowEnableDisableAsHelper"})
@@ -77,15 +85,6 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
         Assert.assertTrue(out.contains("error code 4"), "successfully ran /RESETALLFILECACHES - should FAIL");
     }
-
-    @Test(testName = "Allow Remote Administration", dependsOnMethods = {"disableRemoteAdministration"})
-    public void allowRemoteAdministration() {
-        coordinator.clickAllowRemoteAdministration();
-        SystemActions.sleep(2);
-        String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
-        Assert.assertTrue(out.contains("error code 0"), "failed to run /RESETALLFILECACHES - administrative rights granted?");
-    }
-
 
 /*---------------------------------METHODS----------------------------------------------*/
     public void restartTrayIcon(){
