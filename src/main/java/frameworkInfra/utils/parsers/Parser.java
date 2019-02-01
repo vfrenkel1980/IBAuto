@@ -34,8 +34,10 @@ public class Parser {
         while ((line = in.readLine()) != null) {
             for (Map.Entry<String, String> entry : lookFor.entrySet()) {
                 String key = entry.getKey();
-                pulledData = retrieveDataFromString(line, key);
-                entry.setValue(pulledData);
+                if (line.contains(key)) {
+                    pulledData = retrieveDataFromString(line, key);
+                    entry.setValue(pulledData);
+                }
             }
         }
         in.close();
@@ -47,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Used in order to get data from string line using key,value
+     * Used in order to get data from string line using key
      *
      * @param line the string line to search in
      * @return value that we found using the key we sent
@@ -57,6 +59,8 @@ public class Parser {
         String pulledData = "";
         if (line.contains(key)) {
             pulledData = line.substring(line.lastIndexOf(key) + key.length(), line.length());
+            //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
+            //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();
             pulledData = pulledData.replaceAll("[+={}^':\"]", "").trim();
             if (pulledData.equals(""))
                 pulledData = "null";
