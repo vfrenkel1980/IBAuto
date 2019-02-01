@@ -8,6 +8,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.sikuli.script.FindFailed;
 import org.testng.Assert;
+
 import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;

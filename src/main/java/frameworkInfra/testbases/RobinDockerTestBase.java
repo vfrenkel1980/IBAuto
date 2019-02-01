@@ -18,7 +18,7 @@ public class RobinDockerTestBase extends RobinTestBase {
     @Parameters({"logLevel"})
     public void startDocker(String logLevel) {
         executeCMD("powershell.exe Start-Service docker", "Starting service");
-        executeCMD(DockerCommands.DOCKER_START_CONTAINER + DockerCommands.WIN10_DOC_CONTAINER, "Starting container");
+        executeCMD("powershell.exe " + DockerCommands.DOCKER_START_CONTAINER + DockerCommands.WIN10_DOC_CONTAINER, "Starting container");
         winService.runCommandWaitForFinish(DockerCommands.DOCKER_EXEC + DockerCommands.WIN10_DOC_CONTAINER + "net start \"IncrediBuild Agent\" ");
     }
 

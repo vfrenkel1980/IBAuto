@@ -71,6 +71,7 @@ public class StaticDataProvider {
         public static final String VS_CUSTOM_IB_INSTALLER = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\";
         public static final String EXPORT_COORDMON_FILE = QA_ROOT + "\\coordmon.xml";
         public static final String IGNORE_ERRORS_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBErrorsList.txt";
+        public static final String WINSCP = "\"C:\\Program Files (x86)\\WinSCP\\WinSCP.com\"";
     }
 
     public static class URL {
