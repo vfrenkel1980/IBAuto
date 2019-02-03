@@ -58,7 +58,7 @@ public class LicensingTestBase extends ReleaseTestBase{
                 scenarioDescription = "Unloaded license";
                 test.log(Status.INFO,"2");
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(60);
                 ibService.unloadIbLicense();
@@ -67,7 +67,7 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("3"): //No packages aside from agent package
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
@@ -76,16 +76,16 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("4"): //License Loaded and Agent Unsubscribed
                 scenarioDescription = "License Loaded and Agent Unsubscribed";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 break;
             case ("5"): //Temp License is Expired
                 scenarioDescription = "Temp License is Expired";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
                 SystemActions.addPeriodToSystemTime(0, 0, 5);
@@ -95,15 +95,15 @@ public class LicensingTestBase extends ReleaseTestBase{
             case ("6"): //All Allocated Packages are temporary and expired
                 scenarioDescription = "All Allocated Packages are temporary and expired";
                 ibService.loadIbLicense(IbLicenses.EXPIRED_SOLUTIONS_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 break;
             case ("7"): //Expired license loading
                 scenarioDescription = "Expired license loading";
                 SystemActions.deleteFile(IbLocations.IB_ROOT + "\\Logs\\XlicProc.log");
                 ibService.loadIbLicense(IbLicenses.EXPIRED_LIC);
-                SystemActions.sleep(5);
+                SystemActions.sleep(10);
                 Assert.assertTrue(Parser.doesFileContainString(IbLocations.IB_ROOT + "\\Logs\\XlicProc.log", "License has expired and can not be loaded. Please contact sales@incredibuild.com to receive a new license."));
                 break;
         }
