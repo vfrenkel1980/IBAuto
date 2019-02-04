@@ -59,7 +59,9 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
             case ("1"): //Valid license with all packages
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
+                SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(10);
                 IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
                 coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
                 break;
