@@ -736,8 +736,8 @@ public class IBUIService implements IIBUIService {
         public void stopCoordService() {
             test.log(Status.INFO, "Stopping coordinator service");
             try {
-                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9),15).click();
-                screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.9),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to stop coordinator service, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -748,8 +748,8 @@ public class IBUIService implements IIBUIService {
         public void startCoordService() {
             test.log(Status.INFO, "Starting coordinator service");
             try {
-                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9),15).click();
-                screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.9),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to start coordinator service, failed with error: " + findFailed.getMessage());
                 Assert.fail();
