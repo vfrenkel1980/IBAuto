@@ -554,6 +554,7 @@ public class StaticDataProvider {
         public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
+        public static final String FORCE_CPU_HELPER = "ForceCPUCount_WhenHelper";
         public static final String RESET_SINGLE_USE = "ibat";
         public static final String COORD_PORT = "Port";
         public static final String SERVICE_PORT = "ForcePortNum";

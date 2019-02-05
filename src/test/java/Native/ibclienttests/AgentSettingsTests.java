@@ -248,9 +248,40 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(helperNumber > 1, "PDB File Limit should be >=2, but found " + helperNumber);
     }
 
+    @Test(testName = "Verify CPU Utilization As Initiator and PDB limit")
+    public void verifyCPUUtilizationAsInitiatorAndPDBLimit() {
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
+        setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        setRegKeyWithServiceRestart("1",RegistryKeys.FORCE_CPU_INITIATOR);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
+        setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_INITIATOR);
+        Assert.assertTrue(helperNumber == 1, "CPU utilization should be 1, but found " + helperNumber);
+    }
+
+    @Test(testName = "Verify When CPU Utilization As Helper checked")
+    public void verifyWhenCPUUtilizationAsHelperChecked() {
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
+        setRegKeyWithServiceRestart("1",RegistryKeys.FORCE_CPU_HELPER);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
+        setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_HELPER);
+        Assert.assertTrue(helperNumber > 1, "CPU utilization should be > 1, but found " + helperNumber);
+    }
+
+
+
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
     }
+
+    private void setRegKeyWithServiceRestart(String required,String keyName) {
+        setRegistry(required, "Builder", keyName);
+        ibService.agentServiceStop();
+        ibService.agentServiceStart();
+        SystemActions.sleep(5);
+}
 }
