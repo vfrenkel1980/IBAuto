@@ -325,10 +325,4 @@ public class WindowsService implements IWindowsService {
         return true;
     }
 
-    @Override
-    public int downloadLatestFileSFTP(String user, String host, String privateKeyPath, String remotePath, String localPath) {
-        int returnCode = runCommandWaitForFinish(Locations.WINSCP + " /command \"open  sftp://" +user + "@"+host+"/  " +
-                "-privatekey="+privateKeyPath+"\\*\" \"get -latest \"\""+remotePath+"/*\"\" \"\""+localPath+"\\\"\"\" \"exit\"");
-        return returnCode;
-    }
 }

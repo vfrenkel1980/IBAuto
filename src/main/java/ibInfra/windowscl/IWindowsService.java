@@ -50,5 +50,4 @@ public interface IWindowsService {
 
     ArrayList<String> textFileToList(String filepath);
 
-    int downloadLatestFileSFTP(String user, String host, String privateKeyPath, String remotePath, String localPath);
 }
