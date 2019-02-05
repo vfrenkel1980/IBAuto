@@ -10,7 +10,7 @@ import java.util.Vector;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 /**
- * @code  Example: download last modifyied file from dir from server
+ * @code  Example: download last modified file from dir from server
  *          String remoteFilePath = "/var/www/incredl3/public_html/ibusagelogs/";
  *         String user = "web_admin";
  *         String host = "35.205.56.131";
