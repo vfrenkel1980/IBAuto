@@ -529,6 +529,30 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void enableFailOnlyLocally() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.EnableFailOnlyLocally.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable FailOnlyLocally option with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void disableFailOnlyLocally() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to disable FailOnlyLocally option with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
         public void stopAgentService() {
             try {
                 screen.wait(IBSettings.agent.similar((float) 0.9),5).click();

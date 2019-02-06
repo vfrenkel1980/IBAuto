@@ -124,6 +124,10 @@ public interface IIBUIService {
         void enableSchedulingAndVerifyIcon();
 
         void disableSchedulingAndVerifyIcon();
+
+        void disableFailOnlyLocally();
+
+        void enableFailOnlyLocally();
     }
 
     interface ICoordinator{

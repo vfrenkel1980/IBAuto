@@ -40,6 +40,7 @@ public class IBSettings {
     public static final Pattern ShowAgentNameCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_agent_name.png");
     public static final Pattern ShowCommandLineCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\show_command_line.png");
     public static final Pattern InitiatorTab = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\initiator_tab.png");
+    public static final Pattern AdvancedTab = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\advanced_tab.png");
     public static final Pattern StartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\start_service.png");
     public static final Pattern StopServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\stop_service.png");
     public static final Pattern RestartServiceBtn = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\restart_service.png");
@@ -50,6 +51,8 @@ public class IBSettings {
     public static final Pattern EnableSchedulingCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_agent_scheduling_cb.png");
     public static final Pattern DisabledTrayIcon = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disabledTrayIcon.png");
     public static final Pattern DisableSchedulingCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disableScheduling.png");
+    public static final Pattern EnableFailOnlyLocally = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_fail_only_locally.png");
+    public static final Pattern DisableFailOnlyLocally = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_fail_only_locally.png");
 
 
 }

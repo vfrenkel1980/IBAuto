@@ -180,7 +180,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
     }
 
-    @Test(testName = "Verify .proj file support")
+    @Test(testName = "Verify .proj File Support")
     public void verifyProjFileSupport(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PROJ_WIN32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
@@ -188,6 +188,11 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     }
 
+    @Test(testName = "Verify OnlyFailLocally Flag")
+    public void verifyOnlyFailLocallyFlag(){
+        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "The build was executed on remote, should fail locally");
+    }
 
     /*------------------------------METHODS------------------------------*/
 
