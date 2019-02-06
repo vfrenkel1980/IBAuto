@@ -534,6 +534,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.EnableFailOnlyLocally.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable FailOnlyLocally option with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -546,6 +547,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to disable FailOnlyLocally option with error: " + findFailed.getMessage());
                 Assert.fail();
