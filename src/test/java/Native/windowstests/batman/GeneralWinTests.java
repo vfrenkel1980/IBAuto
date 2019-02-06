@@ -180,6 +180,13 @@ public class GeneralWinTests extends BatmanBCTestBase {
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
     }
 
+    @Test(testName = "Verify .proj file support")
+    public void verifyProjFileSupport(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PROJ_WIN32_RELEASE, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+
+    }
 
 
     /*------------------------------METHODS------------------------------*/
