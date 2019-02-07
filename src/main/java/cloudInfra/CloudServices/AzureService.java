@@ -16,7 +16,7 @@ import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class AzureService implements ICloudService {
+public class AzureService {
 
     private File credFile;
     private Azure azure;
@@ -32,7 +32,7 @@ public class AzureService implements ICloudService {
     private Region region = Region.EUROPE_WEST;
     private String resGroup = "TestRes2";
 
-    @Override
+    
     public void registerCloud() {
         try {
             test.log(Status.INFO, "Registering to Azure cloud service...");
@@ -47,7 +47,6 @@ public class AzureService implements ICloudService {
         }
     }
 
-    @Override
     public void createNetwork() {
         test.log(Status.INFO, "Creating Network and Security group...");
         network = azure.networks()
@@ -76,7 +75,6 @@ public class AzureService implements ICloudService {
 
     }
 
-    @Override
     public void createVm(int vmCount) {
         List<Creatable<VirtualMachine>> creatableVirtualMachines = new ArrayList<>();
         List<Creatable<NetworkInterface>> creatableNetworkInterfaces = new ArrayList<>();
@@ -137,7 +135,6 @@ public class AzureService implements ICloudService {
         test.log(Status.INFO, "VM's created");
     }
 
-    @Override
     public void startVm(VirtualMachine vm) {
         test.log(Status.INFO, "Starting VM " + vm + "...");
         vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
@@ -146,7 +143,6 @@ public class AzureService implements ICloudService {
 
     }
 
-    @Override
     public void stopVm(VirtualMachine vm) {
         test.log(Status.INFO, "Stopping VM " + vm + "...");
         vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
@@ -154,7 +150,6 @@ public class AzureService implements ICloudService {
         test.log(Status.INFO, vm + "Stopped");
     }
 
-    @Override
     public void deleteVm(int vmCount) {
         test.log(Status.INFO, "Deleting Vm's...");
 

@@ -41,6 +41,7 @@ def Sanity = project.hasProperty("Sanity")
 def Dashboard = project.hasProperty("Dashboard")
 def DBSchemas = project.hasProperty("DBSchemas")
 def CoordMonitor = project.hasProperty("CoordMonitor")
+def CloudSetup = project.hasProperty("CloudSetup")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
@@ -105,6 +106,16 @@ test {
     systemProperty 'env', System.properties['env'] ?: 'linuxsim2b'
     //Linux version selection
     systemProperty "version", System.getProperty("version")
+    //Cloud configuration
+    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
+    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'amazon'
+    systemProperty 'cpu', System.properties['cpu'] ?: '2'
+    systemProperty 'cpu', System.properties['cpu'] ?: '4'
+    systemProperty 'cpu', System.properties['cpu'] ?: '8'
+    systemProperty 'memory', System.properties['memory'] ?: '4'
+    systemProperty 'memory', System.properties['memory'] ?: '8'
+    systemProperty 'memory', System.properties['memory'] ?: '16'
+    systemProperty 'numofmachines', System.properties['numofmachines'] ?: "%d"
 
     // enable TestNG support (default is JUnit)
     useTestNG(){
@@ -205,8 +216,13 @@ test {
         if(LinuxSanity) {
             suites "src/test/resources/LinuxSanity.xml"
         }
+
         if(CoordMonitor) {
             suites "src/test/resources/CoordMonitor.xml"
+        }
+
+        if(CloudSetup) {
+            suites "src/test/resources/CloudSetup.xml"
         }
     }
 

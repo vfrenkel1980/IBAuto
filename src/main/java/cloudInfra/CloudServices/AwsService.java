@@ -1,35 +1,28 @@
 package cloudInfra.CloudServices;
 
-import com.microsoft.azure.management.compute.VirtualMachine;
 
-public class AwsService implements ICloudService {
+public class AwsService {
 
-    @Override
     public void registerCloud() {
 
     }
 
-    @Override
     public void createNetwork() {
 
     }
 
-    @Override
     public void createVm(int vmCount) {
 
     }
 
-    @Override
-    public void startVm(VirtualMachine vm) {
+    public void startVm() {
 
     }
 
-    @Override
-    public void stopVm(VirtualMachine vm) {
+    public void stopVm() {
 
     }
 
-    @Override
     public void deleteVm(int vmCount) {
 
     }
