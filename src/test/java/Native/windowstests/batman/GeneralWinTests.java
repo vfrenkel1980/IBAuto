@@ -190,7 +190,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify OnlyFailLocally Flag")
     public void verifyOnlyFailLocallyFlag(){
-        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
+        winService.runCommandWaitForFinish(String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "The build was executed on remote, should fail locally");
     }
 
