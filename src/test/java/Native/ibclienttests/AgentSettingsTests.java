@@ -90,7 +90,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
                     " cmd.exe /c " + Processes.NOTHING);
         }
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        int lastAgent = Parser.getLastLineForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+        int lastAgent = Parser.getLastLineIndexForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
         int firstLocal = Parser.getFirstLineForString(Locations.OUTPUT_LOG_FILE, "Local");
         for (int i = 0; i < 2; i++) {
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
@@ -211,6 +211,24 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"), "Found core 2 for helper");
     }
 
+    @Test(testName = "Verify OnlyFailLocally On")
+    public void verifyOnlyFailLocallyOn() {
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.enableFailOnlyLocally();
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on remote but should't");
+    }
+
+    @Test(testName = "Verify OnlyFailLocally Off", dependsOnMethods = {"verifyOnlyFailLocallyOn"})
+    public void verifyOnlyFailLocallyOff() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.disableFailOnlyLocally();
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on local but should't");
+    }
+
     @Test(testName = "Verify Build With Errors")
     public void verifyBuildWithErrors() {
         setRegistry("All", "Builder", "Flags");
@@ -232,7 +250,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         Assert.assertTrue(helperNumber == 1, "PDB File Limit should be 1, but found " + helperNumber);
     }
@@ -243,14 +261,45 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegistry("0", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         SystemActions.sleep(5);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
-        int helperNumber = Parser.getHelperCoreNumber(Locations.OUTPUT_LOG_FILE).size();
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
         Assert.assertTrue(helperNumber > 1, "PDB File Limit should be >=2, but found " + helperNumber);
     }
+
+    @Test(testName = "Verify CPU Utilization As Initiator and PDB limit")
+    public void verifyCPUUtilizationAsInitiatorAndPDBLimit() {
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
+        setRegistry("1", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        setRegKeyWithServiceRestart("1",RegistryKeys.FORCE_CPU_INITIATOR);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
+        setRegistry("12", "Builder", RegistryKeys.MAX_CONCURRENT_PDBS);
+        setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_INITIATOR);
+        Assert.assertTrue(helperNumber == 1, "CPU utilization should be 1, but found " + helperNumber);
+    }
+
+    @Test(testName = "Verify When CPU Utilization As Helper checked")
+    public void verifyWhenCPUUtilizationAsHelperChecked() {
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
+        setRegKeyWithServiceRestart("1",RegistryKeys.FORCE_CPU_HELPER);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.LITTLE_PROJECT_X86_DEBUG, "%s"));
+        int helperNumber = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
+        setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_HELPER);
+        Assert.assertTrue(helperNumber > 1, "CPU utilization should be > 1, but found " + helperNumber);
+    }
+
+
 
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
     }
+
+    private void setRegKeyWithServiceRestart(String required,String keyName) {
+        setRegistry(required, "Builder", keyName);
+        ibService.agentServiceStop();
+        ibService.agentServiceStart();
+        SystemActions.sleep(5);
+}
 }

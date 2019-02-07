@@ -33,25 +33,41 @@ public class Parser {
 
         while ((line = in.readLine()) != null) {
             for (Map.Entry<String, String> entry : lookFor.entrySet()) {
-                if (line.contains(entry.getKey())) {
-                    pulledData = line.substring(line.lastIndexOf(entry.getValue()) + entry.getValue().length(), line.length());
-                    //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
-                    //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();
-                    pulledData = pulledData.replaceAll("[+={}^':\"]", "").trim();
-                    if (pulledData.equals(""))
-                        pulledData = "null";
+                String key = entry.getKey();
+                if (line.contains(key)) {
+                    pulledData = retrieveDataFromString(line, key);
                     entry.setValue(pulledData);
                 }
             }
         }
         in.close();
-
         return pulledData;
 
 //        for (Map.Entry<String, String> entry : lookFor.entrySet()) {
 //            System.out.println(entry.getKey() + " = " + entry.getValue());
 //        }
     }
+
+    /**
+     * Used in order to get data from string line using key
+     *
+     * @param line the string line to search in
+     * @return value that we found using the key we sent
+     * @throws IOException exception for not being able to read the file
+     */
+    public static String retrieveDataFromString(String line, String key) throws IOException {
+        String pulledData = "";
+        if (line.contains(key)) {
+            pulledData = line.substring(line.lastIndexOf(key) + key.length(), line.length());
+            //pulledData = StringUtils.substringBetween(line, entry.getValue(), System.getProperty("line.separator"));
+            //pulledData = StringUtils.replaceAll(pulledData, "[+={}^']", "").trim();
+            pulledData = pulledData.replaceAll("[+={}^':\"]", "").trim();
+            if (pulledData.equals(""))
+                pulledData = "null";
+        }
+        return pulledData;
+    }
+
 
     public static boolean doesFileContainString(String filePath, String text) {
         test.log(Status.INFO, "Searching for " + text + " in " + filePath);
@@ -104,7 +120,7 @@ public class Parser {
      * @param searchFor String to search for within the file
      * @return number of line String appears in
      */
-    public static int getLastLineForString(String filePath, String searchFor) {
+    public static int getLastLineIndexForString(String filePath, String searchFor) {
         test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
         int line = 0;
         int finalLine = 0;
@@ -122,6 +138,29 @@ public class Parser {
             e.getMessage();
         }
         return finalLine;
+    }
+
+    /**
+     * get the last line that a string appears in
+     *
+     * @param filePath  full path to file
+     * @param searchFor String to search for within the file
+     * @return String where searchFor appears in
+     */
+    public static String getLastLineForString(String filePath, String searchFor) {
+        test.log(Status.INFO, "Starting to look for last appearance of " + searchFor + " in " + filePath);
+        String lastLineFromfile = "";
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine();
+                if (lineFromFile.contains(searchFor)) {
+                    lastLineFromfile = lineFromFile;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }
+        return lastLineFromfile;
     }
 
     /**
@@ -169,7 +208,7 @@ public class Parser {
         return count;
     }
 
-    public static Set<String> getHelperCoreNumber(String filePath) {
+    public static Set<String> getHelperCores(String filePath) {
         Set<String> agentsList = new HashSet<>();
         try (Scanner sc = new Scanner(new File(filePath))) {
             while (sc.hasNext()) {

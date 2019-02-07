@@ -14,10 +14,7 @@ import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -69,7 +66,11 @@ public class CoordMonitorTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result){
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-        ibService.coordServiceStart();
         extent.flush();
+    }
+
+    @AfterClass
+    public void afterClass(){
+        ibService.coordServiceStart();
     }
 }

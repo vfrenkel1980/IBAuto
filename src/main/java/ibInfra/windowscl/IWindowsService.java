@@ -49,4 +49,5 @@ public interface IWindowsService {
     String getWindowsTEMPfolder();
 
     ArrayList<String> textFileToList(String filepath);
+
 }

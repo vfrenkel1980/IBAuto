@@ -529,6 +529,32 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void enableFailOnlyLocally() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.EnableFailOnlyLocally.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable FailOnlyLocally option with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void disableFailOnlyLocally() {
+            try {
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.9),5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to disable FailOnlyLocally option with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
         public void stopAgentService() {
             try {
                 screen.wait(IBSettings.agent.similar((float) 0.9),5).click();
@@ -724,8 +750,8 @@ public class IBUIService implements IIBUIService {
         public void clickAllowEnableDisableAsHelper() {
             test.log(Status.INFO, "Clicking allow Enable Disable as helper");
             try {
-                screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.8),15).rightClick();
-                screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.8),15).click();
+                screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.95),15).rightClick();
+                screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -736,8 +762,8 @@ public class IBUIService implements IIBUIService {
         public void stopCoordService() {
             test.log(Status.INFO, "Stopping coordinator service");
             try {
-                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.8),15).click();
-                screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.8),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to stop coordinator service, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -748,8 +774,8 @@ public class IBUIService implements IIBUIService {
         public void startCoordService() {
             test.log(Status.INFO, "Starting coordinator service");
             try {
-                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.8),15).click();
-                screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.8),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to start coordinator service, failed with error: " + findFailed.getMessage());
                 Assert.fail();

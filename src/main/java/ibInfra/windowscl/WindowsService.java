@@ -118,7 +118,7 @@ public class WindowsService implements IWindowsService {
     }
 
     @Override
-    public boolean isProcessRunning(String processName){
+    public boolean isProcessRunning(String processName) {
         boolean isRunning = true;
         String output;
         output = runCommandGetOutput(String.format(WindowsCommands.GET_RUNNING_TASK, processName));
@@ -257,6 +257,7 @@ public class WindowsService implements IWindowsService {
         runCommandWaitForFinish("net stop " + serviceName);
         runCommandWaitForFinish("net start " + serviceName);
     }
+
     @Override
     public long getTodayMidnight() {
         LocalDateTime now = LocalDateTime.now();
@@ -290,37 +291,38 @@ public class WindowsService implements IWindowsService {
     }
 
     @Override
-    public String getWindowsTEMPfolder(){
+    public String getWindowsTEMPfolder() {
         String path = System.getProperty("java.io.tmpdir");
         return path;
     }
 
     @Override
-    public ArrayList<String> textFileToList(String filepath){
+    public ArrayList<String> textFileToList(String filepath) {
         Scanner s = null;
         ArrayList<String> list = new ArrayList();
         try {
             s = new Scanner(new File(filepath));
-            while (s.hasNextLine()){
+            while (s.hasNextLine()) {
                 list.add(s.nextLine());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             test.log(Status.ERROR, "File not found.\n" +
                     e.getMessage());
-        }finally {
+        } finally {
             s.close();
         }
         return list;
     }
 
     @Override
-    public boolean deleteFile (String absoluteFilePath){
+    public boolean deleteFile(String absoluteFilePath) {
         File file = new File(absoluteFilePath);
         boolean success = file.delete();
-        if (!success){
+        if (!success) {
             return false;
         }
         return true;
     }
+
 }

@@ -63,6 +63,17 @@ public class RegistryService extends TestBase {
 
     }
 
+    public static void deleteRegKey(HKEY rootKey, String keyPath, String keyName) {
+        if (test != null)
+            test.log(Status.INFO, "Deleting " + keyName );
+        try {
+            Advapi32Util.registryDeleteKey(rootKey, keyPath,keyName);
+        } catch (Exception ex) {
+            test.log(Status.ERROR, "Failed to delete registry key with error: " + ex.getMessage());
+            ex.getMessage();
+        }
+    }
+
     public static void removeRegKeyValue(HKEY rootKey, String keyPath, String keyName, String required) {
         if (test != null)
             test.log(Status.INFO, "Removing " + required + " value from " + keyName);

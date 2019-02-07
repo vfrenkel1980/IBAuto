@@ -71,6 +71,7 @@ public class WindowsTestBase extends TestBase {
         String currentLocalLogging = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.LOCAL_LOGGING);
         String currentStandalone = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE);
         String currentCustomStepReg = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.CUSTOM_STEP_VS10_SUPPORT);
+        String onlyFailLocally = RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
 
         //set default registry values for run
         verifyRegistry(msBuild, currentMsBuildReg, RegistryKeys.MSBUILD);
@@ -78,6 +79,7 @@ public class WindowsTestBase extends TestBase {
         verifyRegistry("0", currentLocalLogging, RegistryKeys.LOCAL_LOGGING);
         verifyRegistry("0", currentStandalone, RegistryKeys.STANDALONE_MODE);
         verifyRegistry("1", currentCustomStepReg, RegistryKeys.CUSTOM_STEP_VS10_SUPPORT);
+        verifyRegistry("0", onlyFailLocally, RegistryKeys.ONLY_FAIL_LOCALLY);
         //stop agent service
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");

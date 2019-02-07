@@ -207,6 +207,7 @@ public class StaticDataProvider {
             public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
@@ -554,6 +555,7 @@ public class StaticDataProvider {
         public static final String AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS = "UpdateVersionAlways";
         public static final String FLAGS = "Flags";
         public static final String FORCE_CPU_INITIATOR = "ForceCPUCount_WhenInitiator";
+        public static final String FORCE_CPU_HELPER = "ForceCPUCount_WhenHelper";
         public static final String RESET_SINGLE_USE = "ibat";
         public static final String COORD_PORT = "Port";
         public static final String SERVICE_PORT = "ForcePortNum";
@@ -564,6 +566,7 @@ public class StaticDataProvider {
         public static final String MSBUILD_SUPPORTED_VERSION_15 = "MSBuildMaxSupportedVersion15.0";
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
+        public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
     }
 
     public static class IbLicenses {
