@@ -97,11 +97,11 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
-        WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddress, "4illumination",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddressRandom, "4illumination",
                 "555954","USA", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddress));
+        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
         Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License Files"));
         MailService.deleteMail(host, mailAddress, password);
     }
