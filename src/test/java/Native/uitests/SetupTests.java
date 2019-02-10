@@ -22,8 +22,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 /**
  * @brief <b> IB Setup UI tests</b>
- * @details
- * Run on UI Automation (HOST-4)
+ * @details Run on UI Automation (HOST-4)
  */
 public class SetupTests extends SetupTestBase {
 
@@ -449,15 +448,14 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is not running, Coord installed?");
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent is running, is agent installed?");
     }
+
     /**
      * @test Verify all IB binaries (.exe .dll) with sha1 sha256 signatures in installation folder recursivelly
      * @pre{ }
-     * @steps{
-     *     - Install IB;
-     *     - Get list of all files in installation folder;
+     * @steps{ - Install IB;
+     * - Get list of all files in installation folder;
      * }
-     * @result{
-     *     - All dll and exe IB files are signed with both sha1 and sha256 signatures except Ignore IB binaries list.
+     * @result{ - All dll and exe IB files are signed with both sha1 and sha256 signatures except Ignore IB binaries list.
      * }
      */
     @Test(testName = "Verify Binaries Signatures")
@@ -470,9 +468,9 @@ public class SetupTests extends SetupTestBase {
         for (File file : allFiles) {
             int exit = -1;
             if (!ignoreList.contains(file.getName())) {
-                exit = winService.runCommandWaitForFinish("signtool.exe verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
+                exit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
                 Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha1 signature");
-                exit = winService.runCommandWaitForFinish("signtool.exe verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
+                exit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
                 Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha256 signature");
             }
         }

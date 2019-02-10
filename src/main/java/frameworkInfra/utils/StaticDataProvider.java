@@ -72,6 +72,7 @@ public class StaticDataProvider {
         public static final String EXPORT_COORDMON_FILE = QA_ROOT + "\\coordmon.xml";
         public static final String IGNORE_ERRORS_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBErrorsList.txt";
         public static final String IGNORE_IB_BINARIES_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBBinariesList.txt";
+        public static final String SIGNTOOL = "C:\\Program Files (x86)\\Microsoft SDKs\\ClickOnce\\SignTool\\signtool.exe";
     }
 
     public static class URL {
