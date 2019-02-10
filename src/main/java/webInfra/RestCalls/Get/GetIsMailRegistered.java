@@ -20,7 +20,7 @@ public class GetIsMailRegistered {
     public static boolean isMailRegistered(String email){
 
         try {
-            URL url = new URL("https://test.incredibuild.com/ibonlinestore/authentication/verifyUniqueEmail/" + email);
+            URL url = new URL("https://en-site.incredibuild.com/ibonlinestore/authentication/verifyUniqueEmail/" + email);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
