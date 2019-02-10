@@ -176,7 +176,7 @@ public class StaticDataProvider {
             public static final String PROJECTVC10_DEBUG_WIN32 = IbLocations.BUILD_CONSOLE + TestProjects.VC10PROJECT + " /rebuild /cfg=\"debug|win32\" /nowait /exitcodebase=-8";
             public static final String IB_CONSOLE_FAILEDBUILD = MISC_PROJECTS.IB_CONSOLE_FAILEDBUILD + " /exitcodebase=100";
             public static final String PROJECTVC15_DEBUG_X64 = IbLocations.BUILD_CONSOLE + TestProjects.VC15PROJECT + " /rebuild /cfg=\"release|x64\" /exitcodebase";
-            public static final String FAILEDPROJECT_X64_DEBUG = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15Failed\\ProjectVC15Failed.sln\"  /cfg=\"debug|x64\"  /rebuild /title=\"Failed VC15 Project - Exit1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /exitcodebase";
+            public static final String FAILEDPROJECT_X64_DEBUG = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15Failed\\ProjectVC15Failed.sln\"  /cfg=\"debug|x64\"  /rebuild /title=\"Failed VC15 Project - Exit1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15 /out=\"" + Locations.OUTPUT_LOG_FILE + " /exitcodebase";
             public static final String XG_CONSOLE_SAMPLE = ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_SAMPLE + " /exitcodebase=10";
         }
 
