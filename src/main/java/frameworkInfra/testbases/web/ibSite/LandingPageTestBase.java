@@ -20,7 +20,7 @@ public class LandingPageTestBase extends IbWebTestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://test.incredibuild.com/incredibuild-codeproject#/");
+        eventWebDriver.get("https://en-site.incredibuild.com/incredibuild-codeproject#/");
         eventWebDriver.manage().window().maximize();
         landingPageObject = new LandingPageObject(eventWebDriver);
     }
