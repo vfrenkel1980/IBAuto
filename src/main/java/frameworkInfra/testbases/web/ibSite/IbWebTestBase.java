@@ -5,6 +5,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -20,9 +21,9 @@ import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class IbWebTestBase extends TestBase {
-
+    protected static WindowsService winService = new WindowsService();
     protected String host = "imap.gmail.com";
-    public static String mailAddress = "incrediautomation@gmail.com";
+    public static String mailAddress = "incrediautomation+"+winService.getNowWOSeconds()+"@gmail.com";
     protected static String mailAddress2 = "incrediautomation2@gmail.com";
     protected static String mailAddress3 = "incrediautomation3@gmail.com";
     protected static String mailAddress4 = "incrediautomation4@gmail.com";
