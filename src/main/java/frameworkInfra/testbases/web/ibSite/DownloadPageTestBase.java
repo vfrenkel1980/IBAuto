@@ -23,7 +23,7 @@ public class DownloadPageTestBase extends IbWebTestBase {
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://test.incredibuild.com/");
+        eventWebDriver.get("https://en-site.incredibuild.com/");
         eventWebDriver.manage().window().maximize();
         downloadPageObject = new DownloadPageObject(eventWebDriver);
     }
