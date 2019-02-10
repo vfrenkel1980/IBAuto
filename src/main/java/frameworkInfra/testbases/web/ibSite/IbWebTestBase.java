@@ -23,8 +23,8 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbWebTestBase extends TestBase {
     protected static WindowsService winService = new WindowsService();
     protected String host = "imap.gmail.com";
-    protected static String mailAddressRandom = "incrediautomation+"+winService.getNowWOSeconds()+"@gmail.com";
-    protected static String mailAddress = "incrediautomation@gmail.com";
+    public static String mailAddressRandom = "incrediautomation+"+winService.getNowWOSeconds()+"@gmail.com";
+    public static String mailAddress = "incrediautomation@gmail.com";
     protected static String mailAddress2 = "incrediautomation2@gmail.com";
     protected static String mailAddress3 = "incrediautomation3@gmail.com";
     protected static String mailAddress4 = "incrediautomation4@gmail.com";
