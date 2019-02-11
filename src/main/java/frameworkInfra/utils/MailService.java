@@ -35,7 +35,7 @@ public class MailService {
                 SystemActions.sleep(5);
                 timeout ++;
                 messages = emailFolder.getMessages();
-            } while (messages.length == 0 && timeout < 60);
+            } while (messages.length == 0 && timeout < 90);
 
             for (Message message : messages) {
                 if (message.getSubject().equals(subject))
