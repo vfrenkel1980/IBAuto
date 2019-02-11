@@ -42,6 +42,7 @@ def Dashboard = project.hasProperty("Dashboard")
 def DBSchemas = project.hasProperty("DBSchemas")
 def CoordMonitor = project.hasProperty("CoordMonitor")
 def CloudSetup = project.hasProperty("CloudSetup")
+def AWSPerformance = project.hasProperty("AWSPerformance")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
@@ -106,6 +107,8 @@ test {
     systemProperty 'env', System.properties['env'] ?: 'linuxsim2b'
     //Linux version selection
     systemProperty "version", System.getProperty("version")
+    //Linux AWS initiator selection
+    systemProperty "initiators", System.getProperty("initiators")
     //Cloud configuration
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'amazon'
@@ -219,6 +222,10 @@ test {
 
         if(CloudSetup) {
             suites "src/test/resources/CloudSetup.xml"
+        }
+
+        if(AWSPerformance) {
+            suites "src/test/resources/AWSPerformance.xml"
         }
     }
 
