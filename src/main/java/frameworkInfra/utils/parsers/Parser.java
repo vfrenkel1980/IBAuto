@@ -225,6 +225,23 @@ public class Parser {
         }
         return agentsList;
     }
+
+    public static List<File> findFiles(File dir, String extension) {
+        File[] files = dir.listFiles(f -> f.isDirectory() || f.getName().toLowerCase().endsWith(extension));
+        ArrayList<File> result = new ArrayList<>();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    result.addAll(findFiles(file, extension));
+                } else {
+                    result.add(file);
+                }
+
+            }
+        }
+
+        return result;
+    }
 }
 
     /*example
