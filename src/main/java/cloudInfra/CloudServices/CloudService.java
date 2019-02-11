@@ -10,4 +10,16 @@ public class CloudService {
     public void startVm(){
 
     }
+
+
+
+    public void stopVm(){
+
+    }
+
+
+
+    public void deleteVm(){
+
+    }
 }
