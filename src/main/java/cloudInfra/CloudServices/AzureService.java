@@ -16,7 +16,7 @@ import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class AzureService {
+public class AzureService extends CloudService{
 
     private File credFile;
     private Azure azure;
@@ -30,10 +30,27 @@ public class AzureService {
     private List networkInterfacesKeys;
     private List virtualMachinesKeys;
     private Region region = Region.EUROPE_WEST;
-    private String resGroup = "TestRes2";
+    private String resGroup = "qa-performance";
+    private VirtualMachineSizeTypes type;
+    private int vmCount;
+    private String initiator;
 
-    
-    public void registerCloud() {
+
+    public AzureService(String cpu, String memory, String vmCount, String initiator) {
+        if (cpu.equals("2") && memory.equals("4"))
+            this.type = VirtualMachineSizeTypes.STANDARD_A2_V2;
+        if (cpu.equals("4") && memory.equals("8"))
+            this.type = VirtualMachineSizeTypes.STANDARD_A4_V2;
+        if (cpu.equals("8") && memory.equals("16"))
+            this.type = VirtualMachineSizeTypes.STANDARD_A8_V2;
+
+        this.vmCount = Integer.parseInt(vmCount);
+        this.initiator = initiator;
+        registerCloud();
+        createNetwork();
+    }
+
+    private void registerCloud() {
         try {
             test.log(Status.INFO, "Registering to Azure cloud service...");
             credFile = new File(System.getenv("AZURE_AUTH_LOCATION"));
@@ -47,7 +64,7 @@ public class AzureService {
         }
     }
 
-    public void createNetwork() {
+    private void createNetwork() {
         test.log(Status.INFO, "Creating Network and Security group...");
         network = azure.networks()
                 .define(resGroup + "-vnet")
@@ -75,7 +92,40 @@ public class AzureService {
 
     }
 
-    public void createVm(int vmCount) {
+    @Override
+    public void startVm() {
+        test.log(Status.INFO, "Starting VM " + vm + "...");
+        vm = azure.virtualMachines().getByResourceGroup(resGroup, initiator);
+        vm.start();
+        test.log(Status.INFO, vm + "Started");
+
+    }
+
+
+
+    public void stopVm(VirtualMachine vm) {
+        test.log(Status.INFO, "Stopping VM " + vm + "...");
+        vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
+        vm.powerOff();
+        test.log(Status.INFO, vm + "Stopped");
+    }
+
+    public void deleteVm(int vmCount) {
+        test.log(Status.INFO, "Deleting Vm's...");
+
+        for (int i = 0; i < vmCount; i++) {
+            azure.virtualMachines().deleteById(virtualMachines.get(virtualMachinesKeys.get(i)).id());
+        }
+
+        for (int i = 0; i < vmCount; i++) {
+            azure.disks().deleteById(disks.get(disksKeys.get(0)).id());
+            azure.networkInterfaces().deleteById(networkInterfaces.get(networkInterfacesKeys.get(i)).id());
+        }
+        test.log(Status.INFO, "VM's deleted");
+    }
+
+    @Override
+    public void create() {
         List<Creatable<VirtualMachine>> creatableVirtualMachines = new ArrayList<>();
         List<Creatable<NetworkInterface>> creatableNetworkInterfaces = new ArrayList<>();
         List<Creatable<Disk>> creatableDisk = new ArrayList<>();
@@ -125,7 +175,7 @@ public class AzureService {
                     .withExistingResourceGroup(resGroup)
                     .withExistingPrimaryNetworkInterface(networkInterfaces.get(networkInterfacesKeys.get(i)))
                     .withSpecializedOSDisk(disks.get(disksKeys.get(i)), OperatingSystemTypes.WINDOWS)
-                    .withSize(VirtualMachineSizeTypes.STANDARD_B2S)
+                    .withSize(type)
                     .withNewStorageAccount(storageAccountCreatable);
             creatableVirtualMachines.add(virtualMachineCreatable);
         }
@@ -133,34 +183,5 @@ public class AzureService {
         virtualMachines = azure.virtualMachines().create(creatableVirtualMachines);
         virtualMachinesKeys = new ArrayList(virtualMachines.keySet());
         test.log(Status.INFO, "VM's created");
-    }
-
-    public void startVm(VirtualMachine vm) {
-        test.log(Status.INFO, "Starting VM " + vm + "...");
-        vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
-        vm.start();
-        test.log(Status.INFO, vm + "Started");
-
-    }
-
-    public void stopVm(VirtualMachine vm) {
-        test.log(Status.INFO, "Stopping VM " + vm + "...");
-        vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
-        vm.powerOff();
-        test.log(Status.INFO, vm + "Stopped");
-    }
-
-    public void deleteVm(int vmCount) {
-        test.log(Status.INFO, "Deleting Vm's...");
-
-        for (int i = 0; i < vmCount; i++) {
-            azure.virtualMachines().deleteById(virtualMachines.get(virtualMachinesKeys.get(i)).id());
-        }
-
-        for (int i = 0; i < vmCount; i++) {
-            azure.disks().deleteById(disks.get(disksKeys.get(0)).id());
-            azure.networkInterfaces().deleteById(networkInterfaces.get(networkInterfacesKeys.get(i)).id());
-        }
-        test.log(Status.INFO, "VM's deleted");
     }
 }
