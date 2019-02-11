@@ -1,12 +1,12 @@
 package Cloud;
 
-import cloudInfra.CloudHelper.CloudHelper;
+import cloudInfra.CloudHelper.CloudTestBase;
 import org.testng.annotations.Test;
 
-public class AzureTests extends CloudHelper {
+public class AzureTests extends CloudTestBase {
 
     @Test(testName = "test")
     public void test() {
-        init();
+
     }
 }

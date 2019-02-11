@@ -109,12 +109,8 @@ test {
     //Cloud configuration
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'amazon'
-    systemProperty 'cpu', System.properties['cpu'] ?: '2'
-    systemProperty 'cpu', System.properties['cpu'] ?: '4'
-    systemProperty 'cpu', System.properties['cpu'] ?: '8'
-    systemProperty 'memory', System.properties['memory'] ?: '4'
-    systemProperty 'memory', System.properties['memory'] ?: '8'
-    systemProperty 'memory', System.properties['memory'] ?: '16'
+    systemProperty 'cpu', System.properties['cpu'] ?: '%d'
+    systemProperty 'memory', System.properties['memory'] ?: '%d'
     systemProperty 'numofmachines', System.properties['numofmachines'] ?: "%d"
 
     // enable TestNG support (default is JUnit)
