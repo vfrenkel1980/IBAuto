@@ -39,9 +39,9 @@ public class AzureService extends CloudService{
     public AzureService(String cpu, String memory, String vmCount, String initiator) {
         if (cpu.equals("2") && memory.equals("4"))
             this.type = VirtualMachineSizeTypes.STANDARD_A2_V2;
-        if (cpu.equals("4") && memory.equals("8"))
+        else if (cpu.equals("4") && memory.equals("8"))
             this.type = VirtualMachineSizeTypes.STANDARD_A4_V2;
-        if (cpu.equals("8") && memory.equals("16"))
+        else if (cpu.equals("8") && memory.equals("16"))
             this.type = VirtualMachineSizeTypes.STANDARD_A8_V2;
 
         this.vmCount = Integer.parseInt(vmCount);
