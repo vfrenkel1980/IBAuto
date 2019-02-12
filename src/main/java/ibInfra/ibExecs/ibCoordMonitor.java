@@ -14,8 +14,12 @@ public interface ibCoordMonitor {
 
     String getAgentStatus (String agentName) throws IOException, SAXException, ParserConfigurationException;
 
+    boolean getAgentSubscribeStatus(String agentName) throws IOException, SAXException, ParserConfigurationException;
+
     void waitForAgentIsUpdated(String agentName) throws ParserConfigurationException, SAXException, IOException;
 
     boolean checkIfAgentIsHelper (String initiatorName, String agentName) throws IOException, SAXException, ParserConfigurationException;
+
+    String getAgentAttribute(String agentName, String attribute) throws IOException, SAXException, ParserConfigurationException;
 
 }
