@@ -578,7 +578,7 @@ public class StaticDataProvider {
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
         public static final String AGENT_SETTINGS_LIC = "IncrediBuild - Mark Zvuluni - agent settings.IB_lic";
         public static final String DASHBOARD_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - dashboard tests August 2018.IB_lic";
-        public static final String PRO_LIC = "IncrediBuild - Aleksandra - additional tests environment license JUL 2018- FreeDev.IB_lic";
+        public static final String PRO_LIC = "IncrediBuild FreeDev license - Aleksandra Malykhina - dashboard tests February 2019.IB_lic";
         //lic tests
         public static final String VALID_LIC = "IncrediBuild - Aleksandra - License Testing Environment Jan 2019.IB_lic";
         public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic";

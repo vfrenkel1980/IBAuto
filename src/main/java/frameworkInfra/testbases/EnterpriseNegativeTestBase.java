@@ -15,10 +15,10 @@ import java.lang.reflect.Method;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
-public class EnterpriseNegativeTestBase extends  EnterpriseTestBase{
+public class EnterpriseNegativeTestBase extends EnterpriseTestBase {
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "BEFORE CLASS atarted");
         log.info("BEFORE CLASS staerted");

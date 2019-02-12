@@ -21,8 +21,9 @@ import java.io.IOException;
  */
 public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     /**
-     * @test <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
-     * @pre{ }
+     * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
+     * @pre{ - Only core package is allocated
+     * }
      * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
      * @result{ - The agent is subscribed and the subscribed status is true in the coordmonitor
@@ -30,6 +31,8 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature")
     public void verifyXgcoordconsoleUnsubscribeFeature() {
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/allocatePackages=\"4Cores\"");
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + WindowsMachines.DASHBORD_HELPER);
         boolean subscribeAgentStatus = true;
         try {
