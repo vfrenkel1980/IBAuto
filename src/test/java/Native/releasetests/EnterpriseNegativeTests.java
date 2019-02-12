@@ -1,11 +1,8 @@
 package Native.releasetests;
 
-
 import frameworkInfra.testbases.EnterpriseNegativeTestBase;
-import frameworkInfra.testbases.EnterpriseTestBase;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
-import frameworkInfra.utils.parsers.Parser;
+import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
@@ -39,6 +36,9 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
         boolean subscribeAgentStatus = true;
         try {
             subscribeAgentStatus = coordMonitor.getAgentSubscribeStatus(WindowsMachines.DASHBORD_HELPER);
+            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/SubscribeAll");
+            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+            SystemActions.sleep(10);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
