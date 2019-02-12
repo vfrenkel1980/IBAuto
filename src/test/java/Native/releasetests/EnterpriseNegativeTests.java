@@ -21,11 +21,14 @@ import java.io.IOException;
 public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     /**
      * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
-     * @pre{ - Only core package is allocated
+     * @pre{
+     * - Only core package is allocated
      * }
-     * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
+     * @steps{
+     * - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
-     * @result{ - The agent is subscribed and the subscribed status is true in the coordmonitor
+     * @result{
+     * - The agent is subscribed and the subscribed status is true in the coordmonitor
      * }
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature")

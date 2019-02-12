@@ -452,10 +452,12 @@ public class SetupTests extends SetupTestBase {
     /**
      * @test Verify all IB binaries (.exe .dll) with sha1 sha256 signatures in installation folder recursivelly
      * @pre{ }
-     * @steps{ - Install IB;
+     * @steps{
+     * - Install IB;
      * - Get list of all files in installation folder;
      * }
-     * @result{ - All dll and exe IB files are signed with both sha1 and sha256 signatures except Ignore IB binaries list.
+     * @result{
+     * - All dll and exe IB files are signed with both sha1 and sha256 signatures except Ignore IB binaries list.
      * }
      */
     @Test(testName = "Verify Binaries Signatures")

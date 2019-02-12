@@ -17,10 +17,13 @@ import java.io.IOException;
 public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     /**
      * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a> when only core package is allocated
-     * @pre{ - Only core package is allocated}
-     * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
+     * @pre{
+     * - Only core package is allocated}
+     * @steps{
+     * - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
-     * @result{ - The agent is unsubscribed and the subscribed status is false in the coordmonitor
+     * @result{
+     * - The agent is unsubscribed and the subscribed status is false in the coordmonitor
      * }
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature")
@@ -45,10 +48,13 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
 
     /**
      * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a> when Solution packages are allocated
-     * @pre{ - Solution and  core packages are allocated}
-     * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
+     * @pre{
+     * - Solution and  core packages are allocated}
+     * @steps{
+     * - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
-     * @result{ - The agent isn't unsubscribed and the subscribed status is true in the coordmonitor
+     * @result{
+     * - The agent isn't unsubscribed and the subscribed status is true in the coordmonitor
      * }
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature With Solution Package")
