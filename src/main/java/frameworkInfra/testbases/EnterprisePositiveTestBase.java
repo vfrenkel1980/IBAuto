@@ -21,9 +21,8 @@ public class EnterprisePositiveTestBase extends  EnterpriseTestBase{
     public void beforeClass(){
         test.log(Status.INFO, "BEFORE CLASS atarted");
         log.info("BEFORE CLASS staerted");
-        ibService.installIB("Latest");
+        ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
         ibService.upgradeToEnt();
-        ibService.loadIbLicense(IbLicenses.VALID_LIC);
         SystemActions.sleep(10);
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(10);

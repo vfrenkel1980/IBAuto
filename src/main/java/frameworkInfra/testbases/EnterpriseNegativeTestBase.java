@@ -21,9 +21,7 @@ public class EnterpriseNegativeTestBase extends  EnterpriseTestBase{
     public void beforeClass(){
         test.log(Status.INFO, "BEFORE CLASS atarted");
         log.info("BEFORE CLASS staerted");
-        ibService.installIB("Latest");
-
-       // ibService.loadIbLicense(StaticDataProvider.IbLicenses.VALID_LIC);
+        ibService.installIB("Latest", IbLicenses.PRO_LIC);
         SystemActions.sleep(10);
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(10);
