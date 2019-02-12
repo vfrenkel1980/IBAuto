@@ -41,7 +41,7 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe test failed");
+        Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe Negative test failed");
     }
 }
 

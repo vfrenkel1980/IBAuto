@@ -19,6 +19,7 @@ public class EnterpriseNegativeTestBase extends  EnterpriseTestBase{
 
     @BeforeClass
     public void beforeClass(){
+        test = extent.createTest("Before Class");
         test.log(Status.INFO, "BEFORE CLASS atarted");
         log.info("BEFORE CLASS staerted");
         ibService.installIB("Latest", IbLicenses.PRO_LIC);
