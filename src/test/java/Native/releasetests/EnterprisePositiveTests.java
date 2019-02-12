@@ -13,12 +13,10 @@ import java.io.IOException;
  * @brief<b> <b>Enterprise features tests</b>
  * @details Requires Enterprise license <br>
  * vm: Dashbord on Host-6<br>
- * etc...
  */
 public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     /**
-     * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
-     * when only core package is allocated
+     * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a> when only core package is allocated
      * @pre{ - Only core package is allocated}
      * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
@@ -46,8 +44,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     }
 
     /**
-     * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
-     * when Solution packages are allocated
+     * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a> when Solution packages are allocated
      * @pre{ - Solution and  core packages are allocated}
      * @steps{ - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }

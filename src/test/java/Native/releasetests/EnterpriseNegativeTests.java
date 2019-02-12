@@ -17,7 +17,6 @@ import java.io.IOException;
  * @brief<b> <b>Enterprise features negative tests</b>
  * @details Requires Pro license <br>
  * vm: Dashbord on Host-6<br>
- * etc...
  */
 public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     /**
