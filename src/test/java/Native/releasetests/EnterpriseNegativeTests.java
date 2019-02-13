@@ -11,15 +11,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
- * @brief<b> <b>Enterprise features negative tests</b>
- * @details Requires Pro license <br>
- * vm: Dashbord on Host-6<br>
+ * @brief<b> <b>Enterprise features negative tests with Pro license loaded</b>
+ * @details vm: Dashbord on Host-6
  */
 public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     /**
      * @test Verify <a href="https://incredibuild.atlassian.net/wiki/spaces/IN/pages/131730/Unsubscribing+Agents+via+the+Command+LineVerify">Xgcoordconsole /Unsubscribe Feature</a>
      * @pre{
-     * - Only core package is allocated
+     * - Only core package is allocated to the Agent
      * }
      * @steps{
      * - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
