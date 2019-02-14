@@ -144,6 +144,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL));
         Select country = new Select(eventWebDriver.findElement(COUNTRY_SELECTION_DDL));
+        SystemActions.sleep(1);
         country.selectByVisibleText(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
