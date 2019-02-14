@@ -34,7 +34,7 @@ public class ReleaseTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite() {
-        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "*Trial");
+        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "*IncrediBuild FreeDev license");
         List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
         trialLicenseFile = licFileList.get(0);
         SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\");
