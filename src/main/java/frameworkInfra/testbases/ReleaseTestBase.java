@@ -37,7 +37,7 @@ public class ReleaseTestBase extends TestBase {
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "*IncrediBuild FreeDev license");
         List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
         trialLicenseFile = licFileList.get(0);
-        SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\");
+        SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\"+ trialLicenseFile);
     }
 
 }
