@@ -397,7 +397,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(PHONE_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(phoneempty).isDisplayed());
         eventWebDriver.findElement(PHONE_TB).clear();
-        eventWebDriver.findElement(PHONE_TB).sendKeys("111111");
+        eventWebDriver.findElement(PHONE_TB).sendKeys("1111111111");
         Assert.assertTrue(eventWebDriver.findElements(phoneempty).isEmpty());
     }
 
