@@ -105,7 +105,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.createNewFreeDevWinAccount(rf);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
         Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
-        SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
+        SystemActions.deleteFilesOlderThanX(Locations.TRIAL_LICENSE_PATH,0);
         Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
         MailService.deleteMail(host, mailAddress, password);
     }
