@@ -1,4 +1,4 @@
-package Native.releasetests;
+package Native.Enterprise;
 
 import frameworkInfra.testbases.EnterprisePositiveTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;

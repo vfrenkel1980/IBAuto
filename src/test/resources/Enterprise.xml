@@ -8,8 +8,8 @@
 
     <test name="Enterprise">
         <classes>
-            <class name ="Native.releasetests.EnterprisePositiveTests" />
-            <class name ="Native.releasetests.EnterpriseNegativeTests" />
+            <class name ="Native.Enterprise.EnterprisePositiveTests" />
+            <class name ="Native.Enterprise.EnterpriseNegativeTests" />
         </classes>
     </test>
 </suite>
