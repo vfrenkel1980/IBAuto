@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
 import webInfra.ibWeb.pages.WindowsRegistrationForm;
 import webInfra.ibWeb.pages.UpdateInfoForm;
+import frameworkInfra.utils.StaticDataProvider.*;
 
 
 @Listeners(TestListener.class)
@@ -103,6 +104,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.createNewFreeDevWinAccount(rf);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
         Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
+        Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
         MailService.deleteMail(host, mailAddress, password);
     }
 

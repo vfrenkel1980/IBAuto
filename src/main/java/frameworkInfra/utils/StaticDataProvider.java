@@ -73,6 +73,7 @@ public class StaticDataProvider {
         public static final String IGNORE_ERRORS_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBErrorsList.txt";
         public static final String IGNORE_IB_BINARIES_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBBinariesList.txt";
         public static final String SIGNTOOL = "C:\\Program Files (x86)\\Microsoft SDKs\\ClickOnce\\SignTool\\signtool.exe";
+        public static final String TRIAL_LICENSE_PATH = "\\\\192.168.10.15\\share\\Automation\\Latest Trial License\\";
     }
 
     public static class URL {
