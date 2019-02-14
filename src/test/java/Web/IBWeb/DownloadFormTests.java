@@ -103,11 +103,16 @@ public class DownloadFormTests extends DownloadPageTestBase{
                 "5559540098","USA", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
-        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
-        SystemActions.deleteFilesOlderThanX(Locations.TRIAL_LICENSE_PATH,0);
-        Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
-        MailService.deleteMail(host, mailAddress, password);
+        try {
+            Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
+            Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
+            SystemActions.deleteFilesOlderThanX(Locations.TRIAL_LICENSE_PATH, 0);
+            Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
+        }catch(Exception e){
+            e.getMessage();
+        } finally {
+            MailService.deleteMail(host, mailAddress, password);
+        }
     }
 
     @Test(testName = "Verify Change Details", dependsOnMethods = { "windowsRegistration"} )

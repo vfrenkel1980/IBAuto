@@ -1,11 +1,15 @@
 package Native.releasetests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.LicensingTestBase;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class LicensingTests extends LicensingTestBase {
 
@@ -117,6 +121,10 @@ public class LicensingTests extends LicensingTestBase {
 
         @Test(testName = "Licence Test: Unit Tests")
         public void licTestUnitTests () {
+            if (scenario.equals("8")) {
+                test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
+                throw new SkipException("Skipped test");
+            }
             exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
             if (exitStatus == 0) {
                 Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
