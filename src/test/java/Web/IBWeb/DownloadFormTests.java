@@ -4,6 +4,7 @@ import frameworkInfra.Listeners.TestListener;
 import frameworkInfra.testbases.web.ibSite.DownloadPageTestBase;
 
 import frameworkInfra.utils.MailService;
+import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -104,6 +105,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
         downloadPageObject.createNewFreeDevWinAccount(rf);
         Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
         Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
+        SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
         Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
         MailService.deleteMail(host, mailAddress, password);
     }
