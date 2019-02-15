@@ -22,7 +22,7 @@ public class ReleaseTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
-    protected static String trialLicenseFile = "";
+    protected String trialLicenseFile;
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -33,7 +33,7 @@ public class ReleaseTestBase extends TestBase {
     }
 
     @BeforeSuite
-    public void beforeSuite() {
+    public void updateTrialLicense() {
         SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "*IncrediBuild FreeDev license");
         List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
         trialLicenseFile = licFileList.get(0);
