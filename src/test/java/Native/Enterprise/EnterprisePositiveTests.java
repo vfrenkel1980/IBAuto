@@ -74,6 +74,6 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
             e.printStackTrace();
         }
         Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe test failed");
-        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR__UNSUBSCRIBE_AGENT), "The "+LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT+" message is not displayed in the cmd output");
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_UNSUBSCRIBE_AGENT), "The "+LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT+" message is not displayed in the cmd output");
     }
 }

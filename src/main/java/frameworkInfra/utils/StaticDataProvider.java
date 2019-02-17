@@ -128,7 +128,7 @@ public class StaticDataProvider {
         public static final String DONE_BUILDING_PROJECT = "Done Building Project";
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
         public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
-        public static final String INITIATOR_ERROR__UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine \"CHES-W10-2\" through the command line";
+        public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
 
         static {
             ERROR_LIST = new HashSet<>();
