@@ -3,14 +3,16 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
-
+import static com.sun.jna.platform.win32.WinReg.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -38,6 +40,12 @@ public class ReleaseTestBase extends TestBase {
         List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
         trialLicenseFile = licFileList.get(0);
         SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\"+ trialLicenseFile);
+    }
+
+
+    @AfterSuite
+    public void deleteTrialLicenseRegKey() {
+        RegistryService.deleteRegKey(HKEY_CLASSES_ROOT, "WOW6432Node\\Interface", "{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
     }
 
 }
