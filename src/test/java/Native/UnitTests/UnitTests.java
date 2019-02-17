@@ -37,35 +37,53 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
+import java.security.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import static com.sun.jna.platform.win32.WinReg.*;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class UnitTests {
+    WindowsService winService = new WindowsService();
+    IbService ibService = new IbService();
 
-    @Test
-    public void test() {
-        IbService ibService = new IbService();
-        String process = ibService.getIbConsoleInstallation("Latest");
-        System.out.println(process.substring(process.lastIndexOf("\\")+1));
+    @Test(testName = "test1")
+    public void finder() {
+        int exit = -1;
+        String dirName = StaticDataProvider.IbLocations.IB_ROOT;
+        File dir = new File(dirName);
+        File[] files = dir.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".exe") || filename.endsWith(".dll");
+            }
+        });
+
+        for (File file : files) {
+            if (!file.getName().contains("WindowsInstaller-KB893803-v2-x86") && !file.getName().contains("vc2017_redist.x86")
+                    && !file.getName().contains("vc9crt_x86")) {
+                exit = winService.runCommandWaitForFinish("C:\\Users\\Aleksandra\\Downloads\\SignTool\\signtool.exe verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
+                Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha1 signature");
+                exit = winService.runCommandWaitForFinish("C:\\Users\\Aleksandra\\Downloads\\SignTool\\signtool.exe verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
+                Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha256 signature");
+            }
+        }
     }
 
-    @Test(testName = "test2")
-    public void test2() {
-        WindowsService winService = new WindowsService();
-        IbService ibService = new IbService();
-        boolean isRunning = false;
-        String process = ibService.getIbConsoleInstallation("Latest");
-        winService.runCommandDontWaitForTermination(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /vs_integrated", process));
-        while (winService.isProcessRunning(process.substring(process.lastIndexOf("\\") + 1)))
-            if (winService.isProcessRunning("vsixinstaller.exe"))
-                isRunning = true;
 
-        Assert.assertFalse(isRunning, "VSIXIstaller running, shouldn't be");
+    @Test(testName = "test1")
+    public void testAttachment() {
+        RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface","{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
+
+
     }
-
 }
+
+

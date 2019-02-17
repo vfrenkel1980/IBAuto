@@ -45,6 +45,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
             e.printStackTrace();
         }
         Assert.assertFalse(subscribeAgentStatus, "The agent is subscribed, Unsubscribe test failed");
+
     }
 
     /**
@@ -55,12 +56,13 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
      * - Run the command: xgcoordconsole /unsubscribe=agent_machine_name
      * }
      * @result{
-     * - The agent isn't unsubscribed: the subscribed status is true on the coordmonitor
+     * - The agent isn't unsubscribed: the subscribed status is true on the coordmonitor;
+     * - The error message is displayed in the command line output.
      * }
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature With Solution Package")
     public void verifyXgcoordconsoleUnsubscribeWithSolutionPackage() {
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + WindowsMachines.DASHBORD_HELPER);
+        String output = winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + WindowsMachines.DASHBORD_HELPER);
         boolean subscribeAgentStatus = true;
         try {
             subscribeAgentStatus = coordMonitor.getAgentSubscribeStatus(WindowsMachines.DASHBORD_HELPER);
@@ -72,5 +74,6 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
             e.printStackTrace();
         }
         Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe test failed");
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR__UNSUBSCRIBE_AGENT), "The "+LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT+" message is not displayed in the cmd output");
     }
 }
