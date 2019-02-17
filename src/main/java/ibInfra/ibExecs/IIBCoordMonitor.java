@@ -38,31 +38,24 @@ public class IIBCoordMonitor implements ibCoordMonitor {
 
     @Override
     public String getAgentVersion(String agentName) throws IOException, SAXException, ParserConfigurationException {
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        String absolutePathToFile = winService.getWindowsTEMPfolder() + timestamp + ".xml";
-        Document docXML = exportCoordMonitorDataToXML(winService.getWindowsTEMPfolder(), timestamp + ".xml");
-        docXML.getDocumentElement().normalize();
-
-        NodeList nList = docXML.getElementsByTagName("Agent");
-
-        String version = "";
-        for (int temp = 0; temp < nList.getLength(); temp++)
-        {
-            Node node = nList.item(temp);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element eElement = (Element) node;
-                if (agentName.toUpperCase().equals(eElement.getAttribute("Host"))){
-                    version = eElement.getAttribute("Version");
-                }
-            }
-        }
-        winService.deleteFile(absolutePathToFile);
-        return version;
+        return getAgentAttribute(agentName, "Version");
+    }
+    @Override
+    public String getAgentStatus (String agentName) throws IOException, SAXException, ParserConfigurationException {
+        return getAgentAttribute(agentName, "Online");
     }
 
     @Override
-    public String getAgentStatus (String agentName) throws IOException, SAXException, ParserConfigurationException {
+    public boolean getAgentSubscribeStatus(String agentName) throws IOException, SAXException, ParserConfigurationException {
+        String subscribeStatus = getAgentAttribute(agentName, "Subscribed");
+        boolean subscribed= false;
+        if(subscribeStatus.equals("True"))subscribed=true;
+        return subscribed;
+    }
+
+
+    @Override
+    public String getAgentAttribute(String agentName, String attribute) throws IOException, SAXException, ParserConfigurationException {
         String timestamp = String.valueOf(System.currentTimeMillis());
         String absolutePathToFile = winService.getWindowsTEMPfolder() + timestamp + ".xml";
         Document docXML = exportCoordMonitorDataToXML(winService.getWindowsTEMPfolder(), timestamp + ".xml");
@@ -70,7 +63,7 @@ public class IIBCoordMonitor implements ibCoordMonitor {
 
         NodeList nList = docXML.getElementsByTagName("Agent");
 
-        String status = "";
+        String res = "";
         for (int temp = 0; temp < nList.getLength(); temp++)
         {
             Node node = nList.item(temp);
@@ -78,12 +71,12 @@ public class IIBCoordMonitor implements ibCoordMonitor {
             {
                 Element eElement = (Element) node;
                 if (agentName.toUpperCase().equals(eElement.getAttribute("Host"))){
-                    status = eElement.getAttribute("Online");
+                    res = eElement.getAttribute(attribute);
                 }
             }
         }
         winService.deleteFile(absolutePathToFile);
-        return status;
+        return res;
     }
 
     @Override

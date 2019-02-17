@@ -276,7 +276,7 @@ public class IbService implements IIBService {
     @Override
     public void customPackAllocationOn() {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", "LicenseAllocationOption", "IbQaMode");
-        SystemActions.copyFilesByExtension("C:\\LicenseTests_projects\\CustomAllocation\\", getIBInstallFolder(), "dat", false);
+        SystemActions.copyFilesByExtension("C:\\QA\\CustomAllocation\\", getIBInstallFolder(), "dat", false);
     }
 
     /**

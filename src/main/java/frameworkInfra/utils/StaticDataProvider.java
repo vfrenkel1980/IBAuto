@@ -73,6 +73,7 @@ public class StaticDataProvider {
         public static final String IGNORE_ERRORS_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBErrorsList.txt";
         public static final String IGNORE_IB_BINARIES_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBBinariesList.txt";
         public static final String SIGNTOOL = "C:\\Program Files (x86)\\Microsoft SDKs\\ClickOnce\\SignTool\\signtool.exe";
+        public static final String TRIAL_LICENSE_PATH = "\\\\192.168.10.15\\share\\Automation\\Latest Trial License\\";
     }
 
     public static class URL {
@@ -126,6 +127,8 @@ public class StaticDataProvider {
         public static final String MISSING_PARAM_ERROR = "Missing filename or command of job to execute";
         public static final String DONE_BUILDING_PROJECT = "Done Building Project";
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
+        public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
+        public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
 
         static {
             ERROR_LIST = new HashSet<>();
@@ -578,6 +581,7 @@ public class StaticDataProvider {
         public static final String NO_ENT_LIC = "IncrediBuild - Mark Zvuluni - personal Coordinator - professional (without Enterprise).IB_lic";
         public static final String AGENT_SETTINGS_LIC = "IncrediBuild - Mark Zvuluni - agent settings.IB_lic";
         public static final String DASHBOARD_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - dashboard tests August 2018.IB_lic";
+        public static final String PRO_LIC = "IncrediBuild FreeDev license - Aleksandra Malykhina - dashboard tests February 2019.IB_lic";
         //lic tests
         public static final String VALID_LIC = "IncrediBuild - Aleksandra - License Testing Environment Jan 2019.IB_lic";
         public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic";
@@ -680,6 +684,7 @@ public class StaticDataProvider {
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
+        public static final String DASHBORD_HELPER = "h6-w10-01";
     }
 
     public static class LinuxMachines {
@@ -697,7 +702,7 @@ public class StaticDataProvider {
         public static final String INTERCEPTION = "\\ibconsole.exe /command=\"cmd /c \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\spawner \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\sleep 5\"\" \"\" \" /profile=C:\\LicenseTests_projects\\Dev_Tools\\Interception\\profile.xml /title=\"License test - Dev Tools - Interception\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String SUBMITION = "\\ibconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\Submition\\Batch.bat /title=\"License test - Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String XML = "\\xgconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\XML\\XmlSample.xml /title=\"License test - Dev Tools - XML\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
-        public static final String UNIT_TEST = "cmd /c cd \"C:\\QA\\Simulation\\projects\\gtest\\build\" && "+"\"" + IbLocations.IB_ROOT  + "\\ibconsole.exe\" /command=\"ctest -C Release -VV --parallel 20\" /avoidlocal=on  /showagent /out=" + Locations.OUTPUT_LOG_FILE +" /title=\"GOOGLE TEST\" /test=ctest";
+        public static final String UNIT_TEST = "cmd /c cd \"C:\\QA\\Simulation\\projects\\gtest\\build\" && " + "\"" + IbLocations.IB_ROOT + "\\ibconsole.exe\" /command=\"ctest -C Release -VV --parallel 20\" /avoidlocal=on  /showagent /out=" + Locations.OUTPUT_LOG_FILE + " /title=\"GOOGLE TEST\" /test=ctest";
     }
 
     public static class LinuxSimulation {

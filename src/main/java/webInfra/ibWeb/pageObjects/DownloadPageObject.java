@@ -46,17 +46,17 @@ public class DownloadPageObject {
     public static final By HOW_DID_YOU_HEAR_DDL = By.xpath("//*[@id=\"howDidYouSelection\"]");
     public static final By JOB_TITLE_TB = By.xpath("//*[@id=\"jobtitle\"]");
 
-    public static final By CPP_CB = By.xpath("//*[@value=\"C++ Build\"]");
-    public static final By CSSHORT_CB = By.xpath("//*[@value=\"C#, < 5min compilation time\"]");
-    public static final By CSLONG_CB = By.xpath("//*[@value=\"C#, long compilation time\"]");
-    public static final By JAVA_CB = By.xpath("//*[@value=\"Java Build\"]");
-    public static final By UNREAL_CB = By.xpath("//*[@id=\"Unreal\"]");
-    public static final By UNITY_CB = By.xpath("//*[@id=\"C#Unity\"]");
-    public static final By TFS_CB = By.xpath("//*[@id=\"TFS\"]");
-    public static final By JENKINS_CB = By.xpath("//*[@id=\"Jenkins\"]");
-    public static final By MAILING_LIST_CB = By.xpath("//*[@id=\"mailinglist\"]");
-    public static final By PRIVACY_AGREEMENT_CB = By.xpath("//*[@id=\"privacy\"]");
-    public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//*[@id=\"free-dev-submit\"]");
+    public static final By CPP_CB = By.xpath("//input[@value=\"C++ Build\"]");
+    public static final By CSSHORT_CB = By.xpath("//input[@value=\"C#, < 5min compilation time\"]");
+    public static final By CSLONG_CB = By.xpath("//input[@value=\"C#, long compilation time\"]");
+    public static final By JAVA_CB = By.xpath("//input[@value=\"Java Build\"]");
+    public static final By UNREAL_CB = By.xpath("//input[@id=\"Unreal\"]");
+    public static final By UNITY_CB = By.xpath("//input[@id=\"C#Unity\"]");
+    public static final By TFS_CB = By.xpath("//input[@id=\"TFS\"]");
+    public static final By JENKINS_CB = By.xpath("//input[@id=\"Jenkins\"]");
+    public static final By MAILING_LIST_CB = By.xpath("//input[@id=\"mailinglist\"]");
+    public static final By PRIVACY_AGREEMENT_CB = By.xpath("//input[@id=\"privacy\"]");
+    public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//button[@id=\"free-dev-submit\"]");
     public static final By SUBMIT_BTN = By.xpath("//Button[@value=\"Submit\"]");
     public static final By PREVIOUS_BTN = By.xpath("//*[@value=\"prev\"]");
 
@@ -88,7 +88,7 @@ public class DownloadPageObject {
     public static final By LOGOUT_BTN = By.xpath("//*[contains(text(),'Logout')]");
 
 
-    public static final By firstnamedigits = By.xpath("//*[contains(text(),'The First Name field may only contain alphabetic characters as well as spaces.')]");
+    public static final By firstnamedigits = By.xpath("//*[contains(text(),'The First Name field may only contain alphabetic characters.')]");
     public static final By firstnameempty = By.xpath("//*[contains(text(),'The First Name field is required.')]");
     public static final By firstnameonechar = By.xpath("//*[contains(text(),'The First Name field must be at least 2 characters.')]");
     public static final By lastnamedigits = By.xpath("//*[contains(text(),'The Last Name field may only contain alphabetic characters as well as spaces.')]");
@@ -101,10 +101,10 @@ public class DownloadPageObject {
     public static final By passwordconfirmationempty = By.xpath("//*[contains(text(),'The Password Confirmation field is required.')]");
     public static final By shortpassword = By.xpath("//*[contains(text(),'The Password field must be at least 6 characters.')]");
     public static final By nonmatchingpassword = By.xpath("//*[contains(text(),'The passwords don't match, please type the same password.')]");
-    public static final By invalidphone = By.xpath("//*[contains(text(),'The Phone Number field must be at least 6 characters.')]");
+    public static final By invalidphone = By.xpath("//*[contains(text(),'The Phone Number field must be at least 10 characters.')]");
     public static final By phonewithchars = By.xpath("//*[contains(text(),'The Phone Number field may only contain numeric characters.')]");
     public static final By phoneempty = By.xpath("//*[contains(text(),'The Phone Number field is required.')]");
-    public static final By terms = By.xpath("//*[contains(text(),'\"You must approve IncrediBuild’s end user license agreement.\"')]");
+    public static final By terms = By.xpath("//*[contains(text(),\"You must approve IncrediBuild's end user license agreement.\")]");
     public static final By countryempty = By.xpath("//*[contains(text(),'The Country field is required.')]");
     public static final By companyempty = By.xpath("//*[contains(text(),'The Company field is required.')]");
     public static final By companyshort = By.xpath("//*[contains(text(),'The Company field must be at least 2 characters.')]");
@@ -144,6 +144,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(SUBMIT_FIRST_FORM_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTRY_SELECTION_DDL));
         Select country = new Select(eventWebDriver.findElement(COUNTRY_SELECTION_DDL));
+        SystemActions.sleep(1);
         country.selectByVisibleText(rf.getCountry());
         eventWebDriver.findElement(COMPANY_TB).sendKeys(rf.getCompany());
         switch (rf.getCountry()){
@@ -397,7 +398,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(PHONE_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(phoneempty).isDisplayed());
         eventWebDriver.findElement(PHONE_TB).clear();
-        eventWebDriver.findElement(PHONE_TB).sendKeys("111111");
+        eventWebDriver.findElement(PHONE_TB).sendKeys("1111111111");
         Assert.assertTrue(eventWebDriver.findElements(phoneempty).isEmpty());
     }
 

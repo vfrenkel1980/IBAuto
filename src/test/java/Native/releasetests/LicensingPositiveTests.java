@@ -1,10 +1,12 @@
 package Native.releasetests;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.LicensingPositiveTestBase;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
@@ -12,6 +14,8 @@ import frameworkInfra.utils.StaticDataProvider.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class LicensingPositiveTests extends LicensingPositiveTestBase {
 
@@ -33,9 +37,9 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
         int counter = 0;
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CSC);
         SystemActions.sleep(2);
-        while (winService.isProcessRunning(Processes.BUILDSYSTEM)){
+        while (winService.isProcessRunning(Processes.BUILDSYSTEM)) {
             try {
-                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")){
+                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")) {
                     counter++;
                 }
             } catch (IOException | SAXException | ParserConfigurationException e) {
@@ -51,9 +55,9 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
         int counter = 0;
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + LicTestPrjBuildConsoleCommands.VS2017_PS4_ORBIS);
         SystemActions.sleep(2);
-        while (winService.isProcessRunning(Processes.BUILDSYSTEM)){
+        while (winService.isProcessRunning(Processes.BUILDSYSTEM)) {
             try {
-                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")){
+                if (coordMonitor.checkIfAgentIsHelper("vm-lictest", "vm-lictest-hlp")) {
                     counter++;
                 }
             } catch (IOException | SAXException | ParserConfigurationException e) {
@@ -126,6 +130,10 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
 
     @Test(testName = "Licence Test: Unit Tests")
     public void licTestUnitTests() {
+        if (scenario.equals("2")) {
+            test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
+            throw new SkipException("Skipped test");
+        }
         exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
         if (exitStatus == 0) {
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
@@ -133,4 +141,5 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
             Assert.assertTrue(false, "Build wasn't executed correctly");
         }
     }
+
 }

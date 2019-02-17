@@ -27,6 +27,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
     private String scenarioDescription;
     String currentDate = "";
     Boolean startTests = false;
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     @BeforeSuite
     public void beforeSuite(){
@@ -62,7 +63,15 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
-                IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
+                coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+                break;
+
+            case ("2"): //Valid trial license with all packages
+                scenarioDescription = "Valid trial license with all packages";
+                ibService.loadIbLicense(trialLicenseFile);
+                SystemActions.sleep(10);
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(10);
                 coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
                 break;
         }

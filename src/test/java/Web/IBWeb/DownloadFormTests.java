@@ -4,12 +4,14 @@ import frameworkInfra.Listeners.TestListener;
 import frameworkInfra.testbases.web.ibSite.DownloadPageTestBase;
 
 import frameworkInfra.utils.MailService;
+import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webInfra.RestCalls.Get.GetIsMailRegistered;
 import webInfra.ibWeb.pages.WindowsRegistrationForm;
 import webInfra.ibWeb.pages.UpdateInfoForm;
+import frameworkInfra.utils.StaticDataProvider.*;
 
 
 @Listeners(TestListener.class)
@@ -17,7 +19,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
-        WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", "blah@blah.com", "123123",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", "blah@blah.com", "1231231231",
                 "Canada", "Alberta","IB","city", "other", "Brain", true, true,
                 false,false, true, true, true, false, true,false,true,true,
                 true,true,false,true,false,true,true,true,false,true,
@@ -27,7 +29,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
 
     @Test(testName = "Enterprise Registration")
     public void enterpriseRegistration(){
-        WindowsRegistrationForm rf = new WindowsRegistrationForm("enterprise", "User", mailAddress2, "123123",
+        WindowsRegistrationForm rf = new WindowsRegistrationForm("enterprise", "User", mailAddress2, "1231231231",
                 "Israel", "","IB","city", "other", "ballz", true, true,false,
                 false, false, false, false, true, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);
@@ -98,12 +100,19 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
         WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddressRandom, "4illumination",
-                "555954","USA", "alaska", "IB", "MOHA", "other",
+                "5559540098","USA", "alaska", "IB", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
-        Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
-        Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License Files"));
-        MailService.deleteMail(host, mailAddress, password);
+        try {
+            Assert.assertTrue(GetIsMailRegistered.isMailRegistered(mailAddressRandom));
+            Assert.assertTrue(MailService.checkMailBySubject(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File"));
+            SystemActions.deleteFilesOlderThanX(Locations.TRIAL_LICENSE_PATH, 0);
+            Assert.assertTrue(MailService.saveMessageAttachments(host, mailAddress, password, "Sandbox: Your IncrediBuild Download and License File", Locations.TRIAL_LICENSE_PATH));
+        }catch(Exception e){
+            e.getMessage();
+        } finally {
+            MailService.deleteMail(host, mailAddress, password);
+        }
     }
 
     @Test(testName = "Verify Change Details", dependsOnMethods = { "windowsRegistration"} )

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AgentSettings"  >
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="Enterprise">
+        <classes>
+            <class name ="Native.Enterprise.EnterprisePositiveTests" />
+            <class name ="Native.Enterprise.EnterpriseNegativeTests" />
+        </classes>
+    </test>
+</suite>
