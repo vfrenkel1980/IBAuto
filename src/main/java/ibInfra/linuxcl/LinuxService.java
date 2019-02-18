@@ -1,5 +1,6 @@
 package ibInfra.linuxcl;
 
+import com.amazonaws.services.dynamodbv2.xspec.NULL;
 import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.*;
 import frameworkInfra.testbases.TestBase;
@@ -25,10 +26,21 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public int linuxRunSSHCommand(String command, String hostIP) {
+
+        return linuxRunSSHCommand(command, hostIP, "");
+    }
+
+    @Override
+    public int linuxRunSSHCommand(String command, String hostIP, String keyFilePath)
+    {
         JSch jsch = new JSch();
         int exitStatus = 0;
         Session session;
+        boolean sshWithKey = !keyFilePath.isEmpty();
         try {
+
+            if (sshWithKey)
+                jsch.addIdentity(keyFilePath);
 
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
@@ -57,8 +69,8 @@ public class LinuxService extends TestBase implements ILinuxService {
             exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
                 if (test != null)
-                test.log(Status.WARNING, "Failed to run command.\n" +
-                        "Command: " + command);
+                    test.log(Status.WARNING, "Failed to run command.\n" +
+                            "Command: " + command);
             }
             session.disconnect();
         } catch (JSchException | IOException e) {

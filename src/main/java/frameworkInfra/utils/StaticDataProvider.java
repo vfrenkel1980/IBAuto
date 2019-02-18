@@ -690,6 +690,29 @@ public class StaticDataProvider {
 
     public static class LinuxMachines {
         public static final String LINUX_BUILDER = "192.168.10.44";
+
+    }
+
+    public static class LinuxAWS {
+
+        public static String and5_inst_id = "i-09b17d03429b1a25d";
+        public static String and6_inst_id = "i-0e4c64ed1a75fe883";
+        public static String and7_inst_id = "i-06befc808b5caa7f1";
+        public static String and8_inst_id = "i-04bbfcaafb96bde38";
+        public static String and9_inst_id = "i-0a55ca9b6c3819b85";
+        public static String coord_publicIP_AWS = "63.34.106.126";
+        public static String ami_id_helper = "ami-00183381177c699e5";
+
+        public static final String CD_TENSOR_DIR_CLOUD = "cd /home/xoreax/projects/tensorflow";
+        public static final String CD_AND_9_DIR_CLOUD = "cd /home/xoreax/projects/android/WORKING_DIRECTORY";
+        public static final String CD_AND_5_DIR_CLOUD = "cd /home/xoreax/projects/android5/WORKING_DIRECTORY";
+
+
+        //        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";" +
+//                String.format(StaticDataProvider.LinuxSimulation.BAZEL_BUILD, "--ib-crash -d1", "tensor", "", "24"), ipList.get(simClassType.ordinal()));
+//        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";", ipList.get(simClassType.ordinal()));
+//        Assert.assertTrue((exitCode <= 0), "Sim tensorflow failed with Exit code " + exitCode);
+
     }
 
     public static class LicTestPrjBuildConsoleCommands {
@@ -758,7 +781,6 @@ public class StaticDataProvider {
     public static class VMrunCommands {
 
         public static final String VMRUN = "\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\"";
-
 
     }
 

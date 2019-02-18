@@ -6,6 +6,8 @@ public interface ILinuxService {
 
     int linuxRunSSHCommand(String command, String hostIP);
 
+    int linuxRunSSHCommand(String command, String hostI, String keyFilePath);
+
     String linuxRunSSHCommandOutputString(String command, String hostIP);
 
     List linuxRunSSHCommandAssignToList(String command, String hostIP);

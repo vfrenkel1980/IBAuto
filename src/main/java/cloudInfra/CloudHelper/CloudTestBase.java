@@ -1,5 +1,6 @@
 package cloudInfra.CloudHelper;
 
+import cloudInfra.CloudServices.AwsService;
 import cloudInfra.CloudServices.AzureService;
 import cloudInfra.CloudServices.CloudService;
 import com.aventstack.extentreports.ExtentReports;
@@ -26,7 +27,6 @@ public class CloudTestBase extends TestBase {
     protected static String INITIATOR = System.getProperty("initiators");
     protected CloudService cloudService;
 
-
     static {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -43,17 +43,10 @@ public class CloudTestBase extends TestBase {
                 cloudService = new AzureService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);
                 break;
             case "aws":
-
+                cloudService = new AwsService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);
                 break;
         }
-
-
-
-
     }
-
-
-
 
 
 
