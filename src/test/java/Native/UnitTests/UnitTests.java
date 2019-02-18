@@ -25,29 +25,16 @@ import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 
-public class UnitTests extends TestBase{
+public class UnitTests {
     WindowsService winService = new WindowsService();
     IbService ibService = new IbService();
-    static {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "- UnitTest.html");
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-    }
-
-    @BeforeMethod
-    public void beforeMethod(Method method, ITestContext context){
-        test = extent.createTest(method.getName());
-        test.log(Status.INFO, method.getName() + " test started");
-        test.assignCategory(context.getName());
-        log.info(method.getName() + " test started");
-    }
 
     @Test(testName = "test1")
     public void testAttachment() {
-       // RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface","{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
-        winService.runCommandWaitForFinish("reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740} /f");
+       //RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface\\{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}","NumMethods");
+     //   RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface\\{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}","ProxyStubClsid32");
+        RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface","{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
+        //winService.runCommandWaitForFinish("reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740} /f");
     }
 }
 
