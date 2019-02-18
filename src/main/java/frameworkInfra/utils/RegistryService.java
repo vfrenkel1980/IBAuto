@@ -65,9 +65,28 @@ public class RegistryService extends TestBase {
 
     public static void deleteRegKey(HKEY rootKey, String keyPath, String keyName) {
         if (test != null)
-            test.log(Status.INFO, "Deleting " + keyName );
+            test.log(Status.INFO, "Deleting " + keyName);
         try {
-            Advapi32Util.registryDeleteKey(rootKey, keyPath,keyName);
+            String newKeyPath = keyPath + "\\" + keyName;
+            String[] subKeys = Advapi32Util.registryGetKeys(rootKey, newKeyPath);
+            if (subKeys.length == 0) {
+                Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
+            } else {
+                for (String subKey : subKeys) {
+                    String newSubKeyPath = newKeyPath + "\\" + subKey;
+                    String[] subSubKeys = Advapi32Util.registryGetKeys(rootKey, newSubKeyPath);
+                    if (subSubKeys.length == 0) {
+                        Advapi32Util.registryDeleteKey(rootKey, newKeyPath, subKey);
+                    } else {
+                        for (String subSubKey : subSubKeys) {
+                            deleteRegKey(rootKey, newKeyPath, subKey);
+                            test.log(Status.INFO, subKey + " is deleted");
+                        }
+                        Advapi32Util.registryDeleteKey(rootKey, newKeyPath, subKey);
+                    }
+                }
+                Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
+            }
         } catch (Exception ex) {
             test.log(Status.ERROR, "Failed to delete registry key with error: " + ex.getMessage());
             ex.getMessage();
@@ -94,7 +113,7 @@ public class RegistryService extends TestBase {
         return Advapi32Util.registryKeyExists(rootKey, keyPath);
     }
 
-    public static void createRootRegistryFolder(HKEY rootKey,String path) {
+    public static void createRootRegistryFolder(HKEY rootKey, String path) {
         if (!doesKeyExist(HKEY_LOCAL_MACHINE, path)) {
             try {
                 Advapi32Util.registryCreateKey(rootKey, path);
