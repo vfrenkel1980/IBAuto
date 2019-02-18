@@ -46,7 +46,8 @@ public class UnitTests extends TestBase{
 
     @Test(testName = "test1")
     public void testAttachment() {
-        RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface","{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
+       // RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface","{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}");
+        winService.runCommandWaitForFinish("reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740} /f");
     }
 }
 
