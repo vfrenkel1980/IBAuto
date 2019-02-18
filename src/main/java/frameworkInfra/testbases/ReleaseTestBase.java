@@ -33,6 +33,8 @@ public class ReleaseTestBase extends TestBase {
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - License Tests" + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        test = extent.createTest("Before Suite Update trial license");
+        test.assignCategory("BEFORE SUITE");
     }
 
     @BeforeSuite
