@@ -37,11 +37,15 @@ public class ReleaseTestBase extends TestBase {
 
     @BeforeSuite
     public void updateTrialLicense() {
-        SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "*IncrediBuild FreeDev license");
-        List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
-        trialLicenseFile = licFileList.get(0);
-        SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\"+ trialLicenseFile);
-        test.log(Status.INFO, "Trial license is updated for suite");
+        try {
+            SystemActions.deleteFilesByPrefix(Locations.QA_ROOT + "\\License\\", "IncrediBuild FreeDev license");
+            List<String> licFileList = SystemActions.getAllFilesInDirectory(Locations.TRIAL_LICENSE_PATH);
+            trialLicenseFile = licFileList.get(0);
+            SystemActions.copyFile(Locations.TRIAL_LICENSE_PATH + trialLicenseFile, Locations.QA_ROOT + "\\License\\" + trialLicenseFile);
+            test.log(Status.INFO, "Trial license is updated for suite");
+        }catch(Exception e){
+            test.log(Status.ERROR, "Failed to update trial licence with ERROR"+e.getMessage());
+        }
     }
 
 
