@@ -13,10 +13,6 @@
         <parameter name="logLevel" value="0"/>
         <classes>
             <class name ="Native.UnitTests.UnitTests" >
-                <methods>
-                    <include name="test3" />
-                    <include name="test2" />
-                </methods>
             </class>
         </classes>
     </test>
