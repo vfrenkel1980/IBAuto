@@ -5,6 +5,7 @@ import cloudInfra.CloudServices.CloudService;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
+import frameworkInfra.testbases.TestBase;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
@@ -16,13 +17,13 @@ import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 @Listeners(SuiteListener.class)
-public class CloudTestBase {
+public class CloudTestBase extends TestBase {
 
     protected static String NUMOFMACHINES = System.getProperty("numofmachines");
     protected static String CPU = System.getProperty("cpu");
     protected static String MEMORY = System.getProperty("memory");
     protected static String CLOUD = System.getProperty("cloudtype");
-    protected static String INITIATOR = System.getProperty("initiator");
+    protected static String INITIATOR = System.getProperty("initiators");
     protected CloudService cloudService;
 
 
