@@ -1,6 +1,7 @@
 package Native.UnitTests;
 
 import frameworkInfra.testbases.BatmanBCTestBase;
+import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 
 import ibInfra.ibService.IbService;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 import static com.sun.jna.platform.win32.WinReg.*;
 
 
-public class UnitTests extends BatmanBCTestBase {
+public class UnitTests extends TestBase {
     WindowsService winService = new WindowsService();
     IbService ibService = new IbService();
 
