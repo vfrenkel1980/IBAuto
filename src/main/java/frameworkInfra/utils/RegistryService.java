@@ -73,17 +73,7 @@ public class RegistryService extends TestBase {
                 Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
             } else {
                 for (String subKey : subKeys) {
-                    String newSubKeyPath = newKeyPath + "\\" + subKey;
-                    String[] subSubKeys = Advapi32Util.registryGetKeys(rootKey, newSubKeyPath);
-                    if (subSubKeys.length == 0) {
-                        Advapi32Util.registryDeleteKey(rootKey, newKeyPath, subKey);
-                    } else {
-                        for (String subSubKey : subSubKeys) {
-                            deleteRegKey(rootKey, newKeyPath, subKey);
-                            test.log(Status.INFO, subKey + " is deleted");
-                        }
-                        Advapi32Util.registryDeleteKey(rootKey, newKeyPath, subKey);
-                    }
+                    deleteRegKey(rootKey, newKeyPath, subKey);
                 }
                 Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
             }

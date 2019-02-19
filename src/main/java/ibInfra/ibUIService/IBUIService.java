@@ -750,7 +750,7 @@ public class IBUIService implements IIBUIService {
         public void clickAllowEnableDisableAsHelper() {
             test.log(Status.INFO, "Clicking allow Enable Disable as helper");
             try {
-                screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.95),15).rightClick();
+                screen.wait(CoordMonitor.InitiatorFromList.similar((float) 1),15).rightClick();
                 screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
