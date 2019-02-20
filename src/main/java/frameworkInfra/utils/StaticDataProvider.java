@@ -682,6 +682,7 @@ public class StaticDataProvider {
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";

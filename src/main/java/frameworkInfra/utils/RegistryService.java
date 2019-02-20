@@ -64,22 +64,23 @@ public class RegistryService extends TestBase {
     }
 
     public static void deleteRegKey(HKEY rootKey, String keyPath, String keyName) {
-        if (test != null)
+        if (rootKey == null || keyPath == null || keyName == null) {
+            return;
+        }
+        if (test != null) {
             test.log(Status.INFO, "Deleting " + keyName);
+        }
         try {
             String newKeyPath = keyPath + "\\" + keyName;
             String[] subKeys = Advapi32Util.registryGetKeys(rootKey, newKeyPath);
-            if (subKeys.length == 0) {
-                Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
-            } else {
+            if (subKeys.length != 0) {
                 for (String subKey : subKeys) {
                     deleteRegKey(rootKey, newKeyPath, subKey);
                 }
                 Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
             }
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             test.log(Status.ERROR, "Failed to delete registry key with error: " + ex.getMessage());
-            ex.getMessage();
         }
     }
 

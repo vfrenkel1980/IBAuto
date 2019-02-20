@@ -55,6 +55,8 @@ public class ReleaseTestBase extends TestBase {
     public void deleteTrialLicenseRegKey() {
         RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface",RegistryKeys.GUID);
         test.log(Status.INFO, "Trial license regKey is deleted");
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.LICENSE_HLPR_NAME + " -u admin -p 4illumination -i 0 reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\"+RegistryKeys.GUID);
+        test.log(Status.INFO, "Trial license regKey is deleted on the helper machine");
     }
 
 }
