@@ -129,6 +129,7 @@ public class StaticDataProvider {
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
         public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
         public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
+        public static final String  INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
 
         static {
             ERROR_LIST = new HashSet<>();
@@ -493,6 +494,13 @@ public class StaticDataProvider {
             public static final String CONSOLE_APP_SUCCESS_REBUILD = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\"";
             public static final String CONSOLE_APP_FAIL = "C:\\QA\\Simulation\\Projects\\ConsoleApplication1Fail\\ConsoleApplication1Fail.sln /%s /cfg=\"Debug|x86\"";
             public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
+        }
+
+        public static class Dashboard {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
+            public static final String BIG_XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\profile.xml\" /title=\"XG Console Sample Long\"";
+            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE+Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+
         }
 
         public static class CHROME_BATMAN {

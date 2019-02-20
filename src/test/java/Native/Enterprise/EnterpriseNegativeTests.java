@@ -47,7 +47,31 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
             e.printStackTrace();
         }
         Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe Negative test failed");
-        Assert.assertTrue(output.contains(LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT), "The "+LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT+" message is not displayed in the cmd output");
+        Assert.assertTrue(output.contains(LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT), "The " + LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT + " message is not displayed in the cmd output");
+    }
+
+    @Test(testName = "Verify Quickvalidate Flag Buildconsole")
+    public void verifyCIbuildFlagBuildconsole() {
+        int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
+        String output = winService.runCommandGetOutput(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
+        Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_QUICKVALIDATE), "The " + LogOutput.INITIATOR_ERROR_QUICKVALIDATE + " message is not displayed in the cmd output");
+    }
+
+    @Test(testName = "Verify Quickvalidate Flag IbConsole")
+    public void verifyCIbuildFlagIbConsole() {
+        int exitcode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        String output = winService.runCommandGetOutput(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_QUICKVALIDATE), "The " + LogOutput.INITIATOR_ERROR_QUICKVALIDATE + " message is not displayed in the cmd output");
+    }
+
+    @Test(testName = "Verify Quickvalidate Flag XGConsole")
+    public void verifyCIbuildFlagXGConsole() {
+        int exitcode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        String output = winService.runCommandGetOutput(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_QUICKVALIDATE), "The " + LogOutput.INITIATOR_ERROR_QUICKVALIDATE + " message is not displayed in the cmd output");
     }
 }
 
