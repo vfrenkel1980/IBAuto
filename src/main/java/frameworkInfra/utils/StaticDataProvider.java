@@ -710,13 +710,29 @@ public class StaticDataProvider {
         public static String and7_inst_id = "i-06befc808b5caa7f1";
         public static String and8_inst_id = "i-04bbfcaafb96bde38";
         public static String and9_inst_id = "i-0a55ca9b6c3819b85";
-        public static String coord_publicIP_AWS = "63.34.106.126";
+        public static String init_perf_inst_id = "i-0a55ca9b6c3819b85";
+
+
         public static String ami_id_helper = "ami-00183381177c699e5";
 
-        public static final String CD_TENSOR_DIR_CLOUD = "cd /home/xoreax/projects/tensorflow";
-        public static final String CD_AND_9_DIR_CLOUD = "cd /home/xoreax/projects/android/WORKING_DIRECTORY";
-        public static final String CD_AND_5_DIR_CLOUD = "cd /home/xoreax/projects/android5/WORKING_DIRECTORY";
+        public static String coord_publicIP_AWS = "63.34.106.126";
+        public static String init_perf_publicIP_AWS = "52.213.41.246";
+        public static String and5_publicIP_AWS = "63.33.97.160";
+        public static String and6_publicIP_AWS = "63.34.213.19";
+        public static String and7_publicIP_AWS = "63.35.75.79";
+        public static String and8_publicIP_AWS = "63.35.153.242";
+        public static String and9_publicIP_AWS = "63.35.48.125";
 
+
+        public static final String CD_TENSOR_DIR_AWS = "cd /home/xoreax/projects/tensorflow";
+        public static final String CD_CHROMIUM_DIR_AWS = "cd /home/xoreax/projects/chromium/src/";
+        public static final String CD_QT5_DIR_AWS = "cd /home/xoreax/projects/qt5/";
+        public static final String CD_AND_9_DIR_AWS = "cd /home/xoreax/projects/android/WORKING_DIRECTORY";
+        public static final String CD_AND_8_DIR_AWS = "cd /home/xoreax/projects/android8/WORKING_DIRECTORY";
+        public static final String CD_AND_7_DIR_AWS = "cd /home/xoreax/projects/android7/WORKING_DIRECTORY";
+        public static final String CD_AND_6_DIR_AWS = "cd /home/xoreax/projects/android6/WORKING_DIRECTORY";
+        public static final String CD_AND_5_DIR_AWS = "cd /home/xoreax/projects/android5/WORKING_DIRECTORY";
+        public static final String AWS_SET_UP_JSON ="c:\\QA\\aws_set_up.json";
 
         //        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";" +
 //                String.format(StaticDataProvider.LinuxSimulation.BAZEL_BUILD, "--ib-crash -d1", "tensor", "", "24"), ipList.get(simClassType.ordinal()));
