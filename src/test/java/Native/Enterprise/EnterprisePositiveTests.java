@@ -81,7 +81,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag - Buildconsole")
-    public void verifyCIbuildFlagBuildconsole() {
+    public void verifyQuickvalidateFlagBuildconsole() {
         int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
         Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
@@ -90,7 +90,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag IbConsole")
-    public void verifyCIbuildFlagIbConsole() {
+    public void verifyQuickvalidateFlagIbConsole() {
         int exitcode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
@@ -99,7 +99,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag XGConsole")
-    public void verifyCIbuildFlagXGConsole() {
+    public void verifyQuickvalidateFlagXGConsole() {
         int exitcode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");

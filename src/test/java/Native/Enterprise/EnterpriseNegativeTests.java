@@ -51,7 +51,7 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag Buildconsole")
-    public void verifyCIbuildFlagBuildconsole() {
+    public void verifyQuickvalidateFlagBuildconsole() {
         int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
         String output = winService.runCommandGetOutput(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
         Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
@@ -59,7 +59,7 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag IbConsole")
-    public void verifyCIbuildFlagIbConsole() {
+    public void verifyQuickvalidateFlagIbConsole() {
         int exitcode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         String output = winService.runCommandGetOutput(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
@@ -67,7 +67,7 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
     }
 
     @Test(testName = "Verify Quickvalidate Flag XGConsole")
-    public void verifyCIbuildFlagXGConsole() {
+    public void verifyQuickvalidateFlagXGConsole() {
         int exitcode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         String output = winService.runCommandGetOutput(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
         Assert.assertTrue(exitcode != 0, "The build exited with returncode " + exitcode);
