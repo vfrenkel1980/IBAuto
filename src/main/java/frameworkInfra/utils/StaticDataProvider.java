@@ -130,6 +130,7 @@ public class StaticDataProvider {
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
         public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
         public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
+        public static final String  INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
 
         static {
             ERROR_LIST = new HashSet<>();
@@ -496,6 +497,13 @@ public class StaticDataProvider {
             public static final String DEPENDENCY_PROJECT = "C:\\QA\\Simulation\\Projects\\DependencyProject\\DependencyProject.sln /%s /cfg=\"Debug|x86\"";
         }
 
+        public static class Dashboard {
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
+            public static final String BIG_XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\profile.xml\" /title=\"XG Console Sample Long\"";
+            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE+Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+
+        }
+
         public static class CHROME_BATMAN {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\QA\\Chromium\\src\\out\\Release -t clean";
             public static final String CHROME_RELEASE_BUILD = IbLocations.BUILD_CONSOLE + " /command=\"ninja -C D:\\QA\\Chromium\\src\\out\\Release chrome\" /profile=\"D:\\QA\\Chromium\\chromium_ibprofile.xml\" /Title=ChromiumVsNinja";
@@ -573,6 +581,7 @@ public class StaticDataProvider {
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
+        public static final String GUID = "{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}";
     }
 
     public static class IbLicenses {
@@ -682,6 +691,7 @@ public class StaticDataProvider {
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
@@ -690,6 +700,29 @@ public class StaticDataProvider {
 
     public static class LinuxMachines {
         public static final String LINUX_BUILDER = "192.168.10.44";
+
+    }
+
+    public static class LinuxAWS {
+
+        public static String and5_inst_id = "i-09b17d03429b1a25d";
+        public static String and6_inst_id = "i-0e4c64ed1a75fe883";
+        public static String and7_inst_id = "i-06befc808b5caa7f1";
+        public static String and8_inst_id = "i-04bbfcaafb96bde38";
+        public static String and9_inst_id = "i-0a55ca9b6c3819b85";
+        public static String coord_publicIP_AWS = "63.34.106.126";
+        public static String ami_id_helper = "ami-00183381177c699e5";
+
+        public static final String CD_TENSOR_DIR_CLOUD = "cd /home/xoreax/projects/tensorflow";
+        public static final String CD_AND_9_DIR_CLOUD = "cd /home/xoreax/projects/android/WORKING_DIRECTORY";
+        public static final String CD_AND_5_DIR_CLOUD = "cd /home/xoreax/projects/android5/WORKING_DIRECTORY";
+
+
+        //        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";" +
+//                String.format(StaticDataProvider.LinuxSimulation.BAZEL_BUILD, "--ib-crash -d1", "tensor", "", "24"), ipList.get(simClassType.ordinal()));
+//        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";", ipList.get(simClassType.ordinal()));
+//        Assert.assertTrue((exitCode <= 0), "Sim tensorflow failed with Exit code " + exitCode);
+
     }
 
     public static class LicTestPrjBuildConsoleCommands {
@@ -758,7 +791,6 @@ public class StaticDataProvider {
     public static class VMrunCommands {
 
         public static final String VMRUN = "\"C:\\Program Files (x86)\\VMware\\VMware VIX\\vmrun.exe\"";
-
 
     }
 

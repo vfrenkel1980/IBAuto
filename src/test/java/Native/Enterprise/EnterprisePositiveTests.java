@@ -1,6 +1,7 @@
 package Native.Enterprise;
 
 import frameworkInfra.testbases.EnterprisePositiveTestBase;
+import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
@@ -9,6 +10,8 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 /**
  * @brief<b> <b>Enterprise features tests with Enterprise license loaded (IB Enterprise installed)</b>
@@ -74,6 +77,69 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
             e.printStackTrace();
         }
         Assert.assertTrue(subscribeAgentStatus, "The agent is not subscribed, Unsubscribe test failed");
-        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_UNSUBSCRIBE_AGENT), "The "+LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT+" message is not displayed in the cmd output");
+        Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_UNSUBSCRIBE_AGENT), "The " + LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT + " message is not displayed in the cmd output");
     }
+
+    @Test(testName = "Verify Quickvalidate Flag - Buildconsole")
+    public void verifyQuickvalidateFlagBuildconsole() {
+        int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
+        Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
+    }
+
+    @Test(testName = "Verify Quickvalidate Flag IbConsole")
+    public void verifyQuickvalidateFlagIbConsole() {
+        int exitcode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
+    }
+
+    @Test(testName = "Verify Quickvalidate Flag XGConsole")
+    public void verifyQuickvalidateFlagXGConsole() {
+        int exitcode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
+        Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
+        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
+    }
+
+    @Test(testName = "Verify MultiBuild Success")
+    public void verifyMultiBuildSuccess() {
+        int instanceCount;
+        setRegistry("2", "BuildService", RegistryKeys.MAX_CONCURRENT_BUILDS);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        SystemActions.sleep(1);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
+        SystemActions.sleep(5);
+        instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
+        Assert.assertEquals(instanceCount, 2, "Number of running instances does not match");
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+    }
+
+    @Test(testName = "Verify MultiBuild Failure")
+    public void verifyMultiBuildFailure() {
+        int instanceCount;
+        setRegistry("8", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        SystemActions.sleep(1);
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
+        SystemActions.sleep(5);
+        instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
+        Assert.assertEquals(instanceCount, 1, "Number of running instances does not match");
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+        winService.waitForProcessToStart(Processes.BUILDSYSTEM);
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
+    }
+
+    /*------------------------------METHODS------------------------------*/
+
+    private void setRegistry(String required, String folder, String keyName) {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
+    }
+
 }

@@ -16,37 +16,6 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class GeneralWinTests extends BatmanBCTestBase {
 
-
-    @Test(testName = "Verify MultiBuild Success")
-    public void verifyMultiBuildSuccess() {
-        int instanceCount;
-        setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        setRegistry("2", "BuildService", StaticDataProvider.RegistryKeys.MAX_CONCURRENT_BUILDS);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-        SystemActions.sleep(1);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
-        SystemActions.sleep(5);
-        instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
-        Assert.assertEquals(instanceCount, 2, "Number of running instances does not match");
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-    }
-
-    @Test(testName = "Verify MultiBuild Failure")
-    public void verifyMultiBuildFailure() {
-        int instanceCount;
-        setRegistry("8", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-        SystemActions.sleep(1);
-        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BLENDER_X64_RELEASE, ProjectsCommands.REBUILD));
-        SystemActions.sleep(5);
-        instanceCount = winService.getNumberOfProcessInstances(Processes.BUILDSYSTEM);
-        Assert.assertEquals(instanceCount, 1, "Number of running instances does not match");
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        winService.waitForProcessToStart(Processes.BUILDSYSTEM);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
-        setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
-    }
-
     @Test(testName = "Verify Backup Coordinator Functionality")
     public void verifyBackupCoordinatorFunctionality() {
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
@@ -92,7 +61,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         try {
             winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
-                    String.format("\"C:\\Program Files\\Xoreax\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
+                    String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
             SystemActions.sleep(30);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
             boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
@@ -170,14 +139,6 @@ public class GeneralWinTests extends BatmanBCTestBase {
     @Test(testName = "Verify PDB Error In Log")
     public void verifyPDBErrorInLog() {
         Assert.assertEquals(LogOutput.PDB_ERROR_TESTS, "", "see list of builds that failed with PDB error: " + LogOutput.PDB_ERROR_TESTS);
-    }
-
-    @Test(testName = "Verify CIbuild Flag")
-    public void verifyCIbuildFlag() {
-        winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
     }
 
     @Test(testName = "Verify .proj File Support")

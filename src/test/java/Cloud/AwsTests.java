@@ -1,6 +1,9 @@
 package Cloud;
 
-public class AwsTests {
+import cloudInfra.CloudHelper.CloudTestBase;
+import org.testng.annotations.Test;
+
+public class AwsTests extends CloudTestBase {
 
 
 

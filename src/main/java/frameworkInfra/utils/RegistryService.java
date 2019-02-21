@@ -64,13 +64,23 @@ public class RegistryService extends TestBase {
     }
 
     public static void deleteRegKey(HKEY rootKey, String keyPath, String keyName) {
-        if (test != null)
-            test.log(Status.INFO, "Deleting " + keyName );
+        if (rootKey == null || keyPath == null || keyName == null) {
+            return;
+        }
+        if (test != null) {
+            test.log(Status.INFO, "Deleting " + keyName);
+        }
         try {
-            Advapi32Util.registryDeleteKey(rootKey, keyPath,keyName);
-        } catch (Exception ex) {
+            String newKeyPath = keyPath + "\\" + keyName;
+            String[] subKeys = Advapi32Util.registryGetKeys(rootKey, newKeyPath);
+            if (subKeys.length != 0) {
+                for (String subKey : subKeys) {
+                    deleteRegKey(rootKey, newKeyPath, subKey);
+                }
+                Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
+            }
+        } catch (RuntimeException ex) {
             test.log(Status.ERROR, "Failed to delete registry key with error: " + ex.getMessage());
-            ex.getMessage();
         }
     }
 
@@ -94,7 +104,7 @@ public class RegistryService extends TestBase {
         return Advapi32Util.registryKeyExists(rootKey, keyPath);
     }
 
-    public static void createRootRegistryFolder(HKEY rootKey,String path) {
+    public static void createRootRegistryFolder(HKEY rootKey, String path) {
         if (!doesKeyExist(HKEY_LOCAL_MACHINE, path)) {
             try {
                 Advapi32Util.registryCreateKey(rootKey, path);
