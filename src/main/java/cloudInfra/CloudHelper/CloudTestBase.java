@@ -6,6 +6,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
@@ -38,6 +40,7 @@ public class CloudTestBase extends TestBase {
     @BeforeSuite
     public void init(){
         test = extent.createTest("Before Suite");
+        SystemActions.deleteFile(Locations.CLOUD_IDS_JSON);
         switch (CLOUD) {
             case "azure":
                 cloudService = new AzureService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);

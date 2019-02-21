@@ -11,15 +11,20 @@ public class CloudService {
 
     }
 
-
-
     public void stopVm(){
 
     }
 
-
-
     public void deleteVm(){
 
     }
+
+    public void saveCloudIdsToJSON(){
+
+    }
+
+    public void getCloudIdsFromJSON(){
+
+    }
+
 }

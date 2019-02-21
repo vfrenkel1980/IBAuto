@@ -10,8 +10,15 @@ import com.microsoft.azure.management.resources.fluentcore.model.CreatedResource
 import com.microsoft.azure.management.resources.fluentcore.utils.SdkContext;
 import com.microsoft.azure.management.storage.StorageAccount;
 import com.microsoft.rest.LogLevel;
-import java.io.File;
+import frameworkInfra.utils.StaticDataProvider.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -32,8 +39,11 @@ public class AzureService extends CloudService{
     private Region region = Region.EUROPE_WEST;
     private String resGroup = "qa-performance";
     private VirtualMachineSizeTypes type;
-    private int vmCount;
+    public int vmCount;
     private String initiator;
+    protected List<String> diskIds = new ArrayList<>();
+    protected List<String> nicIds = new ArrayList<>();
+    protected List<String> vmIds = new ArrayList<>();
 
 
     public AzureService(String cpu, String memory, String vmCount, String initiator) {
@@ -110,16 +120,17 @@ public class AzureService extends CloudService{
         test.log(Status.INFO, vm + "Stopped");
     }
 
-    public void deleteVm(int vmCount) {
+    @Override
+    public void deleteVm() {
         test.log(Status.INFO, "Deleting Vm's...");
 
-        for (int i = 0; i < vmCount; i++) {
-            azure.virtualMachines().deleteById(virtualMachines.get(virtualMachinesKeys.get(i)).id());
+        for (String id:vmIds) {
+            azure.virtualMachines().deleteById(id);
         }
 
         for (int i = 0; i < vmCount; i++) {
-            azure.disks().deleteById(disks.get(disksKeys.get(0)).id());
-            azure.networkInterfaces().deleteById(networkInterfaces.get(networkInterfacesKeys.get(i)).id());
+            azure.disks().deleteById(diskIds.get(i));
+            azure.networkInterfaces().deleteById(nicIds.get(i));
         }
         test.log(Status.INFO, "VM's deleted");
     }
@@ -183,5 +194,54 @@ public class AzureService extends CloudService{
         virtualMachines = azure.virtualMachines().create(creatableVirtualMachines);
         virtualMachinesKeys = new ArrayList(virtualMachines.keySet());
         test.log(Status.INFO, "VM's created");
+    }
+
+    @Override
+    public void saveCloudIdsToJSON(){
+        JSONObject obj = new JSONObject();
+        JSONArray diskIds = new JSONArray();
+
+        for (int i = 0 ; i < vmCount; i++){
+            diskIds.add(disks.get(disksKeys.get(i)).id());
+        }
+        obj.put("Disk ID's", diskIds);
+
+        JSONArray nicIds = new JSONArray();
+        for (int i = 0 ; i < vmCount; i++){
+            nicIds.add(networkInterfaces.get(networkInterfacesKeys.get(i)).id());
+        }
+        obj.put("NIC ID's", nicIds);
+
+
+        JSONArray machineIds = new JSONArray();
+        for (int i = 0 ; i < vmCount; i++){
+            machineIds.add(virtualMachines.get(virtualMachinesKeys.get(i)).id());
+        }
+        obj.put("VM ID's", machineIds);
+
+        try (FileWriter file = new FileWriter(Locations.CLOUD_IDS_JSON)) {
+            file.write(obj.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    @Override
+    public void getCloudIdsFromJSON(){
+        JSONParser parser = new JSONParser();
+
+        try {
+            Object obj = parser.parse(new FileReader("c:\\test.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray msg = (JSONArray) jsonObject.get("Disk ID's");
+            diskIds.addAll(msg);
+            JSONArray msg2 = (JSONArray) jsonObject.get("NIC ID's");
+            nicIds.addAll(msg2);
+            JSONArray msg3 = (JSONArray) jsonObject.get("VM ID's");
+            vmIds.addAll(msg3);
+        } catch (ParseException | IOException e) {
+            e.getMessage();
+        }
     }
 }
