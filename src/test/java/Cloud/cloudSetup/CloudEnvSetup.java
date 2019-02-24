@@ -7,12 +7,14 @@ public class CloudEnvSetup extends CloudTestBase {
 
     @Test(testName = "Start Initiator")
     public void startInitiator() {
+        log.info("CloudEnvSetup startVm");
         cloudService.startVm();
 
     }
 
     @Test(testName = "Setup Environment", dependsOnMethods = { "startInitiator"})
     public void environmentSetup() {
+        log.info("CloudEnvSetup create");
         cloudService.create();
     }
 

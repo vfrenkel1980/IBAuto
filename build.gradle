@@ -43,6 +43,7 @@ def Dashboard = project.hasProperty("Dashboard")
 def DBSchemas = project.hasProperty("DBSchemas")
 def CoordMonitor = project.hasProperty("CoordMonitor")
 def CloudSetup = project.hasProperty("CloudSetup")
+def CloudEnvDestruction = project.hasProperty("CloudEnvDestruction")
 def Enterprise = project.hasProperty("Enterprise")
 
 dependencies {
@@ -224,6 +225,12 @@ test {
         if(CloudSetup) {
             suites "src/test/resources/CloudSetup.xml"
         }
+
+
+        if(CloudEnvDestruction) {
+            suites "src/test/resources/CloudEnvDestruction.xml"
+        }
+
 
         if(LinuxAWSTests) {
             suites "src/test/resources/LinuxAWSTests.xml"

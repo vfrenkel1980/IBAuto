@@ -120,6 +120,7 @@ public class AwsService extends CloudService{
 
     private void startVm(String inst_id)
     {
+        log.info("private startVm");
         StartInstancesRequest stert_request = new StartInstancesRequest().withInstanceIds(inst_id);
         StartInstancesResult startInstancesResult =  ec2.startInstances(stert_request);
 
@@ -133,6 +134,7 @@ public class AwsService extends CloudService{
 
     private void startInitiators()
     {
+        log.info("startInitiators");
         String curr_inst_id = null;
 
         for(String curr_init_num: initiators_vec) {
@@ -146,12 +148,14 @@ public class AwsService extends CloudService{
     @Override
     public void startVm() {
         log.info("startVm");
-        startVm(init_inst_id_Map.get(0));
+        log.info(init_inst_id_Map.get("0"));
+        startVm(init_inst_id_Map.get("0"));
         startInitiators();
     }
 
     private void stopVm(String inst_id)
     {
+        log.info("private stopVm");
         StopInstancesRequest request = new StopInstancesRequest().withInstanceIds(inst_id);
         ec2.stopInstances(request);
     }
@@ -160,7 +164,7 @@ public class AwsService extends CloudService{
     public void stopVm(){
         log.info("stopVm");
 
-        stopVm(init_inst_id_Map.get(0));
+        stopVm(init_inst_id_Map.get("0"));
 
         for (String currInit:initiators_vec)
             stopVm(init_inst_id_Map.get(currInit));
@@ -214,7 +218,7 @@ public class AwsService extends CloudService{
 
         obj.put("initiators", initiator_nums);
 
-        try (FileWriter file = new FileWriter(StaticDataProvider.LinuxAWS.AWS_SET_UP_JSON)) {
+        try (FileWriter file = new FileWriter(StaticDataProvider.Locations.CLOUD_IDS_JSON)) {
             file.write(obj.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -227,7 +231,7 @@ public class AwsService extends CloudService{
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader(StaticDataProvider.LinuxAWS.AWS_SET_UP_JSON));
+            Object obj = parser.parse(new FileReader(StaticDataProvider.Locations.CLOUD_IDS_JSON));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray helpersIds = (JSONArray) jsonObject.get("helpers ID's");
             helper_ids_vec.addAll(helpersIds);
