@@ -157,6 +157,10 @@ public class LicensingTestBase extends ReleaseTestBase {
 
     @AfterSuite
     public void afterSuite() {
+        test = extent.createTest("After Suite");
+        test.assignCategory("AFTER SUITE");
+        test.log(Status.INFO, "AFTER SUITE started");
+        log.info("AFTER SUITE started");
         SystemActions.setLocalDateFromString(currentDate);
         ibService.uninstallIB("Latest");
     }

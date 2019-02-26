@@ -79,6 +79,7 @@ public class RegistryService extends TestBase {
                 }
             }
             Advapi32Util.registryDeleteKey(rootKey, keyPath, keyName);
+            test.log(Status.INFO, "RegKey is deleted");
 
         } catch (RuntimeException ex) {
             test.log(Status.ERROR, "Failed to delete registry key with error: " + ex.getMessage());
