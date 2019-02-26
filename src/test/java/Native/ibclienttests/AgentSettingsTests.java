@@ -211,7 +211,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"), "Found core 2 for helper");
     }
 
-    @Test(testName = "Verify OnlyFailLocally On")
+    @Test(testName = "Verify OnlyFailLocally Off")
+    public void verifyOnlyFailLocallyOff() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.disableFailOnlyLocally();
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on local but should't");
+    }
+
+    @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
     public void verifyOnlyFailLocallyOn() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
@@ -219,14 +227,6 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         client.enableFailOnlyLocally();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on remote but should't");
-    }
-
-    @Test(testName = "Verify OnlyFailLocally Off", dependsOnMethods = {"verifyOnlyFailLocallyOn"})
-    public void verifyOnlyFailLocallyOff() {
-        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
-        client.disableFailOnlyLocally();
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on local but should't");
     }
 
     @Test(testName = "Verify Build With Errors")
