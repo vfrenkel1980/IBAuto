@@ -213,6 +213,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Verify OnlyFailLocally Off")
     public void verifyOnlyFailLocallyOff() {
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableFailOnlyLocally();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
@@ -221,8 +223,6 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
     public void verifyOnlyFailLocallyOn() {
-        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-        setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableFailOnlyLocally();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
