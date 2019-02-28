@@ -5,6 +5,7 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -80,8 +81,8 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_UNSUBSCRIBE_AGENT), "The " + LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT + " message is not displayed in the cmd output");
     }
 
-    @Test(testName = "Verify Quickvalidate Flag - Buildconsole")
-    public void verifyQuickvalidateFlagBuildconsole() {
+    @Test(testName = "Verify Quickvalidate Flag")
+    public void verifyQuickvalidateFlag() {
         int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
         Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
@@ -89,24 +90,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
     }
 
-    @Test(testName = "Verify Quickvalidate Flag IbConsole")
-    public void verifyQuickvalidateFlagIbConsole() {
-        int exitcode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
-        Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
-    }
-
-    @Test(testName = "Verify Quickvalidate Flag XGConsole")
-    public void verifyQuickvalidateFlagXGConsole() {
-        int exitcode = winService.runCommandWaitForFinish(IbLocations.XGCONSOLE + " /command=\"" + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD) + " /quickvalidate\"");
-        Assert.assertTrue(exitcode == 0, "The build failed with exitcode " + exitcode);
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libflac++\\Debug\\libflac++_ib_2.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\libmad\\Debug\\libmad.pdb"), "pdb file found");
-        Assert.assertFalse(SystemActions.doesFileExist("C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\Projects\\expat\\Debug\\expat.pdb"), "pdb file found");
-    }
-
+    @Ignore
     @Test(testName = "Verify MultiBuild Success")
     public void verifyMultiBuildSuccess() {
         int instanceCount;
@@ -120,6 +104,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
     }
 
+    @Ignore
     @Test(testName = "Verify MultiBuild Failure")
     public void verifyMultiBuildFailure() {
         int instanceCount;

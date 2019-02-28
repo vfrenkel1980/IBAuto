@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="LinuxAWSTests"  >
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="Sanity tests">
+        <parameter name="cycle" value=" "/>
+        <classes>
+            <class name ="Native.linuxtests.LinuxAWSTests" />
+        </classes>
+    </test>
+
+</suite>
