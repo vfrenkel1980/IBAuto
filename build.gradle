@@ -43,6 +43,8 @@ def Dashboard = project.hasProperty("Dashboard")
 def DBSchemas = project.hasProperty("DBSchemas")
 def CoordMonitor = project.hasProperty("CoordMonitor")
 def CloudSetup = project.hasProperty("CloudSetup")
+def CloudDestruction = project.hasProperty("CloudDestruction")
+def AzurePerformance = project.hasProperty("AzurePerformance")
 def Enterprise = project.hasProperty("Enterprise")
 
 dependencies {
@@ -231,6 +233,14 @@ test {
 
         if(Enterprise) {
             suites "src/test/resources/Enterprise.xml"
+        }
+
+        if(CloudDestruction) {
+            suites "src/test/resources/CloudDestruction.xml"
+        }
+
+        if(AzurePerformance) {
+            suites "src/test/resources/AzurePerformance.xml"
         }
     }
 

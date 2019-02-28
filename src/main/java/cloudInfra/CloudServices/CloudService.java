@@ -31,4 +31,8 @@ public class CloudService {
 
     }
 
+    public String getType(){
+        return "";
+    }
+
 }

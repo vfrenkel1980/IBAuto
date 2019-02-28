@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AzurePerformance"  >
+    <!-- suite name="Suite Name" -->
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="Test" allow-return-values="true">
+        <classes>
+            <class name ="Cloud.AzureTests" />
+        </classes>
+    </test>
+</suite>

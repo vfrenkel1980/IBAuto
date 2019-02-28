@@ -244,4 +244,9 @@ public class AzureService extends CloudService{
             e.getMessage();
         }
     }
+
+    @Override
+    public String getType(){
+        return this.type.toString();
+    }
 }
