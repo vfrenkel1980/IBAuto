@@ -67,7 +67,7 @@ public class AzureService extends CloudService{
             azure = Azure.configure()
                     .withLogLevel(LogLevel.BASIC)
                     .authenticate(credFile)
-                    .withDefaultSubscription();
+                    .withSubscription("23fe6931-5910-4261-a49a-bc2d8869b24a");
             test.log(Status.INFO, "Registration complete");
         } catch (Exception e) {
             test.log(Status.ERROR, "Registration failed");
