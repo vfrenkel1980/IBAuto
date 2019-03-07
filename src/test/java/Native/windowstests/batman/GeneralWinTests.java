@@ -1,6 +1,7 @@
 package Native.windowstests.batman;
 
 import com.aventstack.extentreports.Status;
+import com.sun.jna.platform.win32.WinReg;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
@@ -133,7 +134,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
             SystemActions.sleep(timeout);
             timer += timeout;
         }
-        Assert.assertTrue(msBuildSupportedVersion.equals(result), "The MSBuild version is not updated. Found value " + result);
+        Assert.assertTrue(msBuildSupportedVersion.equals(result), "The MSBuild version is not updated. Found value: " + result + ". Expected value: " + msBuildSupportedVersion);
     }
 
     @Test(testName = "Verify PDB Error In Log")
@@ -142,15 +143,21 @@ public class GeneralWinTests extends BatmanBCTestBase {
     }
 
     @Test(testName = "Verify .proj File Support")
-    public void verifyProjFileSupport(){
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PROJ_WIN32_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
-
+    public void verifyProjFileSupport() {
+        try {
+            RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "1");
+            int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PROJ_WIN32_RELEASE, "%s"));
+            Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+        } catch (RuntimeException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        } finally {
+            RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "0");
+        }
     }
 
     @Test(testName = "Verify OnlyFailLocally Flag")
-    public void verifyOnlyFailLocallyFlag(){
+    public void verifyOnlyFailLocallyFlag() {
         winService.runCommandWaitForFinish(String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "The build was executed on remote, should fail locally");
     }
