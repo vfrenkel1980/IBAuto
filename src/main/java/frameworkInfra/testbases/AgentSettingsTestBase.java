@@ -8,6 +8,7 @@ import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
@@ -16,7 +17,9 @@ import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -34,6 +37,7 @@ public class AgentSettingsTestBase extends TestBase {
     protected Screen screen = new Screen();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     static {
         ibVersion = IIBService.getIbVersion();
@@ -60,10 +64,11 @@ public class AgentSettingsTestBase extends TestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        SystemActions.sleep(120);
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT));
+        try {
+            coordMonitor.waitForAgentIsUpdated(WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+        } catch (RuntimeException | SAXException |IOException | ParserConfigurationException e) {
+            test.log(Status.ERROR, "Helper is not updated. Error: "+e);
+        }
         test.log(Status.INFO, "BEFORE SUITE finished");
         log.info("BEFORE SUITE finished");
     }

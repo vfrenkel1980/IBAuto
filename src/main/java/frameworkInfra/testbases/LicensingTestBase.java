@@ -67,7 +67,7 @@ public class LicensingTestBase extends ReleaseTestBase {
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
                 try {
-                    coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+                    coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 } catch (RuntimeException |SAXException |IOException |ParserConfigurationException e) {
                     test.log(Status.ERROR, "Helper is not updated. Error: "+e);
                 }

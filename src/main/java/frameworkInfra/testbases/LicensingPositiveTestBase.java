@@ -63,7 +63,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
-                coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+                coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;
 
             case ("2"): //Valid trial license with all packages
@@ -72,7 +72,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
-                coordMonitor.waitForAgentIsUpdated("vm-lictest-hlp");
+                coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;
         }
     }
