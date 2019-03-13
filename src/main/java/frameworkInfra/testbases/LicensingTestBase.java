@@ -7,10 +7,14 @@ import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
@@ -22,6 +26,7 @@ public class LicensingTestBase extends ReleaseTestBase {
     private String scenarioDescription;
     String currentDate = "";
     Boolean startTests = false;
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     @BeforeSuite
     public void beforeSuite() {
@@ -60,7 +65,12 @@ public class LicensingTestBase extends ReleaseTestBase {
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-                SystemActions.sleep(60);
+                SystemActions.sleep(10);
+                try {
+                    coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
+                } catch (RuntimeException |SAXException |IOException |ParserConfigurationException e) {
+                    test.log(Status.ERROR, "Helper is not updated. Error: "+e);
+                }
                 ibService.unloadIbLicense();
                 SystemActions.sleep(5);
                 break;
