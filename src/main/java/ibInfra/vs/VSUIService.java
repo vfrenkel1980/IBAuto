@@ -126,7 +126,7 @@ public class VSUIService implements IVSUIService {
         }
         else{
             driver.findElementByName("Create a new project").click();
-            driver.findElementByName("Windows Console Application").click();
+            driver.findElementByName("Console App").click();
             driver.findElementByName("Next").click();
             driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
             driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
