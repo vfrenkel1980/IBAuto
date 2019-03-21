@@ -53,12 +53,7 @@ public class CloudTestBase extends TestBase {
     @BeforeSuite
     public void init(){
         test = extent.createTest("Before Suite");
-        try {
-            SystemActions.deleteFile(Locations.CLOUD_IDS_JSON);
-        }
-        catch (Exception e){
-            test.log(Status.ERROR, "failed to delete cloud ID's json");
-        }
+        SystemActions.deleteFile(Locations.CLOUD_IDS_JSON);
         switch (CLOUD) {
             case "azure":
                 cloudService = new AzureService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);

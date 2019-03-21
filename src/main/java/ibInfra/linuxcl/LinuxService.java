@@ -31,8 +31,8 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
-    public int linuxRunSSHCommand(String command, String hostIP, String keyFilePath)
-    {
+    public int linuxRunSSHCommand(String command, String hostIP, String keyFilePath) {
+
         JSch jsch = new JSch();
         int exitStatus = 0;
         Session session;
@@ -83,9 +83,57 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public String linuxRunSSHCommandOutputString(String command, String hostIP) {
+
+        return linuxRunSSHCommandOutputString(command, hostIP, "");
+//        JSch jsch = new JSch();
+//        Session session;
+//        try {
+//            session = jsch.getSession("xoreax", hostIP, 22);
+//            session.setConfig("StrictHostKeyChecking", "no");
+//            session.setConfig("UserKnownHostsFile", "/dev/null");
+//            //Set password
+//            session.setPassword("xoreax");
+//            command = ". ~/.profile; " + command;
+//            session.connect();
+//            if (test != null) {
+//                test.log(Status.INFO,"Connected to server " + hostIP);
+//                test.log(Status.INFO, "Running command " + command);
+//                extent.flush();
+//            }
+//            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+//            channelExec.setPty(true);
+//            channelExec.setCommand(command);
+//            channelExec.connect();
+//
+//            InputStream in = channelExec.getInputStream();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//            StringBuilder commandOutput=new StringBuilder();
+//            while ((line = reader.readLine()) != null) {
+//                commandOutput.append(line);
+//                commandOutput.append('\n');
+//            }
+//            channelExec.disconnect();
+//            return commandOutput.toString();
+//        } catch (JSchException | IOException e) {
+//            if (test !=null) {
+//                test.log(Status.ERROR, "Connection error occurred");
+//            }
+//            e.printStackTrace();
+//            return "Unable to get result output from command " + command;
+//        }
+    }
+
+    @Override
+    public String linuxRunSSHCommandOutputString(String command, String hostIP, String keyFilePath) {
         JSch jsch = new JSch();
         Session session;
+        boolean sshWithKey = !keyFilePath.isEmpty();
         try {
+
+            if (sshWithKey)
+                jsch.addIdentity(keyFilePath);
+
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
             session.setConfig("UserKnownHostsFile", "/dev/null");
@@ -124,10 +172,58 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public List<String> linuxRunSSHCommandAssignToList(String command, String hostIP) {
+        return linuxRunSSHCommandAssignToList(command, hostIP, "");
+//        JSch jsch = new JSch();
+//        Session session;
+//        List<String> output = SetUniqueList.setUniqueList(new ArrayList<String>());
+//        try {
+//            session = jsch.getSession("xoreax", hostIP, 22);
+//            session.setConfig("StrictHostKeyChecking", "no");
+//            session.setConfig("UserKnownHostsFile", "/dev/null");
+//            //Set password
+//            session.setPassword("xoreax");
+//            command = ". ~/.profile; " + command;
+//            session.connect();
+//
+//            if (test != null) {
+//                test.log(Status.INFO,"Connected to server " + hostIP);
+//                test.log(Status.INFO, "Running command " + command);
+//                extent.flush();
+//            }
+//            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+//            channelExec.setPty(true);
+//            channelExec.setCommand(command);
+//            channelExec.connect();
+//
+//            InputStream in = channelExec.getInputStream();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                output.add(line);
+//            }
+//            channelExec.disconnect();
+//        } catch (JSchException | IOException e) {
+//            if (test !=null) {
+//                test.log(Status.ERROR, "Connection error occurred");
+//            }
+//            e.printStackTrace();
+//        }
+//        return output;
+    }
+
+    @Override
+    public List<String> linuxRunSSHCommandAssignToList(String command, String hostIP, String keyFilePath)
+    {
         JSch jsch = new JSch();
         Session session;
         List<String> output = SetUniqueList.setUniqueList(new ArrayList<String>());
+        boolean sshWithKey = !keyFilePath.isEmpty();
+
         try {
+
+            if (sshWithKey)
+                jsch.addIdentity(keyFilePath);
+
             session = jsch.getSession("xoreax", hostIP, 22);
             session.setConfig("StrictHostKeyChecking", "no");
             session.setConfig("UserKnownHostsFile", "/dev/null");
@@ -237,6 +333,13 @@ public class LinuxService extends TestBase implements ILinuxService {
         return res != 0;
     }
 
+
+    @Override
+    public boolean startIBService(String IP, String keyFilePath) {
+        int res = winService.runCommandWaitForFinish(String.format(LinuxCommands.PLINK_WITH_KEY, keyFilePath) + IP + " " + LinuxCommands.START_IB_SERVICES);
+        return res != 0;
+    }
+
     @Override
     public boolean stopIBService(String IP) {
         int res = winService.runCommandWaitForFinish(LinuxCommands.PLINK + IP + " " + LinuxCommands.STOP_IB_SERVICES);
@@ -295,8 +398,38 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
+    public void updateIB(String destMachine, String version, List<String> grid, String keyFilePath) {
+        log.info("starting updateIB with key");
+        String installationFilePath = getInstallerName(LinuxMachines.LINUX_BUILDER, version);
+        copyFileFromLinuxToLinuxWithKey(LinuxMachines.LINUX_BUILDER, destMachine, installationFilePath, LinuxAWS.LINUX_BUILDER_KEY_FILE_PATH);
+        String installationFileName = installationFilePath.substring(installationFilePath.lastIndexOf("/") + 1);
+        //extractUpgradeFile(destMachine, installationFileName);
+        linuxRunSSHCommand(String.format(LinuxCommands.IB_APPLY_UPDATE, installationFileName), destMachine, keyFilePath);
+        SystemActions.sleep(180);
+        Assert.assertEquals(version, getIBVersion(destMachine, keyFilePath));
+        verifyAgentsUpdated(destMachine, version, keyFilePath);
+//        String ibDBCheckPath = getInstallerFolder(LinuxMachines.LINUX_BUILDER, version) + "/ib_db_check.py";
+//        String  ibTestsPath = getInstallerFolder(LinuxMachines.LINUX_BUILDER, version) + "/ib_tests-1.0.0.tar.bz2";
+//
+//        for (String machine: grid) {
+//            if (machine.contains("mb") || machine.contains("mi") || machine.contains("init") )
+//                copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, machine, ibDBCheckPath);
+//
+//            if ( machine.contains("init") ) {
+//                copyFileFromLinuxToLinux(LinuxMachines.LINUX_BUILDER, machine, ibTestsPath);
+//                extractFile(machine, LinuxSimulation.IB_TESTS);
+//            }
+//        }
+    }
+
+    @Override
     public void copyFileFromLinuxToLinux(String srcMachine, String destMachine, String fileName) {
         linuxRunSSHCommand(String.format(LinuxCommands.COPY_FILE_SCP, fileName, destMachine), srcMachine);
+    }
+
+    @Override
+    public void copyFileFromLinuxToLinuxWithKey(String srcMachine, String destMachine, String fileName, String keyFilePath) {
+        linuxRunSSHCommand(String.format(LinuxCommands.COPY_FILE_SCP_WITH_KEY, keyFilePath, fileName, destMachine), srcMachine);
     }
 
     @Override
@@ -331,12 +464,38 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
+    public String getIBVersion(String machine, String keyFilePath) {
+        String ibVersion = linuxRunSSHCommandOutputString(LinuxCommands.GET_IB_VERSION, machine , keyFilePath);
+        return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
+    }
+
+    @Override
     public void verifyAgentsUpdated(String hostName, String version) {
         LinuxDBService linuxDBService = new LinuxDBService();
         List <String[]> machineList = new ArrayList<>();
         List <String> machineInfo = linuxDBService.selectAllWhere(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE + "," + LinuxDB.COLUMN_CONNECTED_SINCE + "," + LinuxDB.COLUMN_VERSION
                 , LinuxDB.TABLE_HELPER_MACHINES, LinuxDB.COLUMN_LICENSED_CORES + "> 0", hostName);
         String currentTime = linuxRunSSHCommandOutputString(LinuxCommands.GET_EPOCH_TIME, hostName).replaceAll("\n","");
+        for (int i = 0; i < machineInfo.size(); i++)
+        {
+            machineList.add(i, machineInfo.get(i).split("\\|"));
+        }
+        long currentTimeLong = Long.parseLong(currentTime);
+        for (String[] machine : machineList ) {
+            if (currentTimeLong - Long.parseLong(machine[1]) < 10000) {
+                if (!version.equals(machine[2]))
+                    test.log(Status.WARNING, "Version found on " + machine[0] + " is " + machine[2] + " Should be " + version);
+            }
+        }
+    }
+
+    @Override
+    public void verifyAgentsUpdated(String hostName, String version, String keyFilePath) {
+        LinuxDBService linuxDBService = new LinuxDBService();
+        List <String[]> machineList = new ArrayList<>();
+        List <String> machineInfo = linuxDBService.selectAllWhere(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE + "," + LinuxDB.COLUMN_CONNECTED_SINCE + "," + LinuxDB.COLUMN_VERSION
+                , LinuxDB.TABLE_HELPER_MACHINES, LinuxDB.COLUMN_LICENSED_CORES + "> 0", hostName, keyFilePath);
+        String currentTime = linuxRunSSHCommandOutputString(LinuxCommands.GET_EPOCH_TIME, hostName, keyFilePath).replaceAll("\n","");
         for (int i = 0; i < machineInfo.size(); i++)
         {
             machineList.add(i, machineInfo.get(i).split("\\|"));

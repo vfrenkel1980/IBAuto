@@ -6,11 +6,72 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Sanity tests">
-        <parameter name="cycle" value=" "/>
+
+    <!--<test name="LinuxAWSTests" allow-return-values="true">-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxAWSTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
+
+<!--/////////////////////////////////////////////////////////////////////////////-->
+
+
+
+    <test name="Android8" allow-return-values="true">
+        <parameter name="groups" value="7"/>
+        <groups>
+            <run>
+                <include name="7" />
+            </run>
+        </groups>
         <classes>
             <class name ="Native.linuxtests.LinuxAWSTests" />
         </classes>
     </test>
+
+    <test name="Android9" allow-return-values="true">
+        <parameter name="groups" value="8"/>
+        <groups>
+            <run>
+                <include name="8" />
+            </run>
+        </groups>
+        <classes>
+            <class name ="Native.linuxtests.LinuxAWSTests" />
+        </classes>
+    </test>
+
+
+    <!--<test name="8" allow-return-values="true">-->
+        <!--<method-selectors>-->
+            <!--<method-selector>-->
+                <!--<script language="beanshell">-->
+                    <!--<![CDATA[whatGroup = System.getProperty("initiators");-->
+                <!--initiators.containsKey(whatGroup);-->
+                <!--]]>-->
+                <!--</script>-->
+            <!--</method-selector>-->
+        <!--</method-selectors>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxAWSTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
+
+
+    <!--<test name="7" allow-return-values="true">-->
+        <!--<method-selectors>-->
+            <!--<method-selector>-->
+                <!--<script language="beanshell">-->
+                    <!--<![CDATA[whatGroup = System.getProperty("initiators");-->
+                <!--initiators.containsKey(whatGroup);-->
+                <!--]]>-->
+                <!--</script>-->
+            <!--</method-selector>-->
+        <!--</method-selectors>-->
+        <!--<classes>-->
+            <!--<class name ="Native.linuxtests.LinuxAWSTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
+
 
 </suite>

@@ -10,13 +10,19 @@ public interface ILinuxService {
 
     String linuxRunSSHCommandOutputString(String command, String hostIP);
 
+    String linuxRunSSHCommandOutputString(String command, String hostIP, String keyFilePath);
+
     List linuxRunSSHCommandAssignToList(String command, String hostIP);
+
+    List linuxRunSSHCommandAssignToList(String command, String hostIP, String keyFilePath);
 
     void deleteLogsFolder(List<String> ipList);
 
     boolean isIBServiceUp( String IP);
 
     boolean startIBService( String IP);
+
+    boolean startIBService( String IP, String keyFilePath);
 
     boolean stopIBService( String IP);
 
@@ -28,7 +34,11 @@ public interface ILinuxService {
 
     void updateIB(String destMachine, String fileName, List<String> grid);
 
+    void updateIB(String destMachine, String fileName, List<String> grid, String keyFilePath);
+
     void copyFileFromLinuxToLinux(String srcMachine, String destMachine, String fileName);
+
+    void copyFileFromLinuxToLinuxWithKey(String srcMachine, String destMachine, String fileName, String keyFilePath);
 
     String getInstallerName(String machineName, String version);
 
@@ -42,7 +52,11 @@ public interface ILinuxService {
 
     String getIBVersion(String machine);
 
+    String getIBVersion(String machine , String keyFilePath);
+
     void verifyAgentsUpdated(String hostName, String version);
+
+    void verifyAgentsUpdated(String hostName, String version, String keyFilePath);
 
     int installIB(String machineName, String version, String flags, String coord, String binSource,String instFolder, boolean isCoord);
 }
