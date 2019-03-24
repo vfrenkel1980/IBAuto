@@ -96,7 +96,7 @@ public class LinuxSimulationDockCHrootTests extends LinuxSimTestBase {
         Assert.assertTrue(exitCode <= 0, "Test " + testName + " failed with Exit code " + exitCode);
     }
 
-    @Test(testName = "Sim Chroot")//, dependsOnMethods = "SimdDckerKenrel4ExecPrivileged")
+    @Test(testName = "Sim Chroot", dependsOnMethods = "SimdDckerKenrel4ExecPrivileged")
     public void SimdCHroot() {
 
         linuxService.linuxRunSSHCommand("sudo mount  --bind /disk2 /chroot/xenial_u16/home; sudo -S true; sudo mount --bind /usr /chroot/xenial_u16/usr; sudo -S true", ipList.get(simClassType.ordinal()));
