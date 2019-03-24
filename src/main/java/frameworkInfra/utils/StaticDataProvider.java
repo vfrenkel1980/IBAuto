@@ -528,6 +528,14 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
         }
 
+        public static class TESTING_ROBIN {
+            public static final String CPP_UTEST= "/command=\""+Locations.QA_ROOT+"\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagents /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST="cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 20\" /test=ctest  /title=\"CTEST(gtest)\" /showagents /showcmd /showtime /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagents /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagents /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagents /log="+Locations.OUTPUT_LOG_FILE;
+        }
+
         public static class INTERFACES {
             public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild /cfg=\"debug|win32\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;

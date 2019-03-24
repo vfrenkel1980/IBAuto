@@ -467,15 +467,23 @@ public class SetupTests extends SetupTestBase {
         Collection<File> allFiles = Parser.findFiles(filePath, ".exe");
         allFiles.addAll(Parser.findFiles(filePath, ".dll"));
         ArrayList<String> ignoreList = winService.textFileToList(Locations.IGNORE_IB_BINARIES_LIST);
+        int exit =-1;
         for (File file : allFiles) {
-            int exit = -1;
+            int curExit = -1;
             if (!ignoreList.contains(file.getName())) {
-                exit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
-                Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha1 signature");
-                exit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
-                Assert.assertTrue(exit == 0, file.getName() + " is not signed with sha256 signature");
+                curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
+                if(curExit!=0){
+                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
+                    exit=curExit;
+                }
+                curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
+                if(curExit!=0){
+                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
+                    exit=curExit;
+                }
             }
         }
+        Assert.assertTrue(exit==-1,"Not all IB binaries are signed");
     }
     /*-------------------------------METHODS-------------------------------*/
 
