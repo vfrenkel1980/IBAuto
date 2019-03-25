@@ -535,7 +535,7 @@ public class StaticDataProvider {
             public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String NUNIT3_CONSOLE_TEST ="C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit.engine.tests.dll";
+            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit.engine.tests.dll";
             public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST =NUNIT3_CONSOLE_TEST+" /testlevel=10";
         }
 
