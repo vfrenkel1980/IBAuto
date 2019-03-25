@@ -17,6 +17,7 @@ public class StaticDataProvider {
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgconsole.exe" + "\"" + " ";
         public static final String IBCONSOLE = "\"" + IbLocations.IB_ROOT + "\\ibconsole.exe" + "\"" + " ";
+        public static final String IBTESTCONSOLE = "\"" + IbLocations.IB_ROOT + "\\ibtestconsole.exe" + "\"" + " ";
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT + "\\BuildSystem.exe" + "\"" + " ";
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
@@ -534,6 +535,8 @@ public class StaticDataProvider {
             public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagents /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagents /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagents /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String NUNIT3_CONSOLE_TEST ="C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST =NUNIT3_CONSOLE_TEST+" /testlevel=10";
         }
 
         public static class INTERFACES {
