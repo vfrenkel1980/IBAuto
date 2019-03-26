@@ -8,6 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ibInfra.ibExecs.IIBCoordMonitor;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 public class LicensingMiscTests extends LicensingTestBase {
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
@@ -95,8 +99,8 @@ public class LicensingMiscTests extends LicensingTestBase {
         SystemActions.sleep(5);
         returncode += winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
         try {
-            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "coordExport.xml");
-        } catch (Exception e) {
+            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "\\coordExport.xml");
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
         if (returncode == 0) {
