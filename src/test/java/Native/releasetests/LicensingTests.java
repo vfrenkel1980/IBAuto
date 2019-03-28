@@ -95,7 +95,7 @@ public class LicensingTests extends LicensingTestBase {
         if (exitStatus == 0 && scenario.equals("3")) {
             int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
             Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
-        }else if (exitStatus == 0) {
+        } else if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
             Assert.assertTrue(false, "Build wasn't executed correctly");
@@ -112,24 +112,27 @@ public class LicensingTests extends LicensingTestBase {
         if (exitStatus == 0 && scenario.equals("3")) {
             int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
             Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
-        }else if (exitStatus == 0) {
-                Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
-            } else {
-                Assert.assertTrue(false, "Build wasn't executed correctly");
-            }
-        }
-
-        @Test(testName = "Licence Test: Unit Tests")
-        public void licTestUnitTests () {
-            if (scenario.equals("8")) {
-                test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
-                throw new SkipException("Skipped test");
-            }
-            exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
-            if (exitStatus == 0) {
-                Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
-            } else {
-                Assert.assertTrue(false, "Build wasn't executed correctly");
-            }
+        } else if (exitStatus == 0) {
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+        } else {
+            Assert.assertTrue(false, "Build wasn't executed correctly");
         }
     }
+
+    @Test(testName = "Licence Test: Unit Tests")
+    public void licTestUnitTests() {
+        if (scenario.equals("8")) {
+            test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
+            throw new SkipException("Skipped test");
+        }
+        exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        if (exitStatus == 0 && scenario.equals("3")) {
+            int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
+            Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
+        } else if (exitStatus == 0) {
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+        } else {
+            Assert.assertTrue(false, "Build wasn't executed correctly");
+        }
+    }
+}
