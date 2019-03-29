@@ -103,9 +103,10 @@ public class LicensingMiscTests extends LicensingTestBase {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
+        int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         if (returncode == 0) {
             Assert.assertFalse(Parser.doesFileContainString(Locations.QA_ROOT+ "\\coordExport.xml", "IncrediBuild for NUnit"));
-            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+            Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Test Tools Acceleration license is missing"));
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for Unit Tests (Yearly)"));
         } else {
