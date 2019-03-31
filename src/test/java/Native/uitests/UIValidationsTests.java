@@ -103,6 +103,4 @@ public class UIValidationsTests extends UIValidationTestBase {
         client.verifyAgentSettingsOpened();
     }
 
-
-
 }

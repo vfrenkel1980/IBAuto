@@ -112,6 +112,7 @@ test {
     systemProperty "version", System.getProperty("version")
     //Linux AWS initiator selection
     systemProperty "initiators", System.getProperty("initiators")
+    //systemProperty "groups", System.getProperty("groups")
     //Cloud configuration
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'aws'

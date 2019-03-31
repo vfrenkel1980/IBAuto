@@ -15,7 +15,18 @@ public class LinuxDBService implements ILinuxDBService {
     }
 
     @Override
+    public List<String> selectAll(String db, String select, String table, String host, String keyFilePath) {
+        return linuxService.linuxRunSSHCommandAssignToList(String.format(SELECT_ALL, db, select, table), host, keyFilePath);
+    }
+
+    @Override
     public List<String> selectAllWhere(String db, String select, String table, String where, String host) {
         return linuxService.linuxRunSSHCommandAssignToList(String.format(SELECT_ALL_WHERE, db, select, table, where), host);
     }
+
+    @Override
+    public List<String> selectAllWhere(String db, String select, String table, String where, String host, String keyFilePath) {
+        return linuxService.linuxRunSSHCommandAssignToList(String.format(SELECT_ALL_WHERE, db, select, table, where), host, keyFilePath);
+    }
+
 }

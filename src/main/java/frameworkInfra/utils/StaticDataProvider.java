@@ -17,6 +17,7 @@ public class StaticDataProvider {
         public static final String LOGS_ROOT = IbLocations.IB_ROOT + "\\Logs";
         public static final String XGCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgconsole.exe" + "\"" + " ";
         public static final String IBCONSOLE = "\"" + IbLocations.IB_ROOT + "\\ibconsole.exe" + "\"" + " ";
+        public static final String IBTESTCONSOLE = "\"" + IbLocations.IB_ROOT + "\\ibtestconsole.exe" + "\"" + " ";
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT + "\\BuildSystem.exe" + "\"" + " ";
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
@@ -528,6 +529,16 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
         }
 
+        public static class TESTING_ROBIN {
+            public static final String CPP_UTEST= "/command=\""+Locations.QA_ROOT+"\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST="cmd /c cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 20\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit.engine.tests.dll";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST =NUNIT3_CONSOLE_TEST+" /testlevel=10";
+        }
+
         public static class INTERFACES {
             public static final String BUILDCONSOLE_MULTIPLE_PARAMS = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild /cfg=\"debug|win32\" /showagent /showcmd /showtime /title=\"buildconsoletest\" /maxwinver=10 /minwinver=xp /beep /out=" + Locations.OUTPUT_LOG_FILE;
             public static final String BUILDCONSOLE_INVALID_PARAM = "C:\\QA\\Simulation\\VC15\\ConsoleApplication1\\ConsoleApplication1.sln /rebuild /cfg=\"Debug|x86\" /Assist /title=\"buildconsoletest\" /out=" + Locations.OUTPUT_LOG_FILE;
@@ -656,11 +667,13 @@ public class StaticDataProvider {
 
     public static class LinuxCommands {
         public static final String PLINK = "plink -pw xoreax xoreax@";
+        public static final String PLINK_WITH_KEY = "plink -i %s -pw xoreax xoreax@";
         public static final String KILL_IB_DB_CHECK = "ps aux | grep -i ib_db_check.py | awk \'{print $2}\'| xargs sudo kill -9";
         public static final String GET_OS = "cat /proc/version";
         public static final String DELETE_LOGS = "sudo rm -rf /etc/incredibuild/log/20*";
         public static final String CHECK_IB_SERVICES = "\"ps ax --forest | grep ib_server | grep -v \"grep\"\"";
         public static final String START_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild start > /dev/null";
+        public static final String START_IB_SERVICES_NO_SUDOERS = "\"echo xoreax | sudo -S /opt/incredibuild/etc/init.d/incredibuild start > /dev/null\"";
         public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
         public static final String RUN_SQLITE_DELETE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"DELETE FROM %s where %s=\\\"%s.incredibuild.local\\\";\"";
@@ -669,6 +682,7 @@ public class StaticDataProvider {
         public static final String DU_TOTAL_ONLY = "du -s ~/.ccache/ | cut -f 1";
         public static final String HOME_DIR = "/home/xoreax/";
         public static final String COPY_FILE_SCP = "sshpass -p xoreax scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s xoreax@%s:/home/xoreax";
+        public static final String COPY_FILE_SCP_WITH_KEY = "sudo scp -i %s %s xoreax@%s:/home/xoreax";
         public static final String EXTRACT_UPGRADE_FILE = "cd /opt/incredibuild/httpd/htdocs/incredibuild; sudo tar xf ~/%s";
         public static final String EXTRACT_FILE = "tar xvjf %s";
         public static final String GET_IB_VERSION = "ib_console --version";
@@ -700,28 +714,35 @@ public class StaticDataProvider {
 
     public static class LinuxMachines {
         public static final String LINUX_BUILDER = "192.168.10.44";
-
     }
 
     public static class LinuxAWS {
 
-        public static String and5_inst_id = "i-09b17d03429b1a25d";
-        public static String and6_inst_id = "i-0e4c64ed1a75fe883";
-        public static String and7_inst_id = "i-06befc808b5caa7f1";
-        public static String and8_inst_id = "i-04bbfcaafb96bde38";
-        public static String and9_inst_id = "i-0a55ca9b6c3819b85";
-        public static String init_perf_inst_id = "i-0a55ca9b6c3819b85";
+        public static String COORD_INST_ID = "i-0a415b21b10fe3db0";
+        public static String AND5_INST_ID = "i-09b17d03429b1a25d";
+        public static String AND6_INST_ID = "i-0e4c64ed1a75fe883";
+        public static String AND7_INST_ID = "i-06befc808b5caa7f1";
+        public static String AND8_INST_ID = "i-04bbfcaafb96bde38";
+        public static String AND9_INST_ID = "i-0a55ca9b6c3819b85";
+        public static String INIT_PERF_INST_ID = "i-0a55ca9b6c3819b85";
+
+        public static String AMI_ID_HELPER= "ami-00183381177c699e5";
+
+        public static String SECURITY_GROUP = "sg-0d0aa3f9935fe35d2";
+        public static String SUBNET = "subnet-54243122";
+        public static String KEY_NAME = "Q/A";
+        public static String LINUX_KEY_FILE_PATH = "\\\\srv\\share\\Adam\\AWS\\QA.pem";
+        public static String LINUX_BUILDER_KEY_FILE_PATH = "/home/xoreax/awsKey/QA.pem";
+        public static String WIN_KEY_FILE_PATH = "\"\\\\srv\\\\share\\\\Adam\\\\AWS\\\\qa.ppk\"";
 
 
-        public static String ami_id_helper = "ami-00183381177c699e5";
-
-        public static String coord_publicIP_AWS = "63.34.106.126";
-        public static String init_perf_publicIP_AWS = "52.213.41.246";
-        public static String and5_publicIP_AWS = "63.33.97.160";
-        public static String and6_publicIP_AWS = "63.34.213.19";
-        public static String and7_publicIP_AWS = "63.35.75.79";
-        public static String and8_publicIP_AWS = "63.35.153.242";
-        public static String and9_publicIP_AWS = "63.35.48.125";
+        public static String COORD_IP = "63.34.106.126";
+        public static String INIT_PERF_INST_IP = "52.213.41.246";
+        public static String AND5_IP = "63.33.97.160";
+        public static String AND6_IP = "63.34.213.19";
+        public static String AND7_IP = "63.35.75.79";
+        public static String AND8_IP = "63.35.153.242";
+        public static String AND9_IP = "63.35.48.125";
 
 
         public static final String CD_TENSOR_DIR_AWS = "cd /home/xoreax/projects/tensorflow";
@@ -732,12 +753,7 @@ public class StaticDataProvider {
         public static final String CD_AND_7_DIR_AWS = "cd /home/xoreax/projects/android7/WORKING_DIRECTORY";
         public static final String CD_AND_6_DIR_AWS = "cd /home/xoreax/projects/android6/WORKING_DIRECTORY";
         public static final String CD_AND_5_DIR_AWS = "cd /home/xoreax/projects/android5/WORKING_DIRECTORY";
-        public static final String AWS_SET_UP_JSON ="c:\\QA\\aws_set_up.json";
-
-        //        int exitCode = linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";" +
-//                String.format(StaticDataProvider.LinuxSimulation.BAZEL_BUILD, "--ib-crash -d1", "tensor", "", "24"), ipList.get(simClassType.ordinal()));
-//        linuxService.linuxRunSSHCommand(StaticDataProvider.LinuxSimulation.CD_TENSOR_DIR + ";" + StaticDataProvider.LinuxSimulation.BAZEL_CLEAN + ";", ipList.get(simClassType.ordinal()));
-//        Assert.assertTrue((exitCode <= 0), "Sim tensorflow failed with Exit code " + exitCode);
+//        public static final String AWS_SET_UP_JSON ="c:\\QA\\aws_set_up.json";
 
     }
 
@@ -798,7 +814,7 @@ public class StaticDataProvider {
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
         public static final String RUN_IB_TESTS = "./run_all_tests.bash /tmp/ib_tests/";
 
-        public static final String CHROOT_KERNEL4_DIR = "/projects/linux-4.3.3";
+        public static final String CHROOT_KERNEL4_DIR = "/home/projects/linux-4.3.3";
 
         //  public static final String LINUX_SIM_NAME_IP_LIST = "C:\\Users\\LP-Neta\\lp-Neta\\Linux\\AutomationDev\\qa_automation\\src\\main\\resources\\Configuration\\linuxSimNameIPList.json";
 

@@ -8,6 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ibInfra.ibExecs.IIBCoordMonitor;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 public class LicensingMiscTests extends LicensingTestBase {
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
@@ -95,13 +99,14 @@ public class LicensingMiscTests extends LicensingTestBase {
         SystemActions.sleep(5);
         returncode += winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
         try {
-            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "coordExport.xml");
-        } catch (Exception e) {
+            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "\\coordExport.xml");
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
+        int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
         if (returncode == 0) {
             Assert.assertFalse(Parser.doesFileContainString(Locations.QA_ROOT+ "\\coordExport.xml", "IncrediBuild for NUnit"));
-            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
+            Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Test Tools Acceleration license is missing"));
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "IncrediBuild for Unit Tests (Yearly)"));
         } else {

@@ -48,7 +48,7 @@ public class TestBase {
     protected EventHandler handler = new EventHandler();
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
-    private WindowsService windowsService = new WindowsService();
+//    private WindowsService windowsService = new WindowsService();
     private IbService ibService = new IbService();
 
 
