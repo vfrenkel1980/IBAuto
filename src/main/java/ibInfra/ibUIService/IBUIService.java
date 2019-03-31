@@ -93,7 +93,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),240).click();
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.8),360).click();
         }
 
         @Override
