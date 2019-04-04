@@ -35,25 +35,22 @@ public class CloudTestBase extends TestBase {
     protected static String CLOUD = System.getProperty("cloudtype");
     protected static String INITIATOR = System.getProperty("initiators");
     protected CloudService cloudService;
-    public PostgresJDBC postgresJDBC = new PostgresJDBC();
-    private static Calendar calendar = Calendar.getInstance();
-    private static SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+    protected PostgresJDBC postgresJDBC = new PostgresJDBC();
+    protected static Calendar calendar = Calendar.getInstance();
+    protected static SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
     protected String projectName;
-    private String requestedCores;
-    private Date startTime;
-    private Date endTime;
+    protected String requestedCores;
+    protected Date startTime;
+    protected Date endTime;
 
-    static {
-
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/CloudSetup" + formatter.format(calendar.getTime()) + ".html");
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-    }
 
     @BeforeSuite
     public void init(){
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/CloudSetup" + formatter.format(calendar.getTime()) + ".html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+
         test = extent.createTest("Before Suite");
-        //SystemActions.deleteFile(Locations.CLOUD_IDS_JSON);
         switch (CLOUD) {
             case "azure":
                 cloudService = new AzureService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);
@@ -73,18 +70,6 @@ public class CloudTestBase extends TestBase {
         test.log(Status.INFO, method.getName() + " test started");
         startTime = new Date(System.currentTimeMillis());
     }
-
-    @AfterMethod
-    public void afterMethod(){
-        endTime = new Date(System.currentTimeMillis());
-        long duration = startTime.getTime() - endTime.getTime();
-        duration/=1000;
-        String buildDuration = Long.toString(duration);
-        postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "Azure_Performance",
-                "date, project_name, initiator, duration, helper_type, total_requested_cores",
-                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + cloudService.getType() + "\', \'" + requestedCores+ "\'");
-    }
-
 
 
 }

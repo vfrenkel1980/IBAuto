@@ -112,10 +112,10 @@ public class AzureService extends CloudService{
     }
 
 
-
-    public void stopVm(VirtualMachine vm) {
+    @Override
+    public void stopVm(String machineName) {
         test.log(Status.INFO, "Stopping VM " + vm + "...");
-        vm = azure.virtualMachines().getByResourceGroup(resGroup, vm.name());
+        vm = azure.virtualMachines().getByResourceGroup(resGroup, machineName);
         vm.powerOff();
         test.log(Status.INFO, vm + "Stopped");
     }

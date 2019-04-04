@@ -1,5 +1,6 @@
 package cloudInfra.CloudServices;
 
+import com.microsoft.azure.management.compute.VirtualMachine;
 import frameworkInfra.testbases.TestBase;
 import org.apache.log4j.Logger;
 
@@ -15,7 +16,7 @@ public class CloudService {
 
     }
 
-    public void stopVm(){
+    public void stopVm(String machineName){
 
     }
 

@@ -126,15 +126,15 @@ public class AwsService extends CloudService{
         startInitiators();
     }
 
-    private void stopVm(String inst_id)
+/*    private void stopVm(String inst_id)
     {
         log.info("private stopVm");
         StopInstancesRequest request = new StopInstancesRequest().withInstanceIds(inst_id);
         ec2.stopInstances(request);
-    }
+    }*/
 
     @Override
-    public void stopVm(){
+    public void stopVm(String machineName){
         log.info("stopVm");
 
         stopVm(init_inst_id_Map.get("0"));

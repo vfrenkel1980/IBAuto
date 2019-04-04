@@ -13,6 +13,6 @@ public class CloudEnvDestruction extends CloudTestBase {
 
     @Test(testName = "Turn Off Initiator", dependsOnMethods = { "destroyEnvironment"})
     public void turnOffInitiator() {
-        cloudService.stopVm();
+        cloudService.stopVm(INITIATOR);
     }
 }

@@ -1,13 +1,16 @@
 package Cloud;
 
-import cloudInfra.CloudHelper.CloudTestBase;
-import frameworkInfra.testbases.TestBase;
+import cloudInfra.CloudHelper.PerformanceTestBase;
+import frameworkInfra.utils.StaticDataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AzureTests extends TestBase {
+public class AzureTests extends PerformanceTestBase {
 
-    @Test(testName = "test")
-    public void test() {
-
+    @Test(testName = "Chromium Performance")
+    public void chromiumPerformance() {
+        winService.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.CHROME.CHROME_RELEASE_CLEAN);
+        int returnCode = winService.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.CHROME.CHROME_RELEASE_BUILD_IBCONSOLE);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 }
