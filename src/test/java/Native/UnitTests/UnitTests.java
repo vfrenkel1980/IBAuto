@@ -12,13 +12,22 @@ import ibInfra.ibService.IbService;
 
 import ibInfra.windowscl.WindowsService;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.*;
+import org.openqa.selenium.remote.http.W3CHttpCommandCodec;
+import org.openqa.selenium.remote.http.W3CHttpResponseCodec;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import static com.sun.jna.platform.win32.WinReg.*;
@@ -40,19 +49,10 @@ public class UnitTests {
     String requestedCores = "15";
 
 
+
     @Test(testName = "test1")
     public void test() {
-        startTime = new Date(System.currentTimeMillis());
-        endTime = new Date(System.currentTimeMillis());
-        long duration = startTime.getTime() - endTime.getTime();
-        duration/=1000;
-        String buildDuration = Long.toString(duration);
-        postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "Azure_Performance",
-                "date, project_name, initiator, duration, total_requested_cores",
-                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + requestedCores+ "\'");
-/*        postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "vs_release_versioning",
-                "vs_version, ib_version, msbuild_version, ib_installer_name",
-                "1,1,1,1");*/
+
     }
 }
 

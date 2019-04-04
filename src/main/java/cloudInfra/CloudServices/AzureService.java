@@ -232,7 +232,7 @@ public class AzureService extends CloudService{
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader("c:\\test.json"));
+            Object obj = parser.parse(new FileReader(Locations.CLOUD_IDS_JSON));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray msg = (JSONArray) jsonObject.get("Disk ID's");
             diskIds.addAll(msg);
