@@ -14,8 +14,8 @@
         <classes>
             <class name ="Native.windowstests.robin.RobinTests" />
             <class name ="Native.windowstests.robin.RobinDockerTests" />
-            <!--<class name ="Native.windowstests.robin.RobinIBCTestingTests" />-->
-            <!--<class name ="Native.windowstests.robin.RobinIBTCTestingTests" />-->
+            <class name ="Native.windowstests.robin.RobinIBCTestingTests" />
+            <class name ="Native.windowstests.robin.RobinIBTCTestingTests" />
             <class name ="Native.windowstests.IBSamplesTests" />
         </classes>
     </test>
@@ -24,8 +24,8 @@
         <parameter name="logLevel" value="4"/>
         <classes>
             <class name ="Native.windowstests.robin.RobinTests" />
-            <!--<class name ="Native.windowstests.robin.RobinIBCTestingTests" />-->
-            <!--<class name ="Native.windowstests.robin.RobinIBTCTestingTests" />-->
+            <class name ="Native.windowstests.robin.RobinIBCTestingTests" />
+            <class name ="Native.windowstests.robin.RobinIBTCTestingTests" />
             <class name ="Native.windowstests.IBSamplesTests" />
             <class name ="Native.windowstests.CommonTests" />
         </classes>
