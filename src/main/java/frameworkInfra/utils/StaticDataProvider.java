@@ -557,6 +557,9 @@ public class StaticDataProvider {
             public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
         }
+        public static class CONSOLES{
+            public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
+        }
 
 
     }
