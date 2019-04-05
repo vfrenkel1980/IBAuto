@@ -1,6 +1,6 @@
 package Native.windowstests.robin;
 
-import frameworkInfra.testbases.RobinTestBase;
+import frameworkInfra.testbases.RobinTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  * @brief Unit tests execution with IbConsole
  * @details Requires Unit Tests license solution
  */
-public class RobinIBCTestingTests extends RobinTestBase {
+public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test Cpp utest support test.<br>

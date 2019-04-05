@@ -50,6 +50,19 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
         Assert.assertTrue(output.contains(LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT), "The " + LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT + " message is not displayed in the cmd output");
     }
 
+    /**
+     * @test Verify /quickvalidate flag
+     * @pre{
+     * }
+     * @steps{
+     * - Run the build with the /quickvalidate flag
+     * }
+     * @result{
+     * - Build failed;
+     * - The error is displayed: Enterprise license file is required
+     * }
+     */
+
     @Test(testName = "Verify Quickvalidate Flag")
     public void verifyQuickvalidateFlag() {
         int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");
