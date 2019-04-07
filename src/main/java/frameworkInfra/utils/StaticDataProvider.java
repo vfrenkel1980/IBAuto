@@ -511,9 +511,10 @@ public class StaticDataProvider {
         }
 
         public static class CHROME {
-            public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\qa\\Chromium\\src\\out\\Default -t clean";
-            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C c:\\Chromium\\src\\out\\Default chrome\" /profile=\"c:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
-            public static final String CHROME_RELEASE_BUILD_IBCONSOLE = "ibconsole /command=\"ninja -C c:\\Chromium\\src\\out\\Default chrome -j 200\" /profile=\"c:\\qa\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
+            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_CLEAN_PERFORMANCE = "ninja -C C:\\qa\\Chromium\\src\\out\\Default -t clean";
+            public static final String CHROME_RELEASE_BUILD_PERFORMANCE = "ibconsole /command=\"ninja -C c:\\qa\\Chromium\\src\\out\\Default chrome -j 200\" /profile=\"c:\\qa\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
 
         public static class QT_BATMAN {
