@@ -6,6 +6,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.databases.PostgresJDBC;
 import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
@@ -24,17 +26,11 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class PerformanceTestBase extends CloudTestBase{
 
-
-    static {
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/Performance" + formatter.format(calendar.getTime()) + ".html");
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-    }
-
     protected WindowsService winService = new WindowsService();
 
     @BeforeSuite
     public void init(){
+        SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/Performance" + formatter.format(calendar.getTime()) + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
