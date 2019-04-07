@@ -81,6 +81,18 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         Assert.assertTrue(output.contains(LogOutput.INITIATOR_ERROR_UNSUBSCRIBE_AGENT), "The " + LogOutput.ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT + " message is not displayed in the cmd output");
     }
 
+    /**
+     * @test Verify /quickvalidate flag
+     * @pre{
+     * - Solution and  core packages are allocated to the Agent}
+     * @steps{
+     * - Run the build with the /quickvalidate flag
+     * }
+     * @result{
+     * - Build is succeeded;
+     * - The pdb files aren't created in the project folder
+     * }
+     */
     @Test(testName = "Verify Quickvalidate Flag")
     public void verifyQuickvalidateFlag() {
         int exitcode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.Dashboard.AUDACITY_X32_DEBUG, "%s") + " /quickvalidate");

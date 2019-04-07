@@ -532,11 +532,12 @@ public class StaticDataProvider {
 
         public static class TESTING_ROBIN {
             public static final String CPP_UTEST= "/command=\""+Locations.QA_ROOT+"\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String GTEST="cmd /c cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 20\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST="/command=\""+Locations.QA_ROOT+"\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
+            public static final String CTEST="cmd /c cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 20\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log="+Locations.OUTPUT_LOG_FILE;
             public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit.engine.tests.dll";
+            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST =NUNIT3_CONSOLE_TEST+" /testlevel=10";
         }
 
@@ -555,6 +556,9 @@ public class StaticDataProvider {
             public static final String XGSUBMIT_BATCH = "\"C:\\QA\\Simulation\\Samples\\xgsubmit_xgwait\\BatchFileExecution.bat\"";
             public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
+        }
+        public static class CONSOLES{
+            public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
         }
 
 
