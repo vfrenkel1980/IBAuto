@@ -31,7 +31,7 @@ public class PerformanceTestBase extends CloudTestBase{
     @BeforeSuite
     public void init(){
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/Performance" + formatter.format(calendar.getTime()) + ".html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestPerformance" + formatter.format(calendar.getTime()) + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
     }
