@@ -59,9 +59,6 @@ public class CloudTestBase extends TestBase {
                 cloudService = new AwsService(CPU, MEMORY, NUMOFMACHINES, INITIATOR);
                 break;
         }
-
-        int cores = Integer.parseInt(NUMOFMACHINES) * Integer.parseInt(CPU);
-        requestedCores = Integer.toString(cores);
     }
 
     @BeforeMethod

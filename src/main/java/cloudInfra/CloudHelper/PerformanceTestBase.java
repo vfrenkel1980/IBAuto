@@ -34,6 +34,9 @@ public class PerformanceTestBase extends CloudTestBase{
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestPerformance" + formatter.format(calendar.getTime()) + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+
+        int cores = Integer.parseInt(NUMOFMACHINES) * Integer.parseInt(CPU);
+        requestedCores = Integer.toString(cores);
     }
 
     @AfterMethod
@@ -44,6 +47,6 @@ public class PerformanceTestBase extends CloudTestBase{
         String buildDuration = Long.toString(duration);
         postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "Azure_Performance",
                 "date, project_name, initiator, duration, helper_type, total_requested_cores",
-                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + CLOUD + "\', \'" + requestedCores+ "\'");
+                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + CLOUD + "\', \'" + requestedCores + "\'");
     }
 }

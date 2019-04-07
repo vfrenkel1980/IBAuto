@@ -157,7 +157,7 @@ public class AzureService extends CloudService{
                     .define(SdkContext.randomResourceName("test_dsk", 30))
                     .withRegion(region)
                     .withNewResourceGroup(resGroup)
-                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/hlp-6-2-19.vhd")
+                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-07-04-19.vhd")
                     .withSizeInGB(127)
                     .withSku(DiskSkuTypes.STANDARD_LRS);
             creatableDisk.add(disksCreatable);
