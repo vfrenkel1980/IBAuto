@@ -43,11 +43,11 @@ public class PerformanceTestBase extends CloudTestBase{
     @AfterMethod
     public void afterMethod(){
         endTime = new Date(System.currentTimeMillis());
-        long duration = startTime.getTime() - endTime.getTime();
+        long duration = endTime.getTime() - startTime.getTime();
         duration/=1000;
         String buildDuration = Long.toString(duration);
         postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "Azure_Performance",
                 "date, project_name, initiator, duration, helper_type, total_requested_cores",
-                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + cloudService.getType() + "\', \'" + requestedCores+ "\'");
+                "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + CLOUD + "\', \'" + requestedCores+ "\'");
     }
 }
