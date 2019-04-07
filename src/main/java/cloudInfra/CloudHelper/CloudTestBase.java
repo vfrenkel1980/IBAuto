@@ -46,7 +46,7 @@ public class CloudTestBase extends TestBase {
 
     @BeforeSuite
     public void init(){
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/CloudSetup" + formatter.format(calendar.getTime()) + ".html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestCloudSetup" + formatter.format(calendar.getTime()) + ".html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
 
