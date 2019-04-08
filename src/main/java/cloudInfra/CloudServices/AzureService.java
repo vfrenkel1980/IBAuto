@@ -127,7 +127,7 @@ public class AzureService extends CloudService{
         test.log(Status.INFO, "Deleting Vm's...");
 
         for (String id:vmIds) {
-            azure.virtualMachines().deleteById(id);
+            azure.virtualMachines().deleteByIdAsync(id);
         }
 
         for (int i = 0; i < vmCount; i++) {
@@ -159,7 +159,7 @@ public class AzureService extends CloudService{
                     .define(SdkContext.randomResourceName("test_dsk", 30))
                     .withRegion(region)
                     .withNewResourceGroup(resGroup)
-                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-07-04-19.vhd")
+                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-08-04-19.vhd")
                     .withSizeInGB(127)
                     .withSku(DiskSkuTypes.STANDARD_LRS);
             creatableDisk.add(disksCreatable);
