@@ -11,6 +11,7 @@ import com.microsoft.azure.management.resources.fluentcore.utils.SdkContext;
 import com.microsoft.azure.management.storage.StorageAccount;
 import com.microsoft.rest.LogLevel;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class AzureService extends CloudService{
@@ -163,14 +165,22 @@ public class AzureService extends CloudService{
             creatableDisk.add(disksCreatable);
         }
 
-        test.log(Status.INFO, "Creating NIC's and Disks....");
+        test.log(Status.INFO, "Creating NIC's....");
 
         networkInterfaces = azure.networkInterfaces().create(creatableNetworkInterfaces);
+        SystemActions.sleep(10);
         networkInterfacesKeys = new ArrayList(networkInterfaces.keySet());
+        test.log(Status.INFO, "NIC's created");
+        extent.flush();
+
+        test.log(Status.INFO, "Creating Disks....");
         disks = azure.disks().create(creatableDisk);
+        SystemActions.sleep(10);
         disksKeys = new ArrayList(disks.keySet());
 
-        test.log(Status.INFO, "NIC's and Disks created");
+        test.log(Status.INFO, "Disks created");
+        extent.flush();
+
         test.log(Status.INFO, "Creating Storage account...");
 
         Creatable<StorageAccount> storageAccountCreatable = azure.storageAccounts().define("jsudh")
