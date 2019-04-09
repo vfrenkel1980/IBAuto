@@ -59,7 +59,7 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
      * @test NUnit3 /targetdir flag test (the dll is written only with its name, without full path)<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /targetdir="c:\path\to\dll|dir" flag.}
+     * - Run the nunit-console-master tests with /targetdir="c:\path\to\dll\dir" flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -89,7 +89,7 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
      * @test IbTestConsole "HELP" with /help flag test<br>
      * @pre{ }
      * @steps{
-     * - Run the IbTestConsole.exe without parametres}
+     * - Run the IbTestConsole.exe with /help flag}
      * @result{
      * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
