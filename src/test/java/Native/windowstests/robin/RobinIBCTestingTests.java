@@ -14,9 +14,10 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test Cpp utest support test.<br>
-     * @pre{ }
+     * @pre{ <a href="https://github.com/cpputest/cpputest">CppUTest framework project</a>}
      * @steps{ Run the cpputest-master tests}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "Cpp Utest")
@@ -28,9 +29,10 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test Google test support test.<br>
-     * @pre{ }
+     * @pre{ <a href="https://github.com/google/googletest">Google's C++ test framework project</a>}
      * @steps{ Run the google-test-examples-master tests}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "Google Test")
@@ -42,9 +44,10 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test Qt test support test.<br>
-     * @pre{ }
+     * @pre{ <a href="https://github.com/vivaladav/BitsOfBytes/tree/master/cpp-unit-testing-with-qt-test-advanced">An example project of Qt Test framework usage</a>}
      * @steps{ Run the qt-test-advanced tests}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "QT Test")
@@ -56,9 +59,10 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test VS test support test.<br>
-     * @pre{ }
+     * @pre{ <a href="https://github.com/Microsoft/vstest">The Visual Studio Test Platform Project</a>}
      * @steps{ Run the vstest-master tests}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "VS Test")
@@ -70,9 +74,10 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
 
     /**
      * @test XUnit test support test.<br>
-     * @pre{ }
+     * @pre{ <a href="https://github.com/xunit/xunit">xUnit.net unit testing tool project</a>}
      * @steps{ Run the xunit-master tests}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "XUnit Test")
@@ -86,7 +91,8 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
      * @test SameOS flag test.<br>
      * @pre{ }
      * @steps{ Run the vstest-master tests with /sameos flag}
-     * @result{ - Build is succeeded;
+     * @result{
+     * - Build is succeeded;
      * - Build is distributed.}
      */
     @Test(testName = "SameOS Flag Test")
@@ -99,7 +105,8 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
      * @test Error message for invalid parameter /test=nunit3 test.<br>
      * @pre{ }
      * @steps{ Run the nunit3 tests with invalid /test=nunit3 flag}
-     * @result{ - Build is failed;
+     * @result{
+     * - Build is failed;
      * - "In order to accelerate NUnit tests, please use IBTestConsole" error message is displayed in the console.}
      */
     @Test(testName = "NUnit3 Error Message Test")

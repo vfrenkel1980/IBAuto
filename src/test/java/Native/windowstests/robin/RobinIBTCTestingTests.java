@@ -16,9 +16,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 Assembly Level support test.<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests}
+     * @steps{ Run the nunit-console-master tests.}
      * @result{
-     * - Build is succeeded;}
+     * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 Assembly Level Test")
     public void nunit3AssemblyLevelTest() {
@@ -29,9 +29,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 Test Level support test.<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests with /testlevel=10 flag}
+     * @steps{ Run the nunit-console-master tests with /testlevel=10 flag.}
      * @result{
-     * - Build is succeeded;}
+     * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 Test Level Test")
     public void nunit3TestLevelTest() {
@@ -42,9 +42,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests with /testlevel=deep flag}
+     * @steps{ Run the nunit-console-master tests with /testlevel=deep flag.}
      * @result{
-     * - Build is succeeded;}
+     * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 Testlevel Deep Test")
     public void nunit3TestLevelDeepTest() {
@@ -55,9 +55,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 /targetdir flag test (the dll is written only with its name, without full path)<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests with /targetdir="c:\path\to\dll|dir" flag}
+     * @steps{ Run the nunit-console-master tests with /targetdir="c:\path\to\dll|dir" flag.}
      * @result{
-     * - Build is succeeded;}
+     * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 Targetdir Test")
     public void nunit3TargetdirTest() {
@@ -68,7 +68,7 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 /logfile & /loglevel flag test.<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests with /logfile="c:\path\to\log.txt" and /loglevel=info flag}
+     * @steps{ Run the nunit-console-master tests with /logfile="c:\path\to\log.txt" and /loglevel=info flag.}
      * @result{
      * - Build is succeeded;
      * - The log file is created.}
@@ -85,7 +85,7 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
      * @pre{ }
      * @steps{ Run the IbTestConsole.exe without parametres}
      * @result{
-     * - The "HELP" (Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console}
+     * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
     @Test(testName = "IBTC Help Test")
     public void iBTCHelpTest() {
@@ -98,7 +98,7 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
      * @pre{ }
      * @steps{ Run the IbTestConsole.exe without parametres}
      * @result{
-     * - The "HELP" (Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console}
+     * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
     @Test(testName = "IBTC Without Help Test")
     public void iBTCWithoutHelpTest() {
@@ -112,9 +112,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
     /**
      * @test NUnit3 Class Filter test.<br>
      * @pre{ }
-     * @steps{ Run the nunit-console-master tests with --where "class == 'TestClassName'" filter}
+     * @steps{ Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
      * @result{
-     * - Build is succeeded;}
+     * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 With Class Filter Test")
     public void nunit3WithClassFilterTest() {
