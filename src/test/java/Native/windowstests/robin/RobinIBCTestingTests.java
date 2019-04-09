@@ -82,4 +82,31 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
+    /**
+     * @test SameOS flag test.<br>
+     * @pre{ }
+     * @steps{ Run the vstest-master tests with /sameos flag}
+     * @result{ - Build is succeeded;
+     * - Build is distributed.}
+     */
+    @Test(testName = "SameOS Flag Test")
+    public void sameOSFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+    }
+    /**
+     * @test Error message for invalid parameter /test=nunit3 test.<br>
+     * @pre{ }
+     * @steps{ Run the nunit3 tests with invalid /test=nunit3 flag}
+     * @result{ - Build is failed;
+     * - "In order to accelerate NUnit tests, please use IBTestConsole" error message is displayed in the console.}
+     */
+    @Test(testName = "NUnit3 Error Message Test")
+    public void NUnit3ErrorMessageTest() {
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3" );
+        Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3");
+        Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
 }
