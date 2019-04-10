@@ -126,7 +126,7 @@ public class AzureService extends CloudService{
     public void deleteVm() {
         test.log(Status.INFO, "Deleting Vm's...");
 
-        azure.virtualMachines().deleteByIdsAsync(vmIds);
+        azure.virtualMachines().deleteByIds(vmIds);
 
         for (int i = 0; i < vmCount; i++) {
             azure.disks().deleteById(diskIds.get(i));
