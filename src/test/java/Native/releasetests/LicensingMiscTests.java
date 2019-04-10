@@ -97,7 +97,7 @@ public class LicensingMiscTests extends LicensingTestBase {
         SystemActions.sleep(5);
         ibService.loadIbLicense(IbLicenses.VALID_LIC);
         SystemActions.sleep(5);
-        returncode += winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        returncode += winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ LicTestPrjBuildConsoleCommands.UNIT_TEST);
         try {
             coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT, "\\coordExport.xml");
         } catch (IOException | SAXException | ParserConfigurationException e) {
