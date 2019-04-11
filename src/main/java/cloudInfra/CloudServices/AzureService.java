@@ -154,6 +154,7 @@ public class AzureService extends CloudService{
                     .withExistingNetworkSecurityGroup(backEndNSG);
             creatableNetworkInterfaces.add(networkInterfaceCreatable);
 
+            //create machines with single use vm image
             Creatable<Disk> disksCreatable= azure.disks()
                     .define(SdkContext.randomResourceName("test_dsk", 30))
                     .withRegion(region)
@@ -188,8 +189,9 @@ public class AzureService extends CloudService{
 
         test.log(Status.INFO, "Storage account created");
 
+        //run azure script to enable agent service on created machines
         when().
-                post("https://s2events.azure-automation.net/webhooks?token=B5N1Qc6guCitAdrPOmtt47LPjnIgXethwpMGa%2fW%2faCQ%3d").
+                post("https://s2events.azure-automation.net/webhooks?token=sAPGFY%2f5geUYKluCTKHJ%2fctpU2K9dutpcCVeIxmkzkA%3d").
         then().
                 statusCode(200);
 
