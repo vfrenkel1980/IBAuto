@@ -34,6 +34,7 @@ import static com.sun.jna.platform.win32.WinReg.*;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static io.restassured.RestAssured.when;
 
 
 public class UnitTests {
@@ -53,6 +54,7 @@ public class UnitTests {
     @Test(testName = "test1")
     public void test() {
 
+        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& 'C:\\Users\\Mark\\Desktop\\new1.ps1'\"");
     }
 }
 

@@ -12,6 +12,7 @@ import com.microsoft.azure.management.storage.StorageAccount;
 import com.microsoft.rest.LogLevel;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.windowscl.WindowsService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -47,6 +48,7 @@ public class AzureService extends CloudService{
     protected List<String> diskIds = new ArrayList<>();
     protected List<String> nicIds = new ArrayList<>();
     protected List<String> vmIds = new ArrayList<>();
+    private WindowsService winService = new WindowsService();
 
 
     public AzureService(String cpu, String memory, String vmCount, String initiator) {
@@ -189,11 +191,6 @@ public class AzureService extends CloudService{
 
         test.log(Status.INFO, "Storage account created");
 
-        //run azure script to enable agent service on created machines
-        when().
-                post("https://s2events.azure-automation.net/webhooks?token=sAPGFY%2f5geUYKluCTKHJ%2fctpU2K9dutpcCVeIxmkzkA%3d").
-        then().
-                statusCode(200);
 
         for (int i = 0; i < vmCount; i++) {
             Creatable<VirtualMachine> virtualMachineCreatable = azure.virtualMachines()
@@ -209,6 +206,9 @@ public class AzureService extends CloudService{
         test.log(Status.INFO, "Creating VM's...");
         virtualMachines = azure.virtualMachines().create(creatableVirtualMachines);
         virtualMachinesKeys = new ArrayList(virtualMachines.keySet());
+
+        //run azure script to enable agent service on created machines
+        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& 'C:\\Users\\Mark\\Desktop\\new1.ps1'\"");
         test.log(Status.INFO, "VM's created");
     }
 
