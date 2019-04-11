@@ -779,7 +779,7 @@ public class StaticDataProvider {
         public static final String INTERCEPTION = "\\ibconsole.exe /command=\"cmd /c \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\spawner \"\"C:\\LicenseTests_projects\\Dev_Tools\\Interception\\sleep 5\"\" \"\" \" /profile=C:\\LicenseTests_projects\\Dev_Tools\\Interception\\profile.xml /title=\"License test - Dev Tools - Interception\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String SUBMITION = "\\ibconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\Submition\\Batch.bat /title=\"License test - Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
         public static final String XML = "\\xgconsole.exe C:\\LicenseTests_projects\\Dev_Tools\\XML\\XmlSample.xml /title=\"License test - Dev Tools - XML\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
-        public static final String UNIT_TEST = "cmd /c cd \"C:\\QA\\Simulation\\projects\\gtest\\build\" && " + "\"" + IbLocations.IB_ROOT + "\\ibconsole.exe\" /command=\"ctest -C Release -VV --parallel 20\" /avoidlocal=on  /showagent /out=" + Locations.OUTPUT_LOG_FILE + " /title=\"GOOGLE TEST\" /test=ctest";
+        public static final String UNIT_TEST = "/command=\"C:\\QA\\Simulation\\projects\\vstest-master\\runner\\test1.bat\" /test=vstest /showagent /out=" + Locations.OUTPUT_LOG_FILE + " /title=\"VSTEST\"";
     }
 
     public static class LinuxSimulation {

@@ -134,7 +134,7 @@ public class LicensingPositiveTests extends LicensingPositiveTestBase {
             test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
             throw new SkipException("Skipped test");
         }
-        exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        exitStatus = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ LicTestPrjBuildConsoleCommands.UNIT_TEST);
         if (exitStatus == 0) {
             Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {

@@ -125,7 +125,7 @@ public class LicensingTests extends LicensingTestBase {
             test.log(Status.SKIP, "Skipping Unit tests  with the Trial license");
             throw new SkipException("Skipped test");
         }
-        exitStatus = winService.runCommandWaitForFinish(LicTestPrjBuildConsoleCommands.UNIT_TEST);
+        exitStatus = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ LicTestPrjBuildConsoleCommands.UNIT_TEST);
         if (exitStatus == 0 && scenario.equals("3")) {
             int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
             Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
