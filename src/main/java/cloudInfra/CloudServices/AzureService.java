@@ -16,6 +16,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import static io.restassured.RestAssured.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -186,6 +187,11 @@ public class AzureService extends CloudService{
                 .withExistingResourceGroup(resGroup);
 
         test.log(Status.INFO, "Storage account created");
+
+        when().
+                post("https://s2events.azure-automation.net/webhooks?token=B5N1Qc6guCitAdrPOmtt47LPjnIgXethwpMGa%2fW%2faCQ%3d").
+        then().
+                statusCode(200);
 
         for (int i = 0; i < vmCount; i++) {
             Creatable<VirtualMachine> virtualMachineCreatable = azure.virtualMachines()
