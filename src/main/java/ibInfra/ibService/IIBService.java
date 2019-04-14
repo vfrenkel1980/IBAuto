@@ -5,8 +5,11 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 import org.testng.ITestContext;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -84,6 +87,9 @@ public interface IIBService {
     void coordServiceStart();
 
     void agentServiceStop();
+
+    void unsubscribeAllMachines(String coord) throws IOException, SAXException, ParserConfigurationException;
+
 
 
 }

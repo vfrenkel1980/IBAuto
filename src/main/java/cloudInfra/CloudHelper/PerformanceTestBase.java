@@ -9,6 +9,7 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.databases.PostgresJDBC;
+import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -27,6 +28,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class PerformanceTestBase extends CloudTestBase{
 
     protected WindowsService winService = new WindowsService();
+    protected IbService ibService = new IbService();
 
     @BeforeSuite
     public void init(){

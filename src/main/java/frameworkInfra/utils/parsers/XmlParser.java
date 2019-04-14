@@ -9,6 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.*;
+import java.io.*;
 
 public class XmlParser {
 
@@ -36,4 +41,22 @@ public class XmlParser {
         }
         return newIpList;
     }
+
+    public static List<String> getAllMachinesFromMonitor(org.w3c.dom.Document document, String key, String coord){
+        List<String> machines = new ArrayList<String>();
+        document.getDocumentElement().normalize();
+        NodeList nList = document.getElementsByTagName("Agent");
+        for (int i = 0; i < nList.getLength(); i++){
+            Node node = nList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                org.w3c.dom.Element eElement = (org.w3c.dom.Element) node;
+                if (!eElement.getAttribute(key).equals(coord))
+                    machines.add(eElement.getAttribute(key));
+            }
+        }
+        return machines;
+    }
+
+
 }

@@ -8,6 +8,9 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 
 import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.parsers.Parser;
+import frameworkInfra.utils.parsers.XmlParser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import ibInfra.ibService.IbService;
 
 import ibInfra.windowscl.WindowsService;
@@ -20,7 +23,10 @@ import org.openqa.selenium.remote.http.W3CHttpResponseCodec;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -29,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import static com.sun.jna.platform.win32.WinReg.*;
 import static frameworkInfra.Listeners.SuiteListener.extent;
@@ -48,12 +55,20 @@ public class UnitTests {
     private Date startTime;
     private Date endTime;
     String requestedCores = "15";
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
 
 
     @Test(testName = "test1")
     public void test() {
-        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& '" + System.getProperty("user.dir") + "/src/main/resources/Scripts/startIbService.ps1'\"");
+        Document docXML = null;
+        try {
+            docXML = coordMonitor.exportCoordMonitorDataToXML(StaticDataProvider.Locations.QA_ROOT ,"coordOutput.xml");
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+        List machines = XmlParser.getAllMachinesFromMonitor(docXML, "Host", "L2A-W10-02");
+        System.out.println(machines);
     }
 }
 

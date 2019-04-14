@@ -207,8 +207,6 @@ public class AzureService extends CloudService{
         virtualMachines = azure.virtualMachines().create(creatableVirtualMachines);
         virtualMachinesKeys = new ArrayList(virtualMachines.keySet());
 
-        //run azure script to enable agent service on created machines
-        //winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& '" + System.getProperty("user.dir") + "/src/main/resources/Scripts/startIbService.ps1'\"");
         test.log(Status.INFO, "VM's created");
     }
 

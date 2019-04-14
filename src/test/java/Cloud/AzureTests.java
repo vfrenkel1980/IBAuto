@@ -14,4 +14,9 @@ public class AzureTests extends PerformanceTestBase {
         int returnCode = winService.runCommandWaitForFinish(StaticDataProvider.ProjectsCommands.CHROME.CHROME_RELEASE_BUILD_PERFORMANCE);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
+
+    @Test(testName = "Unsubscribe Machines", dependsOnMethods = { "chromiumPerformance"})
+    public void unsubscribeMachines() {
+        ibService.unsubscribeAllMachines("coordinator-1");
+    }
 }
