@@ -53,8 +53,7 @@ public class UnitTests {
 
     @Test(testName = "test1")
     public void test() {
-
-        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& 'C:\\Users\\Mark\\Desktop\\new1.ps1'\"");
+        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& '" + System.getProperty("user.dir") + "/src/main/resources/Scripts/startIbService.ps1'\"");
     }
 }
 
