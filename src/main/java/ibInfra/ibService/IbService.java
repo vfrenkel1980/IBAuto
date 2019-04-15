@@ -6,13 +6,18 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.CustomJsonParser;
 import frameworkInfra.utils.parsers.HtmlParser;
 import frameworkInfra.utils.parsers.Parser;
+import frameworkInfra.utils.parsers.XmlParser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import ibInfra.windowscl.WindowsService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.FileFileFilter;
 import org.testng.ITestContext;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
@@ -31,6 +36,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class IbService implements IIBService {
 
     private WindowsService winService = new WindowsService();
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     @Override
     public String getIBInstallFolder() {
@@ -454,7 +460,19 @@ public class IbService implements IIBService {
         return installer.replaceAll("\\D+","");
     }
 
-
+    @Override
+    public void unsubscribeAllMachines(String coord) {
+        Document docXML = null;
+        try {
+            docXML = coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT ,"\\coordOutput.xml");
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            test.log(Status.ERROR, "Failed to create Coordinator status report. \n"  + e.getMessage());
+        }
+        List machines = XmlParser.getAllMachinesFromMonitor(docXML, "Host", coord);
+        for (Object machine : machines) {
+            winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + machine);
+        }
+    }
 
 
 

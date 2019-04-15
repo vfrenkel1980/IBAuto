@@ -161,7 +161,7 @@ public class AzureService extends CloudService{
                     .define(SdkContext.randomResourceName("test_dsk", 30))
                     .withRegion(region)
                     .withNewResourceGroup(resGroup)
-                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-10-04-19.vhd")
+                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-04-10-19.vhd")
                     .withSizeInGB(127)
                     .withSku(DiskSkuTypes.STANDARD_LRS);
             creatableDisk.add(disksCreatable);
@@ -207,8 +207,6 @@ public class AzureService extends CloudService{
         virtualMachines = azure.virtualMachines().create(creatableVirtualMachines);
         virtualMachinesKeys = new ArrayList(virtualMachines.keySet());
 
-        //run azure script to enable agent service on created machines
-        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& 'C:\\Users\\Mark\\Desktop\\new1.ps1'\"");
         test.log(Status.INFO, "VM's created");
     }
 
