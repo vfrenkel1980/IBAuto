@@ -12,18 +12,16 @@
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="Native.windowstests.robin.RobinTests" />
-            <class name ="Native.windowstests.robin.RobinDockerTests" />
-            <class name ="Native.windowstests.IBSamplesTests" />
+            <class name ="Native.unitTesting.IBCTestingTests" />
+            <class name ="Native.unitTesting.IBTCTestingTests" />
         </classes>
     </test>
 
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="Native.windowstests.robin.RobinTests" />
-            <class name ="Native.windowstests.IBSamplesTests" />
-            <class name ="Native.windowstests.CommonTests" />
+            <class name ="Native.unitTesting.IBCTestingTests" />
+            <class name ="Native.unitTesting.IBTCTestingTests" />
         </classes>
     </test>
 

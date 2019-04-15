@@ -1,4 +1,4 @@
-package Native.windowstests.robin;
+package Native.unitTesting;
 
 import frameworkInfra.testbases.RobinTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -11,8 +11,11 @@ import java.io.File;
  * @brief Unit tests execution with IbTestConsole
  * @details Requires Unit Tests license solution
  */
-public class RobinIBTCTestingTests extends RobinTestingTestBase {
-    //IBTC flags
+public class IBTCTestingTests extends RobinTestingTestBase {
+    /**
+     *     IBTC flags
+     */
+
     /**
      * @test NUnit3 Assembly Level support test.<br>
      * @pre{ }
@@ -113,8 +116,9 @@ public class RobinIBTCTestingTests extends RobinTestingTestBase {
         Assert.assertTrue(out.contains("Usage:\n  IbTestConsole.exe [options] <command>"));
     }
 
-
-//nunit flags
+/**
+ * Nunit3 supported flags
+ */
 
     /**
      * @test NUnit3 Class Filter test.<br>

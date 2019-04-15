@@ -1,4 +1,4 @@
-package Native.windowstests.robin;
+package Native.unitTesting;
 
 import frameworkInfra.testbases.RobinTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -10,8 +10,17 @@ import org.testng.annotations.Test;
  * @brief Unit tests execution with IbConsole
  * @details Requires Unit Tests license solution
  */
-public class RobinIBCTestingTests extends RobinTestingTestBase {
+public class IBCTestingTests extends RobinTestingTestBase {
 
+    /**
+     * Framework tests:
+     * VSTest
+     * XUnit
+     * Google Test (Gtest)
+     * CppUTest
+     * QTtest
+     * CTest
+     */
     /**
      * @test Cpp utest support test.<br>
      * @pre{ <a href="https://github.com/cpputest/cpputest">CppUTest framework project</a>}

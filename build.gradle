@@ -46,6 +46,7 @@ def CloudSetup = project.hasProperty("CloudSetup")
 def CloudDestruction = project.hasProperty("CloudDestruction")
 def AzurePerformance = project.hasProperty("AzurePerformance")
 def Enterprise = project.hasProperty("Enterprise")
+def UnitTesting = project.hasProperty("UnitTesting")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
@@ -234,6 +235,10 @@ test {
 
         if(Enterprise) {
             suites "src/test/resources/Enterprise.xml"
+        }
+
+        if(Enterprise) {
+            suites "src/test/resources/UnitTesting.xml"
         }
 
         if(CloudDestruction) {
