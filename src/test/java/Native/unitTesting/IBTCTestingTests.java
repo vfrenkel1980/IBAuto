@@ -12,9 +12,6 @@ import java.io.File;
  * @details Requires Unit Tests license solution
  */
 public class IBTCTestingTests extends RobinTestingTestBase {
-    /**
-     *     IBTC flags
-     */
 
     /**
      * @test NUnit3 Assembly Level support test.<br>
@@ -115,10 +112,6 @@ public class IBTCTestingTests extends RobinTestingTestBase {
         String out = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE);
         Assert.assertTrue(out.contains("Usage:\n  IbTestConsole.exe [options] <command>"));
     }
-
-/**
- * Nunit3 supported flags
- */
 
     /**
      * @test NUnit3 Class Filter test.<br>

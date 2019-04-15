@@ -9,19 +9,16 @@ import org.testng.annotations.Test;
 /**
  * @brief Unit tests execution with IbConsole
  * @details Requires Unit Tests license solution
+ *
+ * Framework tests:
+ * CppUTest
+ * Google Test (Gtest)
+ * QTtest
+ * VSTest
+ * XUnit
+ * CTest
  */
 public class IBCTestingTests extends RobinTestingTestBase {
-
-    /**
-     * Framework tests:
-     * VSTest
-     * XUnit
-     * Google Test (Gtest)
-     * CppUTest
-     * QTtest
-     * CTest
-     */
-
 
     /**
      * @test Cpp utest support test.<br>
@@ -43,7 +40,7 @@ public class IBCTestingTests extends RobinTestingTestBase {
      * @test Google test support test.<br>
      * @pre{ <a href="https://github.com/google/googletest">Google's C++ test framework project</a>}
      * @steps{
-     * - Run the google-test-examples-master tests}
+     * - Run the googletest-master tests}
      * @result{
      * - Build is succeeded;
      * - Build is distributed.}
@@ -103,6 +100,21 @@ public class IBCTestingTests extends RobinTestingTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
+    /**
+     * @test CTest support test.<br>
+     * @pre{ <a href="https://github.com/snikulov/google-test-examples">Short sample how-to use Google C++ Test Framework</a>}
+     * @steps{
+     * - Run the google-test-examples-master tests (original command: ctest -VV --parallel 20)}
+     * @result{
+     * - Build is succeeded;
+     * - Build is distributed.}
+     */
+    @Test(testName = "CTest")
+    public void cTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.CTEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+    }
     /**
      * @test SameOS flag test.<br>
      * @pre{ }
