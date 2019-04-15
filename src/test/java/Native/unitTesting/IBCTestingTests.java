@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
  * @details Requires Unit Tests license solution
  *
  * Framework tests:
- * CppUTest
- * Google Test (Gtest)
- * QTtest
- * VSTest
- * XUnit
- * CTest
+ * - CppUTest
+ * - Google Test (Gtest)
+ * - QTtest
+ * - VSTest
+ * - XUnit
+ * - CTest
  */
 public class IBCTestingTests extends RobinTestingTestBase {
 
@@ -161,6 +161,23 @@ public class IBCTestingTests extends RobinTestingTestBase {
         String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3" );
         Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3");
+        Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
+
+    /**
+     * @test Error message for invalid parameter /test=nunit2 test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit3 tests with invalid /test=nunit2 flag}
+     * @result{
+     * - Build is failed;
+     * - "In order to accelerate NUnit tests, please use IBTestConsole" error message is displayed in the console.}
+     */
+    @Test(testName = "NUnit2 Error Message Test")
+    public void NUnit2ErrorMessageTest() {
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_1DLL_TEST+"\" /test=nunit2" );
+        Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_1DLL_TEST+"\" /test=nunit2");
         Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
     }
 }
