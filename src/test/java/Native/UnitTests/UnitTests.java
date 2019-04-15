@@ -8,6 +8,7 @@ import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.*;
 
 import frameworkInfra.utils.databases.PostgresJDBC;
+import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibService.IbService;
 
 import ibInfra.windowscl.WindowsService;
@@ -17,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.*;
 import org.openqa.selenium.remote.http.W3CHttpCommandCodec;
 import org.openqa.selenium.remote.http.W3CHttpResponseCodec;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,7 +36,6 @@ import static com.sun.jna.platform.win32.WinReg.*;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
-import static io.restassured.RestAssured.when;
 
 
 public class UnitTests {
@@ -50,12 +51,16 @@ public class UnitTests {
     String requestedCores = "15";
 
 
-
-    @Test(testName = "test1")
-    public void test() {
-
-        winService.runCommandDontWaitForTermination("powershell.exe -noexit \"& 'C:\\Users\\Mark\\Desktop\\new1.ps1'\"");
+    @Test(testName = "IBTC Help Test")
+    public void iBTCHelpTest() {
+        String result = winService.runCommandGetOutput(StaticDataProvider.IbLocations.IBCONSOLE+ " /command=\"" + StaticDataProvider.ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=gtest" );
+        int exitCode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.IBCONSOLE+ " /command=\"" + StaticDataProvider.ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=gtest");
+        System.out.println(result);
+        Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+     //   Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+        Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole."));
     }
 }
+
 
 

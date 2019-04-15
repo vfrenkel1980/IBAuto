@@ -103,9 +103,26 @@ public class RobinIBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "SameOS Flag Test")
     public void sameOSFlagTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST_ANY_OS + " /sameos");
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+    }
+
+    /**
+     * @test SameOS error message test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the vstest-master tests with /minwinver and /sameos flags}
+     * @result{
+     * - Build is failed;
+     * - The error is displayed: "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER."}
+     */
+    @Test(testName = "SameOS Error Test")
+    public void sameOSErrorTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
+        String output = winService.runCommandGetOutput(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
+        Assert.assertTrue(exitCode != 0, "The test execution isn't failed.");
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER"), "The error message isn't correct. Error displayed: "+output);
     }
     /**
      * @test Error message for invalid parameter /test=nunit3 test.<br>
