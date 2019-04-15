@@ -1,5 +1,6 @@
 package frameworkInfra.utils.parsers;
 
+import com.aventstack.extentreports.Status;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -10,10 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.*;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.*;
-import java.io.*;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class XmlParser {
 
@@ -43,6 +42,7 @@ public class XmlParser {
     }
 
     public static List<String> getAllMachinesFromMonitor(org.w3c.dom.Document document, String key, String coord){
+        test.log(Status.INFO, "Reading Status XML for Agent information");
         List<String> machines = new ArrayList<String>();
         document.getDocumentElement().normalize();
         NodeList nList = document.getElementsByTagName("Agent");
@@ -55,6 +55,7 @@ public class XmlParser {
                     machines.add(eElement.getAttribute(key));
             }
         }
+        test.log(Status.INFO, "Number of machines connected to the coordinator - " + machines.size());
         return machines;
     }
 

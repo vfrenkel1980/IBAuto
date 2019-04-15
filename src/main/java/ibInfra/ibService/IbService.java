@@ -464,9 +464,9 @@ public class IbService implements IIBService {
     public void unsubscribeAllMachines(String coord) {
         Document docXML = null;
         try {
-            docXML = coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT ,"//coordOutput.xml");
+            docXML = coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT ,"\\coordOutput.xml");
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
+            test.log(Status.ERROR, "Failed to create Coordinator status report. \n"  + e.getMessage());
         }
         List machines = XmlParser.getAllMachinesFromMonitor(docXML, "Host", coord);
         for (Object machine : machines) {
