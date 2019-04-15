@@ -550,6 +550,9 @@ public class StaticDataProvider {
             public static final String NUNIT2_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_TESTLEVEL_TEST =NUNIT2_TEST+" /testlevel=10";
             public static final String NUNIT2_TESTLEVEL_DEEP_TEST =NUNIT2_TEST+" /testlevel=deep";
+            public static final String GTEST_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
+            public static final String GTEST_TESTLEVEL_TEST =NUNIT2_TEST+" /testlevel=10";
+            public static final String GTEST_TESTLEVEL_DEEP_TEST =NUNIT2_TEST+" /testlevel=deep";
         }
 
         public static class INTERFACES {

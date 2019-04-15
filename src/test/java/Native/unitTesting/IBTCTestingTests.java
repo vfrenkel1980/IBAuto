@@ -171,5 +171,46 @@ public class IBTCTestingTests extends RobinTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_WHERE_FILTER_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
+//GTEST
+    /**
+     * @test GTest Assembly Level support test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master tests.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "GTEST Assembly Level Test")
+    public void gTestAssemblyLevelTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 
+    /**
+     * @test GTest Test Level support test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master tests with /testlevel=10 flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "GTest Test Level Test")
+    public void gTestTestLevelTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TESTLEVEL_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @test GTest testlevel=deep test. (Every testcase runs in the separate task bar).<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master tests with /testlevel=deep flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "GTest Testlevel Deep Test")
+    public void gTestTestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TESTLEVEL_DEEP_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 }
