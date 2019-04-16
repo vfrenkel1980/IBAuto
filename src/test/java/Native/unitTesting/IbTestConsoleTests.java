@@ -14,7 +14,7 @@ import java.io.File;
  * - GTest
  * @details Requires Unit Tests license solution
  */
-public class IBTCTestingTests extends RobinTestingTestBase {
+public class IbTestConsoleTests extends RobinTestingTestBase {
 
     /**
      * @test IBTC /targetdir flag test (the dll is written only with its name, without full path)<br>
