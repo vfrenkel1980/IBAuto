@@ -158,9 +158,9 @@ public class IBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit3 Error Message Test")
     public void NUnit3ErrorMessageTest() {
-        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3" );
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_1DLL_TEST +"\" /test=nunit3" );
         Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_1DLL_TEST +"\" /test=nunit3");
         Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
     }
 
@@ -175,9 +175,9 @@ public class IBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit2 Error Message Test")
     public void NUnit2ErrorMessageTest() {
-        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_1DLL_TEST+"\" /test=nunit2" );
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2" );
         Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_1DLL_TEST+"\" /test=nunit2");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2");
         Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
     }
 }

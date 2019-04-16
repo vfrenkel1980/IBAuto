@@ -26,7 +26,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "Targetdir Test")
     public void targetdirTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_TARGETDIR_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TARGETDIR_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -41,7 +41,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "LogFile Test")
     public void logFileTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_LOGFILE_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_LOGFILE_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         Assert.assertTrue(new File(Locations.OUTPUT_LOG_FILE).exists(), "LogFile is not found");
     }
@@ -84,7 +84,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit2 Assembly Level Test")
     public void nunit2AssemblyLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -98,7 +98,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit2 Test Level Test")
     public void nunit2TestLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_TESTLEVEL_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -112,7 +112,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit2 Testlevel Deep Test")
     public void nunit2TestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_TESTLEVEL_DEEP_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 //NUNIT3
@@ -126,7 +126,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit3 Assembly Level Test")
     public void nunit3AssemblyLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -148,29 +148,73 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      * @test NUnit3 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /testlevel=deep flag.}
+     * - Run the nunit-console-master tests with --result=c:\path\to\result.xml flag.}
      * @result{
      * - Build is succeeded.}
      */
     @Test(testName = "NUnit3 Testlevel Deep Test")
     public void nunit3TestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_TESTLEVEL_DEEP_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
-     * @test NUnit3 Class Filter test.<br>
+     * @test NUnit3 testresult is created test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master failed tests with --result=c:\path\to\result.xml flag.}
+     * @result{
+     * - The result.xml file is created.}
+     */
+    @Test(testName = "NUnit3 Test Result Test")
+    public void nunit3TestResultTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_WHERE_FILTER_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @test NUnit3 --where class filter test.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
      * @result{
      * - Build is succeeded.}
      */
-    @Test(testName = "NUnit3 With Class Filter Test")
-    public void nunit3WithClassFilterTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_WHERE_FILTER_TEST);
+    @Test(testName = "NUnit3 Class Filter Test")
+    public void nunit3ClassFilterTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_WHERE_FILTER_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
+
+    /**
+     * @test NUnit3 SEED flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Seed Flag Test")
+    public void nunit3SeedFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_SEED_FLAG_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+    /**
+     * @test NUnit3 Timeout flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Timeout Flag Test")
+    public void nunit3TimeoutFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+
+
 //GTEST
     /**
      * @test GTest Assembly Level support test.<br>
@@ -182,7 +226,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "GTEST Assembly Level Test")
     public void gTestAssemblyLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -196,7 +240,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "GTest Test Level Test")
     public void gTestTestLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TESTLEVEL_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -210,7 +254,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      */
     @Test(testName = "GTest Testlevel Deep Test")
     public void gTestTestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_TESTLEVEL_DEEP_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 }

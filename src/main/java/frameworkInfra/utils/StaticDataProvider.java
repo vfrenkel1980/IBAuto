@@ -539,20 +539,23 @@ public class StaticDataProvider {
             public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST_ANY_OS ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log="+Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String NUNIT3_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_1DLL_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll ";
-            public static final String NUNIT3_TESTLEVEL_TEST =NUNIT3_TEST+" /testlevel=10";
-            public static final String NUNIT3_TESTLEVEL_DEEP_TEST =NUNIT3_TEST+" /testlevel=deep";
-            public static final String NUNIT3_WHERE_FILTER_TEST =ProjectsCommands.TESTING_ROBIN.NUNIT3_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
-            public static final String NUNIT3_TARGETDIR_TEST ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
-            public static final String NUNIT3_LOGFILE_TEST =NUNIT3_TEST+" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String NUNIT2_1DLL_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
-            public static final String NUNIT2_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
-            public static final String NUNIT2_TESTLEVEL_TEST =NUNIT2_TEST+" /testlevel=10";
-            public static final String NUNIT2_TESTLEVEL_DEEP_TEST =NUNIT2_TEST+" /testlevel=deep";
-            public static final String GTEST_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
-            public static final String GTEST_TESTLEVEL_TEST =GTEST_TEST+" /testlevel=10";
-            public static final String GTEST_TESTLEVEL_DEEP_TEST =GTEST_TEST+" /testlevel=deep";
+            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_1DLL_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_FAIL_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit.engine.tests.dll";
+            public static final String NUNIT3_TESTLEVEL_TEST = NUNIT3_CONSOLE_TEST +" /testlevel=10";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_TEST +" /testlevel=deep";
+            public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST =ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST + " --seed=12354";
+            public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST =ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST + " --timeout=100000";
+            public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST =ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
+            public static final String NUNIT3_CONSOLE_TARGETDIR_TEST ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String NUNIT2_FRAMEWORK_1DLL_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=10";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=deep";
+            public static final String GTEST_CPPSORTER_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe /minwinver=10";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST +" /testlevel=10";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST +" /testlevel=deep";
         }
 
         public static class INTERFACES {
