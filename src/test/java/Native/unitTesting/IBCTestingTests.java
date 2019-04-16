@@ -111,7 +111,7 @@ public class IBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "CTest")
     public void cTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.CTEST);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.CTEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
@@ -145,7 +145,7 @@ public class IBCTestingTests extends RobinTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
         String output = winService.runCommandGetOutput(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
         Assert.assertTrue(exitCode != 0, "The test execution isn't failed.");
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER"), "The error message isn't correct. Error displayed: "+output);
+        Assert.assertTrue(output.contains( "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER"), "The error message isn't correct. Error displayed: "+output);
     }
     /**
      * @test Error message for invalid parameter /test=nunit3 test.<br>
