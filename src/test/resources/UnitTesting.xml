@@ -13,7 +13,8 @@
         <parameter name="logLevel" value="0"/>
         <classes>
             <class name ="Native.unitTesting.IBCTestingTests" />
-            <class name ="Native.unitTesting.IbTestConsoleTests" />
+            <class name ="Native.unitTesting.IBTCNunitTests" />
+            <class name ="Native.unitTesting.IBTCGTestTests" />
         </classes>
     </test>
 
@@ -21,7 +22,8 @@
         <parameter name="logLevel" value="4"/>
         <classes>
             <class name ="Native.unitTesting.IBCTestingTests" />
-            <class name ="Native.unitTesting.IbTestConsoleTests" />
+            <class name ="Native.unitTesting.IBTCNunitTests" />
+            <class name ="Native.unitTesting.IBTCGTestTests" />
         </classes>
     </test>
 
