@@ -555,7 +555,9 @@ public class StaticDataProvider {
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=deep";
             public static final String GTEST_CPPSORTER_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe /minwinver=10";
             public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST +" /testlevel=10";
+            public static final String GTEST_MASTER_TESTLEVEL_TEST ="C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
             public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST +" /testlevel=deep";
+            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST+"cpp_sorter_test.exe --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
         }
 
         public static class INTERFACES {

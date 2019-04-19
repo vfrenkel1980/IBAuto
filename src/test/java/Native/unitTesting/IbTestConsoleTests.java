@@ -148,7 +148,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      * @test NUnit3 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with --result=c:\path\to\result.xml flag.}
+     * - Run the nunit-console-master tests with testlevel=deep flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -159,10 +159,10 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult is created test.<br>
+     * @test NUnit3 testresult is created for failed tests.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master failed tests with --result=c:\path\to\result.xml flag.}
+     * - Run the nunit-console-master failed tests with "--result=c:\path\to\res.xml" flag.}
      * @result{
      * - The result.xml file is created.}
      */
@@ -217,7 +217,7 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
 
 //GTEST
     /**
-     * @test GTest Assembly Level support test.<br>
+     * @test GTest CPPSorter Assembly Level support test.<br>
      * @pre{ }
      * @steps{
      * - Run the google test master tests.}
@@ -225,36 +225,74 @@ public class IbTestConsoleTests extends RobinTestingTestBase {
      * - Build is succeeded.}
      */
     @Test(testName = "GTEST Assembly Level Test")
-    public void gTestAssemblyLevelTest() {
+    public void gTestCPPSorterAssemblyLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
-     * @test GTest Test Level support test.<br>
+     * @test GTest CPPSorter Test Level support test.<br>
      * @pre{ }
      * @steps{
      * - Run the google test master tests with /testlevel=10 flag.}
      * @result{
      * - Build is succeeded.}
      */
-    @Test(testName = "GTest Test Level Test")
-    public void gTestTestLevelTest() {
+    @Test(testName = "GTest CPPSorter Test Level Test")
+    public void gTestCPPSorterTestLevelTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+
+    /**
+     * @test GTest Master Test Level support test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master tests with /testlevel=12 flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "GTest Master Test Level Test")
+    public void gTestMasterTestLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
-     * @test GTest testlevel=deep test. (Every testcase runs in the separate task bar).<br>
+     * @test GTest CPPSorter testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
      * - Run the google test master tests with /testlevel=deep flag.}
      * @result{
      * - Build is succeeded.}
      */
-    @Test(testName = "GTest Testlevel Deep Test")
-    public void gTestTestLevelDeepTest() {
+    @Test(testName = "GTest CPPSorter Testlevel Deep Test")
+    public void gTestCPPSorterTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+    /**
+     * @test GTest Flags test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master tests with all supported flags:
+     * --gtest_filter=*int*
+     * --gtest_also_run_disabled_tests
+     * --gtest_repeat=100
+     * --gtest_shuffle
+     * --gtest_random_seed=1236
+     * --gtest_output=xml:C:\QA\Simulation\gtestResult.xml
+     * .}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "GTest Flags Test")
+    public void gTestFlagsTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_FLAGS);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        File f = new File("C:\\QA\\Simulation\\gtestResult.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created");
+        f.delete();
     }
 }
