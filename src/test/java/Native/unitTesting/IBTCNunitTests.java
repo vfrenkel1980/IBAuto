@@ -139,7 +139,7 @@ public class IBTCNunitTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit3 Test Level Test")
     public void nunit3TestLevelTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_TESTLEVEL_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -158,17 +158,71 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult is created for failed tests.<br>
+     * @test NUnit3 Path with spaces support test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit slow sample tests where the path to dll contains spaces.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Path With Spaces Test")
+    public void nunit3PathWithSpacesTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @test NUnit3 testresult file is created.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit-console-master failed tests with "--result=c:\path\to\res.xml" flag.}
      * @result{
+     * - Build is succeeded.
      * - The result.xml file is created.}
      */
     @Test(testName = "NUnit3 Test Result Test")
     public void nunit3TestResultTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_WHERE_FILTER_TEST);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created");
+        f.delete();
+    }
+
+    /**
+     * @test NUnit3 testresult is created for failed tests.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework failed tests with "--result=c:\path\to\res.xml" flag.}
+     * @result{
+     * - Build failed.
+     * - The result.xml file is created.}
+     */
+    @Test(testName = "NUnit3 Failed Test Result Test")
+    public void nunit3FailedTestResultTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_FAILED_RESULT_TEST);
+        Assert.assertTrue(exitCode != 0, "The test execution not failed with the exitcode " + exitCode);
+        File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created");
+        f.delete();
+    }
+
+    /**
+     * @test NUnit3 testresult path with spaces test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests where the path to resultfile contains spaces.}
+     * @result{
+     * - Build succeeded.
+     * - The result.xml file is created.}
+     */
+    @Test(testName = "NUnit3 Path With Spaces Test Result Test")
+    public void nunit3PathWithSpacesTestResultTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST + "--result="+Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml");
+        Assert.assertTrue(exitCode == 0, "The test execution not failed with the exitcode " + exitCode);
+        File f = new File(Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created");
+        f.delete();
     }
 
     /**
@@ -198,6 +252,7 @@ public class IBTCNunitTests extends RobinTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_SEED_FLAG_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
+
     /**
      * @test NUnit3 Timeout flag test.<br>
      * @pre{ }
@@ -212,4 +267,31 @@ public class IBTCNunitTests extends RobinTestingTestBase {
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
+    /**
+     * @test NUnit3 Testlist flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit slow sample tests with --testlist=testlist.txt flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Testlist Flag Test")
+    public void nunit3TestlistFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TESTLIST_FLAG_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @test NUnit3 @FILE flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit slow sample tests with @fileWithArguments.txt flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 File Flag Test")
+    public void nunit3FileFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_FILE_FLAG_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 }

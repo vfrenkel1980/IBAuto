@@ -108,15 +108,16 @@ public class IBTCGTestTests extends RobinTestingTestBase {
      * @pre{ }
      * @steps{
      * - Run the google test master tests with all supported flags:
-     * --gtest_filter=*int*
-     * --gtest_also_run_disabled_tests
-     * --gtest_repeat=100
-     * --gtest_shuffle
-     * --gtest_random_seed=1236
+     * --gtest_filter=*int*<br>
+     * --gtest_also_run_disabled_tests<br>
+     * --gtest_repeat=100<br>
+     * --gtest_shuffle<br>
+     * --gtest_random_seed=1236<br>
      * --gtest_output=xml:C:\QA\Simulation\gtestResult.xml
      * .}
      * @result{
-     * - Build is succeeded.}
+     * - Build is succeeded.
+     * - Test result file is created.}
      */
     @Test(testName = "GTest Flags Test")
     public void gTestFlagsTest() {
