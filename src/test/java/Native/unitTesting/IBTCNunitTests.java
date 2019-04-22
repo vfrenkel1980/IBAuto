@@ -201,7 +201,7 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     @Test(testName = "NUnit3 Failed Test Result Test")
     public void nunit3FailedTestResultTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_FAILED_RESULT_TEST);
-        Assert.assertTrue(exitCode != 0, "The test execution not failed with the exitcode " + exitCode);
+        Assert.assertFalse(exitCode == 0, "The test execution not failed");
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
@@ -218,8 +218,8 @@ public class IBTCNunitTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit3 Path With Spaces Test Result Test")
     public void nunit3PathWithSpacesTestResultTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST + " --result="+Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml");
-        Assert.assertTrue(exitCode == 0, "The test execution not failed with the exitcode " + exitCode);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST + " --result=\""+Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml\"");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
