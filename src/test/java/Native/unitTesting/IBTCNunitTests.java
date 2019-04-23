@@ -60,7 +60,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test IbTestConsole "HELP" without parameter test. <a href="http://redmine.incredibuild.local/issues/10200">Bug #10200</a><br>
+     * @test IbTestConsole "HELP" without parameters test. <a href="http://redmine.incredibuild.local/issues/10200">Bug #10200</a><br>
      * @pre{ }
      * @steps{
      * - Run the IbTestConsole.exe without parameters}
@@ -91,7 +91,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit2 Test Level support test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /testlevel=10 flag.}
+     * - Run the nunit framework tests with the /testlevel=10 flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -215,7 +215,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with the testlevel=deep flag.}
+     * - Run the nunit-console-master tests with the /testlevel=deep flag.}
      * @result{
      * - Build is succeeded.}
      */
