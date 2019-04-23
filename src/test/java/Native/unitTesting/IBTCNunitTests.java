@@ -1,6 +1,6 @@
 package Native.unitTesting;
 
-import frameworkInfra.testbases.RobinTestingTestBase;
+import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ import java.io.File;
  * - Nunit3
  * @details Requires Unit Tests license solution
  */
-public class IBTCNunitTests extends RobinTestingTestBase {
+public class IBTCNunitTests extends UnitTestingTestBase {
 
     /**
      * @test IBTC /targetdir flag test (the dll is written only with its name, without full path)<br>
@@ -60,15 +60,15 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test IbTestConsole "HELP" without parameter test<br>
+     * @test IbTestConsole "HELP" without parameter test <a href="<a href="http://redmine.incredibuild.local/issues/10200">Bug #10200></a><br>
      * @pre{ }
      * @steps{
      * - Run the IbTestConsole.exe without parametres}
      * @result{
      * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
-    @Test(testName = "IBTC Without Help Test")
-    public void iBTCWithoutHelpTest() {
+    @Test(testName = "IBTC No Help Test")
+    public void iBTCNoHelpTest() {
         String out = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE);
         Assert.assertTrue(out.contains("Usage:\n  IbTestConsole.exe [options] <command>"));
     }
@@ -114,6 +114,73 @@ public class IBTCNunitTests extends RobinTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
+
+    /**
+     * @test NUnit2 /result=testresult.xml is created in the deep testlevel mode test <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943></a>.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with /result=res.xml flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit2 Result Testlevel Deep Test")
+    public void nunit2ResultTestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /result=\'"+Locations.QA_ROOT+"\\nunitres.xml\"");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created for " +testName);
+        f.delete();
+    }
+
+    /**
+     * @test NUnit2 /xml=testresult.xml is created in the deep testlevel mode test <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943></a>.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with /result=res.xml flag.}
+     * @result{
+     * - Build is succeeded;
+     * - The result.xml file is created}
+     */
+    @Test(testName = "NUnit2 Xml Testlevel Deep Test")
+    public void nunit2XmlTestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\'"+Locations.QA_ROOT+"\\nunitres.xml\"");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created for " +testName);
+        f.delete();
+    }
+
+    /**
+     * @test NUnit2 testresult.xml isn't created in the deep testlevel mode with /noresult flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with /result=res.xml flag.}
+     * @result{
+     * - Build is succeeded;
+     * - The result.xml file is created}
+     */
+    @Test(testName = "NUnit2 NoResult Testlevel Deep Test")
+    public void nunit2NoResultTestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /noresult");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertFalse(new File(System.getProperty("user.dir")+"\\TestResult.xml").isFile(), "The test result file is created for " +testName);
+    }
+
+    /**
+     * @test NUnit2 testresult.xml isn't created in the deep testlevel mode with /noxml test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with /result=res.xml flag.}
+     * @result{
+     * - Build is succeeded.
+     * - The result.xml file isn't created}
+     */
+    @Test(testName = "NUnit2 No Xml Testlevel Deep Test")
+    public void nunit2NoXmlTestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /noxml");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertFalse(new File(System.getProperty("user.dir")+"\\TestResult.xml").isFile(), "The test result file is created for " +testName);
+    }
 //NUNIT3
     /**
      * @test NUnit3 Assembly Level support test.<br>
@@ -158,7 +225,22 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 Path with spaces support test.<br>
+     * @test NUnit3 /silent test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master tests with /silent flag.}
+     * @result{
+     * - Build is succeeded.
+     * - There is no output in the command line.}
+     */
+    @Test(testName = "NUnit3 Silent Test")
+    public void nunit3SilentTest() {
+        String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST +  " /silent");
+        Assert.assertTrue(output.equals(""), "The test output is not suppressed.  Output: " + output);
+    }
+
+    /**
+     * @test NUnit3 Path with spaces support test <a href="http://redmine.incredibuild.local/issues/9856">Bug #9856></a>.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit slow sample tests where the path to dll contains spaces.}
@@ -172,16 +254,34 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult file is created.<br>
+     * @test NUnit3 testresult file is created with relative path.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master failed tests with "--result=c:\path\to\res.xml" flag.}
+     * - Run the nunit-console-master failed tests with "--result=result.xml" flag.}
      * @result{
      * - Build is succeeded.
      * - The result.xml file is created.}
      */
     @Test(testName = "NUnit3 Test Result Test")
     public void nunit3TestResultTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST +" --result=result.xml");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        File f = new File(System.getProperty("user.dir")+"\\result.xml");
+        Assert.assertTrue(f.isFile(), "The test result file is not created");
+        f.delete();
+    }
+
+    /**
+     * @test NUnit3 testresult file is created with absolute path.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master failed tests with "--result=c:\path\to\result.xml" flag.}
+     * @result{
+     * - Build is succeeded.
+     * - The result.xml file is created.}
+     */
+    @Test(testName = "NUnit3 Absolute Path Test Result Test")
+    public void nunit3AbsolutePathTestResultTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
@@ -190,10 +290,10 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult is created for failed tests.<br>
+     * @test NUnit3 testresult is created when the tests fail <a href="http://redmine.incredibuild.local/issues/9857">Bug #9857></a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework failed tests with "--result=c:\path\to\res.xml" flag.}
+     * - Run the nunit framework with failed tests and "--result=c:\path\to\res.xml" flag.}
      * @result{
      * - Build failed.
      * - The result.xml file is created.}
@@ -208,7 +308,7 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult path with spaces test.<br>
+     * @test NUnit3 testresult path with spaces test<a href="http://redmine.incredibuild.local/issues/9855">Bug #9855></a>.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit framework tests where the path to resultfile contains spaces.}
@@ -268,19 +368,32 @@ public class IBTCNunitTests extends RobinTestingTestBase {
     }
 
     /**
-     * @test NUnit3 Testlist flag test.<br>
+     * @test NUnit3 Testlist flag with absolute path test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit slow sample tests with --testlist=c:\path\to\testlist.txt flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Absolute PathTestlist Flag Test")
+    public void nunit3AbsolutePathTestlistFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TESTLIST_FLAG_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @test NUnit3 Testlist flag with relative path test<a href="http://redmine.incredibuild.local/issues/9846">Bug #9846></a>.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit slow sample tests with --testlist=testlist.txt flag.}
      * @result{
      * - Build is succeeded.}
      */
-    @Test(testName = "NUnit3 Testlist Flag Test")
-    public void nunit3TestlistFlagTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TESTLIST_FLAG_TEST);
+    @Test(testName = "NUnit3 Relative Path Testlist Flag Test")
+    public void nunit3RelativePathTestlistFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
-
     /**
      * @test NUnit3 @FILE flag test.<br>
      * @pre{ }

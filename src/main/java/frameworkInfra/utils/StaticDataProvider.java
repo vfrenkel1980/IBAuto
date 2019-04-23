@@ -552,7 +552,9 @@ public class StaticDataProvider {
             public static final String NUNIT3_CONSOLE_TARGETDIR_TEST ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String NUNIT3_SLOW_TEST ="nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
+            public static final String NUNIT3_SLOW_TEST_TARGETDIR ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST= NUNIT3_SLOW_TEST +" --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
+            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST= NUNIT3_SLOW_TEST_TARGETDIR +" --testlist=testlist.txt";
             public static final String NUNIT3_SLOW_FILE_FLAG_TEST= NUNIT3_SLOW_TEST +" @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
             public static final String NUNIT2_FRAMEWORK_1DLL_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";

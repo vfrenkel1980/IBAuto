@@ -1,6 +1,6 @@
 package Native.unitTesting;
 
-import frameworkInfra.testbases.RobinTestingTestBase;
+import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.IbLocations;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
@@ -15,7 +15,7 @@ import java.io.File;
  * - GTest
  * @details Requires Unit Tests license solution
  */
-public class IBTCGTestTests extends RobinTestingTestBase {
+public class IBTCGTestTests extends UnitTestingTestBase {
 
     /**
      * @test IBTC /targetdir flag test (the exe is written only with its name, without full path)<br>

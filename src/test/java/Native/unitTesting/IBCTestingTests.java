@@ -1,6 +1,6 @@
 package Native.unitTesting;
 
-import frameworkInfra.testbases.RobinTestingTestBase;
+import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
  * - XUnit
  * - CTest
  */
-public class IBCTestingTests extends RobinTestingTestBase {
+public class IBCTestingTests extends UnitTestingTestBase {
 
     /**
      * @test Cpp utest support test.<br>
