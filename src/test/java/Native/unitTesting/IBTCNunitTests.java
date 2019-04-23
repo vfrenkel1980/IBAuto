@@ -16,10 +16,10 @@ import java.io.File;
 public class IBTCNunitTests extends UnitTestingTestBase {
 
     /**
-     * @test IBTC /targetdir flag test (the dll is written only with its name, without full path)<br>
+     * @test IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /targetdir="c:\path\to\dll\dir" flag.}
+     * - Run the nunit-console-master tests with the /targetdir="c:\path\to\dll\dir" flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -33,7 +33,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test IBTC /logfile & /loglevel flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /logfile="c:\path\to\log.txt" and /loglevel=info flag.}
+     * - Run the nunit-console-master tests with the /logfile="c:\path\to\log.txt" and /loglevel=info flag.}
      * @result{
      * - Build is succeeded;
      * - The log file is created.}
@@ -49,7 +49,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test IbTestConsole "HELP" with /help flag test<br>
      * @pre{ }
      * @steps{
-     * - Run the IbTestConsole.exe with /help flag}
+     * - Run the IbTestConsole.exe with the /help flag}
      * @result{
      * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
@@ -60,10 +60,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test IbTestConsole "HELP" without parameter test <a href="<a href="http://redmine.incredibuild.local/issues/10200">Bug #10200></a><br>
+     * @test IbTestConsole "HELP" without parameter test. <a href="http://redmine.incredibuild.local/issues/10200">Bug #10200</a><br>
      * @pre{ }
      * @steps{
-     * - Run the IbTestConsole.exe without parametres}
+     * - Run the IbTestConsole.exe without parameters}
      * @result{
      * - The "HELP" ("Usage:\n  IbTestConsole.exe [options] <command>") is displayed in the console.}
      */
@@ -105,7 +105,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit2 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /testlevel=deep flag.}
+     * - Run the nunit framework tests with the /testlevel=deep flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -116,10 +116,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit2 /result=testresult.xml is created in the deep testlevel mode test <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943></a>.<br>
+     * @test NUnit2 /result=testresult.xml is created in the deep testlevel mode test. <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943</a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /result=res.xml flag.}
+     * - Run the nunit framework tests with the /result=C:\path\to\res.xml flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -133,10 +133,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit2 /xml=testresult.xml is created in the deep testlevel mode test <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943></a>.<br>
+     * @test NUnit2 /xml=testresult.xml is created in the deep testlevel mode test. <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943</a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /result=res.xml flag.}
+     * - Run the nunit framework tests with /xml=C:\path\to\res.xml flag.}
      * @result{
      * - Build is succeeded;
      * - The result.xml file is created}
@@ -154,7 +154,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit2 testresult.xml isn't created in the deep testlevel mode with /noresult flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /result=res.xml flag.}
+     * - Run the nunit framework tests with the /noresult flag.}
      * @result{
      * - Build is succeeded;
      * - The result.xml file is created}
@@ -167,10 +167,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit2 testresult.xml isn't created in the deep testlevel mode with /noxml test.<br>
+     * @test NUnit2 testresult.xml isn't created in the deep testlevel mode with the /noxml flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests with /result=res.xml flag.}
+     * - Run the nunit framework tests with the /noxml flag.}
      * @result{
      * - Build is succeeded.
      * - The result.xml file isn't created}
@@ -181,6 +181,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         Assert.assertFalse(new File(System.getProperty("user.dir")+"\\TestResult.xml").isFile(), "The test result file is created for " +testName);
     }
+
 //NUNIT3
     /**
      * @test NUnit3 Assembly Level support test.<br>
@@ -200,7 +201,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 Test Level support test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /testlevel=10 flag.}
+     * - Run the nunit-console-master tests with the /testlevel=10 flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -214,7 +215,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 testlevel=deep test. (Every testcase runs in the separate task bar).<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with testlevel=deep flag.}
+     * - Run the nunit-console-master tests with the testlevel=deep flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -228,7 +229,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 /silent test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with /silent flag.}
+     * - Run the nunit-console-master tests with the /silent flag.}
      * @result{
      * - Build is succeeded.
      * - There is no output in the command line.}
@@ -240,7 +241,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit3 Path with spaces support test <a href="http://redmine.incredibuild.local/issues/9856">Bug #9856></a>.<br>
+     * @test NUnit3 Path with spaces support test. <a href="http://redmine.incredibuild.local/issues/9856">Bug #9856</a>.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit slow sample tests where the path to dll contains spaces.}
@@ -257,7 +258,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 testresult file is created with relative path.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master failed tests with "--result=result.xml" flag.}
+     * - Run the nunit-console-master failed tests with the "--result=result.xml" flag.}
      * @result{
      * - Build is succeeded.
      * - The result.xml file is created.}
@@ -272,10 +273,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult file is created with absolute path.<br>
+     * @test NUnit3 testresult file is created with the absolute path.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master failed tests with "--result=c:\path\to\result.xml" flag.}
+     * - Run the nunit-console-master failed tests with the "--result=c:\path\to\result.xml" flag.}
      * @result{
      * - Build is succeeded.
      * - The result.xml file is created.}
@@ -290,7 +291,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult is created when the tests fail <a href="http://redmine.incredibuild.local/issues/9857">Bug #9857></a>.<br>
+     * @test NUnit3 testresult is created when the tests fail. <a href="http://redmine.incredibuild.local/issues/9857">Bug #9857</a>.<br>
      * @pre{ }
      * @steps{
      * - Run the nunit framework with failed tests and "--result=c:\path\to\res.xml" flag.}
@@ -308,10 +309,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit3 testresult path with spaces test<a href="http://redmine.incredibuild.local/issues/9855">Bug #9855></a>.<br>
+     * @test NUnit3 testresult path with spaces test. <a href="http://redmine.incredibuild.local/issues/9855">Bug #9855</a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests where the path to resultfile contains spaces.}
+     * - Run the nunit framework tests where the path to the resultfile contains spaces.}
      * @result{
      * - Build succeeded.
      * - The result.xml file is created.}
@@ -329,7 +330,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 --where class filter test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
+     * - Run the nunit-console-master tests with the --where "class == 'TestClassName'" filter.}
      * @result{
      * - Build is succeeded.}
      */
@@ -343,7 +344,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 SEED flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
+     * - Run the nunit-console-master tests with the --seed=12354 flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -357,7 +358,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 Timeout flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit-console-master tests with --where "class == 'TestClassName'" filter.}
+     * - Run the nunit-console-master tests with the --timeout=100000 flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -371,7 +372,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 Testlist flag with absolute path test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit slow sample tests with --testlist=c:\path\to\testlist.txt flag.}
+     * - Run the nunit slow sample tests with the --testlist=c:\path\to\testlist.txt flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -382,10 +383,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit3 Testlist flag with relative path test<a href="http://redmine.incredibuild.local/issues/9846">Bug #9846></a>.<br>
+     * @test NUnit3 Testlist flag with relative path test. <a href="http://redmine.incredibuild.local/issues/9846">Bug #9846</a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit slow sample tests with --testlist=testlist.txt flag.}
+     * - Run the nunit slow sample tests with the --testlist=testlist.txt flag.}
      * @result{
      * - Build is succeeded.}
      */
@@ -398,7 +399,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 @FILE flag test.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit slow sample tests with @fileWithArguments.txt flag.}
+     * - Run the nunit slow sample tests with the @fileWithArguments.txt flag.}
      * @result{
      * - Build is succeeded.}
      */
