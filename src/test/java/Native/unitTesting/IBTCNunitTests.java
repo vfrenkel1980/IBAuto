@@ -125,7 +125,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit2 Result Testlevel Deep Test")
     public void nunit2ResultTestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /result=\'"+Locations.QA_ROOT+"\\nunitres.xml\"");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /result=\""+Locations.QA_ROOT+"\\nunitres.xml\"");
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created for " +testName);
@@ -143,7 +143,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit2 Xml Testlevel Deep Test")
     public void nunit2XmlTestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\'"+Locations.QA_ROOT+"\\nunitres.xml\"");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\""+Locations.QA_ROOT+"\\nunitres.xml\"");
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created for " +testName);
@@ -319,9 +319,9 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit3 Path With Spaces Test Result Test")
     public void nunit3PathWithSpacesTestResultTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST + " --result=\""+Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml\"");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_TEST + " --result=\""+Locations.QA_ROOT+"\\Testing\\Nunit3 TestExample\\nunitres.xml\"");
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-        File f = new File(Locations.QA_ROOT+"\\Nunit3 TestExample\\nunitres.xml");
+        File f = new File(Locations.QA_ROOT+"\\Testing\\Nunit3 TestExample\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
     }
