@@ -156,6 +156,15 @@ public interface IIBUIService {
 
         void startCoordService();
 
+        void pauseCloud();
+
+        void pauseCloudAndDeletePool();
+
+        void enableCloud();
+
+        void deactivateCloud();
+
+        void verifyCloudDeactivated();
 
 
 

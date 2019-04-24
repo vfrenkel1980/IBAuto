@@ -47,6 +47,8 @@ def CloudDestruction = project.hasProperty("CloudDestruction")
 def AzurePerformance = project.hasProperty("AzurePerformance")
 def Enterprise = project.hasProperty("Enterprise")
 def UnitTesting = project.hasProperty("UnitTesting")
+def ICEngine = project.hasProperty("ICEngine")
+
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
@@ -67,6 +69,8 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.23.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.11.0'
     compile group: 'io.appium', name: 'java-client', version: '5.0.4'
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+    compile group: 'com.sun.jersey', name: 'jersey-server', version: '1.19'
 
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
     //compile group: 'org.uncommons', name: 'reportng', version: '1.1.4'
@@ -114,7 +118,7 @@ test {
     //Linux AWS initiator selection
     systemProperty "initiators", System.getProperty("initiators")
     //systemProperty "groups", System.getProperty("groups")
-    //Cloud configuration
+    //Performance configuration
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'aws'
     systemProperty 'cpu', System.properties['cpu'] ?: '%d'
@@ -247,6 +251,10 @@ test {
 
         if(AzurePerformance) {
             suites "src/test/resources/AzurePerformance.xml"
+        }
+
+        if(ICEngine) {
+            suites "src/test/resources/ICEngine.xml"
         }
     }
 

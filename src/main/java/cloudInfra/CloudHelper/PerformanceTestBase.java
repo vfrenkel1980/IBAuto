@@ -12,6 +12,7 @@ import frameworkInfra.utils.databases.PostgresJDBC;
 import ibInfra.ibService.IbService;
 import ibInfra.windowscl.WindowsService;
 import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -50,5 +51,10 @@ public class PerformanceTestBase extends CloudTestBase{
         postgresJDBC.insertDataToTable("192.168.10.73", "postgres", "postgres123", "release_manager", "Azure_Performance",
                 "date, project_name, initiator, duration, helper_type, total_requested_cores",
                 "\'" + formatter.format(calendar.getTime()) + "\', \'" + projectName + "\', \'" + INITIATOR + "\', \'" + buildDuration + "\', \'" + CLOUD + "\', \'" + requestedCores + "\'");
+    }
+
+    @AfterClass
+    public void afterClass(){
+        ibService.unsubscribeAllMachines("coordinator-1");
     }
 }

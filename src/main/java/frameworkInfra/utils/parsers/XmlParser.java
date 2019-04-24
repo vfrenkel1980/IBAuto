@@ -41,7 +41,9 @@ public class XmlParser {
         return newIpList;
     }
 
-    public static List<String> getAllMachinesFromMonitor(org.w3c.dom.Document document, String key, String coord){
+    //this method is for parsing the exportstatus.xml
+    //returns a list of values matching a specified key
+    public static List<String> getListOfValuesUsingKey(org.w3c.dom.Document document, String key, String value){
         test.log(Status.INFO, "Reading Status XML for Agent information");
         List<String> machines = new ArrayList<String>();
         document.getDocumentElement().normalize();
@@ -51,11 +53,11 @@ public class XmlParser {
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
                 org.w3c.dom.Element eElement = (org.w3c.dom.Element) node;
-                if (!eElement.getAttribute(key).equals(coord))
+                if (eElement.getAttribute(key).equals(value))
                     machines.add(eElement.getAttribute(key));
             }
         }
-        test.log(Status.INFO, "Number of machines connected to the coordinator - " + machines.size());
+        test.log(Status.INFO, "Finished parsing Coord Status export");
         return machines;
     }
 

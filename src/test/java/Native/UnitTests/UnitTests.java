@@ -1,47 +1,35 @@
 package Native.UnitTests;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import frameworkInfra.testbases.BatmanBCTestBase;
-import frameworkInfra.testbases.TestBase;
-import frameworkInfra.utils.*;
-
+import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
+import cloudInfra.IncrediCloud.webServer.WebServer;
+import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.databases.PostgresJDBC;
-import frameworkInfra.utils.parsers.Parser;
-import frameworkInfra.utils.parsers.XmlParser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import ibInfra.ibService.IbService;
 
 import ibInfra.windowscl.WindowsService;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.*;
-import org.openqa.selenium.remote.http.W3CHttpCommandCodec;
-import org.openqa.selenium.remote.http.W3CHttpResponseCodec;
-import org.testng.ITestContext;
-import org.testng.annotations.BeforeMethod;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import org.apache.http.protocol.HttpRequestHandler;
 import org.testng.annotations.Test;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.net.URL;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.sun.jna.platform.win32.WinReg.*;
-import static frameworkInfra.Listeners.SuiteListener.extent;
-import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
-import static frameworkInfra.Listeners.SuiteListener.test;
-import static io.restassured.RestAssured.when;
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 
 public class UnitTests {
@@ -56,20 +44,15 @@ public class UnitTests {
     private Date endTime;
     String requestedCores = "15";
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
+    IncrediCloudService incrediCloudService = new IncrediCloudService("bla");
 
 
 
     @Test(testName = "test1")
     public void test() {
-        Document docXML = null;
-        try {
-            docXML = coordMonitor.exportCoordMonitorDataToXML(StaticDataProvider.Locations.QA_ROOT ,"coordOutput.xml");
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
-        List machines = XmlParser.getAllMachinesFromMonitor(docXML, "Host", "L2A-W10-02");
-        System.out.println(machines);
+        System.out.println(ibService.getNumberOfMachinesParticipateInBuild("Incredi-markz"));
     }
+
 }
 
 

@@ -1,4 +1,4 @@
-package Cloud;
+package Performance;
 
 import cloudInfra.CloudHelper.PerformanceTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -15,8 +15,4 @@ public class AzureTests extends PerformanceTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "Unsubscribe Machines", dependsOnMethods = { "chromiumPerformance"})
-    public void unsubscribeMachines() {
-        ibService.unsubscribeAllMachines("coordinator-1");
-    }
 }

@@ -5,6 +5,7 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 import org.testng.ITestContext;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -89,6 +90,10 @@ public interface IIBService {
     void agentServiceStop();
 
     void unsubscribeAllMachines(String coord) throws IOException, SAXException, ParserConfigurationException;
+
+    int getNumberOfMachinesParticipateInBuild(String initiator);
+
+    Document generateStatusReport() throws IOException, SAXException, ParserConfigurationException;
 
 
 

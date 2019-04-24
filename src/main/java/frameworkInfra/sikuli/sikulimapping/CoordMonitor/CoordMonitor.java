@@ -19,4 +19,16 @@ public class CoordMonitor {
     public static final Pattern ToolsMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\toolsMenu.png");
     public static final Pattern StopServiceMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\stopLocalServiceMenu.png");
     public static final Pattern StartServiceMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\startServiceMenu.png");
+    //IncrediCloud
+    public static final Pattern CloudEnabledButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\cloudEnabled.png");
+    public static final Pattern PauseCloudButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\pauseCloud.png");
+    public static final Pattern PauseCloudOnly = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\pauseCloudOnly.png");
+    public static final Pattern PauseCloudAndDeletePool = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\pauseCloudAndDeletePool.png");
+    public static final Pattern DeactivateCloud = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\deactivateCloud.png");
+    public static final Pattern DeactivateButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\deactivateButton.png");
+    public static final Pattern CloudPausedButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\cloudPaused.png");
+    public static final Pattern ResumeCloudButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\resumeCloud.png");
+    public static final Pattern ScaleToCloudButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\scaleToCloud.png");
+
+
 }

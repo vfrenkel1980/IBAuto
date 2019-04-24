@@ -781,6 +781,68 @@ public class IBUIService implements IIBUIService {
                 Assert.fail();
             }
         }
+
+        @Override
+        public void pauseCloud() {
+            test.log(Status.INFO, "Pausing cloud");
+            try {
+                screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.95),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void pauseCloudAndDeletePool() {
+            test.log(Status.INFO, "Pausing cloud and deleting pool");
+            try {
+                screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.PauseCloudAndDeletePool.similar((float) 0.95),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void enableCloud() {
+            test.log(Status.INFO, "Enabling cloud");
+            try {
+                screen.wait(CoordMonitor.CloudPausedButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.ResumeCloudButton.similar((float) 0.95),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable cloud, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void deactivateCloud() {
+            test.log(Status.INFO, "Deactivating cloud");
+            try {
+                screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.DeactivateCloud.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.DeactivateButton.similar((float) 0.95),15).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to Deactivate cloud, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void verifyCloudDeactivated() {
+            test.log(Status.INFO, "Verifying cloud is deactivated");
+            try {
+                screen.wait(CoordMonitor.ScaleToCloudButton.similar((float) 0.95),15);
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to verify cloud deactivated, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
     }
 
 }

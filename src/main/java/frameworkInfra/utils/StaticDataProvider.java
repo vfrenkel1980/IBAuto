@@ -177,6 +177,7 @@ public class StaticDataProvider {
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
+            public static final String TEST_SAMPLE = Locations.QA_ROOT + "\\TestSample\\RUNME.bat " + "%d " + "%s";
         }
 
         public static class EXITCODEBASE {
@@ -568,7 +569,6 @@ public class StaticDataProvider {
             public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
         }
 
-
     }
 
     //registry keys
@@ -605,6 +605,11 @@ public class StaticDataProvider {
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
         public static final String GUID = "{8CA4C95D-CBE4-474A-AB9E-3F8C9313D740}";
+        public static final String INCREDICLOUDSECRET = "IncrediCloudSecret";
+        public static final String INCREDICLOUDSTATE = "IncrediCloudState";
+        public static final String INCREDICLOUDCOORDID = "IncrediCloudCoordID";
+        public static final String MAXWORKERS = "MaxWorkers";
+
     }
 
     public static class IbLicenses {
@@ -722,6 +727,8 @@ public class StaticDataProvider {
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
         public static final String DASHBORD_HELPER = "h6-w10-01";
+        public static final String IC_COORDINATOR = "L2a-w10-02";
+        public static final String IC_INITIATOR = "";
     }
 
     public static class LinuxMachines {

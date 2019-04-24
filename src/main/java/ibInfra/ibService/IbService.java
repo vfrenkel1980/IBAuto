@@ -462,18 +462,28 @@ public class IbService implements IIBService {
 
     @Override
     public void unsubscribeAllMachines(String coord) {
-        Document docXML = null;
-        try {
-            docXML = coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT ,"\\coordOutput.xml");
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            test.log(Status.ERROR, "Failed to create Coordinator status report. \n"  + e.getMessage());
-        }
-        List machines = XmlParser.getAllMachinesFromMonitor(docXML, "Host", coord);
+        Document docXML = generateStatusReport();
+        List machines = XmlParser.getListOfValuesUsingKey(docXML, "Host", coord);
         for (Object machine : machines) {
-            winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + machine);
+            if (!machine.equals(coord))
+                winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + machine);
         }
     }
 
+    @Override
+    public int getNumberOfMachinesParticipateInBuild(String initiator) {
+        Document docXML = generateStatusReport();
+        List machines = XmlParser.getListOfValuesUsingKey(docXML, "WorkingForAgents", initiator);
+        return machines.size();
+    }
 
-
+    @Override
+    public Document generateStatusReport() {
+        try {
+            return coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT ,"\\coordOutput.xml");
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            test.log(Status.ERROR, "Failed to create Coordinator status report. \n"  + e.getMessage());
+            return null;
+        }
+    }
 }

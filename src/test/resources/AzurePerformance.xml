@@ -9,7 +9,7 @@
 
     <test name="Test" allow-return-values="true">
         <classes>
-            <class name ="Cloud.AzureTests" />
+            <class name ="Performance.AzureTests" />
         </classes>
     </test>
 </suite>

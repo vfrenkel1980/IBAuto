@@ -26,7 +26,7 @@ public class BuildsPageObject {
 
     private static EventFiringWebDriver eventWebDriver;
     private WebDriverWait wait;
-    public BuildsPageObject(EventFiringWebDriver driver) {
+public BuildsPageObject(EventFiringWebDriver driver) {
         eventWebDriver = driver;
         wait = new WebDriverWait(eventWebDriver, 10);
     }

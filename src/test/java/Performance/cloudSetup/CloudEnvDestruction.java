@@ -1,4 +1,4 @@
-package Cloud.cloudSetup;
+package Performance.cloudSetup;
 
 import cloudInfra.CloudHelper.CloudTestBase;
 import org.testng.annotations.Test;

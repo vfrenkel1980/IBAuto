@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CloudDestruction"  >
-    <!-- suite name="Suite Name" -->
+<suite name="ICEngine"  >
 
     <listeners>
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Test" allow-return-values="true">
+    <test name="ICEngine">
         <classes>
-            <class name ="Performance.cloudSetup.CloudEnvDestruction" />
+            <class name ="IncrediCloud.ICEngineTests" />
         </classes>
     </test>
 </suite>

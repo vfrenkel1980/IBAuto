@@ -9,7 +9,7 @@
 
     <test name="Test" allow-return-values="true">
         <classes>
-            <class name ="Cloud.cloudSetup.CloudEnvSetup" />
+            <class name ="Performance.cloudSetup.CloudEnvSetup" />
         </classes>
     </test>
 </suite>

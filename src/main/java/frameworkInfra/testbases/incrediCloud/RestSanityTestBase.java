@@ -39,7 +39,7 @@ public class RestSanityTestBase extends TestBase {
 
     @BeforeClass
     public void beforeClass(){
-        RestAssured.baseURI = "https://incredicloudapigwtest.azure-api.net";
+        RestAssured.baseURI = "https://incredicloudapim-prod.azure-api.net";
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("Content-Ocp-Apim-Trace", "true");
