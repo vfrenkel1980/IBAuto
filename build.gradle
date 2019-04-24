@@ -241,7 +241,7 @@ test {
             suites "src/test/resources/Enterprise.xml"
         }
 
-        if(Enterprise) {
+        if(UnitTesting) {
             suites "src/test/resources/UnitTesting.xml"
         }
 

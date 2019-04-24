@@ -1,6 +1,6 @@
 package Native.unitTesting;
 
-import frameworkInfra.testbases.RobinTestingTestBase;
+import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
  * @details Requires Unit Tests license solution
  *
  * Framework tests:
- * CppUTest
- * Google Test (Gtest)
- * QTtest
- * VSTest
- * XUnit
- * CTest
+ * - CppUTest
+ * - Google Test (Gtest)
+ * - QTtest
+ * - VSTest
+ * - XUnit
+ * - CTest
  */
-public class IBCTestingTests extends RobinTestingTestBase {
+public class IBCTestingTests extends UnitTestingTestBase {
 
     /**
      * @test Cpp utest support test.<br>
@@ -111,7 +111,7 @@ public class IBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "CTest")
     public void cTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.CTEST);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.CTEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
@@ -145,7 +145,7 @@ public class IBCTestingTests extends RobinTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
         String output = winService.runCommandGetOutput(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST + " /sameos");
         Assert.assertTrue(exitCode != 0, "The test execution isn't failed.");
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER"), "The error message isn't correct. Error displayed: "+output);
+        Assert.assertTrue(output.contains( "A /SAMEOS cannot be specified with /MINWINVER, /MAXWINVER"), "The error message isn't correct. Error displayed: "+output);
     }
     /**
      * @test Error message for invalid parameter /test=nunit3 test.<br>
@@ -158,9 +158,26 @@ public class IBCTestingTests extends RobinTestingTestBase {
      */
     @Test(testName = "NUnit3 Error Message Test")
     public void NUnit3ErrorMessageTest() {
-        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3" );
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_1DLL_TEST +"\" /test=nunit3" );
         Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_1DLL_TEST+"\" /test=nunit3");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_1DLL_TEST +"\" /test=nunit3");
+        Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
+
+    /**
+     * @test Error message for invalid parameter /test=nunit2 test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit3 tests with invalid /test=nunit2 flag}
+     * @result{
+     * - Build is failed;
+     * - "In order to accelerate NUnit tests, please use IBTestConsole" error message is displayed in the console.}
+     */
+    @Test(testName = "NUnit2 Error Message Test")
+    public void NUnit2ErrorMessageTest() {
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2" );
+        Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2");
         Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
     }
 }
