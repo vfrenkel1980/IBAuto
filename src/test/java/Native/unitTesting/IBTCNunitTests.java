@@ -21,19 +21,6 @@ import java.util.Set;
  */
 public class IBTCNunitTests extends UnitTestingTestBase {
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
-    /**
-     * @test IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
-     * @pre{ }
-     * @steps{
-     * - Run the nunit-console-master tests with the /targetdir="c:\path\to\dll\dir" flag.}
-     * @result{
-     * - Build is succeeded.}
-     */
-    @Test(testName = "Targetdir Test")
-    public void targetdirTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TARGETDIR_TEST);
-        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-    }
 
     /**
      * @test IBTC /logfile & /loglevel flag test.<br>
@@ -139,6 +126,19 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
+     * @test NUnit2 IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with the /targetdir="c:\path\to\dll\dir" flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit2 Targetdir Test")
+    public void nunit2TargetdirTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TARGETDIR_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+    /**
      * @test NUnit2 /xml=testresult.xml is created in the deep testlevel mode test. <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943</a>.<br>
      * @pre{ }
      * @steps{
@@ -149,7 +149,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit2 Xml Testlevel Deep Test")
     public void nunit2XmlTestLevelDeepTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\""+Locations.QA_ROOT+"\\nunitres.xml\"");
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created for " +testName);
@@ -215,6 +215,51 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         }
     }
 
+    /**
+     * @todo add html parser to test
+     * @test NUnit2  <a href="https://github.com/extent-framework/extentreports-dotnet-cli">Extent HTML Reporting Framework</a> support with Assembly Level test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests;
+     * - Run extent html reporting tool.}
+     * @result{
+     * - 2 file are created in the "reports" folder. }
+     */
+    @Test(testName = "NUnit2 Extent Report Assembly Level Test")
+    public void nunit2ExtentReportAssemblyLevelTest() {
+        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST);
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+System.getProperty("user.dir")+"\\nunitres.xml -o reports/");
+        Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
+        File index = new File(System.getProperty("user.dir")+"\\reports\\index.html");
+        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        index.delete();
+        File dashboard = new File(System.getProperty("user.dir")+"\\reports\\dasboard.html");
+        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+        dashboard.delete();
+    }
+
+    /**
+     * @todo add html parser to test
+     * @test NUnit2  <a href="https://github.com/extent-framework/extentreports-dotnet-cli">Extent HTML Reporting Framework</a> support with Test Level test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit framework tests with /testlevel and /xml flags;
+     * - Run extent html reporting tool.}
+     * @result{
+     * - 2 file are created in the "reports" folder. }
+     */
+    @Test(testName = "NUnit2 Extent Report Test Level Test")
+    public void nunit2ExtentReportTestLevelTest() {
+        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST + " /testlevel=11");
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+System.getProperty("user.dir")+"\\nunitres.xml -o reports/");
+        Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
+        File index = new File(System.getProperty("user.dir")+"\\reports\\index.html");
+        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        index.delete();
+        File dashboard = new File(System.getProperty("user.dir")+"\\reports\\dasboard.html");
+        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+        dashboard.delete();
+    }
 //NUNIT3
     /**
      * @test NUnit3 Assembly Level support test.<br>
@@ -257,7 +302,20 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
-
+    /**
+     *
+     * @test NUnit3 IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit-console-master tests with the /targetdir="c:\path\to\dll\dir" flag.}
+     * @result{
+     * - Build is succeeded.}
+     */
+    @Test(testName = "NUnit3 Targetdir Test")
+    public void nunit3TargetdirTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TARGETDIR_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
     /**
      * @test NUnit3 SameOS flag test.<br>
      * @pre{ }
@@ -371,7 +429,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @test NUnit3 testresult path with spaces test. <a href="http://redmine.incredibuild.local/issues/9855">Bug #9855</a>.<br>
      * @pre{ }
      * @steps{
-     * - Run the nunit framework tests where the path to the resultfile contains spaces.}
+     * - Run the nunit framework slow tests where the path to the resultfile contains spaces.}
      * @result{
      * - Build succeeded.
      * - The result.xml file is created.}
@@ -467,5 +525,51 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     public void nunit3FileFlagTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_SLOW_FILE_FLAG_TEST);
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
+     * @todo add html parser to test
+     * @test NUnit3  <a href="https://github.com/extent-framework/extentreports-dotnet-cli">Extent HTML Reporting Framework</a> support with Assembly Level test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit3 framework tests with /result flag;
+     * - Run extent html reporting tool.}
+     * @result{
+     * - 2 file are created in the "reports" folder. }
+     */
+    @Test(testName = "NUnit2 Extent Report Assembly Level Test")
+    public void nunit3ExtentReportAssemblyLevelTest() {
+        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o reports/");
+        Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
+        File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
+        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        index.delete();
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+        dashboard.delete();
+    }
+
+    /**
+     * @todo add html parser to test
+     * @test NUnit3  <a href="https://github.com/extent-framework/extentreports-dotnet-cli">Extent HTML Reporting Framework</a> support with Test Level test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit3 framework tests with /testlevel and --result flag;
+     * - Run extent html reporting tool.}
+     * @result{
+     * - 2 file are created in the "reports" folder. }
+     */
+    @Test(testName = "NUnit2 Extent Report Test Level Test")
+    public void nunit3ExtentReportTestLevelTest() {
+        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o reports/");
+        Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
+        File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
+        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        index.delete();
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+        dashboard.delete();
     }
 }
