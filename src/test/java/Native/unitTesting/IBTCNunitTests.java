@@ -2,10 +2,16 @@ package Native.unitTesting;
 
 import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * @brief Unit tests execution with IbTestConsole
@@ -14,7 +20,7 @@ import java.io.File;
  * @details Requires Unit Tests license solution
  */
 public class IBTCNunitTests extends UnitTestingTestBase {
-
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
     /**
      * @test IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
      * @pre{ }
@@ -182,6 +188,33 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         Assert.assertFalse(new File(System.getProperty("user.dir")+"\\TestResult.xml").isFile(), "The test result file is created for " +testName);
     }
 
+    /**
+     * @test NUnit2 SameOS flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit2 framework tests with /sameos flag}
+     * @result{
+     * - Build is succeeded;
+     * - All assigned to the build agents have the same OS version: windows 10 or windows server 2016.}
+     */
+    @Test(testName = "NUnit2 SameOS Flag Test")
+    public void nunit2SameOSFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_TEST + " /sameos");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Set<String> helpers = Parser.getHelpers(Locations.OUTPUT_LOG_FILE);
+        for(String helper : helpers){
+            try {
+                Assert.assertTrue(coordMonitor.getAgentOSVersion(helper).equals("10"),helper+" os version isn't equal to 10.");
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 //NUNIT3
     /**
      * @test NUnit3 Assembly Level support test.<br>
@@ -225,6 +258,32 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
+    /**
+     * @test NUnit3 SameOS flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the nunit3 framework tests with /sameos flag}
+     * @result{
+     * - Build is succeeded;
+     * - All assigned to the build agents have the same OS version: windows 10 or windows server 2016.}
+     */
+    @Test(testName = "NUnit3 SameOS Flag Test")
+    public void nunit3SameOSFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST + " /sameos");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Set<String> helpers = Parser.getHelpers(Locations.OUTPUT_LOG_FILE);
+        for(String helper : helpers){
+            try {
+                Assert.assertTrue(coordMonitor.getAgentOSVersion(helper).equals("10"),helper+" os version isn't equal to 10.");
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * @test NUnit3 /silent test.<br>
      * @pre{ }
@@ -325,6 +384,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
     }
+
 
     /**
      * @test NUnit3 --where class filter test.<br>

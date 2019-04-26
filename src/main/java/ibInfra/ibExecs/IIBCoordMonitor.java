@@ -53,6 +53,31 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         return subscribed;
     }
 
+    @Override
+    public String getAgentOSVersion(String agentName) throws IOException, SAXException, ParserConfigurationException {
+        String osVersion = getAgentAttribute(agentName, "OSVersion").toLowerCase();
+        if (osVersion.contains("windows 10") || osVersion.contains("windows server 2016")){
+            osVersion="10";
+        }else if(osVersion.contains("windows 8.1") || osVersion.contains("windows server 2012 R2")){
+            osVersion="8.1";
+        }else if(osVersion.contains("windows 8 ") || osVersion.contains("windows server 2012")){
+            osVersion="8";
+        }else if(osVersion.contains("windows 7") || osVersion.contains("windows server 2008 R2")){
+            osVersion="7";
+        }else if(osVersion.contains("windows server 2008")){
+            osVersion="2008";
+        }else if(osVersion.contains("windows vista") || osVersion.contains("windows server 2008")){
+            osVersion="vista";
+        }else if(osVersion.contains("windows server 2003")){
+            osVersion="2003";
+        }else if(osVersion.contains("windows xp")){
+            osVersion="xp";
+        }else {
+            osVersion="IsNotRecognised";
+        }
+        return osVersion;
+    }
+
 
     @Override
     public String getAgentAttribute(String agentName, String attribute) throws IOException, SAXException, ParserConfigurationException {

@@ -4,10 +4,16 @@ import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.IbLocations;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
+import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * @brief Unit tests execution with IbTestConsole
@@ -16,7 +22,7 @@ import java.io.File;
  * @details Requires Unit Tests license solution
  */
 public class IBTCGTestTests extends UnitTestingTestBase {
-
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
     /**
      * @test IBTC /targetdir flag test (the exe is written only with its name, without full path)<br>
      * @pre{ }
@@ -126,5 +132,32 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         File f = new File("C:\\QA\\Simulation\\gtestResult.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
+    }
+
+    /**
+     * @test GTest SameOS flag test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the google test master  tests with /sameos flag}
+     * @result{
+     * - Build is succeeded;
+     * - All assigned to the build agents have the same OS version: windows 10 or windows server 2016.}
+     */
+    @Test(testName = "GTest SameOS Flag Test")
+    public void gTestSameOSFlagTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_TESTLEVEL_TEST + " /sameos");
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Set<String> helpers = Parser.getHelpers(Locations.OUTPUT_LOG_FILE);
+        for(String helper : helpers){
+            try {
+                Assert.assertTrue(coordMonitor.getAgentOSVersion(helper).equals("10"),helper+" os version isn't equal to 10.");
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

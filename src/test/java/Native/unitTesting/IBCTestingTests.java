@@ -1,10 +1,17 @@
 package Native.unitTesting;
 
+import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * @brief Unit tests execution with IbConsole
@@ -19,6 +26,7 @@ import org.testng.annotations.Test;
  * - CTest
  */
 public class IBCTestingTests extends UnitTestingTestBase {
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     /**
      * @test Cpp utest support test.<br>
@@ -122,13 +130,24 @@ public class IBCTestingTests extends UnitTestingTestBase {
      * - Run the vstest-master tests with /sameos flag}
      * @result{
      * - Build is succeeded;
-     * - Build is distributed.}
+     * - All assigned to the build agents have the same OS version: windows 10 or windows server 2016.}
      */
     @Test(testName = "SameOS Flag Test")
     public void sameOSFlagTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.VS_TEST_ANY_OS + " /sameos");
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
+        Set<String> helpers = Parser.getHelpers(Locations.OUTPUT_LOG_FILE);
+        for(String helper : helpers){
+            try {
+                Assert.assertTrue(coordMonitor.getAgentOSVersion(helper).equals("10"),helper+" os version isn't equal to 10.");
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
