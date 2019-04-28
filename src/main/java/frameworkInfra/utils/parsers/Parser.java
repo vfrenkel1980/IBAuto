@@ -209,7 +209,7 @@ public class Parser {
     }
 
     public static Set<String> getHelperCores(String filePath) {
-        Set<String> agentsList = new HashSet<>();
+        Set<String> coresList = new HashSet<>();
         try (Scanner sc = new Scanner(new File(filePath))) {
             while (sc.hasNext()) {
                 String line = sc.nextLine();
@@ -217,6 +217,24 @@ public class Parser {
                 if (start >= 0) {
                     line = line.substring(start + 8);
                     int end = line.indexOf("'");
+                    coresList.add(line.substring(0, end));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            test.log(Status.INFO, "Failed with error: " + e.getMessage());
+        }
+        return coresList;
+    }
+
+    public static Set<String> getHelpers(String filePath) {
+        Set<String> agentsList = new HashSet<>();
+        try (Scanner sc = new Scanner(new File(filePath))) {
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                int start = line.indexOf("(Agent '");
+                if (start >= 0) {
+                    line = line.substring(start + 8);
+                    int end = line.indexOf(" ");
                     agentsList.add(line.substring(0, end));
                 }
             }

@@ -558,9 +558,12 @@ public class StaticDataProvider {
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST= NUNIT3_SLOW_TEST_TARGETDIR +" --testlist=testlist.txt";
             public static final String NUNIT3_SLOW_FILE_FLAG_TEST= NUNIT3_SLOW_TEST +" @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
             public static final String NUNIT2_FRAMEWORK_1DLL_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST ="nunit-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=10";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=deep";
+            public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST+ " /xml=nunitres.xml";
+            public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\""+Locations.QA_ROOT+"\\nunitres.xml\"";
             public static final String GTEST_CPPSORTER_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
             public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST +" /testlevel=10";
             public static final String GTEST_MASTER_TESTLEVEL_TEST ="C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
