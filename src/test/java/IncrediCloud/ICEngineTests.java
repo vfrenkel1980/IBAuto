@@ -156,7 +156,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyCloudMachinesAreStartedWhenDisablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
-        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(GRID_CORES_WO_CLOUD);
+        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(GRID_CORES_WO_INITIATOR);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started and participating in build");
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE, "Number of machines participating in build is different then expected " + POOL_SIZE);

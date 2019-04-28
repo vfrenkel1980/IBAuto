@@ -752,8 +752,8 @@ public class StaticDataProvider {
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
         public static final String DASHBORD_HELPER = "h6-w10-01";
-        public static final String IC_COORDINATOR = "L2a-w10-02";
-        public static final String IC_INITIATOR = "";
+        public static final String IC_COORDINATOR = "h22-cloud-coord";
+        public static final String IC_INITIATOR = "h22-cloud-init";
     }
 
     public static class LinuxMachines {
