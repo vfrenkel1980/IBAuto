@@ -1,5 +1,6 @@
 package cloudInfra.IncrediCloud.incrediCloudService;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class IncrediCloudService implements IIncrediCloudService{
 
@@ -33,18 +34,21 @@ public class IncrediCloudService implements IIncrediCloudService{
 
     @Override
     public void initRest() {
+        test.log(Status.INFO, "Initializing REST headers");
         RestAssured.baseURI = "https://incredicloudapim-prod.azure-api.net";
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("Content-Ocp-Apim-Trace", "true");
         headers.put("Ocp-Apim-Subscription-Key", "1ba49e574ae44ce289d22542c07ff190");
         RestAssured.requestSpecification = new RequestSpecBuilder().addHeaders(headers).build();
+        test.log(Status.INFO, "Initializing REST headers COMPLETE");
     }
 
     @Override
     public void loginToCloud() {
         Map<String, Object> jsonAsMap = new HashMap<>();
         initRest();
+        test.log(Status.INFO, "Performing REST login to cloud");
 
         jsonAsMap.put("coordId", coordId);
         jsonAsMap.put("secret", secret);
@@ -57,12 +61,13 @@ public class IncrediCloudService implements IIncrediCloudService{
                 statusCode(200).
         extract().
                 path("token");
+        test.log(Status.INFO, "REST login to cloud successful");
     }
 
     @Override
     public void refreshToken() {
         Map<String, Object> jsonAsMap = new HashMap<>();
-
+        test.log(Status.INFO, "Refreshing cloud Token");
         jsonAsMap.put("cordId", coordId);
         jsonAsMap.put("token", token);
 
@@ -75,6 +80,7 @@ public class IncrediCloudService implements IIncrediCloudService{
                 statusCode(200).
                 extract().
                 path("token");
+        test.log(Status.INFO, "Cloud Token refreshed successfully");
     }
 
     //true - get number of delivered machines
@@ -83,6 +89,8 @@ public class IncrediCloudService implements IIncrediCloudService{
     public int getStatusQueue(boolean getDelivered) {
         int count = 0;
         refreshToken();
+        test.log(Status.INFO, "Running GetStatusQueue");
+
         Response response = given().
                 header("Authorization", "bearer " + token).
                 when().
@@ -102,6 +110,7 @@ public class IncrediCloudService implements IIncrediCloudService{
         else{
             count = delivered.size();
         }
+        test.log(Status.INFO, "GetStatusQueue finished successfully");
         return count;
     }
 
