@@ -68,7 +68,7 @@ public class IncrediCloudService implements IIncrediCloudService{
     public void refreshToken() {
         Map<String, Object> jsonAsMap = new HashMap<>();
         test.log(Status.INFO, "Refreshing cloud Token");
-        jsonAsMap.put("cordId", coordId);
+        jsonAsMap.put("coordId", coordId);
         jsonAsMap.put("token", token);
 
         token = given().
