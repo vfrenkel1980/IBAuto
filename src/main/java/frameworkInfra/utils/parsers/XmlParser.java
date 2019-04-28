@@ -53,7 +53,7 @@ public class XmlParser {
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
                 org.w3c.dom.Element eElement = (org.w3c.dom.Element) node;
-                if (eElement.getAttribute(key).equals(value))
+                if (eElement.getAttribute(key).toLowerCase().equals(value.toLowerCase()))
                     machines.add(eElement.getAttribute(key));
             }
         }

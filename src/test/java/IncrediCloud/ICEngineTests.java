@@ -61,7 +61,7 @@ public class ICEngineTests extends ICEngineTestBase {
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(false);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1, "Number of machines participating in build is different then pool size " + POOL_SIZE);
+        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1, "Number of machines participating in build is different then pool size " + POOL_SIZE + 1);
         Assert.assertEquals(machinesInPool, POOL_SIZE, "Number of machines in pool is different then original pool size");
     }
 
