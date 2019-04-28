@@ -54,7 +54,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - No unneeded machines are created}
      */
-    @Test(testName = "Verify No Unneeded Machines Are Created")
+    @Test(testName = "Verify No Unneeded Machines Are Created", dependsOnMethods = { "performOnboarding"})
     public void verifyNoUnneededMachinesAreCreated(){
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "90000"));
         SystemActions.sleep(40);
@@ -74,7 +74,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - Only 2 machines participate in build}
      */
-    @Test(testName = "Verify Not All Machines Participate In Build")
+    @Test(testName = "Verify Not All Machines Participate In Build", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
     public void verifyNotAllMachinesParticipateInBuild(){
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES - 4, "40000"));
         SystemActions.sleep(20);
@@ -93,7 +93,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - 7 machines Are in the pool}
      */
-    @Test(testName = "Verify New Machines Are Created")
+    @Test(testName = "Verify New Machines Are Created", dependsOnMethods = { "verifyNotAllMachinesParticipateInBuild"})
     public void verifyNewMachinesAreCreated(){
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + 6, "900000"));
         SystemActions.sleep(780);
@@ -113,7 +113,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - 4 machines Are in the pool}
      */
-    @Test(testName = "Verify Machines Deallocated After Reaching Timeout")
+    @Test(testName = "Verify Machines Deallocated After Reaching Timeout", dependsOnMethods = { "verifyNewMachinesAreCreated"})
     public void verifyMachinesDeallocatedAfterReachingTimeout(){
         SystemActions.sleep(TIMEOUT + 30);
         int machinesInPool = icService.getStatusQueue(false);
@@ -129,7 +129,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - no cloud machines are created}
      */
-    @Test(testName = "Verify No Cloud Machines Are Created When Using On Prem Machines")
+    @Test(testName = "Verify No Cloud Machines Are Created When Using On Prem Machines", dependsOnMethods = { "verifyMachinesDeallocatedAfterReachingTimeout"})
     public void verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines(){
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "360000"));
         SystemActions.sleep(180);
@@ -152,7 +152,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - on coordinator: right click initiator and enable remote admin, enable "enable/disable"
      * }
      */
-    @Test(testName = "Verify Cloud Machines Are Started When Disabling On Prem")
+    @Test(testName = "Verify Cloud Machines Are Started When Disabling On Prem", dependsOnMethods = { "verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines"})
     public void verifyCloudMachinesAreStartedWhenDisablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
@@ -177,7 +177,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - on coordinator: right click initiator and enable remote admin, enable "enable/disable"
      * }
      */
-    @Test(testName = "Verify Cloud Machines Are Deallocated When Enabling On Prem")
+    @Test(testName = "Verify Cloud Machines Are Deallocated When Enabling On Prem", dependsOnMethods = { "verifyCloudMachinesAreStartedWhenDisablingOnPrem"})
     public void verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
@@ -197,7 +197,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - cloud machines build both builds}
      *
      */
-    @Test(testName = "Test MultiInitiator Support")
+    @Test(testName = "Test MultiInitiator Support", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
     public void testMultiInitiatorSupport(){
         winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + IC_INITIATOR + " -u admin -p 4illumination -i 0 " +
                 String.format("\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES/2, "180000"));
@@ -220,7 +220,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Pause Cloud")
+    @Test(testName = "Pause Cloud", dependsOnMethods = { "testMultiInitiatorSupport"})
     public void pauseCloud(){
         coordinator.pauseCloud();
         icService.waitForDeliveredMachines(0);
@@ -242,7 +242,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - cloud machines should participate in build}
      *
      */
-    @Test(testName = "Enable Cloud")
+    @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
         coordinator.enableCloud();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
@@ -263,7 +263,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Pause Cloud And Delete Pool")
+    @Test(testName = "Pause Cloud And Delete Pool", dependsOnMethods = { "enableCloud"})
     public void pauseCloudAndDeletePool(){
         coordinator.pauseCloudAndDeletePool();
         icService.waitForDeliveredMachines(0);
@@ -285,7 +285,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - cloud machines should be created and participate in build}
      *
      */
-    @Test(testName = "Enable Cloud And Create New Pool")
+    @Test(testName = "Enable Cloud And Create New Pool", dependsOnMethods = { "pauseCloudAndDeletePool"})
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
@@ -306,7 +306,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Deactivate Cloud")
+    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
