@@ -88,7 +88,6 @@ public class IncrediCloudService implements IIncrediCloudService{
     @Override
     public int getStatusQueue(boolean getDelivered) {
         int count = 0;
-        refreshToken();
         test.log(Status.INFO, "Running GetStatusQueue");
 
         Response response = given().
@@ -118,6 +117,7 @@ public class IncrediCloudService implements IIncrediCloudService{
     public boolean waitForDeliveredMachines(int numOfMachines) {
         int time = 0;
         int wait = 900;
+        refreshToken();
         while (time != wait){
             if (getStatusQueue(true) == numOfMachines)
                 return true;

@@ -95,12 +95,12 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify New Machines Are Created", dependsOnMethods = { "verifyNotAllMachinesParticipateInBuild"})
     public void verifyNewMachinesAreCreated(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + 6, "900000"));
-        SystemActions.sleep(780);
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + 6, "960000"));
+        icService.waitForDeliveredMachines(POOL_SIZE + 3);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(true);
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE - 2 + 1, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 4, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
         Assert.assertEquals(machinesInPool, POOL_SIZE + 3, "Number of machines in pool is different then expected");
     }
 
@@ -117,7 +117,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyMachinesDeallocatedAfterReachingTimeout(){
         SystemActions.sleep(TIMEOUT + 30);
         int machinesInPool = icService.getStatusQueue(false);
-        Assert.assertEquals(machinesInPool, POOL_SIZE, "Number of machines in pool is different then expected");
+        Assert.assertEquals(machinesInPool, 0, "Number of machines in pool is different then expected");
     }
 
     /**
@@ -131,9 +131,10 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify No Cloud Machines Are Created When Using On Prem Machines", dependsOnMethods = { "verifyMachinesDeallocatedAfterReachingTimeout"})
     public void verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "360000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         SystemActions.sleep(180);
         int runningMachines = icService.getStatusQueue(true);
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
         Assert.assertEquals(runningMachines, 0, "NO machines should be running");
     }
 
@@ -156,10 +157,10 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyCloudMachinesAreStartedWhenDisablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
-        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(GRID_CORES_WO_INITIATOR);
-        int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
+        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
         Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started and participating in build");
-        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE, "Number of machines participating in build is different then expected " + POOL_SIZE);
     }
 
     /**
@@ -181,9 +182,10 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         SystemActions.sleep(10);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1, "Number of machines participating in build is different then expected");
     }
 
@@ -200,13 +202,13 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Test MultiInitiator Support", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
     public void testMultiInitiatorSupport(){
         winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + IC_INITIATOR + " -u admin -p 4illumination -i 0 " +
-                String.format("\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES/2, "180000"));
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES/2, "180000"));
-        icService.waitForDeliveredMachines(4);
+                String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (GRID_CORES/2) + (POOL_CORES/2), "180000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, POOL_CORES/2, "180000"));
+        icService.waitForDeliveredMachines(POOL_SIZE);
         int initMachines = ibService.getNumberOfMachinesParticipateInBuild(IC_INITIATOR);
         int coordMachines = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertTrue(initMachines > 1 && coordMachines > 1, "coord machine helpers: " + coordMachines + " init machine helpers: " + initMachines);
+        Assert.assertTrue(initMachines >= 1 && coordMachines >= 1, "coord machine helpers: " + coordMachines + " init machine helpers: " + initMachines);
     }
 
     /**
@@ -246,7 +248,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void enableCloud(){
         coordinator.enableCloud();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
-        icService.waitForDeliveredMachines(4);
+        icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1);
@@ -266,12 +268,11 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Pause Cloud And Delete Pool", dependsOnMethods = { "enableCloud"})
     public void pauseCloudAndDeletePool(){
         coordinator.pauseCloudAndDeletePool();
-        icService.waitForDeliveredMachines(0);
-        icService.getStatusQueue(false);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
-        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(4);
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertFalse(cloudMachinesRunning, "Looks like there are running cloud machines");
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
+        SystemActions.sleep(150);
+        int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        Assert.assertEquals(machinesParticipatingInBuild, 1);
     }
 
     /**
@@ -289,7 +290,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
-        icService.waitForDeliveredMachines(4);
+        icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1);
@@ -310,7 +311,6 @@ public class ICEngineTests extends ICEngineTestBase {
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
-        icService.waitForDeliveredMachines(0);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         SystemActions.sleep(60);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
