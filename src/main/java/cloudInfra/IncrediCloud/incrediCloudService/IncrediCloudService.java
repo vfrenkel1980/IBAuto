@@ -109,7 +109,7 @@ public class IncrediCloudService implements IIncrediCloudService{
         else{
             count = delivered.size();
         }
-        test.log(Status.INFO, "GetStatusQueue finished successfully");
+        test.log(Status.INFO, "GetStatusQueue finished successfully with " + count + " machines");
         return count;
     }
 
@@ -124,6 +124,7 @@ public class IncrediCloudService implements IIncrediCloudService{
             time += 10;
             SystemActions.sleep(10);
         }
+        test.log(Status.ERROR, "Number of delivered machines not met. Expected: " + numOfMachines + ", Actual: " + getStatusQueue(true));
         return false;
     }
 

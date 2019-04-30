@@ -160,7 +160,7 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         SystemActions.killProcess(Processes.BUILDSYSTEM);
-        Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started and participating in build");
+        Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started");
     }
 
     /**
