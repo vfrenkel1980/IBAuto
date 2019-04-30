@@ -537,10 +537,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{
      * - 2 file are created in the "reports" folder. }
      */
-    @Test(testName = "NUnit2 Extent Report Assembly Level Test")
+    @Test(testName = "NUnit3 Extent Report Assembly Level Test")
     public void nunit3ExtentReportAssemblyLevelTest() {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
-        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o reports/");
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
         Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
@@ -560,10 +560,10 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{
      * - 2 file are created in the "reports" folder. }
      */
-    @Test(testName = "NUnit2 Extent Report Test Level Test")
+    @Test(testName = "NUnit3 Extent Report Test Level Test")
     public void nunit3ExtentReportTestLevelTest() {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
-        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o reports/");
+        int exitCode = winService.runCommandWaitForFinish("extent -i "+ Locations.QA_ROOT+"\\nunitres.xml -o "+Locations.QA_ROOT+"\\reports\\");
         Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
