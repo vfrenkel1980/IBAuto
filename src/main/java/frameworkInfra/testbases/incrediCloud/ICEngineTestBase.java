@@ -7,6 +7,7 @@ import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
@@ -18,6 +19,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -29,6 +31,7 @@ import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+@Listeners(SuiteListener.class)
 public class ICEngineTestBase extends TestBase {
 
     final public String COORDID = "Automation";
@@ -63,6 +66,7 @@ public class ICEngineTestBase extends TestBase {
     @BeforeClass
     public void beforeClass(){
         test = extent.createTest("Before Class");
+        ibService.updateIB("Latest");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
