@@ -183,13 +183,15 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
-        SystemActions.sleep(10);
+        SystemActions.sleep(180);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         SystemActions.killProcess(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1, "Number of machines participating in build is different then expected");
     }
+/*
 
-    /**
+    */
+/**
      * @test verify multi initiator works as expected<br>
      *
      * @steps{
@@ -198,18 +200,20 @@ public class ICEngineTests extends ICEngineTestBase {
      * @result{
      * - cloud machines build both builds}
      *
-     */
+     *//*
+
     @Test(testName = "Test MultiInitiator Support", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
     public void testMultiInitiatorSupport(){
         winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + IC_INITIATOR + " -u admin -p 4illumination -i 0 " +
-                String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (GRID_CORES/2) + (POOL_CORES/2), "180000"));
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, POOL_CORES/2, "180000"));
-        icService.waitForDeliveredMachines(POOL_SIZE);
+                String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (GRID_CORES/2) + (POOL_CORES/2), "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, POOL_CORES/2, "240000"));
+        SystemActions.sleep(120);
         int initMachines = ibService.getNumberOfMachinesParticipateInBuild(IC_INITIATOR);
         int coordMachines = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(initMachines >= 1 && coordMachines >= 1, "coord machine helpers: " + coordMachines + " init machine helpers: " + initMachines);
     }
+*/
 
     /**
      * @test pause cloud and perform a build<br>
@@ -222,7 +226,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Pause Cloud", dependsOnMethods = { "testMultiInitiatorSupport"})
+    @Test(testName = "Pause Cloud", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
     public void pauseCloud(){
         coordinator.pauseCloud();
         icService.waitForDeliveredMachines(0);
