@@ -814,6 +814,7 @@ public class IBUIService implements IIBUIService {
             try {
                 screen.wait(CoordMonitor.CloudPausedButton.similar((float) 0.95),15).click();
                 screen.wait(CoordMonitor.ResumeCloudButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.ResumeCloudPopUpButton.similar((float) 0.80),15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable cloud, failed with error: " + findFailed.getMessage());
                 Assert.fail();
