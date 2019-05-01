@@ -228,6 +228,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Pause Cloud", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
     public void pauseCloud(){
+        winService.runCommandDontWaitForTermination(IbLocations.COORDMONITOR);
         coordinator.pauseCloud();
         icService.waitForDeliveredMachines(0);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));

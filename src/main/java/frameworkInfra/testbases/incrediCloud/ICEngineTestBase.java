@@ -9,19 +9,15 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
+import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
-import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,6 +91,11 @@ public class ICEngineTestBase extends TestBase {
             webDriver = null;
         }
         extent.flush();
+    }
+
+    @AfterSuite
+    public void afterSuite(){
+        SystemActions.killProcess(Processes.COORDMONITOR);
     }
 
 

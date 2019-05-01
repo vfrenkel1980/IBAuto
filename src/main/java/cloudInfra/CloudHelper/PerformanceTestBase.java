@@ -55,6 +55,8 @@ public class PerformanceTestBase extends CloudTestBase{
 
     @AfterClass
     public void afterClass(){
+        //TODO: copy .dat file to machine and create a method to list machines in the file
+        ibService.customPackAllocationOn();
         ibService.unsubscribeAllMachines("coordinator-1");
     }
 }
