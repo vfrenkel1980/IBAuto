@@ -295,6 +295,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud(true);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
+        SystemActions.sleep(60);
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
