@@ -134,7 +134,7 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         SystemActions.sleep(180);
         int runningMachines = icService.getStatusQueue(true);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(runningMachines, 0, "NO machines should be running");
     }
 
@@ -159,7 +159,7 @@ public class ICEngineTests extends ICEngineTestBase {
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started");
     }
 
@@ -185,7 +185,7 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         SystemActions.sleep(180);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1, "Number of machines participating in build is different then expected");
     }
 /*
@@ -276,7 +276,7 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         SystemActions.sleep(150);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1);
     }
 
