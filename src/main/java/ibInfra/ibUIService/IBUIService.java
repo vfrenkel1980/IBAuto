@@ -787,6 +787,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Pausing cloud");
             try {
                 screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).hover();
                 screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95),15).click();
                 screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
@@ -800,6 +801,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Pausing cloud and deleting pool");
             try {
                 screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).hover();
                 screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95),15).click();
                 screen.wait(CoordMonitor.PauseCloudAndDeletePool.similar((float) 0.95),15).click();
             } catch (FindFailed findFailed) {
