@@ -131,10 +131,8 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify No Cloud Machines Are Created When Using On Prem Machines", dependsOnMethods = { "verifyMachinesDeallocatedAfterReachingTimeout"})
     public void verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
-        SystemActions.sleep(180);
+        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
         int runningMachines = icService.getStatusQueue(true);
-        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(runningMachines, 0, "NO machines should be running");
     }
 
