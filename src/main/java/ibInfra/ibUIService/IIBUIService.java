@@ -160,7 +160,7 @@ public interface IIBUIService {
 
         void pauseCloudAndDeletePool();
 
-        void enableCloud();
+        void enableCloud(boolean isDeleted);
 
         void deactivateCloud();
 

@@ -251,7 +251,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
-        coordinator.enableCloud();
+        coordinator.enableCloud(false);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
@@ -293,7 +293,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Enable Cloud And Create New Pool", dependsOnMethods = { "pauseCloudAndDeletePool"})
     public void enableCloudAndCreateNewPool(){
-        coordinator.enableCloud();
+        coordinator.enableCloud(true);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
