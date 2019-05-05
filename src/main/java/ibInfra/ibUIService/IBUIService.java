@@ -815,6 +815,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Enabling cloud");
             try {
                 screen.wait(CoordMonitor.CloudPausedButton.similar((float) 0.95),15).click();
+                screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95),15).hover();
                 screen.wait(CoordMonitor.ResumeCloudButton.similar((float) 0.95),15).click();
                 if (isDeleted)
                     screen.wait(CoordMonitor.ResumeCloudPopUpButton.similar((float) 0.80),15).click();
