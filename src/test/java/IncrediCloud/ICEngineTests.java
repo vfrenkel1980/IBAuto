@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_COORDINATOR;
-import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_INITIATOR;
 
 /**
  * @brief Tests for IncrediCloud engine functionality
@@ -301,6 +300,29 @@ public class ICEngineTests extends ICEngineTestBase {
     }
 
     /**
+     * @test update cloud settings<br>
+     *
+     * @steps{
+     * - update cloud settings
+     * - verify changes committed
+     * }
+     * @result{
+     * - Cloud settings updated}
+     *
+     */
+    @Test(testName = "Update Cloud Settings", dependsOnMethods = { "enableCloudAndCreateNewPool"})
+    public void updateCloudSettings(){
+        OnboardingPage updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
+                COORD_PORT, VM_PORT);
+        eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+        onboardingPageObject.clickTryIncredicloud();
+        azurePageObject.selectAzureUser();
+        onboardingPageObject.performUpdate(updatePage);
+        SystemActions.sleep(60);
+        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE - 2), "Number of delivered machines is not equal to " + (POOL_SIZE - 2));
+    }
+
+    /**
      * @test deactivate cloud and perform a build<br>
      *
      * @steps{
@@ -321,8 +343,5 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1 , "More than one machine are participating in build.");
     }
-
-
-
 
 }

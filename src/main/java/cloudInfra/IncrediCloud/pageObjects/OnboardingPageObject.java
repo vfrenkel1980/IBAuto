@@ -48,6 +48,11 @@ public class OnboardingPageObject {
         clickSave();
     }
 
+    public void performUpdate(OnboardingPage onboardingPage){
+        enterVMDetails(onboardingPage);
+        clickSave();
+    }
+
     private void selectRegion(OnboardingPage onboardingPage){
         SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
