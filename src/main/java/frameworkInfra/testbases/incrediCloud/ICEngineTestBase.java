@@ -72,6 +72,7 @@ public class ICEngineTestBase extends TestBase {
 
     @BeforeClass
     public void beforeClass(){
+        SystemActions.sleep(600); //wait for the previous resource to be deleted
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();

@@ -65,7 +65,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
      * @result{
      * - error message should appear}
      */
-    @Test(testName = "Create Pool On A Limited Region", dependsOnMethods = { "performOnboarding"})
+    @Test(testName = "Try To Update With A Different User", dependsOnMethods = { "performOnboarding"})
     public void tryToUpdateWithADifferentUser(){
         onboardingPageObject.clickTryIncredicloud();
         azurePageObject.selectAzureUser(LIMITED_USER);
