@@ -129,6 +129,23 @@ public class IncrediCloudService implements IIncrediCloudService{
     }
 
     @Override
+    public void deactivateCloud() {
+        Map<String, Object> jsonAsMap = new HashMap<>();
+        test.log(Status.INFO, "Performing REST Deactivate to cloud");
+
+        jsonAsMap.put("coordId", coordId);
+        given().
+                header("Authorization", "bearer " + token).
+                body(jsonAsMap).
+        when().
+                delete("/provision/deleteAllResources").
+                peek().
+        then().
+                statusCode(200);
+        test.log(Status.INFO, "REST deactivate to cloud successful");
+    }
+
+    @Override
     public void setSecretInRegistry() {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSECRET, secret);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSTATE, "1");

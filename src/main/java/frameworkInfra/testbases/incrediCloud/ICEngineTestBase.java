@@ -1,5 +1,6 @@
 package frameworkInfra.testbases.incrediCloud;
 
+import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
@@ -30,6 +31,8 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 @Listeners(SuiteListener.class)
 public class ICEngineTestBase extends TestBase {
 
+    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
+    final protected String LIMITED_USER = "test1@jijuclickmail.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     //TODO: change the number of cores (2) to an var once cores selection is implemented
@@ -50,19 +53,26 @@ public class ICEngineTestBase extends TestBase {
     protected IncrediCloudService icService = new IncrediCloudService(COORDID);
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
+    protected OnboardingPage onboardingPage;
+    protected OnboardingPage updatePage;
 
     static {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "- ICEngine.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + "- IncrediCloud.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+    }
+
+    @BeforeSuite
+    public void beforeSuite(){
+        test = extent.createTest("Before Suite");
+        ibService.updateIB("Latest");
     }
 
     @BeforeClass
     public void beforeClass(){
         test = extent.createTest("Before Class");
-        ibService.updateIB("Latest");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
@@ -72,6 +82,10 @@ public class ICEngineTestBase extends TestBase {
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
+        onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                COORD_PORT, VM_PORT);
+        updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
+                COORD_PORT, VM_PORT);
     }
 
     @BeforeMethod
@@ -84,21 +98,18 @@ public class ICEngineTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(){
-        if (webDriver != null) {
-            webDriver.quit();
-            eventWebDriver.quit();
-            eventWebDriver.unregister(handler);
-            webDriver = null;
-        }
+        eventWebDriver.close();
         extent.flush();
     }
 
     @AfterSuite
     public void afterSuite(){
         SystemActions.killProcess(Processes.COORDMONITOR);
+        killDriver();
     }
 
 
+    //METHODS
     protected void startWebServerThread(){
         serverThread.start();
     }
@@ -108,6 +119,15 @@ public class ICEngineTestBase extends TestBase {
             serverThread.join();
         } catch (InterruptedException e) {
             test.log(Status.ERROR, "Failed to retrieve response from server with error: " + e.getMessage());
+        }
+    }
+
+    protected void killDriver(){
+        if (webDriver != null) {
+            webDriver.quit();
+            eventWebDriver.quit();
+            eventWebDriver.unregister(handler);
+            webDriver = null;
         }
     }
 

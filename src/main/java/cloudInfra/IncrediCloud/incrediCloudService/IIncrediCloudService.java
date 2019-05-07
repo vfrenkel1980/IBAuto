@@ -13,4 +13,8 @@ public interface IIncrediCloudService {
     boolean waitForDeliveredMachines(int numOfMachines);
 
     void setSecretInRegistry();
+
+    void deactivateCloud();
+
+
 }

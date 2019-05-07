@@ -4,6 +4,8 @@ import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,10 +33,8 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Perform Onboarding")
     public void performOnboarding(){
         startWebServerThread();
-        OnboardingPage onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                COORD_PORT, VM_PORT);
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser();
+        azurePageObject.selectAzureUser(PROD_USER);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -312,11 +312,12 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Update Cloud Settings", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void updateCloudSettings(){
-        OnboardingPage updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
-                COORD_PORT, VM_PORT);
+        webDriver = new ChromeDriver();
+        eventWebDriver = new EventFiringWebDriver(webDriver);
+        eventWebDriver.register(handler);
         eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser();
+        azurePageObject.selectAzureUser(PROD_USER);
         onboardingPageObject.performUpdate(updatePage);
         SystemActions.sleep(60);
         Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE - 2), "Number of delivered machines is not equal to " + (POOL_SIZE - 2));
@@ -333,12 +334,12 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "enableCloudAndCreateNewPool"})
+    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "updateCloudSettings"})
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
-        SystemActions.sleep(60);
+        SystemActions.sleep(120);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1 , "More than one machine are participating in build.");
