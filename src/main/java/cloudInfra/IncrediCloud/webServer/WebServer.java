@@ -33,6 +33,14 @@ public class WebServer implements Runnable {
         }
     }
 
+    public void closeWebServer(){
+        try {
+            server.close();
+        } catch (IOException e) {
+            test.log(Status.ERROR, " Failed to close WebServer with error: " + e.getMessage());
+        }
+    }
+
     private String listenToPort(){
         test.log(Status.INFO, "Listening for connection on port " + port + " ....");
         while (true) {

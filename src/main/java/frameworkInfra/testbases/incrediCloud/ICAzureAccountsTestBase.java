@@ -60,6 +60,7 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
     @AfterClass
     public void afterClass(){
         test = extent.createTest("AFTER CLASS");
+        webServer.closeWebServer();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.INCREDICLOUDSECRET, "");
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         icService.deactivateCloud();
