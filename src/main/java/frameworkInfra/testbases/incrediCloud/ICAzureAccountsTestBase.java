@@ -45,7 +45,14 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+        switch (ENV){
+            case "prod":
+                eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
+            case "uat":
+                eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
+        }
         eventWebDriver.manage().window().maximize();
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
         azurePageObject = new AzureRegistrationPageObject(eventWebDriver);

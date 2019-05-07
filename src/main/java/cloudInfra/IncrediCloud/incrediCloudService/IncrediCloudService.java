@@ -1,9 +1,7 @@
 package cloudInfra.IncrediCloud.incrediCloudService;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import io.restassured.RestAssured;
@@ -15,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
 import static io.restassured.RestAssured.given;
 import static frameworkInfra.Listeners.SuiteListener.test;
+
 
 public class IncrediCloudService implements IIncrediCloudService{
 
@@ -35,7 +35,14 @@ public class IncrediCloudService implements IIncrediCloudService{
     @Override
     public void initRest() {
         test.log(Status.INFO, "Initializing REST headers");
-        RestAssured.baseURI = "https://incredicloudapim-prod.azure-api.net";
+        switch (ENV){
+            case "prod":
+                RestAssured.baseURI = "https://incredicloudapim-prod.azure-api.net";
+                break;
+            case "uat":
+                RestAssured.baseURI = "https://incredicloudapigwtest.azure-api.net";
+                break;
+        }
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("Content-Ocp-Apim-Trace", "true");

@@ -631,6 +631,8 @@ public class StaticDataProvider {
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
         public static final String GUID = "{1CDD463B-8C2F-4A63-AFF2-BED2CD7D4720}";
         public static final String INCREDICLOUDSECRET = "IncrediCloudSecret";
+        public static final String INCREDICLOUDSITEURL = "IncrediCloudWebSiteURL";
+        public static final String INCREDICLOUDAPIURL = "IncrediCloudBaseUrl";
         public static final String INCREDICLOUDSTATE = "IncrediCloudState";
         public static final String INCREDICLOUDCOORDID = "IncrediCloudCoordID";
         public static final String MAXWORKERS = "MaxWorkers";

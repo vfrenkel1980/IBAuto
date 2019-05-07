@@ -1,6 +1,5 @@
 package IncrediCloud;
 
-import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
