@@ -59,7 +59,7 @@ public class ICEngineTests extends ICEngineTestBase {
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(false);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1, "Number of machines participating in build is different then pool size " + POOL_SIZE + 1);
+        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1, "Number of machines participating in build is different then pool size " + (POOL_SIZE + 1));
         Assert.assertEquals(machinesInPool, POOL_SIZE, "Number of machines in pool is different then original pool size");
     }
 
@@ -248,7 +248,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
         coordinator.enableCloud(false);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + POOL_CORES, "180000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -290,12 +290,11 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud And Create New Pool", dependsOnMethods = { "pauseCloudAndDeletePool"})
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud(true);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "960000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES * 2, "480000"));
         SystemActions.sleep(60);
-        icService.waitForDeliveredMachines(POOL_SIZE);
-        int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 1);
+        Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started");
     }
 
     /**
@@ -311,10 +310,17 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Update Cloud Settings", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void updateCloudSettings(){
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+        switch (ENV){
+            case "prod":
+                eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
+            case "uat":
+                eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+        }
         onboardingPageObject.clickTryIncredicloud();
         azurePageObject.selectAzureUser(PROD_USER);
         onboardingPageObject.performUpdate(updatePage);

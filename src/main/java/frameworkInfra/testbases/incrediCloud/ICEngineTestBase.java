@@ -119,7 +119,7 @@ public class ICEngineTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(){
-        eventWebDriver.close();
+        killDriver();
         extent.flush();
     }
 
