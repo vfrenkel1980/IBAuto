@@ -35,9 +35,8 @@ public class AzureService extends CloudService{
     private Network network;
     private NetworkSecurityGroup backEndNSG;
     private CreatedResources<VirtualMachine> virtualMachines;
+    private VirtualMachineCustomImage virtualMachineCustomImage;
     private CreatedResources<NetworkInterface> networkInterfaces;
-    private CreatedResources<Disk> disks;
-    private List disksKeys;
     private List networkInterfacesKeys;
     private List virtualMachinesKeys;
     private Region region = Region.EUROPE_WEST;
@@ -48,7 +47,7 @@ public class AzureService extends CloudService{
     protected List<String> diskIds = new ArrayList<>();
     protected List<String> nicIds = new ArrayList<>();
     protected List<String> vmIds = new ArrayList<>();
-    private WindowsService winService = new WindowsService();
+    protected String imageId = "";
 
 
     public AzureService(String cpu, String memory, String vmCount, String initiator) {
@@ -104,7 +103,6 @@ public class AzureService extends CloudService{
                 .attach()
                 .create();
         test.log(Status.INFO, "Network and Security Group created.");
-
     }
 
     @Override
@@ -113,9 +111,7 @@ public class AzureService extends CloudService{
         vm = azure.virtualMachines().getByResourceGroup(resGroup, initiator);
         vm.start();
         test.log(Status.INFO, vm + "Started");
-
     }
-
 
     @Override
     public void stopVm(String machineName) {
@@ -130,6 +126,7 @@ public class AzureService extends CloudService{
         test.log(Status.INFO, "Deleting Vm's...");
 
         azure.virtualMachines().deleteByIds(vmIds);
+        azure.virtualMachineCustomImages().deleteById(imageId);
 
         for (int i = 0; i < vmCount; i++) {
             azure.disks().deleteById(diskIds.get(i));
@@ -144,6 +141,14 @@ public class AzureService extends CloudService{
         List<Creatable<NetworkInterface>> creatableNetworkInterfaces = new ArrayList<>();
         List<Creatable<Disk>> creatableDisk = new ArrayList<>();
 
+        virtualMachineCustomImage = azure.virtualMachineCustomImages()
+                .define("HelperIMG")
+                .withRegion(region)
+                .withExistingResourceGroup(resGroup)
+                .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-15-04-19.vhd", OperatingSystemStateTypes.GENERALIZED)
+                .withOSDiskSizeInGB(127)
+                .create();
+
         for (int i = 0; i < vmCount; i++) {
 
             Creatable<NetworkInterface> networkInterfaceCreatable = azure.networkInterfaces()
@@ -156,15 +161,6 @@ public class AzureService extends CloudService{
                     .withExistingNetworkSecurityGroup(backEndNSG);
             creatableNetworkInterfaces.add(networkInterfaceCreatable);
 
-            //create machines with single use vm image
-            Creatable<Disk> disksCreatable= azure.disks()
-                    .define(SdkContext.randomResourceName("test_dsk", 30))
-                    .withRegion(region)
-                    .withNewResourceGroup(resGroup)
-                    .withWindowsFromVhd("https://jsudh.blob.core.windows.net/vhd/help-15-04-19.vhd")
-                    .withSizeInGB(127)
-                    .withSku(DiskSkuTypes.STANDARD_LRS);
-            creatableDisk.add(disksCreatable);
         }
 
         test.log(Status.INFO, "Creating NIC's....");
@@ -173,14 +169,6 @@ public class AzureService extends CloudService{
         SystemActions.sleep(10);
         networkInterfacesKeys = new ArrayList(networkInterfaces.keySet());
         test.log(Status.INFO, "NIC's created");
-        extent.flush();
-
-        test.log(Status.INFO, "Creating Disks....");
-        disks = azure.disks().create(creatableDisk);
-        SystemActions.sleep(10);
-        disksKeys = new ArrayList(disks.keySet());
-
-        test.log(Status.INFO, "Disks created");
         extent.flush();
 
         test.log(Status.INFO, "Creating Storage account...");
@@ -198,7 +186,9 @@ public class AzureService extends CloudService{
                     .withRegion(region)
                     .withExistingResourceGroup(resGroup)
                     .withExistingPrimaryNetworkInterface(networkInterfaces.get(networkInterfacesKeys.get(i)))
-                    .withSpecializedOSDisk(disks.get(disksKeys.get(i)), OperatingSystemTypes.WINDOWS)
+                    .withWindowsCustomImage(virtualMachineCustomImage.id())
+                    .withAdminUsername("ibagent")
+                    .withAdminPassword("4illumination!")
                     .withSize(type)
                     .withNewStorageAccount(storageAccountCreatable);
             creatableVirtualMachines.add(virtualMachineCreatable);
@@ -216,7 +206,7 @@ public class AzureService extends CloudService{
         JSONArray diskIds = new JSONArray();
 
         for (int i = 0 ; i < vmCount; i++){
-            diskIds.add(disks.get(disksKeys.get(i)).id());
+            diskIds.add(virtualMachines.get(virtualMachinesKeys.get(i)).osDiskId());
         }
         obj.put("Disk ID's", diskIds);
 
@@ -232,6 +222,8 @@ public class AzureService extends CloudService{
             machineIds.add(virtualMachines.get(virtualMachinesKeys.get(i)).id());
         }
         obj.put("VM ID's", machineIds);
+
+        obj.put("Image ID",virtualMachineCustomImage.id());
 
         try (FileWriter file = new FileWriter(Locations.CLOUD_IDS_JSON)) {
             file.write(obj.toJSONString());
@@ -254,6 +246,7 @@ public class AzureService extends CloudService{
             nicIds.addAll(msg2);
             JSONArray msg3 = (JSONArray) jsonObject.get("VM ID's");
             vmIds.addAll(msg3);
+            imageId = jsonObject.get("Image ID").toString();
         } catch (ParseException | IOException e) {
             e.getMessage();
         }

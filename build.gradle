@@ -86,10 +86,10 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
     //azure
-    compile group: 'com.microsoft.azure', name: 'azure-mgmt-network', version: '1.19.0'
-    compile group: 'com.microsoft.azure', name: 'azure', version: '1.15.1' //compile group: 'com.microsoft.azure', name: 'azure', version: '1.19.0'
-    compile group: 'com.microsoft.azure', name: 'azure-mgmt-compute', version: '1.19.0'
-    compile group: 'com.microsoft.azure', name: 'azure-mgmt-resources', version: '1.19.0'
+    compile group: 'com.microsoft.azure', name: 'azure-mgmt-network', version: '1.22.0'
+    compile group: 'com.microsoft.azure', name: 'azure', version: '1.19.0'
+    compile group: 'com.microsoft.azure', name: 'azure-mgmt-compute', version: '1.22.0'
+    compile group: 'com.microsoft.azure', name: 'azure-mgmt-resources', version: '1.22.0'
 
     //Amazon
     compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.264'
