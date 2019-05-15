@@ -21,7 +21,7 @@ public class StaticDataProvider {
         public static final String BUILDSYSTEM = "\"" + IbLocations.IB_ROOT + "\\BuildSystem.exe" + "\"" + " ";
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
-        public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
+        public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\" /UseFile ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
         public static final String COORDMONITOR = "\"" + IbLocations.IB_ROOT + "\\coordmonitor.exe" + "\"" + " ";

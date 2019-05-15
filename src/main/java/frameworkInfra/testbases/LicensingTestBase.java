@@ -89,7 +89,7 @@ public class LicensingTestBase extends ReleaseTestBase {
                 SystemActions.sleep(10);
                 winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/UnsubscribeAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/Unsubscribe");
                 SystemActions.sleep(10);
                 break;
             case ("5"): //Temp License is Expired
