@@ -38,7 +38,7 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         boolean subscribeAgentStatus = true;
         try {
             subscribeAgentStatus = coordMonitor.getAgentSubscribeStatus(WindowsMachines.DASHBORD_HELPER);
-            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/SubscribeAll");
+            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/Subscribe");
             winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
             SystemActions.sleep(10);
         } catch (IOException e) {
