@@ -118,8 +118,9 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(){
-        killDriver();
+    public void afterMethod(Method method){
+        if (method.getName().equals("performOnboarding") || method.getName().equals("updateCloudSettings"))
+            webDriver.close();
         extent.flush();
     }
 
