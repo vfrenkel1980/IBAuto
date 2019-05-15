@@ -20,6 +20,8 @@ public interface ILinuxService {
 
     boolean isIBServiceUp( String IP);
 
+    boolean isIBCoordinatorServiceUp( String IP);
+
     boolean startIBService( String IP);
 
     boolean startIBService( String IP, String keyFilePath);

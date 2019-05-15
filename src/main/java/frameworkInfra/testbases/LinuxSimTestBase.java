@@ -60,7 +60,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
-        if (!linuxService.isIBServiceUp( ipList.get(0))) {
+        if (!linuxService.isIBCoordinatorServiceUp( ipList.get(0))) {
             test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
