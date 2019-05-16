@@ -59,7 +59,7 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod(Method method){
         killDriver();
         extent.flush();
     }
