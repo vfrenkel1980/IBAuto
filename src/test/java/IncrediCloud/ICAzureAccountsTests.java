@@ -1,10 +1,13 @@
 package IncrediCloud;
 
 import frameworkInfra.testbases.incrediCloud.ICAzureAccountsTestBase;
-import frameworkInfra.utils.StaticDataProvider;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
 
@@ -24,8 +27,17 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
         Assert.assertTrue(onboardingPageObject.verifyQuotaLimitMessage(), "Quota limit message did not appear");
     }
 
+    /**
+     * @test install an older version of ib in order to test ib update<br>
+     * @steps{
+     * - install older IB version
+     * - perform onboarding}
+     * @result{
+     * - update should complete successfully}
+     */
     @Test(testName = "Perform Onboarding", dependsOnMethods = { "createPoolOnALimitedRegion"})
     public void performOnboarding(){
+        ibService.updateIB("2851");
         SystemActions.sleep(30);
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
@@ -34,10 +46,29 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
         icService.setSecretInRegistry();
-        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+        winService.restartService(WindowsServices.COORD_SERVICE);
         icService.loginToCloud();
         Assert.assertTrue(icService.waitForDeliveredMachines(preUpdateOnboardingPage.getPoolSize()), "Number of delivered machines is not equal to " + preUpdateOnboardingPage.getPoolSize());
     }
+
+    /**
+     * @test verify incredicloud after IB update<br>
+     * @pre{ previous test (Perform Onboarding) should have older IB version installed </a>}
+     * @steps{
+     * - update IB version to latest}
+     * @result{
+     * - update should complete successfully}
+     */
+    @Test(testName = "Verify Cloud After IB Update", dependsOnMethods = { "performOnboarding"})
+    public void verifyCloudAfterIBUpdate(){
+        ibService.updateIB("Latest");
+        Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSECRET), webServer.secret,
+                "Secret does not match after updating IB");
+        SystemActions.sleep(180);
+        Assert.assertTrue(icService.waitForDeliveredMachines(preUpdateOnboardingPage.getPoolSize()), "Number of delivered machines is not equal to " + preUpdateOnboardingPage.getPoolSize());
+    }
+
+
     /**
      * @test this test is for testing a bug which wont let us update because the sum of machines before and after the change are over the account limit<br>
      * @pre{ perform onboarding - previous test</a>}
@@ -46,7 +77,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
      * @result{
      * - update should complete successfully}
      */
-/*    @Test(testName = "Update Policy With Sum Of Machines Is Over The Limit", dependsOnMethods = { "performOnboarding"})
+/*    @Test(testName = "Update Policy With Sum Of Machines Is Over The Limit", dependsOnMethods = { "verifyCloudAfterIBUpdate"})
     public void updatePolicyWithSumOfMachinesIsOverTheLimit(){
         onboardingPageObject.clickTryIncredicloud();
         azurePageObject.selectAzureUser(PROD_USER);
@@ -65,7 +96,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
      * @result{
      * - error message should appear}
      */
-    @Test(testName = "Try To Update With A Different User", dependsOnMethods = { "performOnboarding"})
+    @Test(testName = "Try To Update With A Different User", dependsOnMethods = { "verifyCloudAfterIBUpdate"})
     public void tryToUpdateWithADifferentUser(){
         onboardingPageObject.clickTryIncredicloud();
         azurePageObject.selectAzureUser(LIMITED_USER);
