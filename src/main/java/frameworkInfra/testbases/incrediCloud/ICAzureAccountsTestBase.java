@@ -60,7 +60,7 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
 
     @AfterMethod
     public void afterMethod(){
-        eventWebDriver.close();
+        killDriver();
         extent.flush();
     }
 
