@@ -323,6 +323,12 @@ public class LinuxService extends TestBase implements ILinuxService {
     }
 
     @Override
+    public boolean isIBCoordinatorServiceUp(String IP) {
+        int res = winService.runCommandWaitForFinish(LinuxCommands.PLINK + IP + " " + LinuxCommands.CHECK_IB_COORDINATOR_SERVICE);
+        return res == 0;
+    }
+
+    @Override
     public void killibDbCheck(String IP) {
         linuxRunSSHCommandOutputString(LinuxCommands.KILL_IB_DB_CHECK,IP);
     }
