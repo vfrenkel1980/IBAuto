@@ -290,7 +290,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud And Create New Pool", dependsOnMethods = { "pauseCloudAndDeletePool"})
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud(true);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES * 2, "480000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "480000"));
         SystemActions.sleep(60);
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
