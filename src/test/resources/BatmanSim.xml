@@ -12,7 +12,8 @@
     <test name="Minimal">
         <parameter name="logLevel" value="0"/>
         <classes>
-            <class name ="Native.windowstests.batman.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC16PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC16Tests" />
             <class name ="Native.windowstests.batman.BatmanVC15Tests" />
             <class name ="Native.windowstests.batman.BatmanVC14Tests" />
             <class name ="Native.windowstests.batman.BatmanVC12Tests" />
@@ -25,7 +26,8 @@
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="Native.windowstests.batman.BatmanVC15PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC16PreviewTests" />
+            <class name ="Native.windowstests.batman.BatmanVC16Tests" />
             <class name ="Native.windowstests.batman.BatmanVC15Tests" />
             <class name ="Native.windowstests.batman.BatmanVC14Tests" />
             <class name ="Native.windowstests.batman.BatmanVC12Tests" />
