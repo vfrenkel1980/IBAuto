@@ -148,7 +148,7 @@ public class AzureService extends CloudService{
                 .withOSDiskSizeInGB(127)
                 .create();
 
-        for (int i = 2; i < vmCount; i++) {
+        for (int i = 0; i < vmCount; i++) {
 
             Creatable<NetworkInterface> networkInterfaceCreatable = azure.networkInterfaces()
                     .define("testNIC-" + i)
@@ -179,7 +179,7 @@ public class AzureService extends CloudService{
         test.log(Status.INFO, "Storage account created");
 
 
-        for (int i = 2; i < vmCount; i++) {
+        for (int i = 0; i < vmCount; i++) {
             Creatable<VirtualMachine> virtualMachineCreatable = azure.virtualMachines()
                     .define("TESTVM-" + i)
                     .withRegion(region)
