@@ -12,25 +12,25 @@ public class BatmanVC16PreviewTests extends BatmanBCTestBase {
 
 
     @Test(testName = "Audacity 2019 Preview - Debug - build" , groups = { "Build" })
-    public void audacityDebugBuild(){
+    public void audacity2019DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_BATMAN.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "ACE 2019 Preview - Debug - build" , groups = { "Build" })
-    public void ace2017DebugBuild(){
+    public void ace2019DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_BATMAN.ACE_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Big Project 2019 Preview - Debug - build" , groups = { "Build" })
-    public void bigProjectDebugBuild(){
+    public void bigProject2019DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_BATMAN.BIGPROJECT_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Big Project 2019 Preview - Release - build" , groups = { "Build" })
-    public void bigProjectReleaseBuild(){
+    public void bigProject2019ReleaseBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_BATMAN.BIGPROJECT_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }

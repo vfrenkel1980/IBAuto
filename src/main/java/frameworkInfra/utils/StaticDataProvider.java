@@ -41,6 +41,7 @@ public class StaticDataProvider {
         public static final String NCONVERT = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Image Processing\\Nconvert\\" + "\"" + " ";
         public static final String FFMPEG = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Dev Tools Acceleration\\Video Conversion\\Ffmpeg\\" + "\"" + " ";
         public static final String JOM = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Make And Build Tools\\Jom\\" + "\"" + " ";
+        public static final String NMAKE = "\"" + Locations.QA_ROOT + "\\projects\\Samples\\Make And Build Tools\\Nmake\\" + "\"" + " ";
     }
 
     public static class InitMSBuild {

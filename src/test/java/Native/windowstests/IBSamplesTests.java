@@ -157,6 +157,18 @@ public class IBSamplesTests extends WindowsSimTestBase {
         }
     }
 
-    //make
-    //Nmake
+    @Test(testName = "Verify NMake Sample Test")
+    public void verifyNMakeSampleTest() {
+        String result = "";
+        winService.runCommandWaitForFinish(winService.changeCurDirTo(IBSamplesLocations.NMAKE)+".\\RunNMAKESample.bat");
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "verifyJomSampleTest failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+    }
+    /**
+     * @TODO: 5/21/2019  make
+*/
 }
