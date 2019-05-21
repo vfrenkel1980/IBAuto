@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 /**
  * @brief<b> <b>Nintendo Switch project tests</b>
- * @details vm: on Host-24
+ * @details vm Gameboy: on Host-24
  */
 public class NintendoSwitchTests extends WindowsTestBase {
 
