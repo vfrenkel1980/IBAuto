@@ -139,7 +139,6 @@ public class AzureService extends CloudService{
     public void create() {
         List<Creatable<VirtualMachine>> creatableVirtualMachines = new ArrayList<>();
         List<Creatable<NetworkInterface>> creatableNetworkInterfaces = new ArrayList<>();
-        List<Creatable<Disk>> creatableDisk = new ArrayList<>();
 
         virtualMachineCustomImage = azure.virtualMachineCustomImages()
                 .define("HelperIMG")
