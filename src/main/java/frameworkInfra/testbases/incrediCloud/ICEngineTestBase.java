@@ -39,7 +39,7 @@ public class ICEngineTestBase extends TestBase {
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     //TODO: change the number of cores (2) to an var once cores selection is implemented
-    final public int GRID_CORES_WO_CLOUD = 8;
+    final public int GRID_CORES_WO_CLOUD = 16;
     final public int GRID_CORES = POOL_SIZE * 2 + GRID_CORES_WO_CLOUD;
     final public int POOL_CORES = POOL_SIZE * 2;
     final public int PORT = 12345;
