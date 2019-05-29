@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
+
 public class OnboardingPageObject {
 
     //MAPPING
@@ -96,7 +98,7 @@ public class OnboardingPageObject {
     }
 
     private void enterVMDetails(OnboardingPage onboardingPage){
-        eventWebDriver.findElement(VMS_PANEL).click();
+        //eventWebDriver.findElement(VMS_PANEL).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
@@ -124,11 +126,22 @@ public class OnboardingPageObject {
     }
 
     public boolean validateRegion(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
+        switch (ENV){
+            case "prod":
+                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, " Pay-As-You-Go")))).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, " Pay-As-You-Go")))).click();
+                break;
+            case "uat":
+                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
+
+                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "System Test")))).click();
+                break;
+        }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "None")))).click();
@@ -165,7 +178,7 @@ public class OnboardingPageObject {
     }
 
     public void validateTimeout(){
-        eventWebDriver.findElement(VMS_PANEL).click();
+        //eventWebDriver.findElement(VMS_PANEL).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(TIMEOUT_ERROR_LBL).isDisplayed(), "Failed to locate missing Timeout error message");
@@ -195,7 +208,7 @@ public class OnboardingPageObject {
     }
 
     public void validateCoordPort(){
-        eventWebDriver.findElement(NETWORK_PANEL).click();
+        //eventWebDriver.findElement(NETWORK_PANEL).click();
         eventWebDriver.findElement(COORD_PORT_TB).clear();
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(COORD_PORT_ERROR_LBL).isDisplayed(), "Failed to locate missing Coord port error message");
