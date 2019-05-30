@@ -34,14 +34,15 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
-    final protected String PROD_USER = "mark@incredicloudcs.onmicrosoft.com";
+    public static String TYPE = System.getProperty("machineType");
+    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
     final protected String LIMITED_USER = "test1@jijuclickmail.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
-    //TODO: change the number of cores (2) to an var once cores selection is implemented
-    final public int GRID_CORES_WO_CLOUD = 16;
-    final public int GRID_CORES = POOL_SIZE * 2 + GRID_CORES_WO_CLOUD;
-    final public int POOL_CORES = POOL_SIZE * 2;
+    public int MACHINE_CORES = getMachineCores(TYPE);
+    final public int ON_PREM_CORES = 16;
+    final public int GRID_CORES = POOL_SIZE * MACHINE_CORES + ON_PREM_CORES;
+    final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
     final protected int CORES_LIMIT = 20;
@@ -103,9 +104,9 @@ public class ICEngineTestBase extends TestBase {
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
-        onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT, POOL_SIZE,
+        onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                 COORD_PORT, VM_PORT);
-        updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
+        updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
                 COORD_PORT, VM_PORT);
     }
 
@@ -151,6 +152,18 @@ public class ICEngineTestBase extends TestBase {
             eventWebDriver.unregister(handler);
             webDriver = null;
         }
+    }
+
+    private int getMachineCores(String machineType){
+        int cores= 0;
+        switch (machineType){
+            case "B2s":
+                cores = 2;
+                break;
+            case "D4s_v3":
+                cores = 4;
+        }
+        return cores;
     }
 
 }

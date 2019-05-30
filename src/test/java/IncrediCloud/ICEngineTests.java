@@ -74,7 +74,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Not All Machines Participate In Build", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
     public void verifyNotAllMachinesParticipateInBuild(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES - 4, "40000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES - (MACHINE_CORES * 2), "40000"));
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -93,7 +93,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify New Machines Are Created", dependsOnMethods = { "verifyNotAllMachinesParticipateInBuild"})
     public void verifyNewMachinesAreCreated(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + 6, "960000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + (MACHINE_CORES * 3), "960000"));
         icService.waitForDeliveredMachines(POOL_SIZE + 3);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(true);
@@ -129,7 +129,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify No Cloud Machines Are Created When Using On Prem Machines", dependsOnMethods = { "verifyMachinesDeallocatedAfterReachingTimeout"})
     public void verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines(){
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
+        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
         int runningMachines = icService.getStatusQueue(true);
         Assert.assertEquals(runningMachines, 0, "NO machines should be running");
     }
@@ -153,7 +153,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyCloudMachinesAreStartedWhenDisablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started");
@@ -178,7 +178,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem(){
         winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
                 + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_WO_CLOUD, "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
         SystemActions.sleep(180);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);

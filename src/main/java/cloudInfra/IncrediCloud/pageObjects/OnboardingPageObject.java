@@ -16,8 +16,9 @@ public class OnboardingPageObject {
     private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure col-xl-3 col-sm-4 buttonTag']");
     private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Azure Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
-    private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Susbscription']");
-    private static final String REGIONS = "//span[text()='%s']";
+    private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
+    private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
+    private static final String SELECTION_LIST = "//span[contains(text(),'%s')]";
     private static final By FIRST_NAME_TB = By.xpath("//*[@placeholder='First Name']");
     private static final By LAST_NAME_TB = By.xpath("//*[@placeholder='Last Name']");
     private static final By EMAIL_TB = By.xpath("//*[@placeholder='Email']");
@@ -35,7 +36,7 @@ public class OnboardingPageObject {
 
     //ERROR MESSAGES
     private static final By TENNANT_ERROR_LBL = By.xpath("//*[text()='The Tenant id field is required']");
-    private static final By SUBSCRIPTION_ERROR_LBL = By.xpath("//*[text()=' The Susbscription field is required']");
+    private static final By SUBSCRIPTION_ERROR_LBL = By.xpath("//*[text()=' The Subscription field is required']");
     private static final By REGION_ERROR_LBL = By.xpath("//*[text()='The Azure Region field is required']");
     private static final By FNAME_ERROR_LBL = By.xpath("//*[text()=' The first name field is required']");
     private static final By LNAME_ERROR_LBL = By.xpath("//*[text()='The last name field is required']");
@@ -81,7 +82,7 @@ public class OnboardingPageObject {
     private void selectRegion(OnboardingPage onboardingPage){
         SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, onboardingPage.getRegion())))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
     }
 
     private void enterName(OnboardingPage onboardingPage){
@@ -99,6 +100,8 @@ public class OnboardingPageObject {
 
     private void enterVMDetails(OnboardingPage onboardingPage){
         //eventWebDriver.findElement(VMS_PANEL).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(MACHINE_TYPE_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getMachineType())))).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
@@ -115,13 +118,13 @@ public class OnboardingPageObject {
     public boolean validateTenant(){
         SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "None")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
         return eventWebDriver.findElement(TENNANT_ERROR_LBL).isDisplayed();
     }
 
     public boolean validateSubscription(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "None")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
         return eventWebDriver.findElement(SUBSCRIPTION_ERROR_LBL).isDisplayed();
     }
 
@@ -129,22 +132,22 @@ public class OnboardingPageObject {
         switch (ENV){
             case "prod":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, " Pay-As-You-Go")))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
                 break;
             case "uat":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "System Test")))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
                 break;
         }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(REGIONS, "None")))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
         return eventWebDriver.findElement(REGION_ERROR_LBL).isDisplayed();
     }
 

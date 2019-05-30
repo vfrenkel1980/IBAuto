@@ -125,6 +125,7 @@ test {
     systemProperty 'memory', System.properties['memory'] ?: '%d'
     systemProperty 'numofmachines', System.properties['numofmachines'] ?: "%d"
     systemProperty 'incredicloudEnv', System.properties['incredicloudEnv'] ?: "%s"
+    systemProperty 'machineType', System.properties['machineType'] ?: "%s"
 
     // enable TestNG support (default is JUnit)
     useTestNG(){
