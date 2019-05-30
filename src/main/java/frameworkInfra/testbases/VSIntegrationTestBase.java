@@ -109,6 +109,11 @@ public class VSIntegrationTestBase extends TestBase {
         log.info(method.getName() + " test started");
     }
 
+    @AfterMethod
+    public void afterMethod(){
+        extent.flush();
+    }
+
     @AfterClass
     public void afterClass(){
         vsuiService.killDriver();
