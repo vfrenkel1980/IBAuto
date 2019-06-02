@@ -130,14 +130,14 @@ public class OnboardingPageObject {
     }
 
     public boolean validateRegion(){
-        switch (ENV){
-            case "prod":
+/*        switch (ENV){
+            case "prod":*/
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
-                break;
+/*                break;
             case "uat":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
@@ -145,7 +145,7 @@ public class OnboardingPageObject {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
                 break;
-        }
+        }*/
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
