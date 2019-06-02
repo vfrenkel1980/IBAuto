@@ -3,6 +3,8 @@ package cloudInfra.IncrediCloud.pageObjects;
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +21,7 @@ public class OnboardingPageObject {
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
     private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
     private static final String SELECTION_LIST = "//span[contains(text(),'%s')]";
+    private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@class='mat-option-text']";
     private static final By FIRST_NAME_TB = By.xpath("//*[@placeholder='First Name']");
     private static final By LAST_NAME_TB = By.xpath("//*[@placeholder='Last Name']");
     private static final By EMAIL_TB = By.xpath("//*[@placeholder='Email']");
@@ -100,8 +103,8 @@ public class OnboardingPageObject {
 
     private void enterVMDetails(OnboardingPage onboardingPage){
         //eventWebDriver.findElement(VMS_PANEL).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(MACHINE_TYPE_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getMachineType())))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
