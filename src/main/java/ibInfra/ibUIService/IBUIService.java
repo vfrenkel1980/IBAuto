@@ -590,6 +590,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void limitNumberOfCoresPerBuild() {
+            test.log(Status.INFO, "Limiting the number of cores per build");
             try {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.EnableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
@@ -605,6 +606,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void disableLimitOfCoresPerBuild() {
+            test.log(Status.INFO, "Disabling number of cores per build limit");
             try {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.DisableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
