@@ -1,5 +1,6 @@
 package ibInfra.ibUIService;
 
+import com.amazonaws.services.s3.model.InstructionFileId;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
@@ -516,10 +517,11 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public boolean verifyMultipleBuildsTab() {
+            test.log(Status.INFO, "Navigating to \"Initiator\" tab");
             try {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
             } catch (FindFailed findFailed) {
-                test.log(Status.WARNING, "Failed to enable output options with error: " + findFailed.getMessage());
+                test.log(Status.WARNING, "Failed to navigate to Initiator tab with error: " + findFailed.getMessage());
                 Assert.fail();
             }
             if (screen.exists(IBSettings.MultiBuildTab, 15) != null)
