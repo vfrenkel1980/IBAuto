@@ -3,8 +3,6 @@ package cloudInfra.IncrediCloud.pageObjects;
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
