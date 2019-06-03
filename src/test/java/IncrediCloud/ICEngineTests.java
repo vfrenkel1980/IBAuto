@@ -248,7 +248,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
         coordinator.enableCloud(false);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES * 2, "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (ON_PREM_CORES * 2) + POOL_CORES, "240000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -291,7 +291,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void enableCloudAndCreateNewPool(){
         coordinator.enableCloud(true);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "900000"));
-        SystemActions.sleep(60);
+        SystemActions.sleep(180);
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertTrue(cloudMachinesRunning, "Cloud Machines should be started");
