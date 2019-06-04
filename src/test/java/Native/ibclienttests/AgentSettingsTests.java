@@ -218,6 +218,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableFailOnlyLocally();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on local but should't");
     }
 
