@@ -597,7 +597,7 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.InitiatorTab.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.EnableLimitNumOFCoresPerBuildCB.similar((float) 0.9),5).click();
                 screen.wait(IBSettings.NumOfCoresPerBuild.similar((float) 0.9),5).click();
-                screen.type("4");
+                screen.type("5");
                 screen.wait(IBSettings.OKButton.similar((float) 0.9),5).click();
 
             } catch (FindFailed findFailed) {
