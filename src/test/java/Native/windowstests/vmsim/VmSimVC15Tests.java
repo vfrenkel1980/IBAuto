@@ -9,19 +9,19 @@ import org.testng.annotations.Test;
 public class VmSimVC15Tests extends VmSimTestBase {
 
     @Test(testName = "Audacity 2017 - Debug - build" , groups = { "Build" })
-    public void audacityDebugBuild(){
+    public void audacity2017DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_VMSIM.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Big Project 2017 - Debug - build" , groups = { "Build" })
-    public void bigProjectDebugBuild(){
+    public void bigProject2017DebugBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_VMSIM.BIGPROJECT_X32_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
     @Test(testName = "Big Project 2017 - Release - build" , groups = { "Build" })
-    public void bigProjectReleaseBuild(){
+    public void bigProject2017ReleaseBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_VMSIM.BIGPROJECT_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
