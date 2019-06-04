@@ -465,7 +465,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\"";
-            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC16\\wxWidgets-3.1.2\\build\\msw\\wx_vc16.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2019 - Debug x64\"";
+            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC16\\wxWidgets-3.1.2\\build\\msw\\wx_vc15.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2019 - Debug x64\"";
         }
 
         public static class VC16Preview_VMSIM {
