@@ -30,7 +30,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOnStandaloneOff() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         Assert.assertTrue(ibService.verifyAvoidLocal(Locations.OUTPUT_LOG_FILE), "failed to verify avoid local in output log");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
@@ -40,7 +40,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOffStandaloneOn() {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("1", "Builder", RegistryKeys.STANDALONE_MODE);
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
     }
@@ -49,7 +49,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void avoidLocalExecutionTurnedOffStandaloneOff() {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
@@ -204,7 +204,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     public void verifyCoreLimitPerBuildLimitation() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.limitNumberOfCoresPerBuild();
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableLimitOfCoresPerBuild();
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #1)"), "Didn't find core 1 for helper");
