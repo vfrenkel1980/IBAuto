@@ -527,7 +527,7 @@ public class StaticDataProvider {
 
         public static class CHROME {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
-            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_BUILD = "\""+IbLocations.IB_ROOT + "\\buildconsole\" /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
             public static final String CHROME_RELEASE_CLEAN_PERFORMANCE = "ninja -C C:\\qa\\Chromium\\src\\out\\Default -t clean";
             public static final String CHROME_RELEASE_BUILD_PERFORMANCE = "ibconsole /command=\"ninja -C c:\\qa\\Chromium\\src\\out\\Default chrome -j 200\" /profile=\"c:\\qa\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
@@ -546,7 +546,13 @@ public class StaticDataProvider {
         public static class VC16_ROBIN {
             public static final String AUDACITY_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BLENDER_X64_RELEASE = "\""+Locations.QA_ROOT+"\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+        }
 
+        public static class VC16Preview_ROBIN {
+            public static final String AUDACITY_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String BLENDER_X64_RELEASE = "\""+Locations.QA_ROOT+"\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 Preview - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
         }
 
         public static class DOCKER_ROBIN {
