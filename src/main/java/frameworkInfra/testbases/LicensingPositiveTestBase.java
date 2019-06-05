@@ -39,7 +39,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
         SystemActions.deleteFilesByPrefix(Locations.WORKSPACE_REPORTS, "Test");
         currentDate = SystemActions.getLocalDateAsString();
 
-        ibService.installIB("Latest");
+        ibService.installIB(IB_VERSION);
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.AUTOMATIC_UPDATE_SUBSCRIBED_AGENTS, "1");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "1");
@@ -109,7 +109,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
 
     @AfterSuite
     public void afterSuite(){
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
     }
 
 }

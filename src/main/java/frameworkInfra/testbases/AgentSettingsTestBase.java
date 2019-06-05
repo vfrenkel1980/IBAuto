@@ -60,7 +60,7 @@ public class AgentSettingsTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
 
-        ibService.updateIB("Latest");
+        ibService.updateIB(IB_VERSION);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");

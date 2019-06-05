@@ -70,7 +70,7 @@ public class UIValidationTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
         //stop agent service in order to delete history
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
 

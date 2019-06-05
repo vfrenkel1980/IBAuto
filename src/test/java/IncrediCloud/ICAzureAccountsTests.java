@@ -61,7 +61,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
      */
     @Test(testName = "Verify Cloud After IB Update", dependsOnMethods = { "performOnboarding"})
     public void verifyCloudAfterIBUpdate(){
-        ibService.updateIB("Latest");
+        ibService.updateIB(IB_VERSION);
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSECRET), webServer.secret,
                 "Secret does not match after updating IB");
         SystemActions.sleep(180);

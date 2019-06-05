@@ -46,14 +46,14 @@ public class EnterpriseTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result) {
         SystemActions.deleteFile(StaticDataProvider.Locations.OUTPUT_LOG_FILE);
         extent.flush();
     }
 
     @AfterClass
     public void afterClass() {
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
         extent.flush();
     }
 

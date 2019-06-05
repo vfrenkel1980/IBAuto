@@ -22,7 +22,7 @@ public class EnterprisePositiveTestBase extends EnterpriseTestBase {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "BEFORE CLASS started");
         log.info("BEFORE CLASS started");
-        ibService.installIB("Latest",IbLicenses.DASHBOARD_LIC);
+        ibService.installIB(IB_VERSION,IbLicenses.DASHBOARD_LIC);
         ibService.upgradeToEnt();
         SystemActions.sleep(10);
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");

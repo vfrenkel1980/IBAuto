@@ -9,7 +9,7 @@ public class DowngradeTests extends DashboardTestBase {
 
     @Test(testName = "Perform Downgrade To Pro")
     public void performDowngradeToPro() {
-        int exitCode = ibService.downgradeEntToPro("Latest");
+        int exitCode = ibService.downgradeEntToPro(IB_VERSION);
         Assert.assertEquals(exitCode, 0, "Enterprise Downgrade finished with Exit Code different than 0");
     }
 

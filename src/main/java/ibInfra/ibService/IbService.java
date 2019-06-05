@@ -31,6 +31,7 @@ import java.util.*;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.testbases.TestBase.IB_VERSION;
 
 
 public class IbService implements IIBService {
@@ -388,7 +389,7 @@ public class IbService implements IIBService {
      * @param context used to get the suite name
      */
     public void generateCustomReport(ITestContext context){
-        String version = getVersionFromInstaller("Latest");
+        String version = getVersionFromInstaller(IB_VERSION);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();

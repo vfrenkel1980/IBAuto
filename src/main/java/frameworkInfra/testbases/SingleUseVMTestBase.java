@@ -59,7 +59,7 @@ public class SingleUseVMTestBase extends TestBase {
         test.log(INFO, method.getName() + " test started");
         test.assignCategory(context.getName());
         log.info("Starting test " + method.getName());
-        int exit = ibService.installSingleUseIB("Latest");
+        int exit = ibService.installSingleUseIB(IB_VERSION);
         Assert.assertTrue(exit == 0, "Single-use  incrediBuild installation failed");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "1");
@@ -67,7 +67,7 @@ public class SingleUseVMTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
     }
 
     /*------------------------------METHODS------------------------------*/

@@ -95,7 +95,7 @@ public class VSTestBase extends TestBase {
                     vsCommands.upgradeVS(RELEASE_2017);
                 else
                     vsCommands.upgradeVS(PREVIEW_2019);
-                ibService.installIB("Latest", IbLicenses.VSTESTS_LIC);
+                ibService.installIB(IB_VERSION, IbLicenses.VSTESTS_LIC);
                 ibVersion = IIBService.getIbVersion();
                 ibService.verifyIbServicesRunning(true, true);
 
@@ -230,7 +230,7 @@ public class VSTestBase extends TestBase {
      * and saves the result in network automation\reports folder
      */
     private void generateCustomReport(){
-        String version = getVersionFromInstaller("Latest");
+        String version = getVersionFromInstaller(IB_VERSION);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();

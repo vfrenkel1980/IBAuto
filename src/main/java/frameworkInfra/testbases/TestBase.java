@@ -48,6 +48,7 @@ public class TestBase {
     protected EventHandler handler = new EventHandler();
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
+    public static String IB_VERSION = System.getProperty("ibVersion");
 //    private WindowsService windowsService = new WindowsService();
     private IbService ibService = new IbService();
 

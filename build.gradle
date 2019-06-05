@@ -127,6 +127,8 @@ test {
     systemProperty 'incredicloudEnv', System.properties['incredicloudEnv'] ?: "%s"
     systemProperty 'machineType', System.properties['machineType'] ?: "%s"
 
+    systemProperty 'ibVersion', System.properties['ibVersion'] ?: "%s"
+
     // enable TestNG support (default is JUnit)
     useTestNG(){
         useDefaultListeners = true
