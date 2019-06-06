@@ -115,6 +115,8 @@ test {
     systemProperty 'env', System.properties['env'] ?: 'linuxsim2b'
     //Linux version selection
     systemProperty "version", System.getProperty("version")
+    //Linux command flags
+    systemProperty "linuxCLflags", System.getProperty("linuxCLflags")
     //Linux AWS initiator selection
     systemProperty "initiators", System.getProperty("initiators")
     //systemProperty "groups", System.getProperty("groups")
