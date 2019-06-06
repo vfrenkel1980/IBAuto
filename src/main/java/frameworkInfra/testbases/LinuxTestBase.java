@@ -31,6 +31,7 @@ public class LinuxTestBase extends TestBase{
     protected static String className;
     protected static String ENV = System.getProperty("env");
     protected static String VERSION = System.getProperty("version");
+    protected static String LINUXCLFLAGS = System.getProperty("linuxCLflags");
 
     protected static LinuxSimTestBase.TestType testType;
 
