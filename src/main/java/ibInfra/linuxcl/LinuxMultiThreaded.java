@@ -52,39 +52,39 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                 switch (randIndex) {
                     case 0:
                         command = LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Kernel", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Kernel", "", "32");
                         break;
                     case 1:
                         command = LinuxSimulation.CD_APACHE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Apache", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Apache", "", "32");
                         break;
                     case 2:
                         command = LinuxSimulation.CD_CMAKE_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Cmake", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Cmake", "", "32");
                         break;
                     case 3:
                         command = LinuxSimulation.CD_SAMBA_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Samba", "env JOBS=100", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Samba", "env JOBS=100", "32");
                         break;
                     case 4:
                         command = LinuxSimulation.CD_CPP_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "CPP", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "CPP", "", "32");
                         break;
                     case 5:
                         command = LinuxSimulation.CD_MYSQL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "MySQL", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "MySQL", "", "32");
                         break;
                     case 6:
                         command = LinuxSimulation.CD_GIT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Git", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Git", "", "32");
                         break;
                     case 7:
                         command = LinuxSimulation.CD_GDB_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "GDB", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "GDB", "", "32");
                         break;
                     case 8:
                         command = LinuxSimulation.CD_BOOST_DIR + ";" + LinuxSimulation.B2_CLEAN + ";" +
-                                String.format(LinuxSimulation.B2_BUILD, "--ib-crash -d1 ", "Boost", "", "32");
+                                String.format(LinuxSimulation.B2_BUILD, LINUXCLFLAGS, "Boost", "", "32");
                         break;
                 }
             }
@@ -94,19 +94,19 @@ public class LinuxMultiThreaded extends LinuxSimTestBase implements Runnable{
                 switch (randIndex) {
                     case 0:
                         command = LinuxSimulation.CD_KERNEL_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Kernel", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Kernel", "", "32");
                         break;
                     case 1:
                         command = LinuxSimulation.CD_GPSD_DIR + ";" + LinuxSimulation.SCONS_CLEAN + ";" +
-                                String.format(LinuxSimulation.SCONS_BUILD, "--ib-crash -d1 ", "GPSD", "", "32");
+                                String.format(LinuxSimulation.SCONS_BUILD, LINUXCLFLAGS, "GPSD", "", "32");
                         break;
                     case 2:
                         command = LinuxSimulation.CD_SAMBA2_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "Samba", "env JOBS=100", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Samba", "env JOBS=100", "32");
                         break;
                     case 3:
                         command = LinuxSimulation.CD_MYSQL2_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 ", "MySQL", "", "32");
+                                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "MySQL", "", "32");
                         break;
                 }
             }
