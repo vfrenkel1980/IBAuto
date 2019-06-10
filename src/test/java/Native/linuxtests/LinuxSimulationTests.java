@@ -131,7 +131,7 @@ public class LinuxSimulationTests extends LinuxSimTestBase {
     @Test(testName = "Sim Chromium")
     public void SimTestChromium(){
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_CHROMIUM_DIR + ";" + LinuxSimulation.NINJA_CLEAN + ";" +
-                String.format(LinuxSimulation.NINJA_BUILD,"--ib-crash -d1 --f","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.NINJA_BUILD,LINUXCLFLAGS,"Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(simClassType.ordinal()));
 //                String.format(LinuxSimulation.NINJA_BUILD,"--ib-crash","Chromium", "env PATH=$PATH:/disk2/projects/chromium/depot_tools", "32"), ipList.get(simClassType.ordinal()));
 
         Assert.assertTrue(exitCode <= 0, "Test failed with Exit code " + exitCode);
