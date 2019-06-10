@@ -237,6 +237,7 @@ public class SystemActions {
      * @param dest destination
      */
     public static void copyFile(String src, String dest){
+        test.log(Status.INFO, "Copying file from " + src +" to " + dest);
         try {
             FileUtils.copyFile(new File(src), new File(dest));
         } catch (IOException e) {

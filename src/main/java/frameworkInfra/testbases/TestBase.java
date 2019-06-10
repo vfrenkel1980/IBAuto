@@ -79,6 +79,7 @@ public class TestBase {
 
     @AfterSuite
     public void afterSuiteRun(ITestContext context){
+        extent.createTest("After Suite - Report handling");
         ibService.generateCustomReport(context);
     }
 
