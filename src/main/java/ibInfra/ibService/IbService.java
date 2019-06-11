@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.TestBase.IB_VERSION;
 
@@ -389,12 +390,16 @@ public class IbService implements IIBService {
      * @param context used to get the suite name
      */
     public void generateCustomReport(ITestContext context){
+        extent.createTest("Report generator");
         String version = getVersionFromInstaller(IB_VERSION);
+        test.log(Status.INFO, "VERSION: " + IB_VERSION);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
+        test.log(Status.INFO, "File path: " + file);
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
+        test.log(Status.INFO, " SuiteID: " + suiteId);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
         SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
         SystemActions.deleteFile(destFile);

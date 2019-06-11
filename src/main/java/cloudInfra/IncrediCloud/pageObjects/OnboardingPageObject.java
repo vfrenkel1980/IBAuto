@@ -76,7 +76,7 @@ public class OnboardingPageObject {
     }
 
     public void performUpdate(OnboardingPage onboardingPage){
-        enterVMDetails(onboardingPage);
+        updateVmDetails(onboardingPage);
         clickSave();
     }
 
@@ -100,9 +100,17 @@ public class OnboardingPageObject {
     }
 
     private void enterVMDetails(OnboardingPage onboardingPage){
-        //eventWebDriver.findElement(VMS_PANEL).click();
         wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
+        eventWebDriver.findElement(TIMEOUT_TB).clear();
+        eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
+        eventWebDriver.findElement(CORES_LIMIT_TB).clear();
+        eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys(String.valueOf(onboardingPage.getCoresLimit()));
+        eventWebDriver.findElement(POOL_SIZE_TB).clear();
+        eventWebDriver.findElement(POOL_SIZE_TB).sendKeys(String.valueOf(onboardingPage.getPoolSize()));
+    }
+
+    private void updateVmDetails(OnboardingPage onboardingPage){
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
