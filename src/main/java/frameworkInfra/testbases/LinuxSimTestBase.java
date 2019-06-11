@@ -167,6 +167,22 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if ((exitStatus != 0) && (file.contains("ib_tests_res")))
                 test.log(Status.WARNING, "Errors found in " + file);
         }
+
+        for (String machine : ipList){
+            List<String> has_crashes = linuxService.findFile(machine, "/opt/incredibuild/log/", "*.has_crash");
+            for (String crash : has_crashes){
+                if (!crash.isEmpty()){
+                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: " + crash);
+                }
+            }
+            List<String> log_crashes = linuxService.findFile(machine, "/opt/incredibuild/log/", "*.crash.log");
+            for (String crash : log_crashes){
+                if (!crash.isEmpty()){
+                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: " + crash);
+                }
+            }
+        }
+
     }
 
 }
