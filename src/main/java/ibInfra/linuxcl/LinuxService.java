@@ -15,6 +15,7 @@ import org.apache.commons.collections4.list.SetUniqueList;
 import org.junit.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
@@ -527,5 +528,12 @@ public class LinuxService extends TestBase implements ILinuxService {
         installCommand +=  " -A " + instFolder;
 
         return linuxRunSSHCommand(installCommand, machineName);
+    }
+
+    @Override
+    public List findFile(String machineName, String folder, String fileName) {
+        String[] commandOutput =  linuxRunSSHCommandOutputString("find " + folder + " -name " + fileName, machineName).split("\n");
+        List<String> filesList = Arrays.asList(commandOutput);
+        return filesList;
     }
 }
