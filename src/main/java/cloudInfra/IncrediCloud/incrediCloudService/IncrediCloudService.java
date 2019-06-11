@@ -121,6 +121,23 @@ public class IncrediCloudService implements IIncrediCloudService{
     }
 
     @Override
+    public List getCouldIps() {
+        test.log(Status.INFO, "Retrieving IP list from cloud machines");
+        Response response = given().
+                header("Authorization", "bearer " + token).
+                when().
+                get("/provision/getStatusQueue/" + coordId + "/true").
+                peek().
+                then().
+                statusCode(200).
+                extract().
+                response();
+        List<Boolean> ipList = response.path("resourceDetails.ip_address");
+        test.log(Status.INFO, "Finished retrieving IP list");
+        return ipList;
+    }
+
+    @Override
     public boolean waitForDeliveredMachines(int numOfMachines) {
         int time = 0;
         int wait = 900;
