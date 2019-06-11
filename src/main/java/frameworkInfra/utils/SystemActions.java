@@ -105,9 +105,9 @@ public class SystemActions {
         try{
             File file = new File(filePath);
             if(file.delete()){
-                log.info(filePath + " deleted successfully");
+                test.log(Status.INFO,filePath + " deleted successfully");
             }else{
-                log.info("Failed to delete" + filePath);
+                test.log(Status.INFO, "Failed to delete" + filePath);
             }
         }catch(Exception e){
             e.getMessage();

@@ -390,7 +390,7 @@ public class IbService implements IIBService {
      * @param context used to get the suite name
      */
     public void generateCustomReport(ITestContext context){
-        extent.createTest("Report generator");
+        test = extent.createTest("Report generator");
         String version = getVersionFromInstaller(IB_VERSION);
         test.log(Status.INFO, "VERSION: " + IB_VERSION);
         Calendar calendar = Calendar.getInstance();

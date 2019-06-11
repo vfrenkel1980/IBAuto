@@ -133,7 +133,7 @@ public class WindowsTestBase extends TestBase {
 
     @AfterSuite
     public void postSimulation(ITestContext context) {
-        extent.createTest("AFTER SUITE");
+        test = extent.createTest("AFTER SUITE");
         //stop agent service
         test.log(Status.INFO, "Stopping services");
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
