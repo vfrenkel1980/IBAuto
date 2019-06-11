@@ -8,6 +8,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_COORDINATOR;
 
 /**
@@ -80,6 +82,15 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE - 2 + 1, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
     }
+
+/*    @Test(testName = "Verify Undelivered Machine Is Deleted And New One Created", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
+    public void verifyUndeliveredMachineIsDeletedAndNewOneCreated(){
+        List ipList = icService.getCouldIps();
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + ipList.get(0) + " -u helperAdmin -p OrangeJuice1! -i 0 " + "net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+        icService.waitForDeliveredMachines(POOL_SIZE - 1);
+        SystemActions.sleep(900);
+        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "New machine wasn't created to replace the Undelivered one.");
+    }*/
 
     /**
      * @test Start a build and verify 3 new machines created<br>

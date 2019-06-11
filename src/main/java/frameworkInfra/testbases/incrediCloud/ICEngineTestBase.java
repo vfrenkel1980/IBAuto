@@ -36,7 +36,7 @@ public class ICEngineTestBase extends TestBase {
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
     final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
-    final protected String LIMITED_USER = "test1@jijuclickmail.onmicrosoft.com";
+    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     public int MACHINE_CORES = getMachineCores(TYPE);
