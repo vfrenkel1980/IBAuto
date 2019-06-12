@@ -141,6 +141,7 @@ public class IbService implements IIBService {
      */
     @Override
     public String getIbConsoleInstallation(String version) {
+        test.log(Status.INFO, "Fetching console installer name");
         String path = Locations.NETWORK_IB_INSTALLATIONS + version;
         String postFix = "console.exe";
         String installerName = "";
@@ -149,7 +150,7 @@ public class IbService implements IIBService {
                 installerName = String.valueOf(newDirectoryStreamItem);
             }
         } catch (final Exception e) {
-            e.getMessage();
+            test.log(Status.ERROR, "Failed to get console installer name with error: " + e.getMessage());
         }
         return installerName;
     }
@@ -390,9 +391,6 @@ public class IbService implements IIBService {
      * @param context used to get the suite name
      */
     public void generateCustomReport(ITestContext context){
-        test = extent.createTest("Report generator");
-        String version = getVersionFromInstaller(IB_VERSION);
-        test.log(Status.INFO, "VERSION: " + IB_VERSION);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
@@ -401,7 +399,7 @@ public class IbService implements IIBService {
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
         test.log(Status.INFO, " SuiteID: " + suiteId);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
-        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
+        SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + IB_VERSION + ".html");
         SystemActions.deleteFile(destFile);
         filterOlderReports(suite);
         String addVersionNumber = "exceptionsGrandChild: 0,\n" +
