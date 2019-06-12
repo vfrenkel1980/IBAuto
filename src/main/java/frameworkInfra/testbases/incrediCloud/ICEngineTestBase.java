@@ -58,7 +58,6 @@ public class ICEngineTestBase extends TestBase {
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
     protected OnboardingPage onboardingPage;
-    protected OnboardingPage updatePage;
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -82,7 +81,6 @@ public class ICEngineTestBase extends TestBase {
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapigwtest.azure-api.net");
                 break;
         }
-
     }
 
     @BeforeClass
@@ -105,8 +103,6 @@ public class ICEngineTestBase extends TestBase {
         azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
         onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                COORD_PORT, VM_PORT);
-        updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
                 COORD_PORT, VM_PORT);
     }
 

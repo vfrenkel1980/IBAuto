@@ -309,37 +309,6 @@ public class ICEngineTests extends ICEngineTestBase {
     }
 
     /**
-     * @test update cloud settings<br>
-     *
-     * @steps{
-     * - update cloud settings
-     * - verify changes committed
-     * }
-     * @result{
-     * - Cloud settings updated}
-     *
-     */
-    @Test(testName = "Update Cloud Settings", dependsOnMethods = { "enableCloudAndCreateNewPool"})
-    public void updateCloudSettings(){
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        eventWebDriver = new EventFiringWebDriver(webDriver);
-        eventWebDriver.register(handler);
-        switch (ENV){
-            case "prod":
-                eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
-                break;
-            case "uat":
-                eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
-        }
-        onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
-        onboardingPageObject.performUpdate(updatePage);
-        SystemActions.sleep(60);
-        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE - 2), "Number of delivered machines is not equal to " + (POOL_SIZE - 2));
-    }
-
-    /**
      * @test deactivate cloud and perform a build<br>
      *
      * @steps{
@@ -350,7 +319,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "updateCloudSettings"})
+    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
