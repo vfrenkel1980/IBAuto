@@ -34,6 +34,7 @@ public class OnboardingPageObject {
     private static final By SAVE_BTN = By.xpath("//button[@class='save_text save_button buttonTag']");
     private static final By ACTIVATE_BTN = By.xpath("//button[text()='Approve and Activate']");
     private static final By SETTINGS_TAB = By.xpath("//*[text()='IncrediBuild Cloud Settings']");
+    private static final By DOWNLOAD_BTN = By.xpath("//*[text()='DOWNLOAD']");
 
     //ERROR MESSAGES
     private static final By TENNANT_ERROR_LBL = By.xpath("//*[text()='The Tenant id field is required']");
@@ -78,6 +79,11 @@ public class OnboardingPageObject {
     public void performUpdate(OnboardingPage onboardingPage){
         updateVmDetails(onboardingPage);
         clickSave();
+        waitForUpdateToFinish();
+    }
+
+    private void waitForUpdateToFinish(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(DOWNLOAD_BTN));
     }
 
     private void selectRegion(OnboardingPage onboardingPage){
