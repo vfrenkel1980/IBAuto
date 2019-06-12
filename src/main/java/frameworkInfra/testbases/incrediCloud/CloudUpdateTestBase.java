@@ -25,7 +25,6 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
 
     @BeforeClass
     public void beforeClass(){
-        test = extent.createTest("Before Class");
         updateIncreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
                 COORD_PORT, VM_PORT);
         updateDecreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 4,
