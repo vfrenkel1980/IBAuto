@@ -25,14 +25,14 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 --f", "SimTestCcacheKernel4ln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "SimTestCcacheKernel4ln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
         Assert.assertTrue(exitCode <=0, "Test " + testName + "failed with Exit code " + exitCode);
 
         String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + "/kernel" + ";" + "touch kmod.c kprobes.c ksysfs.c kthread.c; cd ..; " +
-                String.format(LinuxSimulation.MAKE_BUILD, "--ib-crash -d1 --f", "Inc_SimTestCcacheKernel4ln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD, LINUXCLFLAGS, "Inc_SimTestCcacheKernel4ln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
         String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
         String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/kernel; find -name kmod.c -newer kmod.o;", ipList.get(simClassType.ordinal()));
@@ -58,14 +58,14 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheKernel4prefix", "", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"SimTestccacheKernel4prefix", "", "32"), ipList.get(simClassType.ordinal()));
 
         Assert.assertTrue(exitCode <= 0, "Test "+ testName + "failed with Exit code " + exitCode);
 
         String withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
         // linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";", ipList.get(simClassType.ordinal());
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_KERNEL4_DIR + "/kernel" + ";" + "touch kmod.c kprobes.c ksysfs.c kthread.c; cd ..; " +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Inc_SimTestccacheKernel4prefix", "", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"Inc_SimTestccacheKernel4prefix", "", "32"), ipList.get(simClassType.ordinal()));
         String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
         String newer = linuxService.linuxRunSSHCommandOutputString(LinuxSimulation.CD_KERNEL4_DIR + "/kernel; find -name kmod.c -newer kmod.o;", ipList.get(simClassType.ordinal()));
@@ -90,7 +90,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(simClassType.ordinal()));
 
         int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
         Assert.assertTrue(exitCode <= 0, "Test "+ testName + "failed with Exit code " + exitCode);
 
@@ -98,7 +98,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 
         linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel;"  +
                 "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..;" +
-                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","Inc_SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
+                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"Inc_SimTestccacheQTln", "env PATH=/usr/lib/ccache:$PATH", "32"), ipList.get(simClassType.ordinal()));
 
         String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(simClassType.ordinal()));
 
@@ -132,7 +132,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 //        linuxService.linuxRunSSHCommand("cd ~/.ccache && ccache -C", ipList.get(2));
 //
 //        int exitCode = linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + ";" + LinuxSimulation.MAKE_CLEAN + ";" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
+//                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"SimTestccacheQTprefix", "", "32"), ipList.get(2));
 //
 ////        Assert.assertEquals(exitCode, 0, "Test "+ testName + "failed with Exit code " + exitCode);
 //
@@ -140,7 +140,7 @@ public class LinuxSimulationCcacheTests extends LinuxSimTestBase {
 //
 //        linuxService.linuxRunSSHCommand(LinuxSimulation.CD_QT_DIR + "/src/sql/kernel;"  +
 //                "touch qsqlquery.cpp qsqlrecord.cpp qsqlfield.cpp qsqlerror.cpp; " + "cd ../../..;" +
-//                String.format(LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","SimTestccacheQTprefix", "", "32"), ipList.get(2));
+//                String.format(LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"SimTestccacheQTprefix", "", "32"), ipList.get(2));
 //
 //        String inc_withIBsize = linuxService.linuxRunSSHCommandOutputString(LinuxCommands.DU_TOTAL_ONLY, ipList.get(2));
 //

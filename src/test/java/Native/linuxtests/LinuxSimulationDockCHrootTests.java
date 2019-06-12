@@ -102,7 +102,7 @@ public class LinuxSimulationDockCHrootTests extends LinuxSimTestBase {
         linuxService.linuxRunSSHCommand("sudo mount  --bind /disk2 /chroot/xenial_u16/home; sudo -S true; sudo mount --bind /usr /chroot/xenial_u16/usr; sudo -S true", ipList.get(simClassType.ordinal()));
 
        int exitCode = linuxService.linuxRunSSHCommand("sudo chroot /chroot/xenial_u16 /bin/bash -c \" cd "+ StaticDataProvider.LinuxSimulation.CHROOT_KERNEL4_DIR + "; "
-               + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + "; " + String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,"--ib-crash -d1 --f","chroot_Kernel4", "", "32") + " ;echo $?\"", ipList.get(simClassType.ordinal()));
+               + StaticDataProvider.LinuxSimulation.MAKE_CLEAN + "; " + String.format(StaticDataProvider.LinuxSimulation.MAKE_BUILD,LINUXCLFLAGS,"chroot_Kernel4", "", "32") + " ;echo $?\"", ipList.get(simClassType.ordinal()));
 
        Assert.assertTrue(exitCode <= 0, "Test " + testName + "failed with Exit code " + exitCode);
 
