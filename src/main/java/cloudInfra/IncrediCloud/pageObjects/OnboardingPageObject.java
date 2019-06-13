@@ -47,7 +47,7 @@ public class OnboardingPageObject {
     private static final By COMPANY_ERROR_LBL = By.xpath("//*[text()=' The Company Name field is required']");
     private static final By TIMEOUT_ERROR_LBL = By.xpath("//*[text()='The VM Idle timeout field is required']");
     private static final By CORES_LIMIT_ERROR_LBL = By.xpath("//*[text()='Number of cores must be multiplied by 2 then number of machines']");
-    private static final By POOL_SIZE_ERROR_LBL = By.xpath("//*[text()='Number of machines must be at least 1 and not greater than number of cores devided by 2 ']");
+    private static final By POOL_SIZE_ERROR_LBL = By.xpath("//*[text()='Number of machines must be at least 1 and not greater than number of cores divided by 2 ']");
     private static final By COORD_PORT_ERROR_LBL = By.xpath("//*[text()=' The Coordinator Port No. field is required']");
     private static final By VM_PORT_ERROR_LBL = By.xpath("//*[text()=' The VM Port Range field is required']");
     private static final By QUOTA_LIMIT_MESSAGE = By.xpath("//*[contains(text(),'Operation results in exceeding quota limits of Core')]");
@@ -117,7 +117,7 @@ public class OnboardingPageObject {
     }
 
     private void updateVmDetails(OnboardingPage onboardingPage){
-        wait.until(ExpectedConditions.elementToBeClickable(TIMEOUT_TB)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(TIMEOUT_TB)).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
         eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys(String.valueOf(onboardingPage.getCoresLimit()));
