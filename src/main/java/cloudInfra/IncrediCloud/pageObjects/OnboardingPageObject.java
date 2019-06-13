@@ -117,7 +117,7 @@ public class OnboardingPageObject {
     }
 
     private void updateVmDetails(OnboardingPage onboardingPage){
-        eventWebDriver.findElement(TIMEOUT_TB).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(TIMEOUT_TB)).click();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
         eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys(String.valueOf(onboardingPage.getCoresLimit()));

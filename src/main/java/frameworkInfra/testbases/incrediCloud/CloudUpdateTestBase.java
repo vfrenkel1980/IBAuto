@@ -20,8 +20,8 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
     protected OnboardingPage updateIncreasePoolSize;
     protected OnboardingPage updateDecreasePoolSize;
     protected OnboardingPage updatePorts;
-    final public int GRID_CORES_AFTER_INCREASE = GRID_CORES + 2;
-    final public int GRID_CORES_AFTER_DECREASE = GRID_CORES - 2;
+    final public int GRID_CORES_AFTER_INCREASE = GRID_CORES + 4;
+    final public int GRID_CORES_AFTER_DECREASE = GRID_CORES - 4;
 
     @BeforeClass
     public void beforeClass(){
@@ -29,9 +29,9 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
                 COORD_PORT, VM_PORT);
         updateIncreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
                 COORD_PORT, VM_PORT);
-        updateDecreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 4,
+        updateDecreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
                 COORD_PORT, VM_PORT);
-        updatePorts = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 4,
+        updatePorts = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
                 31100, 31103);
     }
 

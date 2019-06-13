@@ -53,6 +53,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_AFTER_INCREASE, "900000"));
         icService.waitForDeliveredMachines(updateIncreasePoolSize.getPoolSize());
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, updateIncreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateIncreasePoolSize.getPoolSize());
     }
 
@@ -76,6 +77,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         SystemActions.sleep(TIMEOUT + 30);
         icService.waitForDeliveredMachines(updateDecreasePoolSize.getPoolSize());
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateDecreasePoolSize.getPoolSize());
     }
 
@@ -100,6 +102,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_AFTER_DECREASE, "900000"));
         icService.waitForDeliveredMachines(updateDecreasePoolSize.getPoolSize());
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateDecreasePoolSize.getPoolSize());
     }
 }
