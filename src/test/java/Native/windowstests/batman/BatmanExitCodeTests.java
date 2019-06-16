@@ -52,8 +52,10 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     public void exitCodeBaseTest4() {
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
+        SystemActions.sleep(2);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
     @Test(testName = "Exit Code Base Test 5")
@@ -63,6 +65,7 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
     /*------------------------------METHODS------------------------------*/
