@@ -224,9 +224,11 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
     public void verifyOnlyFailLocallyOn() {
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableFailOnlyLocally();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
+        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on remote but should't");
     }
 
