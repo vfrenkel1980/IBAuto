@@ -4,14 +4,18 @@ import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
 import com.aventstack.extentreports.Status;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -62,5 +66,14 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
     public void afterMethod(Method method){
         killDriver();
         extent.flush();
+    }
+
+    @AfterClass
+    public void afterClass(){
+        test = extent.createTest("AFTER CLASS");
+        webServer.closeWebServer();
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.INCREDICLOUDSECRET, "");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+        icService.deactivateCloud();
     }
 }
