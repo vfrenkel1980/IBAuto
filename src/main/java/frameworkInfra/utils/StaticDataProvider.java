@@ -219,11 +219,11 @@ public class StaticDataProvider {
             public static final String CORECLR_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\coreclr-2.1.6\\bin\\obj\\Windows_NT.x64.Debug\\CoreCLR.sln\" /%s /cfg=\"debug|x64\" /title=\"Core CLR 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CHROME_X64_GN = "\"D:\\chromium\\src\\out\\Default\\all.sln\" /%s /cfg=\"GN|x64\" /title=\"Chrome x64 GN build\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String AUDACITY_SECOND_INITIATOR = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"  /showagent /showcmd /showtime /log=\"\\\\batman\\QA\\Simulation\\second_initiator_output\\buildLog.txt\"";
-            public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
         public static class VC14_BATMAN {
@@ -274,8 +274,8 @@ public class StaticDataProvider {
             public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|x64\"";
-            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 3\" /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 3\" /cfg=\"release|orbis\" /minwinver=\"7\"";
         }
 
         public static class VC11_BATMAN {
@@ -723,6 +723,7 @@ public class StaticDataProvider {
         public static final String VC12PROJECT = Locations.QA_ROOT + "\\projects\\vc12project\\vc12project.sln";
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
+        public static final String VC16PROJECT = Locations.QA_ROOT + "\\projects\\vc16project\\vc16project.sln";
     }
 
     public static class UIValidationsProjects {
