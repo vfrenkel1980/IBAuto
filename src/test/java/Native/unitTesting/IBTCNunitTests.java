@@ -545,7 +545,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
@@ -568,7 +568,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
