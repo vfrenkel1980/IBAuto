@@ -102,7 +102,7 @@ public class StaticDataProvider {
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
         public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
         public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
-        public static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\bin\\nunit-console.exe";
+        public static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\\bin\\nunit-console.exe";
     }
 
     public static class WindowsServices {
@@ -158,9 +158,9 @@ public class StaticDataProvider {
 
     public static class OrbisSDK {
         public static final String SDK_INSTALLER_FOLDER = "\"C:\\ProgramData\\SCE\\SDK Installer\\Binaries\\Bin\"";
-        public static final String PS4_SDK4 = "PS4:4";
-        public static final String PS4_SDK5 = "PS4:3";
-        public static final String PS4_SDK6 = "PS4:2";
+        public static final String PS4_SDK4 = "PS4:2";
+        public static final String PS4_SDK5 = "PS4:4";
+        public static final String PS4_SDK6 = "PS4:3";
         public static final String PS_PROSPERO_0830 = "Prospero:1";
         public static final String SWITCH_PS_SDK = "start /wait SDK_Manager.exe /quiet /SDKSwitch%s";
     }
@@ -226,10 +226,10 @@ public class StaticDataProvider {
             public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE1_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE1_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
 
             public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
