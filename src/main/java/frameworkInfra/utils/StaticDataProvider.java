@@ -158,9 +158,8 @@ public class StaticDataProvider {
 
     public static class OrbisSDK {
         public static final String SDK_INSTALLER_FOLDER = "\"C:\\ProgramData\\SCE\\SDK Installer\\Binaries\\Bin\"";
-        public static final String PS4_SDK4 = "PS4:2";
-        public static final String PS4_SDK5 = "PS4:4";
-        public static final String PS4_SDK6 = "PS4:3";
+        public static final String PS4_SDK5 = "PS4:2";
+        public static final String PS4_SDK6 = "PS4:1";
         public static final String PS_PROSPERO_0830 = "Prospero:1";
         public static final String SWITCH_PS_SDK = "start /wait SDK_Manager.exe /quiet /SDKSwitch%s";
     }
@@ -230,7 +229,6 @@ public class StaticDataProvider {
             public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-
             public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
@@ -290,8 +288,7 @@ public class StaticDataProvider {
         public static class VC11_BATMAN {
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2012 - Release\"";
             public static final String PS4_MANAGEMENT_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 2\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_MANAGEMENT_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 2\" /cfg=\"release|orbis\" /minwinver=\"7\"";
-            public static final String PS4_MANAGEMENT_ORBIS_PROFILE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Profile Sample 2\" /cfg=\"profile|orbis\" /minwinver=\"7\"";
+            public static final String PS4_MANAGEMENT_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 2\" /cfg=\"release|orbis\" /minwinver=\"7\"";
             public static final String PS4_GNM_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
             public static final String PS4_GNM_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"release|orbis\" /minwinver=\"7\"";
             public static final String SHADOWMAP_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"debug|Durango\"";

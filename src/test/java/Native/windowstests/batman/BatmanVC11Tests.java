@@ -15,41 +15,6 @@ public class BatmanVC11Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS4 Management 2012 - debug|Orbis SDK4 - build", groups = {"Build"})
-    public void ps4Management2012DebugOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.PS4_MANAGEMENT_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 EDGE 2012 - release|Orbis SDK4 - build", groups = {"Build"})
-    public void ps4Management2012ReleaseOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.PS4_MANAGEMENT_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 Management 2012 - profile|Orbis SDK4 - build", groups = {"Build"})
-    public void ps4Edge2012ProfileOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.PS4_MANAGEMENT_ORBIS_PROFILE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 GNM 2012 - debug|Orbis SDK4 - build", groups = {"Build"})
-    public void ps4GNM2012DebugOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.PS4_GNM_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 GNM 2012 - release|Orbis SDK4 - build", groups = {"Build"})
-    public void ps4GNM2012ReleaseOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK4);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.PS4_GNM_ORBIS_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
     @Test(testName = "Sahdowmap - 2012 debug|Durango - build", groups = {"Build"})
     public void shadowmap2012DebugDurangoBuild() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC11_BATMAN.SHADOWMAP_DEBUG_DURANGO, "%s"));

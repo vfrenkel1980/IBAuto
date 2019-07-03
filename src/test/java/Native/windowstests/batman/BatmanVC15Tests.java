@@ -92,7 +92,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "PS Prospero 0.830 - 2017 Sample 4 debug - build", groups = {"Build"})
-    public void psProsperoSample4DebugBuild() {
+    public void psProspero0830Sample4DebugBuild() {
         changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0830);
         int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE4_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
