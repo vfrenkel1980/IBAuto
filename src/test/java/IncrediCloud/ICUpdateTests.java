@@ -55,7 +55,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, updateIncreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateIncreasePoolSize.getPoolSize());
+        Assert.assertEquals(machinesParticipatingInBuild, updateIncreasePoolSize.getPoolSize() + 1, "Number of machines participating in build is different then pool size " + (updateIncreasePoolSize.getPoolSize()  + 1));
     }
 
     /**
@@ -80,7 +80,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateDecreasePoolSize.getPoolSize());
+        Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize() + 1, "Number of machines participating in build is different then pool size " + (updateDecreasePoolSize.getPoolSize() + 1));
     }
 
     //TODO: when we have the API to query the resource - verify new security group is created.
@@ -106,6 +106,6 @@ public class ICUpdateTests extends CloudUpdateTestBase {
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize(), "Number of machines participating in build is different then pool size " + updateDecreasePoolSize.getPoolSize());
+        Assert.assertEquals(machinesParticipatingInBuild, updateDecreasePoolSize.getPoolSize()  + 1, "Number of machines participating in build is different then pool size " + (updateDecreasePoolSize.getPoolSize() + 1));
     }
 }

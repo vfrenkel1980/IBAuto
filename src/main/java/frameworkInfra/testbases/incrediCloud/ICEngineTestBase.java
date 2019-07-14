@@ -2,10 +2,8 @@ package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
-import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
-import cloudInfra.IncrediCloud.pageObjects.RegistrationPageObject;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -37,7 +35,6 @@ public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
-    protected static String CLOUD = System.getProperty("cloudtype");
     final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
     final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
     final public String COORDID = "Automation";

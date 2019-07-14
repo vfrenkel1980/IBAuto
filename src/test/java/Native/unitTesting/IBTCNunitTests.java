@@ -1,5 +1,6 @@
 package Native.unitTesting;
 
+import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
@@ -12,6 +13,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+
+import static frameworkInfra.Listeners.SuiteListener.test;
 
 /**
  * @brief Unit tests execution with IbTestConsole
@@ -418,8 +421,14 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit3 Failed Test Result Test")
     public void nunit3FailedTestResultTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_FAILED_RESULT_TEST);
-        Assert.assertFalse(exitCode == 0, "The test execution not failed");
+        String result = "";
+        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_FAILED_RESULT_TEST);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertFalse(result.equals("0"), "Build isn't failed");
+        } catch (IOException e) {
+            test.log(Status.WARNING, e.getMessage());
+        }
         File f = new File(Locations.QA_ROOT+"\\nunitres.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
@@ -545,7 +554,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
@@ -568,7 +577,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dasboard.html");
+        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
