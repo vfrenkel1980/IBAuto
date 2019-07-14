@@ -104,10 +104,10 @@ public class ICEngineTestBase extends TestBase {
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         switch (CLOUD){
-            case "prod":
+            case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
                 break;
-            case "uat":
+            case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
         }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
