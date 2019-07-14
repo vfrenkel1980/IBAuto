@@ -2,8 +2,10 @@ package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
+import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
+import cloudInfra.IncrediCloud.pageObjects.RegistrationPageObject;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -35,6 +37,7 @@ public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
+    protected static String CLOUD = System.getProperty("cloudtype");
     final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
     final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
     final public String COORDID = "Automation";
@@ -50,7 +53,7 @@ public class ICEngineTestBase extends TestBase {
     final protected int VM_PORT = 31106;
     protected WindowsService winService = new WindowsService();
     protected IbService ibService = new IbService();
-    protected AzureRegistrationPageObject azurePageObject;
+    protected RegistrationPageObject cloudRegistrationPageObject;
     protected OnboardingPageObject onboardingPageObject;
     protected WebServer webServer = new WebServer(PORT);
     protected Thread serverThread = new Thread(webServer);
@@ -100,7 +103,13 @@ public class ICEngineTestBase extends TestBase {
         }
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
+        switch (CLOUD){
+            case "prod":
+                cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
+                break;
+            case "uat":
+                cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
+        }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
         onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                 COORD_PORT, VM_PORT);

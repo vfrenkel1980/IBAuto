@@ -3,12 +3,8 @@ package IncrediCloud;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_COORDINATOR;
 
@@ -35,7 +31,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void performOnboarding(){
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);

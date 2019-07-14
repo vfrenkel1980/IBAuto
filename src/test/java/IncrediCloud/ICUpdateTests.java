@@ -24,7 +24,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
     public void performOnboardingBeforeUpdate(){
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -48,7 +48,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
     @Test(testName = "Update - Add Machines To Pool", dependsOnMethods = {"performOnboardingBeforeUpdate"})
     public void updateAddMachinesToPool(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performUpdate(updateIncreasePoolSize);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_AFTER_INCREASE, "900000"));
         icService.waitForDeliveredMachines(updateIncreasePoolSize.getPoolSize());
@@ -72,7 +72,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
     @Test(testName = "Update - Remove Machines From Pool", dependsOnMethods = {"updateAddMachinesToPool"})
     public void updateRemoveMachinesFromPool(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performUpdate(updateDecreasePoolSize);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_AFTER_DECREASE, "900000"));
         SystemActions.sleep(TIMEOUT + 30);
@@ -98,7 +98,7 @@ public class ICUpdateTests extends CloudUpdateTestBase {
     @Test(testName = "Update - Change Ports", dependsOnMethods = {"updateRemoveMachinesFromPool"})
     public void updateChangePorts(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performUpdate(updatePorts);
         SystemActions.sleep(TIMEOUT + 30);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES_AFTER_DECREASE, "900000"));

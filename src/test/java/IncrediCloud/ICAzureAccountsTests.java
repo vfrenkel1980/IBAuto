@@ -22,7 +22,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
     @Test(testName = "Create Pool On A Limited Region")
     public void createPoolOnALimitedRegion(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performOnboarding(failedOnboardingPage);
         Assert.assertTrue(onboardingPageObject.verifyQuotaLimitMessage(), "Quota limit message did not appear");
     }
@@ -41,7 +41,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
         SystemActions.sleep(30);
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performOnboarding(preUpdateOnboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -80,7 +80,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
 /*    @Test(testName = "Update Policy With Sum Of Machines Is Over The Limit", dependsOnMethods = { "verifyCloudAfterIBUpdate"})
     public void updatePolicyWithSumOfMachinesIsOverTheLimit(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performUpdate(postUpdateOnboardingPage);
         boolean doesMessageAppear = onboardingPageObject.verifyQuotaLimitMessage();
         if (!doesMessageAppear)
@@ -99,7 +99,7 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
     @Test(testName = "Try To Update With A Different User", dependsOnMethods = { "verifyCloudAfterIBUpdate"})
     public void tryToUpdateWithADifferentUser(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(LIMITED_USER);
+        cloudRegistrationPageObject.selectUser(LIMITED_USER);
         Assert.assertTrue(onboardingPageObject.verifyDifferentUserUpdateMessage(), "Different user update message did not appear");
     }
 
