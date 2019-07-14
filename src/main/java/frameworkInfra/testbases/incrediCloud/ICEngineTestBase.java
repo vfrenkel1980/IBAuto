@@ -2,8 +2,10 @@ package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
+import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
+import cloudInfra.IncrediCloud.pageObjects.RegistrationPageObject;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -25,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import static cloudInfra.CloudHelper.CloudTestBase.CLOUD;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
