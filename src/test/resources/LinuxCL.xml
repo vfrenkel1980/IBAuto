@@ -31,7 +31,7 @@
                 <class name ="Native.linuxtests.LinuxSimulationTests" />
             </classes>
         </test>
-    <!--
+
          <test name="Cycle 4" allow-return-values="true">
              <parameter name="cycle" value="4"/>
              <classes>
@@ -164,5 +164,5 @@
                  <class name ="Native.linuxtests.LinuxSimulationTests" />
              </classes>
          </test>
-     -->
+
 </suite>
