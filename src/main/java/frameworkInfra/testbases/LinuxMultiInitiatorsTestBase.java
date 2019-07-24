@@ -42,7 +42,7 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         }
         ipList = XmlParser.breakDownIPList(rawIpList);
         testType = TestType.MultiIn;
-        log.info("RUNNING VERSION: " + VERSION);
+        log.info("RUNNING VERSION: " + IB_VERSION);
         otherGridIPList = XmlParser.breakDownIPList(rawIpList2);
         linuxService.killibDbCheck(ipList.get(1));
 
@@ -61,8 +61,8 @@ public class LinuxMultiInitiatorsTestBase extends LinuxTestBase{
         for (int i = 1 ; i < 5 ; i++){
             firstBuilds.add(getFirstBuild(ipList.get(i)));
         }
-        if (!VERSION.equals("current"))
-            linuxService.updateIB(ipList.get(0), VERSION, connectedMachinesToGrid);
+        if (!IB_VERSION.equals("current"))
+            linuxService.updateIB(ipList.get(0), IB_VERSION, connectedMachinesToGrid);
         ibVersion = linuxService.getIBVersion(ipList.get(0));
     }
 
