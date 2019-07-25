@@ -172,10 +172,10 @@ public class LinuxSimTestBase extends LinuxTestBase {
             List<String> has_crashes = linuxService.findFile(machine, "/opt/incredibuild/log/", "*.has_crash");
             for (String crash : has_crashes){
                 if (!has_crashes.isEmpty()){
-                    test.log(Status.INFO, "No CRASH file found in Machine: " + machine);
+                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: " + crash);
                 }
                 else
-                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: " + crash);
+                    test.log(Status.INFO, "No CRASH file found in Machine: " + machine);
             }
             List<String> log_crashes = linuxService.findFile(machine, "/opt/incredibuild/log/", "*.crash.log");
             for (String crash : log_crashes){
