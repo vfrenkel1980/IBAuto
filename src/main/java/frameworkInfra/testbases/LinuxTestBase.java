@@ -29,7 +29,6 @@ public class LinuxTestBase extends TestBase{
     protected static List rawIpList;
     protected static List rawIpList2;
     protected static String className;
-    protected static String VERSION = System.getProperty("version");
     protected static String LINUXCLFLAGS = System.getProperty("linuxCLflags");
 
     protected static LinuxSimTestBase.TestType testType;

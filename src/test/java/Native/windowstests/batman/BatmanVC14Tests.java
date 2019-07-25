@@ -217,28 +217,24 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
     public void googleStadia20Sample1releaseGGPSDK129Build() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_SAMPLE1_GGP_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
     @Test(testName = "Google Stadia - 2015 Sample 2 debug|GGP SDK1.29 - build", groups = {"Build"})
     public void googleStadia20Sample2DebugGGPSDK129Build() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_SAMPLE2_GGP_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
     @Test(testName = "Google Stadia - 2015 Sample 3 release|GGP SDK1.29 - build", groups = {"Build"})
     public void googleStadia20Sample3releaseGGPSDK129Build() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_SAMPLE3_GGP_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
     @Test(testName = "Google Stadia - 2015 Sample 4 debug|GGP SDK1.29 - build", groups = {"Build"})
     public void googleStadia20Sample4DebugGGPSDK129Build() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_SAMPLE4_GGP_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
         /*------------------------------METHODS------------------------------*/
