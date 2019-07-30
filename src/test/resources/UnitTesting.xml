@@ -14,7 +14,7 @@
         <classes>
             <class name ="Native.unitTesting.IBCTestingTests" />
             <class name ="Native.unitTesting.IBTCNunitTests" />
-            <class name ="Native.unitTesting.IBTCGTestTests" />
+            <!--<class name ="Native.unitTesting.IBTCGTestTests" />-->
         </classes>
     </test>
 
@@ -23,7 +23,7 @@
         <classes>
             <class name ="Native.unitTesting.IBCTestingTests" />
             <class name ="Native.unitTesting.IBTCNunitTests" />
-            <class name ="Native.unitTesting.IBTCGTestTests" />
+            <!--<class name ="Native.unitTesting.IBTCGTestTests" />-->
         </classes>
     </test>
 
