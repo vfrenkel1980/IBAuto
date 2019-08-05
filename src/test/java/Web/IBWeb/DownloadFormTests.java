@@ -20,7 +20,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Linux Registration")
     public void linuxRegistration(){
         WindowsRegistrationForm rf = new WindowsRegistrationForm("linux", "User", "blah@blah.com", "1231231231",
-                "Canada", "Alberta","IB","city", "other", "Brain", true, true,
+                "Canada", "Alberta","IncrediBuild","city", "other", "Brain", true, true,
                 false,false, true, true, true, false, true,false,true,true,
                 true,true,false,true,false,true,true,true,false,true,
                 false,true,true);
@@ -30,7 +30,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Enterprise Registration")
     public void enterpriseRegistration(){
         WindowsRegistrationForm rf = new WindowsRegistrationForm("enterprise", "User", mailAddress2, "1231231231",
-                "Israel", "","IB","city", "other", "ballz", true, true,false,
+                "Israel", "","IncrediBuild","city", "other", "ballz", true, true,false,
                 false, false, false, false, true, true,true,true,true);
         downloadPageObject.registerEnterpriseUser(rf);
     }
@@ -100,7 +100,7 @@ public class DownloadFormTests extends DownloadPageTestBase{
     @Test(testName = "Windows Registration", dependsOnMethods = { "validateMailing"} )
     public void windowsRegistration(){
         WindowsRegistrationForm rf = new WindowsRegistrationForm("Win", "User", mailAddressRandom, "4illumination",
-                "5559540098","USA", "alaska", "IB", "MOHA", "other",
+                "5559540098","USA", "alaska", "IncrediBuild", "MOHA", "other",
                 "KING", false, true, false, true, true, false, false, true, false);
         downloadPageObject.createNewFreeDevWinAccount(rf);
         try {
