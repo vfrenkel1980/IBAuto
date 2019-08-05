@@ -7,24 +7,24 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
+
     <test name="Cycle 1" allow-return-values="true">
     <parameter name="cycle" value="1"/>
     <classes>
-        <class name ="Native.linuxtests.LinuxSimulationTests" />
-        <class name ="Native.linuxtests.LinuxBazelTests" />
-        <class name ="Native.linuxtests.Linux32BitTests" />
-        <class name ="Native.linuxtests.LinuxSimulationCcacheTests" />
-        <class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />
-    </classes>
-</test>
-
+      <class name ="Native.linuxtests.LinuxSimulationTests" />
+          <class name ="Native.linuxtests.LinuxBazelTests" />
+          <class name ="Native.linuxtests.Linux32BitTests" />
+          <class name ="Native.linuxtests.LinuxSimulationCcacheTests" />
+          <class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />
+       </classes>
+  </test>
     <test name="Cycle 2" allow-return-values="true">
         <parameter name="cycle" value="2"/>
         <classes>
             <class name ="Native.linuxtests.LinuxSimulationTests" />
         </classes>
     </test>
-<!--
+
         <test name="Cycle 3" allow-return-values="true">
             <parameter name="cycle" value="3"/>
             <classes>
@@ -164,5 +164,4 @@
                  <class name ="Native.linuxtests.LinuxSimulationTests" />
              </classes>
          </test>
--->
 </suite>
