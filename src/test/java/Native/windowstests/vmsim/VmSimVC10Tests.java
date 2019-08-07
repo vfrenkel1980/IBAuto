@@ -7,6 +7,9 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
+/**
+ * @brief<b> VM-Simulation (windows 7) tests for VS 2010 tests</b>
+ */
 public class VmSimVC10Tests extends VmSimTestBase {
 
     @Test(testName = "XBMC 2010 - Debug x32- build" , groups = { "Build" })
@@ -76,6 +79,7 @@ public class VmSimVC10Tests extends VmSimTestBase {
     }
 
     /**
+     * @test All In One Diagnostics Samples 2010 build
      * @bug Verify <a href="http://redmine.incredibuild.local/issues/10834">uild fails on the windows 8.1 32-bit vm10835</a>
      * @todo Remove minwinver option after bug 10834 fix.
      *
