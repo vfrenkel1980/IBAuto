@@ -76,7 +76,9 @@ public class VmSimVC10Tests extends VmSimTestBase {
     }
 
     /**
-     * @bug <A HREF="http://redmine.incredibuild.local/issues/10834"> Build fails on the windows 8.1 32-bit vm10835</A> Remove minwinver option after fix.
+     * @bug{
+     * Verify <a href="http://redmine.incredibuild.local/issues/10834">uild fails on the windows 8.1 32-bit vm10835</a> Remove minwinver option after fix.
+     * }
      */
     @Test(testName = "All In One Diagnostics Samples 2010 - build" , groups = { "Build" })
     public void allInOne2010x32Debug(){
