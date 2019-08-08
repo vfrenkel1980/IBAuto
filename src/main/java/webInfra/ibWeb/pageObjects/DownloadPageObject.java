@@ -56,6 +56,7 @@ public class DownloadPageObject {
     public static final By JENKINS_CB = By.xpath("//input[@id=\"Jenkins\"]");
     public static final By MAILING_LIST_CB = By.xpath("//input[@id=\"mailinglist\"]");
     public static final By PRIVACY_AGREEMENT_CB = By.xpath("//input[@id=\"privacy\"]");
+    public static final By RECAPTCHA_CB = By.xpath("//*[@class=\"recaptcha-checkbox-border\"]");
     public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//button[@id=\"free-dev-submit\"]");
     public static final By SUBMIT_BTN = By.xpath("//Button[@value=\"Submit\"]");
     public static final By PREVIOUS_BTN = By.xpath("//*[@value=\"prev\"]");
@@ -179,6 +180,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
+        eventWebDriver.findElement(RECAPTCHA_CB).click();
         eventWebDriver.findElement(FREE_DEV_SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
@@ -260,6 +262,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
+        eventWebDriver.findElement(RECAPTCHA_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
@@ -316,6 +319,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
+        eventWebDriver.findElement(RECAPTCHA_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }

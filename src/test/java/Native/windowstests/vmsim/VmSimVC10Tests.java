@@ -80,8 +80,7 @@ public class VmSimVC10Tests extends VmSimTestBase {
 
     /**
      * @test All In One Diagnostics Samples 2010 build
-     * @bug Verify <a href="http://redmine.incredibuild.local/issues/10834">uild fails on the windows 8.1 32-bit vm10835</a>
-     * @todo Remove minwinver option after bug 10834 fix.
+     * @bug <a href="http://redmine.incredibuild.local/issues/10834">Bug 10835 Build fails on the windows 8.1 32-bit vm</a> Return to minwinver=8 option after bug 10834 fix.
      *
      */
     @Test(testName = "All In One Diagnostics Samples 2010 - build" , groups = { "Build" })

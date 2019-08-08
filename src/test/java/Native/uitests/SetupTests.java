@@ -473,12 +473,7 @@ public class SetupTests extends SetupTestBase {
             if (!ignoreList.contains(file.getName())) {
                 curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
                 if(curExit!=0){
-                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
-                    exit=curExit;
-                }
-                curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
-                if(curExit!=0){
-                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
+                    test.log(Status.ERROR,  file.getName() + " is not signed with sha256 signature");
                     exit=curExit;
                 }
             }
