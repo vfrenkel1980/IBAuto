@@ -563,8 +563,10 @@ public class DownloadPageObject {
 
 
     public void clickReCaptcha() {
-        new WebDriverWait(eventWebDriver, 10).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name, 'a-') and starts-with(@src, 'https://www.google.com/recaptcha')]")));
-        new WebDriverWait(eventWebDriver, 20).until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.recaptcha-checkbox-checkmark"))).click();
+        WebDriverWait wait = new WebDriverWait(eventWebDriver, 30);
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.recaptcha-checkbox-checkmark")));
+        element.click();
     }
 
 }
