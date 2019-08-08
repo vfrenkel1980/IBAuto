@@ -1,6 +1,7 @@
 package frameworkInfra.testbases.web.ibSite;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -19,7 +20,11 @@ public class DownloadPageTestBase extends IbWebTestBase {
     public void setUpEnv() {
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        webDriver = new ChromeDriver(options);
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eventWebDriver.register(handler);

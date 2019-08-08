@@ -563,11 +563,6 @@ public class DownloadPageObject {
 
 
     public void clickReCaptcha() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        options.addArguments("disable-infobars");
-        options.addArguments("--disable-extensions");
-        WebDriver driver = new ChromeDriver(options);
         new WebDriverWait(eventWebDriver, 10).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name, 'a-') and starts-with(@src, 'https://www.google.com/recaptcha')]")));
         new WebDriverWait(eventWebDriver, 20).until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.recaptcha-checkbox-checkmark"))).click();
     }
