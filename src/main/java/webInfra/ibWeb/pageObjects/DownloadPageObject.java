@@ -59,6 +59,7 @@ public class DownloadPageObject {
     public static final By JENKINS_CB = By.xpath("//input[@id=\"Jenkins\"]");
     public static final By MAILING_LIST_CB = By.xpath("//input[@id=\"mailinglist\"]");
     public static final By PRIVACY_AGREEMENT_CB = By.xpath("//input[@id=\"privacy\"]");
+    public static final By RECATURE_CB = By.xpath("/html/body/div[2]/div[3]/div[1]/div/div/span/div[1]");
     public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//button[@id=\"free-dev-submit\"]");
     public static final By SUBMIT_BTN = By.xpath("//Button[@value=\"Submit\"]");
     public static final By PREVIOUS_BTN = By.xpath("//*[@value=\"prev\"]");
@@ -182,7 +183,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
-        clickReCaptcha();
+        eventWebDriver.findElement(RECATURE_CB).click();
         eventWebDriver.findElement(FREE_DEV_SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
@@ -264,7 +265,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
-        clickReCaptcha();
+        eventWebDriver.findElement(RECATURE_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
@@ -321,7 +322,7 @@ public class DownloadPageObject {
         if (rf.isMailing())
             eventWebDriver.findElement(MAILING_LIST_CB).click();
         eventWebDriver.findElement(PRIVACY_AGREEMENT_CB).click();
-        clickReCaptcha();
+        eventWebDriver.findElement(RECATURE_CB).click();
         eventWebDriver.findElement(SUBMIT_BTN).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AWESOME_LBL));
     }
@@ -559,14 +560,6 @@ public class DownloadPageObject {
         eventWebDriver.findElement(DOWNLOAD_BTN).click();
         if (eventWebDriver.findElement(LOGOUT_BTN).isDisplayed())
             eventWebDriver.findElement(LOGOUT_BTN).click();
-    }
-
-
-    public void clickReCaptcha() {
-        WebDriverWait wait = new WebDriverWait(eventWebDriver, 30);
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name,'a-')]")));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.recaptcha-checkbox-checkmark")));
-        element.click();
     }
 
 }
