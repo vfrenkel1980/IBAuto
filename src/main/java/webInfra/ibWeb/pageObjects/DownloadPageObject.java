@@ -56,7 +56,7 @@ public class DownloadPageObject {
     public static final By JENKINS_CB = By.xpath("//input[@id=\"Jenkins\"]");
     public static final By MAILING_LIST_CB = By.xpath("//input[@id=\"mailinglist\"]");
     public static final By PRIVACY_AGREEMENT_CB = By.xpath("//input[@id=\"privacy\"]");
-    public static final By RECAPTCHA_CB = By.xpath("//*[@class=\"recaptcha-checkbox-border\"]");
+    public static final By RECAPTCHA_CB = By.xpath("//div[contains(@class,\"recaptcha-checkbox-border\")]");
     public static final By FREE_DEV_SUBMIT_BTN = By.xpath("//button[@id=\"free-dev-submit\"]");
     public static final By SUBMIT_BTN = By.xpath("//Button[@value=\"Submit\"]");
     public static final By PREVIOUS_BTN = By.xpath("//*[@value=\"prev\"]");
@@ -363,7 +363,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(EMAIL_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(emailempty).isDisplayed());
         eventWebDriver.findElement(EMAIL_TB).clear();
-        eventWebDriver.findElement(EMAIL_TB).sendKeys("Test@test.com");
+        eventWebDriver.findElement(EMAIL_TB).sendKeys("Test1@test.com");
         Assert.assertTrue(eventWebDriver.findElements(emailempty).isEmpty());
     }
 
