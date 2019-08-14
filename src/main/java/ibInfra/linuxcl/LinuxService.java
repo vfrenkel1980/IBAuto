@@ -1,6 +1,5 @@
 package ibInfra.linuxcl;
 
-import com.amazonaws.services.dynamodbv2.xspec.NULL;
 import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.*;
 import frameworkInfra.testbases.TestBase;

@@ -896,6 +896,7 @@ public class StaticDataProvider {
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
         public static final String BAZEL_BUILD = "ib_console %s -c %s %s  bazel build --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
+        public static final String BAZEL_BUILD2 = "ib_console %s -c %s %s  bazel build --spawn_strategy sandboxed --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
 
         public static final String IB_TESTS = "ib_tests-1.0.0.tar.bz2";
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";
