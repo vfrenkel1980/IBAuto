@@ -91,8 +91,17 @@ public class VSIntegrationTestBase extends TestBase {
                     projectPath = TestProjects.VC15PROJECT;
                     projectName = "vc15project";
                     break;
+                case "16":
+                    projectPath = TestProjects.VC16PROJECT;
+                    projectName = "vc16project";
+                    break;
             }
-            vsuiService.openProject(projectPath, "15");
+            if(Integer.parseInt(VCVersion)<=15){
+                vsuiService.openProject(projectPath, "15");
+            }else{
+                vsuiService.openProject(projectPath, "16");
+            }
+
         }catch (Exception e){
             e.getMessage();
         }

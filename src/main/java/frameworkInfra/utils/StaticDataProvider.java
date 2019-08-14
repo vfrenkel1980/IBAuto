@@ -261,10 +261,10 @@ public class StaticDataProvider {
             public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK5 Debug Sample 2\"";
             public static final String PS4_SAMPLE3_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK5 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
             public static final String PS4_SAMPLE4_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK5 Release Sample 4\" /cfg=\"release|orbis\" /minwinver=\"7\"";
-            public static final String GOOGLE_STADIA_SAMPLE1_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\stadia-samples-1.29.0\\samples\\media_stream\\cpp\\media_stream_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 1 release|GGP\" /cfg=\"release|GGP\"";
-            public static final String GOOGLE_STADIA_SAMPLE2_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\stadia-samples-1.29.0\\samples\\vulkan\\07_queue_family_transfer\\07_queue_family_transfer.sln /%s /title=\"Google Stadia - 2015 Sample 2 debug|GGP\" /cfg=\"debug|GGP\"";
-            public static final String GOOGLE_STADIA_SAMPLE3_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\stadia-samples-1.29.0\\samples\\frame_token\\cpp\\frame_token_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 3 release|GGP\" /cfg=\"release|GGP\"";
-            public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\stadia-samples-1.29.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE1_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.34.0\\samples\\media_stream\\cpp\\media_stream_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 1 release|GGP\" /cfg=\"release|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE2_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.34.0\\samples\\vulkan\\07_queue_family_transfer\\07_queue_family_transfer.sln /%s /title=\"Google Stadia - 2015 Sample 2 debug|GGP\" /cfg=\"debug|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE3_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.34.0\\samples\\frame_token\\cpp\\frame_token_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 3 release|GGP\" /cfg=\"release|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.34.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
         }
 
         public static class VC12_BATMAN {
@@ -426,7 +426,7 @@ public class StaticDataProvider {
             public static final String BATCH_BUILD_BUG = "\"C:\\QA\\Simulation\\VC10\\Batch Build Test\\Batch Build Test.sln\" /%s /preset=\"Batch_Build_Bug\"";
             public static final String NO_DEBUG_CONFIGURATION = "\"C:\\QA\\Simulation\\VC10\\DebugU\\NoDebugConfig.sln\" /%s /cfg=\"debugu|win32\"";
             public static final String ACTIVE_DOC = "\"C:\\QA\\Simulation\\VC10\\ActiveDoc\\ActiveDoc.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String ALL_IN_ONE = "\"C:\\QA\\Simulation\\VC10\\All-In-One Code Framework\\Visual Studio 2010\\All-In-One Diagnostics Samples.sln\" /%s /cfg=\"debug|mixed platforms\" /minwinver=8";
+            public static final String ALL_IN_ONE = "\"C:\\QA\\Simulation\\VC10\\All-In-One Code Framework\\Visual Studio 2010\\All-In-One Diagnostics Samples.sln\" /%s /cfg=\"debug|mixed platforms\"";
             public static final String INTERFACES = "\"C:\\QA\\Simulation\\VC10\\Interfaces\\Interfaces.sln\" /%s /cfg=\"debug|win32\"";
             public static final String VC_2010_TEST = "\"C:\\QA\\Simulation\\VC10\\VS2010_Test_1\\VS2010_Test_1.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_4 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_4\\DepEval_Test_4\\DepEval_Test_4.sln\" /%s /cfg=\"debug|win32\"";

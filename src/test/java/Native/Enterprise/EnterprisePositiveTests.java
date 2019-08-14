@@ -4,6 +4,7 @@ import frameworkInfra.testbases.EnterprisePositiveTestBase;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -133,6 +134,29 @@ public class EnterprisePositiveTests extends EnterprisePositiveTestBase {
         setRegistry("4", "BuildService", RegistryKeys.MIN_LOCAL_CORES);
     }
 
+
+    //multihelper
+    @Ignore
+    @Test(testName = "Verify Multi Helper Assignment")
+    public void verifyMultiInitiatorAssignment() {
+        try {
+            winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
+                    String.format("\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
+            SystemActions.sleep(30);
+            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
+            boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
+            if (isPresent) {
+                SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
+            }
+            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+            Assert.assertTrue(isPresent, "No agent assigned to build");
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+        }
+    }
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {
