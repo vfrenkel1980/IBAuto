@@ -23,7 +23,7 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class LinuxSimTestBase extends LinuxTestBase {
 
-    public enum SimClassType{
+    public enum SimClassType {
         None, GenSim, Dock, Ccache, Thirty2Bit, Bazel
     }
 
@@ -37,7 +37,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
         log.info("starting before suite");
-        switch (ENV){
+        switch (ENV) {
             case "linuxsim1a":
                 rawIpList = XmlParser.getIpList("Simulation IP list.xml");
                 break;
@@ -53,14 +53,14 @@ public class LinuxSimTestBase extends LinuxTestBase {
         extent.attachReporter(htmlReporter);
         linuxService.killibDbCheck(ipList.get(1));
         connectedMachinesToGrid = linuxDBService.selectAll(LinuxDB.DB_COORD_REPORT, LinuxDB.COLUMN_MACHINE, LinuxDB.TABLE_HELPER_MACHINES, ipList.get(0));
-        for (int i=0; i < connectedMachinesToGrid.size(); ++i) {
+        for (int i = 0; i < connectedMachinesToGrid.size(); ++i) {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
-        if (!linuxService.isIBCoordinatorServiceUp( ipList.get(0))) {
+        if (!linuxService.isIBCoordinatorServiceUp(ipList.get(0))) {
             test.log(Status.ERROR, "IB service in coordinator is down... FAILING ALL TESTS!");
             extent.flush();
             System.exit(0);
@@ -69,7 +69,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
         if (!IB_VERSION.equals("current")) {
 
-            for (int i=1; i <= NumInitators; ++i) {
+            for (int i = 1; i <= NumInitators; ++i) {
                 if (linuxService.startIBService(ipList.get(i))) {
                     test.log(Status.ERROR, "IB service in initiator " + i + " is down... FAILING ALL TESTS!");
                     extent.flush();
@@ -78,7 +78,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             }
             linuxService.updateIB(ipList.get(0), IB_VERSION, connectedMachinesToGrid);
         }
-            ibVersion = linuxService.getIBVersion(ipList.get(0));
+        ibVersion = linuxService.getIBVersion(ipList.get(0));
 
         log.info("finished before suite");
     }
@@ -91,31 +91,30 @@ public class LinuxSimTestBase extends LinuxTestBase {
         test.assignCategory("BEFORE CLASS");
         test.log(Status.INFO, "BEFORE CLASS started");
 
-        if(className.contains("CcacheTests"))
-            simClassType=SimClassType.Ccache;
-        else if(className.contains("DockCHrootTests"))
-            simClassType=SimClassType.Dock;
-        else if(className.contains("Linux32BitTests"))
-            simClassType=SimClassType.Thirty2Bit;
-        else if(className.contains("Bazel"))
-            simClassType=SimClassType.Bazel;
+        if (className.contains("CcacheTests"))
+            simClassType = SimClassType.Ccache;
+        else if (className.contains("DockCHrootTests"))
+            simClassType = SimClassType.Dock;
+        else if (className.contains("Linux32BitTests"))
+            simClassType = SimClassType.Thirty2Bit;
+        else if (className.contains("Bazel"))
+            simClassType = SimClassType.Bazel;
         else
-            simClassType=SimClassType.GenSim;
+            simClassType = SimClassType.GenSim;
 
 
-        for (int i=1; i <= NumInitators; ++i) {
+        for (int i = 1; i <= NumInitators; ++i) {
             if ((i == simClassType.ordinal()) && (linuxService.startIBService(ipList.get(i)))) {
-                test.log(Status.ERROR, "IB service in initiator "+ i + " is down... FAILING ALL TESTS!");
+                test.log(Status.ERROR, "IB service in initiator " + i + " is down... FAILING ALL TESTS!");
                 extent.flush();
                 System.exit(0);
-            }
-            else if((i != simClassType.ordinal()) && (linuxService.stopIBService(ipList.get(i)))) {
+            } else if ((i != simClassType.ordinal()) && (linuxService.stopIBService(ipList.get(i)))) {
                 String err = "startIBService failed " + ipList.get(i) + "... FAILING ALL TESTS!";
                 test.log(Status.ERROR, err);
             }
         }
 
-        for (int i=1; i <= NumInitators; ++i)
+        for (int i = 1; i <= NumInitators; ++i)
             firstBuilds.add(getFirstBuild(ipList.get(i)));
 
         log.info("finished before class");
@@ -142,13 +141,13 @@ public class LinuxSimTestBase extends LinuxTestBase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res_" + dateFormat.format(calendar.getTime());
 
-        for (int i=1; i <= NumInitators; ++i) {
+        for (int i = 1; i <= NumInitators; ++i) {
             String scriptFileName = output + "_" + String.valueOf(i);
 
             linuxService.startIBService(ipList.get(i));
             lastBuilds.add(linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, ipList.get(i).replaceAll("\n", "")).replaceAll("\n", ""));
 
-            if(Integer.parseInt(lastBuilds.get(i-1)) >= Integer.parseInt(firstBuilds.get(i-1))) {
+            if (Integer.parseInt(lastBuilds.get(i - 1)) >= Integer.parseInt(firstBuilds.get(i - 1))) {
                 linuxService.linuxRunSSHCommand("./ib_db_check.py -d sim2_ib_db_check_data.py -r " + firstBuilds.get(i - 1) + "," + lastBuilds.get(i - 1) + " > " + scriptFileName + "; exit 0", ipList.get(i));
                 linuxService.getFile(ipList.get(i), LinuxCommands.HOME_DIR + scriptFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + scriptFileName);
             }
@@ -168,18 +167,18 @@ public class LinuxSimTestBase extends LinuxTestBase {
                 test.log(Status.WARNING, "Errors found in " + file);
         }
 
-        for (String machine : ipList){
+        for (String machine : ipList) {
             List<String> has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
-            {if (!has_crashes.isEmpty()){
-                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: /etc/incredibuild/log/");
-                }
-                else
-                    test.log(Status.INFO, "No CRASH file found in Machine: " + machine);
+            if (!has_crashes.isEmpty()) {
+                test.log(Status.WARNING, "Found has_crash file! Machine: " + machine + " Path: /etc/incredibuild/log/");
+            } else {
+                test.log(Status.INFO, "No CRASH file found in Machine: " + machine);
             }
+
             List<String> log_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.crash.log");
-            for (String crash : log_crashes){
-                if (!crash.isEmpty()){
-                    test.log(Status.WARNING, "Found CRASH file! Machine: " + machine + " Path: " + crash);
+            for (String crash : log_crashes) {
+                if (!crash.isEmpty()) {
+                    test.log(Status.WARNING, "Found crash.log file! Machine: " + machine + " Path: " + crash);
                 }
             }
         }
