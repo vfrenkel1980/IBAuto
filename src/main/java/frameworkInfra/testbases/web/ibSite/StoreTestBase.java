@@ -30,7 +30,7 @@ public class StoreTestBase extends IbWebTestBase{
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eventWebDriver.register(handler);
-        eventWebDriver.get("https://www.incredibuild.com/ibonlinestore/signup#/signUp");
+        eventWebDriver.get("https://en-site.incredibuild.com/ibonlinestore/signup#/signUp");
         eventWebDriver.manage().window().maximize();
         signupPageObject = new SignupPageObject(eventWebDriver);
         sp = new SignupPage("New", " User", mailAddress3, "111111", password, "France", "", "Com", "Paris",
