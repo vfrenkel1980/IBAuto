@@ -48,7 +48,7 @@ public class ICEngineTestBase extends TestBase {
     final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
-    final protected int CORES_LIMIT = 20;
+    final protected int CORES_LIMIT = 100;
     final protected int COORD_PORT = 31105;
     final protected int VM_PORT = 31106;
     protected WindowsService winService = new WindowsService();
