@@ -13,7 +13,7 @@ import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
 public class OnboardingPageObject {
 
     //MAPPING
-    private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure col-xl-3 col-sm-4 buttonTag']");
+    private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure  col-sm-4 buttonTag']");
     private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Azure Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
