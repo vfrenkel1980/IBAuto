@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-import static cloudInfra.CloudHelper.CloudTestBase.CLOUD;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
@@ -38,6 +37,7 @@ public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
+    public static String CLOUD = System.getProperty("cloudtype");
     final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
     final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
     final public String COORDID = "Automation";
