@@ -29,10 +29,10 @@ public class AzureRegistrationPageObject extends RegistrationPageObject{
         wait.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
         switch (ENV){
             case "prod":
-                eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination!");
+                eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination@");
                 break;
             case "uat":
-                eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination!");
+                eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination@");
                 break;
         }
         wait.until(ExpectedConditions.elementToBeClickable(SIGNIN_BUTTON)).click();
