@@ -2,10 +2,7 @@ package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
-import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
-import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
-import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
-import cloudInfra.IncrediCloud.pageObjects.RegistrationPageObject;
+import cloudInfra.IncrediCloud.pageObjects.*;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -83,6 +80,10 @@ public class ICEngineTestBase extends TestBase {
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding-uat.azurewebsites.net");
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapigwtest.azure-api.net");
                 break;
+            case "aws":
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, " https://incredicloudapp-aws.azurewebsites.net");
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapim-aws.azure-api.net");
+                break;
         }
     }
 
@@ -100,19 +101,27 @@ public class ICEngineTestBase extends TestBase {
                 break;
             case "uat":
                 eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
+            case "aws":
+                eventWebDriver.get("https://incredicloud-onboarding-aws.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
         }
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         switch (CLOUD){
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
+                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                        COORD_PORT, VM_PORT);
                 break;
             case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
+                //TODO: change to AWS values
+                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                        COORD_PORT, VM_PORT);
         }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
-        onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                COORD_PORT, VM_PORT);
+
     }
 
     @BeforeMethod
@@ -162,7 +171,7 @@ public class ICEngineTestBase extends TestBase {
     private int getMachineCores(String machineType){
         int cores= 0;
         switch (machineType){
-            case "B2s":
+            case "D2":
                 cores = 2;
                 break;
             case "D4s_v3":

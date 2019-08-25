@@ -8,18 +8,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.CLOUD;
 import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
 
 public class OnboardingPageObject {
 
     //MAPPING
     private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure  col-sm-4 buttonTag']");
-    private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Azure Region']");
+    private static final By AZURE_CLOUD_BUTTON = By.xpath("//*[@class='icon_azure']");
+    private static final By AWS_CLOUD_BUTTON = By.xpath("//*[@class='icon_amazon']");
+    private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Cloud Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
     private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
     private static final String SELECTION_LIST = "//span[contains(text(),'%s')]";
-    private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@class='mat-option-text']";
+    private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@placeholder='VM Type']";
     private static final By FIRST_NAME_TB = By.xpath("//*[@placeholder='First Name']");
     private static final By LAST_NAME_TB = By.xpath("//*[@placeholder='Last Name']");
     private static final By EMAIL_TB = By.xpath("//*[@placeholder='Email']");
@@ -65,6 +68,14 @@ public class OnboardingPageObject {
 
     public void clickTryIncredicloud(){
         eventWebDriver.findElement(TRY_INCREDICLOUD_BUTTON).click();
+        switch (CLOUD){
+            case "azure":
+                eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
+                break;
+            case "aws":
+                eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
+                break;
+        }
     }
 
     public void performOnboarding(OnboardingPage onboardingPage){
