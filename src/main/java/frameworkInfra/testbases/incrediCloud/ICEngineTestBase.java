@@ -81,7 +81,7 @@ public class ICEngineTestBase extends TestBase {
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapigwtest.azure-api.net");
                 break;
             case "aws":
-                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, " https://incredicloudapp-aws.azurewebsites.net");
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding-aws.azurewebsites.net");
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapim-aws.azure-api.net");
                 break;
         }

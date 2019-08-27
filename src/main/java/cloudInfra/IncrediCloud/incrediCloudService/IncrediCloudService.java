@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -41,6 +42,9 @@ public class IncrediCloudService implements IIncrediCloudService{
                 break;
             case "uat":
                 RestAssured.baseURI = "https://incredicloudapigwtest.azure-api.net";
+                break;
+            case "aws":
+                RestAssured.baseURI = "https://incredicloudapim-aws.azure-api.net";
                 break;
         }
         Map<String, String> headers = new HashMap<>();
@@ -103,7 +107,6 @@ public class IncrediCloudService implements IIncrediCloudService{
                 get("/provision/getStatusQueue/" + coordId + "/true").
                 peek().
                 then().
-                statusCode(200).
                 extract().
                 response();
         List<Boolean> delivered = response.path("resourceDetails.isDelivered");
@@ -118,23 +121,6 @@ public class IncrediCloudService implements IIncrediCloudService{
         }
         test.log(Status.INFO, "GetStatusQueue finished successfully with " + count + " machines");
         return count;
-    }
-
-    @Override
-    public List getCouldIps() {
-        test.log(Status.INFO, "Retrieving IP list from cloud machines");
-        Response response = given().
-                header("Authorization", "bearer " + token).
-                when().
-                get("/provision/getStatusQueue/" + coordId + "/true").
-                peek().
-                then().
-                statusCode(200).
-                extract().
-                response();
-        List<Boolean> ipList = response.path("resourceDetails.ip_address");
-        test.log(Status.INFO, "Finished retrieving IP list");
-        return ipList;
     }
 
     @Override
@@ -167,6 +153,34 @@ public class IncrediCloudService implements IIncrediCloudService{
         then().
                 statusCode(200);
         test.log(Status.INFO, "REST deactivate to cloud successful");
+    }
+
+    @Override
+    public String getCloudStatus() {
+        return given().
+                header("Authorization", "bearer " + token).
+                when().
+                get("/provision/getStatusQueue/" + coordId + "/true").
+                peek().
+                then().
+                extract().
+                path("resultMessage");
+    }
+
+    @Override
+    public void waitForCloudStatus(String status) {
+        int time = 0;
+        int wait = 900;
+        refreshToken();
+        while (time != wait){
+            if (getCloudStatus().equals(status)){
+                test.log(Status.INFO, "Cloud is in " + status + " status");
+                break;
+            }
+            time += 10;
+            SystemActions.sleep(10);
+        }
+        test.log(Status.INFO, "After waiting 15 minutes, failed to get " + status + " status");
     }
 
     @Override

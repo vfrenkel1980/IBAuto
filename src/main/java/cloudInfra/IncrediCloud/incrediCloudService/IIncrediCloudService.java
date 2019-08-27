@@ -18,7 +18,9 @@ public interface IIncrediCloudService {
 
     void deactivateCloud();
 
-    List getCouldIps();
+    String getCloudStatus();
+
+    void waitForCloudStatus(String status);
 
 
 }

@@ -276,7 +276,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Pause Cloud And Delete Pool", dependsOnMethods = { "enableCloud"})
     public void pauseCloudAndDeletePool(){
         coordinator.pauseCloudAndDeletePool();
-        SystemActions.sleep(900);
+        icService.waitForCloudStatus("OK");
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "180000"));
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
