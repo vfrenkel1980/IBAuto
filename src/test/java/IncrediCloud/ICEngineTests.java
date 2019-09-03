@@ -72,6 +72,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Not All Machines Participate In Build", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
     public void verifyNotAllMachinesParticipateInBuild(){
+        //SystemActions.sleep(120);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES - (MACHINE_CORES * 2), "40000"));
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
@@ -104,7 +105,7 @@ public class ICEngineTests extends ICEngineTestBase {
         icService.waitForDeliveredMachines(POOL_SIZE + 3);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(true);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 4, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
         Assert.assertEquals(machinesInPool, POOL_SIZE + 3, "Number of machines in pool is different then expected");
     }
@@ -255,7 +256,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
         coordinator.enableCloud(false);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (ON_PREM_CORES * 2) + POOL_CORES, "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES + POOL_CORES, "240000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);

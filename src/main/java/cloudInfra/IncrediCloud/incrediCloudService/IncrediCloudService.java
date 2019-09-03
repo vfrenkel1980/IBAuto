@@ -99,6 +99,7 @@ public class IncrediCloudService implements IIncrediCloudService{
     @Override
     public int getStatusQueue(boolean getDelivered) {
         int count = 0;
+        List<Boolean> delivered = null;
         test.log(Status.INFO, "Running GetStatusQueue");
 
         Response response = given().
@@ -109,7 +110,12 @@ public class IncrediCloudService implements IIncrediCloudService{
                 then().
                 extract().
                 response();
-        List<Boolean> delivered = response.path("resourceDetails.isDelivered");
+        try {
+            delivered = response.path("resourceDetails.isDelivered");
+        }
+        catch (Exception e){
+            delivered = response.path("resourceDetails.isDelivered");
+        }
         if(getDelivered) {
             for (boolean del : delivered) {
                 if (del)

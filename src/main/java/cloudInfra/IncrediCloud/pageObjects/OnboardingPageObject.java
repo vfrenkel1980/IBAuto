@@ -22,7 +22,7 @@ public class OnboardingPageObject {
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
     private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
     private static final String SELECTION_LIST = "//span[contains(text(),'%s')]";
-    private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@placeholder='mat-option-text']";
+    private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@class='mat-option-text']";
     private static final By FIRST_NAME_TB = By.xpath("//*[@placeholder='First Name']");
     private static final By LAST_NAME_TB = By.xpath("//*[@placeholder='Last Name']");
     private static final By EMAIL_TB = By.xpath("//*[@placeholder='Email']");
@@ -68,13 +68,16 @@ public class OnboardingPageObject {
 
     public void clickTryIncredicloud(){
         eventWebDriver.findElement(TRY_INCREDICLOUD_BUTTON).click();
-        switch (CLOUD){
-            case "azure":
-                eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
-                break;
-            case "aws":
-                eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
-                break;
+        //TODO: remove when aws is removed from envs
+        if (ENV.equals("aws")) {
+            switch (CLOUD) {
+                case "azure":
+                    eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
+                    break;
+                case "aws":
+                    eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
+                    break;
+            }
         }
     }
 
