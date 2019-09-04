@@ -111,13 +111,13 @@ public class ICEngineTestBase extends TestBase {
         switch (CLOUD){
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
-                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                onboardingPage = new OnboardingPage("UK West", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
                 break;
             case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
                 //TODO: change to AWS values
-                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
         }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
