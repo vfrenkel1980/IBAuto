@@ -70,7 +70,7 @@ public class ICEngineTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        ibService.updateIB(IB_VERSION);
+        //ibService.updateIB(IB_VERSION);
         switch (ENV){
             case "prod":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud.azurewebsites.net");
@@ -89,7 +89,7 @@ public class ICEngineTestBase extends TestBase {
 
     @BeforeClass
     public void beforeClass(){
-        SystemActions.sleep(600); //wait for the previous resource to be deleted
+        //SystemActions.sleep(600); //wait for the previous resource to be deleted
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
@@ -111,13 +111,13 @@ public class ICEngineTestBase extends TestBase {
         switch (CLOUD){
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
-                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                onboardingPage = new OnboardingPage("UK West", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
                 break;
             case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
                 //TODO: change to AWS values
-                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
         }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
@@ -172,10 +172,12 @@ public class ICEngineTestBase extends TestBase {
         int cores= 0;
         switch (machineType){
             case "D2":
+            case "t2.large":
                 cores = 2;
                 break;
             case "D4s_v3":
                 cores = 4;
+                break;
         }
         return cores;
     }

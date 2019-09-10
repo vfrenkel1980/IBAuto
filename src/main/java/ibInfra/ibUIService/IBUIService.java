@@ -846,7 +846,7 @@ public class IBUIService implements IIBUIService {
         public void verifyCloudDeactivated() {
             test.log(Status.INFO, "Verifying cloud is deactivated");
             try {
-                screen.wait(CoordMonitor.ScaleToCloudButton.similar((float) 0.95),60);
+                screen.wait(CoordMonitor.DeactivatingButton.similar((float) 0.95),60);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to verify cloud deactivated, failed with error: " + findFailed.getMessage());
                 Assert.fail();

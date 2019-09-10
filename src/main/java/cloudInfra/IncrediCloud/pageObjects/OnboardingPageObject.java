@@ -82,12 +82,12 @@ public class OnboardingPageObject {
     }
 
     public void performOnboarding(OnboardingPage onboardingPage){
-        selectRegion(onboardingPage);
-        enterName(onboardingPage);
-        enterMail(onboardingPage);
-        enterCompany(onboardingPage);
-        enterVMDetails(onboardingPage);
-        clickSave();
+            selectRegion(onboardingPage);
+            enterName(onboardingPage);
+            enterMail(onboardingPage);
+            enterCompany(onboardingPage);
+            enterVMDetails(onboardingPage);
+            clickSave();
     }
 
     public void performUpdate(OnboardingPage onboardingPage){

@@ -8,10 +8,10 @@
 
     <test name="ICEngine">
         <classes>
-            <class name ="IncrediCloud.ICAzureAccountsTests" />
-            <class name ="IncrediCloud.OnboardingTests" />
+            <!--<class name ="IncrediCloud.ICAzureAccountsTests" />
+            <class name ="IncrediCloud.OnboardingTests" />-->
             <class name ="IncrediCloud.ICEngineTests" />
-            <class name ="IncrediCloud.ICUpdateTests" />
+            <!--<class name ="IncrediCloud.ICUpdateTests" />-->
         </classes>
     </test>
 </suite>

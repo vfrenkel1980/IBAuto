@@ -101,7 +101,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify New Machines Are Created", dependsOnMethods = { "verifyNotAllMachinesParticipateInBuild"})
     public void verifyNewMachinesAreCreated(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + (MACHINE_CORES * 3), "960000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + (MACHINE_CORES * 3), "660000"));
         icService.waitForDeliveredMachines(POOL_SIZE + 3);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(true);
@@ -321,6 +321,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
+        icService.getCloudStatus();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         SystemActions.sleep(120);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
