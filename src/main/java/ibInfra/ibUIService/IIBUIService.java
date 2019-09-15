@@ -150,6 +150,8 @@ public interface IIBUIService {
 
         void clickAllowRemoteAdministration();
 
+        void clickEnableSecureConnection(String agent);
+
         void clickAllowEnableDisableAsHelper();
 
         void stopCoordService();
