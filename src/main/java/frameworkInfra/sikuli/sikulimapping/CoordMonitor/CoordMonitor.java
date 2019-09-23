@@ -15,7 +15,6 @@ public class CoordMonitor {
     public static final Pattern SubscribeAgentMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\subscribeMenu.png");
     public static final Pattern SubscribedAgentValidation = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\subscribedValidation.png");
     public static final Pattern AllowRemoteAdministrationMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\allowRemoteAdministration.png");
-    public static final Pattern EnableSecureConnection = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\enableSecureConnection.png");
     public static final Pattern AllowEnableDisableAsHelperMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\allowEnableDisableAsHelper.png");
     public static final Pattern ToolsMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\toolsMenu.png");
     public static final Pattern StopServiceMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\stopLocalServiceMenu.png");
