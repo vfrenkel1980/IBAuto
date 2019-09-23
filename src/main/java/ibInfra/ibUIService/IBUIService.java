@@ -751,25 +751,6 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void clickEnableSecureConnection(String agent) {
-            test.log(Status.INFO, "Clicking Enable Secure connection");
-            try {
-                if(agent.toLowerCase()=="helper") {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                }else if(agent.toLowerCase()=="initiator"){
-                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.8), 15).rightClick();
-                }else{
-                    test.log(Status.WARNING, "Agent name is incorrect");
-                    Assert.fail();
-                }
-                screen.wait(CoordMonitor.EnableSecureConnection.similar((float) 0.8),15).click();
-            } catch (FindFailed findFailed) {
-                test.log(Status.WARNING, "Failed to click Enable Secure connection, failed with error: " + findFailed.getMessage());
-                Assert.fail();
-            }
-        }
-
-        @Override
         public void clickAllowEnableDisableAsHelper() {
             test.log(Status.INFO, "Clicking allow Enable Disable as helper");
             try {
