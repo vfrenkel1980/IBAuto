@@ -116,7 +116,7 @@ public class WindowsService implements IWindowsService {
                 isRunning = false;
             }
         }
-        test.log(Status.INFO, processName + " Finished running");
+     //   test.log(Status.INFO, processName + " Finished running");
     }
 
     @Override
@@ -140,6 +140,7 @@ public class WindowsService implements IWindowsService {
         String output;
         while (isRunning) {
             output = runCommandGetOutput(Processes.PSLIST + " \\\\" + host + " -u " + user + " -p " + pass + " -e " + processName);
+            System.out.println(Processes.PSLIST + " \\\\" + host + " -u " + user + " -p " + pass + " -e " + processName);
             System.out.println(output);
             if (output.contains("process " + processName + " was not found on " + host)) {
                 isRunning = false;
