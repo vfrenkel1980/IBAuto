@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 
 import static frameworkInfra.Listeners.SuiteListener.*;
 
@@ -120,6 +121,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
             firstBuilds.add(getFirstBuild(ipList.get(i)));
 
         log.info("finished before class");
+        Calendar calender = Calendar.getInstance();
+        log.info(calender.getTime());
     }
 
     @BeforeMethod
@@ -130,6 +133,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.log(Status.INFO, method.getName() + " test started");
+        log.info("Linux Simulation - Cycle " + cycle + "; Test name: " + testName);
     }
 
     @AfterSuite

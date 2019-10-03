@@ -16,6 +16,7 @@ import org.junit.Assert;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Calendar;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -309,11 +310,14 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public void deleteLogsFolder(List<String> ipList) {
+        Calendar calender = Calendar.getInstance();
+        log.info(calender.getTime());
         for (Object machine : ipList) {
             log.info("deleting " + machine);
             winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
             log.info("deleted " + machine);
         }
+        log.info(calender.getTime());
     }
 
     @Override
