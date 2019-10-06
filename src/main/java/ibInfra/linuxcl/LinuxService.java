@@ -317,7 +317,6 @@ public class LinuxService extends TestBase implements ILinuxService {
             winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
             log.info("deleted " + machine);
         }
-        log.info(calender.getTime());
     }
 
     @Override
@@ -537,6 +536,7 @@ public class LinuxService extends TestBase implements ILinuxService {
     public List findFile(String machineName, String folder, String fileName) {
         String[] commandOutput =  linuxRunSSHCommandOutputString("find " + folder + " -name " + fileName, machineName).split("\n");
         List<String> filesList = Arrays.asList(commandOutput);
+        log.info("filesList value in " + machineName + " is " + filesList);
         return filesList;
     }
 }

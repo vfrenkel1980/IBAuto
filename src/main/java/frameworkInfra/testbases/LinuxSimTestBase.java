@@ -89,6 +89,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
     @BeforeClass
     public void initializeEnv(ITestContext testContext) {
+        Calendar calender = Calendar.getInstance();
+        log.info(calender.getTime());
         log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
@@ -121,8 +123,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
             firstBuilds.add(getFirstBuild(ipList.get(i)));
 
         log.info("finished before class");
-        Calendar calender = Calendar.getInstance();
-        log.info(calender.getTime());
     }
 
     @BeforeMethod
@@ -174,6 +174,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
         for (String machine : ipList) {
+            log.info(has_crashes + " value in " + machine);
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
             if (has_crashes.isEmpty()) {
                 test.log(Status.WARNING, "Found has_crash file! Machine: " + machine + " Path: /etc/incredibuild/log/");
@@ -182,6 +183,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             }
 
             log_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.crash.log");
+            log.info(log_crashes + " value in " + machine);
             if (!log_crashes.isEmpty()) {
                     test.log(Status.WARNING, "Found crash.log file! Machine: " + machine + " Path: /etc/incredibuild/log/");
                 }
