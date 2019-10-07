@@ -18,8 +18,7 @@
           <class name ="Native.linuxtests.LinuxSimulationDockCHrootTests" />
        </classes>
   </test>
-    <!--
-    <test name="Cycle 2" allow-return-values="true">
+  <test name="Cycle 2" allow-return-values="true">
         <parameter name="cycle" value="2"/>
         <classes>
             <class name ="Native.linuxtests.LinuxSimulationTests" />
@@ -164,5 +163,4 @@
                      <class name ="Native.linuxtests.LinuxSimulationTests" />
                  </classes>
              </test>
-  -->
  </suite>

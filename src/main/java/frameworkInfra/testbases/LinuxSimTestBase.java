@@ -36,6 +36,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
     private static List<String> has_crashes = new ArrayList<String>();
     private static List<String> log_crashes = new ArrayList<String>();
     protected SimClassType simClassType;
+    Calendar calender = Calendar.getInstance();
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
@@ -89,7 +90,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
     @BeforeClass
     public void initializeEnv(ITestContext testContext) {
-        Calendar calender = Calendar.getInstance();
         log.info(calender.getTime());
         log.info("starting before class");
         test = extent.createTest("Before Class");
@@ -174,19 +174,23 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
         for (String machine : ipList) {
-            log.info(has_crashes + " value in " + machine);
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
-            if (has_crashes.isEmpty()) {
-                test.log(Status.WARNING, "Found has_crash file! Machine: " + machine + " Path: /etc/incredibuild/log/");
+            log.info(has_crashes + " = has_crash value in " + machine);
+            log.info(calender.getTime());
+            if (has_crashes.size() >0) {
+                test.log(Status.WARNING, "Found has_crash file in Machine: " + machine + " Path: /etc/incredibuild/log/");
             } else {
-                test.log(Status.INFO, "No CRASH file found in Machine: " + machine);
+                test.log(Status.INFO, "No has_crashes files found in Machine: " + machine);
             }
 
             log_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.crash.log");
-            log.info(log_crashes + " value in " + machine);
-            if (!log_crashes.isEmpty()) {
-                    test.log(Status.WARNING, "Found crash.log file! Machine: " + machine + " Path: /etc/incredibuild/log/");
+            log.info(log_crashes + " = log_crashes value in " + machine);
+            if (log_crashes.size()>0) {
+                test.log(Status.WARNING, "Found log_crashes files in Machine: " + machine + " Path: /etc/incredibuild/log/");
                 }
+            else {
+                test.log(Status.INFO, "No log_crashes files found in Machine: " + machine);
+            }
 
         }
 
