@@ -68,7 +68,7 @@ public class VSExtensionTests extends VSTestBase {
     public void executeVSBuildExplorer(){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         vsuiService.openVSInstance(VSINSTALLATION, false, SCENARIO);
-        vsuiService.openProject(TestProjects.CUSTOM_PROJECT, VSINSTALLATION);
+        vsuiService.openProject(TestProjects.CUSTOM_PROJECT);
         vsuiService.performIbActionFromPrjExplorer(VsActions.REBUILD_SOLUTION,"solution", "custom");
         String result;
         try {

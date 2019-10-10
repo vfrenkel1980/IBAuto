@@ -9,6 +9,8 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
+import ibInfra.vs.IVSUIService;
+import ibInfra.vs.VS16UIService;
 import ibInfra.vs.VSUIService;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -29,7 +31,7 @@ public class VSIntegrationTestBase extends TestBase {
 
     protected static int ibVersion = 0;
     public IbService ibService = new IbService();
-    public VSUIService vsuiService = new VSUIService();
+    public IVSUIService vsuiService;
     protected String projectPath = "";
     protected String projectName = "";
 
@@ -61,7 +63,6 @@ public class VSIntegrationTestBase extends TestBase {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
         try {
-            vsuiService.openVSInstance(VCVersion, false, "");
             switch (VCVersion) {
                 case "8":
                     projectPath = TestProjects.VC8PROJECT;
@@ -92,15 +93,18 @@ public class VSIntegrationTestBase extends TestBase {
                     projectName = "vc15project";
                     break;
                 case "16":
+                case "116":
                     projectPath = TestProjects.VC16PROJECT;
                     projectName = "vc16project";
                     break;
             }
             if(Integer.parseInt(VCVersion)<=15){
-                vsuiService.openProject(projectPath, "15");
+                vsuiService = new VSUIService();
             }else{
-                vsuiService.openProject(projectPath, "16");
+                vsuiService = new VS16UIService();
             }
+            vsuiService.openVSInstance(VCVersion, false, "");
+            vsuiService.openProject(projectPath);
 
         }catch (Exception e){
             e.getMessage();
