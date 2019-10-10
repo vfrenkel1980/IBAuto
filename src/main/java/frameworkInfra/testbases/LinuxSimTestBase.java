@@ -36,10 +36,11 @@ public class LinuxSimTestBase extends LinuxTestBase {
     private static List<String> has_crashes = new ArrayList<String>();
     private static List<String> log_crashes = new ArrayList<String>();
     protected SimClassType simClassType;
-    Calendar calender = Calendar.getInstance();
+    private Calendar calender = Calendar.getInstance();
 
     @BeforeSuite
     public void envSetUp(ITestContext testContext) {
+        log.info(calender.getTime());
         log.info("starting before suite");
         switch (ENV) {
             case "linuxsim1a":
@@ -90,7 +91,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
     @BeforeClass
     public void initializeEnv(ITestContext testContext) {
-        log.info(calender.getTime());
         log.info("starting before class");
         test = extent.createTest("Before Class");
         test.assignCategory("BEFORE CLASS");
@@ -176,7 +176,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
         for (String machine : ipList) {
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
             log.info(has_crashes + " = has_crash value in " + machine);
-            log.info(calender.getTime());
             if (has_crashes.size() >0) {
                 test.log(Status.WARNING, "Found has_crash file in Machine: " + machine + " Path: /etc/incredibuild/log/");
             } else {
