@@ -2,8 +2,10 @@ package ibInfra.vs;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.AppiumActions;
-import frameworkInfra.utils.parsers.Parser;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.StaticDataProvider.InitMSBuild;
+import frameworkInfra.utils.StaticDataProvider.InitOLDMSBuild;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.VsDevenvInstallPath;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.windowscl.WindowsService;
@@ -19,11 +21,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -31,15 +30,15 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 /**
  * Class to perform actions in VS
  */
-public class VSUIService implements IVSUIService {
+public class VS16UIService implements IVSUIService {
 
     private WindowsService winService = new WindowsService();
     private WindowsDriver driver;
 
-    public VSUIService(WindowsDriver driver){
+    public VS16UIService(WindowsDriver driver){
         this.driver = driver;
     }
-    public VSUIService(){
+    public VS16UIService(){
     }
 
     public void vsFirstActivation(){
@@ -52,7 +51,7 @@ public class VSUIService implements IVSUIService {
         String installedBuild = "";
         String out = "";
         WindowsService windowsService = new WindowsService();
-        out = windowsService.runCommandGetOutput(InitOLDMSBuild.OLD_MSBUILD + " /version");
+        out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
         try {
             FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
             BufferedReader input = new BufferedReader(new FileReader(Locations.QA_ROOT + "\\out.txt"));
@@ -80,9 +79,8 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void openProject(String projectPath) {
-        driver.findElementByName("File").click();
-        driver.findElementByName("Open").click();
-        driver.findElementByName("Project/Solution...").click();
+
+        driver.findElementByName("Open a project or solution").click();
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
@@ -98,17 +96,14 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void createNewProject(String projectName, String version) {
-        List<WebElement> nameTB;
-        driver.findElementByName("File").click();
-        driver.findElementByName("New").click();
-        driver.findElementByName("Project...").click();
-        SystemActions.sleep(3);
-        driver.findElementByName("Windows Console Application").click();
-        nameTB =driver.findElementsByName("Name:");
-        nameTB.get(1).sendKeys(projectName);
-        nameTB =driver.findElementsByName("Location:");
-        nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
-        driver.findElementByName("OK").click();
+        driver.findElementByName("Create a new project").click();
+        driver.findElementByName("Console App").click();
+        driver.findElementByName("Next").click();
+        driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
+        driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
+        driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
+        driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
+        driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
         WebDriverWait wait = new WebDriverWait(driver,90);
         //in vs2019 the following command will switch to the new opened windows (a new session)
         try {
@@ -123,6 +118,9 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
+        List<WebElement> extensions = null;
+        extensions =driver.findElementsByName("Extensions");
+        extensions.get(0).click();
         List<WebElement> ibElements = null;
         ibElements =driver.findElementsByName("IncrediBuild");
         ibElements.get(0).click();
@@ -135,6 +133,9 @@ public class VSUIService implements IVSUIService {
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("Build");
+        List<WebElement> extensions = null;
+        extensions =driver.findElementsByName("Extensions");
+        extensions.get(0).click();
         List<WebElement> ibElements = null;
         ibElements =driver.findElementsByName("IncrediBuild");
         ibElements.get(0).click();
@@ -163,7 +164,7 @@ public class VSUIService implements IVSUIService {
 
     /**
      * Open VS instance
-     * @param version version to open
+     * @param version version to open 116 is PREVIEW
      * @param isFirstActivation boolean value to apply first activation menus if needed
      * @param scenario if scenario=3 - install on a different drive
      */
@@ -171,35 +172,17 @@ public class VSUIService implements IVSUIService {
     public void openVSInstance(String version, boolean isFirstActivation, String scenario) {
         String pathToDevenv = "";
         switch (version) {
-            case "preview":
+            case "116":
                 if (scenario.equals("3"))
                     pathToDevenv = "E:\\Microsoft Visual Studio\\Preview\\Professional\\Common7\\IDE\\devenv.exe";
                 else
                     pathToDevenv = VsDevenvInstallPath.VS2019_PREVIEW + "\\devenv.exe";
                 break;
-            case "8":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 8\\Common7\\IDE\\devenv.exe";
-                break;
-            case "9":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 9.0\\Common7\\IDE\\devenv.exe";
-                break;
-            case "10":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 10.0\\Common7\\IDE\\devenv.exe";
-                break;
-            case "11":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\IDE\\devenv.exe";
-                break;
-            case "12":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\IDE\\devenv.exe";
-                break;
-            case "14":
-                pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\devenv.exe";
-                break;
-            case "15":
+            case "16":
                 if (scenario.equals("3"))
-                    pathToDevenv = "E:\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
+                    pathToDevenv = "E:\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\devenv.exe";
                 else
-                    pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\devenv.exe";
+                    pathToDevenv = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\devenv.exe";
                 break;
         }
         try {

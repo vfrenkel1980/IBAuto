@@ -55,6 +55,20 @@
         </classes>
     </test>
 
+    <test name="VSIntegrationTests16">
+        <parameter name="VCVersion" value="16"/>
+        <classes>
+            <class name ="Native.vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
+    <test name="VSIntegrationTests16Preview">
+        <parameter name="VCVersion" value="116"/>
+        <classes>
+            <class name ="Native.vstests.VSIntegrationTests" />
+        </classes>
+    </test>
+
 
 
 </suite>

@@ -4,6 +4,8 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.vs.VS16UIService;
+import ibInfra.vs.VSUIService;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
@@ -12,16 +14,17 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class UIValidationsTests extends UIValidationTestBase {
 
 
-    @Test(testName = "Verify VS Monitor Bar")
-    public void verifyVSMonitorBar(){
+    @Test(testName = "Verify VS 2017 Monitor Bar")
+    public void verifyVS2017MonitorBar(){
         batchProjects.forEach(item->{
             if(project.equals(item)){
                 test.log(Status.SKIP, "Skipping test as this is a Batch project");
                 throw new SkipException("Skipped test");
             }
         });
+        VSUIService vsuiService = new VSUIService();
         vsuiService.openVSInstance("15", false, "");
-        vsuiService.openProject(projectLocation, "15");
+        vsuiService.openProject(projectLocation);
         if (project.contains("white")){
             vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
             SystemActions.sleep(10);
@@ -30,6 +33,52 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         }
         client.verifyVSBarPattern(vsBarPattern);
+        vsuiService.killDriver();
+    }
+
+    @Test(testName = "Verify VS 2019 Monitor Bar")
+    public void verifyVS2019MonitorBar(){
+        batchProjects.forEach(item->{
+            if(project.equals(item)){
+                test.log(Status.SKIP, "Skipping test as this is a Batch project");
+                throw new SkipException("Skipped test");
+            }
+        });
+        VS16UIService vsuiService = new VS16UIService();
+        vsuiService.openVSInstance("16", false, "");
+        vsuiService.openProject(projectLocation);
+        if (project.contains("white")){
+            vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
+            SystemActions.sleep(10);
+            vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
+        }else {
+            vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
+        }
+        client.verifyVSBarPattern(vsBarPattern);
+        vsuiService.killDriver();
+    }
+
+
+    @Test(testName = "Verify VS 2019 Preview Monitor Bar")
+    public void verifyVS2019PreviewMonitorBar(){
+        batchProjects.forEach(item->{
+            if(project.equals(item)){
+                test.log(Status.SKIP, "Skipping test as this is a Batch project");
+                throw new SkipException("Skipped test");
+            }
+        });
+        VS16UIService vsuiService = new VS16UIService();
+        vsuiService.openVSInstance("116", false, "");
+        vsuiService.openProject(projectLocation);
+        if (project.contains("white")){
+            vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
+            SystemActions.sleep(10);
+            vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
+        }else {
+            vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
+        }
+        client.verifyVSBarPattern(vsBarPattern);
+        vsuiService.killDriver();
     }
 
     @Test(testName = "Verify Tray Icon Color")
