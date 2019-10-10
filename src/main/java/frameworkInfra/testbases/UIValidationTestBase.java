@@ -12,7 +12,6 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
-import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
@@ -44,7 +43,6 @@ public class UIValidationTestBase extends TestBase {
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
     protected Screen screen = new Screen();
-    protected VSUIService vsuiService = new VSUIService();
     protected String project = "";
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");
@@ -221,7 +219,6 @@ public class UIValidationTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-        vsuiService.killDriver();
         SystemActions.killProcess(Processes.BUILDHISTORY);
         SystemActions.killProcess(Processes.BUILDMONITOR);
         SystemActions.killProcess(Processes.COORDMONITOR);
