@@ -49,6 +49,11 @@ public class LinuxTestBase extends TestBase{
         className = getClass().getName();
     }
 
+        @AfterMethod
+    public void afterMethod(ITestResult result) {
+        extent.flush();
+    }
+
 //    @AfterMethod
 //    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
 //
