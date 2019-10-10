@@ -21,7 +21,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             }
         });
         vsuiService.openVSInstance("15", false, "");
-        vsuiService.openProject(projectLocation, "15");
+        vsuiService.openProject(projectLocation);
         if (project.contains("white")){
             vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
             SystemActions.sleep(10);
