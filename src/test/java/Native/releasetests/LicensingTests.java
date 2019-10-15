@@ -86,33 +86,20 @@ public class LicensingTests extends LicensingTestBase {
         }
     }
 
-    /**
-     * @bug 10384 in scenario 3: No packages allocated (valid license).  Workaround is added: the test checks that only 1 remote core was allocated for build
-     */
     @Test(testName = "Licence Test: Dev Tools - Submition")
     public void licTestDevTools_Submition() {
         exitStatus = winService.runCommandWaitForFinish(ibService.getIBInstallFolder() + LicTestPrjBuildConsoleCommands.SUBMITION);
-        if (exitStatus == 0 && scenario.equals("3")) {
-            int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
-            Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
-        } else if (exitStatus == 0) {
+        if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
             Assert.assertTrue(false, "Build wasn't executed correctly");
         }
     }
 
-
-    /**
-     * @bug 10384 in scenario 3: No packages allocated (valid license).Workaround is added: the test checks that only 1 remote core was allocated for build
-     */
     @Test(testName = "Licence Test: Dev Tools - XML")
     public void licTestDevTools_XML() {
         exitStatus = winService.runCommandWaitForFinish(ibService.getIBInstallFolder() + LicTestPrjBuildConsoleCommands.XML);
-        if (exitStatus == 0 && scenario.equals("3")) {
-            int cores = Parser.getHelperCores(Locations.OUTPUT_LOG_FILE).size();
-            Assert.assertTrue(cores == 1, "The number of remote cores is not 1(known issue). Found " + cores);
-        } else if (exitStatus == 0) {
+        if (exitStatus == 0) {
             Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
         } else {
             Assert.assertTrue(false, "Build wasn't executed correctly");
