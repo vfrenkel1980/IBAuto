@@ -175,22 +175,19 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
         for (String machine : ipList) {
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
-            log.info(has_crashes + " = has_crash value in " + machine);
-            if (has_crashes.size() >0) {
-                test.log(Status.WARNING, "Found has_crash file in Machine: " + machine + " Path: /etc/incredibuild/log/");
+            if (has_crashes.size() >0 && !has_crashes.get(0).equals("")) {
+                test.log(Status.WARNING, "Found has_crash files in Machine: " + machine + " Path: /etc/incredibuild/log/");
             } else {
                 test.log(Status.INFO, "No has_crashes files found in Machine: " + machine);
             }
 
             log_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.crash.log");
-            log.info(log_crashes + " = log_crashes value in " + machine);
-            if (log_crashes.size()>0) {
+            if (log_crashes.size()>0 && !log_crashes.get(0).equals("")) {
                 test.log(Status.WARNING, "Found log_crashes files in Machine: " + machine + " Path: /etc/incredibuild/log/");
                 }
             else {
                 test.log(Status.INFO, "No log_crashes files found in Machine: " + machine);
             }
-
         }
 
     }
