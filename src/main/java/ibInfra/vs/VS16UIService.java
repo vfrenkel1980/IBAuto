@@ -80,7 +80,7 @@ public class VS16UIService implements IVSUIService {
     @Override
     public void openProject(String projectPath) {
 
-        driver.findElementByName("Open a project or solution").click();
+        driver.findElementByName("Open a local Visual Studio project or .sln file").click();
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
@@ -96,7 +96,7 @@ public class VS16UIService implements IVSUIService {
 
     @Override
     public void createNewProject(String projectName, String version) {
-        driver.findElementByName("Create a new project").click();
+        driver.findElementByName("Create a _new project").click();
         driver.findElementByName("Console App").click();
         driver.findElementByName("Next").click();
         driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
