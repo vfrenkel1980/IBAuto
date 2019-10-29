@@ -38,10 +38,9 @@ public class AppiumActions {
     }
 
     public static void contextMenuIncrediBuildClick(WebElement project, WindowsDriver driver){
-        List<WebElement> ibElements = null;
         WebElement goTo = null;
-        ibElements = driver.findElementsByName("IncrediBuild");
-        ibElements.get(1).click();
+        WebElement ibElement = driver.findElementByName("IncrediBuild");
+        ibElement.click();
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             goTo = driver.findElementByName("Go To");
@@ -52,8 +51,8 @@ public class AppiumActions {
         }
         if (goTo != null){
             AppiumActions.rightClick(project, driver);
-            ibElements.get(0).click();
-            test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText() );
+            ibElement.click();
+            test.log(Status.INFO, "Successfully clicked on " + ibElement.getText() );
         }
     }
 }

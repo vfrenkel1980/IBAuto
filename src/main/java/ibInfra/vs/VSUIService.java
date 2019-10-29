@@ -122,10 +122,7 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void performIbActionFromMenu(String action) {
-        driver.findElementByName("Build");
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("IncrediBuild");
-        ibElements.get(0).click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -134,10 +131,7 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
-        driver.findElementByName("Build");
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("IncrediBuild");
-        ibElements.get(0).click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
     }
