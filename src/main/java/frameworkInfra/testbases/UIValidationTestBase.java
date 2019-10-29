@@ -10,6 +10,7 @@ import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
@@ -68,6 +69,9 @@ public class UIValidationTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
         //stop agent service in order to delete history
+        int version = IIBService.getIbVersion();
+        if (version != 0)
+            ibService.uninstallIB(String.valueOf(version));
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }

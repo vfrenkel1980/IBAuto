@@ -118,12 +118,8 @@ public class VS16UIService implements IVSUIService {
     @Override
     public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
-        List<WebElement> extensions = null;
-        extensions =driver.findElementsByName("Extensions");
-        extensions.get(0).click();
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("IncrediBuild");
-        ibElements.get(0).click();
+        driver.findElementByName("Extensions").click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -133,12 +129,8 @@ public class VS16UIService implements IVSUIService {
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("Build");
-        List<WebElement> extensions = null;
-        extensions =driver.findElementsByName("Extensions");
-        extensions.get(0).click();
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("IncrediBuild");
-        ibElements.get(0).click();
+        driver.findElementByName("Extensions").click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
     }
@@ -192,11 +184,10 @@ public class VS16UIService implements IVSUIService {
             }
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
             if (test != null) {
                 test.log(Status.INFO, "Visual Studio opened successfully");
             }
-            SystemActions.sleep(30);
             if(isFirstActivation) {
                 try {
                     SystemActions.sleep(10);
