@@ -143,7 +143,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void browseLicense() throws FindFailed {
             test.log(Status.INFO, "Clicking on browse license");
-            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),600).click();
+            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),1000).click();
         }
 
         @Override
