@@ -265,6 +265,7 @@ public class StaticDataProvider {
             public static final String GOOGLE_STADIA_SAMPLE2_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\07_queue_family_transfer\\07_queue_family_transfer.sln /%s /title=\"Google Stadia - 2015 Sample 2 debug|GGP\" /cfg=\"debug|GGP\"";
             public static final String GOOGLE_STADIA_SAMPLE3_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\frame_token\\cpp\\frame_token_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 3 release|GGP\" /cfg=\"release|GGP\"";
             public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
+            public static final String GOOGLE_STADIA_PREDICTED_OFF_GGP = Locations.QA_ROOT + "\\VC14\\StadiaCppProject1\\StadiaCppProject1.sln /%s /title=\"Google Stadia - 2015 Predicted Release|GGP\" /cfg=\"release|GGP\"";
         }
 
         public static class VC12_BATMAN {

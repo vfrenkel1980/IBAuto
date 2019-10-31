@@ -237,6 +237,15 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    /**
+     * @test Ticket 12354
+     */
+    @Test(testName = "Google Stadia - 2015 Predicted Off - build", groups = {"Build"})
+    public void googleStadia2015PredictedOffBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_PREDICTED_OFF_GGP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
         /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String keyName){

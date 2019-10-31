@@ -6,6 +6,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -209,6 +210,8 @@ public class IBCTestingTests extends UnitTestingTestBase {
      * - Build is failed;
      * - "In order to accelerate GTest tests, please use IBTestConsole" error message is displayed in the console.}
      */
+    // TODO: 10/31/2019  Enable test after #12160 merge
+    @Ignore
     @Test(testName = "Gtest Error Message Test")
     public void GtestErrorMessageTest() {
         String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ ProjectsCommands.TESTING_ROBIN.GTEST);
