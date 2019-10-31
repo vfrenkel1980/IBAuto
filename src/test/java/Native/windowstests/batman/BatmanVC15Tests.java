@@ -142,6 +142,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
+
     @Test(enabled = false, testName = "Android CPP - Debug - build", groups = {"Build"})
     public void androidCPPDebugBuild() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.ANDROIDCPP_ARM64_DEBUG, "%s"));

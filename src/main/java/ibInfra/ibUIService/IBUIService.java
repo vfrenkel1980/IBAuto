@@ -112,7 +112,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckReleaseNotes() throws FindFailed {
             test.log(Status.INFO, "Removing Release notes CB");
-            screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8),120).click();
+            screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8),10000).click();
         }
 
         @Override
@@ -143,7 +143,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void browseLicense() throws FindFailed {
             test.log(Status.INFO, "Clicking on browse license");
-            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),1000).click();
+            screen.wait(IBInstaller.BrowseLicenseBTN.similar((float) 0.5),10000).click();
         }
 
         @Override
@@ -194,7 +194,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckLaunchDashboard() throws FindFailed {
             test.log(Status.INFO, "Removing \"Launch Dashboard\" CB");
-            screen.wait(IBInstaller.LaunchDashboardCB.similar((float) 0.7),600).click();
+            screen.wait(IBInstaller.LaunchDashboardCB.similar((float) 0.7),6000).click();
         }
 
         @Override
