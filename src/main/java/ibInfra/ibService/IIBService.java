@@ -19,6 +19,8 @@ public interface IIBService {
 
     String getIBInstallFolder();
 
+    int build(String command);
+
     int cleanAndBuild(String command);
 
     void cleanAndBuildDontWaitTermination(String command);

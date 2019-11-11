@@ -46,6 +46,16 @@ public class IbService implements IIBService {
     }
 
     /**
+     * perform ib build
+     * @param command the command we run
+     * @return exit code of the command
+     */
+    @Override
+    public int build(String command) {
+        return winService.runCommandWaitForFinish(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
+    }
+
+    /**
      * perform ib clean and build
      * @param command the command we run
      * @return exit code of the command

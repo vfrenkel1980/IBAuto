@@ -166,6 +166,28 @@ public class GeneralWinTests extends BatmanBCTestBase {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
     }
 
+    /**
+     * @test "Verify that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
+     *  The 2 projects of the solution are being built a first time
+     *  The second time that the code is built there should not be any update since the code was not modified.
+     *  Ticket #11279
+     * @pre{
+     * }
+     * @steps{
+     * - Run the command: clean and build
+     * - Run the command: build
+     * }
+     * @result{
+    *  Expected: string "2 up-to-date" should be displayed in the build Output file
+     * }
+     */
+    @Test(testName = "Verify that when building the same code twice, the 2nd time there is no update")
+    public void verifyThatWhenBuildingTheSameCodeTwiceThe2ndTimeThereIsNoUpdate() {
+        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        ibService.build(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        // Check Output file: look for string "2 up-to-date"
+        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "2 up-to-date"));
+    }
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {

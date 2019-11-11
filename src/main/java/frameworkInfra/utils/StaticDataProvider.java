@@ -133,7 +133,7 @@ public class StaticDataProvider {
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
         public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
         public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
-        public static final String  INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
+        public static final String INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
 
         static {
             ERROR_LIST = new HashSet<>();
@@ -197,6 +197,7 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
         }
+
         public static class VC16_BATMAN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String ACE_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
@@ -266,6 +267,7 @@ public class StaticDataProvider {
             public static final String GOOGLE_STADIA_SAMPLE3_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\frame_token\\cpp\\frame_token_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 3 release|GGP\" /cfg=\"release|GGP\"";
             public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
             public static final String GOOGLE_STADIA_PREDICTED_OFF_GGP = Locations.QA_ROOT + "\\VC14\\StadiaCppProject1\\StadiaCppProject1.sln /%s /title=\"Google Stadia - 2015 Predicted Release|GGP\" /cfg=\"release|GGP\"";
+            public static final String STADIA_INCREDEMENTAL_BUILD = Locations.QA_ROOT + "\\VC14\\StadiaIncrementalBuild\\StadiaIncrementalBuild.sln /%s /title=\"Stadia Incremental Build - 2015\" /cfg=\"debug|GGP\"";
         }
 
         public static class VC12_BATMAN {
@@ -289,7 +291,7 @@ public class StaticDataProvider {
             public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|x64\"";
-           }
+        }
 
         public static class VC11_BATMAN {
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2012 - Release\"";
@@ -528,7 +530,7 @@ public class StaticDataProvider {
         public static class Dashboard {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
             public static final String BIG_XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\profile.xml\" /title=\"XG Console Sample Long\"";
-            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE+Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE + Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
 
         }
 
@@ -539,7 +541,7 @@ public class StaticDataProvider {
 
         public static class CHROME {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
-            public static final String CHROME_RELEASE_BUILD = "\""+IbLocations.IB_ROOT + "\\buildconsole\" /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_BUILD = "\"" + IbLocations.IB_ROOT + "\\buildconsole\" /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
             public static final String CHROME_RELEASE_CLEAN_PERFORMANCE = "ninja -C C:\\qa\\Chromium\\src\\out\\Default -t clean";
             public static final String CHROME_RELEASE_BUILD_PERFORMANCE = "ibconsole /command=\"ninja -C c:\\qa\\Chromium\\src\\out\\Default chrome -j 200\" /profile=\"c:\\qa\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
@@ -550,21 +552,22 @@ public class StaticDataProvider {
         }
 
         public static class VC15_ROBIN {
-            public static final String AUDACITY_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String BLENDER_X64_RELEASE = "\""+Locations.QA_ROOT+"\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String ACE_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
 
         }
+
         public static class VC16_ROBIN {
-            public static final String AUDACITY_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
-            public static final String BLENDER_X64_RELEASE = "\""+Locations.QA_ROOT+"\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
-            public static final String ACE_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
         }
 
         public static class VC16Preview_ROBIN {
-            public static final String AUDACITY_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
-            public static final String BLENDER_X64_RELEASE = "\""+Locations.QA_ROOT+"\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
-            public static final String ACE_X32_DEBUG = "\""+Locations.QA_ROOT+"\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 Preview - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 Preview - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
         }
 
         public static class DOCKER_ROBIN {
@@ -573,44 +576,44 @@ public class StaticDataProvider {
         }
 
         public static class TESTING_ROBIN {
-            public static final String CPP_UTEST= "/command=\""+Locations.QA_ROOT+"\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String GTEST=" /command=\""+Locations.QA_ROOT+"\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String CTEST="cmd /c cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String VS_TEST_ANY_OS ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_CONSOLE_1DLL_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_FAIL_TEST ="nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
-            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /testlevel=10";
-            public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /testlevel=deep";
-            public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --seed=12354";
-            public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --timeout=100000";
-            public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
-            public static final String NUNIT3_CONSOLE_RESULT_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --result="+Locations.QA_ROOT+"\\nunitres.xml";
-            public static final String NUNIT3_FAILED_RESULT_TEST =NUNIT3_FAIL_TEST + " --result="+Locations.QA_ROOT+"\\nunitres.xml";
-            public static final String NUNIT3_CONSOLE_TARGETDIR_TEST ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
-            public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String NUNIT3_SLOW_TEST ="nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
-            public static final String NUNIT3_SLOW_TEST_TARGETDIR ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
-            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST= NUNIT3_SLOW_TEST +" --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
-            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST= NUNIT3_SLOW_TEST_TARGETDIR +" --testlist=testlist.txt";
-            public static final String NUNIT3_SLOW_FILE_FLAG_TEST= NUNIT3_SLOW_TEST +" @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
-            public static final String NUNIT2_FRAMEWORK_1DLL_TEST =Processes.NUNIT2+" C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
-            public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST =Processes.NUNIT2+" /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
-            public static final String NUNIT2_FRAMEWORK_TEST =Processes.NUNIT2+" C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=10";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=deep";
-            public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST+ " /xml=nunitres.xml";
-            public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\""+Locations.QA_ROOT+"\\nunitres.xml\"";
-            public static final String GTEST_CPPSORTER_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
-            public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST +" /testlevel=10";
-            public static final String GTEST_MASTER_TESTLEVEL_TEST ="C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
-            public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST +" /testlevel=deep";
-            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST+" --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
-            public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String GTEST_CPPSORTER_TARGETDIR_TEST ="cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
+            public static final String CPP_UTEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST = " /command=\"" + Locations.QA_ROOT + "\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String CTEST = "cmd /c cd " + Locations.QA_ROOT + "\\Testing\\google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST_ANY_OS = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String XUNIT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String NUNIT3_CONSOLE_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_1DLL_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_FAIL_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=10";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=deep";
+            public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --seed=12354";
+            public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --timeout=100000";
+            public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
+            public static final String NUNIT3_CONSOLE_RESULT_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
+            public static final String NUNIT3_FAILED_RESULT_TEST = NUNIT3_FAIL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
+            public static final String NUNIT3_CONSOLE_TARGETDIR_TEST = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String NUNIT3_SLOW_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
+            public static final String NUNIT3_SLOW_TEST_TARGETDIR = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
+            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST = NUNIT3_SLOW_TEST + " --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
+            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST = NUNIT3_SLOW_TEST_TARGETDIR + " --testlist=testlist.txt";
+            public static final String NUNIT3_SLOW_FILE_FLAG_TEST = NUNIT3_SLOW_TEST + " @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
+            public static final String NUNIT2_FRAMEWORK_1DLL_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep";
+            public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
+            public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
+            public static final String GTEST_CPPSORTER_TEST = "C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST + " /testlevel=10";
+            public static final String GTEST_MASTER_TESTLEVEL_TEST = "C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST + " /testlevel=deep";
+            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
+            public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String GTEST_CPPSORTER_TARGETDIR_TEST = "cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
 
         }
 
@@ -630,7 +633,8 @@ public class StaticDataProvider {
             public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
         }
-        public static class CONSOLES{
+
+        public static class CONSOLES {
             public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
         }
 
@@ -815,7 +819,7 @@ public class StaticDataProvider {
         public static String AND9_INST_ID = "i-0a55ca9b6c3819b85";
         public static String INIT_PERF_INST_ID = "i-0a55ca9b6c3819b85";
 
-        public static String AMI_ID_HELPER= "ami-00183381177c699e5";
+        public static String AMI_ID_HELPER = "ami-00183381177c699e5";
 
         public static String SECURITY_GROUP = "sg-0d0aa3f9935fe35d2";
         public static String SUBNET = "subnet-54243122";
