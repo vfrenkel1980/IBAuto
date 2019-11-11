@@ -183,10 +183,10 @@ public class GeneralWinTests extends BatmanBCTestBase {
      */
     @Test(testName = "Verify that when building the same code twice, the 2nd time there is no update")
     public void verifyThatWhenBuildingTheSameCodeTwiceThe2ndTimeThereIsNoUpdate() {
-        ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
-        ibService.build(StaticDataProvider.IbLocations.BUILD_CONSOLE + StaticDataProvider.ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        ibService.build(IbLocations.BUILD_CONSOLE + ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
         // Check Output file: look for string "2 up-to-date"
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "2 up-to-date"));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "2 up-to-date"));
     }
     /*------------------------------METHODS------------------------------*/
 
