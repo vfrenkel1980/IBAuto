@@ -674,7 +674,7 @@ public class StaticDataProvider {
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
-        public static final String GUID = "{554EB00C-92F9-4A05-82A9-281CA494652F}";
+        public static final String GUID = "{F7F636FF-0846-4E64-86F5-25C44E871D90}";
         public static final String INCREDICLOUDSECRET = "IncrediCloudSecret";
         public static final String INCREDICLOUDSITEURL = "IncrediCloudWebSiteURL";
         public static final String INCREDICLOUDAPIURL = "IncrediCloudBaseUrl";
