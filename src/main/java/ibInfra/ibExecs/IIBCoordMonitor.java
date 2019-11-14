@@ -19,7 +19,7 @@ import java.time.LocalTime;
 
 public class IIBCoordMonitor implements ibCoordMonitor {
 
-    private static final long DELAY_FOR_AGENT_UPDATE = 10L;
+    private static final long DELAY_FOR_AGENT_UPDATE_MIN = 10L;
     IWindowsService winService = new WindowsService();
 
     @Override
@@ -116,7 +116,7 @@ public class IIBCoordMonitor implements ibCoordMonitor {
             SystemActions.sleep(10);
             remoteVer = getAgentVersion(agentName);
             remoteStatus = getAgentStatus(agentName);
-        } while (start.plusMinutes(DELAY_FOR_AGENT_UPDATE).isAfter(LocalTime.now()) &&
+        } while (start.plusMinutes(DELAY_FOR_AGENT_UPDATE_MIN).isAfter(LocalTime.now()) &&
                 (!localVer.equals(remoteVer) | !remoteStatus.equals("True")));
     }
 
