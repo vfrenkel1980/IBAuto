@@ -79,6 +79,56 @@ public class StaticDataProvider {
         public static final String CLOUD_IDS_JSON = Locations.QA_ROOT + "\\cloud_ids.json";
     }
 
+    //XGCoordConsole Flags
+    public static class XGCoordFlags{
+        public static final String AGENTS = "/Agents";  // this way we query the coordiantor and receive all subscribed agents. When using this option, "AgentsList.dat" can be empty.
+        public static final String AGENTS_LIST = "/Agents=\"/%s\""; // When using this option, "AgentsList.dat" can be empty.
+        public static final String USE_FILE = "/UseFile"; // this way we use the agents listed in the "AgentsList.dat" file.
+        public static final String ENABLE_AS_HELPER = "/EnableAsHelper"; // enable the agents that were asked to work on.
+        public static final String DISABLE_AS_HELPER = "/DisableAsHelper"; // disable the agents that were asked to work on.
+        public static final String ENABLE_ALL_BUT_COORDINATOR = "/EnableAllButCoordinator"; // enable the agents that were asked to work on, excluding the coordinator.
+        public static final String DISABLE_ALL_BUT_COORDINATOR = "/DisableAllButCoordinator"; // disable the agents that were asked to work on, excluding the coordinator.
+        public static final String ALLOCATE_ALL = "/AllocateAll"; // allocate all available packages in license to the agents that were asked to work on.
+        public static final String DELLOCATE_ALL = "/DeallocateAll"; // deallocate all packages from the agents that were asked to work on.
+        public static final String ALLOCATE_PACKAGES = "/AllocatePackages=\"%s\""; // allocate listed packes to the agents that were asked to work on.
+        public static final String DEALLOCATE_PACKAGES = "/DeallocatePackages=\"%s\""; // deallocate listed packes from the agents that were asked to work on.
+        public static final String SUBSCRIBE = "/Subscribe"; // subscribe the agents that were asked to work on.
+        public static final String UNSUBSCRIBE = "/Unsubscribe"; // subscribe the agents that were asked to work on.
+        public static final String LOAD_LICENSE = "/LoadLicense=\"%s\""; // load license.(full path to license
+        public static final String UNLOAD_LICENSE = "/UnloadLicense"; // unload license.
+    }
+
+    //License Packages
+    public static class IBLicensePackages{
+        public static final String CORES4 = "4Cores";
+        public static final String CORES8 = "8Cores";
+        public static final String CORES12 = "12Cores";
+        public static final String CORES16 = "16Cores";
+        public static final String CORES24 = "24Cores";
+        public static final String CORES32 = "32Cores";
+        public static final String CORES48 = "48Cores";
+        public static final String CORES64 = "64Cores";
+        public static final String VC6 = "VC6 Yearly";
+        public static final String VC78 = "VC78 Yearly";
+        public static final String XBOX = "Xbox Yearly";
+        public static final String INTEL = "Intel Yearly";
+        public static final String VC678 = "VC678 Yearly";
+        public static final String CW = "CW Yearly";
+        public static final String XGE = "XGE Yearly";
+        public static final String CSHARP = "C# Yearly";
+        public static final String DS3 = "3DS Yearly";
+        public static final String WII = "Cafe Yearly";
+        public static final String BUILD_TOOLS = "BuildTools Yearly";
+        public static final String DEV_TOOL_ACC = "DevToolAcc Yearly";
+        public static final String PLAY_STATION = "PlayStation Yearly";
+        public static final String XBOX_ONE = "Xbox One Yearly";
+        public static final String NINTENDO_SWITCH = "Nintendo Switch Yearly";
+        public static final String MULTIPLE_BUILD = "Multiple Build Yearly";
+        public static final String UNIT_TESTS = "Unit Tests Yearly";
+        public static final String UNITY_3D = "Unity3D Yearly";
+        public static final String GOOGLE_STADIA = "Google Stadia Yearly";
+    }
+
     public static class URL {
         public static final String VS_PREVIEW_URL = "https://download.visualstudio.microsoft.com/download/pr/11796490/da370bf146a3a1e91ec0ace29e623fdb/vs_Professional.exe";
         public static final String VS_RELEASE_URL = "https://aka.ms/vs/15/release/vs_professional.exe ";

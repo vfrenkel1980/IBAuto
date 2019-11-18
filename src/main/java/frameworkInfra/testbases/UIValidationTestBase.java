@@ -10,6 +10,7 @@ import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibExecs.XGCoordConsole;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
@@ -43,6 +44,7 @@ public class UIValidationTestBase extends TestBase {
     public IbService ibService = new IbService();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
+    private XGCoordConsole xgCoordConsole = new XGCoordConsole();
     protected Screen screen = new Screen();
     protected String project = "";
     protected String projectLocation = "";
@@ -73,6 +75,8 @@ public class UIValidationTestBase extends TestBase {
         if (version != 0)
             ibService.uninstallIB(String.valueOf(version));
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
+        ibService.customPackAllocationOn();
+        xgCoordConsole.deallocatePackages(IBLicensePackages.NINTENDO_SWITCH+IBLicensePackages.WII+IBLicensePackages.DS3);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
 
