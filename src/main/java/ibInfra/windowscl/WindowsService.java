@@ -81,7 +81,9 @@ public class WindowsService implements IWindowsService {
             Process pr = rt.exec(command);
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-
+            if (test != null) {
+                test.log(Status.INFO, "Running command " + command + " - Waiting for result");
+            }
             StringBuilder commandOutput = new StringBuilder();
             while ((line = input.readLine()) != null) {
                 commandOutput.append(line);

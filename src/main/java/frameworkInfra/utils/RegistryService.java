@@ -27,7 +27,7 @@ public class RegistryService extends TestBase {
         try {
             Advapi32Util.registrySetStringValue(rootKey, keyPath, keyName, value);
         } catch (Exception ex) {
-            test.log(Status.ERROR, "Unable to set " + keyName + " with value " + value);
+//            test.log(Status.ERROR, "Unable to set " + keyName + " with value " + value);
             ex.getMessage();
         }
     }
