@@ -76,7 +76,8 @@ public class UIValidationTestBase extends TestBase {
             ibService.uninstallIB(String.valueOf(version));
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         ibService.customPackAllocationOn();
-        xgCoordConsole.deallocatePackages(IBLicensePackages.NINTENDO_SWITCH+IBLicensePackages.WII+IBLicensePackages.DS3);
+        String packages[] = {IBLicensePackages.NINTENDO_SWITCH,IBLicensePackages.WII,IBLicensePackages.DS3};
+        xgCoordConsole.deallocatePackages(packages);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
 
