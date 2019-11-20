@@ -675,6 +675,7 @@ public class StaticDataProvider {
         public static final String INCREDICLOUDSTATE = "IncrediCloudState";
         public static final String INCREDICLOUDCOORDID = "IncrediCloudCoordID";
         public static final String MAXWORKERS = "MaxWorkers";
+        public static final String MINIDLELEVEL = "MinIdleLevel";
 
     }
 

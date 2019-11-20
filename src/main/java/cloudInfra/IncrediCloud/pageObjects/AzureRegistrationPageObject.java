@@ -27,7 +27,7 @@ public class AzureRegistrationPageObject extends RegistrationPageObject{
     public void selectUser(String user){
         eventWebDriver.findElement(AZURE_EMAIL_TB).sendKeys(user);
         wait.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
-        eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination@");
+        eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination!");
         wait.until(ExpectedConditions.elementToBeClickable(SIGNIN_BUTTON)).click();
         wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_BUTTON)).click();
     }

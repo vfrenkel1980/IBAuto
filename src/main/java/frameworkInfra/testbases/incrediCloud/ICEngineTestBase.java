@@ -45,7 +45,7 @@ public class ICEngineTestBase extends TestBase {
     final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
-    final protected int CORES_LIMIT = 100;
+    final protected int CORES_LIMIT = 60;
     final protected int COORD_PORT = 31105;
     final protected int VM_PORT = 31106;
     protected WindowsService winService = new WindowsService();
@@ -71,6 +71,7 @@ public class ICEngineTestBase extends TestBase {
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
         //ibService.updateIB(IB_VERSION);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.MINIDLELEVEL, "0.02");
         switch (ENV){
             case "prod":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud.azurewebsites.net");
