@@ -24,6 +24,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -209,7 +210,7 @@ public class UIValidationTestBase extends TestBase {
         }
         if (project.contains("white")){
             winService.runCommandDontWaitForTermination(command);
-            SystemActions.sleep(7);
+            SystemActions.sleep(10);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.sleep(5);
         }else {
