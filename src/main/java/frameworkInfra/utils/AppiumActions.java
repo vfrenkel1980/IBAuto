@@ -46,6 +46,7 @@ public class AppiumActions {
             ibElements = driver.findElementsByName("IncrediBuild");
         }
         ibElements.get(1).click();
+
         try {
             goTo = driver.findElementByName("Go To");
         }
