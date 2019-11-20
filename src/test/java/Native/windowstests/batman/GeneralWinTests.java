@@ -15,6 +15,11 @@ import org.testng.annotations.Test;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+
+/**
+ * @brief<b> <b>General Windows Tests</b>
+ * @details host: Batman
+ */
 public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify Backup Coordinator Functionality")
