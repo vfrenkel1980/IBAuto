@@ -26,6 +26,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
