@@ -9,25 +9,25 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="Minimal">
-        <parameter name="logLevel" value="0"/>
-        <classes>
-            <class name ="Native.windowstests.robin.RobinVC15Tests" />
-            <class name ="Native.windowstests.robin.RobinVC16Tests" />
-            <class name ="Native.windowstests.robin.RobinVC16PreviewTests" />
-            <class name ="Native.windowstests.robin.RobinDockerTests" />
-            <class name ="Native.windowstests.IBSamplesTests" />
-        </classes>
-    </test>
+    <!--<test name="Minimal">-->
+        <!--<parameter name="logLevel" value="0"/>-->
+        <!--<classes>-->
+            <!--<class name ="Native.windowstests.robin.RobinVC15Tests" />-->
+            <!--<class name ="Native.windowstests.robin.RobinVC16Tests" />-->
+            <!--<class name ="Native.windowstests.robin.RobinVC16PreviewTests" />-->
+            <!--<class name ="Native.windowstests.robin.RobinDockerTests" />-->
+            <!--<class name ="Native.windowstests.IBSamplesTests" />-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <test name="Detailed">
         <parameter name="logLevel" value="4"/>
         <classes>
-            <class name ="Native.windowstests.robin.RobinVC15Tests" />
+            <!--<class name ="Native.windowstests.robin.RobinVC15Tests" />-->
             <class name ="Native.windowstests.robin.RobinVC16Tests" />
-            <class name ="Native.windowstests.robin.RobinVC16PreviewTests" />
-            <class name ="Native.windowstests.IBSamplesTests" />
-            <class name ="Native.windowstests.CommonTests" />
+            <!--<class name ="Native.windowstests.robin.RobinVC16PreviewTests" />-->
+            <!--<class name ="Native.windowstests.IBSamplesTests" />-->
+            <!--<class name ="Native.windowstests.CommonTests" />-->
         </classes>
     </test>
 

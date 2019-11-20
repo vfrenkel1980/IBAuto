@@ -633,6 +633,7 @@ public class StaticDataProvider {
             public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST_ANY_OS = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            // NUNIT3
             public static final String NUNIT3_CONSOLE_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_1DLL_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
             public static final String NUNIT3_FAIL_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
@@ -642,6 +643,15 @@ public class StaticDataProvider {
             public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --timeout=100000";
             public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
             public static final String NUNIT3_CONSOLE_RESULT_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
+            public static final String NUNIT3_CONSOLE_SKIPNONSTOPASSEMBLIES_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --skipnontestassemblies";
+            public static final String NUNIT3_CONSOLE_SHADOWCOPY_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --shadowcopy";
+            public static final String NUNIT3_CONSOLE_NOHEADER_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --noheader";
+            public static final String NUNIT3_CONSOLE_NOH_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --noh";
+            public static final String NUNIT3_CONSOLE_PROCESS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --process=separate";
+            public static final String NUNIT3_CONSOLE_INPROCESS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --inprocess";
+            public static final String NUNIT3_CONSOLE_CONFIG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --config=release";
+            public static final String NUNIT3_CONSOLE_FRAMEWORK_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --framework=2.0";
+            public static final String NUNIT3_CONSOLE_PARAMS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --testparam parm1=value1,param2=value2";
             public static final String NUNIT3_FAILED_RESULT_TEST = NUNIT3_FAIL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
             public static final String NUNIT3_CONSOLE_TARGETDIR_TEST = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
@@ -650,13 +660,26 @@ public class StaticDataProvider {
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST = NUNIT3_SLOW_TEST + " --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST = NUNIT3_SLOW_TEST_TARGETDIR + " --testlist=testlist.txt";
             public static final String NUNIT3_SLOW_FILE_FLAG_TEST = NUNIT3_SLOW_TEST + " @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
+            // NUNIT2
             public static final String NUNIT2_FRAMEWORK_1DLL_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_1DLL_WITH_SPACE_TEST = Processes.NUNIT2 + " \"C:\\QA\\Simulation\\Testing\\NUnit2 With Space\\bin\\nunit.framework.tests.dll\"";
+            public static final String NUNIT2_FRAMEWORK_LOGFILE_TEST =NUNIT2_FRAMEWORK_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep";
             public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
             public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
+            public static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_NAMESPACES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests,NUnit.Framework.Syntax";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_FIXTURES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests.RandomizerTests,NUnit.Framework.Tests,NUnit.Framework.Syntax.AndTest";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Constraints.SameAsTest.FailsWithBadValues,NUnit.Framework.Tests.RangeTests.InRangeSucceeds";
+            public static final String NUNIT2_FRAMEWORK_1DLL_RUNLIST = NUNIT2_FRAMEWORK_1DLL_TEST + " /runlist=";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUNlIST_TEST = NUNIT2_FRAMEWORK_1DLL_RUNLIST + "C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\TestsList.txt";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_CONFIG_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /config=release";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_FRAMEWORK_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /framework=v4.0";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER__PROCESS_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /process=separate";
+            //GTEST
             public static final String GTEST_CPPSORTER_TEST = "C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
             public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST + " /testlevel=10";
             public static final String GTEST_MASTER_TESTLEVEL_TEST = "C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
@@ -664,7 +687,6 @@ public class StaticDataProvider {
             public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
             public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String GTEST_CPPSORTER_TARGETDIR_TEST = "cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
-
         }
 
         public static class INTERFACES {
