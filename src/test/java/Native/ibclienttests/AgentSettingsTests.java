@@ -240,13 +240,20 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     @Test(testName = "Enable Scheduling And Verify Tray Icon")
-    public void enableSchedulingAndVerifyTrayIcon() {
+    public void enableSchedulingAndVerifyTrayIconWithPermission() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableSchedulingAndVerifyIcon();
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableSchedulingAndVerifyIcon();
+        SystemActions.sleep(30);
     }
 
+    @Test(testName = "Enable Scheduling And Verify Tray Icon")
+    public void enableSchedulingAndVerifyTrayIconWithoutPermission() {
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.isNotActiveScheduling();
+        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+    }
     @Test(testName = "Verify PDB File Limit 1")
     public void verifyPDBFileLimit1() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
