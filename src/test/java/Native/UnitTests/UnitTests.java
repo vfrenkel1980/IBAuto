@@ -73,6 +73,21 @@ public class UnitTests {
         ibSevice.agentServiceStart();
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
+//
+//
+//    protected void killDriver(){
+//        if (webDriver != null) {
+//            webDriver.quit();
+//            eventWebDriver.quit();
+//            eventWebDriver.unregister(handler);
+//            webDriver = null;
+//        }
+//    }
+
+    public static String toHex(byte[] bytes) {
+        BigInteger bi = new BigInteger(1, bytes);
+        return String.format("%0" + (bytes.length << 1) + "X", bi);
+    }
 
 
     protected void killDriver(){
