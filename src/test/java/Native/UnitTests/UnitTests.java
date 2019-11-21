@@ -82,6 +82,7 @@ public class UnitTests {
             eventWebDriver.unregister(handler);
             webDriver = null;
         }
+
     }
 }
 
