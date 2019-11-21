@@ -70,35 +70,7 @@ public class UnitTests {
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.FORCE_CPU_INITIATOR, "0");
         ibService.agentServiceStop();
-        ibSevice.agentServiceStart();
+        ibService.agentServiceStart();
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
-//
-//
-//    protected void killDriver(){
-//        if (webDriver != null) {
-//            webDriver.quit();
-//            eventWebDriver.quit();
-//            eventWebDriver.unregister(handler);
-//            webDriver = null;
-//        }
-//    }
-
-    public static String toHex(byte[] bytes) {
-        BigInteger bi = new BigInteger(1, bytes);
-        return String.format("%0" + (bytes.length << 1) + "X", bi);
-    }
-
-
-    protected void killDriver(){
-        if (webDriver != null) {
-            webDriver.quit();
-            eventWebDriver.quit();
-            eventWebDriver.unregister(handler);
-            webDriver = null;
-        }
-
-    }
 }
-
-
