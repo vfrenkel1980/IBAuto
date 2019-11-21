@@ -1,6 +1,5 @@
 package Native.UnitTests;
 
-import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -29,7 +28,10 @@ import org.testng.annotations.Test;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,7 +55,7 @@ public class UnitTests {
     private Date endTime;
     String requestedCores = "15";
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
-    IncrediCloudService incrediCloudService = new IncrediCloudService("bla");
+    //IncrediCloudService incrediCloudService = new IncrediCloudService("bla");
     public static WebDriver webDriver = null;
     public EventFiringWebDriver eventWebDriver;
     protected EventHandler handler = new EventHandler();
@@ -71,16 +73,4 @@ public class UnitTests {
         ibService.agentServiceStart();
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
-
-
-    protected void killDriver(){
-        if (webDriver != null) {
-            webDriver.quit();
-            eventWebDriver.quit();
-            eventWebDriver.unregister(handler);
-            webDriver = null;
-        }
-    }
 }
-
-
