@@ -70,7 +70,7 @@ public class UnitTests {
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.FORCE_CPU_INITIATOR, "0");
         ibService.agentServiceStop();
-        ibService.agentServiceStart();
+        ibSevice.agentServiceStart();
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
 
