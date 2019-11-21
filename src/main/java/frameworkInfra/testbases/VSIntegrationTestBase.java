@@ -9,6 +9,8 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
+import ibInfra.vs.IVSUIService;
+import ibInfra.vs.VS16UIService;
 import ibInfra.vs.VSUIService;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -29,7 +31,7 @@ public class VSIntegrationTestBase extends TestBase {
 
     protected static int ibVersion = 0;
     public IbService ibService = new IbService();
-    public VSUIService vsuiService = new VSUIService();
+    public IVSUIService vsuiService;
     protected String projectPath = "";
     protected String projectName = "";
 
@@ -44,9 +46,11 @@ public class VSIntegrationTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite(){
-        ibService.updateIB("Latest");
+        test = extent.createTest("Before Suite");
+        ibService.updateIB(IB_VERSION);
         ibService.disableVsMonitor();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_VSBUILD_OUTPUT, "1");
     }
 
     /**
@@ -60,7 +64,6 @@ public class VSIntegrationTestBase extends TestBase {
         test = extent.createTest("Before Class");
         test.assignCategory("VC" + VCVersion);
         try {
-            vsuiService.openVSInstance(VCVersion, false, "");
             switch (VCVersion) {
                 case "8":
                     projectPath = TestProjects.VC8PROJECT;
@@ -90,8 +93,20 @@ public class VSIntegrationTestBase extends TestBase {
                     projectPath = TestProjects.VC15PROJECT;
                     projectName = "vc15project";
                     break;
+                case "16":
+                case "116":
+                    projectPath = TestProjects.VC16PROJECT;
+                    projectName = "vc16project";
+                    break;
             }
-            vsuiService.openProject(projectPath, "15");
+            if(Integer.parseInt(VCVersion)<=15){
+                vsuiService = new VSUIService();
+            }else{
+                vsuiService = new VS16UIService();
+            }
+            vsuiService.openVSInstance(VCVersion, false, "");
+            vsuiService.openProject(projectPath);
+
         }catch (Exception e){
             e.getMessage();
         }

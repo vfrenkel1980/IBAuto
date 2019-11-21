@@ -46,7 +46,7 @@ public class DashboardTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        ibService.installIB("Latest", IbLicenses.DASHBOARD_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.DASHBOARD_LIC);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_SUCCESS, "%s"));
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.ConsoleAppProj.CONSOLE_APP_FAIL, "%s"));
     }
@@ -71,7 +71,7 @@ public class DashboardTestBase extends TestBase {
 
     @AfterSuite
     public void afterSuite(){
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
     }
 
 }

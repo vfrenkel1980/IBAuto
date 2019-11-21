@@ -3,8 +3,6 @@ package IncrediCloud;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,7 +31,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void performOnboarding(){
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -74,12 +72,22 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Not All Machines Participate In Build", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
     public void verifyNotAllMachinesParticipateInBuild(){
+        //SystemActions.sleep(120);
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES - (MACHINE_CORES * 2), "40000"));
         SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE - 2 + 1, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
     }
+
+/*    @Test(testName = "Verify Undelivered Machine Is Deleted And New One Created", dependsOnMethods = { "verifyNoUnneededMachinesAreCreated"})
+    public void verifyUndeliveredMachineIsDeletedAndNewOneCreated(){
+        List ipList = icService.getCouldIps();
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + ipList.get(0) + " -u helperAdmin -p OrangeJuice1! -i 0 " + "net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
+        icService.waitForDeliveredMachines(POOL_SIZE - 1);
+        SystemActions.sleep(900);
+        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "New machine wasn't created to replace the Undelivered one.");
+    }*/
 
     /**
      * @test Start a build and verify 3 new machines created<br>
@@ -93,11 +101,11 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify New Machines Are Created", dependsOnMethods = { "verifyNotAllMachinesParticipateInBuild"})
     public void verifyNewMachinesAreCreated(){
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + (MACHINE_CORES * 3), "960000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES + (MACHINE_CORES * 3), "660000"));
         icService.waitForDeliveredMachines(POOL_SIZE + 3);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         int machinesInPool = icService.getStatusQueue(true);
-        SystemActions.killProcess(Processes.BUILDSYSTEM);
+        winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, POOL_SIZE + 4, "Number of machines participating in build is different then expected " + (POOL_SIZE - 2 +1));
         Assert.assertEquals(machinesInPool, POOL_SIZE + 3, "Number of machines in pool is different then expected");
     }
@@ -248,7 +256,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Enable Cloud", dependsOnMethods = { "pauseCloud"})
     public void enableCloud(){
         coordinator.enableCloud(false);
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, (ON_PREM_CORES * 2) + POOL_CORES, "240000"));
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES + POOL_CORES, "240000"));
         icService.waitForDeliveredMachines(POOL_SIZE);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -269,8 +277,9 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Pause Cloud And Delete Pool", dependsOnMethods = { "enableCloud"})
     public void pauseCloudAndDeletePool(){
         coordinator.pauseCloudAndDeletePool();
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
-        SystemActions.sleep(150);
+        icService.waitForCloudStatus("OK");
+        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "180000"));
+        SystemActions.sleep(20);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
         Assert.assertEquals(machinesParticipatingInBuild, 1);
@@ -298,37 +307,6 @@ public class ICEngineTests extends ICEngineTestBase {
     }
 
     /**
-     * @test update cloud settings<br>
-     *
-     * @steps{
-     * - update cloud settings
-     * - verify changes committed
-     * }
-     * @result{
-     * - Cloud settings updated}
-     *
-     */
-    @Test(testName = "Update Cloud Settings", dependsOnMethods = { "enableCloudAndCreateNewPool"})
-    public void updateCloudSettings(){
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        eventWebDriver = new EventFiringWebDriver(webDriver);
-        eventWebDriver.register(handler);
-        switch (ENV){
-            case "prod":
-                eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
-                break;
-            case "uat":
-                eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
-        }
-        onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
-        onboardingPageObject.performUpdate(updatePage);
-        SystemActions.sleep(60);
-        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE - 2), "Number of delivered machines is not equal to " + (POOL_SIZE - 2));
-    }
-
-    /**
      * @test deactivate cloud and perform a build<br>
      *
      * @steps{
@@ -339,10 +317,11 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "updateCloudSettings"})
+    @Test(testName = "Deactivate Cloud", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void deactivateCloud(){
         coordinator.deactivateCloud();
         coordinator.verifyCloudDeactivated();
+        icService.getCloudStatus();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         SystemActions.sleep(120);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);

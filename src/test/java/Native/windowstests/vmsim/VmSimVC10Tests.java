@@ -7,6 +7,9 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
+/**
+ * @brief<b> VM-Simulation (windows 7) tests for VS 2010 tests</b>
+ */
 public class VmSimVC10Tests extends VmSimTestBase {
 
     @Test(testName = "XBMC 2010 - Debug x32- build" , groups = { "Build" })
@@ -75,9 +78,14 @@ public class VmSimVC10Tests extends VmSimTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    /**
+     * @test All In One Diagnostics Samples 2010 build
+     * @bug <a href="http://redmine.incredibuild.local/issues/10834">Bug 10835 Build fails on the windows 8.1 32-bit vm</a> Return to minwinver=8 option after bug 10834 fix.
+     *
+     */
     @Test(testName = "All In One Diagnostics Samples 2010 - build" , groups = { "Build" })
     public void allInOne2010x32Debug(){
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC10_VMSIM.ALL_IN_ONE, "%s"));
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC10_VMSIM.ALL_IN_ONE + " /minwinver=10", "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 

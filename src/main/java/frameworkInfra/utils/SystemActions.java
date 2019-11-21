@@ -105,9 +105,9 @@ public class SystemActions {
         try{
             File file = new File(filePath);
             if(file.delete()){
-                log.info(filePath + " deleted successfully");
+                test.log(Status.INFO,filePath + " deleted successfully");
             }else{
-                log.info("Failed to delete" + filePath);
+                test.log(Status.INFO, "Failed to delete" + filePath);
             }
         }catch(Exception e){
             e.getMessage();
@@ -237,6 +237,7 @@ public class SystemActions {
      * @param dest destination
      */
     public static void copyFile(String src, String dest){
+        test.log(Status.INFO, "Copying file from " + src +" to " + dest);
         try {
             FileUtils.copyFile(new File(src), new File(dest));
         } catch (IOException e) {

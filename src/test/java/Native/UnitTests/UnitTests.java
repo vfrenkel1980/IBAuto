@@ -62,18 +62,24 @@ public class UnitTests {
 
     @Test(testName = "test1")
     public void test() {
-        setRegistry("0", "Builder", StaticDataProvider.RegistryKeys.AVOID_LOCAL);
-        setRegistry("0", "Builder", StaticDataProvider.RegistryKeys.STANDALONE_MODE);
+        winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
+        client.changeCpuUtilCores();
         ibService.cleanAndBuild(StaticDataProvider.IbLocations.BUILD_CONSOLE + String.format(StaticDataProvider.ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.LOCAL), "Failed to find Local in output log");
-        Assert.assertTrue(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, StaticDataProvider.LogOutput.AGENT), "Failed to find Agent in output log");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.FORCE_CPU_INITIATOR, "0");
+        ibService.agentServiceStop();
+        ibService.agentServiceStart();
+        Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
 
-    private void setRegistry(String required, String folder, String keyName) {
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\" + folder, keyName, required);
+
+    protected void killDriver(){
+        if (webDriver != null) {
+            webDriver.quit();
+            eventWebDriver.quit();
+            eventWebDriver.unregister(handler);
+            webDriver = null;
+        }
     }
-
-
 }
 
 

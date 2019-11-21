@@ -24,7 +24,7 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     @Test(testName = "Exit Code Base Test 1")
     public void exitCodeBaseTest1() {
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG);
-        Assert.assertTrue(returnCode == 1, "exitCodeBaseTest1 failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == 10001, "exitCodeBaseTest1 failed with return code " + returnCode);
     }
 
     @Test(testName = "Exit Code Base Test 2")
@@ -52,8 +52,10 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     public void exitCodeBaseTest4() {
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
+        SystemActions.sleep(2);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
     @Test(testName = "Exit Code Base Test 5")
@@ -61,8 +63,10 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         setBuildServiceRegistry(RegistryKeys.MIN_LOCAL_CORES, "8");
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "2");
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
+        SystemActions.sleep(2);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
+        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
     /*------------------------------METHODS------------------------------*/

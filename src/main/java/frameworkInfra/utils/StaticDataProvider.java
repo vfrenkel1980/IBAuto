@@ -74,9 +74,59 @@ public class StaticDataProvider {
         public static final String EXPORT_COORDMON_FILE = QA_ROOT + "\\coordmon.xml";
         public static final String IGNORE_ERRORS_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBErrorsList.txt";
         public static final String IGNORE_IB_BINARIES_LIST = System.getProperty("user.dir") + "/src/main/resources/InfoLists/IgnoreIBBinariesList.txt";
-        public static final String SIGNTOOL = "C:\\Program Files (x86)\\Microsoft SDKs\\ClickOnce\\SignTool\\signtool.exe";
+        public static final String SIGNTOOL = "\"C:\\Program Files (x86)\\Windows Kits\\10\\App Certification Kit\\signtool.exe\"";
         public static final String TRIAL_LICENSE_PATH = "\\\\192.168.10.15\\share\\Automation\\Latest Trial License\\";
         public static final String CLOUD_IDS_JSON = Locations.QA_ROOT + "\\cloud_ids.json";
+    }
+
+    //XGCoordConsole Flags
+    public static class XGCoordFlags{
+        public static final String AGENTS = "/Agents";  // this way we query the coordiantor and receive all subscribed agents. When using this option, "AgentsList.dat" can be empty.
+        public static final String AGENTS_LIST = "/Agents=\"/%s\""; // When using this option, "AgentsList.dat" can be empty.
+        public static final String USE_FILE = "/UseFile"; // this way we use the agents listed in the "AgentsList.dat" file.
+        public static final String ENABLE_AS_HELPER = "/EnableAsHelper"; // enable the agents that were asked to work on.
+        public static final String DISABLE_AS_HELPER = "/DisableAsHelper"; // disable the agents that were asked to work on.
+        public static final String ENABLE_ALL_BUT_COORDINATOR = "/EnableAllButCoordinator"; // enable the agents that were asked to work on, excluding the coordinator.
+        public static final String DISABLE_ALL_BUT_COORDINATOR = "/DisableAllButCoordinator"; // disable the agents that were asked to work on, excluding the coordinator.
+        public static final String ALLOCATE_ALL = "/AllocateAll"; // allocate all available packages in license to the agents that were asked to work on.
+        public static final String DELLOCATE_ALL = "/DeallocateAll"; // deallocate all packages from the agents that were asked to work on.
+        public static final String ALLOCATE_PACKAGES = "/AllocatePackages=\"%s\""; // allocate listed packes to the agents that were asked to work on.
+        public static final String DEALLOCATE_PACKAGES = "/DeallocatePackages=\"%s\""; // deallocate listed packes from the agents that were asked to work on.
+        public static final String SUBSCRIBE = "/Subscribe"; // subscribe the agents that were asked to work on.
+        public static final String UNSUBSCRIBE = "/Unsubscribe"; // subscribe the agents that were asked to work on.
+        public static final String LOAD_LICENSE = "/LoadLicense=\"%s\""; // load license.(full path to license
+        public static final String UNLOAD_LICENSE = "/UnloadLicense"; // unload license.
+    }
+
+    //License Packages
+    public static class IBLicensePackages{
+        public static final String CORES4 = "4Cores";
+        public static final String CORES8 = "8Cores";
+        public static final String CORES12 = "12Cores";
+        public static final String CORES16 = "16Cores";
+        public static final String CORES24 = "24Cores";
+        public static final String CORES32 = "32Cores";
+        public static final String CORES48 = "48Cores";
+        public static final String CORES64 = "64Cores";
+        public static final String VC6 = "VC6 Yearly";
+        public static final String VC78 = "VC78 Yearly";
+        public static final String XBOX = "Xbox Yearly";
+        public static final String INTEL = "Intel Yearly";
+        public static final String VC678 = "VC678 Yearly";
+        public static final String CW = "CW Yearly";
+        public static final String XGE = "XGE Yearly";
+        public static final String CSHARP = "C# Yearly";
+        public static final String DS3 = "3DS Yearly";
+        public static final String WII = "Cafe Yearly";
+        public static final String BUILD_TOOLS = "BuildTools Yearly";
+        public static final String DEV_TOOL_ACC = "DevToolAcc Yearly";
+        public static final String PLAY_STATION = "PlayStation Yearly";
+        public static final String XBOX_ONE = "Xbox One Yearly";
+        public static final String NINTENDO_SWITCH = "Nintendo Switch Yearly";
+        public static final String MULTIPLE_BUILD = "Multiple Build Yearly";
+        public static final String UNIT_TESTS = "Unit Tests Yearly";
+        public static final String UNITY_3D = "Unity3D Yearly";
+        public static final String GOOGLE_STADIA = "Google Stadia Yearly";
     }
 
     public static class URL {
@@ -102,6 +152,7 @@ public class StaticDataProvider {
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
         public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
         public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
+        public static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\\bin\\nunit-console.exe";
     }
 
     public static class WindowsServices {
@@ -132,7 +183,7 @@ public class StaticDataProvider {
         public static final Pattern START_LOG_PATTERN = Pattern.compile("[----------].*");
         public static final String ENT_LIC_REQUIRED_UNSUBSCRIBE_AGENT = "An IncrediBuild Enterprise license is required in order to unsubscribe Helper machines through the command line";
         public static final String INITIATOR_ERROR_UNSUBSCRIBE_AGENT = "IncrediBuild does not support unsubscribing Initiator machine";
-        public static final String  INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
+        public static final String INITIATOR_ERROR_QUICKVALIDATE = "The QuickValidate performance feature is only available as part of the IncrediBuild Enterprise Edition";
 
         static {
             ERROR_LIST = new HashSet<>();
@@ -157,8 +208,9 @@ public class StaticDataProvider {
 
     public static class OrbisSDK {
         public static final String SDK_INSTALLER_FOLDER = "\"C:\\ProgramData\\SCE\\SDK Installer\\Binaries\\Bin\"";
-        public static final String PS4_SDK4 = "PS4:2";
-        public static final String PS4_SDK6 = "PS4:3";
+        public static final String PS4_SDK5 = "PS4:2";
+        public static final String PS4_SDK6 = "PS4:1";
+        public static final String PS_PROSPERO_0830 = "Prospero:1";
         public static final String SWITCH_PS_SDK = "start /wait SDK_Manager.exe /quiet /SDKSwitch%s";
     }
 
@@ -195,6 +247,7 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
         }
+
         public static class VC16_BATMAN {
             public static final String AUDACITY_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String ACE_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
@@ -219,11 +272,15 @@ public class StaticDataProvider {
             public static final String CORECLR_X64_DEBUG = "\"C:\\QA\\Simulation\\VC15\\coreclr-2.1.6\\bin\\obj\\Windows_NT.x64.Debug\\CoreCLR.sln\" /%s /cfg=\"debug|x64\" /title=\"Core CLR 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String CHROME_X64_GN = "\"D:\\chromium\\src\\out\\Default\\all.sln\" /%s /cfg=\"GN|x64\" /title=\"Chrome x64 GN build\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String AUDACITY_SECOND_INITIATOR = "\"C:\\QA\\Simulation\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"  /showagent /showcmd /showtime /log=\"\\\\batman\\QA\\Simulation\\second_initiator_output\\buildLog.txt\"";
-            public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE1_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\graphics\\api_edge_animation\\api_edge_animation.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_libngs2\\api_libngs2.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.000\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
         public static class VC14_BATMAN {
@@ -251,6 +308,16 @@ public class StaticDataProvider {
             public static final String XBOX_ONE_MIX_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\Xbox_One_Mix\\Samples\\IntroGraphics\\Xbox_One_Mix.sln\" /%s /cfg=\"release|Durango\"";
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC14\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2015 - Debug\" /VsVersion=14";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC14\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2015 - Release\" /VsVersion=14";
+            public static final String PS4_SAMPLE1_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK5 Release Sample 1\"";
+            public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK5 Debug Sample 2\"";
+            public static final String PS4_SAMPLE3_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK5 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_SAMPLE4_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\5.500\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK5 Release Sample 4\" /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String GOOGLE_STADIA_SAMPLE1_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\media_stream\\cpp\\media_stream_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 1 release|GGP\" /cfg=\"release|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE2_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\07_queue_family_transfer\\07_queue_family_transfer.sln /%s /title=\"Google Stadia - 2015 Sample 2 debug|GGP\" /cfg=\"debug|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE3_GGP_RELEASE = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\frame_token\\cpp\\frame_token_cpp.sln /%s /title=\"Google Stadia - 2015 Sample 3 release|GGP\" /cfg=\"release|GGP\"";
+            public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
+            public static final String GOOGLE_STADIA_PREDICTED_OFF_GGP = Locations.QA_ROOT + "\\VC14\\StadiaCppProject1\\StadiaCppProject1.sln /%s /title=\"Google Stadia - 2015 Predicted Release|GGP\" /cfg=\"release|GGP\"";
+            public static final String STADIA_INCREDEMENTAL_BUILD = Locations.QA_ROOT + "\\VC14\\StadiaIncrementalBuild\\StadiaIncrementalBuild.sln /%s /title=\"Stadia Incremental Build - 2015\" /cfg=\"debug|GGP\"";
         }
 
         public static class VC12_BATMAN {
@@ -274,17 +341,14 @@ public class StaticDataProvider {
             public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2013.sln\" /%s /cfg=\"release|x64\"";
-            public static final String PS4_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 3\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_subdiv\\api_subdiv.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 3\" /cfg=\"release|orbis\" /minwinver=\"7\"";
         }
 
         public static class VC11_BATMAN {
             public static final String ACE_X32_RELEASE = "\"C:\\QA\\Simulation\\VC11\\ACE_VC11\\ACE_vc2012.sln\" /%s /cfg=\"release|win32\" /title=\"ACE 2012 - Release\"";
-            public static final String PS4_EDGE_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 2\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_EDGE_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 2\" /cfg=\"release|orbis\" /minwinver=\"7\"";
-            public static final String PS4_EDGE_ORBIS_PROFILE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\engines\\api_edge_animation\\api_edge_animation_orbis.sln\" /%s /title=\"PS4 Orbis SDK4 Profile Sample 2\" /cfg=\"profile|orbis\" /minwinver=\"7\"";
-            public static final String PS4_GNM_ORBIS_DEBUG = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
-            public static final String PS4_GNM_ORBIS_RELEASE = "\"C:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.000\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_MANAGEMENT_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 2\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_MANAGEMENT_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\target_management\\api_libdeci4h\\api_libdeci4h.sln\" /%s /title=\"PS4 Orbis SDK4 Release Sample 2\" /cfg=\"release|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"debug|orbis\" /minwinver=\"7\"";
+            public static final String PS4_GNM_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\4.500\\target\\samples\\sample_code\\graphics\\api_gnm\\api_gnm.sln\" /%s /title=\"PS4 Orbis SDK4 Debug Sample 1\" /cfg=\"release|orbis\" /minwinver=\"7\"";
             public static final String SHADOWMAP_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"debug|Durango\"";
             public static final String SHADOWMAP_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap110.sln\" /%s /cfg=\"release|Durango\"";
         }
@@ -415,7 +479,7 @@ public class StaticDataProvider {
             public static final String BATCH_BUILD_BUG = "\"C:\\QA\\Simulation\\VC10\\Batch Build Test\\Batch Build Test.sln\" /%s /preset=\"Batch_Build_Bug\"";
             public static final String NO_DEBUG_CONFIGURATION = "\"C:\\QA\\Simulation\\VC10\\DebugU\\NoDebugConfig.sln\" /%s /cfg=\"debugu|win32\"";
             public static final String ACTIVE_DOC = "\"C:\\QA\\Simulation\\VC10\\ActiveDoc\\ActiveDoc.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String ALL_IN_ONE = "\"C:\\QA\\Simulation\\VC10\\All-In-One Code Framework\\Visual Studio 2010\\All-In-One Diagnostics Samples.sln\" /%s /cfg=\"debug|mixed platforms\" /minwinver=8";
+            public static final String ALL_IN_ONE = "\"C:\\QA\\Simulation\\VC10\\All-In-One Code Framework\\Visual Studio 2010\\All-In-One Diagnostics Samples.sln\" /%s /cfg=\"debug|mixed platforms\"";
             public static final String INTERFACES = "\"C:\\QA\\Simulation\\VC10\\Interfaces\\Interfaces.sln\" /%s /cfg=\"debug|win32\"";
             public static final String VC_2010_TEST = "\"C:\\QA\\Simulation\\VC10\\VS2010_Test_1\\VS2010_Test_1.sln\" /%s /cfg=\"debug|win32\"";
             public static final String DEP_EVAL_4 = "\"C:\\QA\\Simulation\\VC10\\depeval\\DepEval_Test_4\\DepEval_Test_4\\DepEval_Test_4.sln\" /%s /cfg=\"debug|win32\"";
@@ -465,7 +529,7 @@ public class StaticDataProvider {
             public static final String BIGPROJECT_X32_DEBUG = "\"C:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BIGPROJECT_X32_RELEASE = "\"C:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BLENDER_X64_RELEASE = "\"C:\\QA\\Simulation\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\"";
-            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC16\\wxWidgets-3.1.2\\build\\msw\\wx_vc16.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2019 - Debug x64\"";
+            public static final String WXWIDGETS_X64_DEBUG = "\"C:\\QA\\simulation\\VC16\\wxWidgets-3.1.2\\build\\msw\\wx_vc15.sln\" /%s /cfg=\"debug|x64\" /title=\"WxWidgets 2019 - Debug x64\"";
         }
 
         public static class VC16Preview_VMSIM {
@@ -516,7 +580,7 @@ public class StaticDataProvider {
         public static class Dashboard {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\"";
             public static final String BIG_XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Samples\\Interception\\profile.xml\" /title=\"XG Console Sample Long\"";
-            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE+Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
+            public static final String SUBMITION_SAMPLE = IbLocations.IBCONSOLE + Locations.QA_ROOT + "\\projects\\Samples\\Submition\\Batch.bat /title=\"Dev Tools - Submition\" /showagent /out=" + Locations.OUTPUT_LOG_FILE;
 
         }
 
@@ -527,7 +591,7 @@ public class StaticDataProvider {
 
         public static class CHROME {
             public static final String CHROME_RELEASE_CLEAN = "ninja -C D:\\Chromium\\src\\out\\Default -t clean";
-            public static final String CHROME_RELEASE_BUILD = "buildconsole /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
+            public static final String CHROME_RELEASE_BUILD = "\"" + IbLocations.IB_ROOT + "\\buildconsole\" /command=\"ninja -C D:\\Chromium\\src\\out\\Default chrome\" /profile=\"D:\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
             public static final String CHROME_RELEASE_CLEAN_PERFORMANCE = "ninja -C C:\\qa\\Chromium\\src\\out\\Default -t clean";
             public static final String CHROME_RELEASE_BUILD_PERFORMANCE = "ibconsole /command=\"ninja -C c:\\qa\\Chromium\\src\\out\\Default chrome -j 200\" /profile=\"c:\\qa\\Chromium\\chromium_clang.ib_profile.xml\" /minwinver=7 /Title=ChromiumVsCLang";
         }
@@ -538,7 +602,22 @@ public class StaticDataProvider {
         }
 
         public static class VC15_ROBIN {
-            public static final String AUDACITY_X32_DEBUG = "\"D:\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC15\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC15\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC15\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2017 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+
+        }
+
+        public static class VC16_ROBIN {
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+        }
+
+        public static class VC16Preview_ROBIN {
+            public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 Preview - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
         }
 
         public static class DOCKER_ROBIN {
@@ -547,45 +626,67 @@ public class StaticDataProvider {
         }
 
         public static class TESTING_ROBIN {
-            public static final String CPP_UTEST= "/command=\""+Locations.QA_ROOT+"\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String GTEST="/command=\""+Locations.QA_ROOT+"\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String CTEST="cmd /c cd "+Locations.QA_ROOT+"\\Testing\\google-test-examples-master\\build && "+IbLocations.IBCONSOLE+"/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String QT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String VS_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String VS_TEST_ANY_OS ="/command=\""+Locations.QA_ROOT+"\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String XUNIT_TEST ="/command=\""+Locations.QA_ROOT+"\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log="+Locations.OUTPUT_LOG_FILE;
-            public static final String NUNIT3_CONSOLE_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_CONSOLE_1DLL_TEST ="nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_FAIL_TEST ="nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
-            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /testlevel=10";
-            public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /testlevel=deep";
-            public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --seed=12354";
-            public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --timeout=100000";
-            public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
-            public static final String NUNIT3_CONSOLE_RESULT_TEST =NUNIT3_CONSOLE_1DLL_TEST + " --result="+Locations.QA_ROOT+"\\nunitres.xml";
-            public static final String NUNIT3_FAILED_RESULT_TEST =NUNIT3_FAIL_TEST + " --result="+Locations.QA_ROOT+"\\nunitres.xml";
-            public static final String NUNIT3_CONSOLE_TARGETDIR_TEST ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
-            public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String NUNIT3_SLOW_TEST ="nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
-            public static final String NUNIT3_SLOW_TEST_TARGETDIR ="nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
-            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST= NUNIT3_SLOW_TEST +" --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
-            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST= NUNIT3_SLOW_TEST_TARGETDIR +" --testlist=testlist.txt";
-            public static final String NUNIT3_SLOW_FILE_FLAG_TEST= NUNIT3_SLOW_TEST +" @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
-            public static final String NUNIT2_FRAMEWORK_1DLL_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
-            public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST ="nunit-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
-            public static final String NUNIT2_FRAMEWORK_TEST ="nunit-console.exe C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=10";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST +" /testlevel=deep";
-            public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST+ " /xml=nunitres.xml";
-            public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST+ " /xml=\""+Locations.QA_ROOT+"\\nunitres.xml\"";
-            public static final String GTEST_CPPSORTER_TEST ="C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
-            public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST +" /testlevel=10";
-            public static final String GTEST_MASTER_TESTLEVEL_TEST ="C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
-            public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST +" /testlevel=deep";
-            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST+" --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
-            public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST +" /logfile="+Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String GTEST_CPPSORTER_TARGETDIR_TEST ="cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
-
+            public static final String CPP_UTEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST = " /command=\"" + Locations.QA_ROOT + "\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String CTEST = "cmd /c cd " + Locations.QA_ROOT + "\\Testing\\google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String VS_TEST_ANY_OS = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String XUNIT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            // NUNIT3
+            public static final String NUNIT3_CONSOLE_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_1DLL_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
+            public static final String NUNIT3_FAIL_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=10";
+            public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=deep";
+            public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --seed=12354";
+            public static final String NUNIT3_CONSOLE_TIMEOUT_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --timeout=100000";
+            public static final String NUNIT3_CONSOLE_WHERE_FILTER_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --where \"class == \'NUnit.ConsoleRunner.Tests.ExceptionHelperTests\'\"";
+            public static final String NUNIT3_CONSOLE_RESULT_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
+            public static final String NUNIT3_CONSOLE_SKIPNONSTOPASSEMBLIES_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --skipnontestassemblies";
+            public static final String NUNIT3_CONSOLE_SHADOWCOPY_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --shadowcopy";
+            public static final String NUNIT3_CONSOLE_NOHEADER_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --noheader";
+            public static final String NUNIT3_CONSOLE_NOH_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --noh";
+            public static final String NUNIT3_CONSOLE_PROCESS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --process=separate";
+            public static final String NUNIT3_CONSOLE_INPROCESS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --inprocess";
+            public static final String NUNIT3_CONSOLE_CONFIG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --config=release";
+            public static final String NUNIT3_CONSOLE_FRAMEWORK_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --framework=2.0";
+            public static final String NUNIT3_CONSOLE_PARAMS_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --testparam parm1=value1,param2=value2";
+            public static final String NUNIT3_FAILED_RESULT_TEST = NUNIT3_FAIL_TEST + " --result=" + Locations.QA_ROOT + "\\nunitres.xml";
+            public static final String NUNIT3_CONSOLE_TARGETDIR_TEST = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
+            public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String NUNIT3_SLOW_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
+            public static final String NUNIT3_SLOW_TEST_TARGETDIR = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
+            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST = NUNIT3_SLOW_TEST + " --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
+            public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST = NUNIT3_SLOW_TEST_TARGETDIR + " --testlist=testlist.txt";
+            public static final String NUNIT3_SLOW_FILE_FLAG_TEST = NUNIT3_SLOW_TEST + " @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
+            // NUNIT2
+            public static final String NUNIT2_FRAMEWORK_1DLL_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_1DLL_WITH_SPACE_TEST = Processes.NUNIT2 + " \"C:\\QA\\Simulation\\Testing\\NUnit2 With Space\\bin\\nunit.framework.tests.dll\"";
+            public static final String NUNIT2_FRAMEWORK_LOGFILE_TEST =NUNIT2_FRAMEWORK_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
+            public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep";
+            public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
+            public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
+            public static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_NAMESPACES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests,NUnit.Framework.Syntax";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_FIXTURES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests.RandomizerTests,NUnit.Framework.Tests,NUnit.Framework.Syntax.AndTest";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Constraints.SameAsTest.FailsWithBadValues,NUnit.Framework.Tests.RangeTests.InRangeSucceeds";
+            public static final String NUNIT2_FRAMEWORK_1DLL_RUNLIST = NUNIT2_FRAMEWORK_1DLL_TEST + " /runlist=";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUNlIST_TEST = NUNIT2_FRAMEWORK_1DLL_RUNLIST + "C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\TestsList.txt";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_CONFIG_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /config=release";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER_FRAMEWORK_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /framework=v4.0";
+            public static final String NUNIT2_FRAMEWORK_WITH_FILTER__PROCESS_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /process=separate";
+            //GTEST
+            public static final String GTEST_CPPSORTER_TEST = "C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST + " /testlevel=10";
+            public static final String GTEST_MASTER_TESTLEVEL_TEST = "C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
+            public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST + " /testlevel=deep";
+            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
+            public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String GTEST_CPPSORTER_TARGETDIR_TEST = "cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
         }
 
         public static class INTERFACES {
@@ -604,7 +705,8 @@ public class StaticDataProvider {
             public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
         }
-        public static class CONSOLES{
+
+        public static class CONSOLES {
             public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
         }
 
@@ -620,6 +722,7 @@ public class StaticDataProvider {
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";
+        public static final String SAVE_VSBUILD_OUTPUT = "SaveVsBuildOutput";
         public static final String VS_FIRST_ACTIVATION = "FirstActivation";
         public static final String MIN_LOCAL_CORES = "MinLocalCoresPerBuild";
         public static final String MAX_CONCURRENT_BUILDS = "MaxConcurrentBuilds";
@@ -643,7 +746,7 @@ public class StaticDataProvider {
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
-        public static final String GUID = "{1CDD463B-8C2F-4A63-AFF2-BED2CD7D4720}";
+        public static final String GUID = "{F7F636FF-0846-4E64-86F5-25C44E871D90}";
         public static final String INCREDICLOUDSECRET = "IncrediCloudSecret";
         public static final String INCREDICLOUDSITEURL = "IncrediCloudWebSiteURL";
         public static final String INCREDICLOUDAPIURL = "IncrediCloudBaseUrl";
@@ -709,6 +812,7 @@ public class StaticDataProvider {
         public static final String VC12PROJECT = Locations.QA_ROOT + "\\projects\\vc12project\\vc12project.sln";
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
+        public static final String VC16PROJECT = Locations.QA_ROOT + "\\projects\\vc16project\\vc16project.sln";
     }
 
     public static class UIValidationsProjects {
@@ -768,7 +872,7 @@ public class StaticDataProvider {
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
-        public static final String DASHBORD_HELPER = "h6-w10-01";
+        public static final String DASHBORD_HELPER = "srv-10";
         public static final String IC_COORDINATOR = "h22-cloud-coord";
         public static final String IC_INITIATOR = "h22-cloud-init";
     }
@@ -787,7 +891,7 @@ public class StaticDataProvider {
         public static String AND9_INST_ID = "i-0a55ca9b6c3819b85";
         public static String INIT_PERF_INST_ID = "i-0a55ca9b6c3819b85";
 
-        public static String AMI_ID_HELPER= "ami-00183381177c699e5";
+        public static String AMI_ID_HELPER = "ami-00183381177c699e5";
 
         public static String SECURITY_GROUP = "sg-0d0aa3f9935fe35d2";
         public static String SUBNET = "subnet-54243122";
@@ -870,6 +974,7 @@ public class StaticDataProvider {
         public static final String B2_BUILD = "ib_console %s -c %s %s ./b2 -j%s";
         public static final String NINJA_BUILD = "ib_console %s -c %s %s ninja -C out/Release chrome -j%s";
         public static final String BAZEL_BUILD = "ib_console %s -c %s %s  bazel build --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
+        public static final String BAZEL_BUILD2 = "ib_console %s -c %s %s  bazel build --spawn_strategy sandboxed --jobs=%s --local_resources 4800,24,1 --config=opt //tensorflow/tools/pip_package:build_pip_package";
 
         public static final String IB_TESTS = "ib_tests-1.0.0.tar.bz2";
         public static final String IB_TESTS_DIR = "/home/xoreax/ib_tests-1.0.0/";

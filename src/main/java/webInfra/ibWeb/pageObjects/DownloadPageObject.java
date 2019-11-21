@@ -359,7 +359,7 @@ public class DownloadPageObject {
         eventWebDriver.findElement(EMAIL_TB).sendKeys(" ");
         Assert.assertTrue(eventWebDriver.findElement(emailempty).isDisplayed());
         eventWebDriver.findElement(EMAIL_TB).clear();
-        eventWebDriver.findElement(EMAIL_TB).sendKeys("Test@test.com");
+        eventWebDriver.findElement(EMAIL_TB).sendKeys("Test1@test.com");
         Assert.assertTrue(eventWebDriver.findElements(emailempty).isEmpty());
     }
 

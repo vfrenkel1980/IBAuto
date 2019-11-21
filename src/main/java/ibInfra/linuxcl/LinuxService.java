@@ -1,6 +1,5 @@
 package ibInfra.linuxcl;
 
-import com.amazonaws.services.dynamodbv2.xspec.NULL;
 import com.aventstack.extentreports.Status;
 import com.jcraft.jsch.*;
 import frameworkInfra.testbases.TestBase;
@@ -15,7 +14,9 @@ import org.apache.commons.collections4.list.SetUniqueList;
 import org.junit.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Calendar;
 
 import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -309,6 +310,8 @@ public class LinuxService extends TestBase implements ILinuxService {
 
     @Override
     public void deleteLogsFolder(List<String> ipList) {
+        Calendar calender = Calendar.getInstance();
+        log.info(calender.getTime());
         for (Object machine : ipList) {
             log.info("deleting " + machine);
             winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
@@ -527,5 +530,12 @@ public class LinuxService extends TestBase implements ILinuxService {
         installCommand +=  " -A " + instFolder;
 
         return linuxRunSSHCommand(installCommand, machineName);
+    }
+
+    @Override
+    public List findFile(String machineName, String folder, String fileName) {
+        String[] commandOutput =  linuxRunSSHCommandOutputString("find " + folder + " -name " + fileName, machineName).split("\n");
+        List<String> filesList = Arrays.asList(commandOutput);
+        return filesList;
     }
 }

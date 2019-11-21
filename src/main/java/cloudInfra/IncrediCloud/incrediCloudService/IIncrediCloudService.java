@@ -1,5 +1,7 @@
 package cloudInfra.IncrediCloud.incrediCloudService;
 
+import java.util.List;
+
 public interface IIncrediCloudService {
 
     void initRest();
@@ -15,6 +17,10 @@ public interface IIncrediCloudService {
     void setSecretInRegistry();
 
     void deactivateCloud();
+
+    String getCloudStatus();
+
+    void waitForCloudStatus(String status);
 
 
 }

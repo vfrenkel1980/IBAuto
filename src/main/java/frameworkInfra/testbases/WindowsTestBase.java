@@ -133,7 +133,9 @@ public class WindowsTestBase extends TestBase {
 
     @AfterSuite
     public void postSimulation(ITestContext context) {
+        test = extent.createTest("AFTER SUITE");
         //stop agent service
+        test.log(Status.INFO, "Stopping services");
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Agent\" ");
         winService.runCommandWaitForFinish("net stop \"IncrediBuild Coordinator\" ");
         SystemActions.killProcess(Processes.TRAY_ICON);
@@ -148,8 +150,9 @@ public class WindowsTestBase extends TestBase {
         //start agent service
         winService.runCommandWaitForFinish("net start \"IncrediBuild Agent\" ");
         winService.runCommandWaitForFinish("net start \"IncrediBuild Coordinator\" ");
+        test.log(Status.INFO, "Services started");
         SystemActions.startProcess(IbLocations.IB_ROOT + "\\" + Processes.TRAY_ICON);
-        log.info("Suite finished");
+        test.log(Status.INFO, "After suite finished");
     }
 
     private void verifyRegistry(String required, String current, String keyName) {

@@ -61,4 +61,6 @@ public interface ILinuxService {
     void verifyAgentsUpdated(String hostName, String version, String keyFilePath);
 
     int installIB(String machineName, String version, String flags, String coord, String binSource,String instFolder, boolean isCoord);
+
+    List findFile(String machineName, String folder, String fileName);
 }

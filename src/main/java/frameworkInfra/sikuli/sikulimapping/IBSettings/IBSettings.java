@@ -49,6 +49,7 @@ public class IBSettings {
     public static final Pattern NumOfCoresPerBuild = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\cores_per_build_tb.png");
     public static final Pattern PreferenceTab = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\preference_tab.png");
     public static final Pattern EnableSchedulingCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_agent_scheduling_cb.png");
+    public static final Pattern isNotActiveScheduling = new Pattern("\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\is_not_active_agent_scheduling.png");
     public static final Pattern DisabledTrayIcon = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disabledTrayIcon.png");
     public static final Pattern DisableSchedulingCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disableScheduling.png");
     public static final Pattern EnableFailOnlyLocally = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_fail_only_locally.png");

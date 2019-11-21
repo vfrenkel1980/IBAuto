@@ -8,6 +8,7 @@ import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
@@ -29,8 +30,7 @@ public class LinuxTestBase extends TestBase{
     protected static List rawIpList;
     protected static List rawIpList2;
     protected static String className;
-    protected static String ENV = System.getProperty("env");
-    protected static String VERSION = System.getProperty("version");
+    protected static String LINUXCLFLAGS = System.getProperty("linuxCLflags");
 
     protected static LinuxSimTestBase.TestType testType;
 
@@ -50,6 +50,11 @@ public class LinuxTestBase extends TestBase{
         className = getClass().getName();
     }
 
+        @AfterMethod
+    public void afterMethod(ITestResult result) {
+        extent.flush();
+    }
+
 //    @AfterMethod
 //    public void afterMethod(ITestResult result) throws InterruptedException, IOException {
 //
@@ -67,7 +72,11 @@ public class LinuxTestBase extends TestBase{
         ibVersion = runCommand.linuxRunSSHCommandOutputString(LinuxCommands.GET_IB_VERSION, ipList.get(0));
         return ibVersion.substring(ibVersion.indexOf("[") + 1, ibVersion.indexOf("]"));
     }*/
-
+@Override
+    @AfterSuite
+    public void afterSuiteRun(ITestContext context) {
+        extent.flush();
+}
     public String getFirstBuild(String host){
         String lastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, host);
         lastBuild = lastBuild.replace("\n","");

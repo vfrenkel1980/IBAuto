@@ -28,7 +28,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Install In A Different Directory")
     public void installInADifferentDirectory() {
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -63,7 +63,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(enabled = false, testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator() {
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -91,7 +91,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(enabled = false, testName = "Install Single Use VM")
     public void installSingleUseVM() {
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -120,8 +120,8 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Uninstall IB")
     public void uninstallIb() {
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
-        ibuiService.startIBUIInstaller("Latest");
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.selectUninstall();
@@ -137,10 +137,10 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Repair IB")
     public void repairIb() {
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         winService.runCommandWaitForFinish("net stop \"" + WindowsServices.AGENT_SERVICE + "\"");
         SystemActions.deleteFilesByPrefix(IbLocations.IB_ROOT, "*.exe");
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -159,7 +159,7 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Upgrade IB")
     public void upgradeIb() {
         ibService.installIB("2190", IbLicenses.UI_LIC);
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -178,7 +178,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Downgrade IB")
     public void downgradeIb() {
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         ibuiService.startIBUIInstaller("2190");
         try {
             installer.clickNext();
@@ -198,7 +198,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Verify Port Changes")
     public void verifyPortChanges() {
-        ibuiService.startIBUIInstaller("Latest");
+        ibuiService.startIBUIInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -240,8 +240,8 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Upgrade Pro To Enterprise")
     public void upgradeProToEnterprise() {
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
-        ibuiService.startEntInstaller("Latest");
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
+        ibuiService.startEntInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -266,7 +266,7 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Downgrade Enterprise To Pro")
     public void downgradeEnterpriseToPro() {
         installEnterprise();
-        ibuiService.startEntInstaller("Latest");
+        ibuiService.startEntInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.selectDowngrade();
@@ -294,7 +294,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Change Enterprise Installation Location And Port")
     public void changeEnterpriseInstallationLocationAndPort() {
-        ibuiService.startEntInstaller("Latest");
+        ibuiService.startEntInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();
@@ -336,8 +336,8 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Negative Upgrade Pro To Ent With No Ent License")
     public void negativeUpgradeProToEntWithNoEntLicense() {
-        ibService.installIB("Latest", IbLicenses.NO_ENT_LIC);
-        ibuiService.startEntInstaller("Latest");
+        ibService.installIB(IB_VERSION, IbLicenses.NO_ENT_LIC);
+        ibuiService.startEntInstaller(IB_VERSION);
         try {
             installer.verifyInvalidLicenseMessage();
             installer.clickExit();
@@ -350,19 +350,19 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Verify Installer Exit Code While Devenv Is Running")
     public void verifyInstallerExitCodeWhileDevenvIsRunning() {
         vsuiService.openVSInstance("15", false, "");
-        int exitCode = ibService.installIB("Latest");
+        int exitCode = ibService.installIB(IB_VERSION);
         vsuiService.killDriver();
         Assert.assertEquals(exitCode, 2, "Installation finished with exit code different than 2!");
     }
 
     @Test(testName = "Verify Successful Installer Exit Code")
     public void verifySuccessfulInstallerExitCode() {
-        Assert.assertEquals(ibService.installIB("Latest"), 0, "Installation finished with exit code different than 0!");
+        Assert.assertEquals(ibService.installIB(IB_VERSION), 0, "Installation finished with exit code different than 0!");
     }
 
     @Test(testName = "Verify Wrong Parameter Installer Exit Code")
     public void verifyWrongParameterInstallerExitCode() {
-        String installationFile = ibService.getIbConsoleInstallation("Latest");
+        String installationFile = ibService.getIbConsoleInstallation(IB_VERSION);
         int exitCode = winService.runCommandWaitForFinish(installationFile + " /someparam");
         Assert.assertEquals(exitCode, 4, "Installation finished with exit code different than 4!");
     }
@@ -372,7 +372,7 @@ public class SetupTests extends SetupTestBase {
         String filename = "";
         String installLogsFolder = System.getProperty("java.io.tmpdir") + "IB_Setup_Logs";
         SystemActions.deleteFilesByPrefix(installLogsFolder, "IncrediBuild_Setup");
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         List<String> files = SystemActions.getAllFilesInDirectory(installLogsFolder);
         for (String file : files) {
             if (file.contains("IncrediBuild_Setup"))
@@ -383,9 +383,9 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Verify Pro Uninstall Leftovers")
     public void verifyProUninstallLeftovers() {
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
         runBuildAndAssert();
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT), "HKLM wasn't removed in verifyProUninstallLeftovers test");
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_CURRENT_USER, Locations.IB_HKCU_REG_ROOT), "HKCU wasn't removed in verifyProUninstallLeftovers test");
         Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_ROOT), "IB root folder wasn't removed in verifyProUninstallLeftovers test");
@@ -396,7 +396,7 @@ public class SetupTests extends SetupTestBase {
     public void verifyEnterpriseUninstallLeftovers() {
         installEnterprise();
         runBuildAndAssert();
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT), "HKLM wasn't removed in verifyEnterpriseUninstallLeftovers test");
         Assert.assertFalse(RegistryService.doesKeyExist(HKEY_CURRENT_USER, Locations.IB_HKCU_REG_ROOT), "HKCU wasn't removed in verifyEnterpriseUninstallLeftovers test");
         Assert.assertFalse(SystemActions.doesFileExist(IbLocations.IB_ROOT), "IB root folder wasn't removed in verifyEnterpriseUninstallLeftovers test");
@@ -407,7 +407,7 @@ public class SetupTests extends SetupTestBase {
     @Test(testName = "Verify VS_Integrated Parameter")
     public void verifyVSIntegratedParameter() {
         boolean isRunning = false;
-        String process = ibService.getIbConsoleInstallation("Latest");
+        String process = ibService.getIbConsoleInstallation(IB_VERSION);
         winService.runCommandDontWaitForTermination(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /vs_integrated", process));
         while (winService.isProcessRunning(process.substring(process.lastIndexOf("\\") + 1)))
             if (winService.isProcessRunning("vsixinstaller.exe"))
@@ -418,7 +418,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Verify Console Installation Port Flags")
     public void verifyConsoleInstallationPortFlags() {
-        String process = ibService.getIbConsoleInstallation("Latest");
+        String process = ibService.getIbConsoleInstallation(IB_VERSION);
         winService.runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /AGENT:SERVICEPORT=25000" +
                 " /AGENT:HELPERPORT=25001 /COORD:SERVICEPORT=25002", process));
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.COORD_PORT), "25002");
@@ -428,14 +428,14 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Verify Console Installation Cache Flag")
     public void verifyConsoleInstallationCacheFlag() {
-        String process = ibService.getIbConsoleInstallation("Latest");
+        String process = ibService.getIbConsoleInstallation(IB_VERSION);
         winService.runCommandWaitForFinish(String.format(StaticDataProvider.WindowsCommands.IB_INSTALL_COMMAND + " /AGENT:FILECACHE=1024", process));
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Shadow", RegistryKeys.CACHE_SIZE), "1024");
     }
 
     @Test(testName = "Install Agent Only")
     public void InstallAgentOnly() {
-        String process = ibService.getIbConsoleInstallation("Latest");
+        String process = ibService.getIbConsoleInstallation(IB_VERSION);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components=agent", process));
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, agent installed?");
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is running, is coordinator installed?");
@@ -443,7 +443,7 @@ public class SetupTests extends SetupTestBase {
 
     @Test(testName = "Install Coordinator Only")
     public void InstallCoordinatorOnly() {
-        String process = ibService.getIbConsoleInstallation("Latest");
+        String process = ibService.getIbConsoleInstallation(IB_VERSION);
         winService.runCommandWaitForFinish(String.format(WindowsCommands.IB_INSTALL_NO_PARAMS + " /Components=Coordinator", process));
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.COORD_SERVICE), "Coord service is not running, Coord installed?");
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent is running, is agent installed?");
@@ -462,7 +462,7 @@ public class SetupTests extends SetupTestBase {
      */
     @Test(testName = "Verify Binaries Signatures")
     public void verifyBinariesSignatures() {
-        ibService.installIB("Latest");
+        ibService.installIB(IB_VERSION);
         File filePath = new File(StaticDataProvider.IbLocations.IB_ROOT);
         Collection<File> allFiles = Parser.findFiles(filePath, ".exe");
         allFiles.addAll(Parser.findFiles(filePath, ".dll"));
@@ -473,12 +473,7 @@ public class SetupTests extends SetupTestBase {
             if (!ignoreList.contains(file.getName())) {
                 curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 0 \"" + file.getAbsolutePath() + "\"");
                 if(curExit!=0){
-                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
-                    exit=curExit;
-                }
-                curExit = winService.runCommandWaitForFinish(Locations.SIGNTOOL + " verify /pa /ds 1 \"" + file.getAbsolutePath() + "\"");
-                if(curExit!=0){
-                    test.log(Status.ERROR,  file.getName() + " is not signed with sha1 signature");
+                    test.log(Status.ERROR,  file.getName() + " is not signed with sha256 signature");
                     exit=curExit;
                 }
             }
@@ -493,7 +488,7 @@ public class SetupTests extends SetupTestBase {
     }
 
     private void installEnterprise() {
-        ibuiService.startEntInstaller("Latest");
+        ibuiService.startEntInstaller(IB_VERSION);
         try {
             installer.clickNext();
             installer.clickNext();

@@ -22,7 +22,7 @@ public class EnterpriseNegativeTestBase extends EnterpriseTestBase {
         test = extent.createTest("Before Class");
         test.log(Status.INFO, "BEFORE CLASS atarted");
         log.info("BEFORE CLASS staerted");
-        ibService.installIB("Latest", IbLicenses.PRO_LIC);
+        ibService.installIB(IB_VERSION, IbLicenses.PRO_LIC);
         SystemActions.sleep(10);
         winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
         SystemActions.sleep(10);

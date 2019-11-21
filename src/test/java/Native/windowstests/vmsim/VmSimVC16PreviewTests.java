@@ -25,7 +25,7 @@ public class VmSimVC16PreviewTests extends VmSimTestBase {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_VMSIM.BIGPROJECT_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
-    @Ignore
+
     @Test(testName = "Blender 2019 Preview - Release - build" , groups = { "Build" })
     public void blender2019PreviewReleaseBuild(){
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16Preview_VMSIM.BLENDER_X64_RELEASE, "%s"));

@@ -8,13 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.CLOUD;
 import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
 
 public class OnboardingPageObject {
 
     //MAPPING
-    private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure col-xl-3 col-sm-4 buttonTag']");
-    private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Azure Region']");
+    private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure  col-sm-4 buttonTag']");
+    private static final By AZURE_CLOUD_BUTTON = By.xpath("//*[@class='icon_azure']");
+    private static final By AWS_CLOUD_BUTTON = By.xpath("//*[@class='icon_amazon']");
+    private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Cloud Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
     private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
@@ -34,6 +37,7 @@ public class OnboardingPageObject {
     private static final By SAVE_BTN = By.xpath("//button[@class='save_text save_button buttonTag']");
     private static final By ACTIVATE_BTN = By.xpath("//button[text()='Approve and Activate']");
     private static final By SETTINGS_TAB = By.xpath("//*[text()='IncrediBuild Cloud Settings']");
+    private static final By DOWNLOAD_BTN = By.xpath("//*[contains(text(),'IncrediBuild Cloud for Microsoft Azure')]");
 
     //ERROR MESSAGES
     private static final By TENNANT_ERROR_LBL = By.xpath("//*[text()='The Tenant id field is required']");
@@ -46,7 +50,7 @@ public class OnboardingPageObject {
     private static final By COMPANY_ERROR_LBL = By.xpath("//*[text()=' The Company Name field is required']");
     private static final By TIMEOUT_ERROR_LBL = By.xpath("//*[text()='The VM Idle timeout field is required']");
     private static final By CORES_LIMIT_ERROR_LBL = By.xpath("//*[text()='Number of cores must be multiplied by 2 then number of machines']");
-    private static final By POOL_SIZE_ERROR_LBL = By.xpath("//*[text()='Number of machines must be at least 1 and not greater than number of cores devided by 2 ']");
+    private static final By POOL_SIZE_ERROR_LBL = By.xpath("//*[text()='Number of machines must be at least 1 and not greater than number of cores divided by 2 ']");
     private static final By COORD_PORT_ERROR_LBL = By.xpath("//*[text()=' The Coordinator Port No. field is required']");
     private static final By VM_PORT_ERROR_LBL = By.xpath("//*[text()=' The VM Port Range field is required']");
     private static final By QUOTA_LIMIT_MESSAGE = By.xpath("//*[contains(text(),'Operation results in exceeding quota limits of Core')]");
@@ -64,20 +68,36 @@ public class OnboardingPageObject {
 
     public void clickTryIncredicloud(){
         eventWebDriver.findElement(TRY_INCREDICLOUD_BUTTON).click();
+        //TODO: remove when aws is removed from envs
+        if (ENV.equals("aws")) {
+            switch (CLOUD) {
+                case "azure":
+                    eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
+                    break;
+                case "aws":
+                    eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
+                    break;
+            }
+        }
     }
 
     public void performOnboarding(OnboardingPage onboardingPage){
-        selectRegion(onboardingPage);
-        enterName(onboardingPage);
-        enterMail(onboardingPage);
-        enterCompany(onboardingPage);
-        enterVMDetails(onboardingPage);
-        clickSave();
+            selectRegion(onboardingPage);
+            enterName(onboardingPage);
+            enterMail(onboardingPage);
+            enterCompany(onboardingPage);
+            enterVMDetails(onboardingPage);
+            clickSave();
     }
 
     public void performUpdate(OnboardingPage onboardingPage){
-        enterVMDetails(onboardingPage);
+        updateVmDetails(onboardingPage);
         clickSave();
+        waitForUpdateToFinish();
+    }
+
+    private void waitForUpdateToFinish(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(DOWNLOAD_BTN));
     }
 
     private void selectRegion(OnboardingPage onboardingPage){
@@ -100,10 +120,18 @@ public class OnboardingPageObject {
     }
 
     private void enterVMDetails(OnboardingPage onboardingPage){
-        //eventWebDriver.findElement(VMS_PANEL).click();
         wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
+        eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
+        eventWebDriver.findElement(CORES_LIMIT_TB).clear();
+        eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys(String.valueOf(onboardingPage.getCoresLimit()));
+        eventWebDriver.findElement(POOL_SIZE_TB).clear();
+        eventWebDriver.findElement(POOL_SIZE_TB).sendKeys(String.valueOf(onboardingPage.getPoolSize()));
+    }
+
+    private void updateVmDetails(OnboardingPage onboardingPage){
+        wait.until(ExpectedConditions.elementToBeClickable(TIMEOUT_TB)).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
         eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys(String.valueOf(onboardingPage.getCoresLimit()));

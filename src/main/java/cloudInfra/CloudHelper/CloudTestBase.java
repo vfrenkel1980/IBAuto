@@ -32,7 +32,7 @@ public class CloudTestBase extends TestBase {
     protected static String NUMOFMACHINES = System.getProperty("numofmachines");
     protected static String CPU = System.getProperty("cpu");
     protected static String MEMORY = System.getProperty("memory");
-    protected static String CLOUD = System.getProperty("cloudtype");
+    public static String CLOUD = System.getProperty("cloudtype");
     protected static String INITIATOR = System.getProperty("initiators");
     protected CloudService cloudService;
     protected PostgresJDBC postgresJDBC = new PostgresJDBC();

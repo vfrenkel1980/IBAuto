@@ -15,7 +15,7 @@ public class OnboardingTests extends OnboardingTestBase {
     @Test(testName = "Validate Tenant")
     public void validateTenant(){
         onboardingPageObject.clickTryIncredicloud();
-        azurePageObject.selectAzureUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER);
         Assert.assertTrue(onboardingPageObject.validateTenant(), "Failed to locate Tenant error message");
     }
 

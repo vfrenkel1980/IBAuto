@@ -63,7 +63,7 @@ public class SetupTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
-        ibService.uninstallIB("Latest");
+        ibService.uninstallIB(IB_VERSION);
         SystemActions.killProcess("chrome.exe");
         extent.flush();
     }

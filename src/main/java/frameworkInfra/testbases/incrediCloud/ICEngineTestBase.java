@@ -2,8 +2,7 @@ package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
-import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
-import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
+import cloudInfra.IncrediCloud.pageObjects.*;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -35,8 +34,9 @@ public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
-    final protected String PROD_USER = "mark@incredicloudcs.onmicrosoft.com";
-    final protected String LIMITED_USER = "test1@jijuclickmail.onmicrosoft.com";
+    public static String CLOUD = System.getProperty("cloudtype");
+    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
+    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     public int MACHINE_CORES = getMachineCores(TYPE);
@@ -45,12 +45,12 @@ public class ICEngineTestBase extends TestBase {
     final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
-    final protected int CORES_LIMIT = 20;
+    final protected int CORES_LIMIT = 100;
     final protected int COORD_PORT = 31105;
     final protected int VM_PORT = 31106;
     protected WindowsService winService = new WindowsService();
     protected IbService ibService = new IbService();
-    protected AzureRegistrationPageObject azurePageObject;
+    protected RegistrationPageObject cloudRegistrationPageObject;
     protected OnboardingPageObject onboardingPageObject;
     protected WebServer webServer = new WebServer(PORT);
     protected Thread serverThread = new Thread(webServer);
@@ -58,7 +58,6 @@ public class ICEngineTestBase extends TestBase {
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
     protected OnboardingPage onboardingPage;
-    protected OnboardingPage updatePage;
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -71,7 +70,7 @@ public class ICEngineTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
-        ibService.updateIB("Latest");
+        //ibService.updateIB(IB_VERSION);
         switch (ENV){
             case "prod":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud.azurewebsites.net");
@@ -81,13 +80,16 @@ public class ICEngineTestBase extends TestBase {
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding-uat.azurewebsites.net");
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapigwtest.azure-api.net");
                 break;
+            case "aws":
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding-aws.azurewebsites.net");
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapim-aws.azure-api.net");
+                break;
         }
-
     }
 
     @BeforeClass
     public void beforeClass(){
-        SystemActions.sleep(600); //wait for the previous resource to be deleted
+        //SystemActions.sleep(600); //wait for the previous resource to be deleted
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
@@ -99,15 +101,27 @@ public class ICEngineTestBase extends TestBase {
                 break;
             case "uat":
                 eventWebDriver.get("https://incredicloud-onboarding-uat.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
+            case "aws":
+                eventWebDriver.get("https://incredicloud-onboarding-aws.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
         }
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
+        switch (CLOUD){
+            case "azure":
+                cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
+                onboardingPage = new OnboardingPage("UK West", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                        COORD_PORT, VM_PORT);
+                break;
+            case "aws":
+                cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
+                //TODO: change to AWS values
+                onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                        COORD_PORT, VM_PORT);
+        }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
-        onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                COORD_PORT, VM_PORT);
-        updatePage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT - 10, POOL_SIZE - 2 ,
-                COORD_PORT, VM_PORT);
+
     }
 
     @BeforeMethod
@@ -157,11 +171,13 @@ public class ICEngineTestBase extends TestBase {
     private int getMachineCores(String machineType){
         int cores= 0;
         switch (machineType){
-            case "B2s":
+            case "D2":
+            case "t2.large":
                 cores = 2;
                 break;
             case "D4s_v3":
                 cores = 4;
+                break;
         }
         return cores;
     }

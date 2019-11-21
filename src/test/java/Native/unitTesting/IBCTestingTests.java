@@ -6,6 +6,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -197,6 +198,25 @@ public class IBCTestingTests extends UnitTestingTestBase {
         String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2" );
         Assert.assertTrue(result.contains("In order to accelerate NUnit tests, please use IBTestConsole"));
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ " /command=\"" + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST +"\" /test=nunit2");
+        Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
+
+    /**
+     * @test Error message for invalid parameter /test=gtest test.<br>
+     * @pre{ }
+     * @steps{
+     * - Run the GTests tests with invalid /test=gtest flag}
+     * @result{
+     * - Build is failed;
+     * - "In order to accelerate GTest tests, please use IBTestConsole" error message is displayed in the console.}
+     */
+    // TODO: 10/31/2019  Enable test after #12160 merge
+    @Ignore
+    @Test(testName = "Gtest Error Message Test")
+    public void GtestErrorMessageTest() {
+        String result = winService.runCommandGetOutput(IbLocations.IBCONSOLE+ ProjectsCommands.TESTING_ROBIN.GTEST);
+        Assert.assertTrue(result.contains("In order to accelerate GTest tests, please use IBTestConsole"));
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE+ ProjectsCommands.TESTING_ROBIN.GTEST);
         Assert.assertTrue(exitCode == 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
     }
 }

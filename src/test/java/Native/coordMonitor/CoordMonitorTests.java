@@ -6,7 +6,10 @@ import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @brief<b> <b>Coordinator monitor tests (including UI)</b>
+ * @details vm: Agent settings
+ */
 public class CoordMonitorTests extends CoordMonitorTestBase {
 //
 //    @Test(testName = "Disable Agent As Helper")
@@ -83,6 +86,7 @@ public class CoordMonitorTests extends CoordMonitorTestBase {
         String out = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME + " -u Admin -p 4illumination -i 0 xgCoordConsole /RESETALLFILECACHES");
         Assert.assertTrue(out.contains("error code 4"), "successfully ran /RESETALLFILECACHES - should FAIL");
     }
+
 
 /*---------------------------------METHODS----------------------------------------------*/
     public void restartTrayIcon(){

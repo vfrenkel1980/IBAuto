@@ -48,6 +48,8 @@ public class TestBase {
     protected EventHandler handler = new EventHandler();
     public String testName = "";
     public static String OS = System.getProperty("os.name").toLowerCase();
+    public static String IB_VERSION = System.getProperty("ibVersion");
+    public static String ENV = System.getProperty("env");
 //    private WindowsService windowsService = new WindowsService();
     private IbService ibService = new IbService();
 
@@ -78,12 +80,30 @@ public class TestBase {
 
     @AfterSuite
     public void afterSuiteRun(ITestContext context){
+        extent.createTest("After Suite - Report handling");
         ibService.generateCustomReport(context);
     }
 
     public String getTestName(Method method){
         Test testAnnotation = (Test) method.getAnnotation(Test.class);
         return testAnnotation.testName();
+    }
+
+    private void assignLicenses(){
+        switch (ENV){
+            case "env1":
+
+                break;
+            case "env2":
+
+                break;
+            case "env3":
+
+                break;
+            case "env4":
+
+                break;
+        }
     }
 
 }

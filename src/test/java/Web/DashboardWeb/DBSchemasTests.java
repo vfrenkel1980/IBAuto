@@ -30,7 +30,7 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName = "Upgrade IB To Latest Schema", dependsOnMethods = "installOlderSchema")
     public void upgradeIBToLatestSchema() {
-        ibService.updateIB("Latest");
+        ibService.updateIB(IB_VERSION);
         ibService.decryptSQLiteDB("new");
         int successful = sqLiteJDBC.getIntFromQuery("", "", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 0, "Number of successful builds does not match expected");
@@ -70,7 +70,7 @@ public class DBSchemasTests extends DBSchemasTestBase {
 
     @Test(testName = "Downgrade To Latest Pro Schema", dependsOnMethods = "upgradeToLatestVersionOfEnt")
     public void downgradeToLatestProSchema() {
-        ibService.downgradeEntToPro("Latest");
+        ibService.downgradeEntToPro(IB_VERSION);
         ibService.decryptSQLiteDB("new");
         int successful = sqLiteJDBC.getIntFromQuery("", "", "", "", "COUNT(*) ", "coord_build ", "status IN (0) AND build_type IN (1,3)");
         Assert.assertEquals(successful, 0, "Number of successful builds does not match expected");

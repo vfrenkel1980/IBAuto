@@ -10,9 +10,10 @@ import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibExecs.XGCoordConsole;
+import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
-import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
@@ -23,6 +24,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -43,8 +45,8 @@ public class UIValidationTestBase extends TestBase {
     public IbService ibService = new IbService();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
+    private XGCoordConsole xgCoordConsole = new XGCoordConsole();
     protected Screen screen = new Screen();
-    protected VSUIService vsuiService = new VSUIService();
     protected String project = "";
     protected String projectLocation = "";
     protected final List<String> batchProjects = Arrays.asList("green02", "green03", "green04", "green05", "red07", "red08", "red09");
@@ -70,7 +72,13 @@ public class UIValidationTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
         //stop agent service in order to delete history
-        ibService.installIB("Latest", IbLicenses.UI_LIC);
+        int version = IIBService.getIbVersion();
+        if (version != 0)
+            ibService.uninstallIB(String.valueOf(version));
+        ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
+        ibService.customPackAllocationOn();
+        String packages[] = {IBLicensePackages.NINTENDO_SWITCH,IBLicensePackages.WII,IBLicensePackages.DS3};
+        xgCoordConsole.deallocatePackages(packages);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.KEEP_BUILD_STATUS_ICON, "1");
     }
 
@@ -202,7 +210,7 @@ public class UIValidationTestBase extends TestBase {
         }
         if (project.contains("white")){
             winService.runCommandDontWaitForTermination(command);
-            SystemActions.sleep(7);
+            SystemActions.sleep(20);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.sleep(5);
         }else {
@@ -221,7 +229,6 @@ public class UIValidationTestBase extends TestBase {
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-        vsuiService.killDriver();
         SystemActions.killProcess(Processes.BUILDHISTORY);
         SystemActions.killProcess(Processes.BUILDMONITOR);
         SystemActions.killProcess(Processes.COORDMONITOR);

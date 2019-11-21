@@ -52,12 +52,7 @@ public class VSUIService implements IVSUIService {
         String installedBuild = "";
         String out = "";
         WindowsService windowsService = new WindowsService();
-        //TODO: remove this section when latest version hist VS
-        int version = IIBService.getIbVersion();
-        if (version > 2457)
-            out = windowsService.runCommandGetOutput(InitMSBuild.MSBUILD + " /version");
-        else
-            out = windowsService.runCommandGetOutput(InitOLDMSBuild.OLD_MSBUILD + " /version");
+        out = windowsService.runCommandGetOutput(InitOLDMSBuild.OLD_MSBUILD + " /version");
         try {
             FileUtils.writeStringToFile(new File(Locations.QA_ROOT + "\\out.txt"), out, "UTF-8");
             BufferedReader input = new BufferedReader(new FileReader(Locations.QA_ROOT + "\\out.txt"));
@@ -83,19 +78,11 @@ public class VSUIService implements IVSUIService {
         driver = null;
     }
 
-    //TODO: once 2019 is released change all values of 15 from simulations to 16
-    //e.g. VSIntegrationTestBase
     @Override
-    public void openProject(String projectPath, String version) {
-
-        if (version.equals("15")){
-            driver.findElementByName("File").click();
-            driver.findElementByName("Open").click();
-            driver.findElementByName("Project/Solution...").click();
-        }
-        else {
-            driver.findElementByName("Open a project or solution").click();
-        }
+    public void openProject(String projectPath) {
+        driver.findElementByName("File").click();
+        driver.findElementByName("Open").click();
+        driver.findElementByName("Project/Solution...").click();
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
@@ -112,28 +99,16 @@ public class VSUIService implements IVSUIService {
     @Override
     public void createNewProject(String projectName, String version) {
         List<WebElement> nameTB;
-        if (version.equals("15")){
-            driver.findElementByName("File").click();
-            driver.findElementByName("New").click();
-            driver.findElementByName("Project...").click();
-            SystemActions.sleep(3);
-            driver.findElementByName("Windows Console Application").click();
-            nameTB =driver.findElementsByName("Name:");
-            nameTB.get(1).sendKeys(projectName);
-            nameTB =driver.findElementsByName("Location:");
-            nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
-            driver.findElementByName("OK").click();
-        }
-        else{
-            driver.findElementByName("Create a new project").click();
-            driver.findElementByName("Console App").click();
-            driver.findElementByName("Next").click();
-            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).clear();
-            driver.findElement(By.xpath("//*[@AutomationId=\"projectNameText\"]")).sendKeys(projectName);
-            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
-            driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
-            driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
-        }
+        driver.findElementByName("File").click();
+        driver.findElementByName("New").click();
+        driver.findElementByName("Project...").click();
+        SystemActions.sleep(3);
+        driver.findElementByName("Windows Console Application").click();
+        nameTB =driver.findElementsByName("Name:");
+        nameTB.get(1).sendKeys(projectName);
+        nameTB =driver.findElementsByName("Location:");
+        nameTB.get(1).sendKeys(Locations.QA_ROOT + "\\projects");
+        driver.findElementByName("OK").click();
         WebDriverWait wait = new WebDriverWait(driver,90);
         //in vs2019 the following command will switch to the new opened windows (a new session)
         try {
@@ -147,13 +122,7 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void performIbActionFromMenu(String action) {
-        driver.findElementByName("Build");
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("Incredibuild");
-        if (ibElements.size() == 0) {
-            ibElements = driver.findElementsByName("IncrediBuild");
-        }
-        ibElements.get(0).click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
         SystemActions.sleep(3);
@@ -162,13 +131,7 @@ public class VSUIService implements IVSUIService {
 
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
-        driver.findElementByName("Build");
-        List<WebElement> ibElements = null;
-        ibElements =driver.findElementsByName("Incredibuild");
-        if (ibElements.size() == 0) {
-            ibElements = driver.findElementsByName("IncrediBuild");
-        }
-        ibElements.get(0).click();
+        driver.findElementByName("IncrediBuild").click();
         driver.findElementByName(action).click();
         test.log(Status.INFO, "Successfully clicked on " + action);
     }
@@ -240,11 +203,10 @@ public class VSUIService implements IVSUIService {
             }
             capabilities.setCapability("app", pathToDevenv);
             driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
             if (test != null) {
                 test.log(Status.INFO, "Visual Studio opened successfully");
             }
-            SystemActions.sleep(30);
             if(isFirstActivation) {
                 try {
                     SystemActions.sleep(10);

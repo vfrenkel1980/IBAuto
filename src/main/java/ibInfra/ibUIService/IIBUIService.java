@@ -124,6 +124,7 @@ public interface IIBUIService {
         void enableSchedulingAndVerifyIcon();
 
         void disableSchedulingAndVerifyIcon();
+        void isNotActiveScheduling();
 
         void disableFailOnlyLocally();
 

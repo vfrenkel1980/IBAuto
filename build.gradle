@@ -109,12 +109,11 @@ test {
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: '15'
     systemProperty 'vsinstallation', System.properties['vsinstallation'] ?: 'preview'
     //Sim environment for Linux simulations
-    systemProperty 'env', System.properties['env'] ?: 'linuxsim1a'
-    systemProperty 'env', System.properties['env'] ?: 'linuxsim1b'
-    systemProperty 'env', System.properties['env'] ?: 'linuxsim2a'
-    systemProperty 'env', System.properties['env'] ?: 'linuxsim2b'
+    systemProperty 'env', System.properties['env'] ?: '%s'
     //Linux version selection
     systemProperty "version", System.getProperty("version")
+    //Linux command flags
+    systemProperty "linuxCLflags", System.getProperty("linuxCLflags")
     //Linux AWS initiator selection
     systemProperty "initiators", System.getProperty("initiators")
     //systemProperty "groups", System.getProperty("groups")
@@ -126,6 +125,8 @@ test {
     systemProperty 'numofmachines', System.properties['numofmachines'] ?: "%d"
     systemProperty 'incredicloudEnv', System.properties['incredicloudEnv'] ?: "%s"
     systemProperty 'machineType', System.properties['machineType'] ?: "%s"
+
+    systemProperty 'ibVersion', System.properties['ibVersion'] ?: "%s"
 
     // enable TestNG support (default is JUnit)
     useTestNG(){

@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -39,6 +40,7 @@ public class AppiumActions {
     public static void contextMenuIncrediBuildClick(WebElement project, WindowsDriver driver){
         List<WebElement> ibElements = null;
         WebElement goTo = null;
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         ibElements =driver.findElementsByName("Incredibuild");
         if (ibElements.size() == 0) {
             ibElements = driver.findElementsByName("IncrediBuild");
@@ -56,5 +58,6 @@ public class AppiumActions {
             ibElements.get(0).click();
             test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText() );
         }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 }

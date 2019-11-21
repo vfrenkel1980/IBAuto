@@ -55,7 +55,7 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
         }
         eventWebDriver.manage().window().maximize();
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
-        azurePageObject = new AzureRegistrationPageObject(eventWebDriver);
+        cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
     }
 
     @AfterMethod

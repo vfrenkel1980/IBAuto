@@ -15,6 +15,11 @@ import org.testng.annotations.Test;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+
+/**
+ * @brief<b> <b>General Windows Tests</b>
+ * @details host: Batman
+ */
 public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify Backup Coordinator Functionality")
@@ -62,9 +67,10 @@ public class GeneralWinTests extends BatmanBCTestBase {
         try {
             winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
-                    String.format("\"C:\\Program Files (x86)\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
+                    String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
             SystemActions.sleep(30);
             winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
+            SystemActions.sleep(5);
             boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
             if (isPresent) {
                 SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
@@ -165,6 +171,28 @@ public class GeneralWinTests extends BatmanBCTestBase {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
     }
 
+    /**
+     * @test "Verify that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
+     *  The 2 projects of the solution are being built a first time
+     *  The second time that the code is built there should not be any update since the code was not modified.
+     *  Ticket #11279
+     * @pre{
+     * }
+     * @steps{
+     * - Run the command: clean and build
+     * - Run the command: build
+     * }
+     * @result{
+    *  Expected: string "2 up-to-date" should be displayed in the build Output file
+     * }
+     */
+    @Test(testName = "Verify that when building the same code twice, the 2nd time there is no update")
+    public void verifyThatWhenBuildingTheSameCodeTwiceThe2ndTimeThereIsNoUpdate() {
+        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        ibService.build(IbLocations.BUILD_CONSOLE + ProjectsCommands.VC14_BATMAN.STADIA_INCREDEMENTAL_BUILD);
+        // Check Output file: look for string "2 up-to-date"
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "2 up-to-date"));
+    }
     /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String folder, String keyName) {

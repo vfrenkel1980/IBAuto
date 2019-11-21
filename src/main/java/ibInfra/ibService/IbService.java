@@ -30,7 +30,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import static frameworkInfra.Listeners.SuiteListener.extent;
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.testbases.TestBase.IB_VERSION;
 
 
 public class IbService implements IIBService {
@@ -41,6 +43,16 @@ public class IbService implements IIBService {
     @Override
     public String getIBInstallFolder() {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.FOLDER);
+    }
+
+    /**
+     * perform ib build
+     * @param command the command we run
+     * @return exit code of the command
+     */
+    @Override
+    public int build(String command) {
+        return winService.runCommandWaitForFinish(String.format(command + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.BUILD));
     }
 
     /**
@@ -139,6 +151,7 @@ public class IbService implements IIBService {
      */
     @Override
     public String getIbConsoleInstallation(String version) {
+        test.log(Status.INFO, "Fetching console installer name");
         String path = Locations.NETWORK_IB_INSTALLATIONS + version;
         String postFix = "console.exe";
         String installerName = "";
@@ -147,7 +160,7 @@ public class IbService implements IIBService {
                 installerName = String.valueOf(newDirectoryStreamItem);
             }
         } catch (final Exception e) {
-            e.getMessage();
+            test.log(Status.ERROR, "Failed to get console installer name with error: " + e.getMessage());
         }
         return installerName;
     }
@@ -388,12 +401,15 @@ public class IbService implements IIBService {
      * @param context used to get the suite name
      */
     public void generateCustomReport(ITestContext context){
-        String version = getVersionFromInstaller("Latest");
+        String version = getVersionFromInstaller(IB_VERSION);
+        test.log(Status.INFO, "VERSION: " + version);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
+        test.log(Status.INFO, "File path: " + file);
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
+        test.log(Status.INFO, " SuiteID: " + suiteId);
         String destFile = Locations.NETWORK_REPORTS_FOLDER + "TestResultReport" + suite + ".html";
         SystemActions.copyFile(file, Locations.NETWORK_REPORTS_FOLDER + suite + "\\" + suite + "_" + formatter.format(calendar.getTime()) + "_" + version + ".html");
         SystemActions.deleteFile(destFile);

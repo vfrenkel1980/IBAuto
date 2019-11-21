@@ -54,7 +54,7 @@ public class LinuxSanityTestBase extends LinuxTestBase {
                 break;
         }
 
-        log.info("RUNNING VERSION: " + VERSION);
+        log.info("RUNNING VERSION: " + IB_VERSION);
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - Sanity.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
