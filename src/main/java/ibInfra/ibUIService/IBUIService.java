@@ -665,6 +665,7 @@ public class IBUIService implements IIBUIService {
                 if (screen.exists(IBSettings.isNotActiveScheduling, 15) != null)
                     objectExists = true;
                 Assert.assertTrue(objectExists, "Could not find SchedulingCB");
+                screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable scheduling with error:" + findFailed.getMessage());
                 Assert.fail();
@@ -774,6 +775,9 @@ public class IBUIService implements IIBUIService {
                 try {
                     screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.97), 15).rightClick();
                     screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.95),15).click();
+
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
                     Assert.fail();
