@@ -37,6 +37,7 @@ public class AgentSettingsTestBase extends TestBase {
     protected Screen screen = new Screen();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
+    protected IBUIService.Coordinator coordinator=ibuiService.new Coordinator();
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     static {
@@ -71,6 +72,7 @@ public class AgentSettingsTestBase extends TestBase {
         }
         test.log(Status.INFO, "BEFORE SUITE finished");
         log.info("BEFORE SUITE finished");
+
     }
 
     @BeforeMethod
