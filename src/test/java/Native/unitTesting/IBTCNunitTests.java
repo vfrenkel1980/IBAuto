@@ -106,11 +106,11 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit framework tests with the /testlevel=deep flag.}
      * @result{ - Build is succeeded.}
      */
-//    @Test(testName = "NUnit2 Testlevel Deep Test")
-//    public void nunit2TestLevelDeepTest() {
-//        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
-//        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-//    }
+    @Test(testName = "NUnit2 Testlevel Deep Test")
+    public void nunit2TestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 
     /**
      * @test NUnit2 /result=testresult.xml is created in the deep testlevel mode test. <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943</a>.<br>
@@ -392,11 +392,11 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit-console-master tests with the /testlevel=deep flag.}
      * @result{ - Build is succeeded.}
      */
-//    @Test(testName = "NUnit3 Testlevel Deep Test")
-//    public void nunit3TestLevelDeepTest() {
-//        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
-//        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-//    }
+    @Test(testName = "NUnit3 Testlevel Deep Test")
+    public void nunit3TestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 
     /**
      * @test NUnit3 IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
