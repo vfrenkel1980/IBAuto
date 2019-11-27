@@ -99,10 +99,11 @@ public class IBUIService implements IIBUIService {
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
             try {
-                screen.wait(IBInstaller.NextNewBTN.similar((float) 0.8), 360).click();
+                screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 36).click();
             }
             catch (FindFailed findFailed){
                 test.log(Status.WARNING, "Failed to click to Next button : " + findFailed.getMessage());
+                Assert.fail();
             }
         }
 
@@ -115,7 +116,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickFinish() throws FindFailed {
             test.log(Status.INFO, "Clicking Finish");
-            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 360).click();
+            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 36).click();
         }
 
         @Override
@@ -624,7 +625,9 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to disable core limit with error: " + findFailed.getMessage());
-                Assert.fail();
+
+
+
             }
         }
 
