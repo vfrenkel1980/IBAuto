@@ -74,6 +74,15 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 SystemActions.sleep(10);
                 coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;
+
+            case ("3"): //Valid offline license with all packages
+                scenarioDescription = "Valid license with all packages";
+                ibService.loadIbLicense(IbLicenses.VALID_OFFLINE_LIC);
+                SystemActions.sleep(10);
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                SystemActions.sleep(10);
+                coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
+                break;
         }
     }
 
