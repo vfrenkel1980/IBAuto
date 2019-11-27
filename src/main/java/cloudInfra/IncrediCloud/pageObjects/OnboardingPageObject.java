@@ -81,12 +81,13 @@ public class OnboardingPageObject {
     }
 
     public void performOnboarding(OnboardingPage onboardingPage){
-            selectRegion(onboardingPage);
-            enterName(onboardingPage);
-            enterMail(onboardingPage);
-            enterCompany(onboardingPage);
-            enterVMDetails(onboardingPage);
-            clickSave();
+        selectSubscription();
+        selectRegion(onboardingPage);
+        enterName(onboardingPage);
+        enterMail(onboardingPage);
+        enterCompany(onboardingPage);
+        enterVMDetails(onboardingPage);
+        clickSave();
     }
 
     public void performUpdate(OnboardingPage onboardingPage){
@@ -99,10 +100,25 @@ public class OnboardingPageObject {
         wait.until(ExpectedConditions.visibilityOfElementLocated(DOWNLOAD_BTN));
     }
 
-    private void selectRegion(OnboardingPage onboardingPage){
+    private void selectSubscription() {
         SystemActions.sleep(10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test"))));
+        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test"))).click();
+    }
+
+//    private void selectRegion(OnboardingPage onboardingPage){
+//        SystemActions.sleep(10);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+//    }
+    private void selectRegion(OnboardingPage onboardingPage){
+    //        SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+    //        Actions actions = new Actions(eventWebDriver);
+    //        actions.moveToElement(eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))));
+        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))).click();
     }
 
     private void enterName(OnboardingPage onboardingPage){
@@ -160,20 +176,20 @@ public class OnboardingPageObject {
     public boolean validateRegion(){
 /*        switch (ENV){
             case "prod":*/
-                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
-
-                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
-/*                break;
-            case "uat":
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
+//                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
+//
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+//                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
+//                break;
+//            case "uat":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
-                break;
-        }*/
+//                break;
+//        }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();

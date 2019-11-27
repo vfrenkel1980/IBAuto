@@ -39,7 +39,8 @@ public class AzureService extends CloudService{
     private CreatedResources<NetworkInterface> networkInterfaces;
     private List networkInterfacesKeys;
     private List virtualMachinesKeys;
-    private Region region = Region.EUROPE_WEST;
+//    private Region region = Region.EUROPE_WEST;
+    private Region region = Region.EUROPE_NORTH;
     private String resGroup = "qa-performance";
     private VirtualMachineSizeTypes type;
     public int vmCount;
