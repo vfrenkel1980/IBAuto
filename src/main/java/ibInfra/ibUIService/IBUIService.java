@@ -98,7 +98,12 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 360).click();
+            try {
+                screen.wait(IBInstaller.NextNewBTN.similar((float) 0.8), 360).click();
+            }
+            catch (FindFailed findFailed){
+                test.log(Status.WARNING, "Failed to click to Next button : " + findFailed.getMessage());
+            }
         }
 
         @Override
