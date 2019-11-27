@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -400,12 +402,19 @@ public class IbService implements IIBService {
      * and saves the result in network automation\reports folder
      * @param context used to get the suite name
      */
-    public void generateCustomReport(ITestContext context){
+    public void generateCustomReport(ITestContext context) throws IOException {
         String version = getVersionFromInstaller(IB_VERSION);
         test.log(Status.INFO, "VERSION: " + version);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
+        Path path = Paths.get(file);
+        Charset charset = StandardCharsets.UTF_8;
+        String content = new String(Files.readAllBytes(path), charset);
+        String oldString = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
+        content = content.replace(oldString, "/media/share/Automation/Screenshots/");
+        Files.write(path, content.getBytes(charset));
+        test.log(Status.INFO, "Screenshot path is updated for the file: " + file);
         test.log(Status.INFO, "File path: " + file);
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
