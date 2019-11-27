@@ -6,6 +6,7 @@ import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
+import org.junit.Ignore;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
@@ -104,6 +105,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      * @result{
      * - Build is succeeded.}
      */
+    @Ignore
     @Test(testName = "GTest CPPSorter Testlevel Deep Test")
     public void gTestCPPSorterTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST);
