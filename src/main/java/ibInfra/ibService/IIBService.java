@@ -88,7 +88,7 @@ public interface IIBService {
 
     void openBuildMonitor();
 
-    void generateCustomReport(ITestContext context) throws IOException;
+    void generateCustomReport(ITestContext context);
 
     void agentServiceStart();
 

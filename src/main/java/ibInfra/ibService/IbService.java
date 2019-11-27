@@ -402,19 +402,23 @@ public class IbService implements IIBService {
      * and saves the result in network automation\reports folder
      * @param context used to get the suite name
      */
-    public void generateCustomReport(ITestContext context) throws IOException {
+    public void generateCustomReport(ITestContext context){
         String version = getVersionFromInstaller(IB_VERSION);
         test.log(Status.INFO, "VERSION: " + version);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
-        Path path = Paths.get(file);
-        Charset charset = StandardCharsets.UTF_8;
-        String content = new String(Files.readAllBytes(path), charset);
-        String oldString = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
-        content = content.replace(oldString, "/media/share/Automation/Screenshots/");
-        Files.write(path, content.getBytes(charset));
-        test.log(Status.INFO, "Screenshot path is updated for the file: " + file);
+        try {
+            Path path = Paths.get(file);
+            Charset charset = StandardCharsets.UTF_8;
+            String content = new String(Files.readAllBytes(path), charset);
+            String oldString = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
+            content = content.replace(oldString, "/media/share/Automation/Screenshots/");
+            Files.write(path, content.getBytes(charset));
+            test.log(Status.INFO, "Screenshot path is updated for the file: " + file);
+        }catch(IOException e){
+            test.log(Status.WARNING, "Screenshot path is not updated with error" + e);
+        }
         test.log(Status.INFO, "File path: " + file);
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
