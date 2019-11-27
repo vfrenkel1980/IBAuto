@@ -6,6 +6,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -106,11 +107,13 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit framework tests with the /testlevel=deep flag.}
      * @result{ - Build is succeeded.}
      */
-//    @Test(testName = "NUnit2 Testlevel Deep Test")
-//    public void nunit2TestLevelDeepTest() {
-//        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
-//        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-//    }
+    //BUG
+    @Ignore
+    @Test(testName = "NUnit2 Testlevel Deep Test")
+    public void nunit2TestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 
     /**
      * @test NUnit2 /result=testresult.xml is created in the deep testlevel mode test. <a href="http://redmine.incredibuild.local/issues/9943">Bug #9943</a>.<br>
@@ -118,6 +121,8 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit framework tests with the /result=C:\path\to\res.xml flag.}
      * @result{ - Build is succeeded.}
      */
+    //BUG
+    @Ignore
     @Test(testName = "NUnit2 Result Testlevel Deep Test")
     public void nunit2ResultTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /result=\"" + Locations.QA_ROOT + "\\nunitres.xml\"");
@@ -230,6 +235,8 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded;
      * - The result.xml file is created}
      */
+    //BUG
+    @Ignore
     @Test(testName = "NUnit2 Xml Testlevel Deep Test")
     public void nunit2XmlTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST);
@@ -246,6 +253,8 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded;
      * - The result.xml file is created}
      */
+    //BUG
+    @Ignore
     @Test(testName = "NUnit2 NoResult Testlevel Deep Test")
     public void nunit2NoResultTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /noresult");
@@ -260,6 +269,8 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded.
      * - The result.xml file isn't created}
      */
+    //BUG
+    @Ignore
     @Test(testName = "NUnit2 No Xml Testlevel Deep Test")
     public void nunit2NoXmlTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /noxml");
@@ -392,11 +403,13 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit-console-master tests with the /testlevel=deep flag.}
      * @result{ - Build is succeeded.}
      */
-//    @Test(testName = "NUnit3 Testlevel Deep Test")
-//    public void nunit3TestLevelDeepTest() {
-//        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
-//        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-//    }
+    //BUG
+    @Ignore
+    @Test(testName = "NUnit3 Testlevel Deep Test")
+    public void nunit3TestLevelDeepTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+    }
 
     /**
      * @test NUnit3 IBTC /targetdir flag test (the dll is written with relative (not absolute) path)<br>
