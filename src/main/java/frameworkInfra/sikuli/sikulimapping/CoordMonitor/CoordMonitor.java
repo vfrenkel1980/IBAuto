@@ -34,6 +34,6 @@ public class CoordMonitor {
     public static final Pattern ScaleToCloudButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\scaleToCloud.png");
 
 
-    public static final Pattern FileMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\file_menu.png");
+    public static final Pattern FileMenu = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\");
     public static final Pattern ExitButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\exit_button.png");
 }
