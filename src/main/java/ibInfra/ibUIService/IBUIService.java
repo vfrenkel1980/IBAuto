@@ -117,7 +117,7 @@ public class IBUIService implements IIBUIService {
         public void clickFinish() throws FindFailed {
             try {
                 test.log(Status.INFO, "Clicking Finish");
-                screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 36).click();
+                screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 40).click();
             }
             catch (FindFailed findFailed){
                 test.log(Status.WARNING, "Failed to click to Finish button : " + findFailed.getMessage());
