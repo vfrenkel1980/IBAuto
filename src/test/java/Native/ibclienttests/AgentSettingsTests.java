@@ -241,7 +241,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
 //    @Test(testName = "Enable Scheduling And Verify Tray Icon")
 //    public void enableSchedulingAndVerifyTrayIconWithPermission() {
-//        winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
+//        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+//        client.openCoordMonitorFromTray();
 //        coordinator.clickAllowEnableDisableAsHelper();
 //        SystemActions.sleep(30);
 //        client.enableSchedulingAndVerifyIcon();

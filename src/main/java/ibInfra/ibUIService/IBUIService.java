@@ -96,7 +96,7 @@ public class IBUIService implements IIBUIService {
     public class Installer implements IInstaller {
 
         @Override
-        public void clickNext() throws FindFailed {
+        public void clickNext()  {
             test.log(Status.INFO, "Clicking Next");
             try {
                 screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
@@ -115,8 +115,14 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void clickFinish() throws FindFailed {
-            test.log(Status.INFO, "Clicking Finish");
-            screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 36).click();
+            try {
+                test.log(Status.INFO, "Clicking Finish");
+                screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 36).click();
+            }
+            catch (FindFailed findFailed){
+                test.log(Status.WARNING, "Failed to click to Finish button : " + findFailed.getMessage());
+                Assert.fail();
+            }
         }
 
         @Override
