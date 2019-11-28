@@ -40,6 +40,7 @@ public class AgentSettingsTestBase extends TestBase {
     protected IBUIService.Coordinator coordinator=ibuiService.new Coordinator();
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
+
     static {
         ibVersion = IIBService.getIbVersion();
         Calendar calendar = Calendar.getInstance();

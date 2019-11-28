@@ -239,17 +239,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED), 8);
     }
 
-    @Test(testName = "Enable Scheduling And Verify Tray Icon")
-    public void enableSchedulingAndVerifyTrayIconWithPermission() {
-        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
-        client.openCoordMonitorFromTray();
-        coordinator.clickAllowEnableDisableAsHelper();
-        SystemActions.sleep(30);
-        client.enableSchedulingAndVerifyIcon();
-        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
-        client.disableSchedulingAndVerifyIcon();
-        SystemActions.sleep(30);
-    }
+//    @Test(testName = "Enable Scheduling And Verify Tray Icon")
+//    public void enableSchedulingAndVerifyTrayIconWithPermission() {
+//        winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
+//        coordinator.clickAllowEnableDisableAsHelper();
+//        SystemActions.sleep(30);
+//        client.enableSchedulingAndVerifyIcon();
+//        winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+//        client.disableSchedulingAndVerifyIcon();
+//        SystemActions.sleep(30);
+//    }
 
     @Test(testName = "Enable Scheduling And Verify Tray Icon Without Permission")
     public void enableSchedulingAndVerifyTrayIconWithoutPermission() {
