@@ -99,7 +99,7 @@ public class IBUIService implements IIBUIService {
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
             try {
-                screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 36).click();
+                screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
             }
             catch (FindFailed findFailed){
                 test.log(Status.WARNING, "Failed to click to Next button : " + findFailed.getMessage());

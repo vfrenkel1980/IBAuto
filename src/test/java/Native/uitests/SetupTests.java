@@ -127,6 +127,7 @@ public class SetupTests extends SetupTestBase {
             installer.selectUninstall();
             installer.clickNext();
             installer.clickNext();
+            SystemActions.sleep(35);
             installer.clickFinish();
         } catch (FindFailed e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
