@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -406,6 +408,17 @@ public class IbService implements IIBService {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
         String file = winService.getLatestFileFromDir(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/" , "TestOutput").getAbsolutePath();
+        try {
+            Path path = Paths.get(file);
+            Charset charset = StandardCharsets.UTF_8;
+            String content = new String(Files.readAllBytes(path), charset);
+            String oldString = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
+            content = content.replace(oldString, "/media/share/Automation/Screenshots/");
+            Files.write(path, content.getBytes(charset));
+            test.log(Status.INFO, "Screenshot path is updated for the file: " + file);
+        }catch(IOException e){
+            test.log(Status.WARNING, "Screenshot path is not updated with error" + e);
+        }
         test.log(Status.INFO, "File path: " + file);
         String suite = context.getCurrentXmlTest().getSuite().getName();
         String suiteId = CustomJsonParser.getValueFromKey(System.getProperty("user.dir") + "/src/main/resources/Configuration/SuiteId.json", suite);
