@@ -105,7 +105,6 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      * @result{
      * - Build is succeeded.}
      */
-    @Ignore
     @Test(testName = "GTest CPPSorter Testlevel Deep Test")
     public void gTestCPPSorterTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST);

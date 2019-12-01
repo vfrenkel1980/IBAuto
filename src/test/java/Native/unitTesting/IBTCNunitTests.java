@@ -198,6 +198,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit2 framework tests with filter /config.}
      * @result{ - Build is succeeded.}
      */
+    @Ignore
     @Test(testName = "NUnit2 with filter config test")
     public void nunit2FilterConfigTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_WITH_FILTER_CONFIG_TEST);
@@ -319,7 +320,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(System.getProperty("user.dir") + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dasboard.html");
+        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
@@ -340,7 +341,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = new File(System.getProperty("user.dir") + "\\reports\\index.html");
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
         index.delete();
-        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dasboard.html");
+        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
         dashboard.delete();
     }
@@ -391,6 +392,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit-console-master tests with the /testlevel=10 flag.}
      * @result{ - Build is succeeded.}
      */
+    @Ignore
     @Test(testName = "NUnit3 Test Level Test")
     public void nunit3TestLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST);
@@ -404,7 +406,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded.}
      */
     //BUG
-    @Ignore
     @Test(testName = "NUnit3 Testlevel Deep Test")
     public void nunit3TestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
