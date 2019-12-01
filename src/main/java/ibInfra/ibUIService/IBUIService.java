@@ -165,15 +165,22 @@ public class IBUIService implements IIBUIService {
         @Override
         public void browseLicenseNavigateToDesktop() throws FindFailed {
             test.log(Status.INFO, "Clicking on Desktop tab");
-            screen.wait(IBInstaller.DesktopTabBTN.similar((float) 0.8), 5).click();
+            screen.wait(IBInstaller.DesktopTabBTN.similar((float) 0.8), 60).click();
         }
 
         @Override
         public void selectLicense() throws FindFailed {
             test.log(Status.INFO, "Selecting license");
-            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
-            screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
-            test.log(Status.INFO, "License selected");
+            try {
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 100
+                ).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 100).click();
+                test.log(Status.INFO, "License selected");
+            }
+            catch (FindFailed findFailed){
+                    test.log(Status.WARNING, "Failed to click to LicenseFile button : " + findFailed.getMessage());
+                    Assert.fail();
+                }
         }
 
         @Override
