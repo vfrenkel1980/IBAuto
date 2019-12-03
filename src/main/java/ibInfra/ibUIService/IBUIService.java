@@ -171,16 +171,9 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectLicense() throws FindFailed {
             test.log(Status.INFO, "Selecting license");
-            try {
-                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 100
-                ).doubleClick();
-                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 100).click();
-                test.log(Status.INFO, "License selected");
-            }
-            catch (FindFailed findFailed){
-                    test.log(Status.WARNING, "Failed to click to LicenseFile button : " + findFailed.getMessage());
-                    Assert.fail();
-                }
+            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
+            screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+            test.log(Status.INFO, "License selected");
         }
 
         @Override
@@ -374,9 +367,9 @@ public class IBUIService implements IIBUIService {
         public void openCoordMonitorFromTray() {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 35).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 35).rightClick();
-                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 30).click();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open coordinator monitor with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -679,9 +672,9 @@ public class IBUIService implements IIBUIService {
         @Override
         public void isNotActiveScheduling() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 15).click();
-                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 15).click();
-                screen.wait(IBSettings.isNotActiveScheduling.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.isNotActiveScheduling.similar((float) 0.9), 5).click();
                 boolean objectExists = false;
                 if (screen.exists(IBSettings.isNotActiveScheduling, 15) != null)
                     objectExists = true;
@@ -794,10 +787,10 @@ public class IBUIService implements IIBUIService {
             public void clickAllowEnableDisableAsHelper() {
                 test.log(Status.INFO, "Clicking allow Enable Disable as helper");
                 try {
-                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.97), 20).rightClick();
-                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 20).click();
-                   // screen.wait(CoordMonitor.FileMenu.similar((float) 0.95), 20).click();
-                   // screen.wait(CoordMonitor.ExitButton.similar((float) 0.95),20).click();
+                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.97), 15).rightClick();
+                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.95),15).click();
 
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
