@@ -25,7 +25,7 @@ public class ReleaseTestBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
-    protected String trialLicenseFile;
+    public static String trialLicenseFile;
 
     static {
         Calendar calendar = Calendar.getInstance();

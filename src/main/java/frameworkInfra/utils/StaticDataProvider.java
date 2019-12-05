@@ -210,7 +210,7 @@ public class StaticDataProvider {
         public static final String SDK_INSTALLER_FOLDER = "\"C:\\ProgramData\\SCE\\SDK Installer\\Binaries\\Bin\"";
         public static final String PS4_SDK5 = "PS4:2";
         public static final String PS4_SDK6 = "PS4:1";
-        public static final String PS_PROSPERO_0830 = "Prospero:1";
+        public static final String PS_PROSPERO_0900 = "Prospero:2";
         public static final String SWITCH_PS_SDK = "start /wait SDK_Manager.exe /quiet /SDKSwitch%s";
     }
 
@@ -276,10 +276,10 @@ public class StaticDataProvider {
             public static final String PS4_SAMPLE2_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE3_ORBIS_RELEASE = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\input_output_devices\\api_camera\\advanced\\api_camera_advanced.sln\" /%s /cfg=\"release|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PS4_SAMPLE4_ORBIS_DEBUG = "\"D:\\Program Files (x86)\\SCE\\ORBIS SDKs\\6.500\\target\\samples\\sample_code\\performance_optimization\\tutorial_mixing_of_graphics_and_compute\\mixing_of_graphics_and_compute.sln\" /%s /cfg=\"debug|orbis\" /minwinver=\"7\" /title=\"PS4 Orbis SDK6 Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE1_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\graphics\\api_edge_animation\\api_edge_animation.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
-            public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.830\\target\\samples\\sample_code\\audio_video\\api_libngs2\\api_libngs2.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE1_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.900\\target\\samples\\sample_code\\audio_video\\api_ajm\\api_ajm.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 1\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE2_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.900\\target\\samples\\sample_code\\common\\source\\sampleutil\\libSceSampleUtil.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 2\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE3_RELEASE = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.900\\target\\samples\\sample_code\\graphics\\api_edge_animation\\api_edge_animation.sln\" /%s /cfg=\"release|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Release Sample 3\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String PS_PROSPERO_SAMPLE4_DEBUG = "\"D:\\Program Files (x86)\\SCE\\Prospero SDKs\\0.900\\target\\samples\\sample_code\\audio_video\\api_libngs2\\api_libngs2.sln\" /%s /cfg=\"debug|Prospero\" /minwinver=\"7\" /title=\"PS Prospero Debug Sample 4\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
             public static final String PROJ_WIN32_RELEASE = "\"C:\\QA\\Simulation\\VC15\\mono-master\\mono-master\\msvc\\eglib.proj\" /%s /cfg=\"release|win32\" /title=\"proj file 2017 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
@@ -667,7 +667,7 @@ public class StaticDataProvider {
             public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep /noshadow";
             public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
             public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
             public static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";

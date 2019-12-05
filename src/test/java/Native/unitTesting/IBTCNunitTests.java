@@ -3,10 +3,10 @@ package Native.unitTesting;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.UnitTestingTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.parsers.HtmlReportingToolParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -51,6 +51,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     //NUNIT2
+
     /**
      * @test NUnit2 /logfile & /loglevel flag test.<br>
      * @pre{ }
@@ -107,8 +108,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit framework tests with the /testlevel=deep flag.}
      * @result{ - Build is succeeded.}
      */
-    //BUG
-    @Ignore
     @Test(testName = "NUnit2 Testlevel Deep Test")
     public void nunit2TestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST);
@@ -121,8 +120,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @steps{ - Run the nunit framework tests with the /result=C:\path\to\res.xml flag.}
      * @result{ - Build is succeeded.}
      */
-    //BUG
-    @Ignore
     @Test(testName = "NUnit2 Result Testlevel Deep Test")
     public void nunit2ResultTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /result=\"" + Locations.QA_ROOT + "\\nunitres.xml\"");
@@ -193,18 +190,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
     /**
-     * @test NUnit2 Test with filter /config<br>
-     * @pre{ }
-     * @steps{ - Run the nunit2 framework tests with filter /config.}
-     * @result{ - Build is succeeded.}
-     */
-    @Test(testName = "NUnit2 with filter config test")
-    public void nunit2FilterConfigTest() {
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_WITH_FILTER_CONFIG_TEST);
-        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
-    }
-
-    /**
      * @test NUnit2 Test with filter /framework<br>
      * @pre{ }
      * @steps{ - Run the nunit2 framework tests with filter /framework.}
@@ -235,8 +220,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded;
      * - The result.xml file is created}
      */
-    //BUG
-    @Ignore
     @Test(testName = "NUnit2 Xml Testlevel Deep Test")
     public void nunit2XmlTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST);
@@ -253,8 +236,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded;
      * - The result.xml file is created}
      */
-    //BUG
-    @Ignore
     @Test(testName = "NUnit2 NoResult Testlevel Deep Test")
     public void nunit2NoResultTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /noresult");
@@ -269,8 +250,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded.
      * - The result.xml file isn't created}
      */
-    //BUG
-    @Ignore
     @Test(testName = "NUnit2 No Xml Testlevel Deep Test")
     public void nunit2NoXmlTestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /noxml");
@@ -312,15 +291,22 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - 2 file are created in the "reports" folder. }
      */
     @Test(testName = "NUnit2 Extent Report Assembly Level Test")
-    public void nunit2ExtentReportAssemblyLevelTest() {
+    public void nunit2ExtentReportAssemblyLevelTest() throws InterruptedException {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST);
         int exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
         Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
-        File index = new File(System.getProperty("user.dir") + "\\reports\\index.html");
+
+        String indexFilePath = System.getProperty("user.dir") + "\\reports\\index.html";
+        File index = new File(indexFilePath);
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
-        index.delete();
-        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dasboard.html");
+
+        String dashboardFilePath = System.getProperty("user.dir") + "\\reports\\dashboard.html";
+        File dashboard = new File(dashboardFilePath);
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+
+        compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+
+        index.delete();
         dashboard.delete();
     }
 
@@ -333,25 +319,39 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - 2 file are created in the "reports" folder. }
      */
     @Test(testName = "NUnit2 Extent Report Test Level Test")
-    public void nunit2ExtentReportTestLevelTest() {
-        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST + " /testlevel=11");
-        int exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
-        Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
-        File index = new File(System.getProperty("user.dir") + "\\reports\\index.html");
-        Assert.assertTrue(index.isFile(), "The test result index file is not created");
-        index.delete();
-        File dashboard = new File(System.getProperty("user.dir") + "\\reports\\dasboard.html");
-        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
-        dashboard.delete();
+    public void nunit2ExtentReportTestLevelTest() throws InterruptedException {
+        File index = null;
+        File dashboard = null;
+        try {
+            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST + " /testlevel=11");
+
+            int exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
+            Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
+
+            String indexFilePath = System.getProperty("user.dir") + "\\reports\\index.html";
+            index = new File(indexFilePath);
+            Assert.assertTrue(index.isFile(), "The test result index file is not created");
+
+            String dashboardFilePath = System.getProperty("user.dir") + "\\reports\\dashboard.html";
+            dashboard = new File(dashboardFilePath);
+            Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+
+            compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+        } finally {
+            index.delete();
+            dashboard.delete();
+        }
+
     }
 
     //Negative flow
+
     /**
      * @test NUnit2 Negative flow Not supported flag /nologo test.<br>
      * @pre{ }
      * @steps{ - Run the nunit framework tests with the /nologo flag.}
      * @result{ - Build fails with return code -4.
-    */
+     */
     @Test(testName = "NUnit2 Negative Flow Filter /nologo test")
     public void nunit2NegativeFlowFilterNoLogoTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_1DLL_TEST + " /nologo");
@@ -359,6 +359,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
 //NUNIT3
+
     /**
      * @test NUnit3 /logfile & /loglevel flag test.<br>
      * @pre{ }
@@ -404,7 +405,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded.}
      */
     //BUG
-    @Ignore
     @Test(testName = "NUnit3 Testlevel Deep Test")
     public void nunit3TestLevelDeepTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST);
@@ -582,7 +582,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
-      /**
+    /**
      * @test NUnit3 testresult file is created with relative path.<br>
      * @pre{ }
      * @steps{ - Run the nunit-console-master failed tests with the "--result=result.xml" flag.}
@@ -734,15 +734,21 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - 2 file are created in the "reports" folder. }
      */
     @Test(testName = "NUnit3 Extent Report Assembly Level Test")
-    public void nunit3ExtentReportAssemblyLevelTest() {
+    public void nunit3ExtentReportAssemblyLevelTest() throws InterruptedException {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
         int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
         Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
-        File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
+        String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
+        File index = new File(indexFilePath);
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
-        index.delete();
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
+
+        String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
+        File dashboard = new File(dashboardFilePath);
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+
+        compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+
+        index.delete();
         dashboard.delete();
     }
 
@@ -755,18 +761,25 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      * @result{ - 2 file are created in the "reports" folder. }
      */
     @Test(testName = "NUnit3 Extent Report Test Level Test")
-    public void nunit3ExtentReportTestLevelTest() {
+    public void nunit3ExtentReportTestLevelTest() throws InterruptedException {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
         int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
         Assert.assertTrue(exitCode == 0, "The test reporter execution failed with the exitcode " + exitCode);
-        File index = new File(Locations.QA_ROOT + "\\reports\\index.html");
+        String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
+        File index = new File(indexFilePath);
         Assert.assertTrue(index.isFile(), "The test result index file is not created");
-        index.delete();
+
+        String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
         File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
         Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+
+        compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+
+        index.delete();
         dashboard.delete();
     }
     //Negative flow
+
     /**
      * @test NUnit3 Negative flow Not supported flag /nocolor test.<br>
      * @pre{ }
@@ -777,5 +790,26 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     public void nunit3NegativeFlowFilterNoColorTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_1DLL_TEST + " --nocolor");
         Assert.assertTrue(exitCode == -4, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    private void compareExtentReportsFiles(String indexFilePath, String dashboardFilePath) throws InterruptedException {
+
+//        indexFilePath = "C:\\Users\\farm\\Desktop\\index.html";
+//        dashboardFilePath = "C:\\Users\\farm\\Desktop\\dashboard.html";
+
+        // Compare number of PASSED tests
+        int index = HtmlReportingToolParser.numberOfPassedTestsInIndex(indexFilePath);
+        int dashboard = HtmlReportingToolParser.numberOfPassedTestsInDashboard(dashboardFilePath);
+        Assert.assertEquals(index, dashboard, String.format("Number of PASSED tests is not identical in '%s' and in '%s'!", indexFilePath, dashboardFilePath));
+
+        // Compare number of FAILED tests
+        index = HtmlReportingToolParser.numberOfFailedTestsInIndex(indexFilePath);
+        dashboard = HtmlReportingToolParser.numberOfFailedTestsInDashboard(dashboardFilePath);
+        Assert.assertEquals(index, dashboard, String.format("Number of FAILED tests is not identical in '%s' and in '%s'!", indexFilePath, dashboardFilePath));
+
+        // Compare number of SKIPPED tests
+//        index = HtmlReportingToolParser.numberOfSkippedTestsInIndex(indexFilePath);
+//        dashboard = HtmlReportingToolParser.numberOfSkippedTestsInDashboard(dashboardFilePath);
+//        Assert.assertEquals(index, dashboard, String.format("Number of SKIPPED tests is not identical in '%s' and in '%s'!", indexFilePath, dashboardFilePath));
     }
 }

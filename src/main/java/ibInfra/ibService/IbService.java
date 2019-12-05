@@ -413,7 +413,7 @@ public class IbService implements IIBService {
             Charset charset = StandardCharsets.UTF_8;
             String content = new String(Files.readAllBytes(path), charset);
             String oldString = "\\\\192.168.10.15\\share\\Automation\\Screenshots\\";
-            content = content.replace(oldString, "/public/screenshots/");
+            content = content.replace(oldString, "http://release-manager:1003/Screenshots/");
             Files.write(path, content.getBytes(charset));
             test.log(Status.INFO, "Screenshot path is updated for the file: " + file);
         }catch(IOException e){

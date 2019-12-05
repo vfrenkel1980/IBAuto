@@ -70,30 +70,30 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS Prospero 0.830 - 2017 Sample 1 release - build", groups = {"Build"})
-    public void psProspero0830_2017Sample1ReleaseBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0830);
+    @Test(testName = "PS Prospero 0.900 - 2017 Sample 1 release - build", groups = {"Build"})
+    public void psProspero0900_2017Sample1ReleaseBuild() {
+        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
         int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE1_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS Prospero 0.830 - 2017 Sample 2 debug - build", groups = {"Build"})
-    public void psProspero0830_2017Sample2DebugBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0830);
+    @Test(testName = "PS Prospero 0.900 - 2017 Sample 2 debug - build", groups = {"Build"})
+    public void psProspero0900_2017Sample2DebugBuild() {
+        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
         int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE2_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS Prospero 0.830 - 2017 Sample 3 release - build", groups = {"Build"})
-    public void psProspero0830_Sample3ReleaseBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0830);
+    @Test(testName = "PS Prospero 0.900 - 2017 Sample 3 release - build", groups = {"Build"})
+    public void psProspero0900_Sample3ReleaseBuild() {
+        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
         int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE3_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS Prospero 0.830 - 2017 Sample 4 debug - build", groups = {"Build"})
-    public void psProspero0830Sample4DebugBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0830);
+    @Test(testName = "PS Prospero 0.900 - 2017 Sample 4 debug - build", groups = {"Build"})
+    public void psProspero0900Sample4DebugBuild() {
+        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
         int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE4_DEBUG, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
@@ -203,7 +203,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     /*-------------------------------------METHODS---------------------------------------------------------------*/
-    public void changePSSDKVersionTo(String SDKVersion) {
+    private void changePSSDKVersionTo(String SDKVersion) {
         winService.runCommandWaitForFinish(winService.changeCurDirTo(OrbisSDK.SDK_INSTALLER_FOLDER) + String.format(OrbisSDK.SWITCH_PS_SDK, SDKVersion));
     }
 
