@@ -2,4 +2,3 @@ WindowsInstaller-KB893803-v2-x86.exe
 vc2017_redist.x86.exe
 vc9crt_x86.exe
 install.exe
-ib_nuget.exe
