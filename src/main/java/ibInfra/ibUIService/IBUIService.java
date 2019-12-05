@@ -192,9 +192,15 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void selectUninstall() throws FindFailed {
+        public void selectUninstall()  {
             test.log(Status.INFO, "Selecting uninstall");
-            screen.wait(IBInstaller.UninstallRB.similar((float) 0.7), 5).click();
+            try {
+                screen.wait(IBInstaller.UninstallRB.similar((float) 0.7), 300).click();
+            }
+            catch (FindFailed findFailed){
+                test.log(Status.WARNING, "Uninstall fail: " + findFailed.getMessage());
+                Assert.fail();
+                }
         }
 
         @Override
