@@ -50,14 +50,11 @@ public class ReleaseTestBase extends TestBase {
         }
     }
 
-    /**
-     * @todo fix delete regkey on remote helper vm
-     */
     @AfterSuite
     public void deleteTrialLicenseRegKey() {
         RegistryService.deleteRegKey(HKEY_CLASSES_ROOT,"WOW6432Node\\Interface",RegistryKeys.GUID);
         String output = winService.runCommandGetOutput(Processes.PSEXEC + " \\\\" + WindowsMachines.LICENSE_HLPR_NAME +
-                " -u admin -p 4illumination -i 0 reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\{F7F636FF-0846-4E64-86F5-25C44E871D90} /f");
+                " -u admin -p 4illumination -i 0 reg delete HKEY_CLASSES_ROOT\\WOW6432Node\\Interface\\" + RegistryKeys.GUID + " /f");
         test.log(Status.INFO, output);
     }
 }
