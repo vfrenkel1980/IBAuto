@@ -45,12 +45,12 @@ public class VSIntegrationTestBase extends TestBase {
     }
 
     @BeforeSuite
-    public void beforeSuite(){
+    public void beforeSuite() {
         test = extent.createTest("Before Suite");
         ibService.updateIB(IB_VERSION);
         ibService.disableVsMonitor();
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_VSBUILD_OUTPUT, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.SAVE_VSBUILD_OUTPUT, "1");
     }
 
     /**
@@ -99,25 +99,24 @@ public class VSIntegrationTestBase extends TestBase {
                     projectName = "vc16project";
                     break;
             }
-            if(Integer.parseInt(VCVersion)<=15){
+            if (Integer.parseInt(VCVersion) <= 15) {
                 vsuiService = new VSUIService();
-            }else{
+            } else {
                 vsuiService = new VS16UIService();
             }
             vsuiService.openVSInstance(VCVersion, false, "");
             vsuiService.openProject(projectPath);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
-        }
-        finally {
+        } finally {
             extent.flush();
         }
     }
 
     @BeforeMethod
     @Parameters({"VCVersion"})
-    public void beforeMethod(Method method, ITestContext context, String VCVersion){
+    public void beforeMethod(Method method, ITestContext context, String VCVersion) {
         test = extent.createTest(method.getName());
         test.log(Status.INFO, method.getName() + " test started");
         test.assignCategory("VC" + VCVersion);
@@ -125,12 +124,12 @@ public class VSIntegrationTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         extent.flush();
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         vsuiService.killDriver();
         extent.flush();
     }

@@ -209,7 +209,7 @@ public class UIValidationTestBase extends TestBase {
         }
         if (project.contains("white")){
             winService.runCommandDontWaitForTermination(command);
-            SystemActions.sleep(20);
+            SystemActions.sleep(12);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.sleep(5);
         }else {
