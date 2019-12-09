@@ -28,7 +28,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.openProject(projectLocation);
             if (project.contains("white")) {
                 vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-                SystemActions.sleep(10);
+                SystemActions.sleep(12);
                 vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
@@ -55,7 +55,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.openProject(projectLocation);
             if (project.contains("white")) {
                 vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-                SystemActions.sleep(10);
+                SystemActions.sleep(12);
                 vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
@@ -83,7 +83,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.openProject(projectLocation);
             if (project.contains("white")) {
                 vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-                SystemActions.sleep(10);
+                SystemActions.sleep(12);
                 vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
