@@ -60,7 +60,7 @@ public class UnitTests {
     protected IBUIService.Client client = ibuiService.new Client();
 
 
-    @Test(testName = "test1")
+    @Test(testName = "test2")
     public void test() {
         winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
         client.changeCpuUtilCores();
@@ -68,6 +68,7 @@ public class UnitTests {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.FORCE_CPU_INITIATOR, "0");
         ibService.agentServiceStop();
         ibService.agentServiceStart();
+
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
 
