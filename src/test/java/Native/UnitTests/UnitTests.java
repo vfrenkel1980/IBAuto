@@ -72,14 +72,8 @@ public class UnitTests {
     }
 
 
-    protected void killDriver(){
-        if (webDriver != null) {
-            webDriver.quit();
-            eventWebDriver.quit();
-            eventWebDriver.unregister(handler);
-            webDriver = null;
-        }
-    }
+
+
 }
 
 
