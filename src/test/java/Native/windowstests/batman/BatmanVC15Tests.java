@@ -98,13 +98,14 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Ignore
     @Test(testName = "Chrome release - build" , groups = { "Build" })
     public void chromeReleaseBuild(){
         if (testName.equals("Minimal")){
             test.log(Status.SKIP, "Skipping Chrome test on Minimal logging");
             throw new SkipException("Skipped test");
         }
-        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN_PERFORMANCE);
+        winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_CLEAN);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.CHROME_BATMAN.CHROME_RELEASE_BUILD);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
