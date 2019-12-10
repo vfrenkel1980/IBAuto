@@ -5,7 +5,6 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.xml.sax.SAXException;
@@ -24,7 +23,7 @@ public class LicensingMiscTests extends LicensingTestBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
         SystemActions.sleep(5);
         int exitStatus = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CPP);
         if (returncode + exitStatus == 0) {
@@ -45,9 +44,9 @@ public class LicensingMiscTests extends LicensingTestBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
-        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/deallocatePackages=\"VC678 Yearly\"");
+        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/deallocatePackages=\"C# Yearly\"");
         winService.restartService(WindowsServices.COORD_SERVICE);
         SystemActions.sleep(5);
         int exitStatus = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + Locations.LICENSE_TEST_PROJECTS + LicTestPrjBuildConsoleCommands.VS2017_CPP);
@@ -68,9 +67,9 @@ public class LicensingMiscTests extends LicensingTestBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
-        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"VC678 Yearly\"");
-        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/deallocatePackages=\"C# Yearly\"");
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/deallocatePackages=\"VC678 Yearly\"");
+        returncode += winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/deallocatePackages=\"C# Yearly\"");
         ibService.unloadIbLicense();
         SystemActions.sleep(5);
         ibService.loadIbLicense(IbLicenses.VALID_LIC);
@@ -93,7 +92,7 @@ public class LicensingMiscTests extends LicensingTestBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        int returncode = winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
         SystemActions.sleep(5);
         ibService.loadIbLicense(IbLicenses.VALID_LIC);
         SystemActions.sleep(5);

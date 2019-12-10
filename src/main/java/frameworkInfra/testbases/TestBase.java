@@ -59,7 +59,7 @@ public class TestBase {
         SystemActions.deleteFilesByPrefix(System.getProperty("user.dir") + "", "*log.out");
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
-        SystemActions.deleteFilesOlderThanX("\\\\192.168.10.15\\share\\Automation\\Screenshots\\", 30);
+        SystemActions.deleteFilesOlderThanX("\\\\192.168.10.15\\share\\Automation\\Screenshots\\", 15);
 
         //copy latest extent report to backup folder
         SystemActions.copyFilesByExtension(Locations.WORKSPACE_REPORTS, Locations.QA_ROOT + "\\Logs\\Automation HTML Reports", ".html", false);

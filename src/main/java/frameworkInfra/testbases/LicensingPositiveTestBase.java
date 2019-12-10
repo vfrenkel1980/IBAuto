@@ -6,7 +6,6 @@ import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.dataObjects.ibObjects.IbCoordMonAgent;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -61,7 +60,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;
@@ -70,7 +69,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 scenarioDescription = "Valid trial license with all packages";
                 ibService.loadIbLicense(trialLicenseFile);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;
@@ -79,7 +78,7 @@ public class LicensingPositiveTestBase extends ReleaseTestBase{
                 scenarioDescription = "Valid license with all packages";
                 ibService.loadIbLicense(IbLicenses.VALID_OFFLINE_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
                 break;

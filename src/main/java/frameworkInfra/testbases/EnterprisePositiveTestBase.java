@@ -25,7 +25,7 @@ public class EnterprisePositiveTestBase extends EnterpriseTestBase {
         ibService.installIB(IB_VERSION,IbLicenses.DASHBOARD_LIC);
         ibService.upgradeToEnt();
         SystemActions.sleep(10);
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
         SystemActions.sleep(10);
         IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
         try {

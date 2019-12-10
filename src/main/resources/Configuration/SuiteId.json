@@ -15,6 +15,13 @@
   "VSPreview": "14",
   "WebRegression": "15",
   "DBSchemas": "16",
-  "AlfredSim": "17"
+  "AlfredSim": "17",
+  "Babylon": "18",
+  "CoordMonitor": "19",
+  "AzurePerformance": "20",
+  "Enterprise": "21",
+  "ENWebRegression": "22",
+  "JPWebRegression": "23",
+  "Phoenix": "24"
 
 }

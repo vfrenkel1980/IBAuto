@@ -35,14 +35,14 @@ public class EnterpriseNegativeTests extends EnterpriseNegativeTestBase {
      */
     @Test(testName = "Verify Xgcoordconsole Unsubscribe Feature")
     public void verifyXgcoordconsoleUnsubscribeFeature() {
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
-        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/allocatePackages=\"4Cores\"");
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll /Agents=" + WindowsMachines.DASHBORD_HELPER);
+        winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/allocatePackages=\"4Cores\" /Agents=" + WindowsMachines.DASHBORD_HELPER);
         String output = winService.runCommandGetOutput(IbLocations.XGCOORDCONSOLE + " /unsubscribe=" + WindowsMachines.DASHBORD_HELPER);
         boolean subscribeAgentStatus = true;
         try {
             subscribeAgentStatus = coordMonitor.getAgentSubscribeStatus(WindowsMachines.DASHBORD_HELPER);
-            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/SubscribeAll");
-            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/Subscribe /Agents=" + WindowsMachines.DASHBORD_HELPER);
+            winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll /Agents=" + WindowsMachines.DASHBORD_HELPER);
             SystemActions.sleep(10);
         } catch (IOException e) {
             e.printStackTrace();

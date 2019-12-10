@@ -64,7 +64,7 @@ public class LicensingTestBase extends ReleaseTestBase {
                 test.log(Status.INFO, "2");
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 try {
                     coordMonitor.waitForAgentIsUpdated(WindowsMachines.LICENSE_HLPR_NAME);
@@ -78,25 +78,25 @@ public class LicensingTestBase extends ReleaseTestBase {
                 scenarioDescription = "No packages aside from agent package";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/DeallocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/DeallocateAll");
                 SystemActions.sleep(10);
                 break;
             case ("4"): //License Loaded and Agent Unsubscribed
                 scenarioDescription = "License Loaded and Agent Unsubscribed";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/Unsubscribe");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/Unsubscribe");
                 SystemActions.sleep(10);
                 break;
             case ("5"): //Temp License is Expired
                 scenarioDescription = "Temp License is Expired";
                 ibService.loadIbLicense(IbLicenses.VALID_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 SystemActions.addPeriodToSystemTime(0, 0, 5);
                 SystemActions.sleep(20);
@@ -106,7 +106,7 @@ public class LicensingTestBase extends ReleaseTestBase {
                 scenarioDescription = "All Allocated Packages are temporary and expired";
                 ibService.loadIbLicense(IbLicenses.EXPIRED_SOLUTIONS_LIC);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 break;
             case ("7"): //Expired license loading
@@ -120,7 +120,7 @@ public class LicensingTestBase extends ReleaseTestBase {
                 scenarioDescription = "Trial License is Expired";
                 ibService.loadIbLicense(trialLicenseFile);
                 SystemActions.sleep(10);
-                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE + "/AllocateAll");
+                winService.runCommandWaitForFinish(IbLocations.XGCOORDCONSOLE_USEFILE + "/AllocateAll");
                 SystemActions.sleep(10);
                 SystemActions.addPeriodToSystemTime(0, 5, 0);
                 SystemActions.sleep(20);
