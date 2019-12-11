@@ -153,7 +153,7 @@ public class StaticDataProvider {
         public static final String PSLIST = Locations.QA_ROOT + "\\Tools\\PStools\\PsList.exe";
         public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
         public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
-        public static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\\bin\\nunit-console.exe";
+        private static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\\bin\\nunit-console.exe";
     }
 
     public static class WindowsServices {
@@ -225,9 +225,9 @@ public class StaticDataProvider {
             public static final String RUBY_24 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.4\\run.bat";
             public static final String RUBY_25 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.5\\run.bat";
             public static final String RUBY_26 = Locations.QA_ROOT + "\\projects\\Misc\\ruby_2.6\\run.bat";
-            public static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\" ";
+            private static final String XG_CONSOLE_SAMPLE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample\" ";
             public static final String XG_CONSOLE_SAMPLE_LONG = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\DummySubProcess.exe 300 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\profile.xml\" /title=\"XG Console Sample Long\"";
-            public static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
+            private static final String IB_CONSOLE_FAILEDBUILD = IbLocations.IBCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\MainProcess.exe 30 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\prof.xml\" /title=\"IB Console Failed build\"";
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
@@ -632,12 +632,13 @@ public class StaticDataProvider {
             public static final String CTEST = "cmd /c cd " + Locations.QA_ROOT + "\\Testing\\google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String MS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\mstest-master\\runner\\runner.bat\" /test=mstest /title=\"MS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST_ANY_OS = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String XUNIT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\xunit-master\\runner\\test1.bat\" /test=xunit /title=\"XUNIT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             // NUNIT3
             public static final String NUNIT3_CONSOLE_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Release\\net35\\nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_1DLL_TEST = "nunit3-console.exe C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\\nunit3-console.tests.dll";
-            public static final String NUNIT3_FAIL_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
+            private static final String NUNIT3_FAIL_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\nunit.framework.tests.dll\" /testlevel=10";
             public static final String NUNIT3_CONSOLE_TESTLEVEL_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=10";
             public static final String NUNIT3_CONSOLE_TESTLEVEL_DEEP_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /testlevel=deep";
             public static final String NUNIT3_CONSOLE_SEED_FLAG_TEST = NUNIT3_CONSOLE_1DLL_TEST + " --seed=12354";
@@ -657,7 +658,7 @@ public class StaticDataProvider {
             public static final String NUNIT3_CONSOLE_TARGETDIR_TEST = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\nunit-console-master\\bin\\Debug\\net35\" nunit3-console.tests.dll nunit3-console.tests.dll";
             public static final String NUNIT3_CONSOLE_LOGFILE_TEST = NUNIT3_CONSOLE_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String NUNIT3_SLOW_TEST = "nunit3-console.exe \"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\net40\\slow-nunit-tests-1.dll\"";
-            public static final String NUNIT3_SLOW_TEST_TARGETDIR = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
+            private static final String NUNIT3_SLOW_TEST_TARGETDIR = "nunit3-console.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\" net40\\slow-nunit-tests-1.dll";
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TEST = NUNIT3_SLOW_TEST + " --testlist=\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\testlist.txt\"";
             public static final String NUNIT3_SLOW_TESTLIST_FLAG_TARGETDIR_TEST = NUNIT3_SLOW_TEST_TARGETDIR + " --testlist=testlist.txt";
             public static final String NUNIT3_SLOW_FILE_FLAG_TEST = NUNIT3_SLOW_TEST + " @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
@@ -671,11 +672,11 @@ public class StaticDataProvider {
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep /noshadow";
             public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
             public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
-            public static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";
+            private static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_NAMESPACES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests,NUnit.Framework.Syntax";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_FIXTURES_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Tests.RandomizerTests,NUnit.Framework.Tests,NUnit.Framework.Syntax.AndTest";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST = NUNIT2_FRAMEWORK_1DLL_RUN + "NUnit.Framework.Constraints.SameAsTest.FailsWithBadValues,NUnit.Framework.Tests.RangeTests.InRangeSucceeds";
-            public static final String NUNIT2_FRAMEWORK_1DLL_RUNLIST = NUNIT2_FRAMEWORK_1DLL_TEST + " /runlist=";
+            private static final String NUNIT2_FRAMEWORK_1DLL_RUNLIST = NUNIT2_FRAMEWORK_1DLL_TEST + " /runlist=";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_RUNlIST_TEST = NUNIT2_FRAMEWORK_1DLL_RUNLIST + "C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\TestsList.txt";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_CONFIG_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /config=release";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_FRAMEWORK_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /framework=v4.0";
