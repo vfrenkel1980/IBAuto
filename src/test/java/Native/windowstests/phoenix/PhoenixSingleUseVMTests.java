@@ -6,8 +6,13 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
+import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
@@ -19,6 +24,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
  * etc...
  */
 public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
     /**
      * @test SingleUse VM sanity e2e workflow test.<br>
      * @pre{ }
@@ -53,6 +59,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     @Test(testName = "SingleUse VM Auto Assign Disabled Test")
     public void singleUseVMAutoAssignDisabledTest() {
         autoSubscribeSUVM("0");
+        SystemActions.sleep(5);
         setUp();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
         autoSubscribeSUVM("1");
@@ -207,7 +214,15 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     public void exportCoordMon() {
-        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + "xgcoordconsole /exportstatus=\"\\\\PHOENIX\\c$\\QA\\Simulation\\coordmon.xml\"");
+        try {
+            winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + coordMonitor.exportCoordMonitorDataToXML("\\\\PHOENIX\\c$\\QA\\Simulation\\","coordmon.xml\""));
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getIbatRegKey() {
