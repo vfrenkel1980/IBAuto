@@ -215,7 +215,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
 
     public void exportCoordMon() {
         try {
-            winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + coordMonitor.exportCoordMonitorDataToXML("\\\\PHOENIX\\c$\\QA\\Simulation\\","coordmon.xml\""));
+            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT,"coordmon.xml");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
