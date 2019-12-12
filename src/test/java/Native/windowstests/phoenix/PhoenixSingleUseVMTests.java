@@ -214,16 +214,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     }
 
     public void exportCoordMon() {
-        try {
-            coordMonitor.exportCoordMonitorDataToXML(Locations.QA_ROOT,"\\coordmon.xml");
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-        //winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + Processes.XGCOORDCONSOLE+" /exportstatus=\"\\\\PHOENIX\\c$\\QA\\Simulation\\coordmon.xml\"");
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + Processes.XGCOORDCONSOLE+" /exportstatus=\"\\\\PHOENIX\\c$\\QA\\Simulation\\coordmon.xml\"");
     }
 
     public String getIbatRegKey() {

@@ -721,6 +721,7 @@ public class StaticDataProvider {
         public static final String LOCAL_LOGGING = "ExternalHelperLog";
         public static final String STANDALONE_MODE = "Standalone";
         public static final String AVOID_LOCAL = "AvoidLocalExec";
+        public static final String RESTART_ON_LOCAL = "AllowDoubleTargets";
         public static final String LOGGING_LEVEL = "Level";
         public static final String VERSION = "Version";
         public static final String SAVE_BUILD_PACKET = "SaveBuildPacket";

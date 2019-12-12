@@ -63,6 +63,7 @@ public class SingleUseVMTestBase extends TestBase {
         Assert.assertTrue(exit == 0, "Single-use  incrediBuild installation failed");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.STANDALONE_MODE, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.AVOID_LOCAL, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.RESTART_ON_LOCAL, "0");
     }
 
     @AfterMethod
