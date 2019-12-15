@@ -46,6 +46,9 @@ public class IncrediCloudService implements IIncrediCloudService{
             case "aws":
                 RestAssured.baseURI = "https://incredicloudapim-aws.azure-api.net";
                 break;
+            case "dev":
+                RestAssured.baseURI = "https://incredicloudapigwdev.azure-api.net";
+                break;
         }
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -63,6 +66,9 @@ public class IncrediCloudService implements IIncrediCloudService{
 
         jsonAsMap.put("coordId", coordId);
         jsonAsMap.put("secret", secret);
+        System.out.println("---------- Secret: ----------");
+        System.out.println(secret);
+        System.out.println("-----------------------------");
         token = given().
                 body(jsonAsMap).
         when().

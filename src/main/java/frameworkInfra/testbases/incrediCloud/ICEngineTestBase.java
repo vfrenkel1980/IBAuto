@@ -35,8 +35,10 @@ public class ICEngineTestBase extends TestBase {
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
     public static String CLOUD = System.getProperty("cloudtype");
-    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
-    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
+//    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
+//    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
+    final protected String PROD_USER = "rivki@incredicloudcs.onmicrosoft.com";
+    final protected String LIMITED_USER = "rivki@incredicloudcs.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     public int MACHINE_CORES = getMachineCores(TYPE);
@@ -45,7 +47,7 @@ public class ICEngineTestBase extends TestBase {
     final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
-    final protected int CORES_LIMIT = 100;
+    final protected int CORES_LIMIT = 60;
     final protected int COORD_PORT = 31105;
     final protected int VM_PORT = 31106;
     protected WindowsService winService = new WindowsService();
@@ -71,6 +73,7 @@ public class ICEngineTestBase extends TestBase {
     public void beforeSuite(){
         test = extent.createTest("Before Suite");
         //ibService.updateIB(IB_VERSION);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.MINIDLELEVEL, "0.02");
         switch (ENV){
             case "prod":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud.azurewebsites.net");
@@ -83,6 +86,10 @@ public class ICEngineTestBase extends TestBase {
             case "aws":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding-aws.azurewebsites.net");
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapim-aws.azure-api.net");
+                break;
+            case "dev":
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud-onboarding.azurewebsites.net");
+                RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapigwdev.azure-api.net");
                 break;
         }
     }
@@ -105,13 +112,16 @@ public class ICEngineTestBase extends TestBase {
             case "aws":
                 eventWebDriver.get("https://incredicloud-onboarding-aws.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
                 break;
+            case "dev":
+                eventWebDriver.get("https://incredicloud-onboarding.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
+                break;
         }
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         switch (CLOUD){
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
-                onboardingPage = new OnboardingPage("UK West", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
                 break;
             case "aws":

@@ -15,8 +15,8 @@ public class OnboardingPageObject {
 
     //MAPPING
     private static final By TRY_INCREDICLOUD_BUTTON = By.xpath("//button[@class='login_azure  col-sm-4 buttonTag']");
-    private static final By AZURE_CLOUD_BUTTON = By.xpath("//*[@class='icon_azure']");
-    private static final By AWS_CLOUD_BUTTON = By.xpath("//*[@class='icon_amazon']");
+    private static final By AZURE_CLOUD_BUTTON = By.xpath("//*[@class='icon-btn icon_azure']");
+    private static final By AWS_CLOUD_BUTTON = By.xpath("//*[@class='icon-btn icon_amazon']");
     private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Cloud Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
@@ -35,7 +35,8 @@ public class OnboardingPageObject {
     private static final By VM_PORT_TB = By.xpath("//*[@placeholder='VM Port Range']");
     private static final By NETWORK_PANEL = By.xpath("//mat-panel-title[text()=' Network ']");
     private static final By SAVE_BTN = By.xpath("//button[@class='save_text save_button buttonTag']");
-    private static final By ACTIVATE_BTN = By.xpath("//button[text()='Approve and Activate']");
+    private static final By ACTIVATE_BTN = By.xpath("//span[text()='Approve and Activate']");
+    private static final By LICENSE_AGREEMENT = By.xpath("//*[@id='mat-checkbox-1']");
     private static final By SETTINGS_TAB = By.xpath("//*[text()='IncrediBuild Cloud Settings']");
     private static final By DOWNLOAD_BTN = By.xpath("//*[contains(text(),'IncrediBuild Cloud for Microsoft Azure')]");
 
@@ -66,28 +67,27 @@ public class OnboardingPageObject {
         wait = new WebDriverWait(eventWebDriver, 40);
     }
 
-    public void clickTryIncredicloud(){
+    public void clickTryIncredicloud() {
         eventWebDriver.findElement(TRY_INCREDICLOUD_BUTTON).click();
-        //TODO: remove when aws is removed from envs
-        if (ENV.equals("aws")) {
-            switch (CLOUD) {
-                case "azure":
-                    eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
-                    break;
-                case "aws":
-                    eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
-                    break;
-            }
+        switch (CLOUD) {
+            case "azure":
+                eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
+                break;
+            case "aws":
+                eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
+                break;
+
         }
     }
 
     public void performOnboarding(OnboardingPage onboardingPage){
-            selectRegion(onboardingPage);
-            enterName(onboardingPage);
-            enterMail(onboardingPage);
-            enterCompany(onboardingPage);
-            enterVMDetails(onboardingPage);
-            clickSave();
+        selectSubscription();
+        selectRegion(onboardingPage);
+        enterName(onboardingPage);
+        enterMail(onboardingPage);
+        enterCompany(onboardingPage);
+        enterVMDetails(onboardingPage);
+        clickSave();
     }
 
     public void performUpdate(OnboardingPage onboardingPage){
@@ -100,10 +100,25 @@ public class OnboardingPageObject {
         wait.until(ExpectedConditions.visibilityOfElementLocated(DOWNLOAD_BTN));
     }
 
-    private void selectRegion(OnboardingPage onboardingPage){
+    private void selectSubscription() {
         SystemActions.sleep(10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test"))));
+        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test"))).click();
+    }
+
+//    private void selectRegion(OnboardingPage onboardingPage){
+//        SystemActions.sleep(10);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+//    }
+    private void selectRegion(OnboardingPage onboardingPage){
+    //        SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+    //        Actions actions = new Actions(eventWebDriver);
+    //        actions.moveToElement(eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))));
+        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))).click();
     }
 
     private void enterName(OnboardingPage onboardingPage){
@@ -141,6 +156,7 @@ public class OnboardingPageObject {
 
     private void clickSave(){
         eventWebDriver.findElement(SAVE_BTN).click();
+        eventWebDriver.findElement(LICENSE_AGREEMENT).click();
         eventWebDriver.findElement(ACTIVATE_BTN).click();
     }
 
@@ -160,20 +176,20 @@ public class OnboardingPageObject {
     public boolean validateRegion(){
 /*        switch (ENV){
             case "prod":*/
-                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
-
-                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
-/*                break;
-            case "uat":
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
+//                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "8f26139b-cd59-4045-9294-9da3caa4bfd4")))).click();
+//
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+//                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
+//                break;
+//            case "uat":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
-                break;
-        }*/
+//                break;
+//        }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
