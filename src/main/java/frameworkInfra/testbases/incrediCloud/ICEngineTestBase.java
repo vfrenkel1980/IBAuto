@@ -37,8 +37,8 @@ public class ICEngineTestBase extends TestBase {
     public static String CLOUD = System.getProperty("cloudtype");
 //    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
 //    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
-    final protected String PROD_USER = "rivki@incredicloudcs.onmicrosoft.com";
-    final protected String LIMITED_USER = "rivki@incredicloudcs.onmicrosoft.com";
+    final protected String PROD_USER = "automation@incredicloudcs.onmicrosoft.com";
+    final protected String LIMITED_USER = "automation@incredicloudcs.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
     public int MACHINE_CORES = getMachineCores(TYPE);
