@@ -373,9 +373,9 @@ public class IBUIService implements IIBUIService {
         public void openCoordMonitorFromTray() {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
-                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 5).click();
+                //screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.30), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open coordinator monitor with error: " + findFailed.getMessage());
                 Assert.fail();
