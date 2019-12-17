@@ -208,7 +208,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
         winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + IbLocations.XGCOORDCONSOLE_USEFILE +" /Subscribe");
         String ibat = getIbatRegKey();
         int time = 0;
-        while (!ibat.equals("2") || time <= 180) {
+        while (!ibat.equals("2") & time <= 180) {
             ibat = getIbatRegKey();
             int timeout = 10;
             SystemActions.sleep(timeout);
