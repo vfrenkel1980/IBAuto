@@ -44,13 +44,13 @@ public class GeneralWinTests extends BatmanBCTestBase {
     @Test(testName = "Verify Backup Coord Service Memory Usage")
     public void verifyBackupCoordServiceMemoryUsage() {
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
-        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "CoordService.exe"), "CoordService has exceeded the memory threshold");
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "CoordService.exe"), "CoordService has exceeded the memory threshold: "+output + " Expected= "+ MemoryThresholds._20K);
     }
 
     @Test(testName = "Verify Agent Service Memory Usage")
     public void verifyAgentCoordServiceMemoryUsage() {
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
-        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold");
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold: "+output + " Expected= "+ MemoryThresholds._20K);
     }
 
     @Test(testName = "Verify BuildSystem Memory Usage During Build")
@@ -59,7 +59,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         SystemActions.sleep(20);
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
         winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using");
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using: "+output + " Expected= "+ MemoryThresholds._200K);
     }
 
     @Test(testName = "Verify Multi Initiator Assignment")
