@@ -58,12 +58,17 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
      */
     @Test(testName = "SingleUse VM Auto Assign Disabled Test")
     public void singleUseVMAutoAssignDisabledTest() {
-        autoSubscribeSUVM("0");
-        SystemActions.sleep(5);
-        setUp();
-        ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
-        autoSubscribeSUVM("1");
-        Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "Packages were allocated to the Agent");
+        try {
+            autoSubscribeSUVM("0");
+            SystemActions.sleep(10);
+            setUp();
+            ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.CONSAPP_X64_RELEASE, "%s"));
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "Packages were allocated to the Agent");
+        }catch (Exception e){
+            e.getMessage();
+        }finally {
+            autoSubscribeSUVM("1");
+        }
     }
 
     /**
@@ -200,7 +205,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /*------------------------------METHODS------------------------------*/
     public void setUp() {
         ibService.agentServiceStart();
-        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + Processes.XGCOORDCONSOLE +" /Subscribe=phoenix");
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + IbLocations.XGCOORDCONSOLE_USEFILE +" /Subscribe");
         String ibat = getIbatRegKey();
         int time = 0;
         while (!ibat.equals("2") || time <= 180) {
