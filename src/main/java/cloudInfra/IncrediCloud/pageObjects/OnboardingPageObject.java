@@ -100,7 +100,7 @@ public class OnboardingPageObject {
         enterMail(onboardingPage);
         enterCompany(onboardingPage);
         enterVMDetails(onboardingPage);
-        addCustomTags(onboardingPage.getCustomTags());:q
+        addCustomTags(onboardingPage.getCustomTags());
         clickSave();
     }
 
