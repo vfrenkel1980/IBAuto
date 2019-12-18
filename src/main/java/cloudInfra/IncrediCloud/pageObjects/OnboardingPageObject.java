@@ -3,10 +3,16 @@ package cloudInfra.IncrediCloud.pageObjects;
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
 import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.CLOUD;
 import static frameworkInfra.testbases.incrediCloud.ICEngineTestBase.ENV;
@@ -28,6 +34,14 @@ public class OnboardingPageObject {
     private static final By EMAIL_TB = By.xpath("//*[@placeholder='Email']");
     private static final By COMPANY_TB = By.xpath("//*[@placeholder='Company Name']");
     private static final By VMS_PANEL = By.xpath("//mat-panel-title[text()=' VMs ']");
+    //Custom tags
+    private static final By CUSTOM_TAG_KEY = By.id("tagNameInput");
+    private static final By CUSTOM_TAG_VALUE = By.id("tagValueInput");
+    private static final By CUSTOM_TAG_ADD_BTN = By.id("addTagBtn");
+    private static final By CUSTOM_TAG_REMOVE_BTN = By.className("ic-tag-chip-remove-btn");
+    private static final By CUSTOM_TAG_ADDED_TAG = By.className("ic-tag-chip");
+    private static final By CUSTOM_TAG_NO_TAG_UPDATE_MESSAGE = By.className("noTagUpdateBtn");
+
     private static final By TIMEOUT_TB = By.xpath("//*[@placeholder='VM Idle Timeout (seconds)']");
     private static final By CORES_LIMIT_TB = By.xpath("//*[@placeholder='Total Cores Limit']");
     private static final By POOL_SIZE_TB = By.xpath("//*[@placeholder='No. of VMs in Pool']");
@@ -58,7 +72,6 @@ public class OnboardingPageObject {
     private static final By DIFFERENT_USER_UPDATE_MESSAGE = By.xpath("//*[contains(text(),'please refer to the user to do any change in coordinator settings')]");
 
 
-
     private static EventFiringWebDriver eventWebDriver;
     private WebDriverWait wait;
 
@@ -80,23 +93,24 @@ public class OnboardingPageObject {
         }
     }
 
-    public void performOnboarding(OnboardingPage onboardingPage){
+    public void performOnboarding(OnboardingPage onboardingPage) {
         selectSubscription();
         selectRegion(onboardingPage);
         enterName(onboardingPage);
         enterMail(onboardingPage);
         enterCompany(onboardingPage);
         enterVMDetails(onboardingPage);
+        addCustomTags(onboardingPage.getCustomTags());:q
         clickSave();
     }
 
-    public void performUpdate(OnboardingPage onboardingPage){
+    public void performUpdate(OnboardingPage onboardingPage) {
         updateVmDetails(onboardingPage);
         clickSave();
         waitForUpdateToFinish();
     }
 
-    private void waitForUpdateToFinish(){
+    private void waitForUpdateToFinish() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(DOWNLOAD_BTN));
     }
 
@@ -104,37 +118,41 @@ public class OnboardingPageObject {
         SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test"))));
-        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test"))).click();
+
+        WebElement sub = eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test")));
+        Actions actions = new Actions(eventWebDriver);
+        actions.moveToElement(sub).click().perform();
+//        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test"))).click();
     }
 
-//    private void selectRegion(OnboardingPage onboardingPage){
+    //    private void selectRegion(OnboardingPage onboardingPage){
 //        SystemActions.sleep(10);
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
 //        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
 //    }
-    private void selectRegion(OnboardingPage onboardingPage){
-    //        SystemActions.sleep(10);
+    private void selectRegion(OnboardingPage onboardingPage) {
+        //        SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-    //        Actions actions = new Actions(eventWebDriver);
-    //        actions.moveToElement(eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
+        //        Actions actions = new Actions(eventWebDriver);
+        //        actions.moveToElement(eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))));
         eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))).click();
     }
 
-    private void enterName(OnboardingPage onboardingPage){
+    private void enterName(OnboardingPage onboardingPage) {
         eventWebDriver.findElement(FIRST_NAME_TB).sendKeys(onboardingPage.getFirstName());
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys(onboardingPage.getLastName());
     }
 
-    private void enterMail(OnboardingPage onboardingPage){
+    private void enterMail(OnboardingPage onboardingPage) {
         eventWebDriver.findElement(EMAIL_TB).sendKeys(onboardingPage.getEmail());
     }
 
-    private void enterCompany(OnboardingPage onboardingPage){
+    private void enterCompany(OnboardingPage onboardingPage) {
         eventWebDriver.findElement(COMPANY_TB).sendKeys(onboardingPage.getCompany());
     }
 
-    private void enterVMDetails(OnboardingPage onboardingPage){
+    private void enterVMDetails(OnboardingPage onboardingPage) {
         wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
@@ -145,7 +163,22 @@ public class OnboardingPageObject {
         eventWebDriver.findElement(POOL_SIZE_TB).sendKeys(String.valueOf(onboardingPage.getPoolSize()));
     }
 
-    private void updateVmDetails(OnboardingPage onboardingPage){
+    private void addCustomTags(HashMap<String,String> customTags) {
+        Iterator it = customTags.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            addCustomTag(pair.getKey().toString(), pair.getValue().toString());
+        }
+    }
+
+    private void addCustomTag(String key, String value) {
+        eventWebDriver.findElement(CUSTOM_TAG_KEY).sendKeys(key);
+        eventWebDriver.findElement(CUSTOM_TAG_VALUE).sendKeys(value);
+        wait.until(ExpectedConditions.elementToBeClickable(CUSTOM_TAG_ADD_BTN)).click();
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(CUSTOM_TAG_ADDED_TAG));
+    }
+
+    private void updateVmDetails(OnboardingPage onboardingPage) {
         wait.until(ExpectedConditions.elementToBeClickable(TIMEOUT_TB)).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
@@ -154,26 +187,26 @@ public class OnboardingPageObject {
         eventWebDriver.findElement(POOL_SIZE_TB).sendKeys(String.valueOf(onboardingPage.getPoolSize()));
     }
 
-    private void clickSave(){
+    private void clickSave() {
         eventWebDriver.findElement(SAVE_BTN).click();
         eventWebDriver.findElement(LICENSE_AGREEMENT).click();
         eventWebDriver.findElement(ACTIVATE_BTN).click();
     }
 
-    public boolean validateTenant(){
+    public boolean validateTenant() {
         SystemActions.sleep(10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
         return eventWebDriver.findElement(TENNANT_ERROR_LBL).isDisplayed();
     }
 
-    public boolean validateSubscription(){
+    public boolean validateSubscription() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "None")))).click();
         return eventWebDriver.findElement(SUBSCRIPTION_ERROR_LBL).isDisplayed();
     }
 
-    public boolean validateRegion(){
+    public boolean validateRegion() {
 /*        switch (ENV){
             case "prod":*/
 //                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
@@ -183,11 +216,11 @@ public class OnboardingPageObject {
 //                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, " Pay-As-You-Go")))).click();
 //                break;
 //            case "uat":
-                wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TENANT_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "bde8b775-ae5e-4043-bd01-ab0b17249045")))).click();
 
-                wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SUBSCRIPTION_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, "System Test")))).click();
 //                break;
 //        }
 
@@ -196,21 +229,21 @@ public class OnboardingPageObject {
         return eventWebDriver.findElement(REGION_ERROR_LBL).isDisplayed();
     }
 
-    public void validateFirstName(){
+    public void validateFirstName() {
         eventWebDriver.findElement(FIRST_NAME_TB).sendKeys("1234");
         Assert.assertTrue(eventWebDriver.findElement(FIRST_NAME_TB).getText().isEmpty(), "Digits are not allowed in the First name field");
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(FNAME_ERROR_LBL).isDisplayed(), "Failed to locate First name error message");
     }
 
-    public void validateLastName(){
+    public void validateLastName() {
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys("1234");
         Assert.assertTrue(eventWebDriver.findElement(LAST_NAME_TB).getText().isEmpty(), "Digits are not allowed in the First name field");
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(LNAME_ERROR_LBL).isDisplayed(), "Failed to locate Last name error message");
     }
 
-    public void validateEmail(){
+    public void validateEmail() {
         eventWebDriver.findElement(EMAIL_TB).click();
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(EMAIL_ERROR_LBL).isDisplayed(), "Failed to locate missing Email error message");
@@ -219,13 +252,13 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(INVALID_EMAIL_ERROR_LBL).isDisplayed(), "Failed to Invalid Email error message");
     }
 
-    public void validateCompany(){
+    public void validateCompany() {
         eventWebDriver.findElement(COMPANY_TB).click();
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(COMPANY_ERROR_LBL).isDisplayed(), "Failed to locate missing Company error message");
     }
 
-    public void validateTimeout(){
+    public void validateTimeout() {
         //eventWebDriver.findElement(VMS_PANEL).click();
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(SETTINGS_TAB).click();
@@ -235,7 +268,7 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(TIMEOUT_TB).getText().isEmpty(), "Letters are not allowed in the Timeout field");
     }
 
-    public void validateCoresLimit(){
+    public void validateCoresLimit() {
         eventWebDriver.findElement(CORES_LIMIT_TB).clear();
         eventWebDriver.findElement(CORES_LIMIT_TB).sendKeys("1");
         eventWebDriver.findElement(SETTINGS_TAB).click();
@@ -245,7 +278,7 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(CORES_LIMIT_TB).getText().isEmpty(), "Letters are not allowed in the Cores Limit field");
     }
 
-    public void validatePoolSize(){
+    public void validatePoolSize() {
         eventWebDriver.findElement(POOL_SIZE_TB).clear();
         eventWebDriver.findElement(POOL_SIZE_TB).sendKeys("1");
         eventWebDriver.findElement(SETTINGS_TAB).click();
@@ -255,7 +288,7 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(POOL_SIZE_TB).getText().isEmpty(), "Letters are not allowed in the Cores Limit field");
     }
 
-    public void validateCoordPort(){
+    public void validateCoordPort() {
         //eventWebDriver.findElement(NETWORK_PANEL).click();
         eventWebDriver.findElement(COORD_PORT_TB).clear();
         eventWebDriver.findElement(SETTINGS_TAB).click();
@@ -265,7 +298,7 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(COORD_PORT_TB).getText().isEmpty(), "Letters are not allowed in the Coord Port field");
     }
 
-    public void validateVmPort(){
+    public void validateVmPort() {
         eventWebDriver.findElement(VM_PORT_TB).clear();
         eventWebDriver.findElement(SETTINGS_TAB).click();
         Assert.assertTrue(eventWebDriver.findElement(VM_PORT_ERROR_LBL).isDisplayed(), "Failed to locate missing VM port error message");
@@ -274,12 +307,12 @@ public class OnboardingPageObject {
         Assert.assertTrue(eventWebDriver.findElement(VM_PORT_TB).getText().isEmpty(), "Letters are not allowed in the VM Port field");
     }
 
-    public boolean verifyQuotaLimitMessage(){
+    public boolean verifyQuotaLimitMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(QUOTA_LIMIT_MESSAGE));
         return eventWebDriver.findElement(QUOTA_LIMIT_MESSAGE).isDisplayed();
     }
 
-    public boolean verifyDifferentUserUpdateMessage(){
+    public boolean verifyDifferentUserUpdateMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(DIFFERENT_USER_UPDATE_MESSAGE));
         return eventWebDriver.findElement(DIFFERENT_USER_UPDATE_MESSAGE).isDisplayed();
     }
