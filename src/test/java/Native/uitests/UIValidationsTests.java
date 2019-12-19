@@ -154,6 +154,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             throw new SkipException("Skipped test");
         }
         client.openCoordMonitorFromTray();
+        SystemActions.sleep(30);
         client.verifyCoordinatorMonitorOpened();
     }
 
