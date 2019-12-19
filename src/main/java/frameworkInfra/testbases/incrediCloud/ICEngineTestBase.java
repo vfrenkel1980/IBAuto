@@ -22,6 +22,7 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
@@ -102,6 +103,8 @@ public class ICEngineTestBase extends TestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
+        HashMap<String,String> customTags = new HashMap();
+        customTags.put("team", "RnD");
         switch (ENV){
             case "prod":
                 eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
@@ -122,13 +125,13 @@ public class ICEngineTestBase extends TestBase {
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT);
+                        COORD_PORT, VM_PORT, customTags);
                 break;
             case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
                 //TODO: change to AWS values
                 onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT);
+                        COORD_PORT, VM_PORT, customTags);
         }
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
 

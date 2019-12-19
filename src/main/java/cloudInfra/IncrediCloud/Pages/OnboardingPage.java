@@ -1,5 +1,7 @@
 package cloudInfra.IncrediCloud.Pages;
 
+import java.util.HashMap;
+
 public class OnboardingPage {
 
     private String region;
@@ -13,8 +15,9 @@ public class OnboardingPage {
     private int poolSize;
     private int coordPort;
     private int vmPort;
+    private HashMap<String,String> customTags;
 
-    public OnboardingPage(String region, String firstName, String lastName, String email, String company,String machineType, int timeout, int coresLimit, int poolSize, int coordPort, int vmPort) {
+    public OnboardingPage(String region, String firstName, String lastName, String email, String company, String machineType, int timeout, int coresLimit, int poolSize, int coordPort, int vmPort, HashMap<String,String> customTags) {
         this.region = region;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,6 +29,7 @@ public class OnboardingPage {
         this.poolSize = poolSize;
         this.coordPort = coordPort;
         this.vmPort = vmPort;
+        this.customTags = customTags;
     }
 
     public String getRegion() {
@@ -70,6 +74,10 @@ public class OnboardingPage {
 
     public int getVmPort() {
         return vmPort;
+    }
+
+    public HashMap getCustomTags() {
+        return customTags;
     }
 }
 

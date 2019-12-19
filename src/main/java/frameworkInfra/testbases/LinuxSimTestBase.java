@@ -131,9 +131,12 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testName = getTestName(method);
         test = extent.createTest(testName);
         test.assignCategory("Linux Simulation - Cycle " + cycle);
-        test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.log(Status.INFO, method.getName() + " test started");
         log.info("Linux Simulation - Cycle " + cycle + "; Test name: " + testName);
+        if (cycle.equals("21") || cycle.equals("22")){
+            LinuxTestBase.LINUXCLFLAGS = ("-f");
+            log.info("For performance, Cycle" + cycle + " is without -d, only flags are: " + LINUXCLFLAGS);
+        }
     }
 
     @AfterSuite
