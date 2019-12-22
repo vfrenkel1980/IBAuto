@@ -1,7 +1,9 @@
 package ibInfra.ibExecs;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import ibInfra.ibExecs.metadata.CoordinatorStatus;
 import ibInfra.windowscl.IWindowsService;
 import ibInfra.windowscl.WindowsService;
 import org.w3c.dom.Document;
@@ -15,16 +17,65 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class IIBCoordMonitor implements ibCoordMonitor {
+import ibInfra.ibExecs.metadata.Agent;
 
+public class IIBCoordMonitor {
     private static final long DELAY_FOR_AGENT_UPDATE_MIN = 10L;
     IWindowsService winService = new WindowsService();
 
-    @Override
-    public Document exportCoordMonitorDataToXML(String pathToFile, String filename) throws ParserConfigurationException, IOException, SAXException {
+    public CoordinatorStatus retrieveCoordMonitorDataFromXmlFile(String coordinatorXmlFilePath) throws Exception {
+        int errorCode = winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/exportstatus=\"" + coordinatorXmlFilePath + "\"");
+        if (errorCode != 0) {
+            throw new Exception("Failed to export Coordinator Monitor XML with xgCoordConsole command");
+        }
 
+        XmlMapper xmlMapper = null;
+        String readContent = "";
+        try {
+            xmlMapper = new XmlMapper();
+            readContent = new String(Files.readAllBytes(Paths.get(coordinatorXmlFilePath)));
+        } catch (IOException e) {
+            throw new Exception("Failed to read from Xml coordinator file! Error: " + e.getMessage());
+        }
+
+        CoordinatorStatus coordinatorMetadata;
+        try {
+            coordinatorMetadata = xmlMapper.readValue(readContent, CoordinatorStatus.class);
+        } catch (IOException e) {
+            throw new Exception("Failed to extract Xml coordinator file to an object! Error: " + e.getMessage());
+        }
+
+        return coordinatorMetadata;
+    }
+
+    public String getBuildGroup(CoordinatorStatus coordinatorMonitorData, String hostName) throws Exception {
+        Iterator it = coordinatorMonitorData.getAgents().iterator();
+        while (it.hasNext()) {
+            Agent agent = (Agent) it.next();
+            if ((agent).getHost().toLowerCase().equals(hostName.toLowerCase()))
+                return agent.getBuildGroup();
+        }
+        throw new Exception(String.format("Host '%s': No data could not be retrieved from Coordinator monitor!", hostName));
+    }
+
+    public ArrayList<Agent> getAgentsByBuildGroup(CoordinatorStatus coordinatorMonitorData, String buildGroupName) {
+        ArrayList<Agent> agents = new ArrayList<>();
+        Iterator it = coordinatorMonitorData.getAgents().iterator();
+        while (it.hasNext()) {
+            Agent agent = (Agent) it.next();
+            if ((agent).getBuildGroup().toLowerCase().equals(buildGroupName.toLowerCase()))
+                agents.add(agent);
+        }
+        return agents;
+    }
+
+    public Document exportCoordMonitorDataToXML(String pathToFile, String filename) throws ParserConfigurationException, IOException, SAXException {
         String absoluteFilePath = pathToFile + filename;
         File file = new File(absoluteFilePath);
         winService.runCommandWaitForFinish(StaticDataProvider.IbLocations.XGCOORDCONSOLE + "/exportstatus=\"" + absoluteFilePath + "\"");
@@ -38,17 +89,14 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         return document;
     }
 
-    @Override
     public String getAgentVersion(String agentName) throws IOException, SAXException, ParserConfigurationException {
         return getAgentAttribute(agentName, "Version");
     }
 
-    @Override
     public String getAgentStatus(String agentName) throws IOException, SAXException, ParserConfigurationException {
         return getAgentAttribute(agentName, "Online");
     }
 
-    @Override
     public boolean getAgentSubscribeStatus(String agentName) throws IOException, SAXException, ParserConfigurationException {
         String subscribeStatus = getAgentAttribute(agentName, "Subscribed");
         boolean subscribed = false;
@@ -56,7 +104,6 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         return subscribed;
     }
 
-    @Override
     public String getAgentOSVersion(String agentName) throws IOException, SAXException, ParserConfigurationException {
         String osVersion = getAgentAttribute(agentName, "OSVersion").toLowerCase();
         if (osVersion.contains("windows 10") || osVersion.contains("windows server 2016")) {
@@ -81,8 +128,6 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         return osVersion;
     }
 
-
-    @Override
     public String getAgentAttribute(String agentName, String attribute) throws IOException, SAXException, ParserConfigurationException {
         String timestamp = String.valueOf(System.currentTimeMillis());
         String absolutePathToFile = winService.getWindowsTEMPfolder() + timestamp + ".xml";
@@ -105,11 +150,10 @@ public class IIBCoordMonitor implements ibCoordMonitor {
         return res;
     }
 
-    @Override
     public void waitForAgentIsUpdated(String agentName) throws ParserConfigurationException, SAXException, IOException {
         final LocalTime start = LocalTime.now();
         final String coordAgent = winService.getHostName();
-        final String localVer  = getAgentVersion(coordAgent);
+        final String localVer = getAgentVersion(coordAgent);
         String remoteVer;
         String remoteStatus;
         do {
@@ -120,7 +164,6 @@ public class IIBCoordMonitor implements ibCoordMonitor {
                 (!localVer.equals(remoteVer) | !remoteStatus.equals("True")));
     }
 
-    @Override
     public boolean checkIfAgentIsHelper(String initiatorName, String agentName) throws IOException, SAXException, ParserConfigurationException {
         SystemActions.sleep(1);
         String timestamp = String.valueOf(System.currentTimeMillis());

@@ -30,13 +30,15 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.testbases.TestBase.log;
 
 public class SystemActions {
+    private static final String GET_NUMBER = "\\d+";
 
     /**
      * delete all files in folder with a predefined prefix
-     * @param path the path that we want to delete the files
+     *
+     * @param path       the path that we want to delete the files
      * @param filePrefix the prefix for the files to be deleted
      */
-    public static void deleteFilesByPrefix(String path, String filePrefix){
+    public static void deleteFilesByPrefix(String path, String filePrefix) {
         try (DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(Paths.get(path), filePrefix + "*")) {
             for (final Path newDirectoryStreamItem : newDirectoryStream) {
                 Files.delete(newDirectoryStreamItem);
@@ -46,7 +48,7 @@ public class SystemActions {
         }
     }
 
-    public static void deleteFolder(File path){
+    public static void deleteFolder(File path) {
         File[] allContents = path.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
@@ -58,16 +60,17 @@ public class SystemActions {
 
     /**
      * Copy all files with a predefined extension
-     * @param source source location
-     * @param destination destination to copy to
-     * @param extension file extension to be copied
+     *
+     * @param source       source location
+     * @param destination  destination to copy to
+     * @param extension    file extension to be copied
      * @param useTimeStamp should a timeStamp be created on the destination folder
      */
-    public static void copyFilesByExtension(String source, String destination, String extension, boolean useTimeStamp){
+    public static void copyFilesByExtension(String source, String destination, String extension, boolean useTimeStamp) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
 
-        File sourceLocation= new File(source);
+        File sourceLocation = new File(source);
         File targetLocation;
         if (useTimeStamp)
             targetLocation = new File(destination + formatter.format(calendar.getTime()));
@@ -83,8 +86,8 @@ public class SystemActions {
         }
     }
 
-    public static void killProcess(String process){
-        try{
+    public static void killProcess(String process) {
+        try {
             test.log(Status.INFO, "Killing process " + process);
             Runtime.getRuntime().exec("TASKKILL /F /IM " + process);
         } catch (IOException e) {
@@ -92,8 +95,8 @@ public class SystemActions {
         }
     }
 
-    public static void startProcess(String processPath){
-        try{
+    public static void startProcess(String processPath) {
+        try {
             test.log(Status.INFO, "Starting process " + processPath);
             Runtime.getRuntime().exec(processPath);
         } catch (IOException e) {
@@ -103,22 +106,23 @@ public class SystemActions {
 
     /**
      * delte a single file
+     *
      * @param filePath file to delete
      */
-    public static void deleteFile(String filePath){
-        try{
+    public static void deleteFile(String filePath) {
+        try {
             File file = new File(filePath);
-            if(file.delete()){
-                test.log(Status.INFO,filePath + " deleted successfully");
-            }else{
+            if (file.delete()) {
+                test.log(Status.INFO, filePath + " deleted successfully");
+            } else {
                 test.log(Status.INFO, "Failed to delete" + filePath);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.getMessage();
         }
     }
 
-    public static void sleep(int seconds){
+    public static void sleep(int seconds) {
         long timeout = seconds * 1000;
         try {
             Thread.sleep(timeout);
@@ -129,10 +133,11 @@ public class SystemActions {
 
     /**
      * List all file in the required directory
+     *
      * @param path dir to list the files
      * @return List of files in the directory
      */
-    public static List<String> getAllFilesInDirectory(String path){
+    public static List<String> getAllFilesInDirectory(String path) {
         List<String> results = new ArrayList<String>();
         File[] files = new File(path).listFiles();
 
@@ -146,11 +151,12 @@ public class SystemActions {
 
     /**
      * List all file in the required directory
+     *
      * @param path dir to list the files
      * @return List of files in the directory
      */
 
-    public static int countAllFilesInDirectory(String path){
+    public static int countAllFilesInDirectory(String path) {
         File file = new File(path);
         File[] files = file.listFiles();
         int count = 0;
@@ -165,11 +171,12 @@ public class SystemActions {
 
     /**
      * Add time to machine time
-     * @param days days
+     *
+     * @param days   days
      * @param months months
-     * @param years years
+     * @param years  years
      */
-    public static void addPeriodToSystemTime(long days, long months, long years){
+    public static void addPeriodToSystemTime(long days, long months, long years) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
         String newDate = (now.plusDays(days).plusMonths(months).plusYears(years)).format(formatter);
@@ -184,9 +191,10 @@ public class SystemActions {
 
     /**
      * remove time from machine time
-     * @param days days
+     *
+     * @param days   days
      * @param months months
-     * @param years years
+     * @param years  years
      */
     public static void subtractPeriodFromSystemTime(long days, long months, long years) {
         LocalDateTime now = LocalDateTime.now();
@@ -202,9 +210,10 @@ public class SystemActions {
 
     /**
      * get local date
+     *
      * @return String date
      */
-    public static String getLocalDateAsString(){
+    public static String getLocalDateAsString() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
         String newDate = now.format(formatter);
@@ -214,6 +223,7 @@ public class SystemActions {
 
     /**
      * set local date
+     *
      * @param date date to set on machine
      */
     public static void setLocalDateFromString(String date) {
@@ -227,21 +237,23 @@ public class SystemActions {
 
     /**
      * checks if file exists in directory
+     *
      * @param filePath path to check
      * @return true/false
      */
-    public static boolean doesFileExist(String filePath){
+    public static boolean doesFileExist(String filePath) {
         File file = new File(filePath);
         return file.exists();
     }
 
     /**
      * copy file from source to destination
-     * @param src source
+     *
+     * @param src  source
      * @param dest destination
      */
-    public static void copyFile(String src, String dest){
-        test.log(Status.INFO, "Copying file from " + src +" to " + dest);
+    public static void copyFile(String src, String dest) {
+        test.log(Status.INFO, "Copying file from " + src + " to " + dest);
         try {
             FileUtils.copyFile(new File(src), new File(dest));
         } catch (IOException e) {
@@ -251,10 +263,11 @@ public class SystemActions {
 
     /**
      * deletes all files older than
-     * @param dir directory to the delete the files
+     *
+     * @param dir  directory to the delete the files
      * @param days number of days defined to the delete the files
      */
-    public static void deleteFilesOlderThanX(String dir, int days){
+    public static void deleteFilesOlderThanX(String dir, int days) {
         try {
             File directory = new File(dir);
             if (directory.isDirectory()) {
@@ -263,7 +276,7 @@ public class SystemActions {
                 for (File file : filesToDelete) {
                     boolean success = FileUtils.deleteQuietly(file);
                     if (!success) {
-                        test.log(Status.WARNING,"Cannot delete old file at: " + file.getAbsolutePath());
+                        test.log(Status.WARNING, "Cannot delete old file at: " + file.getAbsolutePath());
                     }
                 }
             }
@@ -282,7 +295,7 @@ public class SystemActions {
         return files[0].substring(files[0].lastIndexOf("\\") + 1);
     }
 
-    public static void appendToFile (String file, String text) {
+    public static void appendToFile(String file, String text) {
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(file, true));
@@ -311,12 +324,56 @@ public class SystemActions {
         return contentBuilder.toString();
     }
 
-    public static Matcher searchPattern(String contentToSearch, String patternToFind)
-    {
-        //test.log(Status.INFO, "SystemActions.searchPattern(): ...");
+    public static Matcher searchPattern(String contentToSearch, String patternToFind) {
+        test.log(Status.INFO, "SystemActions.searchPattern(): ...");
         Pattern pattern = Pattern.compile(patternToFind);
         Matcher matcher = pattern.matcher(contentToSearch);
-        //test.log(Status.INFO, "SystemActions.searchPattern(): done");
+        test.log(Status.INFO, "SystemActions.searchPattern(): done");
         return matcher;
     }
+
+    public static String findStringInText(String text, String stringToFind) {
+        Matcher matcher = SystemActions.searchPattern(text, stringToFind);
+        String s = "";
+        if (matcher.find()) {
+            try {
+                s = matcher.group(0);
+            } catch (Exception e) {
+                return "";
+            }
+        }
+
+        if (s.isEmpty()) {
+            return "";
+        }
+        return s;
+    }
+
+    public static int extractNumberFromString(String s) {
+        Pattern pattern = Pattern.compile(GET_NUMBER);
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.find()) {
+            try {
+                s = matcher.group(0);
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+
+        if (s.isEmpty()) {
+            return 0;
+        }
+        return Integer.valueOf(s);
+    }
+
+    public static int extractNumberFromStringInText(String text, String stringToFind) {
+        String s = findStringInText(text, stringToFind);
+        return extractNumberFromString(s);
+    }
+
+    public static int extractNumberFromStringInFile(String filePath, String stringToFind) {
+        String fileContent = SystemActions.getFileContent(filePath);
+        return extractNumberFromStringInText(fileContent, stringToFind);
+    }
+
 }
