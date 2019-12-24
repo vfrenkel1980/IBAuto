@@ -33,8 +33,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
     private String className = this.getClass().getName();
     private static List<String> firstBuilds = new ArrayList<String>();
     private static List<String> lastBuilds = new ArrayList<String>();
-    private static List<String> has_crashes = new ArrayList<String>();
-    private static List<String> log_crashes = new ArrayList<String>();
     protected SimClassType simClassType;
     private Calendar calender = Calendar.getInstance();
 
@@ -177,6 +175,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
         for (String machine : ipList) {
+            List<String> has_crashes;
+            List<String> log_crashes;
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
             if (has_crashes.size() >0 && !has_crashes.get(0).equals("")) {
                 test.log(Status.WARNING, "Found has_crash files in Machine: " + machine + " Path: /etc/incredibuild/log/");
