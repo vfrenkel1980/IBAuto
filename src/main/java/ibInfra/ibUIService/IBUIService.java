@@ -114,7 +114,7 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void clickFinish() throws FindFailed {
+        public void clickFinish()  {
             try {
                 test.log(Status.INFO, "Clicking Finish");
                 screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 40).click();
@@ -169,10 +169,16 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void selectLicense() throws FindFailed {
+        public void selectLicense()  {
             test.log(Status.INFO, "Selecting license");
-            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
-            screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+            try {
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+            }
+            catch (FindFailed findFailed){
+                    test.log(Status.WARNING, "License select fail: " + findFailed.getMessage());
+                    Assert.fail();
+                }
             test.log(Status.INFO, "License selected");
         }
 
@@ -691,6 +697,7 @@ public class IBUIService implements IIBUIService {
                 Assert.fail();
             }
         }
+
         }
 
         public class Coordinator implements ICoordinator {
