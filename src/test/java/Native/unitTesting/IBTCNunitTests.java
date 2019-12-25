@@ -136,14 +136,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
 
-    //@todo
-    @Ignore
-    // New internal flag /thresholdTestLevel
-    // Scenario:
-    // Run command: "C:\Program Files (x86)\IncrediBuild\ibtestconsole.exe" c:\QA\Simulation\Testing\NUnit2\bin\nunit-console.exe C:\QA\Simulation\Testing\NUnit2\bin\tests\nunit.framework.tests.dll /logfile=c:\QA\Simulation\buildLog.txt /thresholdTestlevel=10
-    // Then we will read form the Build Output and retrieve the max num of cores in use
-    // en compare it with this number 20*(100-[thresholdTestlevel])/100
-
     /**
      * @test Nunit2 with flag /ThresholdTestlevel Test.<br>
      * @pre{ }
@@ -154,7 +146,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "nunit2 ThresholdTestlevel Test")
     public void nunit2ThresholdTestlevelTest() throws Exception {
         final String CORES_IN_USE = "\\d+ cores employed";
-        final int thresholdTestlevel = 10;
+        final int thresholdTestlevel = 20;
         final String HOSTNAME = "Robin";
         IIBCoordMonitor iibCoordMonitor = new IIBCoordMonitor();
         CoordinatorStatus coordinatorMonitor = iibCoordMonitor.retrieveCoordMonitorDataFromXmlFile(Locations.QA_ROOT + "\\coord.xml");

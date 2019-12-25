@@ -7,7 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_COORDINATOR;
-
+/**
+ * @brief<b> <b>ICUpdateTests</b>
+ * @details
+ */
 public class ICUpdateTests extends CloudUpdateTestBase {
 
     /**
