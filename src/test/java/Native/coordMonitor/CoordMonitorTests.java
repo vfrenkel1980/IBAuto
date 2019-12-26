@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 /**
  * @brief<b> <b>Coordinator monitor tests (including UI)</b>
  * @details vm: Agent settings
+ *
  */
 public class CoordMonitorTests extends CoordMonitorTestBase {
 
