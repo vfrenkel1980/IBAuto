@@ -96,15 +96,10 @@ public class IBUIService implements IIBUIService {
     public class Installer implements IInstaller {
 
         @Override
-        public void clickNext()  {
+        public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            try {
-                screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
-            }
-            catch (FindFailed findFailed){
-                test.log(Status.WARNING, "Failed to click to Next button : " + findFailed.getMessage());
-                Assert.fail();
-            }
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
+
         }
 
         @Override
@@ -114,15 +109,9 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void clickFinish()  {
-            try {
+        public void clickFinish() throws FindFailed {
                 test.log(Status.INFO, "Clicking Finish");
                 screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 40).click();
-            }
-            catch (FindFailed findFailed){
-                test.log(Status.WARNING, "Failed to click to Finish button : " + findFailed.getMessage());
-                Assert.fail();
-            }
         }
 
         @Override

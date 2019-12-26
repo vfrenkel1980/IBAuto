@@ -105,6 +105,7 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
         }
     }
 
+
     /*------------------------------METHODS------------------------------*/
 
     private void setCustomStepSupportRegistry(String required) {
