@@ -1,7 +1,6 @@
 package frameworkInfra.utils;
 
 import com.aventstack.extentreports.Status;
-import frameworkInfra.testbases.TestBase;
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -37,26 +36,25 @@ public class AppiumActions {
         }
     }
 
-    public static void contextMenuIncrediBuildClick(WebElement project, WindowsDriver driver){
-        List<WebElement> ibElements = null;
+    public static void contextMenuIncrediBuildClick(WebElement project, WindowsDriver driver) {
+        List<WebElement> ibElements;
         WebElement goTo = null;
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        ibElements =driver.findElementsByName("Incredibuild");
+        ibElements = driver.findElementsByName("IncrediBuild");
         if (ibElements.size() == 0) {
-            ibElements = driver.findElementsByName("IncrediBuild");
+            ibElements = driver.findElementsByName("Incredibuild");
         }
         ibElements.get(1).click();
 
         try {
             goTo = driver.findElementByName("Go To");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
         }
-        if (goTo != null){
+        if (goTo != null) {
             AppiumActions.rightClick(project, driver);
             ibElements.get(0).click();
-            test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText() );
+            test.log(Status.INFO, "Successfully clicked on " + ibElements.get(0).getText());
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
