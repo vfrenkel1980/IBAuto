@@ -35,8 +35,8 @@ public class IIBCoordMonitor {
             throw new Exception("Failed to export Coordinator Monitor XML with xgCoordConsole command");
         }
 
-        XmlMapper xmlMapper = null;
-        String readContent = "";
+        XmlMapper xmlMapper;
+        String readContent;
         try {
             xmlMapper = new XmlMapper();
             readContent = new String(Files.readAllBytes(Paths.get(coordinatorXmlFilePath)));
@@ -64,12 +64,13 @@ public class IIBCoordMonitor {
         throw new Exception(String.format("Host '%s': No data could not be retrieved from Coordinator monitor!", hostName));
     }
 
-    public ArrayList<Agent> getAgentsByBuildGroup(CoordinatorStatus coordinatorMonitorData, String buildGroupName) {
+    public ArrayList<Agent> getEnabledAgentsByBuildGroup(CoordinatorStatus coordinatorMonitorData, String buildGroupName) {
         ArrayList<Agent> agents = new ArrayList<>();
         Iterator it = coordinatorMonitorData.getAgents().iterator();
         while (it.hasNext()) {
             Agent agent = (Agent) it.next();
-            if ((agent).getBuildGroup().toLowerCase().equals(buildGroupName.toLowerCase()))
+            if ((agent).getBuildGroup().toLowerCase().equals(buildGroupName.toLowerCase()) &&
+                 agent.isEnabled())
                 agents.add(agent);
         }
         return agents;

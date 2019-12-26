@@ -9,7 +9,6 @@ import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import ibInfra.ibExecs.metadata.CoordinatorStatus;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -151,7 +150,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         IIBCoordMonitor iibCoordMonitor = new IIBCoordMonitor();
         CoordinatorStatus coordinatorMonitor = iibCoordMonitor.retrieveCoordMonitorDataFromXmlFile(Locations.QA_ROOT + "\\coord.xml");
         String buildGroup = iibCoordMonitor.getBuildGroup(coordinatorMonitor, HOSTNAME);
-        ArrayList<Agent> agents = iibCoordMonitor.getAgentsByBuildGroup(coordinatorMonitor, buildGroup);
+        ArrayList<Agent> agents = iibCoordMonitor.getEnabledAgentsByBuildGroup(coordinatorMonitor, buildGroup);
         int totalNumberOfCores = 0;
         for (Agent a : agents) {
             totalNumberOfCores += Integer.parseInt(a.getCPUCount());
@@ -430,7 +429,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "NUnit3 Test Level Test")
     public void nunit3TestLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST);
-        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertEquals(exitCode,0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
@@ -627,7 +626,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "NUnit3 Test Result Test")
     public void nunit3TestResultTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST + " --result=result.xml");
-        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
         File f = new File(System.getProperty("user.dir") + "\\result.xml");
         Assert.assertTrue(f.isFile(), "The test result file is not created");
         f.delete();
