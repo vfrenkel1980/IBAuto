@@ -1,3 +1,4 @@
 BEFORE SUITE started
-BEFORE CLASS started - Change Logging Level to0
-nunit2ThresholdTestlevelTest test started
+BEFORE SUITE finished
+enableSchedulingAndVerifyTrayIconWithPermission test started
+enableSchedulingAndVerifyTrayIconWithoutPermission test started
