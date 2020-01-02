@@ -241,10 +241,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     @Test(testName = "Enable Scheduling And Verify Tray Icon")
     public void enableSchedulingAndVerifyTrayIconWithPermission() {
-        client.openCoordMonitorFromTray();
-        coordinator.clickAllowEnableDisableAsHelper();
-        SystemActions.sleep(30);
-        SystemActions.killProcess(Processes.COORDMONITOR);
+    //    client.openCoordMonitorFromTray();
+       // coordinator.clickAllowEnableDisableAsHelper();
+       // SystemActions.sleep(30);
+       // SystemActions.killProcess(Processes.COORDMONITOR);
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.enableSchedulingAndVerifyIcon();
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -263,6 +263,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         SystemActions.sleep(30);
         client.isNotActiveScheduling();
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
+        client.openCoordMonitorFromTray();
+        coordinator.clickAllowEnableDisableAsHelper();
+        SystemActions.sleep(15);
+        SystemActions.killProcess(Processes.COORDMONITOR);
     }
     @Test(testName = "Verify PDB File Limit 1")
     public void verifyPDBFileLimit1() {
