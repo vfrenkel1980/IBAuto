@@ -2,12 +2,11 @@ package ibInfra.vs;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.utils.AppiumActions;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.InitMSBuild;
-import frameworkInfra.utils.StaticDataProvider.InitOLDMSBuild;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.VsDevenvInstallPath;
 import frameworkInfra.utils.SystemActions;
-import ibInfra.ibService.IIBService;
 import ibInfra.windowscl.WindowsService;
 import io.appium.java_client.windows.WindowsDriver;
 import org.apache.commons.io.FileUtils;
@@ -22,7 +21,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -35,13 +33,14 @@ public class VS16UIService implements IVSUIService {
     private WindowsService winService = new WindowsService();
     private WindowsDriver driver;
 
-    public VS16UIService(WindowsDriver driver){
+    public VS16UIService(WindowsDriver driver) {
         this.driver = driver;
     }
-    public VS16UIService(){
+
+    public VS16UIService() {
     }
 
-    public void vsFirstActivation(){
+    public void vsFirstActivation() {
         driver.findElementByName("Not now, maybe later.").click();
         driver.findElementByName("Start Visual Studio").click();
     }
@@ -62,7 +61,7 @@ public class VS16UIService implements IVSUIService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             SystemActions.deleteFile(Locations.QA_ROOT + "\\out.txt");
         }
         return installedBuild;
@@ -84,10 +83,10 @@ public class VS16UIService implements IVSUIService {
         SystemActions.sleep(2);
         driver.findElementByClassName("Edit").sendKeys(projectPath);
         driver.findElementByName("Open").click();
-        WebDriverWait wait = new WebDriverWait(driver,90);
+        WebDriverWait wait = new WebDriverWait(driver, 90);
         try {
             driver.switchTo().window(driver.getWindowHandle());
-        } catch (Exception e){
+        } catch (Exception e) {
             driver.switchTo().window(driver.getWindowHandle());
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[contains(@Name, \"Solution '\")]"))));
@@ -104,11 +103,11 @@ public class VS16UIService implements IVSUIService {
         driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).clear();
         driver.findElement(By.xpath("//*[@AutomationId=\"PART_EditableTextBox\"]")).sendKeys(Locations.QA_ROOT + "\\projects");
         driver.findElement(By.xpath("//*[@AutomationId=\"button_Next\"]")).click();
-        WebDriverWait wait = new WebDriverWait(driver,90);
+        WebDriverWait wait = new WebDriverWait(driver, 90);
         //in vs2019 the following command will switch to the new opened windows (a new session)
         try {
             driver.switchTo().window(driver.getWindowHandle());
-        } catch (Exception e){
+        } catch (Exception e) {
             driver.switchTo().window(driver.getWindowHandle());
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[@Name=\"Build\"]"))));
@@ -136,19 +135,23 @@ public class VS16UIService implements IVSUIService {
     }
 
     @Override
-    public void performIbActionFromPrjExplorer(String action,String type, String solutionName){
+    public void performIbActionFromPrjExplorer(String action, String type, String solutionName) throws Exception {
         driver.findElementByName("Build");
         WebElement newel;
         if (type.equals("solution")) {
             newel = driver.findElement(By.xpath("//*[contains(@Name, \"Solution '" + solutionName + "'\")]"));
-        }
-        else{
+        } else {
             newel = driver.findElementByName(solutionName);
         }
         AppiumActions.rightClick(newel, driver);
         SystemActions.sleep(2);
-        AppiumActions.contextMenuIncrediBuildClick(newel, driver);
-        driver.findElementByName(action).click();
+        if (type.equals(StaticDataProvider.VsTreeType.SOLUTION)) {
+            AppiumActions.solutionContextMenuIncrediBuildClickForVCVersion16(driver);
+            AppiumActions.solutionActionClickForVCVersion16(action, driver);
+        } else if (type.equals(StaticDataProvider.VsTreeType.PROJECT)) {
+            AppiumActions.projectContextMenuIncrediBuildClickForVCVersion16(driver);
+            AppiumActions.projectActionClickForVCVersion16(action, driver);
+        }
         test.log(Status.INFO, "Successfully clicked on " + newel.getText() + action);
         SystemActions.sleep(3);
         winService.waitForProcessToFinish("buildsystem.exe");
@@ -156,9 +159,10 @@ public class VS16UIService implements IVSUIService {
 
     /**
      * Open VS instance
-     * @param version version to open 116 is PREVIEW
+     *
+     * @param version           version to open 116 is PREVIEW
      * @param isFirstActivation boolean value to apply first activation menus if needed
-     * @param scenario if scenario=3 - install on a different drive
+     * @param scenario          if scenario=3 - install on a different drive
      */
     @Override
     public void openVSInstance(String version, boolean isFirstActivation, String scenario) {
@@ -188,14 +192,13 @@ public class VS16UIService implements IVSUIService {
             if (test != null) {
                 test.log(Status.INFO, "Visual Studio opened successfully");
             }
-            if(isFirstActivation) {
+            if (isFirstActivation) {
                 try {
                     SystemActions.sleep(10);
                     vsFirstActivation();
                 } catch (Exception e) {
                     test.log(Status.ERROR, "Failed set VS first activation: ------>" + e.getMessage());
-                }
-                finally {
+                } finally {
                     driver.quit();
                 }
             }

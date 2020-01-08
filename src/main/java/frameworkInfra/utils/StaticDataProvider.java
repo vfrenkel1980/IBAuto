@@ -192,6 +192,11 @@ public class StaticDataProvider {
         }
     }
 
+    public static class VsTreeType {
+        public static final String PROJECT = "project";
+        public static final String SOLUTION = "solution";
+    }
+
     public static class VsActions {
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
