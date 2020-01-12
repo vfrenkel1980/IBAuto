@@ -192,6 +192,11 @@ public class StaticDataProvider {
         }
     }
 
+    public static class VsTreeType {
+        public static final String PROJECT = "project";
+        public static final String SOLUTION = "solution";
+    }
+
     public static class VsActions {
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
@@ -772,7 +777,7 @@ public class StaticDataProvider {
         //lic tests
         public static final String VALID_LIC = "IncrediBuild - IncrediBuild - Aleksandra - License Testing Environment Jan 2019 (new).IB_lic";
         public static final String VALID_OFFLINE_LIC = "IncrediBuild - Aleksandra Malykhina - personal Coordinator offline license 25-NOV-19.IB_lic";
-        public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic";
+        public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018 - expired solutions.IB_lic";
         public static final String EXPIRED_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - license expired.IB_lic";
         public static final String VALID_NO_UTESTS_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic";
     }

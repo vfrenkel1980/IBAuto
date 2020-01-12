@@ -1,74 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="VSIntegration"  >
+<suite name="VSIntegration">
 
     <listeners>
-        <listener class-name="frameworkInfra.Listeners.TestListener" />
+        <listener class-name="frameworkInfra.Listeners.TestListener"/>
     </listeners>
 
     <test name="VSIntegrationTests8">
         <parameter name="VCVersion" value="8"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests9">
         <parameter name="VCVersion" value="9"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests10">
         <parameter name="VCVersion" value="10"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests11">
         <parameter name="VCVersion" value="11"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests12">
         <parameter name="VCVersion" value="12"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests14">
         <parameter name="VCVersion" value="14"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests15">
         <parameter name="VCVersion" value="15"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests16">
         <parameter name="VCVersion" value="16"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
 
     <test name="VSIntegrationTests16Preview">
         <parameter name="VCVersion" value="116"/>
         <classes>
-            <class name ="Native.vstests.VSIntegrationTests" />
+            <class name="Native.vstests.VSIntegrationTests"/>
         </classes>
     </test>
-
-
-
 </suite>
