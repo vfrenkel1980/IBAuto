@@ -24,8 +24,21 @@ import java.util.Set;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * @brief<b> <a href="https://incredibuild.atlassian.net/wiki/spaces/ITK/pages/427327495/Agent+settings+-+Automation+coverage"><b>Agent settings Automation coverage</b></a> tests</b>
+ */
 public class AgentSettingsTests extends AgentSettingsTestBase {
-
+    /**
+     * @test Avoid local Execution turned ON, Standalone OFF
+     * @pre{ }
+     * @steps{
+     * - Set Registry Key Avoid Local
+     * - Set Registry Key Standalone Mode
+     * - Clean and Build IB
+     * - Set Registry Key Avoid Local
+     * @return true/false
+     * @return true(File contain string Agent)/false(Failed to find Agent string)
+     */
     @Test(testName = "Avoid local Execution turned ON, Standalone OFF")
     public void avoidLocalExecutionTurnedOnStandaloneOff() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
