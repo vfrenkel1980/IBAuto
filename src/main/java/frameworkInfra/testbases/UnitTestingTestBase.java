@@ -3,7 +3,9 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
+import frameworkInfra.utils.StaticDataProvider.WindowsMachines;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -21,11 +23,6 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 @Listeners(SuiteListener.class)
 public class UnitTestingTestBase extends WindowsTestBase{
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
-
-    @BeforeClass
-    public void avoidLocal() {
-        //RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "1");
-    }
 
     @BeforeMethod
     @Parameters({ "logLevel"})
@@ -63,10 +60,6 @@ public class UnitTestingTestBase extends WindowsTestBase{
 
     }
 
-    @AfterClass
-    public void restartLocal() {
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "0");
-    }
     @AfterMethod
     public void deleteTestResults(){
         new File(System.getProperty("user.dir")+"\\TestResult.xml").delete();

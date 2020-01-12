@@ -1,11 +1,16 @@
 package Native.unitTesting;
 
-import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.testbases.UnitTestingTestBase;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider.IbLocations;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
+import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
@@ -13,6 +18,8 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.Set;
+
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 /**
  * @brief Unit tests execution with IbConsole
@@ -29,7 +36,13 @@ import java.util.Set;
 public class IBCTestingTests extends UnitTestingTestBase {
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
+    @BeforeClass
+    public void avoidLocal() {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "1");
+    }
+
     /**
+     *
      * @test Cpp utest support test.<br>
      * @pre{ <a href="https://github.com/cpputest/cpputest">CppUTest framework project</a>}
      * @steps{ - Run the cpputest-master tests}
@@ -212,5 +225,10 @@ public class IBCTestingTests extends UnitTestingTestBase {
         Assert.assertTrue(result.contains("In order to accelerate GTest tests, please use IBTestConsole"));
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST);
         Assert.assertEquals(exitCode, 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
+
+    @AfterClass
+    public void restartLocal() {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "0");
     }
 }

@@ -136,7 +136,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         f.delete();
     }
 
-
     @Ignore
     /**
      * @test Nunit2 with flag /ThresholdTestlevel Test.<br>
@@ -148,7 +147,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "nunit2 ThresholdTestlevel Test")
     public void nunit2ThresholdTestlevelTest() throws Exception {
         final String CORES_IN_USE = "\\d+ cores employed";
-        final int thresholdTestlevel = 20;
+        final int thresholdTestlevel = 10;
         final String HOSTNAME = "windows-qa-1";
         IIBCoordMonitor iibCoordMonitor = new IIBCoordMonitor();
         CoordinatorStatus coordinatorMonitor = iibCoordMonitor.retrieveCoordMonitorDataFromXmlFile(Locations.QA_ROOT + "\\coord.xml");
