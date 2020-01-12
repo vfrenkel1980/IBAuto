@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d2ea9cd1-e536-4682-af9f-8bb4e8f25f98" name="Administrator@WINDOWS-QA-1 2020-01-09 15:56:46" runUser="NT AUTHORITY\SYSTEM" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="01b6514b-a481-43a5-a8f4-95a9b071a36b">
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+    <Deployment runDeploymentRoot="Administrator_WINDOWS-QA-1 2020-01-09 15_56_46" />
+    <Properties />
+  </TestSettings>
+  <Times creation="2020-01-09T15:56:46.4370000+02:00" queuing="2020-01-09T15:56:48.1557509+02:00" start="2020-01-09T15:56:48.6401474+02:00" finish="2020-01-09T15:56:49.7495118+02:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="isTrue" storage="c:\qa\simulation\testing\mstest-master\runner\mstestproject.dll" id="10ed9d88-46c9-05b9-156d-2b585507df3c">
+      <Execution id="950fcf8c-96d7-45cf-92d4-540001195d8c" />
+      <TestMethod codeBase="C:/QA/Simulation/Testing/mstest-master/runner/MSTestProject.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MSTestProject.UnitTest1, MSTestProject, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="isTrue" />
+    </UnitTest>
+    <UnitTest name="isFalse" storage="c:\qa\simulation\testing\mstest-master\runner\mstestproject.dll" id="a44828db-0023-d090-8331-c52e1c27c3c9">
+      <Execution id="bc3e8bf7-41b0-4319-aead-4bb0747bc205" />
+      <TestMethod codeBase="C:/QA/Simulation/Testing/mstest-master/runner/MSTestProject.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MSTestProject.UnitTest1, MSTestProject, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="isFalse" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="a44828db-0023-d090-8331-c52e1c27c3c9" executionId="bc3e8bf7-41b0-4319-aead-4bb0747bc205" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10ed9d88-46c9-05b9-156d-2b585507df3c" executionId="950fcf8c-96d7-45cf-92d4-540001195d8c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="bc3e8bf7-41b0-4319-aead-4bb0747bc205" testId="a44828db-0023-d090-8331-c52e1c27c3c9" testName="isFalse" computerName="WINDOWS-QA-1" duration="00:00:00.0133910" startTime="2020-01-09T15:56:48.9528493+02:00" endTime="2020-01-09T15:56:49.6245095+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc3e8bf7-41b0-4319-aead-4bb0747bc205">
+    </UnitTestResult>
+    <UnitTestResult executionId="950fcf8c-96d7-45cf-92d4-540001195d8c" testId="10ed9d88-46c9-05b9-156d-2b585507df3c" testName="isTrue" computerName="WINDOWS-QA-1" duration="00:00:00.0001514" startTime="2020-01-09T15:56:49.6401326+02:00" endTime="2020-01-09T15:56:49.6401326+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="950fcf8c-96d7-45cf-92d4-540001195d8c">
+    </UnitTestResult>
+  </Results>
+</TestRun>

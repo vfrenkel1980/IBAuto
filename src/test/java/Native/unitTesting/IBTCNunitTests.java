@@ -2,13 +2,17 @@ package Native.unitTesting;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.UnitTestingTestBase;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.StaticDataProvider.IbLocations;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
 import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.HtmlReportingToolParser;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibExecs.IIBCoordMonitor;
+import ibInfra.ibExecs.metadata.Agent;
 import ibInfra.ibExecs.metadata.CoordinatorStatus;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
@@ -17,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
-
-import ibInfra.ibExecs.metadata.Agent;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -135,6 +137,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     }
 
 
+    @Ignore
     /**
      * @test Nunit2 with flag /ThresholdTestlevel Test.<br>
      * @pre{ }
@@ -146,7 +149,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     public void nunit2ThresholdTestlevelTest() throws Exception {
         final String CORES_IN_USE = "\\d+ cores employed";
         final int thresholdTestlevel = 20;
-        final String HOSTNAME = "Robin";
+        final String HOSTNAME = "windows-qa-1";
         IIBCoordMonitor iibCoordMonitor = new IIBCoordMonitor();
         CoordinatorStatus coordinatorMonitor = iibCoordMonitor.retrieveCoordMonitorDataFromXmlFile(Locations.QA_ROOT + "\\coord.xml");
         String buildGroup = iibCoordMonitor.getBuildGroup(coordinatorMonitor, HOSTNAME);
@@ -340,8 +343,12 @@ public class IBTCNunitTests extends UnitTestingTestBase {
 
             compareExtentReportsFiles(indexFilePath, dashboardFilePath);
         } finally {
-            index.delete();
-            dashboard.delete();
+            if (index != null) {
+                index.delete();
+            }
+            if (dashboard != null) {
+                dashboard.delete();
+            }
         }
     }
 
@@ -372,8 +379,12 @@ public class IBTCNunitTests extends UnitTestingTestBase {
 
             compareExtentReportsFiles(indexFilePath, dashboardFilePath);
         } finally {
-            index.delete();
-            dashboard.delete();
+            if (index != null) {
+                index.delete();
+            }
+            if (dashboard != null) {
+                dashboard.delete();
+            }
         }
 
     }
@@ -429,7 +440,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "NUnit3 Test Level Test")
     public void nunit3TestLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TESTLEVEL_TEST);
-        Assert.assertEquals(exitCode,0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
@@ -696,7 +707,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "NUnit3 Class Filter Test")
     public void nunit3ClassFilterTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_WHERE_FILTER_TEST);
-        Assert.assertEquals(exitCode, 0,"The test execution failed with the exitcode " + exitCode);
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
@@ -768,21 +779,31 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit3 Extent Report Assembly Level Test")
     public void nunit3ExtentReportAssemblyLevelTest() throws InterruptedException {
-        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
-        int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
-        Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
-        String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
-        File index = new File(indexFilePath);
-        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        File index = null;
+        File dashboard = null;
+        try {
+            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
+            int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
+            Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
+            String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
+            index = new File(indexFilePath);
+            Assert.assertTrue(index.isFile(), "The test result index file is not created");
 
-        String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
-        File dashboard = new File(dashboardFilePath);
-        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+            String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
+            dashboard = new File(dashboardFilePath);
+            Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
 
-        compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+            compareExtentReportsFiles(indexFilePath, dashboardFilePath);
 
-        index.delete();
-        dashboard.delete();
+        } finally {
+            if (index != null) {
+                index.delete();
+            }
+            if (dashboard != null) {
+                dashboard.delete();
+            }
+
+        }
     }
 
     /**
@@ -794,21 +815,32 @@ public class IBTCNunitTests extends UnitTestingTestBase {
      */
     @Test(testName = "NUnit3 Extent Report Test Level Test")
     public void nunit3ExtentReportTestLevelTest() throws InterruptedException {
-        winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
-        int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
-        Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
-        String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
-        File index = new File(indexFilePath);
-        Assert.assertTrue(index.isFile(), "The test result index file is not created");
+        File index = null;
+        File dashboard = null;
+        try {
+            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
 
-        String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
-        File dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
-        Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
+            int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
+            Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
+            String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
+            index = new File(indexFilePath);
+            Assert.assertTrue(index.isFile(), "The test result index file is not created");
 
-        compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+            String dashboardFilePath = Locations.QA_ROOT + "\\reports\\dashboard.html";
+            dashboard = new File(Locations.QA_ROOT + "\\reports\\dashboard.html");
+            Assert.assertTrue(dashboard.isFile(), "The test result dashboard file is not created");
 
-        index.delete();
-        dashboard.delete();
+            compareExtentReportsFiles(indexFilePath, dashboardFilePath);
+
+        } finally {
+            if (index != null) {
+                index.delete();
+            }
+            if (dashboard != null) {
+                dashboard.delete();
+            }
+
+        }
     }
 
     //Negative flow
