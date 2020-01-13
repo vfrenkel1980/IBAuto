@@ -51,7 +51,7 @@ public class UnitTestingTestBase extends WindowsTestBase{
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.RESTART_ON_LOCAL, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         try {
-            coordMonitor.waitForAgentIsUpdated(WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+            coordMonitor.waitForAgentIsUpdated(WindowsMachines.UNITESTS_HLPR_NAME);
         } catch (RuntimeException | SAXException | IOException | ParserConfigurationException e) {
             test.log(Status.ERROR, "Helper is not updated. Error: "+e);
         }
