@@ -106,7 +106,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     public void singleUseVMStopServicePositiveTest() {
         setUp();
         ibService.agentServiceStop();
-        SystemActions.sleep(23);
+        SystemActions.sleep(20);
         ibService.agentServiceStart();
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_PHOENIX.AUDACITY_X32_DEBUG, "%s"));
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
