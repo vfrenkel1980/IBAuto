@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -165,14 +167,21 @@ public class GeneralWinTests extends BatmanBCTestBase {
     @Test(testName = "Verify OnlyFailLocally Flag")
     public void verifyOnlyFailLocallyFlag() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "The build was executed on remote, should fail locally");
-        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertTrue(result.equals("0"), "verifyOnlyFailLocallyFlag failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+        finally {
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+        }
     }
 
     /**
-     * @test "Verify that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
+     * @test "Verify (incremental build) that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
      *  The 2 projects of the solution are being built a first time
      *  The second time that the code is built there should not be any update since the code was not modified.
      *  Ticket #11279

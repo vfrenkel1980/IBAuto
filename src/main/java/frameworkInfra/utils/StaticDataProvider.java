@@ -236,6 +236,7 @@ public class StaticDataProvider {
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
+            public static final String XG_CONSOLE_FAILED_ON_REMOTE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\RemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\profile.xml\" /title=\"FaileOnlyLocal: XG Console Failed On  remote\"";
             public static final String TEST_SAMPLE = Locations.QA_ROOT + "\\TestSample\\RUNME.bat " + "%d " + "%s";
         }
 
