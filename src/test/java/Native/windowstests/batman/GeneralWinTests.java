@@ -163,9 +163,24 @@ public class GeneralWinTests extends BatmanBCTestBase {
             RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "0");
         }
     }
-
-    @Test(testName = "Verify OnlyFailLocally Flag")
-    public void verifyOnlyFailLocallyFlag() {
+    /**
+     * @test Verify <a href="https://docs.google.com/document/d/14uCrC8cqjP1o_nBh0gEwAr8SLC4odY2yNrtkWc_jQ6U/edit?usp=sharing">only fail locally feature </a> is ON
+     * @pre{
+     * - Set OnlyFailLocally reg key to ON
+     * - Set Avoid local reg key to ON
+     * }
+     * @steps{
+     * - Run the project that fails on the remote cores, but is succeeded on local cores
+     * }
+     * @result{
+     * - The build is succeeded;
+     * Post:
+     * - Set OnlyFailLocally reg key to OFF
+     * - Set Avoid local reg key to OFF
+     * }
+     */
+    @Test(testName = "Verify OnlyFailLocally Flag Positive Test")
+    public void verifyOnlyFailLocallyFlagPositiveTest() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
         String result = "";
@@ -179,6 +194,36 @@ public class GeneralWinTests extends BatmanBCTestBase {
         finally {
             setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
             setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+        }
+    }
+    /**
+     * @test Verify <a href="https://docs.google.com/document/d/14uCrC8cqjP1o_nBh0gEwAr8SLC4odY2yNrtkWc_jQ6U/edit?usp=sharing">only fail locally feature</a> is OFF
+     * @pre{
+     * - Set Avoid local reg key to ON
+     * }
+     * @steps{
+     * - Run the project that fails on the remote cores, but is succeeded on local cores
+     * }
+     * @result{
+     * - The build is failed;
+     * Post:
+     * - Set Avoid local reg key to OFF
+     * }
+     */
+    @Test(testName = "Verify OnlyFailLocally Flag Negative Test")
+    public void verifyOnlyFailLocallyFlagNegativeTest() {
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertEquals(result.equals("1"), "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+        finally {
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+
         }
     }
 
