@@ -167,6 +167,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
     @Test(testName = "Verify OnlyFailLocally Flag")
     public void verifyOnlyFailLocallyFlag() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
         String result = "";
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
         try {
@@ -177,6 +178,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         }
         finally {
             setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
         }
     }
 
