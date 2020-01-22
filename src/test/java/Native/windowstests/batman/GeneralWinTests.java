@@ -187,7 +187,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertTrue(result.equals("0"), "verifyOnlyFailLocallyFlag failed with exit code " + result);
+            Assert.assertEquals(result,"0", "verifyOnlyFailLocallyFlag failed with exit code " + result);
         } catch (IOException e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
@@ -217,7 +217,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertEquals(result.equals("1"), "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
+            Assert.assertEquals(result,"1", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
         } catch (IOException e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
