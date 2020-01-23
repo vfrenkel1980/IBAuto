@@ -618,6 +618,7 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String VC16PROJPREfast = "\"" + Locations.QA_ROOT + "\\VC16\\enablingPREfast\\enablingPREfast.sln\" /cfg=\"debug|x86\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
         }
 
         public static class VC16Preview_ROBIN {
@@ -824,6 +825,7 @@ public class StaticDataProvider {
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
         public static final String VC16PROJECT = Locations.QA_ROOT + "\\projects\\vc16project\\vc16project.sln";
+
     }
 
     public static class UIValidationsProjects {

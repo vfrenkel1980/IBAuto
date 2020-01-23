@@ -30,14 +30,15 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Avoid local Execution turned ON, Standalone OFF
-     * @pre{ }
+     * @pre{
+     * - Set Registry Key Avoid Local ON
+     * - Set Registry Key Standalone Mode OFF}
      * @steps{
-     * - Set Registry Key Avoid Local
-     * - Set Registry Key Standalone Mode
      * - Clean and Build IB
-     * - Set Registry Key Avoid Local
-     * @return true/false
-     * @return true(File contain string Agent)/false(Failed to find Agent string)
+     * - Set Registry Key Avoid Local OFF
+     * - Verify result in output log file
+     * @result true/false
+     * @result true(File contain string Agent)/false(Failed to find Agent string)
      */
     @Test(testName = "Avoid local Execution turned ON, Standalone OFF")
     public void avoidLocalExecutionTurnedOnStandaloneOff() {
@@ -49,6 +50,17 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
+    /**
+     * @test Avoid local Execution turned OFF, Standalone ON
+     * @pre{
+     * - Set Registry Key Avoid Local OFF
+     *  - Set Registry Key Standalone Mode ON}
+     * @steps
+     *  - Clean and Build IB
+     *  - Verify result in output log file
+     * @result true/false
+     * @result true(Failed contain string Agent word)/false(Failed to find Agent string)
+     */
     @Test(testName = "Avoid local Execution turned OFF, Standalone ON")
     public void avoidLocalExecutionTurnedOffStandaloneOn() {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
@@ -57,7 +69,17 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
     }
-
+    /**
+     * @test Avoid local Execution turned OFF, Standalone OFF
+     * @pre{
+     *  - Set Registry Key Avoid Local OFF
+     *  - Set Registry Key Standalone Mode ON}
+     * @steps
+     *  - Clean and Build IB
+     *  -Verify result in output log file
+     * @result true/false
+     * @result true(Failed contain string Agent word)/false(Failed to find Agent string)
+     */
     @Test(testName = "Avoid local Execution turned OFF, Standalone OFF")
     public void avoidLocalExecutionTurnedOffStandaloneOff() {
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
@@ -67,6 +89,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Failed to find Agent in output log");
     }
 
+    /**
+     * @test Verify Extended logging level
+     * @pre{
+     * - Set Registry Key Logging Level}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Extended logging level")
     public void verifyExtendedLoggingLevel() {
         String result;
@@ -80,6 +109,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         }
     }
 
+    /**
+     * @test Verify Minimal logging level
+     * @pre{
+     * - Set Registry Key Logging Level}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Minimal logging level")
     public void verifyMinimalLoggingLevel() {
         String result;
@@ -93,6 +129,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         }
     }
 
+    /**
+     * @test Verify Task Termination On High CPU Consumption
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Task Termination On High CPU Consumption")
     public void verifyTaskTerminationOnHighCPUConsumption() {
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, ProjectsCommands.CLEAN));
@@ -112,6 +154,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(firstLocal > lastAgent, lastAgent + " appears after Local in output.log" + "local: " + firstLocal + " Agent: " + lastAgent);
     }
 
+    /**
+     * @test Pro License - Verify MultiBuild Does Work When Adding Registry
+     * @pre{}
+     * @steps
+     *  - Load License
+     *  - Set Registry Key
+     *  - Run Command from Win Service Rebuild
+     * @result
+     */
     @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
     public void proLicenseVerifyMultiBuildDoesNotWorkWhenAddingRegistry() {
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
@@ -122,6 +173,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.MAX_ALLOWED_BUILDS), "Max allowed builds did not appear in the log");
     }
 
+    /**
+     * @test Pro License - Verify MultiBuild Missing from UI
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
     public void proLicenseVerifyMultiBuildMissingFromUI() {
         ibService.loadIbLicense(IbLicenses.NO_ENT_LIC);
@@ -132,6 +189,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(isPresent, "MultiBuild tab should not be displayed with PRO license");
     }
 
+    /**
+     * @test Ent License - Verify MultiBuild Exists In UI
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Ent License - Verify MultiBuild Exists In UI")
     public void entLicenseVerifyMultiBuildExistsInUI() {
         ibService.loadIbLicense(IbLicenses.AGENT_SETTINGS_LIC);
@@ -142,6 +205,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(isPresent, "MultiBuild tab should be displayed with PRO license");
     }
 
+    /**
+     * @test Verify Build History By Date
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Build History By Date")
     public void verifyBuildHistoryByDate() {
         String currentDate = SystemActions.getLocalDateAsString();
@@ -153,6 +222,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(2, numOfHistoryFiles, "Files in history folder are not deleted");
     }
 
+    /**
+     * @test Verify Build History By Click
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Build History By Click")
     public void verifyBuildHistoryByClick() {
         winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
@@ -162,6 +237,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(2, numOfHistoryFiles, "Files in history folder are not deleted");
     }
 
+    /**
+     * @test Verify CPU Utilization
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify CPU Utilization")
     public void verifyCPUUtilization() {
         winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
@@ -173,6 +254,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(StaticDataProvider.Locations.OUTPUT_LOG_FILE, "CPU 2"));
     }
 
+    /**
+     * @test Change Default Start Page
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Change Default Start Page")
     public void changeDefaultStartPage() {
         winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
@@ -182,6 +269,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         client.verifyProjectsPageIsOpen();
     }
 
+    /**
+     * @test Verify Output Options
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Output Options")
     public void verifyOutputOptions() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -192,6 +285,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         //Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, ""));
     }
 
+    /**
+     * @test Stop Agent Service
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Stop Agent Service", dependsOnMethods = {"verifyTaskTerminationOnHighCPUConsumption"})
     public void stopAgentService() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -199,6 +298,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is running, should be stopped.");
     }
 
+    /**
+     * @test Start Agent Service
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Start Agent Service", dependsOnMethods = {"stopAgentService"})
     public void startAgentService() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -206,6 +311,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, should be running.");
     }
 
+    /**
+     * @test Restart Agent Service
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Restart Agent Service", dependsOnMethods = {"startAgentService"})
     public void restartAgentService() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -213,6 +324,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(winService.isServiceRunning(WindowsServices.AGENT_SERVICE), "Agent service is not running, should be running.");
     }
 
+    /**
+     * @test Verify Core Limit Per Build Limitation
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Core Limit Per Build Limitation")
     public void verifyCoreLimitPerBuildLimitation() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -224,6 +341,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent 'Vm-agntset-hlp (Core #2)"), "Found core 2 for helper");
     }
 
+    /**
+     * @test Verify OnlyFailLocally Off
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify OnlyFailLocally Off")
     public void verifyOnlyFailLocallyOff() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
@@ -235,6 +358,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on local but should't");
     }
 
+    /**
+     * @test Verify OnlyFailLocally On
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
     public void verifyOnlyFailLocallyOn() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
@@ -245,6 +374,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "Build was failed on remote but should't");
     }
 
+    /**
+     * @test Verify Build With Errors
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify Build With Errors")
     public void verifyBuildWithErrors() {
         setRegistry("All", "Builder", "Flags");
@@ -252,6 +387,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertEquals(Parser.countOccurencesInFile(Locations.OUTPUT_LOG_FILE, LogOutput.BUILD_SUCCEEDED), 8);
     }
 
+    /**
+     * @test Enable Scheduling And Verify Tray Icon
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Enable Scheduling And Verify Tray Icon")
     public void enableSchedulingAndVerifyTrayIconWithPermission() {
     //    client.openCoordMonitorFromTray();
@@ -269,6 +410,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     }
 
+    /**
+     * @test Enable Scheduling And Verify Tray Icon Without Permission
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Enable Scheduling And Verify Tray Icon Without Permission")
     public void enableSchedulingAndVerifyTrayIconWithoutPermission() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
@@ -281,6 +428,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         SystemActions.sleep(15);
         SystemActions.killProcess(Processes.COORDMONITOR);
     }
+
+    /**
+     * @test Verify PDB File Limit 1
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify PDB File Limit 1")
     public void verifyPDBFileLimit1() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
@@ -292,6 +446,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(helperNumber == 1, "PDB File Limit should be 1, but found " + helperNumber);
     }
 
+    /**
+     * @test Verify PDB File Limit Unchecked
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify PDB File Limit Unchecked")
     public void verifyPDBFileLimitUnchecked() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
@@ -303,6 +463,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(helperNumber > 1, "PDB File Limit should be >=2, but found " + helperNumber);
     }
 
+    /**
+     * @test Verify CPU Utilization As Initiator and PDB limit
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify CPU Utilization As Initiator and PDB limit")
     public void verifyCPUUtilizationAsInitiatorAndPDBLimit() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
@@ -315,6 +481,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(helperNumber == 1, "CPU utilization should be 1, but found " + helperNumber);
     }
 
+    /**
+     * @test Verify When CPU Utilization As Helper checked
+     * @pre{}
+     * @steps
+     * @result
+     */
     @Test(testName = "Verify When CPU Utilization As Helper checked")
     public void verifyWhenCPUUtilizationAsHelperChecked() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);
