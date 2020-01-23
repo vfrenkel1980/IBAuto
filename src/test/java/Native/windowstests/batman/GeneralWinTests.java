@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
@@ -161,18 +163,72 @@ public class GeneralWinTests extends BatmanBCTestBase {
             RegistryService.setRegistryKey(WinReg.HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.AVOID_LOCAL, "0");
         }
     }
-
-    @Test(testName = "Verify OnlyFailLocally Flag")
-    public void verifyOnlyFailLocallyFlag() {
+    /**
+     * @test Verify <a href="https://docs.google.com/document/d/14uCrC8cqjP1o_nBh0gEwAr8SLC4odY2yNrtkWc_jQ6U/edit?usp=sharing">only fail locally feature </a> is ON
+     * @pre{
+     * - Set OnlyFailLocally reg key to ON
+     * - Set Avoid local reg key to ON
+     * }
+     * @steps{
+     * - Run the project that fails on the remote cores, but is succeeded on local cores
+     * }
+     * @result{
+     * - The build is succeeded;
+     * Post:
+     * - Set OnlyFailLocally reg key to OFF
+     * - Set Avoid local reg key to OFF
+     * }
+     */
+    @Test(testName = "Verify OnlyFailLocally Flag Positive Test")
+    public void verifyOnlyFailLocallyFlagPositiveTest() {
         setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-        winService.runCommandWaitForFinish(String.format(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG, ProjectsCommands.REBUILD) + " /OnlyFailLocally=on /showagent");
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "(Agent '"));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Local"), "The build was executed on remote, should fail locally");
-        setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+        setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertEquals(result,"0", "verifyOnlyFailLocallyFlag failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+        finally {
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+        }
+    }
+    /**
+     * @test Verify <a href="https://docs.google.com/document/d/14uCrC8cqjP1o_nBh0gEwAr8SLC4odY2yNrtkWc_jQ6U/edit?usp=sharing">only fail locally feature</a> is OFF
+     * @pre{
+     * - Set Avoid local reg key to ON
+     * }
+     * @steps{
+     * - Run the project that fails on the remote cores, but is succeeded on local cores
+     * }
+     * @result{
+     * - The build is failed;
+     * Post:
+     * - Set Avoid local reg key to OFF
+     * }
+     */
+    @Test(testName = "Verify OnlyFailLocally Flag Negative Test")
+    public void verifyOnlyFailLocallyFlagNegativeTest() {
+        setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+        String result = "";
+        winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
+        try {
+            result = ibService.findValueInPacketLog("ExitCode ");
+            Assert.assertEquals(result,"1", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
+        } catch (IOException e) {
+            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+        }
+        finally {
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+
+        }
     }
 
     /**
-     * @test "Verify that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
+     * @test "Verify (incremental build) that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
      *  The 2 projects of the solution are being built a first time
      *  The second time that the code is built there should not be any update since the code was not modified.
      *  Ticket #11279

@@ -236,6 +236,7 @@ public class StaticDataProvider {
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
+            public static final String XG_CONSOLE_FAILED_ON_REMOTE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\RemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\profile.xml\" /title=\"FaileOnlyLocal: XG Console Failed On  remote\"";
             public static final String TEST_SAMPLE = Locations.QA_ROOT + "\\TestSample\\RUNME.bat " + "%d " + "%s";
         }
 
@@ -628,8 +629,8 @@ public class StaticDataProvider {
         }
 
         public static class DOCKER_ROBIN {
-            public static final String MONO_X64_DEBUG = "\"C:\\projects\\mono-master\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\"";
-            public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
+            public static final String MONO_X64_DEBUG = "\"C:\\IB\\mono\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\" /log=c:\\QA\\Simulation\\buildlog.txt /mon=c:\\QA\\Simulation\\buildDockerMono.ib_mon /loglevel=\"Detailed\" /showagent";
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\IB\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\" /log=c:\\QA\\Simulation\\buildlog.txt /mon=c:\\QA\\Simulation\\buildDockerAudacity.ib_mon /loglevel=\"Detailed\" /showagent";
         }
 
         public static class TESTING_ROBIN {
@@ -804,7 +805,7 @@ public class StaticDataProvider {
     }
 
     public static class DockerCommands {
-        public static final String WIN10_DOC_CONTAINER = "affectionate_swartz";
+        public static final String WIN10_DOC_CONTAINER = "e32d1e145386";
         public static final String DOCKER_EXEC = "docker exec -i ";
         public static final String DOCKER_START_CONTAINER = "docker start -ai ";
     }
@@ -881,6 +882,7 @@ public class StaticDataProvider {
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
