@@ -3,6 +3,7 @@ package frameworkInfra.testbases;
 import com.aventstack.extentreports.Status;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.SystemActions;
 import ibInfra.linuxcl.LinuxDBService;
 import ibInfra.linuxcl.LinuxService;
 import org.testng.ITestContext;
@@ -12,6 +13,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,6 +45,7 @@ public class LinuxTestBase extends TestBase{
 
     public Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+    protected String reportFilePath;
 
     @BeforeSuite
     public void linuxSetup(ITestContext testContext) {
@@ -76,7 +79,13 @@ public class LinuxTestBase extends TestBase{
     @AfterSuite
     public void afterSuiteRun(ITestContext context) {
         extent.flush();
-}
+        Calendar calendar = Calendar.getInstance();
+        String reportFileNewPath = System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html";
+        File toBeRenamed = new File(reportFilePath);
+        SystemActions.renameFile(toBeRenamed, reportFileNewPath);
+        SystemActions.deleteFile(reportFilePath);
+    }
+
     public String getFirstBuild(String host){
         String lastBuild = linuxService.runQueryLastBuild(LinuxCommands.BUILD_ID, LinuxCommands.BUILD_HISTORY, host);
         lastBuild = lastBuild.replace("\n","");
