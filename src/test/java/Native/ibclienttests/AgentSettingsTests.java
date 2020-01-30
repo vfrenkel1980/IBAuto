@@ -94,7 +94,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @pre{
      * - Set Registry Key Logging Level}
      * @steps
+     * - Run RUNME file
+     * - Find value of required key in packet log
      * @result
+     * - Expected result 4
      */
     @Test(testName = "Verify Extended logging level")
     public void verifyExtendedLoggingLevel() {
@@ -114,7 +117,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @pre{
      * - Set Registry Key Logging Level}
      * @steps
+     * - Run RUNME file
+     * - Find value of required key in packet log
      * @result
+     * - Expected result 0
      */
     @Test(testName = "Verify Minimal logging level")
     public void verifyMinimalLoggingLevel() {
@@ -162,6 +168,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      *  - Set Registry Key
      *  - Run Command from Win Service Rebuild
      * @result
+     * - Maximum number of concurrent builds reached
      */
     @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
     public void proLicenseVerifyMultiBuildDoesNotWorkWhenAddingRegistry() {
@@ -177,7 +184,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Pro License - Verify MultiBuild Missing from UI
      * @pre{}
      * @steps
+     * - Load IB License(without Enterprise)
+     * - Run buildsettings executable file
+     * - Verify if Multiple Build Tab exist
+     * - Kill buildsettings process
+     * - Load Agent Settings IB License
      * @result
+     *- MultiBuild tab should not be displayed with PRO license
      */
     @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
     public void proLicenseVerifyMultiBuildMissingFromUI() {
@@ -193,7 +206,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Ent License - Verify MultiBuild Exists In UI
      * @pre{}
      * @steps
+     * - Load Agent Settings IB License
+     * - Run buildsettings executable file
+     * - Run buildsettings executable file
+     * - Verify if Multiple Build Tab exist
+     * - Kill buildsettings process
      * @result
+     * - MultiBuild tab should be displayed with PRO license
      */
     @Test(testName = "Ent License - Verify MultiBuild Exists In UI")
     public void entLicenseVerifyMultiBuildExistsInUI() {
@@ -207,9 +226,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify Build History By Date
-     * @pre{}
+     * @pre{
+     * - Get local date
+     * - Set local date}
      * @steps
+     * - Run buildsettings executable file
+     * - Restart IncrediBuild_Agent service
+     * - Open history file
      * @result
+     * - Numbers of History files
      */
     @Test(testName = "Verify Build History By Date")
     public void verifyBuildHistoryByDate() {
@@ -224,9 +249,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify Build History By Click
-     * @pre{}
      * @steps
+     * - Run RUNME file
+     * - Run buildsettings executable file
+     * - Click on Clear History button
+     * - Open history file
      * @result
+     * - Numbers of history files
      */
     @Test(testName = "Verify Build History By Click")
     public void verifyBuildHistoryByClick() {
@@ -239,9 +268,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify CPU Utilization
-     * @pre{}
      * @steps
+     * - Run RUNME file
+     * - Change in CPU Utilization tab number of cores to 1
+     * - Run buildsettings executable file
+     * - Set Registry Key Force CPU Count When Initiator with value 0
+     * - Stop Agent Service
+     * - Start Agent Service
      * @result
+     *
      */
     @Test(testName = "Verify CPU Utilization")
     public void verifyCPUUtilization() {
@@ -256,8 +291,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Change Default Start Page
-     * @pre{}
      * @steps
+     * - Run RUNME file
+     *
      * @result
      */
     @Test(testName = "Change Default Start Page")
