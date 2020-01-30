@@ -61,6 +61,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
+        test = extent.createTest("Before Suite");
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
