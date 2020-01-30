@@ -51,7 +51,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testType = TestType.Sim;
         ipList = XmlParser.breakDownIPList(rawIpList);
         log.info("RUNNING VERSION: " + IB_VERSION);
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
+        reportFilePath = System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html";
+        htmlReporter = new ExtentHtmlReporter(reportFilePath);
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         linuxService.killibDbCheck(ipList.get(1));

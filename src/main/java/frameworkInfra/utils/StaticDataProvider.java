@@ -805,7 +805,7 @@ public class StaticDataProvider {
     }
 
     public static class DockerCommands {
-        public static final String WIN10_DOC_CONTAINER = "e32d1e145386";
+        public static final String WIN10_DOC_CONTAINER = "bf667a8f937c";
         public static final String DOCKER_EXEC = "docker exec -i ";
         public static final String DOCKER_START_CONTAINER = "docker start -ai ";
     }
