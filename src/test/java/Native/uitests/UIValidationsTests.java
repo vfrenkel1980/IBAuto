@@ -21,8 +21,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @tets Verify Visual Studio 2017 Monitor Bar
      * @steps{
      * - Open VS instance version 15
-     * - Open project
-     * }
+     * - Open project}
      */
     @Test(testName = "Verify VS 2017 Monitor Bar")
     public void verifyVS2017MonitorBar() {
@@ -55,8 +54,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify Visual Studio 2019 Monitor Bar
      * @steps{
      * - Open VS instance version 16
-     * - Open project
-     * }
+     * - Open project}
      */
     @Test(testName = "Verify VS 2019 Monitor Bar")
     public void verifyVS2019MonitorBar() {
@@ -89,8 +87,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify Visual Studio 2019 Preview Monitor Bar
      * @steps{
      * - Open VS instance version 116
-     * - Open project
-     * }
+     * - Open project}
      */
     @Test(testName = "Verify VS 2019 Preview Monitor Bar")
     public void verifyVS2019PreviewMonitorBar() {
@@ -132,8 +129,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify IB Monitor Bar
      * @steps{
      * - Open build monitor exe
-     * - Verify Monitor Bar Pattern
-     * }
+     * - Verify Monitor Bar Pattern}
      */
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar() {
@@ -145,8 +141,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify History Coloring
      * @steps{
      * - Run BuildHistory.exe file
-     * - Verify History Coloring Pattern
-     * }
+     * - Verify History Coloring Pattern}
      */
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring() {
@@ -159,8 +154,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @steps{
      * - Open Build Monitor
      * - Click Projects Tab
-     * - Verify ProjectsTab Coloring
-     * }
+     * - Verify ProjectsTab Coloring}
      */
     @Test(testName = "Verify Projects Tab Coloring")
     public void verifyProjectsTabColoring() {
@@ -180,8 +174,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify Monitor Opened From Tray
      * @steps{
      * - Open Monitor From Tray
-     * - Verify Build Monitor Opened
-     * }
+     * - Verify Build Monitor Opened}
      */
     @Test(testName = "Verify Monitor Opened From Tray")
     public void verifyMonitorOpenedFromTray() {
@@ -197,8 +190,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify History Opened From Tray
      * @steps{
      * - Open History From Tray
-     * - Verify Build History Opened
-     * }
+     * - Verify Build History Opened}
      */
     @Test(testName = "Verify History Opened From Tray")
     public void verifyHistoryFromTray() {
@@ -214,8 +206,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify Coordinator Monitor Opened From Tray
      * @steps{
      * - Open Coordinator Monitor From Tray
-     * - Verify Coordinator Monitor Opened
-     * }
+     * - Verify Coordinator Monitor Opened}
      */
     @Test(testName = "Verify Coord Monitor Opened From Tray")
     public void verifyCoordMonitorOpenedFromTray() {
@@ -232,8 +223,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @test Verify Agent Settings Opened From Tray
      * @steps{
      * - open Agent Settings From Tray
-     * - Verify Agent Settings Opened
-     * }
+     * - Verify Agent Settings Opened}
      */
     @Test(testName = "Verify Agent Settings Opened From Tray")
     public void verifyAgentSettingsOpenedFromTray() {

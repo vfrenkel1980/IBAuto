@@ -58,12 +58,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Avoid local Execution turned OFF, Standalone ON
      * @pre{
      * - Set Registry Key Avoid Local OFF
-     *  - Set Registry Key Standalone Mode ON
-     *  }
+     *  - Set Registry Key Standalone Mode ON}
      * @steps{
      *  - Clean and Build IB
-     *  - Verify result in output log file
-     *  }
+     *  - Verify result in output log file}
      * @result{ - true/false
      * - true(Failed contain string Agent word)/false(Failed to find Agent string)
      * }
@@ -84,8 +82,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      *  }
      * @steps{
      *  - Clean and Build IB
-     *  -Verify result in output log file
-     *  }
+     *  -Verify result in output log file}
      * @result{ true/false
      * - true(Failed contain string Agent word)/false(Failed to find Agent string)
      * }
@@ -106,8 +103,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * }
      * @steps{
      * - Run RUNME file
-     * - Find value of required key in packet log
-     * }
+     * - Find value of required key in packet log}
      * @result{ - Expected result 4}
      */
     @Test(testName = "Verify Extended logging level")
@@ -130,8 +126,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * }
      * @steps{
      * - Run RUNME file
-     * - Find value of required key in packet log
-     * }
+     * - Find value of required key in packet log}
      * @result{ - Expected result 0}
      */
     @Test(testName = "Verify Minimal logging level")
@@ -177,8 +172,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @steps{
      *  - Load License
      *  - Set Registry Key
-     *  - Run Command from Win Service Rebuild
-     *  }
+     *  - Run Command from Win Service Rebuild}
      * @result{ - Maximum number of concurrent builds reached}
      */
     @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
@@ -198,8 +192,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run buildsettings executable file
      * - Verify if Multiple Build Tab exist
      * - Kill buildsettings process
-     * - Load Agent Settings IB License
-     * }
+     * - Load Agent Settings IB License}
      * @result{ - MultiBuild tab should not be displayed with PRO license}
      */
     @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
@@ -219,8 +212,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run buildsettings executable file
      * - Run buildsettings executable file
      * - Verify if Multiple Build Tab exist
-     * - Kill buildsettings process
-     * }
+     * - Kill buildsettings process}
      * @result{ - MultiBuild tab should be displayed with PRO license}
      */
     @Test(testName = "Ent License - Verify MultiBuild Exists In UI")
@@ -237,8 +229,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Verify Build History By Date
      * @pre{
      * - Get local date
-     * - Set local date
-     * }
+     * - Set local date}
      * @steps{
      * - Run buildsettings executable file
      * - Restart IncrediBuild_Agent service
@@ -263,8 +254,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run RUNME file
      * - Run buildsettings executable file
      * - Click on Clear History button
-     * - Open history file
-     * }
+     * - Open history file}
      * @result{ - Numbers of history files}
      */
     @Test(testName = "Verify Build History By Click")
@@ -284,8 +274,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run buildsettings executable file
      * - Set Registry Key Force CPU Count When Initiator with value 0
      * - Stop Agent Service
-     * - Start Agent Service
-     * }
+     * - Start Agent Service}
      * @result{}
      */
     @Test(testName = "Verify CPU Utilization")
@@ -306,8 +295,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run BuildSettings.exe file
      * - Change Startup page to projects
      * - Run BuildMonitor.exe file
-     *  - Verify projects page is open
-     *  }
+     *  - Verify projects page is open}
      */
     @Test(testName = "Change Default Start Page")
     public void changeDefaultStartPage() {
@@ -322,8 +310,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Verify Output Options
      * @steps{
      * - Run file BuildSettings.exe
-     * - Enable output options
-     *}
+     * - Enable output options}
      * @result{}
      */
     @Test(testName = "Verify Output Options")
@@ -340,8 +327,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Stop Agent Service
      * @steps{
      * - Run file BuildSettings.exe
-     * - Stop Agent service
-     * }
+     * - Stop Agent service}
      * @result{ - Agent service should be stopped}
      */
     @Test(testName = "Stop Agent Service", dependsOnMethods = {"verifyTaskTerminationOnHighCPUConsumption"})
@@ -355,8 +341,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Start Agent Service
      * @steps{
      * - Run file BuildSettings.exe
-     * - Start Agent service
-     * }
+     * - Start Agent service}
      * @result{ - Agent service should be running}
      */
     @Test(testName = "Start Agent Service", dependsOnMethods = {"stopAgentService"})
@@ -370,8 +355,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Restart Agent Service
      * @steps{
      * - Run file BuildSettings.exe
-     * - Restart Agent service
-     * }
+     * - Restart Agent service }
      * @result{ - Agent service should be running}
      */
     @Test(testName = "Restart Agent Service", dependsOnMethods = {"startAgentService"})
@@ -388,8 +372,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Limiting the number of cores per build
      * - Perform IB clean and build
      *  - Run file BuildSettings.exe
-     *  - Disabling number of cores per build limit
-     *  }
+     *  - Disabling number of cores per build limit}
      * @result{}
      */
 
@@ -414,8 +397,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run file BuildSettings.exe
      * - Disable FailOnlyLocally option
      * - Perform IB clean and build
-     * - Set Registry Key Avoid Local OFF
-     * }
+     * - Set Registry Key Avoid Local OFF}
      * @result{}
      */
     @Test(testName = "Verify OnlyFailLocally Off")
@@ -438,8 +420,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run file BuildSettings.exe
      * - Enable FailOnlyLocally option
      * - Perform IB clean and build
-     * - Set Registry Key Avoid Local OFF
-     * }
+     * - Set Registry Key Avoid Local OFF}
      * @result{}
      */
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
@@ -475,8 +456,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run file BuildSettings.exe
      * - Disable Scheduling And Verify Icon
      * - Opening Coordinator Monitor from tray
-     * - Click Allow Enable Disable As Helper
-     * }
+     * - Click Allow Enable Disable As Helper}
      * @result{}
      */
     @Test(testName = "Enable Scheduling And Verify Tray Icon")
@@ -504,8 +484,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run file BuildSettings.exe
      * - Open Coordinator Monitor From Tray
      * - Click Allow Enable Disable As Helper
-     * - Killing process CoordMonitor.exe
-     * }
+     * - Killing process CoordMonitor.exe}
      * @result{}
      */
     @Test(testName = "Enable Scheduling And Verify Tray Icon Without Permission")
@@ -530,8 +509,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @steps{
      * - Perform IB clean and build
      * - Get Helper Cores
-     * - Set Registry Key Max Concurrent PDBs 12
-     * }
+     * - Set Registry Key Max Concurrent PDBs 12}
      * @result{}
      */
     @Test(testName = "Verify PDB File Limit 1")
@@ -554,8 +532,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @steps{
      * - Perform IB clean and build
      * - Get Helper Cores
-     * - Set Registry Key Max Concurrent PDBs 12
-     * }
+     * - Set Registry Key Max Concurrent PDBs 12}
      * @result{}
      */
     @Test(testName = "Verify PDB File Limit Unchecked")
@@ -579,8 +556,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @steps{
      * - Perform IB clean and build
      * - Get Helper Cores
-     * - Set Registry Key Force CPU Count When Initiator OFF
-     * }
+     * - Set Registry Key Force CPU Count When Initiator OFF}
      * @result{}
      */
     @Test(testName = "Verify CPU Utilization As Initiator and PDB limit")
@@ -604,8 +580,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @steps{
      * - Perform IB clean and build
      * - Get Helper Cores
-     * - Set Registry Key Force CPU Count When Helper OFF
-     * }
+     * - Set Registry Key Force CPU Count When Helper OFF}
      * @result{}
      */
     @Test(testName = "Verify When CPU Utilization As Helper checked")
