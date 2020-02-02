@@ -313,9 +313,15 @@ public class LinuxService extends TestBase implements ILinuxService {
         Calendar calender = Calendar.getInstance();
         log.info(calender.getTime());
         for (Object machine : ipList) {
-            log.info("deleting " + machine);
-            winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
-            log.info("deleted " + machine);
+            log.info("deleting Logs from: " + machine);
+            int temp = winService.runCommandWaitForFinish(LinuxCommands.PLINK + machine + " " + LinuxCommands.DELETE_LOGS);
+            if (temp == 0) {
+                log.info("deleted Logs from " + machine);}
+            if (temp == 1) {
+                log.info("Failed to delete Logs from " + machine);
+                test.log(Status.WARNING, "Failed to delete Logs from " + machine);
+                extent.flush();
+            }
         }
     }
 
