@@ -89,7 +89,6 @@ public BuildsPageObject(EventFiringWebDriver driver) {
 
     public void waitForLoadingScreen(){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(OVERLAY));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(OVERVIEW_TAB));
     }
 
 }
