@@ -30,14 +30,14 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  */
 public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
-     * @test Avoid local Execution turned ON, Standalone OFF
+     * @test Avoid local execution turned ON, Standalone OFF
      * @pre{
-     * - Set Registry Key Avoid Local ON
-     * - Set Registry Key Standalone Mode OFF
+     * - Set registry key Avoid Local ON
+     * - Set registry key Standalone Mode OFF
      * }
      * @steps{
-     * - Clean and Build IB
-     * - Set Registry Key Avoid Local OFF
+     * - Clean and build IB
+     * - Set registry key Avoid Local OFF
      * - Verify result in output log file
      * }
      * @result{ - true/false
@@ -55,12 +55,12 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Avoid local Execution turned OFF, Standalone ON
+     * @test Avoid local execution turned OFF, Standalone ON
      * @pre{
-     * - Set Registry Key Avoid Local OFF
-     *  - Set Registry Key Standalone Mode ON}
+     * - Set registry key Avoid Local OFF
+     *  - Set registry key Standalone Mode ON}
      * @steps{
-     *  - Clean and Build IB
+     *  - Clean and build IB
      *  - Verify result in output log file}
      * @result{ - true/false
      * - true(Failed contain string Agent word)/false(Failed to find Agent string)
@@ -75,13 +75,13 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
     }
     /**
-     * @test Avoid local Execution turned OFF, Standalone OFF
+     * @test Avoid local execution turned OFF, Standalone OFF
      * @pre{
-     *  - Set Registry Key Avoid Local OFF
-     *  - Set Registry Key Standalone Mode ON
+     *  - Set registry key Avoid Local OFF
+     *  - Set registry key Standalone Mode ON
      *  }
      * @steps{
-     *  - Clean and Build IB
+     *  - Clean and build IB
      *  -Verify result in output log file}
      * @result{ true/false
      * - true(Failed contain string Agent word)/false(Failed to find Agent string)
@@ -97,9 +97,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Extended logging level
+     * @test Verify extended logging level
      * @pre{
-     * - Set Registry Key Logging Level
+     * - Set registry key logging Level
      * }
      * @steps{
      * - Run RUNME file
@@ -170,9 +170,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Pro License - Verify MultiBuild Does Work When Adding Registry
      * @steps{
-     *  - Load License
-     *  - Set Registry Key
-     *  - Run Command from Win Service Rebuild}
+     *  - Load license
+     *  - Set registry key
+     *  - Run command from win service Rebuild}
      * @result{ - Maximum number of concurrent builds reached}
      */
     @Test(testName = "Pro License - Verify MultiBuild Does Not Work When Adding Registry")
@@ -188,11 +188,11 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Pro License - Verify MultiBuild Missing from UI
      * @steps{
-     * - Load IB License(without Enterprise)
+     * - Load IB license(without Enterprise)
      * - Run buildsettings executable file
      * - Verify if Multiple Build Tab exist
      * - Kill buildsettings process
-     * - Load Agent Settings IB License}
+     * - Load Agent Settings IB license}
      * @result{ - MultiBuild tab should not be displayed with PRO license}
      */
     @Test(testName = "Pro License - Verify MultiBuild Missing from UI")
@@ -226,7 +226,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Build History By Date
+     * @test Verify Build History by date
      * @pre{
      * - Get local date
      * - Set local date}
@@ -249,7 +249,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Build History By Click
+     * @test Verify Build History by click
      * @steps{
      * - Run RUNME file
      * - Run buildsettings executable file
@@ -272,10 +272,10 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Run RUNME file
      * - Change in CPU Utilization tab number of cores to 1
      * - Run buildsettings executable file
-     * - Set Registry Key Force CPU Count When Initiator with value 0
+     * - Set registry key force CPU count when Initiator with value 0
      * - Stop Agent Service
      * - Start Agent Service}
-     * @result{}
+     * @result{ }
      */
     @Test(testName = "Verify CPU Utilization")
     public void verifyCPUUtilization() {
@@ -289,7 +289,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Change Default Start Page
+     * @test Change default Start Page
      * @steps{
      * - Run RUNME file
      * - Run BuildSettings.exe file
@@ -307,7 +307,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Output Options
+     * @test Verify Output options
      * @steps{
      * - Run file BuildSettings.exe
      * - Enable output options}
@@ -366,7 +366,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Core Limit Per Build Limitation
+     * @test Verify Core limit per build limitation
      * @steps{
      * - Run file BuildSettings.exe
      * - Limiting the number of cores per build
@@ -388,17 +388,17 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Only Fail Locally Off
+     * @test Verify only fail locally OFF
      * @pre{
-     * - Set Registry Key Avoid Local ON
-     * - Set Registry Key Standalone Mode OFF
+     * - Set registry key Avoid Local ON
+     * - Set registry key Standalone Mode OFF
      * }
      * @steps{
      * - Run file BuildSettings.exe
      * - Disable FailOnlyLocally option
      * - Perform IB clean and build
-     * - Set Registry Key Avoid Local OFF}
-     * @result{}
+     * - Set registry key Avoid Local OFF}
+     * @result{ }
      */
     @Test(testName = "Verify OnlyFailLocally Off")
     public void verifyOnlyFailLocallyOff() {
@@ -412,15 +412,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Only Fail Locally On
+     * @test Verify only fail locally ON
      * @pre{
-     * - Set Registry Key Avoid Local ON
+     * - Set registry key Avoid Local ON
      * }
      * @steps{
      * - Run file BuildSettings.exe
      * - Enable FailOnlyLocally option
      * - Perform IB clean and build
-     * - Set Registry Key Avoid Local OFF}
+     * - Set registry key Avoid Local OFF}
      * @result{}
      */
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
@@ -434,9 +434,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify Build With Errors
+     * @test Verify build with errors
      * @pre{
-     * Set Registry All
+     *  - Set registry All
      * }
      * @steps{ - Perform IB clean and build}
      * @result{ - Build succeeded, expected 8}
@@ -449,15 +449,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Enable Scheduling And Verify Tray Icon
+     * @test Enable Scheduling and verify Tray icon
      * @steps{
      * - Run file BuildSettings.exe
-     * - Enable Scheduling And Verify Icon
+     * - Enable Scheduling and verify icon
      * - Run file BuildSettings.exe
-     * - Disable Scheduling And Verify Icon
+     * - Disable Scheduling and verify icon
      * - Opening Coordinator Monitor from tray
-     * - Click Allow Enable Disable As Helper}
-     * @result{}
+     * - Click on Allow Enable Disable As Helper option}
+     * @result{ }
      */
     @Test(testName = "Enable Scheduling And Verify Tray Icon")
     public void enableSchedulingAndVerifyTrayIconWithPermission() {
@@ -477,15 +477,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Enable Scheduling And Verify Tray Icon Without Permission
+     * @test Enable Scheduling and verify Tray icon without permission
      * @steps{
      * - Run file BuildSettings.exe
      * - Is Not Active Scheduling option
      * - Run file BuildSettings.exe
-     * - Open Coordinator Monitor From Tray
-     * - Click Allow Enable Disable As Helper
+     * - Open Coordinator Monitor from Tray icon
+     * - Click on Allow Enable Disable As Helper option
      * - Killing process CoordMonitor.exe}
-     * @result{}
+     * @result{ }
      */
     @Test(testName = "Enable Scheduling And Verify Tray Icon Without Permission")
     public void enableSchedulingAndVerifyTrayIconWithoutPermission() {
@@ -501,16 +501,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify PDB File Limit 1
+     * @test Verify PDB file limit 1
      * @pre{
-     * - Set Registry Key Standalone OFF
-     * - Set Registry Key Max Concurrent PDBs ON
+     * - Set registry key Standalone OFF
+     * - Set registry key Max Concurrent PDBs ON
      * }
      * @steps{
      * - Perform IB clean and build
-     * - Get Helper Cores
-     * - Set Registry Key Max Concurrent PDBs 12}
-     * @result{}
+     * - Get helper cores
+     * - Set registry key Max Concurrent PDBs 12}
+     * @result{ }
      */
     @Test(testName = "Verify PDB File Limit 1")
     public void verifyPDBFileLimit1() {
@@ -526,14 +526,14 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Verify PDB File Limit Unchecked
      * @pre{
-     * - Set Registry Key Standalone OFF
-     * - Set Registry Key Max Concurrent PDBs OFF
+     * - Set registry key Standalone OFF
+     * - Set registry key Max Concurrent PDBs OFF
      * }
      * @steps{
      * - Perform IB clean and build
-     * - Get Helper Cores
-     * - Set Registry Key Max Concurrent PDBs 12}
-     * @result{}
+     * - Get helper cores
+     * - Set registry key Max Concurrent PDBs 12}
+     * @result{ }
      */
     @Test(testName = "Verify PDB File Limit Unchecked")
     public void verifyPDBFileLimitUnchecked() {
@@ -549,15 +549,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Verify CPU Utilization As Initiator and PDB limit
      * @pre{
-     * - Set Registry Key Standalone OFF
-     * - Set Registry Key Max Concurrent PDBs ON
-     * - Set Registry Key Force CPU Count When Initiator ON
+     * - Set registry key Standalone OFF
+     * - Set registry key Max Concurrent PDBs ON
+     * - Set registry key force CPU count when Initiator ON
      * }
      * @steps{
      * - Perform IB clean and build
-     * - Get Helper Cores
-     * - Set Registry Key Force CPU Count When Initiator OFF}
-     * @result{}
+     * - Get helper cores
+     * - Set registry key force CPU count when Initiator OFF}
+     * @result{ }
      */
     @Test(testName = "Verify CPU Utilization As Initiator and PDB limit")
     public void verifyCPUUtilizationAsInitiatorAndPDBLimit() {
@@ -572,16 +572,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     }
 
     /**
-     * @test Verify When CPU Utilization As Helper checked
+     * @test Verify when CPU Utilization As Helper checked
      * @pre{
-     * - Set Registry Key Standalone OFF
-     * - Set Registry Key Force CPU Count When Helper ON
+     * - Set registry key Standalone OFF
+     * - Set registry key force CPU count when Helper ON
      * }
      * @steps{
      * - Perform IB clean and build
-     * - Get Helper Cores
-     * - Set Registry Key Force CPU Count When Helper OFF}
-     * @result{}
+     * - Get helper cores
+     * - Set registry key force CPU count when Helper OFF}
+     * @result{ }
      */
     @Test(testName = "Verify When CPU Utilization As Helper checked")
     public void verifyWhenCPUUtilizationAsHelperChecked() {

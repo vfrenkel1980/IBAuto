@@ -25,7 +25,14 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  * @details Run on UI Automation (HOST-4)
  */
 public class SetupTests extends SetupTestBase {
-
+    /**
+     * @test Install In A Different Directory
+     * @steps{
+     * - Start the IB ui installer
+     * - Get Registry Key
+     * - Run Build And Assert
+     * }
+     */
     @Test(testName = "Install In A Different Directory")
     public void installInADifferentDirectory() {
         ibuiService.startIBUIInstaller(IB_VERSION);
@@ -61,6 +68,14 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Install On An Existing Coordinator
+     * @steps{
+     * - Start the IB ui installer
+     * - Get Registry Key
+     * - Run Build And Assert
+     * }
+     */
     @Test(enabled = false, testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator() {
         ibuiService.startIBUIInstaller(IB_VERSION);
@@ -89,6 +104,14 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Install Single Use VM
+     * @steps{
+     * - Start the IB ui installer
+     * - Get Registry Key
+     * - Run Build And Assert
+     * }
+     */
     @Test(enabled = false, testName = "Install Single Use VM")
     public void installSingleUseVM() {
         ibuiService.startIBUIInstaller(IB_VERSION);
@@ -118,6 +141,16 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Uninstall IB
+     * @steps{
+     * - Install incredibuild
+     * - Start the IB ui installer
+     * - Select Uninstall option
+     * - Verify if incredibuild services are running
+     * }
+     * @result{ - Should be Uninstalled}
+     */
     @Test(testName = "Uninstall IB")
     public void uninstallIb() {
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
@@ -136,6 +169,19 @@ public class SetupTests extends SetupTestBase {
         Assert.assertFalse(ibService.verifyIbServicesRunning(true, true), "Services are running!!!! Should be Uninstalled");
     }
 
+    /**
+     * @test Repair IB
+     * @steps{
+     * - Install incredibuild
+     * - Run IncrediBuild_Agent service
+     * - Delete all files in folder with a predefined prefix
+     * - Start the IB ui installer
+     * - Removing Release notes CB
+     * - Get Registry Key
+     * - Verify if incredibuild services are running
+     * - Run Build And Assert
+     * }
+     */
     @Test(testName = "Repair IB")
     public void repairIb() {
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
@@ -157,6 +203,18 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Upgrade IB
+     * @steps{
+     * - Install incredibuild version 2190
+     * - Start the IB ui installer
+     * - Removing Release notes CB
+     * - Removing Remote update CB
+     * - Get Registry Key
+     * - Verify if incredibuild services are running
+     * - run Build And Assert
+     * }
+     */
     @Test(testName = "Upgrade IB")
     public void upgradeIb() {
         ibService.installIB("2190", IbLicenses.UI_LIC);
@@ -177,6 +235,18 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Downgrade IB
+     * @steps{
+     * - Install incredibuild
+     * - Start the IB ui installer 2190
+     * - Removing Release notes CB
+     * - Removing Remote update CB
+     * - Get Registry Key
+     * - Verify if incredibuild services are running
+     * - run Build And Assert
+     * }
+     */
     @Test(testName = "Downgrade IB")
     public void downgradeIb() {
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
@@ -197,6 +267,23 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Verify Port Changes
+     * @steps{
+     * - Start the IB ui installer
+     * - Selecting "install new coordinator"
+     * - Selecting manual ports
+     * - Selecting manual coordinator ports
+     * - Browse License BTN
+     * - Removing Release notes CB
+     * - Get Registry Key
+     * - Verify if incredibuild services are running
+     * - Get Registry Key Coordinator port
+     * - Get Registry Key Agent port
+     * - Get Registry Key Helper port
+     * - run Build And Assert
+     * }
+     */
     @Test(testName = "Verify Port Changes")
     public void verifyPortChanges() {
         ibuiService.startIBUIInstaller(IB_VERSION);
@@ -239,6 +326,18 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Upgrade Pro To Enterprise
+     * @steps{
+     * - Install incredibuild
+     * - Start the IB ui installer
+     * - Removing "Launch Dashboard" CB
+     * - Removing "Create Ent. shortcut" CB
+     * - Removing Remote update CB
+     * - Run Build And Assert
+     * - Get Last Value From postgresJDBC Table
+     * }
+     */
     @Test(testName = "Upgrade Pro To Enterprise")
     public void upgradeProToEnterprise() {
         ibService.installIB(IB_VERSION, IbLicenses.UI_LIC);
@@ -264,6 +363,17 @@ public class SetupTests extends SetupTestBase {
 
     }
 
+    /**
+     * @test Downgrade Enterprise To Pro
+     * @steps{
+     * - Install Enterprise IB
+     * - Start the IB ui installer
+     * - Selecting Downgrade To Incredibuild Pro Edition option
+     * - Verify if Incredibuild Dashboard Server is running
+     * - Verify if incredibuild services are running
+     * - Run Build And Assert
+     * }
+     */
     @Test(testName = "Downgrade Enterprise To Pro")
     public void downgradeEnterpriseToPro() {
         installEnterprise();
@@ -283,6 +393,16 @@ public class SetupTests extends SetupTestBase {
         runBuildAndAssert();
     }
 
+    /**
+     * @test Enterprise Clean Installation
+     * @steps{
+     * - Install Enterprise IB
+     * - Verify if Incredibuild Dashboard Server is running
+     * - Verify if incredibuild services are running
+     * - Run Build And Assert
+     * - Get Last Value From postgresJDBC Table
+     * }
+     */
     @Test(testName = "Enterprise Clean Installation")
     public void enterpriseCleanInstallation() {
         installEnterprise();
@@ -293,6 +413,24 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(exitCode.equals("0"), "DB exit code is: " + exitCode);
     }
 
+    /**
+     * @test Change Enterprise Installation Location And Port
+     * @steps{
+     * - Start the IB ui installer
+     * - Selecting "install new coordinator"
+     * - Changing Enterprise installation path to Different Enterprise Installation Directory
+     * - Selecting manual dashboard ports
+     * - Browse License
+     * - Removing Release notes CB
+     * - Removing "Launch Dashboard" CB
+     * - Removing "Create Ent. shortcut" CB
+     * - Verify if Incredibuild Dashboard Server is running
+     * - Verify if incredibuild services are running
+     * - Get Registry Key
+     * - Run Build And Assert
+     * - Get Last Value From postgresJDBC Table
+     * }
+     */
     @Test(testName = "Change Enterprise Installation Location And Port")
     public void changeEnterpriseInstallationLocationAndPort() {
         ibuiService.startEntInstaller(IB_VERSION);
@@ -335,6 +473,10 @@ public class SetupTests extends SetupTestBase {
         Assert.assertTrue(exitCode.equals("0"), "DB exit code is: " + exitCode);
     }
 
+    /**
+     * @test Negative Upgrade Pro To Ent With No Ent License
+     * @steps{}
+     */
     @Test(testName = "Negative Upgrade Pro To Ent With No Ent License")
     public void negativeUpgradeProToEntWithNoEntLicense() {
         ibService.installIB(IB_VERSION, IbLicenses.NO_ENT_LIC);
@@ -519,4 +661,4 @@ public class SetupTests extends SetupTestBase {
             Assert.fail();
         }
     }
-}
+}//end of SetupTest class

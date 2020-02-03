@@ -880,8 +880,8 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines {
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
-        public static final String AGENT_SETTINGS_HLPR_NAME = "192.168.10.235"; // "VM-AgntSet-hlp"
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.235"; //"192.168.10.165"
+        public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
