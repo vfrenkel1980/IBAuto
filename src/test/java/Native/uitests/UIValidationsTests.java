@@ -222,8 +222,8 @@ public class UIValidationsTests extends UIValidationTestBase {
     /**
      * @test Verify Agent Settings Opened From Tray
      * @steps{
-     * - open Agent Settings From Tray
-     * - Verify Agent Settings Opened}
+     * - Open Agent Settings from Tray
+     * - Verify Agent Settings opened}
      */
     @Test(testName = "Verify Agent Settings Opened From Tray")
     public void verifyAgentSettingsOpenedFromTray() {
