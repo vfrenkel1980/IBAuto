@@ -84,7 +84,7 @@ public class SetupTests extends SetupTestBase {
      * - Perform IB clean and build
      * }
      * @result{ - Return code}
-     *
+     */
     @Test(enabled = false, testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator() {
         ibuiService.startIBUIInstaller(IB_VERSION);
