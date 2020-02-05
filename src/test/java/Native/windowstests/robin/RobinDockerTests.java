@@ -12,7 +12,8 @@ public class RobinDockerTests extends RobinDockerTestBase {
     public void dockerMonoDebugBuild() {
         int returnCode = winService.runCommandWaitForFinish(DockerCommands.DOCKER_EXEC + DockerCommands.WIN10_DOC_CONTAINER + " " +
                 IbLocations.BUILD_CONSOLE + ProjectsCommands.DOCKER_ROBIN.MONO_X64_DEBUG);
-        winService.runCommandWaitForFinish("docker cp  " + DockerCommands.WIN10_DOC_CONTAINER + ":c:\\QA\\Simulation\\buildLog.txt  C:\\QA\\Simulation\\buildLog.txt\"");
+        winService.runCommandWaitForFinish("docker cp  " + DockerCommands.WIN10_DOC_CONTAINER + ":c:\\QA\\Simulation\\buildLog.txt  C:\\QA\\Simulation\\buildLog.txt");
+        winService.runCommandWaitForFinish("docker cp  " + DockerCommands.WIN10_DOC_CONTAINER + ":c:\\QA\\Simulation\\buildDockerMono.ib_mon  C:\\QA\\Simulation\\buildDockermono.ib_mon");
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "No agents were assigned to the build");
     }
@@ -22,6 +23,7 @@ public class RobinDockerTests extends RobinDockerTestBase {
         int returnCode = winService.runCommandWaitForFinish(DockerCommands.DOCKER_EXEC + DockerCommands.WIN10_DOC_CONTAINER + " " +
                 IbLocations.BUILD_CONSOLE + ProjectsCommands.DOCKER_ROBIN.AUDACITY_X32_DEBUG);
         winService.runCommandWaitForFinish("docker cp  " + DockerCommands.WIN10_DOC_CONTAINER + ":c:\\QA\\Simulation\\buildLog.txt  C:\\QA\\Simulation\\buildLog.txt\"");
+        winService.runCommandWaitForFinish("docker cp  " + DockerCommands.WIN10_DOC_CONTAINER + ":c:\\QA\\Simulation\\buildDockerAudacity.ib_mon  C:\\QA\\Simulation\\buildDockerAudacity.ib_mon");
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "No agents were assigned to the build");
     }

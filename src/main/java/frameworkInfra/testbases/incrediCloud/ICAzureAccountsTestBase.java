@@ -28,11 +28,11 @@ public class ICAzureAccountsTestBase extends ICEngineTestBase {
     public void beforeClass(){
         test = extent.createTest("Before Class");
         failedOnboardingPage = new OnboardingPage("East Asia", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, 10,
-                COORD_PORT, VM_PORT);
+                COORD_PORT, VM_PORT, null);
         preUpdateOnboardingPage = new OnboardingPage("East Asia", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, 2,
-                COORD_PORT, VM_PORT);
+                COORD_PORT, VM_PORT, null);
         postUpdateOnboardingPage = new OnboardingPage("East Asia", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, 4,
-                COORD_PORT, VM_PORT);
+                COORD_PORT, VM_PORT, null);
     }
 
     @BeforeMethod

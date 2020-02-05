@@ -1,5 +1,6 @@
 package ibInfra.ibExecs;
 
+import ibInfra.ibExecs.metadata.CoordinatorStatus;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -23,5 +24,7 @@ public interface ibCoordMonitor {
     boolean checkIfAgentIsHelper (String initiatorName, String agentName) throws IOException, SAXException, ParserConfigurationException;
 
     String getAgentAttribute(String agentName, String attribute) throws IOException, SAXException, ParserConfigurationException;
+
+    CoordinatorStatus retrieveCoordMonitorDataFromXmlFile(String xPath) throws Exception;
 
 }

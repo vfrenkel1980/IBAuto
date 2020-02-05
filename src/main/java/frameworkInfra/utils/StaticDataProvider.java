@@ -192,6 +192,11 @@ public class StaticDataProvider {
         }
     }
 
+    public static class VsTreeType {
+        public static final String PROJECT = "project";
+        public static final String SOLUTION = "solution";
+    }
+
     public static class VsActions {
         public static final String BUILD_SOLUTION = "Build Solution";
         public static final String REBUILD_SOLUTION = "Rebuild Solution";
@@ -231,6 +236,7 @@ public class StaticDataProvider {
             public static final String PROJECTVC15_CUSTOMSTEP_FAIL = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\ProjectVC15CustomStepFailed.sln\"  /cfg=\"debug|x86\" /title=\"Project VC15 CustomStep Failed\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC15CustomStepFailed\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
+            public static final String XG_CONSOLE_FAILED_ON_REMOTE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\RemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\profile.xml\" /title=\"FaileOnlyLocal: XG Console Failed On  remote\"";
             public static final String TEST_SAMPLE = Locations.QA_ROOT + "\\TestSample\\RUNME.bat " + "%d " + "%s";
         }
 
@@ -613,6 +619,7 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BLENDER_X64_RELEASE = "\"" + Locations.QA_ROOT + "\\VC16\\Blender\\build_windows_Full_x64_vc15_Release\\Blender.sln\" /%s /cfg=\"Release|x64\" /title=\"Blender 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String ACE_X32_DEBUG = "\"" + Locations.QA_ROOT + "\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\"  /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String VC16PROJPREfast = "\"" + Locations.QA_ROOT + "\\VC16\\enablingPREfast\\enablingPREfast.sln\" /cfg=\"debug|x86\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
         }
 
         public static class VC16Preview_ROBIN {
@@ -622,8 +629,8 @@ public class StaticDataProvider {
         }
 
         public static class DOCKER_ROBIN {
-            public static final String MONO_X64_DEBUG = "\"C:\\projects\\mono-master\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\"";
-            public static final String AUDACITY_X32_DEBUG = "\"C:\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\"";
+            public static final String MONO_X64_DEBUG = "\"C:\\IB\\mono\\msvc\\mono.sln\" /rebuild /cfg=\"debug|x64\" /title=\"Mono 2017 - Debug x64\" /log=c:\\QA\\Simulation\\buildlog.txt /mon=c:\\QA\\Simulation\\buildDockerMono.ib_mon /loglevel=\"Detailed\" /showagent";
+            public static final String AUDACITY_X32_DEBUG = "\"C:\\IB\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /rebuild  /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug x32\" /log=c:\\QA\\Simulation\\buildlog.txt /mon=c:\\QA\\Simulation\\buildDockerAudacity.ib_mon /loglevel=\"Detailed\" /showagent";
         }
 
         public static class TESTING_ROBIN {
@@ -669,7 +676,8 @@ public class StaticDataProvider {
             public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
-            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=deep /noshadow";
+            public static final String NUNIT2_FRAMEWORK_THRESHOLDTESTLEVEL_TEST = NUNIT2_FRAMEWORK_1DLL_TEST + " /testLevel=auto /thresholdTestlevel=%s";
+            public static final String NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST = NUNIT2_FRAMEWORK_1DLL_TEST + " /testlevel=deep /noshadow";
             public static final String NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TEST + " /xml=nunitres.xml";
             public static final String NUNIT2_FRAMEWORK_DEEP_XML_RESULT_TEST = ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_TESTLEVEL_DEEP_TEST + " /xml=\"" + Locations.QA_ROOT + "\\nunitres.xml\"";
             private static final String NUNIT2_FRAMEWORK_1DLL_RUN = NUNIT2_FRAMEWORK_1DLL_TEST + " /run=";
@@ -769,9 +777,9 @@ public class StaticDataProvider {
         public static final String DASHBOARD_LIC = "IncrediBuild FreeDev license - Mark Zvuluni - dashboard tests August 2018.IB_lic";
         public static final String PRO_LIC = "IncrediBuild FreeDev license - Aleksandra Malykhina - dashboard tests February 2019.IB_lic";
         //lic tests
-        public static final String VALID_LIC = "IncrediBuild - Aleksandra - License Testing Environment Jan 2019.IB_lic";
+        public static final String VALID_LIC = "IncrediBuild - IncrediBuild - Aleksandra - License Testing Environment Jan 2019 (new).IB_lic";
         public static final String VALID_OFFLINE_LIC = "IncrediBuild - Aleksandra Malykhina - personal Coordinator offline license 25-NOV-19.IB_lic";
-        public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - expired solutions.IB_lic";
+        public static final String EXPIRED_SOLUTIONS_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018 - expired solutions.IB_lic";
         public static final String EXPIRED_LIC = "IncrediBuild - Vlad - License Testing Environment December 2018 - license expired.IB_lic";
         public static final String VALID_NO_UTESTS_LIC = "IncrediBuild - Vlad - License Testing Environment April 2018.IB_lic";
     }
@@ -797,7 +805,7 @@ public class StaticDataProvider {
     }
 
     public static class DockerCommands {
-        public static final String WIN10_DOC_CONTAINER = "affectionate_swartz";
+        public static final String WIN10_DOC_CONTAINER = "bf667a8f937c";
         public static final String DOCKER_EXEC = "docker exec -i ";
         public static final String DOCKER_START_CONTAINER = "docker start -ai ";
     }
@@ -818,6 +826,7 @@ public class StaticDataProvider {
         public static final String VC14PROJECT = Locations.QA_ROOT + "\\projects\\vc14project\\vc14project.sln";
         public static final String VC15PROJECT = Locations.QA_ROOT + "\\projects\\vc15project\\vc15project.sln";
         public static final String VC16PROJECT = Locations.QA_ROOT + "\\projects\\vc16project\\vc16project.sln";
+
     }
 
     public static class UIValidationsProjects {
@@ -871,8 +880,9 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines {
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.235"; //"192.168.10.165"
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";

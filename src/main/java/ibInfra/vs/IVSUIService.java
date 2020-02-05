@@ -12,7 +12,7 @@ public interface IVSUIService  {
 
     void performIbActionFromMenuDontWaitForFinish(String action);
 
-    void performIbActionFromPrjExplorer(String action,String type, String solutionName);
+    void performIbActionFromPrjExplorer(String action,String type, String solutionName) throws Exception;
 
     void openVSInstance(String vsinstallation, boolean isFirstActivation, String scenario);
 

@@ -50,6 +50,7 @@ public class SingleUseVMTestBase extends TestBase {
         test.log(Status.INFO, "BEFORE SUITE started");
         log.info("BEFORE SUITE started");
         customPackAllocationOn();
+        autoSubscribeSUVM("1");
     }
 
     @BeforeMethod
@@ -68,6 +69,8 @@ public class SingleUseVMTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
+
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + IbLocations.XGCOORDCONSOLE_USEFILE +" /unsubscribe");
         ibService.uninstallIB(IB_VERSION);
     }
 
@@ -85,6 +88,7 @@ public class SingleUseVMTestBase extends TestBase {
     public void coordServiceRestart() {
         winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + "net stop \"" + WindowsServices.COORD_SERVICE + "\"");
         winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + "net start \"" + WindowsServices.COORD_SERVICE + "\"");
+        SystemActions.sleep(15);
     }
 
     public void setUnsubscribeTimeOnCoord(int time) {

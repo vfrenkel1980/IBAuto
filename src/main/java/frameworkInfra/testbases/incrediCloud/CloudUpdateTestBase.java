@@ -32,13 +32,13 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
         switch (CLOUD) {
             case "azure":
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT);
+                        COORD_PORT, VM_PORT, null);
                 updateIncreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
-                        COORD_PORT, VM_PORT);
+                        COORD_PORT, VM_PORT, null);
                 updateDecreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
-                        COORD_PORT, VM_PORT);
+                        COORD_PORT, VM_PORT, null);
                 updatePorts = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
-                        31100, 31103);
+                        31100, 31103, null);
                 break;
             case "aws":
                 //TODO: fill in aws update values.

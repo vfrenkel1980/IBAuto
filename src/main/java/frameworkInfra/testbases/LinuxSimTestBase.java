@@ -33,8 +33,6 @@ public class LinuxSimTestBase extends LinuxTestBase {
     private String className = this.getClass().getName();
     private static List<String> firstBuilds = new ArrayList<String>();
     private static List<String> lastBuilds = new ArrayList<String>();
-    private static List<String> has_crashes = new ArrayList<String>();
-    private static List<String> log_crashes = new ArrayList<String>();
     protected SimClassType simClassType;
     private Calendar calender = Calendar.getInstance();
 
@@ -53,7 +51,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testType = TestType.Sim;
         ipList = XmlParser.breakDownIPList(rawIpList);
         log.info("RUNNING VERSION: " + IB_VERSION);
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html");
+        reportFilePath = System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html";
+        htmlReporter = new ExtentHtmlReporter(reportFilePath);
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         linuxService.killibDbCheck(ipList.get(1));
@@ -62,6 +61,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
             if (connectedMachinesToGrid.get(i).contains("."))
                 connectedMachinesToGrid.set(i, connectedMachinesToGrid.get(i).substring(0, connectedMachinesToGrid.get(i).indexOf(".")));
         }
+        test = extent.createTest("Before Suite");
         linuxService.deleteLogsFolder(connectedMachinesToGrid);
 
 
@@ -131,9 +131,12 @@ public class LinuxSimTestBase extends LinuxTestBase {
         testName = getTestName(method);
         test = extent.createTest(testName);
         test.assignCategory("Linux Simulation - Cycle " + cycle);
-        test.assignCategory("Linux Simulation - Cycle " + cycle);
         test.log(Status.INFO, method.getName() + " test started");
         log.info("Linux Simulation - Cycle " + cycle + "; Test name: " + testName);
+        if (cycle.equals("21") || cycle.equals("22")){
+            LinuxTestBase.LINUXCLFLAGS = ("-f");
+            log.info("For performance, Cycle" + cycle + " is without -d, only flags are: " + LINUXCLFLAGS);
+        }
     }
 
     @AfterSuite
@@ -174,6 +177,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
 
         for (String machine : ipList) {
+            List<String> has_crashes;
+            List<String> log_crashes;
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
             if (has_crashes.size() >0 && !has_crashes.get(0).equals("")) {
                 test.log(Status.WARNING, "Found has_crash files in Machine: " + machine + " Path: /etc/incredibuild/log/");

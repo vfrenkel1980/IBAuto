@@ -96,15 +96,10 @@ public class IBUIService implements IIBUIService {
     public class Installer implements IInstaller {
 
         @Override
-        public void clickNext()  {
+        public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            try {
-                screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
-            }
-            catch (FindFailed findFailed){
-                test.log(Status.WARNING, "Failed to click to Next button : " + findFailed.getMessage());
-                Assert.fail();
-            }
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
+
         }
 
         @Override
@@ -115,14 +110,8 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void clickFinish() throws FindFailed {
-            try {
                 test.log(Status.INFO, "Clicking Finish");
                 screen.wait(IBInstaller.FinishBTN.similar((float) 0.8), 40).click();
-            }
-            catch (FindFailed findFailed){
-                test.log(Status.WARNING, "Failed to click to Finish button : " + findFailed.getMessage());
-                Assert.fail();
-            }
         }
 
         @Override
@@ -169,10 +158,16 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void selectLicense() throws FindFailed {
+        public void selectLicense()  {
             test.log(Status.INFO, "Selecting license");
-            screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
-            screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+            try {
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+            }
+            catch (FindFailed findFailed){
+                    test.log(Status.WARNING, "License select fail: " + findFailed.getMessage());
+                    Assert.fail();
+                }
             test.log(Status.INFO, "License selected");
         }
 
@@ -373,9 +368,9 @@ public class IBUIService implements IIBUIService {
         public void openCoordMonitorFromTray() {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
-                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 5).click();
+                //screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 30).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open coordinator monitor with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -691,6 +686,7 @@ public class IBUIService implements IIBUIService {
                 Assert.fail();
             }
         }
+
         }
 
         public class Coordinator implements ICoordinator {

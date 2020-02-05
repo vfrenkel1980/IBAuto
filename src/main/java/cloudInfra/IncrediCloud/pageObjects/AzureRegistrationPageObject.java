@@ -1,6 +1,8 @@
 package cloudInfra.IncrediCloud.pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,6 +32,10 @@ public class AzureRegistrationPageObject extends RegistrationPageObject{
 //        eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination!");
         eventWebDriver.findElement(PASSWORD_TB).sendKeys("4illumination!");
         wait.until(ExpectedConditions.elementToBeClickable(SIGNIN_BUTTON)).click();
+
+//        WebElement sub = eventWebDriver.findElement(ACCEPT_BUTTON);
+//        Actions actions = new Actions(eventWebDriver);
+//        actions.moveToElement(sub).click().perform();
         wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_BUTTON)).click();
     }
 }
