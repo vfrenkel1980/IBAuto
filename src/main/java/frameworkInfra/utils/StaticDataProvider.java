@@ -22,7 +22,7 @@ public class StaticDataProvider {
         public static final String BUILDMONITOR = "\"" + IbLocations.IB_ROOT + "\\BuildMonitor.exe" + "\"" + " ";
         public static final String BUILDHISTORY = "\"" + IbLocations.IB_ROOT + "\\BuildHistory.exe" + "\"" + " ";
         public static final String XGCOORDCONSOLE = "\"" + IbLocations.IB_ROOT + "\\xgCoordConsole.exe" + "\"" + " ";
-        public static final String XGCOORDCONSOLE_USEFILE = XGCOORDCONSOLE+" /UseFile ";
+        public static final String XGCOORDCONSOLE_USEFILE = XGCOORDCONSOLE + " /UseFile ";
         public static final String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\XLicProc.exe" + "\"" + " ";
         public static final String BUILDSETTINGS = "\"" + IbLocations.IB_ROOT + "\\buildsettings.exe" + "\"" + " ";
         public static final String COORDMONITOR = "\"" + IbLocations.IB_ROOT + "\\coordmonitor.exe" + "\"" + " ";
@@ -78,10 +78,11 @@ public class StaticDataProvider {
         public static final String SIGNTOOL = "\"C:\\Program Files (x86)\\Windows Kits\\10\\App Certification Kit\\signtool.exe\"";
         public static final String TRIAL_LICENSE_PATH = "\\\\192.168.10.15\\share\\Automation\\Latest Trial License\\";
         public static final String CLOUD_IDS_JSON = Locations.QA_ROOT + "\\cloud_ids.json";
+        public static final String GTEST_ROOT_PATH = Locations.QA_ROOT + "\\Testing\\google-tests\\";
     }
 
     //XGCoordConsole Flags
-    public static class XGCoordFlags{
+    public static class XGCoordFlags {
         public static final String AGENTS = "/Agents";  // this way we query the coordiantor and receive all subscribed agents. When using this option, "AgentsList.dat" can be empty.
         public static final String AGENTS_LIST = "/Agents=\"/%s\""; // When using this option, "AgentsList.dat" can be empty.
         public static final String USE_FILE = "/UseFile"; // this way we use the agents listed in the "AgentsList.dat" file.
@@ -100,7 +101,7 @@ public class StaticDataProvider {
     }
 
     //License Packages
-    public static class IBLicensePackages{
+    public static class IBLicensePackages {
         public static final String CORES4 = "4Cores";
         public static final String CORES8 = "8Cores";
         public static final String CORES12 = "12Cores";
@@ -635,8 +636,8 @@ public class StaticDataProvider {
 
         public static class TESTING_ROBIN {
             public static final String CPP_UTEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
-            public static final String GTEST = " /command=\"" + Locations.QA_ROOT + "\\Testing\\googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
-            public static final String CTEST = "cmd /c cd " + Locations.QA_ROOT + "\\Testing\\google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String GTEST = " /command=\"" + Locations.GTEST_ROOT_PATH + "googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String CTEST = "cmd /c cd " + Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String MS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\mstest-master\\runner\\runner.bat\" /test=mstest /title=\"MS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
@@ -672,7 +673,7 @@ public class StaticDataProvider {
             // NUNIT2
             public static final String NUNIT2_FRAMEWORK_1DLL_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_1DLL_WITH_SPACE_TEST = Processes.NUNIT2 + " \"C:\\QA\\Simulation\\Testing\\NUnit2 With Space\\bin\\nunit.framework.tests.dll\"";
-            public static final String NUNIT2_FRAMEWORK_LOGFILE_TEST =NUNIT2_FRAMEWORK_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
+            public static final String NUNIT2_FRAMEWORK_LOGFILE_TEST = NUNIT2_FRAMEWORK_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
             public static final String NUNIT2_FRAMEWORK_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.core.tests.net45.dll";
             public static final String NUNIT2_FRAMEWORK_TESTLEVEL_TEST = NUNIT2_FRAMEWORK_TEST + " /testlevel=10";
@@ -690,13 +691,33 @@ public class StaticDataProvider {
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER_FRAMEWORK_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /framework=v4.0";
             public static final String NUNIT2_FRAMEWORK_WITH_FILTER__PROCESS_TEST = NUNIT2_FRAMEWORK_WITH_FILTER_RUN_TESTS_TEST + " /process=separate";
             //GTEST
-            public static final String GTEST_CPPSORTER_TEST = "C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
+            public static final String GTEST_CPPSORTER_TEST = Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
             public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST + " /testlevel=10";
-            public static final String GTEST_MASTER_TESTLEVEL_TEST = "C:\\QA\\Simulation\\Testing\\googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
+            public static final String GTEST_MASTER_TESTLEVEL_TEST = Locations.GTEST_ROOT_PATH + "googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
             public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST + " /testlevel=deep";
-            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TESTLEVEL_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
+            public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
+            public static final String GTEST_CPPSORTER_FLAGS_NO_OUPUT_FILE = GTEST_CPPSORTER_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
+            public static final String GTEST_MASTER_FLAGS = GTEST_MASTER_TESTLEVEL_TEST + "  --gtest_filter=*CanGetNextPrime* --gtest_also_run_disabled_tests  --gtest_repeat=5 --gtest_shuffle  --gtest_random_seed=20 --gtest_output=json:C:\\QA\\Simulation\\gtestResult2.json";
+            public static final String GTEST_EXECUTABLE_WITH_FAILING_TESTS = Locations.GTEST_ROOT_PATH + "Executables\\gtest_failed_test.exe";
+            public static final String GTEST_EXECUTABLE_WITH_TEST_THAT_THROWS_AN_EXCEPTION = Locations.GTEST_ROOT_PATH + "Executables\\gtest_exception_test.exe";
+            public static final String GTEST_EXECUTABLE_THAT_CRASHES = Locations.GTEST_ROOT_PATH + "Executables\\gtest_crash_test.exe";
+            public static final String GTEST_NON_GTEST_EXECUTABLE = Locations.GTEST_ROOT_PATH + "Executables\\crash_test.exe";
+            public static final String GTEST_EXECUTABLE_FAILS_ON_REMOTE_NOT_ON_LOCAL = Locations.GTEST_ROOT_PATH + "Executables\\gtest_failed_remote_test.exe";
+            public static final String GTEST_EXECUTABLE_STRESS_TEST = Locations.GTEST_ROOT_PATH + "Executables\\gtest_highload_test.exe";
+            public static final String GTEST_EXECUTABLE_EXTREMELY_LONG_TEST = " opencv_test_calib3dd.exe opencv_test_cored.exe opencv_test_dnnd.exe opencv_test_features2dd.exe opencv_test_flannd.exe opencv_test_gapid.exe opencv_test_highguid.exe opencv_test_imgcodecsd.exe opencv_test_imgprocd.exe opencv_test_mld.exe opencv_test_objdetectd.exe opencv_test_photod.exe opencv_test_stitchingd.exe opencv_test_videod.exe opencv_test_videoiod.exe /openmonitor /testlevel=deep";
+            public static final String GTEST_MUTIPLE_EXECUTABLES_TXT_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\GoodInputFile.txt";
+            public static final String GTEST_MUTIPLE_EXECUTABLES_HTML_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.html";
+            public static final String GTEST_MUTIPLE_EXECUTABLES_DOC_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.doc";
+            public static final String GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InvalidInputFile.txt";
+            public static final String UNSUPPORTED_FLAG_GTEST_LIST_TESTS = "--gtest_list_tests";
+            public static final String UNSUPPORTED_FLAG_GTEST_COLOR = "--gtest_color";
+            public static final String UNSUPPORTED_FLAG_GTEST_PRINT_TIME = "--gtest_print_time";
+            public static final String UNSUPPORTED_FLAG_GTEST_BREAK_ON_FAILURE = "--gtest_break_on_failure";
+            public static final String UNSUPPORTED_FLAG_GTEST_THROW_ON_FAILURE = "--gtest_throw_on_failure";
+            public static final String UNSUPPORTED_FLAG_GTEST_CATCH_EXCEPTIONS = "--gtest_catch_exceptions";
+
             public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
-            public static final String GTEST_CPPSORTER_TARGETDIR_TEST = "cpp_sorter_test.exe /targetdir=\"C:\\QA\\Simulation\\Testing\\google-test-examples-master\\build\\Release\"";
+            public static final String GTEST_CPPSORTER_TARGETDIR_TEST = String.format("cpp_sorter_test.exe /targetdir=%sgoogle-test-examples-master\\build\\Release", Locations.GTEST_ROOT_PATH);
         }
 
         public static class INTERFACES {
@@ -880,7 +901,7 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines {
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.235"; //"192.168.10.165"
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
