@@ -58,7 +58,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * @test Avoid local execution turned OFF, Standalone ON
      * @pre{
      * - Set registry key Avoid Local OFF
-     *  - Set registry key Standalone Mode ON}
+     * - Set registry key Standalone Mode ON}
      * @steps{
      *  - Clean and build IB
      *  - Verify result in output log file}
@@ -122,7 +122,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     /**
      * @test Verify Minimal logging level
      * @pre{
-     * - Set Registry Key Logging Level
+     * - Set registry key Logging Level
      * }
      * @steps{
      * - Run RUNME file
@@ -144,9 +144,9 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify Task Termination On High CPU Consumption
-     * @pre{}
-     * @steps{}
-     * @result{}
+     * @pre{ }
+     * @steps{ }
+     * @result{ }
      */
     @Test(testName = "Verify Task Termination On High CPU Consumption")
     public void verifyTaskTerminationOnHighCPUConsumption() {
@@ -169,6 +169,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Pro License - Verify MultiBuild Does Work When Adding Registry
+     * @pre{ }
      * @steps{
      *  - Load license
      *  - Set registry key
@@ -187,6 +188,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Pro License - Verify MultiBuild Missing from UI
+     * @pre{ }
      * @steps{
      * - Load IB license(without Enterprise)
      * - Run buildsettings executable file
@@ -207,6 +209,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Ent License - Verify MultiBuild Exists In UI
+     * @pre{ }
      * @steps{
      * - Load Agent Settings IB License
      * - Run buildsettings executable file
@@ -268,6 +271,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify CPU Utilization
+     * @pre{ }
      * @steps{
      * - Run RUNME file
      * - Change in CPU Utilization tab number of cores to 1
@@ -290,12 +294,14 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Change default Start Page
+     * @pre{ }
      * @steps{
      * - Run RUNME file
      * - Run BuildSettings.exe file
      * - Change Startup page to projects
      * - Run BuildMonitor.exe file
      *  - Verify projects page is open}
+     * @result{ }
      */
     @Test(testName = "Change Default Start Page")
     public void changeDefaultStartPage() {
@@ -308,10 +314,11 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify Output options
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Enable output options}
-     * @result{}
+     * @result{ }
      */
     @Test(testName = "Verify Output Options")
     public void verifyOutputOptions() {
@@ -325,6 +332,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Stop Agent Service
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Stop Agent service}
@@ -339,6 +347,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Start Agent Service
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Start Agent service}
@@ -353,6 +362,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Restart Agent Service
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Restart Agent service }
@@ -367,13 +377,14 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Verify Core limit per build limitation
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Limiting the number of cores per build
      * - Perform IB clean and build
      *  - Run file BuildSettings.exe
      *  - Disabling number of cores per build limit}
-     * @result{}
+     * @result{ }
      */
 
     @Test(testName = "Verify Core Limit Per Build Limitation")
@@ -421,7 +432,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Enable FailOnlyLocally option
      * - Perform IB clean and build
      * - Set registry key Avoid Local OFF}
-     * @result{}
+     * @result{ }
      */
     @Test(testName = "Verify OnlyFailLocally On", dependsOnMethods = {"verifyOnlyFailLocallyOff"})
     public void verifyOnlyFailLocallyOn() {
@@ -450,6 +461,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Enable Scheduling and verify Tray icon
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Enable Scheduling and verify icon
@@ -478,6 +490,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
 
     /**
      * @test Enable Scheduling and verify Tray icon without permission
+     * @pre{ }
      * @steps{
      * - Run file BuildSettings.exe
      * - Is Not Active Scheduling option
