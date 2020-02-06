@@ -12,16 +12,23 @@ import org.testng.annotations.Test;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 /**
- * @brief <b> UI tests</b>
+ * @brief <b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IUM/pages/11272241/Visual+Studio+UI+Add-in"><b>Visual Studio UI Add-in</b></a> UI tests</b>
+ * @brief <b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IUM/pages/21758026/The+Build+Monitor"><b>The Build Monitor</b></a> UI tests</b>
  * @details Run on UI Automation (HOST-4)
  */
 public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @tets Verify Visual Studio 2017 Monitor Bar
+     * @pre{ }
      * @steps{
      * - Open VS instance version 15
-     * - Open project}
+     * - Open project
+     * - Perform Ib action Rebuild Solution
+     * - Perform Ib action Stop Build
+     * - Verify VS bar pattern
+     * - Kill process devenv}
+     * @result{ }
      */
     @Test(testName = "Verify VS 2017 Monitor Bar")
     public void verifyVS2017MonitorBar() {
@@ -52,9 +59,15 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Visual Studio 2019 Monitor Bar
+     * @pre{ }
      * @steps{
      * - Open VS instance version 16
-     * - Open project}
+     * - Open project
+     * - Perform Ib action Rebuild Solution
+     * - Perform Ib action Stop Build
+     * - Verify VS bar pattern
+     * - Kill process devenv}
+     * @result{ }
      */
     @Test(testName = "Verify VS 2019 Monitor Bar")
     public void verifyVS2019MonitorBar() {
@@ -85,9 +98,15 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Visual Studio 2019 Preview Monitor Bar
+     * @prse{ }
      * @steps{
      * - Open VS instance version 116
-     * - Open project}
+     * - Open project
+     * - Perform Ib action Rebuild Solution
+     * - Perform Ib action Stop Build
+     * - Verify VS bar pattern
+     * - Kill process devenv}
+     * @result{ }
      */
     @Test(testName = "Verify VS 2019 Preview Monitor Bar")
     public void verifyVS2019PreviewMonitorBar() {
@@ -118,7 +137,9 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Tray Icon Color
-     * @steps{ -  Verify green tray icon}
+     * @pre{ }
+     * @steps{ - Verify green tray icon pattern}
+     * @result{ - Try icon is present}
      */
     @Test(testName = "Verify Tray Icon Color")
     public void verifyTrayIconColor() {
@@ -127,9 +148,11 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify IB Monitor Bar
+     * @pre{ }
      * @steps{
      * - Open build monitor exe
      * - Verify Monitor Bar Pattern}
+     * @result{ - Monitor Bar pattern is present}
      */
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar() {
@@ -139,9 +162,11 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify History Coloring
+     * @pre{ }
      * @steps{
      * - Run BuildHistory.exe file
-     * - Verify History Coloring Pattern}
+     * - Verify History coloring pattern}
+     * @result{ - History coloring pattern is present}
      */
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring() {
@@ -151,10 +176,12 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Projects Tab Coloring
+     * @pre{ }
      * @steps{
-     * - Open Build Monitor
-     * - Click Projects Tab
-     * - Verify ProjectsTab Coloring}
+     * - Open Build monitor
+     * - Click Projects tab
+     * - Verify Projects tab coloring}
+     * @result{ - Progress pattern is present}
      */
     @Test(testName = "Verify Projects Tab Coloring")
     public void verifyProjectsTabColoring() {
@@ -172,9 +199,12 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Monitor Opened From Tray
+     * @pre{ }
      * @steps{
-     * - Open Monitor From Tray
-     * - Verify Build Monitor Opened}
+     * - Open Monitor from tray
+     * - Verify Build monitor opened
+     * - }
+     * @result{ - Build monitor window is present}
      */
     @Test(testName = "Verify Monitor Opened From Tray")
     public void verifyMonitorOpenedFromTray() {
@@ -188,9 +218,11 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify History Opened From Tray
+     * @pre{ }
      * @steps{
-     * - Open History From Tray
-     * - Verify Build History Opened}
+     * - Open History from tray
+     * - Verify Build history opened}
+     * @result{ - Build history window is present}
      */
     @Test(testName = "Verify History Opened From Tray")
     public void verifyHistoryFromTray() {
@@ -204,9 +236,11 @@ public class UIValidationsTests extends UIValidationTestBase {
 
     /**
      * @test Verify Coordinator Monitor Opened From Tray
+     * @pre{ }
      * @steps{
-     * - Open Coordinator Monitor From Tray
+     * - Open Coordinator monitor from tray
      * - Verify Coordinator Monitor Opened}
+     * @result{ - Coordinator monitor window is opened}
      */
     @Test(testName = "Verify Coord Monitor Opened From Tray")
     public void verifyCoordMonitorOpenedFromTray() {
@@ -220,10 +254,12 @@ public class UIValidationsTests extends UIValidationTestBase {
     }
 
     /**
-     * @test Verify Agent Settings Opened From Tray
+     * @test Verify Agent Settings Opened From Try
+     * @pre{ }
      * @steps{
-     * - Open Agent Settings from Tray
+     * - Open Agent Settings from tray
      * - Verify Agent Settings opened}
+     * @result{ - Agent Settings window is opened}
      */
     @Test(testName = "Verify Agent Settings Opened From Tray")
     public void verifyAgentSettingsOpenedFromTray() {
@@ -235,4 +271,4 @@ public class UIValidationsTests extends UIValidationTestBase {
         client.verifyAgentSettingsOpened();
     }
 
-}
+}// end of UIValidationsTests class
