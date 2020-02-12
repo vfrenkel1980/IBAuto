@@ -19,6 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -324,7 +325,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest CLI Multiple Executables Check Test Discovery Test")
     public void gTestCLIMultipleExecutablesCheckTestDiscoveryTest() {
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " " + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_FLAGS);
-        final String TEST_DISCOVERY= "Analyzing files for tests to execute\n" +
+        final String TEST_DISCOVERY = "Analyzing files for tests to execute\n" +
                 "Analyzing  cpp_sorter_test.exe for tests...\n" +
                 "Analyzing  sample6_unittest.exe for tests...\n" +
                 "found 0 tests in cpp_sorter_test.exe\n" +
@@ -381,7 +382,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest Invalid InputFile Multiple Executables Test")
     public void gTestInvalidInputFileMultipleExecutablesTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE);
-        Assert.assertEquals(exitCode, -4, "The test execution was expected to fail");
+        Assert.assertEquals(exitCode, -3, "The test execution was expected to fail");
     }
 
     /**
@@ -433,28 +434,29 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     }
 
     //comparing output files: xml and json
+//    testsuites tests="12"
 
-//    /**
-//     * @test GTest executable with test filter --gtest_output=xml test.<br>
-//     * @pre{ }
-//     * @steps{ - Run the gtest executablewith test filter --gtest_output=xml}
-//     * @result{ - Build is succeeded;
-//     */
-//    @Test(testName = "GTest With Test Filter --gtest_output=xml Test")
-//    public void gTestXmlOutput() {
-//        String outputFile = "C:\\QA\\Simulation\\gtestResult.xml";
+    /**
+     * @test GTest executable with test filter --gtest_output=xml test.<br>
+     * @pre{ }
+     * @steps{ - Run the gtest executable with test filter --gtest_output=xml}
+     * @result{ - Build is succeeded;
+     */
+    @Test(testName = "GTest Validate Number Of Tests In Xml Output Test")
+    public void gTestValidateNumberOfTestsInXmlOutputTest() throws InterruptedException {
+//        String outputFile = "C:\\QA\\Simulation\\GtestResult.xml";
 //        String ibOutputFile = "C:\\QA\\Simulation\\ibGtestResult.xml";
-//        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", outputFile));
-//        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
-//        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", ibOutputFile));
-//        Assert.assertEquals(exitCode2, 0, "The test execution failed with the exitcode " + exitCode);
-//
-//        File noIBOutput = null;
-//        File ibOutput = null;
-//        noIBOutput = new File(outputFile);
-//        ibOutput = new File(ibOutputFile);
-//        Assert.assertEquals(ibOutput.get);
-//    }
+        String outputFile = "C:\\QA\\Simulation\\out1.xml";
+        String ibOutputFile = "C:\\QA\\Simulation\\out2.xml";
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", outputFile));
+        Assert.assertEquals(exitCode, 0, "The test execution(without ibtc) failed with the exitcode " + exitCode);
+        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", ibOutputFile));
+        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode);
+        final String TEXT_TO_FIND = "<testsuites tests=\"\\d+\"";
+        int n1 = numberOfTests(outputFile, TEXT_TO_FIND);
+        int n2 = numberOfTests(ibOutputFile, TEXT_TO_FIND);
+        Assert.assertEquals(n1, n2, "The number of tests running with or without ibtc should be equal!");
+    }
 
 
     /**
@@ -549,5 +551,15 @@ public class IBTCGTestTests extends UnitTestingTestBase {
 
     private String getRegistry(String folder, String keyName) {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName);
+    }
+
+    private static int numberOfTests(String filePath, String textToFind) throws InterruptedException {
+        String fileContent = SystemActions.getFileContent(filePath);
+        Matcher matcher = SystemActions.searchPattern(fileContent, textToFind);
+        int numberOfTests = 0;
+        while (matcher.find()) {
+            numberOfTests++;
+        }
+        return numberOfTests;
     }
 }

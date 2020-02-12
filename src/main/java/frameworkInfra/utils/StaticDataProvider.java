@@ -606,7 +606,7 @@ public class StaticDataProvider {
 
         public static class QT_BATMAN {
             public static final String QT_CLEAN = "D:\\QA\\qt5\\CleanQT.bat";
-            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat";
+            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat" ;
         }
 
         public static class VC15_ROBIN {
@@ -705,7 +705,7 @@ public class StaticDataProvider {
             public static final String GTEST_EXECUTABLE_FAILS_ON_REMOTE_NOT_ON_LOCAL = Locations.GTEST_ROOT_PATH + "Executables\\gtest_failed_remote_test.exe";
             public static final String GTEST_EXECUTABLE_STRESS_TEST = Locations.GTEST_ROOT_PATH + "Executables\\gtest_highload_test.exe";
             public static final String GTEST_EXECUTABLE_EXTREMELY_LONG_TEST = " opencv_test_calib3dd.exe opencv_test_cored.exe opencv_test_dnnd.exe opencv_test_features2dd.exe opencv_test_flannd.exe opencv_test_gapid.exe opencv_test_highguid.exe opencv_test_imgcodecsd.exe opencv_test_imgprocd.exe opencv_test_mld.exe opencv_test_objdetectd.exe opencv_test_photod.exe opencv_test_stitchingd.exe opencv_test_videod.exe opencv_test_videoiod.exe /openmonitor /testlevel=deep";
-            public static final String GTEST_MUTIPLE_EXECUTABLES_TXT_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\GoodInputFile.txt";
+            public static final String GTEST_MUTIPLE_EXECUTABLES_TXT_INPUT_FILE = "/testlevel=10  /inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\GoodInputFile.txt";
             public static final String GTEST_MUTIPLE_EXECUTABLES_HTML_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.html";
             public static final String GTEST_MUTIPLE_EXECUTABLES_DOC_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.doc";
             public static final String GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InvalidInputFile.txt";
