@@ -205,7 +205,7 @@ public class PhoenixSingleUseVMTests extends SingleUseVMTestBase {
     /*------------------------------METHODS------------------------------*/
     public void setUp() {
         ibService.agentServiceStart();
-        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + IbLocations.XGCOORDCONSOLE_USEFILE +" /Subscribe");
+        winService.runCommandWaitForFinish(Processes.PSEXEC + " \\\\" + WindowsMachines.BABYLON + " -u Administrator -p 4illumination -i 0 " + IbLocations.XGCOORDCONSOLE +" "+WindowsMachines.PHOENIX+" /Subscribe");
         String ibat = getIbatRegKey();
         int time = 0;
         while (!ibat.equals("2") & time <= 180) {

@@ -911,6 +911,7 @@ public class StaticDataProvider {
         public static final String DASHBORD_HELPER = "srv-10";
         public static final String IC_COORDINATOR = "h22-cloud-coord";
         public static final String IC_INITIATOR = "h22-cloud-init";
+        public static final String PHOENIX = "Phoenix";
     }
 
     public static class LinuxMachines {
