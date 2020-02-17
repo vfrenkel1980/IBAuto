@@ -27,7 +27,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class SetupTests extends SetupTestBase {
     /**
      * @test Install in a different directory
-     * @pre{ }
+     * @pre{ Uninstall previously installed IB versions }
      * @steps{
      * - Start the IB ui installer
      * - Get registry key
@@ -35,7 +35,8 @@ public class SetupTests extends SetupTestBase {
      * - Verify if installed location match expected location
      * - Perform IB clean and build
      * }
-     * @result{ - Return code }
+     * @result{ - Incredibuild should be installed.
+     * - Service should be running. }
      */
     @Test(testName = "Install In A Different Directory")
     public void installInADifferentDirectory() {
@@ -83,7 +84,8 @@ public class SetupTests extends SetupTestBase {
      * - Get the coordinator of the current ib agent
      * - Perform IB clean and build
      * }
-     * @result{ - Return code}
+     * @result{ - Incredibuild should be installed.
+     * - Service should be running.}
      */
     @Test(enabled = false, testName = "Install On An Existing Coordinator")
     public void installOnAnExistingCoordinator() {
@@ -163,7 +165,8 @@ public class SetupTests extends SetupTestBase {
      * - Select Uninstall option
      * - Verify if incredibuild services are running
      * }
-     * @result{ - Should be Uninstalled}
+     * @result{ - All Folders/RegValues/Files are corresponds to IncrediBuild installation should be deleted.
+     * - IB add-in for VS should be removed from VS IDE.}
      */
     @Test(testName = "Uninstall IB")
     public void uninstallIb() {
@@ -185,7 +188,7 @@ public class SetupTests extends SetupTestBase {
 
     /**
      * @test Repair IB
-     * @pre{ }
+     * @pre{ Install last IB version on your testing machine }
      * @steps{
      * - Install incredibuild
      * - Run IncrediBuild_Agent service
@@ -196,7 +199,11 @@ public class SetupTests extends SetupTestBase {
      * - Verify if incredibuild services are running
      * - Perform IB clean and build
      * }
-     * @result{ - Return code}
+     * @result{ - Incredibuild should be installed.
+     * - Service should be running.
+     * - Tryicon should appear.
+     * - Incredibuild add-in for VS should be installed.
+     * }
      */
     @Test(testName = "Repair IB")
     public void repairIb() {
@@ -221,7 +228,7 @@ public class SetupTests extends SetupTestBase {
 
     /**
      * @test Upgrade IB
-     * @pre{ }
+     * @pre{ Run Setup.exe and choose to save IBSetupConsole.exe file for next silent installation from command prompt... }
      * @steps{
      * - Install incredibuild version 2190
      * - Start the IB ui installer
@@ -231,7 +238,11 @@ public class SetupTests extends SetupTestBase {
      * - Verify if incredibuild services are running
      * - Perform IB clean and build
      * }
-     * @result{ - Return code}
+     * @result{ - Incredibuild version should be updated.
+     * - Service should be running.
+     * - Tryicon should appear.
+     * - Incredibuild add-in for VS should be installed.
+     * }
      */
     @Test(testName = "Upgrade IB")
     public void upgradeIb() {

@@ -136,6 +136,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         f.delete();
     }
 
+    @Ignore
     /**
      * @test Nunit2 with flag /ThresholdTestlevel Test.<br>
      * @pre{ }
@@ -148,7 +149,6 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         final String CORES_IN_USE = "\\d+ cores employed";
         final int thresholdTestlevel = 10;
         final String HOSTNAME = "windows-qa-1";
-        Thread.sleep(4000);
         IIBCoordMonitor iibCoordMonitor = new IIBCoordMonitor();
         CoordinatorStatus coordinatorMonitor = iibCoordMonitor.retrieveCoordMonitorDataFromXmlFile(Locations.QA_ROOT + "\\coord.xml");
         String buildGroup = iibCoordMonitor.getBuildGroup(coordinatorMonitor, HOSTNAME);
@@ -427,7 +427,7 @@ public class IBTCNunitTests extends UnitTestingTestBase {
     @Test(testName = "NUnit3 Assembly Level Test")
     public void nunit3AssemblyLevelTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_TEST);
-        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+        Assert.assertTrue(exitCode == 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     /**
