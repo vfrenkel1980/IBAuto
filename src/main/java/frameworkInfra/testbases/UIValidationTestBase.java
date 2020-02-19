@@ -44,6 +44,7 @@ public class UIValidationTestBase extends TestBase {
     public IbService ibService = new IbService();
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Client client = ibuiService.new Client();
+    protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
     private XGCoordConsole xgCoordConsole = new XGCoordConsole();
     protected Screen screen = new Screen();
     protected String project = "";

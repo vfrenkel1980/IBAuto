@@ -147,6 +147,7 @@ public class StaticDataProvider {
         public static final String BUILDHISTORY = "BuildHistory.exe ";
         public static final String AGENTSETTINGS = "BuildSettings.exe ";
         public static final String COORDMONITOR = "CoordMonitor.exe ";
+        public static final String COORDSETTINGS = "CoordinatorSettings.exe";
         public static final String BUILDSETTINGS = "BuildSettings.exe ";
         public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
@@ -254,6 +255,10 @@ public class StaticDataProvider {
         public static class AGENT_SETTINGS {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
+        }
+       //TODO: ADD CORRECT PATH TO COORDSETTINGS
+        public static class COORD_SETTINGS{
+            public static final String COORD_SETTINGS_LOCATION = "Y:\\1-IB_Builds\\Latest\\map";
         }
 
         public static class VC16_BATMAN {
@@ -901,7 +906,7 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines {
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.235"; //"192.168.10.165"
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";

@@ -378,6 +378,19 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void openCoordSettingsFromTray() {
+            test.log(Status.INFO, "Opening Coordinator Settings from tray");
+            try{
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
+            }catch (FindFailed findFailed){
+                test.log(Status.WARNING, "Failed to open coordinator settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+
+        @Override
         public void openAgentSettingsFromTray() {
             test.log(Status.INFO, "Opening Agent Settings from tray");
             try {
@@ -563,9 +576,9 @@ public class IBUIService implements IIBUIService {
         @Override
         public void disableFailOnlyLocally() {
             try {
-                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.5), 15).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.5), 15).click();
+                screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.5), 15).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to disable FailOnlyLocally option with error: " + findFailed.getMessage());

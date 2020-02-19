@@ -1,11 +1,15 @@
 package Native.uitests;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.vs.VS16UIService;
 import ibInfra.vs.VSUIService;
+import org.sikuli.script.FindFailed;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
@@ -19,7 +23,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class UIValidationsTests extends UIValidationTestBase {
 
     /**
-     * @tets Verify Visual Studio 2017 Monitor Bar
+     * @test Verify Visual Studio 2017 Monitor Bar
      * @pre{ }
      * @steps{
      * - Open VS instance version 15
@@ -202,8 +206,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @pre{ }
      * @steps{
      * - Open Monitor from tray
-     * - Verify Build monitor opened
-     * - }
+     * - Verify Build monitor opened}
      * @result{ - Build monitor window is present}
      */
     @Test(testName = "Verify Monitor Opened From Tray")
@@ -252,6 +255,37 @@ public class UIValidationsTests extends UIValidationTestBase {
         SystemActions.sleep(30);
         client.verifyCoordinatorMonitorOpened();
     }
+
+    /**
+     * @test Verify Coordinator Settings Opened as Administrator
+     * @pre{ }
+     * @steps{
+     * - Open Coordinator Setting as Administrator
+     * - Verify Coordinator Monitor Opened}
+     * @result{ - Coordinator Settings option is enabled}
+     */
+    @Test(testName="Run Coordinator settings as Administrator")
+    public void RunCoordSetingsAsAdministrator(){
+        winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
+        if (!project.equals("green01")) {
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
+        SystemActions.sleep(30);
+        client.verifyCoordinatorMonitorOpened();
+        try {
+            screen.wait(CoordMonitor.ToolsMenu.similar((float)0.9), 15).click();
+            screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15);
+            boolean objectExists = false;
+            if (screen.exists(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15) != null)
+                objectExists = true;
+            Assert.assertTrue(objectExists, "Could not find Stop Service");
+        }catch(FindFailed findFailed) {
+            test.log(Status.WARNING, "Stop coordinator service is not enabled, failed with error: " + findFailed.getMessage());
+            Assert.fail();
+        }
+    }
+
 
     /**
      * @test Verify Agent Settings Opened From Try

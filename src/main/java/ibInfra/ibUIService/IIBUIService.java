@@ -85,6 +85,8 @@ public interface IIBUIService {
 
         void openCoordMonitorFromTray();
 
+        void openCoordSettingsFromTray();
+
         void openAgentSettingsFromTray();
 
         void verifyAllowEnableDisableAsHelperDisabledFromTray();
