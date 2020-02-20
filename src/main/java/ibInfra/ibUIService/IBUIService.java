@@ -275,7 +275,7 @@ public class IBUIService implements IIBUIService {
         public void verifyVSBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for VS Bar");
             try {
-                screen.wait(pat.similar((float) 0.8), 5);
+                screen.wait(pat.similar((float) 0.8), 60);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
                 Assert.fail();
