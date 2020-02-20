@@ -14,6 +14,8 @@ import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.utils.StaticDataProvider.Processes.COORDSETTINGS;
+import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands.COORD_SETTINGS.COORD_SETTINGS_LOCATION;
 
 /**
  * @brief <b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IUM/pages/11272241/Visual+Studio+UI+Add-in"><b>Visual Studio UI Add-in</b></a> UI tests</b>
@@ -266,6 +268,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      */
     @Test(testName="Run Coordinator settings as Administrator")
     public void RunCoordSetingsAsAdministrator(){
+       SystemActions.doesFileExist(COORD_SETTINGS_LOCATION);
         winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
         if (!project.equals("green01")) {
             test.log(Status.SKIP, "Test should run once on green project");
@@ -286,23 +289,23 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
-
-    /**
-     * @test Verify Agent Settings Opened From Try
-     * @pre{ }
-     * @steps{
-     * - Open Agent Settings from tray
-     * - Verify Agent Settings opened}
-     * @result{ - Agent Settings window is opened}
-     */
-    @Test(testName = "Verify Agent Settings Opened From Tray")
-    public void verifyAgentSettingsOpenedFromTray() {
-        if (!project.equals("green01")) {
-            test.log(Status.SKIP, "Test should run once on green project");
-            throw new SkipException("Skipped test");
-        }
-        client.openAgentSettingsFromTray();
-        client.verifyAgentSettingsOpened();
-    }
+//
+//    /**
+//     * @test Verify Agent Settings Opened From Try
+//     * @pre{ }
+//     * @steps{
+//     * - Open Agent Settings from tray
+//     * - Verify Agent Settings opened}
+//     * @result{ - Agent Settings window is opened}
+//     */
+//    @Test(testName = "Verify Agent Settings Opened From Tray")
+//    public void verifyAgentSettingsOpenedFromTray() {
+//        if (!project.equals("green01")) {
+//            test.log(Status.SKIP, "Test should run once on green project");
+//            throw new SkipException("Skipped test");
+//        }
+//        client.openAgentSettingsFromTray();
+//        client.verifyAgentSettingsOpened();
+//    }
 
 }// end of UIValidationsTests class

@@ -1,6 +1,7 @@
 package Native.ibclienttests;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.AgentSettingsTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -10,6 +11,7 @@ import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.windowscl.WindowsService;
 import org.apache.velocity.runtime.directive.Parse;
+import org.sikuli.script.FindFailed;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -23,6 +25,8 @@ import java.util.Set;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands.COORD_SETTINGS.COORD_SETTINGS_LOCATION;
+import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.AGENT_SETTINGS_HLPR_NAME;
 
 /**
  * @brief<b> <a href="https://incredibuild.atlassian.net/wiki/spaces/ITK/pages/427327495/Agent+settings+-+Automation+coverage"><b>Agent settings Automation coverage</b></a> tests</b>
@@ -158,7 +162,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
                     " cmd.exe /c " + Processes.NOTHING);
         }
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
-        int lastAgent = Parser.getLastLineIndexForString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
+        int lastAgent = Parser.getLastLineIndexForString(Locations.OUTPUT_LOG_FILE, "Agent '" + AGENT_SETTINGS_HLPR_NAME);
         int firstLocal = Parser.getFirstLineForString(Locations.OUTPUT_LOG_FILE, "Local");
         for (int i = 0; i < 2; i++) {
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP +
@@ -605,8 +609,38 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_HELPER);
         Assert.assertTrue(helperNumber > 1, "CPU utilization should be > 1, but found " + helperNumber);
     }
+//TODO
+    /**
+     * @test Verify IB installation folder not have a coordintorsettings
+     * @pre{ }
+     * @steps{
+     * - Open Coordinator Setting as Administrator
+     * - Verify Coordinator Monitor Opened}
+     * @result{ - Coordinator Settings option is disabled}
+     */
+    @Test(testName= "Verify IB installation folder not have a coordintorsettings")
+    public void installationFolderNotHaveCoordSettingsFile(){
+        winService.runCommandDontWaitForTermination(Processes.PSEXEC + " -d -i 1 -u admin -p 4illumination \\\\" + WindowsMachines.AGENT_SETTINGS_HLPR_IP + SystemActions.doesFileExist(COORD_SETTINGS_LOCATION));
 
-
+//        boolean isExist=SystemActions.doesFileExist(COORD_SETTINGS_LOCATION);
+//        Assert.assertFalse(isExist, "IB installation folder have a coordintorsettings");
+//        Assert.assertFalse(winService.isServiceRunning(Processes.COORDSETTINGS), "CoordSettings running, should not be running");
+//        winService.waitForProcessToStart(Processes.COORDMONITOR);
+//        SystemActions.sleep(30);
+//        client.verifyCoordinatorMonitorOpened();
+//        try {
+//            screen.wait(CoordMonitor.ToolsMenu.similar((float)0.9), 15).click();
+//            screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15);
+//            boolean objectExists = false;
+//            if (screen.exists(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15) != null)
+//                objectExists = true;
+//            Assert.assertTrue(objectExists, "Could not find Stop Service");
+//        }catch(FindFailed findFailed) {
+//            test.log(Status.WARNING, "Stop coordinator service is not enabled, failed with error: " + findFailed.getMessage());
+//            Assert.fail();
+//        }
+//        SystemActions.killProcess(Processes.COORDMONITOR);
+    }
 
     /*------------------------------METHODS------------------------------*/
 

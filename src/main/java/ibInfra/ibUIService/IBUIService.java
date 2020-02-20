@@ -576,8 +576,8 @@ public class IBUIService implements IIBUIService {
         @Override
         public void disableFailOnlyLocally() {
             try {
-                screen.wait(IBSettings.InitiatorTab.similar((float) 0.5), 15).click();
-                screen.wait(IBSettings.AdvancedTab.similar((float) 0.5), 15).click();
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.5), 30).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.5), 30).click();
                 screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.5), 15).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
