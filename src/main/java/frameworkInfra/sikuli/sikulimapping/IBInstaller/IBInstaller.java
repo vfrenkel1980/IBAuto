@@ -1,5 +1,6 @@
 package frameworkInfra.sikuli.sikulimapping.IBInstaller;
 
+import org.apache.tools.ant.UnknownElement;
 import org.sikuli.script.Pattern;
 
 public class IBInstaller {
@@ -33,5 +34,6 @@ public class IBInstaller {
     public static final Pattern ExitBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\exit.png");
     public static final Pattern CustomTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\custom.png");
     public static final Pattern SingleUseVMCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\single_use_VM.png");
-
+public static final Pattern AssignBuildGroupBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\assign_build_group_btn.png");
+    public static final Pattern AdvancedBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\advanced_setup.png");
 }

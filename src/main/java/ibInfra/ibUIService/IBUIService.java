@@ -115,6 +115,18 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void clickAdvanced() throws FindFailed {
+            test.log(Status.INFO, "Clicking Advanced");
+            screen.wait(IBInstaller.AdvancedBTN.similar((float) 0.8), 30).click();
+        }
+
+        @Override
+        public void clickAssignBuildGroup() throws FindFailed {
+            test.log(Status.INFO, "Clicking Assign build group button");
+            screen.wait(IBInstaller.AssignBuildGroupBTN.similar((float) 0.8), 30).click();
+        }
+
+        @Override
         public void uncheckReleaseNotes() throws FindFailed {
             test.log(Status.INFO, "Removing Release notes CB");
             screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8), 10000).click();
@@ -263,6 +275,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Selecting Single Use VM");
             screen.wait(IBInstaller.SingleUseVMCB.similar((float) 0.7), 5).click();
         }
+
     }
 
     /**
@@ -399,6 +412,19 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void clickAdvancedOptionOfCoordSettings() {
+            test.log(Status.INFO, "Opening Advanced option of Coordinator Settings");
+            try{
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 10).click();
+            }catch(FindFailed findFailed){
+                test.log(Status.WARNING, "Failed to open Advanced option with error");
                 Assert.fail();
             }
         }

@@ -609,7 +609,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         setRegKeyWithServiceRestart("0",RegistryKeys.FORCE_CPU_HELPER);
         Assert.assertTrue(helperNumber > 1, "CPU utilization should be > 1, but found " + helperNumber);
     }
-//TODO
+//TODO http://redmine.incredibuild.local/issues/5576
     /**
      * @test Verify IB installation folder not have a coordintorsettings
      * @pre{ }

@@ -781,6 +781,24 @@ public class SetupTests extends SetupTestBase {
         }
         Assert.assertTrue(exit==-1,"Not all IB binaries are signed");
     }
+//TODO https://incredibuild-my.sharepoint.com/:w:/r/personal/avishai_moshka_incredibuild_com/_layouts/15/Doc.aspx?sourcedoc=%7B3E1F08A6-7875-4ABD-8321-B4CA68D6E57C%7D&file=Build%20Group%20API.docx&action=default&mobileredirect=true
+
+//    @Test(testName="Installation Agent Assigned To Group")
+//    public void installationAgentAssignedToGroup(){
+//        ibuiService.startIBUIInstaller(IB_VERSION);
+//        try{
+//            installer.clickNext();
+//            installer.clickNext();
+//            installer.acceptTerms();
+//            installer.clickNext();
+//            installer.clickAdvanced();
+//            installer.clickAssignBuildGroup();
+//            installer.clickNext();
+//        }catch (FindFailed e){
+//            test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
+//            Assert.fail();
+//        }
+//    }
     /*-------------------------------METHODS-------------------------------*/
 
     private void runBuildAndAssert() {

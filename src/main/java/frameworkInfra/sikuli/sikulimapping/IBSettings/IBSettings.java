@@ -55,6 +55,5 @@ public class IBSettings {
     public static final Pattern DisableSchedulingCB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disableScheduling.png");
     public static final Pattern EnableFailOnlyLocally = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_fail_only_locally.png");
     public static final Pattern DisableFailOnlyLocally = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_fail_only_locally.png");
-
-
+    public static final Pattern AllowAgentsToBuildGroups =new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\allow_agents_to_buildGroups.png");
 }
