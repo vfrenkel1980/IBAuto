@@ -8,16 +8,29 @@ import frameworkInfra.utils.StaticDataProvider.IbLocations;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
 import frameworkInfra.utils.SystemActions;
+import frameworkInfra.utils.parsers.CustomJsonParser;
 import frameworkInfra.utils.parsers.Parser;
+import frameworkInfra.utils.parsers.XmlParser;
 import ibInfra.ibExecs.IIBCoordMonitor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.util.StopWatch;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -32,7 +45,9 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  */
 public class IBTCGTestTests extends UnitTestingTestBase {
 
-    private final String ERROR_MESSAGE_INTERNAL_ERROR = "[error]: Internal error: Unsupported gtest option '%s'";
+    private final String ERROR_MESSAGE_INTERNAL_ERROR = " Gtest flag '%s' is not supported.";
+    private final String XML_OUTPUT_TESTSUITES = "testsuites";
+    private final String XML_OUTPUT_TESTSUITE = "testsuite";
 
     private IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
@@ -105,7 +120,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         final int expectedCoreInUse = 10;
         final String HOSTNAME = "windows-qa-1";
 
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " /testlevel=" + expectedCoreInUse);
         int actualNumOfCoresInUse = SystemActions.extractNumberFromStringInText(output, CORES_IN_USE);
         Assert.assertEquals(actualNumOfCoresInUse, expectedCoreInUse, "The number of cores in use is not as expected!");
@@ -183,6 +198,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
             }
         }
     }
+
 
     /**
      * @test GTest executable with failing tests<br>
@@ -284,7 +300,29 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      */
     @Test(testName = "GTest Stress Test")
     public void gTestStressTest() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_STRESS_TEST);
+        stopWatch.stop();
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+        // Calculate test duration
+        long durationMillis = stopWatch.getTotalTimeMillis();
+        int numOfTests = 100;
+        long testDuration = durationMillis / numOfTests;
+        Assert.assertTrue(testDuration <= 1020, "The test execution took longer than expected! Expected time per test is: less than 1020ms, Actual was: " + testDuration);
+
+    }
+
+    @Ignore
+    /**
+     * @test GTest executable for Stress per 10 test<br>
+     * @pre{ }
+     * @steps{ - Run gtest executable for stress}
+     * @result{ - Build is failing;
+     */
+    @Test(testName = "GTest Stress per 10 Test")
+    public void gTestStressPer10Test() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_STRESS_BY_10_INPUTFILE_TEST);
         Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -297,10 +335,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Ignore
     @Test(testName = "GTest Extremely Long Test")
     public void gTestExtremelyLongTest() {
-        // cd C:\QA\Simulation\Testing\google-tests\Executables\openCV
-        // Locations.GTEST_ROOT_PATH + "\\Executables\\openCV";
-        // set OPENCV_TEST_DATA_PATH=C:\QA\Simulation\Testing\google-tests\Executables\openCV\testdata\
-        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_EXTREMELY_LONG_TEST);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_ALL_EXECUTABLES_TEST);
         Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
     }
 
@@ -325,16 +360,13 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest CLI Multiple Executables Check Test Discovery Test")
     public void gTestCLIMultipleExecutablesCheckTestDiscoveryTest() {
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " " + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_FLAGS);
-        final String TEST_DISCOVERY = "Analyzing files for tests to execute\n" +
-                "Analyzing  cpp_sorter_test.exe for tests...\n" +
-                "Analyzing  sample6_unittest.exe for tests...\n" +
-                "found 0 tests in cpp_sorter_test.exe\n" +
-                "found 0 tests in cpp_sorter_test.exe\n" +
-                "found 4 tests in sample6_unittest.exe\n" +
-                "4 tests discovered from 2 files\n" +
-                "\n" +
-                "GTest: cpp_sorter_test.exe sample6_unittest.exe";
-        Assert.assertTrue(output.startsWith(TEST_DISCOVERY), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("Analyzing files for tests to execute"), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("Analyzing  cpp_sorter_test.exe for tests..."), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("Analyzing  sample6_unittest.exe for tests..."), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("found 0 tests in cpp_sorter_test.exe"), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("found 4 tests in sample6_unittest.exe"), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("4 tests discovered from 2 files"), "The Test discovery details are not as expected!");
+        Assert.assertTrue(output.contains("GTest: cpp_sorter_test.exe sample6_unittest.exe"), "The Test discovery details are not as expected!");
     }
 
     /**
@@ -374,6 +406,18 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     }
 
     /**
+     * @test GTest running multiple google executables with Input file and with /test=gtest.  <a href="http://redmine.incredibuild.local/issues/13111">Bug #13111</a>.<br><br>
+     * @pre{ }
+     * @steps{ - Run multiple google executables with Input file and with /test=gtest}
+     * @result{ - Builds are succeeded;
+     */
+    @Test(testName = "GTest With InputFile and with /test=gtest")
+    public void gTestInputFileAndTestEqualGTestTest() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_INPUT_FILE_ + " /test=gtest");
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+    }
+
+    /**
      * @test GTest running multiple google executables with google flags with an invalid Input file<br>
      * @pre{ }
      * @steps{ - Run multiple google executables with google flags with an invalid Input file}
@@ -382,7 +426,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest Invalid InputFile Multiple Executables Test")
     public void gTestInvalidInputFileMultipleExecutablesTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE);
-        Assert.assertEquals(exitCode, -3, "The test execution was expected to fail");
+        Assert.assertEquals(exitCode, -4, "The test execution was expected to fail");
     }
 
     /**
@@ -433,8 +477,6 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         Assert.assertEquals(exitCode, -4, "The test execution failed with the exitcode " + exitCode);
     }
 
-    //comparing output files: xml and json
-//    testsuites tests="12"
 
     /**
      * @test GTest executable with test filter --gtest_output=xml test.<br>
@@ -443,21 +485,109 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded;
      */
     @Test(testName = "GTest Validate Number Of Tests In Xml Output Test")
-    public void gTestValidateNumberOfTestsInXmlOutputTest() throws InterruptedException {
-//        String outputFile = "C:\\QA\\Simulation\\GtestResult.xml";
-//        String ibOutputFile = "C:\\QA\\Simulation\\ibGtestResult.xml";
-        String outputFile = "C:\\QA\\Simulation\\out1.xml";
-        String ibOutputFile = "C:\\QA\\Simulation\\out2.xml";
-        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", outputFile));
+    public void gTestValidateNumberOfTestsInXmlOutputTest() throws InterruptedException, ParserConfigurationException, SAXException, IOException {
+        String outputFile = "C:\\QA\\Simulation\\GtestResult.xml";
+        String ibOutputFile = "C:\\QA\\Simulation\\ibGtestResult.xml";
+//        String outputFile = "C:\\QA\\Simulation\\out1.json";
+//        String ibOutputFile = "C:\\QA\\Simulation\\out2.json";
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_TESTLEVEL_TEST + String.format(" --gtest_output=xml:%s", outputFile));
         Assert.assertEquals(exitCode, 0, "The test execution(without ibtc) failed with the exitcode " + exitCode);
-        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=xml:%s", ibOutputFile));
-        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode);
+        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_TESTLEVEL_TEST + String.format(" --gtest_output=xml:%s", ibOutputFile));
+        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode2);
+
+        String s = compareXmlOutputFiles(ibOutputFile, outputFile);
+
         final String TEXT_TO_FIND = "<testsuites tests=\"\\d+\"";
         int n1 = numberOfTests(outputFile, TEXT_TO_FIND);
         int n2 = numberOfTests(ibOutputFile, TEXT_TO_FIND);
         Assert.assertEquals(n1, n2, "The number of tests running with or without ibtc should be equal!");
     }
 
+    /**
+     * @test GTest executable compare JSON output IBTC vs. no IBTC test.<br>
+     * @pre{ }
+     * @steps{ - Run the gtest executable with IBTC and without IBTC with test filter --gtest_output=json }
+     * @result{ - Builds are successful. Beside time Output are identical;
+     */
+    @Test(testName = "GTest Compare Json Output Files IB vs. No IB Test")
+    public void gTestCompareJsonOutputFilesIBvsNoIBTest() throws ParserConfigurationException, SAXException, IOException, ParseException {
+        String outputFile = "C:\\QA\\Simulation\\GtestResult.json";
+        String ibOutputFile = "C:\\QA\\Simulation\\ibGtestResult.json";
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=json:%s", outputFile));
+        Assert.assertEquals(exitCode, 0, "The test execution(without ibtc) failed with the exitcode " + exitCode);
+        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + String.format(" --gtest_output=json:%s", ibOutputFile));
+        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode2);
+
+//        String diff = compareJsonOutputFiles(ibOutputFile, outputFile);
+//        Assert.assertTrue(diff.isEmpty(), "Json Output files without IBTC and with IBTC are not identical! \n" + diff);
+        Boolean areEquals = compareJsonOutputFiles(outputFile, ibOutputFile);
+        Assert.assertTrue(areEquals, "Json Output files without IBTC and with IBTC are not identical! \n");
+
+    }
+
+    /**
+     * @test GTest executable compare JSON output /testlevel=auto vs. testlevel=deep test.<br>
+     * @pre{ }
+     * @steps{ - Run the gtest executable with /testlevel=auto vs. /testlevel=deep with test filter --gtest_output=json }
+     * @result{ - Builds are successful. Beside time Output are identical;
+     */
+    @Test(testName = "GTest Compare Json Output Files Auto vs. Deep Test")
+    public void gTestCompareJsonOutputTestLevelAutoVsDeepTest() throws ParserConfigurationException, SAXException, IOException, ParseException, InterruptedException {
+        String outputFile = "C:\\QA\\Simulation\\GtestResult.json";
+        String ibOutputFile = "C:\\QA\\Simulation\\ibGtestResult.json";
+        //SystemActions.sleep(3);
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_TEST + " /testlevel=auto " + String.format(" --gtest_output=json:%s", outputFile));
+        Assert.assertEquals(exitCode, 0, "The test execution(/testlevel=auto) failed with the exitcode " + exitCode);
+        int exitCode2 = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MASTER_TEST + " /testlevel=deep " + String.format(" --gtest_output=json:%s", ibOutputFile));
+        Assert.assertEquals(exitCode2, 0, "The test execution(/testlevel=deep) failed with the exitcode " + exitCode2);
+
+//        String diff = compareJsonOutputFiles(ibOutputFile, outputFile);
+//        Assert.assertTrue(diff.isEmpty(), "Json Output files with /testlevel=auto and with /testlevel=deep are not identical!\n" + diff);
+        Boolean areEquals = compareJsonOutputFiles(outputFile, ibOutputFile);
+        Assert.assertTrue(areEquals, "Json Output files without IBTC and with IBTC are not identical! \n");
+    }
+
+    /**
+     * @test GTest OpenCV executable compare JSON output IBTC vs. no IBTC test.<br>
+     * @pre{ }
+     * @steps{ - Run the gtest executable with IBTC and without IBTC with test filter --gtest_output=json }
+     * @result{ - Builds are successful. Beside time Output are identical;
+     */
+    @Test(testName = "GTest OpenCV Compare Json Output Files IB vs. No IB Test")
+    public void gTestOpenCVCompareJsonOutputFilesIBvsNoIBTest() throws ParserConfigurationException, SAXException, IOException, ParseException {
+        String noIbtcOutputFile = "C:\\QA\\Simulation\\opencv_flannd_noibtc.json";
+        String ibtcOutputFile = "C:\\QA\\Simulation\\opencv_flannd_auto.json";
+        int exitCode2 = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_NO_IBTC_TEST);
+        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode2);
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_TESTLEVEL_AUTO_TEST);
+        Assert.assertEquals(exitCode, 0, "The test execution(without ibtc) failed with the exitcode " + exitCode);
+
+        Boolean areEquals = compareJsonOutputFiles(noIbtcOutputFile, ibtcOutputFile);
+        Assert.assertTrue(areEquals, "Json Output files without IBTC and with IBTC are not identical! \n");
+    }
+
+    /**
+     * @test GTest OpenCV executable compare JSON output /testlevel=auto vs. testlevel=deep test.<br>
+     * @pre{ }
+     * @steps{ - Run the gtest executable with /testlevel=auto vs. /testlevel=deep with test filter --gtest_output=json }
+     * @result{ - Builds are successful. Beside time Output are identical;
+     */
+    @Test(testName = "GTest OpenCV Compare Json Output Files Auto vs. Deep Test")
+    public void gTestOpenCVCompareJsonOutputTestLevelAutoVsDeepTest() throws ParserConfigurationException, SAXException, IOException, ParseException, InterruptedException {
+        String autoOutputFile = "C:\\QA\\Simulation\\opencv_flannd_auto.json";
+        String deepOutputFile = "C:\\QA\\Simulation\\opencv_flannd_deep.json";
+        //Thread.sleep(4000);
+
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_TESTLEVEL_AUTO_TEST);
+        Assert.assertEquals(exitCode, 0, "The test execution(without ibtc) failed with the exitcode " + exitCode);
+        int exitCode2 = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.GTEST_OPENCV_TESTLEVEL_DEEP_TEST);
+        Assert.assertEquals(exitCode2, 0, "The test execution(with ibtc) failed with the exitcode " + exitCode2);
+
+//        String diff = compareJsonOutputFiles(autoOutputFile, deepOutputFile);
+//        Assert.assertTrue(diff.isEmpty(), "Json Output files with /testlevel=auto and with /testlevel=deep are not identical!\n" + diff);
+        Boolean areEquals = compareJsonOutputFiles(autoOutputFile, deepOutputFile);
+        Assert.assertTrue(areEquals, "Json Output files without IBTC and with IBTC are not identical! \n");
+    }
 
     /**
      * @test GTest unsupported flag --gtest_list_tests test.<br>
@@ -553,7 +683,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         return RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\" + folder, keyName);
     }
 
-    private static int numberOfTests(String filePath, String textToFind) throws InterruptedException {
+    private int numberOfTests(String filePath, String textToFind) throws InterruptedException {
         String fileContent = SystemActions.getFileContent(filePath);
         Matcher matcher = SystemActions.searchPattern(fileContent, textToFind);
         int numberOfTests = 0;
@@ -561,5 +691,153 @@ public class IBTCGTestTests extends UnitTestingTestBase {
             numberOfTests++;
         }
         return numberOfTests;
+    }
+
+    private String compareXmlOutputFiles(String actualXml, String expectedXml) throws IOException, SAXException, ParserConfigurationException {
+        NodeList testSuites = XmlParser.retrieveNodeListPerElementName(actualXml, XML_OUTPUT_TESTSUITES);
+
+        return "";
+
+    }
+
+
+//    private String compareJsonOutputFiles(String actualJson, String expectedJson) throws IOException, ParseException {
+//        JSONParser parser = new JSONParser();
+//        Object obj = parser.parse(new FileReader(actualJson));
+//        JSONObject expectedJo = (JSONObject) obj;
+//
+//        parser = new JSONParser();
+//        obj = parser.parse(new FileReader(expectedJson));
+//        JSONObject actualJo = (JSONObject) obj;
+//
+//        Iterator<String> keys = expectedJo.keySet().iterator();
+//        while(keys.hasNext()) {
+//            //if ( json.getJSONObject(key) instanceof JSONObject )
+//
+//        }
+//
+//        return "";
+//
+//    }
+
+    private boolean compareJsonOutputFiles(String actualJson, String expectedJson) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader actualFr = new FileReader(actualJson);
+        Object actual = parser.parse(actualFr);
+
+        parser = new JSONParser();
+        FileReader expectedFr = new FileReader(expectedJson);
+        Object expected = parser.parse(expectedFr);
+
+        boolean b = CustomJsonParser.areEqual(actual, expected);
+
+        actualFr.close();
+        actualFr = null;
+        expectedFr.close();
+        expectedFr = null;
+        return b;
+    }
+
+    private String depcompareJsonOutputFiles(String actualJson, String expectedJson) throws IOException, SAXException, ParserConfigurationException, ParseException {
+        //timestamp
+        JSONParser parser = new JSONParser();
+        FileReader actualFr = new FileReader(actualJson);
+        Object obj = parser.parse(actualFr);
+        JSONObject jsonObject = (JSONObject) obj;
+        JSONArray actualTestsuites = (JSONArray) jsonObject.get(XML_OUTPUT_TESTSUITES);
+
+        parser = new JSONParser();
+        FileReader expectedFr = new FileReader(actualJson);
+        obj = parser.parse(expectedFr);
+        jsonObject = (JSONObject) obj;
+        JSONArray expectedTestsuites = (JSONArray) jsonObject.get(XML_OUTPUT_TESTSUITES);
+
+        Iterator it = expectedTestsuites.iterator();
+        while (it.hasNext()) {
+            JSONObject expectedTestsuite = (JSONObject) it.next();
+            String testsuiteName = expectedTestsuite.get("name").toString();
+            boolean actualElementFound = false;
+            for (Object o : actualTestsuites) {
+                JSONObject actualTestsuite = (JSONObject) o;
+                String actualSuiteName = actualTestsuite.get("name").toString();
+                if (!actualSuiteName.equals(testsuiteName)) {
+                    continue;
+                } else {
+                    actualElementFound = true;
+                    String diff = compareTestSuites(actualSuiteName, expectedTestsuite, actualTestsuite);
+                    if (diff.isEmpty()) {
+                        break;
+                    } else return diff;
+                }
+            } // finding the actual element
+            if (!actualElementFound) {
+                return String.format("Testsuite '%s' was not found in file '%s'!", testsuiteName, actualJson);
+            }
+        }  // running through the expected elements
+
+        obj = null;
+        jsonObject = null;
+        actualTestsuites = null;
+        expectedTestsuites = null;
+        actualFr.close();
+        actualFr = null;
+        expectedFr.close();
+        expectedFr = null;
+        return "";
+
+    }
+
+    private String compareTestSuites(String testsuiteName, JSONObject expectedTestsuites, JSONObject actualTestsuites) {
+        Iterator<String> keys = expectedTestsuites.keySet().iterator();
+        while (keys.hasNext()) {
+            String currentKey = keys.next();
+            if (currentKey.contains("time")) {
+                continue;
+            }
+            if (currentKey.equals("testsuite")) {
+                //continue;
+                JSONArray expectedTestsuite = (JSONArray) expectedTestsuites.get(currentKey);
+                JSONArray actualTestsuite = (JSONArray) actualTestsuites.get(currentKey);
+                String diff = compareTestsuite(expectedTestsuite, actualTestsuite);
+                if (!diff.isEmpty()) {
+                    return diff;
+                }
+                continue;
+            }
+            String expectedValue = expectedTestsuites.get(currentKey).toString();
+            String actualValue = actualTestsuites.get(currentKey).toString();
+            if (!actualValue.equals(expectedValue)) {
+                return String.format("A different value was found for Testsuite '%s' for parameter '%s'. Expected: %s, Actual: %s", testsuiteName, currentKey, expectedValue, actualValue);
+            }
+        }
+        return "";
+    }
+
+    private String compareTestsuite(JSONArray expectedTestSuiteArr, JSONArray actualTestSuiteArr) {
+        Iterator it = expectedTestSuiteArr.iterator();
+        while (it.hasNext()) {
+            JSONObject expectedTestsuite = (JSONObject) it.next();
+            String testsuiteName = expectedTestsuite.get("name").toString();
+            boolean actualElementFound = false;
+            for (Object o : actualTestSuiteArr) {
+                JSONObject actualTestsuite = (JSONObject) o;
+                String actualSuiteName = actualTestsuite.get("name").toString();
+                if (!actualSuiteName.equals(testsuiteName)) {
+                    continue;
+                } else {
+                    actualElementFound = true;
+                    String diff = compareTestSuites(actualSuiteName, expectedTestsuite, actualTestsuite);
+                    if (diff.isEmpty()) {
+                        break;
+                    } else return diff;
+                }
+            } // finding the actual element
+            if (!actualElementFound) {
+                return String.format("Testsuite '%s' was not found!", testsuiteName);
+            }
+
+        } // for
+
+        return "";
     }
 }

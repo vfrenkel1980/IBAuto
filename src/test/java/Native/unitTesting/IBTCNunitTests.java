@@ -388,6 +388,17 @@ public class IBTCNunitTests extends UnitTestingTestBase {
 
     }
 
+    /**
+     * @test NUnit2 that supports x86 test. Coverage for Bug <a href="http://redmine.incredibuild.local/issues/12869">Bug #12869</a>.<br>
+     * @pre{ }
+     * @steps{ - Run the nunit-framework-tests with NUnit2 that supports x86 flag.}
+     * @result{ - Build is succeeded;  }
+     */
+    @Test(testName = "Nunit2 that supports x86 Test")
+    public void nunit2ThatSupportsx86Test() {
+        int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2x86_FRAMEWORK_1DLL_TEST);
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+    }
     //Negative flow
 
     /**
