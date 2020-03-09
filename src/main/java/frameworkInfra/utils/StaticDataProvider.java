@@ -147,7 +147,6 @@ public class StaticDataProvider {
         public static final String BUILDHISTORY = "BuildHistory.exe ";
         public static final String AGENTSETTINGS = "BuildSettings.exe ";
         public static final String COORDMONITOR = "CoordMonitor.exe ";
-        public static final String COORDSETTINGS = "CoordinatorSettings.exe";
         public static final String BUILDSETTINGS = "BuildSettings.exe ";
         public static String XLICPROC = "\"" + IbLocations.IB_ROOT + "\\xlicproc" + "\" " + "/LicenseFile=";
         public static final String NOTHING = Locations.QA_ROOT + "\\Tools\\nothing.exe";
@@ -156,6 +155,7 @@ public class StaticDataProvider {
         public static final String SQLITE_CONVERTION_TOOL_NEW = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbNew.exe";
         public static final String SQLITE_CONVERTION_TOOL_OLD = Locations.QA_ROOT + "\\Tools\\ConvertEncryptedDbOld.exe";
         private static final String NUNIT2 = Locations.QA_ROOT + "\\Testing\\NUnit2\\bin\\nunit-console.exe";
+        private static final String NUNIT2x86 = Locations.QA_ROOT + "\\Testing\\NUnit_2.7.1\\bin\\nunit-console-x86.exe";
     }
 
     public static class WindowsServices {
@@ -256,7 +256,8 @@ public class StaticDataProvider {
             public static final String AUDACITY_X32_DEBUG = "\"C:\\QA\\Simulation\\projects\\Audacity\\Audacity 2.1.0 src\\win\\audacity.sln\" /%s /cfg=\"debug|win32\" /title=\"Audacity 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
             public static final String LITTLE_PROJECT_X86_DEBUG = "C:\\QA\\Simulation\\projects\\LittleProject2\\LittleProject2.sln /%s /cfg=\"Debug|x86\" /title=\"LittleProject 2017 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\"";
         }
-       //TODO: ADD CORRECT PATH TO COORDSETTINGS
+
+        //TODO: ADD CORRECT PATH TO COORDSETTINGS
         public static class COORD_SETTINGS{
             public static final String COORD_SETTINGS_LOCATION = "C:\\Program Files (x86)\\IncrediBuild\\CoordinatorSettings.exe";
         }
@@ -611,7 +612,7 @@ public class StaticDataProvider {
 
         public static class QT_BATMAN {
             public static final String QT_CLEAN = "D:\\QA\\qt5\\CleanQT.bat";
-            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat" ;
+            public static final String QT_BUILD = "D:\\QA\\qt5\\IBBuildQT.bat";
         }
 
         public static class VC15_ROBIN {
@@ -677,6 +678,7 @@ public class StaticDataProvider {
             public static final String NUNIT3_SLOW_FILE_FLAG_TEST = NUNIT3_SLOW_TEST + " @\"C:\\QA\\Simulation\\Testing\\Nunit3 TestExample\\fileWithArguments.txt\"";
             // NUNIT2
             public static final String NUNIT2_FRAMEWORK_1DLL_TEST = Processes.NUNIT2 + " C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\\nunit.framework.tests.dll";
+            public static final String NUNIT2x86_FRAMEWORK_1DLL_TEST = Processes.NUNIT2x86 + " C:\\QA\\Simulation\\Testing\\NUnit_2.7.1\\tests\\x86\\Release\\nunit.framework.tests.dll /log2console /loglevel=info";
             public static final String NUNIT2_FRAMEWORK_1DLL_WITH_SPACE_TEST = Processes.NUNIT2 + " \"C:\\QA\\Simulation\\Testing\\NUnit2 With Space\\bin\\nunit.framework.tests.dll\"";
             public static final String NUNIT2_FRAMEWORK_LOGFILE_TEST = NUNIT2_FRAMEWORK_1DLL_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String NUNIT2_FRAMEWORK_TARGETDIR_TEST = Processes.NUNIT2 + " /targetdir=\"C:\\QA\\Simulation\\Testing\\NUnit2\\bin\\tests\" nunit.framework.tests.dll";
@@ -698,7 +700,12 @@ public class StaticDataProvider {
             //GTEST
             public static final String GTEST_CPPSORTER_TEST = Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build\\Release\\cpp_sorter_test.exe";
             public static final String GTEST_CPPSORTER_TESTLEVEL_TEST = GTEST_CPPSORTER_TEST + " /testlevel=10";
-            public static final String GTEST_MASTER_TESTLEVEL_TEST = Locations.GTEST_ROOT_PATH + "googletest-master\\googletest\\Debug\\sample6_unittest.exe /testlevel=12";
+            public static final String GTEST_MASTER_TEST = Locations.GTEST_ROOT_PATH + "googletest-master\\googletest\\Debug\\sample6_unittest.exe";
+            public static final String GTEST_MASTER_TESTLEVEL_TEST = GTEST_MASTER_TEST + " /testlevel=12";
+            public static final String GTEST_OPENCV_TESTLEVEL_AUTO_TEST = Locations.GTEST_ROOT_PATH + "Executables\\openCV\\runner\\Run opencv_test_flannd.exe Auto.bat";
+            public static final String GTEST_OPENCV_TESTLEVEL_DEEP_TEST = Locations.GTEST_ROOT_PATH + "Executables\\openCV\\runner\\Run opencv_test_flannd.exe Deep.bat";
+            public static final String GTEST_OPENCV_NO_IBTC_TEST = Locations.GTEST_ROOT_PATH + "Executables\\openCV\\runner\\Run opencv_test_flannd.exe No IBTC.bat";
+            public static final String GTEST_OPENCV_ALL_EXECUTABLES_TEST = Locations.GTEST_ROOT_PATH + "Executables\\openCV\\runner\\Run all OpenCV executables";
             public static final String GTEST_CPPSORTER_TESTLEVEL_DEEP_TEST = GTEST_CPPSORTER_TEST + " /testlevel=deep";
             public static final String GTEST_CPPSORTER_FLAGS = GTEST_CPPSORTER_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
             public static final String GTEST_CPPSORTER_FLAGS_NO_OUPUT_FILE = GTEST_CPPSORTER_TEST + " --gtest_filter=*int* --gtest_also_run_disabled_tests  --gtest_repeat=100 --gtest_shuffle  --gtest_random_seed=1236 --gtest_output=xml:C:\\QA\\Simulation\\gtestResult.xml";
@@ -709,10 +716,12 @@ public class StaticDataProvider {
             public static final String GTEST_EXECUTABLE_THAT_CRASHES = Locations.GTEST_ROOT_PATH + "Executables\\gtest_crash_test.exe";
             public static final String GTEST_NON_GTEST_EXECUTABLE = Locations.GTEST_ROOT_PATH + "Executables\\crash_test.exe";
             public static final String GTEST_EXECUTABLE_FAILS_ON_REMOTE_NOT_ON_LOCAL = Locations.GTEST_ROOT_PATH + "Executables\\gtest_failed_remote_test.exe";
-            public static final String GTEST_EXECUTABLE_STRESS_TEST = Locations.GTEST_ROOT_PATH + "Executables\\gtest_highload_test.exe";
+            public static final String GTEST_EXECUTABLE_STRESS_TEST = Locations.GTEST_ROOT_PATH + "Executables\\gtest_highload_test.exe ";
+            public static final String GTEST_EXECUTABLE_STRESS_BY_10_INPUTFILE_TEST =  "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\StressInputFile.txt --gtest_output=json:C:\\QA\\Simulation\\stressBy10.json";
             public static final String GTEST_EXECUTABLE_EXTREMELY_LONG_TEST = " opencv_test_calib3dd.exe opencv_test_cored.exe opencv_test_dnnd.exe opencv_test_features2dd.exe opencv_test_flannd.exe opencv_test_gapid.exe opencv_test_highguid.exe opencv_test_imgcodecsd.exe opencv_test_imgprocd.exe opencv_test_mld.exe opencv_test_objdetectd.exe opencv_test_photod.exe opencv_test_stitchingd.exe opencv_test_videod.exe opencv_test_videoiod.exe /openmonitor /testlevel=deep";
             public static final String GTEST_MUTIPLE_EXECUTABLES_TXT_INPUT_FILE = "/testlevel=10  /inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\GoodInputFile.txt";
             public static final String GTEST_MUTIPLE_EXECUTABLES_HTML_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.html";
+            public static final String GTEST_OPENCV_INPUT_FILE_ =" /inputfile="  + Locations.GTEST_ROOT_PATH + "InputFiles\\OpenCV_InputFile.txt";
             public static final String GTEST_MUTIPLE_EXECUTABLES_DOC_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InputFile.doc";
             public static final String GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE = "/inputfile=" + Locations.GTEST_ROOT_PATH + "InputFiles\\InvalidInputFile.txt";
             public static final String UNSUPPORTED_FLAG_GTEST_LIST_TESTS = "--gtest_list_tests";
@@ -912,14 +921,14 @@ public class StaticDataProvider {
     }
 
     public static class WindowsMachines {
-        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.235"; //"192.168.10.165"
+        public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";
         public static final String WIN_INSIDER = "Sr4-w10-fastrin";
-        public static final String DASHBORD_HELPER = "srv-10"; //192.168.11.65
+        public static final String DASHBORD_HELPER = "srv-10";
         public static final String IC_COORDINATOR = "h22-cloud-coord";
         public static final String IC_INITIATOR = "h22-cloud-init";
         public static final String PHOENIX = "Phoenix";
