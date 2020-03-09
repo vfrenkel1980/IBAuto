@@ -150,6 +150,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+
     @Test(enabled = false, testName = "Android CS - Debug - build", groups = {"Build"})
     public void androidCSDebugBuild() {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.ANDROIDCS_ANYCPU_DEBUG, "%s"));
@@ -202,7 +203,6 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         }
         Assert.assertTrue(pass, "Some machines from VMSIM Grid were assigned to the Batman build process");
     }
-
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void changePSSDKVersionTo(String SDKVersion) {
         winService.runCommandWaitForFinish(winService.changeCurDirTo(OrbisSDK.SDK_INSTALLER_FOLDER) + String.format(OrbisSDK.SWITCH_PS_SDK, SDKVersion));

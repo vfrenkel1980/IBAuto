@@ -289,47 +289,46 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
-//
-//    /**
-//     * @test Verify Agent Settings Opened From Try
-//     * @pre{ }
-//     * @steps{
-//     * - Open Agent Settings from tray
-//     * - Verify Agent Settings opened}
-//     * @result{ - Agent Settings window is opened}
-//     */
-//    @Test(testName = "Verify Agent Settings Opened From Tray")
-//    public void verifyAgentSettingsOpenedFromTray() {
-//        if (!project.equals("green01")) {
-//            test.log(Status.SKIP, "Test should run once on green project");
-//            throw new SkipException("Skipped test");
-//        }
-//        client.openAgentSettingsFromTray();
-//        client.verifyAgentSettingsOpened();
-//    }
+    /**
+     * @test Verify Agent Settings Opened From Try
+     * @pre{ }
+     * @steps{
+     * - Open Agent Settings from tray
+     * - Verify Agent Settings opened}
+     * @result{ - Agent Settings window is opened}
+     */
+    @Test(testName = "Verify Agent Settings Opened From Tray")
+    public void verifyAgentSettingsOpenedFromTray() {
+        if (!project.equals("green01")) {
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
+        client.openAgentSettingsFromTray();
+        client.verifyAgentSettingsOpened();
+    }
 
     //TODO
-//    /**
-//     * @test Verify Build Groups default state is OFF
-//     * @pre{ }
-//     * @steps{
-//     * - Open Coordinator Setting from Tray
-//     * - Click to Advanced Option Of CoordSettings
-//     * @result{ - Allow Agents to register to Build Group is disabled}
-//     */
-//     @Test(testName="Verify Build Groups default state is OFF")
-//      public void verifyBuildGroupsIsOff() {
-//      client.clickAdvancedOptionOfCoordSettings();
-//      if (!project.equals("green01")) {
-//        test.log(Status.SKIP, "Test should run once on green project");
-//        throw new SkipException("Skipped test");
-//      }
-//      try {
-//        screen.wait(IBSettings.AllowAgentsToBuildGroups.similar((float) 0.9), 10);
-//      }catch(FindFailed findFailed) {
-//        test.log(Status.WARNING, "Build Groups is not disabled, failed with error: " + findFailed.getMessage());
-//        Assert.fail();
-//      }
-//     }
+    /**
+     * @test Verify Build Groups default state is OFF
+     * @pre{ }
+     * @steps{
+     * - Open Coordinator Setting from Tray
+     * - Click to Advanced option of CoordSettings
+     * @result{ - Allow Agents to register to Build Group is disabled}
+     */
+     @Test(testName="Verify Build Groups default state is OFF")
+      public void verifyBuildGroupsIsOff() {
+      client.clickAdvancedOptionOfCoordSettings();
+      if (!project.equals("green01")) {
+        test.log(Status.SKIP, "Test should run once on green project");
+        throw new SkipException("Skipped test");
+      }
+      try {
+        screen.wait(IBSettings.AllowAgentsToBuildGroups.similar((float) 0.9), 10);
+      }catch(FindFailed findFailed) {
+        test.log(Status.WARNING, "Build Groups is not disabled, failed with error: " + findFailed.getMessage());
+        Assert.fail();
+      }
+     }
 
 }// end of UIValidationsTests class

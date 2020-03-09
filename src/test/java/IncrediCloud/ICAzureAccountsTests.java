@@ -8,10 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-/**
- * @brief<b> <b>ICAzureAccountsTests</b>
- * @details
- */
+
 public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
 
     /**

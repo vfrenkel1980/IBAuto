@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+
 /**
  * @brief Unit tests execution with IbTestConsole
  * <p>
@@ -562,4 +563,79 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         }
         return numberOfTests;
     }
+
+    /**
+     * @test gTest Error Message Invalid Unitest Framework
+     * @pre{ }
+     * @steps {- Run command from IBConsole with flag: /test=unix }
+     * @result { - Exception message group 1}
+     */
+    @Test(testName ="gTest Error Message Invalid Unitest Framework")
+    public void gtestGeneralErrorInvalidUnitestFramwork(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.INVALID_UNITEST_FRAMEWORK_UNIX;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST_TEST_FLAG_EQUAL_UNIX);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
+
+    }
+    /**
+     * @test gtest General Error Invalid Missing Unitest Framework And Invalid Executable
+     * @pre{ }
+     * @steps {- Run command from IBConsole: InputFiles\GoodInputFile.txt}
+     * @result { - Exception message group 1: The requested framework cannot be detected. Use the /test=<framework> option, to specify the framework you want to execute.}
+     */
+    @Test(testName ="gtest General Error Invalid Missing Unitest Framework And Invalid Executable")
+    public void gtestGeneralErrorInvalidMissingUnitestFrameworkAndInvalidExecutable(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.INVALID_FRAMEWORK;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLES_TXT_FILE);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
+    }
+    /**
+     * @test gTest Critical error during main algorithm processing
+     * @pre{ }
+     * @steps {- Run command from IBConsole with invalid file}
+     * @result { Internal error: <exception message group 2>}
+     */
+    @Test(testName ="gtest General Internal Error Invalid Output Filename")
+    public void gtestGeneralInternalErrorInvalidOutputFilename(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.INVALID_OUTPUT_FILE;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_INALID_OUTPUT_FILE);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
+    }
+    /**
+     * @test nUnit3 General Error Invalid Value For At File Flag
+     * @pre{ }
+     * @steps {- Run command from IBConsole with NUnit.Tests1.dll @file=}
+     * @result { Invalid value for the '@file' option.}
+     */
+    @Test(testName ="nUnit3 General Error Invalid Value For At File Flag")
+    public void nUnitGeneralErrorInvalidValueForAtFileFlag(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.INVALID_VALUE_FILE_FLAG;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT_INALID_VALUE_FLAG);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
+    }
+    /**
+     * @test gTest General Error Sameos And MinMaxWinVer Flags Used Together
+     * @pre{ }
+     * @steps {- Run command from IBConsole with flag: /MinWinVer /MaxWinVer}
+     * @result { Internal: exception message group 1: The '/sameos' option cannot be used together with the '/MinWinVer' or '/MaxWinVer' options.}
+     */
+    @Test(testName ="gTest General Error Sameos And MinMaxWinVer Flags Used Together")
+    public void gTestGeneralErrorSameosAndMinMaxWinVerFlagsUsedTogether(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.SAMEOS_OPTION;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_SAMEOS_OPTIONS);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
 }
+    /**
+     * @test gTest General Error Missing Executable File
+     * @pre{ }
+     * @steps {- Run command from IBConsole with flag: /testlevel=auto /openmonitor}
+     * @result { exception message group 1: The execution command is incomplete}
+     */
+    @Test(testName ="gTest General Error Missing Executable File")
+    public void gTestGeneralErrorMissingExecutableFile(){
+        String expectedErrorMessage=StaticDataProvider.ErrorMessages.GeneralErrors.EXECUTION_COMMAND_INCOMPLETE;
+        String gTestErrors = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MISSING_EXECUTABLE_FILE);
+        Assert.assertTrue(gTestErrors.contains(expectedErrorMessage), "Failed to find gTest error in output");
+    }
+
+}//end of class

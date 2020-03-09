@@ -9,6 +9,8 @@ import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import ibInfra.ibService.IIBService;
 import ibInfra.ibService.IbService;
+import ibInfra.vs.VS16UIService;
+import ibInfra.vs.VSUIService;
 import ibInfra.windowscl.WindowsService;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestContext;
@@ -30,6 +32,8 @@ public class WindowsTestBase extends TestBase {
     private static int ibVersion = 0;
     public WindowsService winService = new WindowsService();
     public IbService ibService = new IbService();
+    public VSUIService vsuiService=new VSUIService();
+    public VS16UIService vs16UIService = new VS16UIService();
     public String testName = "";
     public String suiteName = "";
 
