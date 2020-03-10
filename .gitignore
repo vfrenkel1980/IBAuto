@@ -3,3 +3,5 @@ out
 .gradle
 .idea
 log.out
+TestResults
+reports
