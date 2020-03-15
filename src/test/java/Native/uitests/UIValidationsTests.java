@@ -14,6 +14,7 @@ import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
+
 import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands.COORD_SETTINGS.COORD_SETTINGS_LOCATION;
 
 /**
@@ -49,7 +50,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.openProject(projectLocation);
             if (project.contains("white")) {
                 vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-                SystemActions.sleep(12);
+                SystemActions.sleep(20);
                 vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
@@ -132,7 +133,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
             }
-            SystemActions.sleep(30);
+            SystemActions.sleep(60);
             client.verifyVSBarPattern(vsBarPattern);
         } catch (RuntimeException e) {
             e.getMessage();
@@ -274,7 +275,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             test.log(Status.SKIP, "Test should run once on green project");
             throw new SkipException("Skipped test");
         }
-        SystemActions.sleep(30);
+        SystemActions.sleep(60);
         client.verifyCoordinatorMonitorOpened();
         try {
             screen.wait(CoordMonitor.ToolsMenu.similar((float)0.9), 15).click();
@@ -289,47 +290,23 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
-//
-//    /**
-//     * @test Verify Agent Settings Opened From Try
-//     * @pre{ }
-//     * @steps{
-//     * - Open Agent Settings from tray
-//     * - Verify Agent Settings opened}
-//     * @result{ - Agent Settings window is opened}
-//     */
-//    @Test(testName = "Verify Agent Settings Opened From Tray")
-//    public void verifyAgentSettingsOpenedFromTray() {
-//        if (!project.equals("green01")) {
-//            test.log(Status.SKIP, "Test should run once on green project");
-//            throw new SkipException("Skipped test");
-//        }
-//        client.openAgentSettingsFromTray();
-//        client.verifyAgentSettingsOpened();
-//    }
 
-    //TODO
-//    /**
-//     * @test Verify Build Groups default state is OFF
-//     * @pre{ }
-//     * @steps{
-//     * - Open Coordinator Setting from Tray
-//     * - Click to Advanced Option Of CoordSettings
-//     * @result{ - Allow Agents to register to Build Group is disabled}
-//     */
-//     @Test(testName="Verify Build Groups default state is OFF")
-//      public void verifyBuildGroupsIsOff() {
-//      client.clickAdvancedOptionOfCoordSettings();
-//      if (!project.equals("green01")) {
-//        test.log(Status.SKIP, "Test should run once on green project");
-//        throw new SkipException("Skipped test");
-//      }
-//      try {
-//        screen.wait(IBSettings.AllowAgentsToBuildGroups.similar((float) 0.9), 10);
-//      }catch(FindFailed findFailed) {
-//        test.log(Status.WARNING, "Build Groups is not disabled, failed with error: " + findFailed.getMessage());
-//        Assert.fail();
-//      }
-//     }
+    /**
+     * @test Verify Agent Settings Opened From Try
+     * @pre{ }
+     * @steps{
+     * - Open Agent Settings from tray
+     * - Verify Agent Settings opened}
+     * @result{ - Agent Settings window is opened}
+     */
+    @Test(testName = "Verify Agent Settings Opened From Tray")
+    public void verifyAgentSettingsOpenedFromTray() {
+        if (!project.equals("green01")) {
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
+        client.openAgentSettingsFromTray();
+        client.verifyAgentSettingsOpened();
+    }
 
 }// end of UIValidationsTests class
