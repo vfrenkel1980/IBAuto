@@ -10,13 +10,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class XmlParser {
 
-    public static List getIpList(String listFile){
+    public static List getIpList(String listFile) {
 
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(System.getProperty("user.dir") + "/src/main/resources/Machines/" + listFile);
@@ -43,15 +49,14 @@ public class XmlParser {
 
     //this method is for parsing the exportstatus.xml
     //returns a list of values matching a specified key
-    public static List<String> getListOfValuesUsingKey(org.w3c.dom.Document document, String key, String value){
+    public static List<String> getListOfValuesUsingKey(org.w3c.dom.Document document, String key, String value) {
         test.log(Status.INFO, "Reading Status XML for Agent information");
         List<String> machines = new ArrayList<String>();
         document.getDocumentElement().normalize();
         NodeList nList = document.getElementsByTagName("Agent");
-        for (int i = 0; i < nList.getLength(); i++){
+        for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
                 org.w3c.dom.Element eElement = (org.w3c.dom.Element) node;
                 if (eElement.getAttribute(key).toLowerCase().equals(value.toLowerCase()))
                     machines.add(eElement.getAttribute(key));
@@ -59,6 +64,17 @@ public class XmlParser {
         }
         test.log(Status.INFO, "Finished parsing Coord Status export");
         return machines;
+    }
+
+    public static NodeList retrieveNodeListPerElementName(String filePath, String elementName) throws ParserConfigurationException, IOException, SAXException {
+        File fXmlFile = new File(filePath);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        org.w3c.dom.Document document = builder.parse(fXmlFile);
+        document.getDocumentElement().normalize();
+
+        NodeList n =document.getElementsByTagName(elementName);
+        return null;
     }
 
 

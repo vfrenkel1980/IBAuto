@@ -25,6 +25,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  * @details Run on UI Automation (HOST-4)
  */
 public class SetupTests extends SetupTestBase {
+
     /**
      * @test Install in a different directory
      * @pre{ Uninstall previously installed IB versions }

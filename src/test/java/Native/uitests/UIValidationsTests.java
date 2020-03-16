@@ -15,6 +15,8 @@ import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands.COORD_SETTINGS.COORD_SETTINGS_LOCATION;
+
 /**
  * @brief <b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IUM/pages/11272241/Visual+Studio+UI+Add-in"><b>Visual Studio UI Add-in</b></a> UI tests</b>
  * @brief <b> <a href="https://incredibuild.atlassian.net/wiki/spaces/IUM/pages/21758026/The+Build+Monitor"><b>The Build Monitor</b></a> UI tests</b>
@@ -48,7 +50,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             vsuiService.openProject(projectLocation);
             if (project.contains("white")) {
                 vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-                SystemActions.sleep(12);
+                SystemActions.sleep(20);
                 vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
@@ -131,6 +133,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
             }
+            SystemActions.sleep(60);
             client.verifyVSBarPattern(vsBarPattern);
         } catch (RuntimeException e) {
             e.getMessage();
@@ -266,12 +269,13 @@ public class UIValidationsTests extends UIValidationTestBase {
      */
     @Test(testName="Run Coordinator settings as Administrator")
     public void RunCoordSetingsAsAdministrator(){
+       SystemActions.doesFileExist(COORD_SETTINGS_LOCATION);
         winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
         if (!project.equals("green01")) {
             test.log(Status.SKIP, "Test should run once on green project");
             throw new SkipException("Skipped test");
         }
-        SystemActions.sleep(30);
+        SystemActions.sleep(60);
         client.verifyCoordinatorMonitorOpened();
         try {
             screen.wait(CoordMonitor.ToolsMenu.similar((float)0.9), 15).click();

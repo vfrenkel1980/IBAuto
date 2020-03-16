@@ -13,6 +13,7 @@ public class Monitor {
         public static final Pattern IBYellowBar = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildMonitor\\ib_mon_yellow_bar.png");
         public static final Pattern IBRedBar = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildMonitor\\ib_mon_red_bar.png");
         public static final Pattern IBWhiteBar = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildMonitor\\ib_mon_white_bar.png");
+        public static final Pattern DevButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\BuildMonitor\\dev_button.png");
     }
 
     public static class Tabs {

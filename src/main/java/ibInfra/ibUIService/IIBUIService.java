@@ -21,6 +21,10 @@ public interface IIBUIService {
 
         void clickFinish() throws FindFailed;
 
+        void clickAdvanced() throws FindFailed;
+
+        void clickAssignBuildGroup() throws FindFailed;
+
         void uncheckReleaseNotes() throws FindFailed;
 
         void uncheckRemoteUpdate() throws FindFailed;
@@ -40,6 +44,7 @@ public interface IIBUIService {
         void selectCoordinator(String coordName) throws FindFailed;
 
         void selectUninstall() throws FindFailed;
+
 
         void selectManualHelperPorts() throws FindFailed;
 
@@ -88,6 +93,8 @@ public interface IIBUIService {
         void openCoordSettingsFromTray();
 
         void openAgentSettingsFromTray();
+
+        void clickAdvancedOptionOfCoordSettings();
 
         void verifyAllowEnableDisableAsHelperDisabledFromTray();
 
