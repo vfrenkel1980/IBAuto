@@ -115,6 +115,18 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
+        public void clickAdvanced() throws FindFailed {
+            test.log(Status.INFO, "Clicking Advanced");
+            screen.wait(IBInstaller.AdvancedBTN.similar((float) 0.8), 30).click();
+        }
+
+        @Override
+        public void clickAssignBuildGroup() throws FindFailed {
+            test.log(Status.INFO, "Clicking Assign build group button");
+            screen.wait(IBInstaller.AssignBuildGroupBTN.similar((float) 0.8), 30).click();
+        }
+
+        @Override
         public void uncheckReleaseNotes() throws FindFailed {
             test.log(Status.INFO, "Removing Release notes CB");
             screen.wait(IBInstaller.ReleaseNotesUncheckCB.similar((float) 0.8), 10000).click();
@@ -275,7 +287,7 @@ public class IBUIService implements IIBUIService {
         public void verifyVSBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for VS Bar");
             try {
-                screen.wait(pat.similar((float) 0.8), 5);
+                screen.wait(pat.similar((float) 0.8), 60);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -399,6 +411,19 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
+
+        @Override
+        public void clickAdvancedOptionOfCoordSettings() {
+            test.log(Status.INFO, "Opening Advanced option of Coordinator Settings");
+            try{
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 10).click();
+            }catch(FindFailed findFailed){
+                test.log(Status.WARNING, "Failed to open Advanced option with error");
                 Assert.fail();
             }
         }
@@ -576,8 +601,8 @@ public class IBUIService implements IIBUIService {
         @Override
         public void disableFailOnlyLocally() {
             try {
-                screen.wait(IBSettings.InitiatorTab.similar((float) 0.5), 15).click();
-                screen.wait(IBSettings.AdvancedTab.similar((float) 0.5), 15).click();
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.5), 30).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.5), 30).click();
                 screen.wait(IBSettings.DisableFailOnlyLocally.similar((float) 0.5), 15).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
@@ -708,8 +733,8 @@ public class IBUIService implements IIBUIService {
             public void disableAsHelper() {
                 test.log(Status.INFO, "Disabling agent as helper");
                 try {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 30).rightClick();
+                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to disable as helper, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -719,7 +744,7 @@ public class IBUIService implements IIBUIService {
             @Override
             public void verifyHelperIsDisabled() {
                 boolean objectExists = false;
-                if (screen.exists(CoordMonitor.DisabledAgentValidation, 15) != null)
+                if (screen.exists(CoordMonitor.DisabledAgentValidation, 30) != null)
                     objectExists = true;
                 Assert.assertTrue(objectExists, "Could not find agent disabled verification");
             }
@@ -749,8 +774,8 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Unsubscribing agent as helper");
                 try {
                     SystemActions.sleep(5);
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 30).rightClick();
+                    screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to unsubscribe agent, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -770,8 +795,8 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Subscribing agent as helper");
                 try {
                     SystemActions.sleep(5);
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 30).rightClick();
+                    screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to subscribe agent, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -790,8 +815,8 @@ public class IBUIService implements IIBUIService {
             public void clickAllowRemoteAdministration() {
                 test.log(Status.INFO, "Clicking allow remote administration");
                 try {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 30).rightClick();
+                    screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow remote administration, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -802,10 +827,10 @@ public class IBUIService implements IIBUIService {
             public void clickAllowEnableDisableAsHelper() {
                 test.log(Status.INFO, "Clicking allow Enable Disable as helper");
                 try {
-                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.97), 15).rightClick();
-                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.95),15).click();
+                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.9), 30).rightClick();
+                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.9),30).click();
 
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
@@ -817,8 +842,8 @@ public class IBUIService implements IIBUIService {
             public void stopCoordService() {
                 test.log(Status.INFO, "Stopping coordinator service");
                 try {
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to stop coordinator service, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -829,8 +854,8 @@ public class IBUIService implements IIBUIService {
             public void startCoordService() {
                 test.log(Status.INFO, "Starting coordinator service");
                 try {
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.StartServiceMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to start coordinator service, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -841,10 +866,10 @@ public class IBUIService implements IIBUIService {
             public void pauseCloud() {
                 test.log(Status.INFO, "Pausing cloud");
                 try {
-                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).hover();
-                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 30).hover();
+                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -855,10 +880,10 @@ public class IBUIService implements IIBUIService {
             public void pauseCloudAndDeletePool() {
                 test.log(Status.INFO, "Pausing cloud and deleting pool");
                 try {
-                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).hover();
-                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.PauseCloudAndDeletePool.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 0.9).hover();
+                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.PauseCloudAndDeletePool.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -869,11 +894,11 @@ public class IBUIService implements IIBUIService {
             public void enableCloud(boolean isDeleted) {
                 test.log(Status.INFO, "Enabling cloud");
                 try {
-                    screen.wait(CoordMonitor.CloudPausedButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).hover();
-                    screen.wait(CoordMonitor.ResumeCloudButton.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.CloudPausedButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 30).hover();
+                    screen.wait(CoordMonitor.ResumeCloudButton.similar((float) 0.9), 30).click();
                     if (isDeleted)
-                        screen.wait(CoordMonitor.ResumeCloudPopUpButton.similar((float) 0.80), 15).click();
+                        screen.wait(CoordMonitor.ResumeCloudPopUpButton.similar((float) 0.8), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to enable cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -884,9 +909,9 @@ public class IBUIService implements IIBUIService {
             public void deactivateCloud() {
                 test.log(Status.INFO, "Deactivating cloud");
                 try {
-                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.DeactivateCloud.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.DeactivateButton.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.DeactivateCloud.similar((float) 0.9), 30).click();
+                    screen.wait(CoordMonitor.DeactivateButton.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Deactivate cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -897,7 +922,7 @@ public class IBUIService implements IIBUIService {
             public void verifyCloudDeactivated() {
                 test.log(Status.INFO, "Verifying cloud is deactivated");
                 try {
-                    screen.wait(CoordMonitor.DeactivatingButton.similar((float) 0.95), 60);
+                    screen.wait(CoordMonitor.DeactivatingButton.similar((float) 0.9), 60);
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to verify cloud deactivated, failed with error: " + findFailed.getMessage());
                     Assert.fail();
