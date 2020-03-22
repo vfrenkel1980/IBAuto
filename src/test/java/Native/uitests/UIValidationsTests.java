@@ -132,7 +132,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             } else {
                 vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
             }
-            SystemActions.sleep(30);
+            SystemActions.sleep(60);
             client.verifyVSBarPattern(vsBarPattern);
         } catch (RuntimeException e) {
             e.getMessage();

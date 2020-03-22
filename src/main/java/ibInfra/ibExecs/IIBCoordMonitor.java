@@ -158,7 +158,7 @@ public class IIBCoordMonitor {
         String remoteVer;
         String remoteStatus;
         do {
-            SystemActions.sleep(10);
+            SystemActions.sleep(30);
             remoteVer = getAgentVersion(agentName);
             remoteStatus = getAgentStatus(agentName);
         } while (start.plusMinutes(DELAY_FOR_AGENT_UPDATE_MIN).isAfter(LocalTime.now()) &&
