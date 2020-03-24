@@ -105,7 +105,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void acceptTerms() throws FindFailed {
             test.log(Status.INFO, "Clicking Accept terms");
-            screen.wait(IBInstaller.TermsUncheckCB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.TermsUncheckCB.similar((float) 0.5), 25).click();
         }
 
         @Override
@@ -135,26 +135,26 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckRemoteUpdate() throws FindFailed {
             test.log(Status.INFO, "Removing Remote update CB");
-            screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8), 5).click();
+            screen.wait(IBInstaller.UpdateOtherComputersCB.similar((float) 0.8), 25).click();
         }
 
         @Override
         public void installNewCoordinator() throws FindFailed {
             test.log(Status.INFO, "Selecting \"install new coordinator\"");
-            screen.wait(IBInstaller.NewCoordinatorRB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.NewCoordinatorRB.similar((float) 0.5), 25).click();
         }
 
         @Override
         public void changeInstallationPath(String path) throws FindFailed {
             test.log(Status.INFO, "Changing installation path to: " + path);
-            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.5), 25).click();
             screen.type(path);
         }
 
         @Override
         public void uncheckEnvVar() throws FindFailed {
             test.log(Status.INFO, "Removing Env Vars CB");
-            screen.wait(IBInstaller.EnvVarCB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.EnvVarCB.similar((float) 0.5), 25).click();
         }
 
         @Override
@@ -173,8 +173,8 @@ public class IBUIService implements IIBUIService {
         public void selectLicense()  {
             test.log(Status.INFO, "Selecting license");
             try {
-                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 5).doubleClick();
-                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 10).click();
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 25).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 25).click();
             }
             catch (FindFailed findFailed){
                     test.log(Status.WARNING, "License select fail: " + findFailed.getMessage());
@@ -186,7 +186,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectCoordinator(String coordName) throws FindFailed {
             test.log(Status.INFO, "Selecting existing coordinator");
-            screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.CoordinatorNameTB.similar((float) 0.9), 25).click();
             screen.type(coordName);
             SystemActions.sleep(2);
         }
@@ -206,11 +206,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectManualHelperPorts() throws FindFailed {
             test.log(Status.INFO, "Selecting manual ports");
-            screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.7), 5).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 5).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 5).type(InstallationPorts.AGENT_PORT);
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.7), 5).click();
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4), 5).type(InstallationPorts.HELPER_PORT);
+            screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.9), 25).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 25).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 25).type(InstallationPorts.AGENT_PORT);
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.9), 25).click();
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4), 25).type(InstallationPorts.HELPER_PORT);
         }
 
         @Override
@@ -229,26 +229,26 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckCreateEntShortcut() throws FindFailed {
             test.log(Status.INFO, "Removing \"Create Ent. shortcut\" CB");
-            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.7), 5).click();
+            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.9), 25).click();
         }
 
         @Override
         public void selectDowngrade() throws FindFailed {
             test.log(Status.INFO, "Selecting downgrade option");
-            screen.wait(IBInstaller.DowngradeToProRB.similar((float) 0.7), 5).click();
+            screen.wait(IBInstaller.DowngradeToProRB.similar((float) 0.9), 25).click();
         }
 
         @Override
         public void changeDashboardPort() throws FindFailed {
             test.log(Status.INFO, "Selecting manual dashboard ports");
-            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9), 5).click();
-            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.4), 5).type(InstallationPorts.DASHBOARD_PORT);
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9), 25).click();
+            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9), 25).type(InstallationPorts.DASHBOARD_PORT);
         }
 
         @Override
         public void changeEntInstallationLocation(String path) throws FindFailed {
             test.log(Status.INFO, "Changing Enterprise installation path to: " + path);
-            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5), 5).click();
+            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5), 25).click();
             screen.type(path);
         }
 
@@ -267,13 +267,13 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickCustom() throws FindFailed {
             test.log(Status.INFO, "Clicking Custom");
-            screen.wait(IBInstaller.CustomTab.similar((float) 0.7), 5).click();
+            screen.wait(IBInstaller.CustomTab.similar((float) 0.9), 25).click();
         }
 
         @Override
         public void selectSingleUseVM() throws FindFailed {
             test.log(Status.INFO, "Selecting Single Use VM");
-            screen.wait(IBInstaller.SingleUseVMCB.similar((float) 0.7), 5).click();
+            screen.wait(IBInstaller.SingleUseVMCB.similar((float) 0.9), 25).click();
         }
 
     }
