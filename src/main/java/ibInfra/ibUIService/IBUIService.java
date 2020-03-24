@@ -321,7 +321,7 @@ public class IBUIService implements IIBUIService {
         public void verifyHistoryColoringPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for History Coloring");
             try {
-                screen.wait(pat.similar((float) 0.6), 5);
+                screen.wait(pat.similar((float) 0.9), 25);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find History coloring with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -333,7 +333,7 @@ public class IBUIService implements IIBUIService {
             SystemActions.sleep(3);
             test.log(Status.INFO, "Looking for Projects Tab");
             try {
-                screen.wait(Monitor.Tabs.Projects.similar((float) 0.8), 5).click();
+                screen.wait(Monitor.Tabs.Projects.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Projects Tab with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -344,7 +344,7 @@ public class IBUIService implements IIBUIService {
         public void verifyProjectsTabColoring(Pattern pat) {
             test.log(Status.INFO, "Looking for Project Color Bar");
             try {
-                screen.wait(pat.similar((float) 0.9), 5);
+                screen.wait(pat.similar((float) 0.9), 25);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Project Color Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -355,9 +355,9 @@ public class IBUIService implements IIBUIService {
         public void openMonitorFromTray() {
             test.log(Status.INFO, "Opening Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
-                screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
+                screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open monitor with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -368,9 +368,9 @@ public class IBUIService implements IIBUIService {
         public void openHistoryFromTray() {
             test.log(Status.INFO, "Opening History from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
-                screen.wait(IBSettings.TrayIcon.historyTray.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
+                screen.wait(IBSettings.TrayIcon.historyTray.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open history with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -407,9 +407,9 @@ public class IBUIService implements IIBUIService {
         public void openAgentSettingsFromTray() {
             test.log(Status.INFO, "Opening Agent Settings from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
-                screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).rightClick();
+                screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 15).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -422,7 +422,7 @@ public class IBUIService implements IIBUIService {
             try{
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
-                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 10).click();
+                screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 20).click();
             }catch(FindFailed findFailed){
                 test.log(Status.WARNING, "Failed to open Advanced option with error");
                 Assert.fail();
@@ -434,7 +434,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Verify allow enable/disable as helper disabled");
             openTray();
             try {
-                screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 1), 2);
+                screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 0.9), 15);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable/disable as  helper is not denied from tray, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -446,7 +446,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Verify Agent is enabled as helper from tray");
             openTray();
             try {
-                screen.wait(IBSettings.TrayIcon.enabledAsHelperTray.similar((float) 1), 2);
+                screen.wait(IBSettings.TrayIcon.enabledAsHelperTray.similar((float) 0.9), 15);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find enabled as helper from tray, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -455,8 +455,8 @@ public class IBUIService implements IIBUIService {
 
         public void openTray() {
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).rightClick();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).rightClick();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open tray-icon menu, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -499,9 +499,9 @@ public class IBUIService implements IIBUIService {
         public void clickClearHistory() {
             test.log(Status.INFO, "Clicking on Clear History");
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.GeneralTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.agent.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.GeneralTab.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5), 10).click();
                 SystemActions.sleep(10);
             } catch (FindFailed findFailed) {
