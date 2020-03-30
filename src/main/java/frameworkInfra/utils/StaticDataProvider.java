@@ -731,13 +731,22 @@ public class StaticDataProvider {
             public static final String UNSUPPORTED_FLAG_GTEST_THROW_ON_FAILURE = "--gtest_throw_on_failure";
             public static final String UNSUPPORTED_FLAG_GTEST_CATCH_EXCEPTIONS = "--gtest_catch_exceptions";
             public static final String GTEST_EXECUTABLES_TXT_FILE = Locations.GTEST_ROOT_PATH + "InputFiles\\GoodInputFile.txt";
-            public static final String GTEST_INALID_OUTPUT_FILE = Locations.GTEST_ROOT_PATH + "";
-            public static final String NUNIT_INALID_VALUE_FLAG = GTEST_CPPSORTER_TEST + "NUnit.Tests1.dll @file=";
-            public static final String GTEST_MISSING_EXECUTABLE_FILE = Locations.GTEST_ROOT_PATH  + "/testlevel=auto /openmonitor";
-            public static final String GTEST_SAMEOS_OPTIONS = Locations.GTEST_ROOT_PATH + "/MinWinVer /MAxWinVer";
             public static final String GTEST_CPPSORTER_LOGFILE_TEST = GTEST_CPPSORTER_TEST + " /logfile=" + Locations.OUTPUT_LOG_FILE + " /loglevel=info";
             public static final String GTEST_CPPSORTER_TARGETDIR_TEST = String.format("cpp_sorter_test.exe /targetdir=%sgoogle-test-examples-master\\build\\Release", Locations.GTEST_ROOT_PATH);
+            public static final String GTEST_INVALID_VALUE_MINMAXWINVER = GTEST_CPPSORTER_TEST + " /MaxWinVer=12";
+            public static final String GTEST_FRAMEWORK_EMPTY = GTEST_CPPSORTER_TEST + " /test=";
 
+            public static class INCORRECTGTESTCOMMANDS {
+                public static final String GTEST_CPPSORTER_TEST_TEST_FLAG_EQUAL_UNIX = GTEST_CPPSORTER_TEST + " /test=unix";
+                public static final String GTEST_MISSING_EXECUTABLE_FILE = " /test=gtest /testlevel=auto";
+                public static final String GTEST_SAMEOS_OPTIONS = GTEST_CPPSORTER_TEST + " /sameos" + " /MinWinVer=10 /MAxWinVer";
+                public static final String NUNIT_INVALID_VALUE_FLAG = Locations.QA_ROOT + "\\Testing\\google-tests\\google-test-examples-master\\build\\Release\\cpp_sorter_test.exe NUnit.Tests1.dll @file=";
+                public static final String GTEST_INVALID_OUTPUT_FILE = Locations.GTEST_ROOT_PATH + "";
+                public static final String GTEST_INVALID_STRING = GTEST_CPPSORTER_TEST + " /testlevel=info";
+                public static final String GTEST_INVALID_TRASHOLD_STRING = GTEST_CPPSORTER_TEST + " /thresholdTestlevel=111";
+                public static final String GTEST_INALID_VALUE_FOR_OPTION = Locations.GTEST_ROOT_PATH + " /test=ATest";
+                public static final String GTETS_OUT_OPTION = "C:\\QA\\Simulation\\Testing\\google-tests\\Executables\\gtest_av_test.exe /out=sarit.xml /silent";
+            }
         }
 
         public static class INTERFACES {
@@ -1057,18 +1066,22 @@ public class StaticDataProvider {
         public static final String DASHBOARD_PORT = "8001";
     }
 
-    public static final class ErrorMessages
-    {
-        public static class GeneralErrors
-        {
-            public static final String INVALID_UNITEST_FRAMEWORK_UNIX = "Error processing command line: Invalid '/test' option value: unix";
-            public static final String HELP_ERROR = "Run 'IbTestConsole.exe /help' for usage help.";
-            public static final String INVALID_FRAMEWORK = "The requested framework cannot be detected. Use the /test=<framework> option, to specify the framework INVALID_ you want to execute.";
-            public static final String INVALID_OUTPUT_FILE = "exception message group 2";
-            public static final String INVALID_VALUE_FILE_FLAG = "Invalid value for the '@file' option.";
-            public static final String SAMEOS_OPTION = "The '/sameos' option cannot be used together with the '/MinWinVer' or '/MaxWinVer' options.";
-            public static final String EXECUTION_COMMAND_INCOMPLETE = "The execution command is incomplete";
-        }
+    public static class ErrorMessages {
 
+        public static class GeneralErrors {
+            public static final String INVALID_UNITEST_FRAMEWORK_UNIX = "Invalid value 'unix' for the '/test' option.";
+            public static final String INVALID_VALUE_FILE_FLAG = "Invalid value for the 'file=' option.";
+            public static final String SAMEOS_OPTION = "Invalid value '10?/MAxWinVer' for the '/MinWinVer option.";
+            public static final String EXECUTION_COMMAND_INCOMPLETE = "The execution command is incomplete";
+            public static final String INVALID_OUTPUT_FILE = "Fatal Error: File not found:";
+            public static final String INVALID_FRAMEWORK ="The requested framework cannot be detected. Use the /test=<framework> option, to specify the framework you want to execute.";
+            public static final String INVALID_STRING ="The value of the '/testlevel' option is either invalid or out of range.";
+            public static final String INVALID_TRESHOLD_STRING ="The value: 111 of the '/thresholdTestlevel' option is either invalid or out of range";
+            public static final String INVALID_VALUE_FOR_OPTION = "Invalid value 'ATest' for the '/test' option.";
+            public static final String OUT_OPTION_FLAG = "The '/out' option cannot be used with the '/silent' option.";
+            public static final String FRAMEWORK_EMPTY_ERROR = "the argument for option '--test=' should follow immediately after the equal sign";
+            public static final String IBCONSOLE_TASK_ERROR = "";
+            public static final String INVALID_VALUE_MINMAXWINVER = "Invalid value '12' for the '/MaxWinVer option.";
+        }
     }
 }
