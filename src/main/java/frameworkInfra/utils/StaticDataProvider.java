@@ -304,18 +304,18 @@ public class StaticDataProvider {
             public static final String MONO_X64_DEBUG = "\"C:\\QA\\Simulation\\VC14\\mono-master\\msvc\\mono.sln\" /%s /cfg=\"debug|x64\" /title=\"Mono 2015 - Debug x64\"";
             public static final String MONO_X32_RELEASE = "\"C:\\QA\\Simulation\\VC14\\mono-master\\msvc\\mono.sln\" /%s /cfg=\"release|win32\" /title=\"Mono 2015 - Release Win32\"";
             public static final String MONO_X64_RELEASE = "\"C:\\QA\\Simulation\\VC14\\mono-master\\msvc\\mono.sln\" /%s /cfg=\"release|x64\" /title=\"Mono 2015 - Release x64\"";
-            public static final String NINTENDO_AAA_NX32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"debug|NX32\"";
-            public static final String NINTENDO_AAA_NX64_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"debug|NX64\"";
-            public static final String NINTENDO_AAA_NX32_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"release|NX32\"";
-            public static final String NINTENDO_AAA_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"release|NX64\"";
-            public static final String NINTENDO_AAA_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"release|x64\"";
-            public static final String NINTENDO_AAA_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplicationAuthorization\\AccountApplicationAuthorization-spec.NX.vs2015.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String NVNTUTORIAL_NX32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"debug|NX32\"";
-            public static final String NVNTUTORIAL_NX64_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"debug|NX64\"";
-            public static final String NVNTUTORIAL_NX32_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"release|NX32\"";
-            public static final String NVNTUTORIAL_NX64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"release|NX64\"";
-            public static final String NVNTUTORIAL_X32_DEBUG = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"debug|win32\"";
-            public static final String NVNTUTORIAL_X64_RELEASE = "\"C:\\Nintendo\\SDK_FOR_SIMULATION\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.vs2015.sln\" /%s /cfg=\"release|x64\"";
+            public static final String NINTENDO_AAA_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|NX32\"";
+            public static final String NINTENDO_AAA_NX64_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|NX64\"";
+            public static final String NINTENDO_AAA_NX32_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|NX32\"";
+            public static final String NINTENDO_AAA_NX64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|NX64\"";
+            public static final String NINTENDO_AAA_X32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|x64\"";
+            public static final String NINTENDO_AAA_X64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|win32\"";
+            public static final String NVNTUTORIAL_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|NX32\"";
+            public static final String NVNTUTORIAL_NX64_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|NX64\"";
+            public static final String NVNTUTORIAL_NX32_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|NX32\"";
+            public static final String NVNTUTORIAL_NX64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|NX64\"";
+            public static final String NVNTUTORIAL_X32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"debug|win32\"";
+            public static final String NVNTUTORIAL_X64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2015.sln\" /%s /cfg=\"release|x64\"";
             public static final String SHADOWMAP_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap140.sln\" /%s /cfg=\"debug|Durango\"";
             public static final String SHADOWMAP_RELEASE_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\ShadowMap\\graphics\\ShadowMap\\ShadowMap140.sln\" /%s /cfg=\"release|Durango\"";
             public static final String XBOX_ONE_MIX_DEBUG_DURANGO = "\"C:\\QA\\Simulation\\VC14\\Durango_Samples\\Xbox_One_Mix\\Samples\\IntroGraphics\\Xbox_One_Mix.sln\" /%s /cfg=\"debug|Durango\"";
@@ -767,7 +767,9 @@ public class StaticDataProvider {
         }
 
         public static class CONSOLES {
-            public static final String DEMO1_NX64_RELEASE = "\"C:\\Nintendo\\SwitchSDK\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
+            public static final String DEMO1_NX64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\Demo1\\Demo1-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
+            public static final String ACCOUNT_APPLICATION_NX64_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX64\"";
+
         }
 
     }

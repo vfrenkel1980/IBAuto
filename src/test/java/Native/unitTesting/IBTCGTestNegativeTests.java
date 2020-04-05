@@ -41,7 +41,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gTest General Error: Invalid Unitest Framework
      * @pre{ }
      * @steps {- Run command from IBTestConsole with flag: /test=unix }
-     * @result { - Command fails with error message: <Exception message group 1>}
+     * @result { - Command fails with error message: Exception message group 1}
      */
     @Test(testName ="gTest General Error Invalid Unitest Framework")
     public void gtestGeneralErrorInvalidUnitestFramwork(){
@@ -54,7 +54,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gtest General Error: Invalid Missing Unitest Framework And Invalid Executable
      * @pre{ }
      * @steps {- Run command from IBTestConsole: InputFiles\GoodInputFile.txt}
-     * @result { - Command fails with error message: <Exception message group 1>:
+     * @result { - Command fails with error message: Exception message group 1:
      *  The requested framework cannot be detected.
      *  Use the /test=<framework> option, to specify the framework you want to execute.}
      */
@@ -68,7 +68,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gtest Internal Error: Invalid Output Filename
      * @pre{ }
      * @steps {- Run command from IBTestConsole with invalid file}
-     * @result {- Command fails with error message: <exception message group 2>}
+     * @result {- Command fails with error message: exception message group 2}
      */
     @Test(testName ="gtest Internal Error Invalid Output Filename")
     public void gtestGeneralInternalErrorInvalidOutputFilename(){
@@ -92,7 +92,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gTest General Error: Sameos And MinMaxWinVer Flags Used Together
      * @pre{ }
      * @steps {- Run command from IBTestConsole with flag: /MinWinVer /MaxWinVer}
-     * @result {- Command fails with error message: <exception message group 1>: The '/sameos' option cannot be used together with the '/MinWinVer' or '/MaxWinVer' options.}
+     * @result {- Command fails with error message: exception message group 1: The sameos option cannot be used together with the MinWinVer or MaxWinVer options.}
      */
     @Test(testName ="gTest General Error Sameos And MinMaxWinVer Flags Used Together")
     public void gTestGeneralErrorSameosAndMinMaxWinVerFlagsUsedTogether(){
@@ -103,8 +103,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Missing Executable File
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /testlevel=auto /openmonitor}
-     * @result {- Command fails with error message: <exception message group 1>: The execution command is incomplete}
+     * @steps {- Run command from IBTestConsole with flag: testlevel=auto openmonitor}
+     * @result {- Command fails with error message: exception message group 1: The execution command is incomplete}
      */
     @Test(testName ="gTest General Error Missing Executable File")
     public void gTestGeneralErrorMissingExecutableFile(){
@@ -116,8 +116,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Test level Flag Invalid String
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /testlevel=info}
-     * @result {- Command fails with error message: <exception message group 1>: Invalid ‘/<optionName>’ option value:  <optionValue>”}
+     * @steps {- Run command from IBTestConsole with flag: testlevel=info}
+     * @result {- Command fails with error message: exception message group 1: Invalid optionName, option value"}
      */
     @Test(testName ="gTest General Error Test level Flag Invalid String")
     public void gTestGeneralErrorTestlevelFlagInvalidString(){
@@ -128,8 +128,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Test level Flag Invalid String
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /testlevel=info}
-     * @result { - Command fails with error message: <exception message group 1>: The value of the '/testlevel' option is either invalid or out of range.”}
+     * @steps {- Run command from IBTestConsole with flag: testlevel=info}
+     * @result { - Command fails with error message: exception message group 1: The value of the testlevel option is either invalid or out of range.}
      */
     @Test(testName ="gTest General Error Test level Flag Invalid String")
     public void gTestGeneralErrorTestlevelFlagValueIsOutOfRange(){
@@ -141,8 +141,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Threshold Testlevel Flag Value Is Out Of Range
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /thresholdTestlevel=111}
-     * @result {- Command fails with error message: <exception message group 1>: Internal}
+     * @steps {- Run command from IBTestConsole with flag: thresholdTestlevel=111}
+     * @result {- Command fails with error message: exception message group 1: Internal}
      */
     @Test(testName ="gTest General Error Threshold Test level Flag Invalid String")
     public void gTestGeneralErrorThresholdTestlevelFlagValueIsOutOfRange(){
@@ -154,8 +154,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Flag Value For Option
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /test=ATest}
-     * @result {- Command fails with error message: Invalid value 'ATest' for the '/test' option. }
+     * @steps {- Run command from IBTestConsole with flag: test=ATest}
+     * @result {- Command fails with error message: Invalid value 'ATest' for the 'test' option. }
      */
     @Test(testName ="gTest General Error Flag Value For Option")
     public void gTestGeneralErrorFlagValueForOption(){
@@ -166,8 +166,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest Generall Error: Out Flag With Silent Not Used
      * @pre{ }
-     * @steps {- Run command from IBTestConsole with flag: /out-sarit.xml /silent}
-     * @result {- Command fails with error message: <exception message group 1>: Invalid value '<optionValue>' for the ‘/<optionName>' option. }
+     * @steps {- Run command from IBTestConsole with flag: out-sarit.xml silent}
+     * @result {- Command fails with error message: exception message group 1: Invalid value optionValue for the optionName option. }
      */
     @Test(testName ="gTest General Error Out Flag With Silent Not Used")
     public void gTestGeneralErrorOutFlagWithSilentNotUsed(){
@@ -179,7 +179,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gTest General Error: Unittest Framework Empty
      * @pre{ }
      * @steps {- Run command from IBTestConsole framework is empty}
-     * @result { - Command fails with error message: <exception message group 2>: Internal}
+     * @result { - Command fails with error message: exception message group 2: Internal}
      */
     @Test(testName ="gTest General Error Unittest Framework Empty")
     public void gTestGeneralErrorUnittestFrameworkEmpty(){
@@ -191,7 +191,7 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
      * @test gTest General Error: Execute Task
      * @pre{ }
      * @steps {- Run command from IBConsole: command/=IbConsole.exe}
-     * @result {- Command fails with error message: <exception  message group 2>: Internal}
+     * @result {- Command fails with error message: exception  message group 2: Internal}
      */
     @Test(testName ="gTest General Error Execute Task")
     public void gTestGeneralErrorExecuteTask(){
@@ -203,8 +203,8 @@ public class IBTCGTestNegativeTests extends UnitTestingTestBase {
     /**
      * @test gTest General Error: Invalid Value Of MinMaxWin VerFlags
      * @pre{ }
-     * @steps {- Run command from IBTestConsole: /MaxWinVer=12}
-     * @result {- Command fails with error message: <exception message group 2>: Internal}
+     * @steps {- Run command from IBTestConsole: MaxWinVer=12}
+     * @result {- Command fails with error message: exception message group 2: Internal}
      */
     @Test(testName ="gTest General Error Invalid Value Of MinMaxWin VerFlags")
     public void gTestGeneralErrorInvalidValueOfMinMaxWinVerFlags(){
