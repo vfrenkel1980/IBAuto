@@ -4,6 +4,8 @@ import com.aventstack.extentreports.Status;
 import frameworkInfra.testbases.BatmanBCTestBase;
 import frameworkInfra.utils.*;
 import frameworkInfra.utils.parsers.Parser;
+import frameworkInfra.utils.RegistryService;
+
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Ignore;
@@ -12,6 +14,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 
@@ -203,9 +206,71 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         }
         Assert.assertTrue(pass, "Some machines from VMSIM Grid were assigned to the Batman build process");
     }
+
+    @Test(testName = "AccountApplication - 2017 debug|NX32 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017DebugNX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX32_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+
+    }
+
+    @Test(testName = "AccountApplication - 2017 debug|NX64 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017DebugNX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX64_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "AccountApplication - 2017 release|NX32 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017ReleaseNX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX32_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+
+    @Test(testName = "AccountApplication - 2017 release|NX64 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017ReleaseNX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX64_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "AccountApplication - 2017 release|x64 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017ReleaseX64Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X64_RELEASE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "AccountApplication - 2017 debug|win32 - build" , groups = { "Build" })
+    public void accountApplicationAuthorization2017DebugX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X32_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "NvnTutorial06 - 2017 debug|NX32- build" , groups = { "Build" })
+    public void nvnTutorial2017DebugNX32Build(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NVNTUTORIAL_NX32_DEBUG, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void changePSSDKVersionTo(String SDKVersion) {
         winService.runCommandWaitForFinish(winService.changeCurDirTo(OrbisSDK.SDK_INSTALLER_FOLDER) + String.format(OrbisSDK.SWITCH_PS_SDK, SDKVersion));
+    }
+    private void setRegistry(String required, String keyName){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
     }
 
 }
