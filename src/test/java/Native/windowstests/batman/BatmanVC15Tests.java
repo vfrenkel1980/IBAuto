@@ -208,7 +208,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "AccountApplication - 2017 debug|NX32 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017DebugNX32Build(){
+    public void accountApplication2017DebugNX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX32_DEBUG, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
@@ -217,7 +217,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "AccountApplication - 2017 debug|NX64 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017DebugNX64Build(){
+    public void accountApplication2017DebugNX64Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX64_DEBUG, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
@@ -225,7 +225,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "AccountApplication - 2017 release|NX32 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017ReleaseNX32Build(){
+    public void accountApplication2017ReleaseNX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX32_RELEASE, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
@@ -234,7 +234,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 
 
     @Test(testName = "AccountApplication - 2017 release|NX64 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017ReleaseNX64Build(){
+    public void accountApplication017ReleaseNX64Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_NX64_RELEASE, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
@@ -242,7 +242,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "AccountApplication - 2017 release|x64 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017ReleaseX64Build(){
+    public void accountApplication2017ReleaseX64Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X64_RELEASE, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
@@ -250,7 +250,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
     @Test(testName = "AccountApplication - 2017 debug|win32 - build" , groups = { "Build" })
-    public void accountApplicationAuthorization2017DebugX32Build(){
+    public void accountApplication2017DebugX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X32_DEBUG, "%s"));
         setRegistry("2", RegistryKeys.PREDICTED);
