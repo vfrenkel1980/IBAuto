@@ -56,6 +56,7 @@ public class IBCTestingTests extends UnitTestingTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"), "No agents were assigned to the build");
     }
 
+
     /**
      * @test Google test support test.<br>
      * @pre{ <a href="https://github.com/google/googletest">Google's C++ test framework project</a>}
@@ -225,6 +226,18 @@ public class IBCTestingTests extends UnitTestingTestBase {
         Assert.assertTrue(result.contains("In order to accelerate GTest tests, please use IBTestConsole"));
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST);
         Assert.assertEquals(exitCode, 3, "The test execution errorlevel is not match to 3. Errorlevel = " + exitCode);
+    }
+
+    /**
+     * @test Bug coverage #13239: wrong returned code.<br>
+     * @pre{ <a href="http://redmine.incredibuild.local/issues/13239">Bug coverage: wrong returned code</a>}
+     * @steps{ - Run ibtestconsole with repro project }
+     * @result{ - Build is successful; }
+     */
+    @Test(testName = "Bug coverage #13239: Wrong Returned Code Test")
+    public void bugCoverage13239WrongReturnedCodeTest() {
+        int exitCode = winService.runCommandWaitForFinish(ProjectsCommands.TESTING_ROBIN.IBCONSOLE_BUG_13239_TEST);
+        Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
     }
 
     @AfterClass

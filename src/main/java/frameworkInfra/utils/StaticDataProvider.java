@@ -649,6 +649,7 @@ public class StaticDataProvider {
 
         public static class TESTING_ROBIN {
             public static final String CPP_UTEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String IBCONSOLE_BUG_13239_TEST =  Locations.QA_ROOT + "\\Testing\\ibconsole\\ReprosForBugs\\13239\\c++\\RunMe.bat";
             public static final String GTEST = " /command=\"" + Locations.GTEST_ROOT_PATH + "googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String CTEST = "cmd /c cd " + Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
