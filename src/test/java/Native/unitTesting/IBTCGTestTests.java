@@ -193,7 +193,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest With Failing Tests Test")
     public void gTestWithFailingTestsTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_WITH_FAILING_TESTS);
-        Assert.assertEquals(exitCode, 1000001, "The test was expected to fail with Error code 1000001");
+        Assert.assertEquals(exitCode, 3, "The test was expected to fail with Error code 3");
     }
 
     /**
@@ -217,7 +217,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest With Crash Test")
     public void gTestWithCrashTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_THAT_CRASHES);
-        Assert.assertEquals(exitCode, 1000001, "The test was expected to fail with Error code 1000001");
+        Assert.assertEquals(exitCode, 1, "The test was expected to fail with Error code 1");
     }
 
     /**

@@ -24,7 +24,7 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     @Test(testName = "Exit Code Base Test 1")
     public void exitCodeBaseTest1() {
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.FAILEDPROJECT_X64_DEBUG);
-        Assert.assertTrue(returnCode == 10001, "exitCodeBaseTest1 failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == -1073741510, "exitCodeBaseTest1 failed with return code " + returnCode);
     }
 
     @Test(testName = "Exit Code Base Test 2")

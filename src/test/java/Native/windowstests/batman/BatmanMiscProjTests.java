@@ -70,7 +70,7 @@ public class BatmanMiscProjTests extends BatmanBCTestBase {
     public void ibcustomStepOnFailTest() {
         setCustomStepSupportRegistry("1");
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.PROJECTVC15_CUSTOMSTEP_FAIL);
-        Assert.assertTrue(returnCode == 1, "customStepOnFailTest failed with return code " + returnCode);
+        Assert.assertTrue(returnCode == -1073741510, "customStepOnFailTest failed with return code " + returnCode);
     }
 
     @Test(testName = "IBCustomStep OFF Success Test")
