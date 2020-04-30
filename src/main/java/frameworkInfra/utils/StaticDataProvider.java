@@ -274,6 +274,12 @@ public class StaticDataProvider {
             public static final String ACE_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
             public static final String BIGPROJECT_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2019 Preview - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
             public static final String BIGPROJECT_X32_RELEASE = "\"D:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2019 Preview - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+
+            public static final String NINTENDO_AAA_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX32\"";
+            public static final String NINTENDO_AAA_NX64_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX64\"";
+            public static final String NINTENDO_AAA_NX32_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX32\"";
+            public static final String NINTENDO_AAA_NX64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
+            public static final String NVNTUTORIAL_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX32\"";
         }
 
         public static class VC15_BATMAN {
