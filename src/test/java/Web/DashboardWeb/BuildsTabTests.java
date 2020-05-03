@@ -4,7 +4,10 @@ import frameworkInfra.testbases.web.dashboard.BuildsTabTestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.LinkedHashMap;
-
+/**
+ * @brief<b> <b>Builds Tab Tests</b>
+ * @details vm: h6-w10-dashbord on Srv-10
+ */
 public class BuildsTabTests extends BuildsTabTestBase {
     private static final String ALL = "All";
     private static final String TODAY = "Today";

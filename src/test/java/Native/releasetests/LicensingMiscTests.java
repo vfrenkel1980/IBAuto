@@ -11,7 +11,10 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-
+/**
+ * @brief<b> <b>IB License Tests</b>
+ * @details vm: VM-LicTest on Srv-3
+ */
 public class LicensingMiscTests extends LicensingTestBase {
     IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 

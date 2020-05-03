@@ -10,7 +10,10 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
-
+/**
+ * @brief<b> <b>IB License Tests</b>
+ * @details vm: VM-LicTest on Srv-3
+ */
 public class LicensingTests extends LicensingTestBase {
 
     int exitStatus;

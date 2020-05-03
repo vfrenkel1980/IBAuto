@@ -4,7 +4,10 @@ import frameworkInfra.testbases.web.dashboard.UpgradeEntTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @brief<b> <b>Upgrade Tests</b>
+ * @details vm: h6-w10-dashbord on Srv-10
+ */
 public class UpgradeTests extends UpgradeEntTestBase {
 
     @Test(testName = "Perform Upgrade To Ent")
