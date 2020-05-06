@@ -68,6 +68,7 @@ public class AgentSettingsTestBase extends TestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", RegistryKeys.RESTART_ON_LOCAL, "0");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT +"\\Builder", RegistryKeys.SAVE_BUILD_PACKET, "1");
         try {
+
             coordMonitor.waitForAgentIsUpdated(WindowsMachines.AGENT_SETTINGS_HLPR_NAME);
             SystemActions.sleep(30);
         } catch (RuntimeException | SAXException |IOException | ParserConfigurationException e) {
