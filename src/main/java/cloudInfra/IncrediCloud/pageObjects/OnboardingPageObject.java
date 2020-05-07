@@ -246,8 +246,8 @@ public class OnboardingPageObject {
     }
 
     private void setVMsSection(OnboardingPage onboardingPage) {
-        wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
         onboardingPage.setMachineTypeInUI(eventWebDriver.findElement(MACHINE_TYPE_SELECT).getText());
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
