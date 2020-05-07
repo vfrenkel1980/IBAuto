@@ -31,7 +31,7 @@ public class ICEngineTests extends ICEngineTestBase {
     public void performOnboarding(){
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        cloudRegistrationPageObject.selectUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -39,6 +39,8 @@ public class ICEngineTests extends ICEngineTestBase {
         winService.restartService(WindowsServices.COORD_SERVICE);
         icService.loginToCloud();
         Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
+        isOnBoarding = true;
+        verifyVirtualMachinesInfo();
     }
 
     /**
@@ -87,7 +89,7 @@ public class ICEngineTests extends ICEngineTestBase {
         icService.waitForDeliveredMachines(POOL_SIZE - 1);
         SystemActions.sleep(900);
         Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "New machine wasn't created to replace the Undelivered one.");
-    }*/
+    }
 
     /**
      * @test Start a build and verify 3 new machines created<br>
@@ -121,7 +123,7 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Machines Deallocated After Reaching Timeout", dependsOnMethods = { "verifyNewMachinesAreCreated"})
     public void verifyMachinesDeallocatedAfterReachingTimeout(){
-        SystemActions.sleep(TIMEOUT + 30);
+        SystemActions.sleep(TIMEOUT*2 + 30);
         int machinesInPool = icService.getStatusQueue(false);
         Assert.assertEquals(machinesInPool, 0, "Number of machines in pool is different then expected");
     }
@@ -159,8 +161,8 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Cloud Machines Are Started When Disabling On Prem", dependsOnMethods = { "verifyNoCloudMachinesAreCreatedWhenUsingOnPremMachines"})
     public void verifyCloudMachinesAreStartedWhenDisablingOnPrem(){
-        winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
-                + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
+//        winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
+//                + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /disable\"");
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
         boolean cloudMachinesRunning = icService.waitForDeliveredMachines(POOL_SIZE);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -184,9 +186,9 @@ public class ICEngineTests extends ICEngineTestBase {
      */
     @Test(testName = "Verify Cloud Machines Are Deallocated When Enabling On Prem", dependsOnMethods = { "verifyCloudMachinesAreStartedWhenDisablingOnPrem"})
     public void verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem(){
-        winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
-                + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
-        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
+//        winService.runCommandWaitForFinish(Processes.PSEXEC + " -d -i 0 -u admin -p 4illumination \\\\"
+//                + WindowsMachines.IC_INITIATOR + " cmd.exe /c \"buildconsole /enable\"");
+//        winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, ON_PREM_CORES, "240000"));
         SystemActions.sleep(180);
         int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
         winService.waitForProcessToFinish(Processes.BUILDSYSTEM);
@@ -230,7 +232,7 @@ public class ICEngineTests extends ICEngineTestBase {
      * - no cloud machines should participate in build}
      *
      */
-    @Test(testName = "Pause Cloud", dependsOnMethods = { "verifyCloudMachinesAreDeallocatedWhenEnablingOnPrem"})
+    @Test(testName = "Pause Cloud", dependsOnMethods = { "verifyCloudMachinesAreStartedWhenDisablingOnPrem"})
     public void pauseCloud(){
         winService.runCommandDontWaitForTermination(IbLocations.COORDMONITOR);
         coordinator.pauseCloud();

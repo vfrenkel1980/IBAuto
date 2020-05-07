@@ -47,8 +47,13 @@ def CloudDestruction = project.hasProperty("CloudDestruction")
 def AzurePerformance = project.hasProperty("AzurePerformance")
 def Enterprise = project.hasProperty("Enterprise")
 def UnitTesting = project.hasProperty("UnitTesting")
-def ICEngine = project.hasProperty("ICEngine")
-
+// Cloud
+def ICEngine = project.hasProperty("ICEngine") // at the beginning when all tests: sanity, regression and enable/disable run as one suite
+def ICSanity = project.hasProperty("ICSanity")
+def ICRegression = project.hasProperty("ICRegression")
+def ICDisableEnable = project.hasProperty("ICDisableEnable")
+def ICUpdate = project.hasProperty("ICUpdate")
+def ICOnboarding = project.hasProperty("ICOnboarding")
 
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
@@ -64,7 +69,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-exec', version: '1.3'
     compile group: 'org.jprocesses', name: 'jProcesses', version: '1.6.4'
     compile group: 'com.profesorfalken', name: 'WMI4Java', version: '1.6.1'
-    compile name:'sikulixapi'
+    compile name: 'sikulixapi'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.23.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.11.0'
@@ -121,145 +126,168 @@ test {
     //Performance configuration
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
     systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'aws'
+    systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'BASIC_ONBOARDING'
+//    systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'LOW_ONBOARDING'
+//    systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'SPLIT_ONBOARDING'
+    systemProperty 'isPVOn', System.properties['isPVOn'] ?: '%s'
     systemProperty 'cpu', System.properties['cpu'] ?: '%d'
     systemProperty 'memory', System.properties['memory'] ?: '%d'
     systemProperty 'numofmachines', System.properties['numofmachines'] ?: "%d"
     systemProperty 'incredicloudEnv', System.properties['incredicloudEnv'] ?: "%s"
     systemProperty 'machineType', System.properties['machineType'] ?: "%s"
-
     systemProperty 'ibVersion', System.properties['ibVersion'] ?: "%s"
 
     // enable TestNG support (default is JUnit)
-    useTestNG(){
+    useTestNG() {
         useDefaultListeners = true
 
         //suites("src/test/resources/testng.xml")
-        if(UI) {
+        if (UI) {
             suites "src/test/resources/UI.xml"
         }
 
-        if(BatmanSim) {
+        if (BatmanSim) {
             suites "src/test/resources/BatmanSim.xml"
         }
 
-        if(VmSim) {
+        if (VmSim) {
             suites "src/test/resources/VmSim.xml"
         }
-        if(RobinSim) {
+        if (RobinSim) {
             suites "src/test/resources/RobinSim.xml"
         }
 
-        if(AlfredSim) {
+        if (AlfredSim) {
             suites "src/test/resources/AlfredSim.xml"
         }
-        if(Babylon) {
+        if (Babylon) {
             suites "src/test/resources/Babylon.xml"
         }
-        if(Phoenix) {
+        if (Phoenix) {
             suites "src/test/resources/Phoenix.xml"
         }
-        if(LinuxCL) {
+        if (LinuxCL) {
             suites "src/test/resources/LinuxCL.xml"
         }
 
-        if(LinuxMultiBuild) {
+        if (LinuxMultiBuild) {
             suites "src/test/resources/LinuxMultiBuild.xml"
         }
 
-        if(LinuxMultiInitiator) {
+        if (LinuxMultiInitiator) {
             suites "src/test/resources/LinuxMultiInitiator.xml"
         }
 
-        if(Unit) {
+        if (Unit) {
             suites "src/test/resources/Unit.xml"
         }
 
-        if(VSPreview) {
+        if (VSPreview) {
             suites "src/test/resources/VSPreview.xml"
         }
 
-        if(VSIntegration) {
+        if (VSIntegration) {
             suites "src/test/resources/VSIntegration.xml"
         }
 
-        if(LicenseTests) {
+        if (LicenseTests) {
             suites "src/test/resources/LicenseTests.xml"
         }
 
-        if(PositiveLicenseTests) {
+        if (PositiveLicenseTests) {
             suites "src/test/resources/PositiveLicenseTests.xml"
         }
 
-        if(AgentSettings) {
+        if (AgentSettings) {
             suites "src/test/resources/AgentSettings.xml"
         }
 
-        if(UIValidations) {
+        if (UIValidations) {
             suites "src/test/resources/UIValidations.xml"
         }
 
-        if(Setup) {
+        if (Setup) {
             suites "src/test/resources/Setup.xml"
         }
 
-        if(WebRegression) {
+        if (WebRegression) {
             suites "src/test/resources/WebRegression.xml"
         }
-        
-        if(ENWebRegression) {
+
+        if (ENWebRegression) {
             suites "src/test/resources/ENWebRegression.xml"
         }
 
-        if(JPWebRegression) {
+        if (JPWebRegression) {
             suites "src/test/resources/JPWebRegression.xml"
         }
 
-        if(Sanity) {
+        if (Sanity) {
             suites "src/test/resources/Sanity.xml"
         }
 
-        if(Dashboard) {
+        if (Dashboard) {
             suites "src/test/resources/Dashboard.xml"
         }
 
-        if(DBSchemas) {
+        if (DBSchemas) {
             suites "src/test/resources/DBSchemas.xml"
         }
-        if(LinuxSanity) {
+        if (LinuxSanity) {
             suites "src/test/resources/LinuxSanity.xml"
         }
 
-        if(CoordMonitor) {
+        if (CoordMonitor) {
             suites "src/test/resources/CoordMonitor.xml"
         }
 
-        if(CloudSetup) {
+        if (CloudSetup) {
             suites "src/test/resources/CloudSetup.xml"
         }
 
-        if(LinuxAWSTests) {
+        if (LinuxAWSTests) {
             suites "src/test/resources/LinuxAWSTests.xml"
         }
 
-        if(Enterprise) {
+        if (Enterprise) {
             suites "src/test/resources/Enterprise.xml"
         }
 
-        if(UnitTesting) {
+        if (UnitTesting) {
             suites "src/test/resources/UnitTesting.xml"
         }
 
-        if(CloudDestruction) {
+        if (CloudDestruction) {
             suites "src/test/resources/CloudDestruction.xml"
         }
 
-        if(AzurePerformance) {
+        if (AzurePerformance) {
             suites "src/test/resources/AzurePerformance.xml"
         }
 
-        if(ICEngine) {
+        if (ICEngine) {
             suites "src/test/resources/ICEngine.xml"
         }
-    }
 
+        if (ICSanity) {
+            suites "src/test/resources/IC/TestSuites/ICSanity.xml"
+        }
+        
+        if (ICRegression) {
+            suites "src/test/resources/ICRegression.xml"
+        }
+
+        if (ICDisableEnable) {
+            suites "src/test/resources/ICDisableEnable.xml"
+        }
+
+        if (ICUpdate) {
+            suites "src/test/resources/ICUpdate.xml"
+        }
+
+        if (ICOnboarding) {
+            suites "src/test/resources/ICOnboarding.xml"
+        }
+  
+    }
 }

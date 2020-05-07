@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ICAzureTests"  >
+    <parameter name="Env" value="DEV"/>
+    <parameter name="Cloud" value="Aws"/>
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <!--  BasicOnboarding, LowBoarding, Private network(in sanity?), Split boarding  -->
+    <test name="ICHighPermissions">
+        <parameter name="onboardingType" value="BasicOnboarding"/>
+        <classes>
+            <class name ="IncrediCloud.ICRegressionTests" />
+            <class name ="IncrediCloud.ICDisableEnableTests" />
+            <class name ="IncrediCloud.ICUpdateTests" />
+        </classes>
+    </test>
+
+
+</suite>

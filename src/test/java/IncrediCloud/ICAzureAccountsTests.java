@@ -14,34 +14,30 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
     /**
      * @test try to create policy while creating more machines than region allows<br>
      * @pre{ this is the only test in the class that uses chromedriver</a>}
-     * @steps{
-     * - perform onboarding}
-     * @result{
-     * - error message should appear}
+     * @steps{ - perform onboarding}
+     * @result{ - error message should appear}
      */
     @Test(testName = "Create Pool On A Limited Region")
-    public void createPoolOnALimitedRegion(){
+    public void createPoolOnALimitedRegion() {
         onboardingPageObject.clickTryIncredicloud();
-        cloudRegistrationPageObject.selectUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
         onboardingPageObject.performOnboarding(failedOnboardingPage);
         Assert.assertTrue(onboardingPageObject.verifyQuotaLimitMessage(), "Quota limit message did not appear");
     }
 
     /**
      * @test install an older version of ib in order to test ib update<br>
-     * @steps{
-     * - install older IB version
+     * @steps{ - install older IB version
      * - perform onboarding}
-     * @result{
-     * - update should complete successfully}
+     * @result{ - update should complete successfully}
      */
-    @Test(testName = "Perform Onboarding", dependsOnMethods = { "createPoolOnALimitedRegion"})
-    public void performOnboarding(){
+    @Test(testName = "Perform Onboarding", dependsOnMethods = {"createPoolOnALimitedRegion"})
+    public void performOnboarding() {
         ibService.updateIB("2851");
         SystemActions.sleep(30);
         startWebServerThread();
         onboardingPageObject.clickTryIncredicloud();
-        cloudRegistrationPageObject.selectUser(PROD_USER);
+        cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
         onboardingPageObject.performOnboarding(preUpdateOnboardingPage);
         waitForWebServerResponse();
         icService.setSecret(webServer.secret);
@@ -54,13 +50,11 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
     /**
      * @test verify incredicloud after IB update<br>
      * @pre{ previous test (Perform Onboarding) should have older IB version installed </a>}
-     * @steps{
-     * - update IB version to latest}
-     * @result{
-     * - update should complete successfully}
+     * @steps{ - update IB version to latest}
+     * @result{ - update should complete successfully}
      */
-    @Test(testName = "Verify Cloud After IB Update", dependsOnMethods = { "performOnboarding"})
-    public void verifyCloudAfterIBUpdate(){
+    @Test(testName = "Verify Cloud After IB Update", dependsOnMethods = {"performOnboarding"})
+    public void verifyCloudAfterIBUpdate() {
         ibService.updateIB(IB_VERSION);
         Assert.assertEquals(RegistryService.getRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSECRET), webServer.secret,
                 "Secret does not match after updating IB");
@@ -91,15 +85,13 @@ public class ICAzureAccountsTests extends ICAzureAccountsTestBase {
     /**
      * @test try to create policy while creating more machines than region allows<br>
      * @pre{ this is the only test in the class that uses chromedriver</a>}
-     * @steps{
-     * - perform onboarding}
-     * @result{
-     * - error message should appear}
+     * @steps{ - perform onboarding}
+     * @result{ - error message should appear}
      */
-    @Test(testName = "Try To Update With A Different User", dependsOnMethods = { "verifyCloudAfterIBUpdate"})
-    public void tryToUpdateWithADifferentUser(){
+    @Test(testName = "Try To Update With A Different User", dependsOnMethods = {"verifyCloudAfterIBUpdate"})
+    public void tryToUpdateWithADifferentUser() {
         onboardingPageObject.clickTryIncredicloud();
-        cloudRegistrationPageObject.selectUser(LIMITED_USER);
+        cloudRegistrationPageObject.selectUser(LIMITED_USER, ONBOARDING_TYPE);
         Assert.assertTrue(onboardingPageObject.verifyDifferentUserUpdateMessage(), "Different user update message did not appear");
     }
 

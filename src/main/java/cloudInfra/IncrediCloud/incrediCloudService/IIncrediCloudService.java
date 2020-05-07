@@ -1,6 +1,8 @@
 package cloudInfra.IncrediCloud.incrediCloudService;
 
-import java.util.List;
+import cloudInfra.IncrediCloud.metadata.VirtualMachineInfo;
+
+import java.util.ArrayList;
 
 public interface IIncrediCloudService {
 
@@ -21,6 +23,10 @@ public interface IIncrediCloudService {
     String getCloudStatus();
 
     void waitForCloudStatus(String status);
+
+    ArrayList<String> getVirtualMachinesNames();
+
+    VirtualMachineInfo getVirtualMachineInformation(String machineName);
 
 
 }

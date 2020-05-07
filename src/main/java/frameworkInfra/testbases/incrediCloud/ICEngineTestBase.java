@@ -1,8 +1,15 @@
 package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
+import cloudInfra.IncrediCloud.Utils.CloudUtil;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
-import cloudInfra.IncrediCloud.pageObjects.*;
+import cloudInfra.IncrediCloud.metadata.Configuration.CloudConfigurationData;
+import cloudInfra.IncrediCloud.metadata.Enums.OnboardingType;
+import cloudInfra.IncrediCloud.metadata.VirtualMachineInfo;
+import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
+import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
+import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
+import cloudInfra.IncrediCloud.pageObjects.RegistrationPageObject;
 import cloudInfra.IncrediCloud.webServer.WebServer;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
@@ -10,25 +17,26 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.RegistryService;
-import frameworkInfra.utils.StaticDataProvider.*;
+import frameworkInfra.utils.StaticDataProvider.Locations;
+import frameworkInfra.utils.StaticDataProvider.Processes;
+import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
 import frameworkInfra.utils.SystemActions;
 import ibInfra.ibService.IbService;
 import ibInfra.ibUIService.IBUIService;
 import ibInfra.windowscl.WindowsService;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-import static frameworkInfra.Listeners.SuiteListener.extent;
-import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
-import static frameworkInfra.Listeners.SuiteListener.test;
+import static frameworkInfra.Listeners.SuiteListener.*;
+
 
 @Listeners(SuiteListener.class)
 public class ICEngineTestBase extends TestBase {
@@ -36,8 +44,8 @@ public class ICEngineTestBase extends TestBase {
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
     public static String CLOUD = System.getProperty("cloudtype");
-//    final protected String PROD_USER = "mark@doriextermanxoreax.onmicrosoft.com";
-//    final protected String LIMITED_USER = "mark2@doriextermanxoreax.onmicrosoft.com";
+    public static OnboardingType ONBOARDING_TYPE = (System.getProperty("onboardingType") == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(System.getProperty("onboardingType")));
+    public static boolean IS_PRIVATE_NETWORK = (System.getProperty("isPVOn") == null ? false : Boolean.getBoolean(System.getProperty("isPVOn")));
     final protected String PROD_USER = "automation@incredicloudcs.onmicrosoft.com";
     final protected String LIMITED_USER = "automation@incredicloudcs.onmicrosoft.com";
     final public String COORDID = "Automation";
@@ -61,6 +69,8 @@ public class ICEngineTestBase extends TestBase {
     private IBUIService ibuiService = new IBUIService();
     protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
     protected OnboardingPage onboardingPage;
+    protected boolean isOnBoarding = false;
+    protected CloudConfigurationData configurationData;
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -71,11 +81,15 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @BeforeSuite
-    public void beforeSuite(){
+    public void beforeSuite() throws Exception {
         test = extent.createTest("Before Suite");
-        //ibService.updateIB(IB_VERSION);
+       // ibService.updateIB(IB_VERSION);
+
+        // retrieve Cloud configuration data
+        configurationData = CloudUtil.getCloudConfigurationData();
+
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.MINIDLELEVEL, "0.02");
-        switch (ENV){
+        switch (ENV) {
             case "prod":
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDSITEURL, "https://incredicloud.azurewebsites.net");
                 RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.INCREDICLOUDAPIURL, "https://incredicloudapim-prod.azure-api.net");
@@ -96,16 +110,15 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
+        isOnBoarding = false;
         //SystemActions.sleep(600); //wait for the previous resource to be deleted
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        HashMap<String,String> customTags = new HashMap();
-        customTags.put("team", "RnD");
-        switch (ENV){
+        switch (ENV) {
             case "prod":
                 eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
                 break;
@@ -121,20 +134,42 @@ public class ICEngineTestBase extends TestBase {
         }
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        switch (CLOUD){
+
+        switch (CLOUD) {
             case "azure":
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT, customTags);
+                        COORD_PORT, VM_PORT);
+
+                // Set private network
+                if (IS_PRIVATE_NETWORK) {
+                    onboardingPage.setIsPrivateNetwork(true);
+                    onboardingPage.setResourceGroupName(configurationData.getAzureConfigurationData().getResourceGroupName());
+                    onboardingPage.setVirtualNetwork(configurationData.getAzureConfigurationData().getVirtualNetwork());
+                    onboardingPage.setPrivateNetworkSubnet(configurationData.getAzureConfigurationData().getSubnet());
+                }
                 break;
             case "aws":
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
-                //TODO: change to AWS values
                 onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT, customTags);
-        }
-        onboardingPageObject = new OnboardingPageObject(eventWebDriver);
+                        COORD_PORT, VM_PORT);
 
+                if (IS_PRIVATE_NETWORK) {
+                    onboardingPage.setIsPrivateNetwork(true);
+                    onboardingPage.setPrivateNetworkVpc(configurationData.getAwsConfigurationData().getVpc());
+                    onboardingPage.setPrivateNetworkSubnet(configurationData.getAwsConfigurationData().getSubnet()); // default
+                    //onboardingPage.setPrivateNetworkSubnet(configurationData.getAwsConfigurationData().getAdditionalSubnet());
+                }
+                break;
+
+        }
+
+        // Set Custom tags
+        HashMap<String, String> customTags = new HashMap();
+        customTags.put("group", "RnD");
+        customTags.put("team", "QA");
+        onboardingPage.setCustomTags(customTags);
+        onboardingPageObject = new OnboardingPageObject(eventWebDriver);
     }
 
     @BeforeMethod
@@ -146,25 +181,28 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @AfterMethod
-    public void afterMethod(Method method){
+    public void afterMethod(Method method) {
         if (method.getName().equals("performOnboarding") || method.getName().equals("updateCloudSettings"))
             webDriver.close();
         extent.flush();
     }
 
     @AfterSuite
-    public void afterSuite(){
+    public void afterSuite() {
+        if (isOnBoarding) {
+            deactivateCloud();
+        }
         SystemActions.killProcess(Processes.COORDMONITOR);
         killDriver();
     }
 
 
     //METHODS
-    protected void startWebServerThread(){
+    protected void startWebServerThread() {
         serverThread.start();
     }
 
-    protected void waitForWebServerResponse(){
+    protected void waitForWebServerResponse() {
         try {
             serverThread.join();
         } catch (InterruptedException e) {
@@ -172,7 +210,7 @@ public class ICEngineTestBase extends TestBase {
         }
     }
 
-    protected void killDriver(){
+    protected void killDriver() {
         if (webDriver != null) {
             webDriver.quit();
             eventWebDriver.quit();
@@ -181,11 +219,12 @@ public class ICEngineTestBase extends TestBase {
         }
     }
 
-    private int getMachineCores(String machineType){
-        int cores= 0;
-        switch (machineType){
+    private int getMachineCores(String machineType) {
+        int cores = 2;
+        switch (machineType) {
             case "D2":
             case "t2.large":
+            case "c4.large":
                 cores = 2;
                 break;
             case "D4s_v3":
@@ -193,6 +232,34 @@ public class ICEngineTestBase extends TestBase {
                 break;
         }
         return cores;
+    }
+
+    protected void verifyVirtualMachinesInfo() {
+        ArrayList<String> vmNames = icService.getVirtualMachinesNames();
+        //ArrayList<String> vmNames = new ArrayList<>();
+        //vmNames.add("incredibuild_Cl-xRzvC_0");
+        //onboardingPage.setMachineTypeInUI("Standard_D2_v3 - 2 Cores, 8GB RAM, $0.188/hour");
+        for (String vmName : vmNames) {
+            VirtualMachineInfo vmi = icService.getVirtualMachineInformation(vmName);
+            Assert.assertTrue(onboardingPage.getMachineTypeInUI().startsWith(vmi.getVmSize()));
+
+            Iterator iterator = onboardingPage.getCustomTags().entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry mapEntry = (Map.Entry) iterator.next();
+                String key = (String) mapEntry.getKey();
+                String val = (String) mapEntry.getValue();
+                Assert.assertTrue(vmi.getTags().containsKey(key), "");
+                Assert.assertTrue(vmi.getTags().get(key).equals(val), "");
+            }
+
+        }
+    }
+
+    private void deactivateCloud() {
+        icService.deactivateCloud();
+        icService.getCloudStatus();
+        SystemActions.sleep(40);
+        isOnBoarding = false;
     }
 
 }

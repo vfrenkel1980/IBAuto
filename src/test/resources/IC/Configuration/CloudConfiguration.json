@@ -1,0 +1,22 @@
+{
+  "awsConfigurationData": {
+    "accessKey": "AKIA4BHIO2JBKQX4ZCT5",
+    "secretKey": "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",
+    "roleARN": "arn:aws:iam::827268715074:role/IB_POLICY_ROLE_Low",
+    "externalID": "0506ea90-6f69-11ea-b788-dd73d2e8a2d8",
+    "vpc": "vpc-00a9922319c1ba790 - 172.17.0.0/24",
+    "subnet": "subnet-03f4200f635463c68 - 172.17.0.0/24",
+    "additionalSubnet": "subnet-051b941f5d9b9d4d3 - 172.16.2.0/24"
+  },
+  "azureConfigurationData": {
+    "user": "automation@incredicloudcs.onmicrosoft.com",
+    "password": "Raku6621",
+    "tenantID": "bde8b775-ae5e-4043-bd01-ab0b17249045",
+    "applicationID": "29b00fa9-9d80-4dec-aa91-a583fcae4c9c",
+    "clientSecret": "ZjhiNmZlZDktZmFjYi00MDcxLTk5YTQtMWFmYzcyMzRhZGFm",
+    "resourceGroupName": "testRG",
+    "virtualNetwork": "testVnet",
+    "subnet": "default - 10.10.0.0/24 - 251 available IPs",
+    "additionalSubnet": ""
+  }
+}

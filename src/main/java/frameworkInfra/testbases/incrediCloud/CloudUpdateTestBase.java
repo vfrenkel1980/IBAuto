@@ -1,6 +1,7 @@
 package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
+import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.AzureRegistrationPageObject;
 import cloudInfra.IncrediCloud.pageObjects.OnboardingPageObject;
 import com.aventstack.extentreports.Status;
@@ -28,20 +29,27 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
     final public int GRID_CORES_AFTER_DECREASE = GRID_CORES - 4;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         switch (CLOUD) {
             case "azure":
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
-                        COORD_PORT, VM_PORT, null);
+                        COORD_PORT, VM_PORT);
                 updateIncreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
-                        COORD_PORT, VM_PORT, null);
+                        COORD_PORT, VM_PORT);
                 updateDecreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
-                        COORD_PORT, VM_PORT, null);
+                        COORD_PORT, VM_PORT);
                 updatePorts = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
-                        31100, 31103, null);
+                        31100, 31103);
                 break;
             case "aws":
-                //TODO: fill in aws update values.
+                onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
+                        COORD_PORT, VM_PORT);
+                updateIncreasePoolSize = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
+                        COORD_PORT, VM_PORT);
+                updateDecreasePoolSize = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
+                        COORD_PORT, VM_PORT);
+                updatePorts = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
+                        31100, 31103);
                 break;
         }
     }
@@ -56,7 +64,7 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
         webDriver = new ChromeDriver();
         eventWebDriver = new EventFiringWebDriver(webDriver);
         eventWebDriver.register(handler);
-        switch (ENV){
+        switch (ENV) {
             case "prod":
                 eventWebDriver.get("https://incredicloud.azurewebsites.net/?coord_id=" + COORDID + "&redirect_uri=http://127.0.0.1:" + PORT + "/cloudauthentication");
                 break;
@@ -69,17 +77,26 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
         }
         eventWebDriver.manage().window().maximize();
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
-        cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
+
+        switch (CLOUD) {
+            case "azure":
+                cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
+                break;
+            case "aws":
+                cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
+                break;
+        }
+
     }
 
     @AfterMethod
-    public void afterMethod(Method method){
+    public void afterMethod(Method method) {
         killDriver();
         extent.flush();
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         test = extent.createTest("AFTER CLASS");
         webServer.closeWebServer();
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.INCREDICLOUDSECRET, "");
