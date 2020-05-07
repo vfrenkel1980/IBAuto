@@ -25,7 +25,7 @@ public class NintendoSwitchTests extends WindowsTestBase {
     /**
      * @test Application Account - Debug|NX64 - build
      * @pre { Disable Predictive execution option fom VS Builds -> Advanced
-     * - Set value X64 to ForcePredictedExecutionPlatforms parameter in the IB profile xml file }
+     *  - Set value X64 to ForcePredictedExecutionPlatforms parameter in the IB profile xml file }
      * @steps {- Build from console AccountApplication-spec.NX.autogen.vs2017.sln project}
      * @result {- Return number of code}
      */
