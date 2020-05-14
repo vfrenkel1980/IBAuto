@@ -289,24 +289,24 @@ public class UIValidationsTests extends UIValidationTestBase {
         }
     }
 
-//
-//    /**
-//     * @test Verify Agent Settings Opened From Try
-//     * @pre{ }
-//     * @steps{
-//     * - Open Agent Settings from tray
-//     * - Verify Agent Settings opened}
-//     * @result{ - Agent Settings window is opened}
-//     */
-//    @Test(testName = "Verify Agent Settings Opened From Tray")
-//    public void verifyAgentSettingsOpenedFromTray() {
-//        if (!project.equals("green01")) {
-//            test.log(Status.SKIP, "Test should run once on green project");
-//            throw new SkipException("Skipped test");
-//        }
-//        client.openAgentSettingsFromTray();
-//        client.verifyAgentSettingsOpened();
-//    }
+
+    /**
+     * @test Verify Agent Settings Opened From Try
+     * @pre{ }
+     * @steps{
+     * - Open Agent Settings from tray
+     * - Verify Agent Settings opened}
+     * @result{ - Agent Settings window is opened}
+     */
+    @Test(testName = "Verify Agent Settings Opened From Tray")
+    public void verifyAgentSettingsOpenedFromTray() {
+        if (!project.equals("green01")) {
+            test.log(Status.SKIP, "Test should run once on green project");
+            throw new SkipException("Skipped test");
+        }
+        client.openAgentSettingsFromTray();
+        client.verifyAgentSettingsOpened();
+    }
 
     //TODO
 //    /**

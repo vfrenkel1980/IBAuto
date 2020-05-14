@@ -173,8 +173,8 @@ public class IBUIService implements IIBUIService {
         public void selectLicense()  {
             test.log(Status.INFO, "Selecting license");
             try {
-                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 25).doubleClick();
-                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 25).click();
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.9), 25).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.9), 25).click();
             }
             catch (FindFailed findFailed){
                     test.log(Status.WARNING, "License select fail: " + findFailed.getMessage());
@@ -308,6 +308,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void verifyMonitorBarPattern(Pattern pat) {
+            SystemActions.sleep(3);
             test.log(Status.INFO, "Looking for Monitor Bar");
             try {
                 screen.wait(pat.similar((float) 0.9), 5);
@@ -319,6 +320,7 @@ public class IBUIService implements IIBUIService {
 
         @Override
         public void verifyHistoryColoringPattern(Pattern pat) {
+            SystemActions.sleep(3);
             test.log(Status.INFO, "Looking for History Coloring");
             try {
                 screen.wait(pat.similar((float) 0.9), 25);
@@ -355,7 +357,7 @@ public class IBUIService implements IIBUIService {
         public void openMonitorFromTray() {
             test.log(Status.INFO, "Opening Monitor from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).hover();
+               // screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).hover();
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
                 screen.wait(IBSettings.TrayIcon.monitorTray.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
@@ -726,6 +728,17 @@ public class IBUIService implements IIBUIService {
             }
         }
 
+        @Override
+        public void predictedExecutionIsAvailable(){
+            try{
+            screen.wait(IBSettings.VisualStudioBuilds.similar((float)0.9),10).click();
+            screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 20).click();
+            screen.wait(IBSettings.EnhanceThroughputUsingBox.similar((float)0.9),20).click();
+            }catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to enable predicted execution with error:" + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
         }
 
         public class Coordinator implements ICoordinator {
