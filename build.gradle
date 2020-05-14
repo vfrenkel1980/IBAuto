@@ -124,8 +124,8 @@ test {
     systemProperty "initiators", System.getProperty("initiators")
     //systemProperty "groups", System.getProperty("groups")
     //Performance configuration
-    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'azure'
-    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'aws'
+    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'AZURE'
+    systemProperty 'cloudtype', System.properties['cloudtype'] ?: 'AWS'
     systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'BASIC_ONBOARDING'
 //    systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'LOW_ONBOARDING'
 //    systemProperty 'onboardingType', System.properties['onboardinType'] ?: 'SPLIT_ONBOARDING'
