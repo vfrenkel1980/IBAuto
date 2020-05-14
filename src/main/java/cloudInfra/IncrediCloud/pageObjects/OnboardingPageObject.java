@@ -1,6 +1,8 @@
 package cloudInfra.IncrediCloud.pageObjects;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
+import cloudInfra.IncrediCloud.Utils.SeleniumUtils;
+import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import cloudInfra.IncrediCloud.metadata.Enums.OnboardingType;
 import frameworkInfra.utils.SystemActions;
 import org.openqa.selenium.By;
@@ -32,7 +34,7 @@ public class OnboardingPageObject {
     private static final By AWS_CLOUD_BUTTON = By.xpath("//*[@class='icon-btn icon_amazon']");
     private static final By AWS_CLOUD_ADMIN_LOGIN_BUTTON = By.xpath("//*[@id='loginAWSAdmin']");
     private static final By AWS_CLOUD_LOW_PERMISSIONS_LOGIN_BUTTON = By.xpath("//*[@id='loginAWSLow']");
-
+    private static final By RESOURCE_MANAGEMENT_LABEL = By.xpath("//span[text()='Resource Management']");
     private static final By REGION_SELECT = By.xpath("//mat-select[@placeholder='Cloud Region']");
     private static final By TENANT_SELECT = By.xpath("//mat-select[@placeholder='Tenant ID']");
     private static final By SUBSCRIPTION_SELECT = By.xpath("//mat-select[@placeholder='Subscription']");
@@ -45,8 +47,6 @@ public class OnboardingPageObject {
     private static final By CUSTOM_TAG_NO_TAG_UPDATE_MESSAGE = By.className("noTagUpdateBtn");
     private static final By MACHINE_TYPE_SELECT = By.xpath("//mat-select[@placeholder='VM Type']");
     private static final String SELECTION_LIST = "//span[contains(text(),'%s')]";
-//    private static final String REGION_SELECTION_LIST =
-//            "//span[@class='mat-select-value-text ng-tns-c20-28 ng-star-inserted']";
     private static final String MACHINE_SELECTION_LIST = "//span[contains(text(),'%s')][@class='mat-option-text']";
     private static final By FIRST_NAME_TB = By.xpath("//*[@placeholder='First Name']");
     private static final By LAST_NAME_TB = By.xpath("//*[@placeholder='Last Name']");
@@ -108,7 +108,7 @@ public class OnboardingPageObject {
     public void clickTryIncredicloud() {
         scaleToCloud();
         switch (CLOUD) {
-            case "azure":
+            case AZURE:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(AZURE_CLOUD_BUTTON));
                 eventWebDriver.findElement(AZURE_CLOUD_BUTTON).click();
                 if (ONBOARDING_TYPE.equals(OnboardingType.LOW_ONBOARDING)) {
@@ -120,7 +120,7 @@ public class OnboardingPageObject {
                 }
 
                 break;
-            case "aws":
+            case AWS:
                 wait.until(ExpectedConditions.visibilityOfElementLocated(AWS_CLOUD_BUTTON));
                 eventWebDriver.findElement(AWS_CLOUD_BUTTON).click();
                 if (ONBOARDING_TYPE.equals(OnboardingType.LOW_ONBOARDING)) {
@@ -136,24 +136,15 @@ public class OnboardingPageObject {
 
     public void performOnboarding(OnboardingPage onboardingPage) {
         setGeneralSection(onboardingPage);
-        setResourceManagmentSection(onboardingPage);
+        setResourceManagementSection(onboardingPage);
         setVMsSection(onboardingPage);
         clickSave(false);
-
-//        selectSubscription();
-//        selectRegion(onboardingPage);
-//        enterName(onboardingPage);
-//        enterMail(onboardingPage);
-//        enterCompany(onboardingPage);
-//        setVMsSection(onboardingPage);
-//        addCustomTags(onboardingPage.getCustomTags());
-
     }
 
     public void performUpdate(OnboardingPage onboardingPage) {
         updateVmDetails(onboardingPage);
         clickSave(true);
-        // waitForUpdateToFinish();
+        waitForUpdateToFinish();
     }
 
     private void waitForUpdateToFinish() {
@@ -166,11 +157,11 @@ public class OnboardingPageObject {
         enterCompany(onboardingPage);
     }
 
-    private void setResourceManagmentSection(OnboardingPage onboardingPage) {
-        if (CLOUD.equals("azure")) {
+    private void setResourceManagementSection(OnboardingPage onboardingPage) {
+        if (CLOUD.equals(CloudType.AZURE)) {
             selectSubscription();
         }
-        //selectRegion(onboardingPage);
+        selectRegion(onboardingPage);
 
         if (onboardingPage.getIsPrivateNetwork()) {
             selectPrivateNetwork(onboardingPage);
@@ -187,51 +178,48 @@ public class OnboardingPageObject {
         WebElement sub = eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test")));
         Actions actions = new Actions(eventWebDriver);
         actions.moveToElement(sub).click().perform();
-//        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, "System Test"))).click();
     }
-
-    //    private void selectRegion(OnboardingPage onboardingPage){
-//        SystemActions.sleep(10);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
-//    }
 
     private void selectPrivateNetwork(OnboardingPage onboardingPage) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PRIVATE_NETWORK_BTN)).click();
 
-        if (CLOUD.equals("azure")) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AZURE_RESOURCE_GROUP_SELECTION_LIST)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getResourceGroupName()))));
-            eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getResourceGroupName()))).click();
+        switch (CLOUD) {
+            case AZURE:
+                wait.until(ExpectedConditions.visibilityOfElementLocated(AZURE_RESOURCE_GROUP_SELECTION_LIST)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getResourceGroupName()))));
+                eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getResourceGroupName()))).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AZURE_VIRTUAL_NETWORK_SELECTION_LIST)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getVirtualNetwork()))));
-            eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getVirtualNetwork()))).click();
-        } else if (CLOUD.equals("aws")) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AWS_VPC_SELECTION_LIST)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkVpc()))));
-            SystemActions.sleep(1);
-            eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkVpc()))).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(AZURE_VIRTUAL_NETWORK_SELECTION_LIST)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getVirtualNetwork()))));
+                eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getVirtualNetwork()))).click();
+                break;
+            case AWS:
+                wait.until(ExpectedConditions.visibilityOfElementLocated(AWS_VPC_SELECTION_LIST)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkVpc()))));
+                SystemActions.sleep(1);
+                eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkVpc()))).click();
+                break;
         }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUBNET_SELECTION_LIST)).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkSubnet()))));
         eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getPrivateNetworkSubnet()))).click();
         SystemActions.sleep(1);
-
     }
 
     private void selectRegion(OnboardingPage onboardingPage) {
-        //        SystemActions.sleep(10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
-//        Actions actions = new Actions(eventWebDriver);
-//        actions.moveToElement(eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion())))).click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))));
-        eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))).click();
+        SeleniumUtils.scrollToWebElement(eventWebDriver, eventWebDriver.findElement(REGION_SELECT));
+        if (!eventWebDriver.findElement(REGION_SELECT).getText().equals(onboardingPage.getRegion())) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(REGION_SELECT)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))));
+            SystemActions.sleep(1);
+            eventWebDriver.findElement(By.xpath(String.format(SELECTION_LIST, onboardingPage.getRegion()))).click();
+        }
     }
 
     private void enterName(OnboardingPage onboardingPage) {
+        SeleniumUtils.scrollToWebElement(eventWebDriver, eventWebDriver.findElement(FIRST_NAME_TB));
+        SystemActions.sleep(1);
         wait.until(ExpectedConditions.presenceOfElementLocated(FIRST_NAME_TB));
         eventWebDriver.findElement(FIRST_NAME_TB).sendKeys(onboardingPage.getFirstName());
         eventWebDriver.findElement(LAST_NAME_TB).sendKeys(onboardingPage.getLastName());
@@ -246,8 +234,9 @@ public class OnboardingPageObject {
     }
 
     private void setVMsSection(OnboardingPage onboardingPage) {
-//        wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
-//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
+        SeleniumUtils.scrollToWebElement(eventWebDriver, eventWebDriver.findElement(MACHINE_TYPE_SELECT));
+        wait.until(ExpectedConditions.elementToBeClickable(MACHINE_TYPE_SELECT)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(MACHINE_SELECTION_LIST, onboardingPage.getMachineType())))).click();
         onboardingPage.setMachineTypeInUI(eventWebDriver.findElement(MACHINE_TYPE_SELECT).getText());
         eventWebDriver.findElement(TIMEOUT_TB).clear();
         eventWebDriver.findElement(TIMEOUT_TB).sendKeys(String.valueOf(onboardingPage.getTimeout()));
@@ -282,13 +271,13 @@ public class OnboardingPageObject {
     }
 
     private void clickSave(Boolean isOnBoardingUpdate) {
+        SeleniumUtils.scrollToWebElement(eventWebDriver, eventWebDriver.findElement(SAVE_BTN));
         eventWebDriver.findElement(SAVE_BTN).click();
         if (!isOnBoardingUpdate) {
             eventWebDriver.findElement(LICENSE_AGREEMENT).click();
         }
         eventWebDriver.findElement(ACTIVATE_BTN).click();
     }
-
 
     public boolean validateTenant() {
         SystemActions.sleep(10);
