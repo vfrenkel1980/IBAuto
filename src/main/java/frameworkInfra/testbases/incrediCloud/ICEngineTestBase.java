@@ -1,9 +1,11 @@
 package frameworkInfra.testbases.incrediCloud;
 
 import cloudInfra.IncrediCloud.Pages.OnboardingPage;
-import cloudInfra.IncrediCloud.Utils.CloudUtil;
+import cloudInfra.IncrediCloud.Utils.CloudUtils;
 import cloudInfra.IncrediCloud.incrediCloudService.IncrediCloudService;
 import cloudInfra.IncrediCloud.metadata.Configuration.CloudConfigurationData;
+import cloudInfra.IncrediCloud.metadata.Enums.CloudStatusType;
+import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import cloudInfra.IncrediCloud.metadata.Enums.OnboardingType;
 import cloudInfra.IncrediCloud.metadata.VirtualMachineInfo;
 import cloudInfra.IncrediCloud.pageObjects.AWSRegistrationPageObject;
@@ -37,13 +39,12 @@ import java.util.concurrent.TimeUnit;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 
-
 @Listeners(SuiteListener.class)
 public class ICEngineTestBase extends TestBase {
 
     public static String ENV = System.getProperty("incredicloudEnv");
     public static String TYPE = System.getProperty("machineType");
-    public static String CLOUD = System.getProperty("cloudtype");
+    public static CloudType CLOUD = CloudType.valueOf(System.getProperty("cloudtype"));
     public static OnboardingType ONBOARDING_TYPE = (System.getProperty("onboardingType") == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(System.getProperty("onboardingType")));
     public static boolean IS_PRIVATE_NETWORK = (System.getProperty("isPVOn") == null ? false : Boolean.getBoolean(System.getProperty("isPVOn")));
     final protected String PROD_USER = "automation@incredicloudcs.onmicrosoft.com";
@@ -83,10 +84,10 @@ public class ICEngineTestBase extends TestBase {
     @BeforeSuite
     public void beforeSuite() throws Exception {
         test = extent.createTest("Before Suite");
-       // ibService.updateIB(IB_VERSION);
+        // ibService.updateIB(IB_VERSION);
 
         // retrieve Cloud configuration data
-        configurationData = CloudUtil.getCloudConfigurationData();
+        configurationData = CloudUtils.getCloudConfigurationData();
 
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Coordinator", RegistryKeys.MINIDLELEVEL, "0.02");
         switch (ENV) {
@@ -136,7 +137,7 @@ public class ICEngineTestBase extends TestBase {
         eventWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         switch (CLOUD) {
-            case "azure":
+            case AZURE:
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
@@ -149,7 +150,7 @@ public class ICEngineTestBase extends TestBase {
                     onboardingPage.setPrivateNetworkSubnet(configurationData.getAzureConfigurationData().getSubnet());
                 }
                 break;
-            case "aws":
+            case AWS:
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
                 onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
@@ -182,13 +183,24 @@ public class ICEngineTestBase extends TestBase {
 
     @AfterMethod
     public void afterMethod(Method method) {
-        if (method.getName().equals("performOnboarding") || method.getName().equals("updateCloudSettings"))
-            webDriver.close();
-        extent.flush();
+        // if (method.getName().equals("performOnboarding") || method.getName().equals("updateCloudSettings"))
+
     }
 
-    @AfterSuite
-    public void afterSuite() {
+    @AfterClass
+    public void afterClass() {
+        try {
+            if (webDriver != null) {
+                webDriver.close();
+            }
+
+            if (extent != null) {
+                extent.flush();
+            }
+        } catch (Exception e) {
+            test.log(Status.INFO, "Afterclass");
+        }
+
         if (isOnBoarding) {
             deactivateCloud();
         }
@@ -249,7 +261,7 @@ public class ICEngineTestBase extends TestBase {
                 String key = (String) mapEntry.getKey();
                 String val = (String) mapEntry.getValue();
                 Assert.assertTrue(vmi.getTags().containsKey(key), "");
-                Assert.assertTrue(vmi.getTags().get(key).equals(val), "");
+                Assert.assertEquals(vmi.getTags().get(key), val, "");
             }
 
         }
@@ -257,8 +269,8 @@ public class ICEngineTestBase extends TestBase {
 
     private void deactivateCloud() {
         icService.deactivateCloud();
-        icService.getCloudStatus();
-        SystemActions.sleep(40);
+        icService.waitForCloudStatus(CloudStatusType.COORDINATOR_IS_DEACTIVATING.getType());
+        icService.waitForCloudStatus(CloudStatusType.COORDINATOR_IS_DEACTIVATED.getType());
         isOnBoarding = false;
     }
 

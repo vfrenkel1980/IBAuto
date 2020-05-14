@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CloudUtil {
+public class CloudUtils {
     private static final String CONFIGURATION_DATA_FILEPATH = "C:\\qa_automation\\src\\test\\resources\\IC\\Configuration\\CloudConfiguration.json";
 
     /**
-     * @return
+     * @return CloudConfigurationData
      * @throws Exception
      */
     public static CloudConfigurationData getCloudConfigurationData() throws Exception {

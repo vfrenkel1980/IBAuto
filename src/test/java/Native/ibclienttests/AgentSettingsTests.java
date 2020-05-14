@@ -72,6 +72,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      */
     @Test(testName = "Avoid local Execution turned OFF, Standalone ON")
     public void avoidLocalExecutionTurnedOffStandaloneOn() {
+        test.log(Status.INFO,"vlad first test");
         setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
         setRegistry("1", "Builder", RegistryKeys.STANDALONE_MODE);
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));

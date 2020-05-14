@@ -1,5 +1,6 @@
 package IncrediCloud;
 
+import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
@@ -27,9 +28,12 @@ public class ICSanityTests extends ICEngineTestBase {
         icService.setSecretInRegistry();
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         icService.loginToCloud();
-        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
         isOnBoarding = true;
-        //verifyVirtualMachinesInfo();
+        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
+
+//        if (CLOUD.equals(CloudType.AZURE)) {
+//            verifyVirtualMachinesInfo();
+//        }
     }
 
 
