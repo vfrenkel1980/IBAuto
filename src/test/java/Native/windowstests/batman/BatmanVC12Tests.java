@@ -57,7 +57,6 @@ public class BatmanVC12Tests extends BatmanBCTestBase {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC12_BATMAN.LLVM_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
-//  Tests not relevant, NX Nintendo extensions not supported for VS 2013
 //
 //    @Test(testName = "AccountApplicationAuthorization - 2013 debug|NX32 - build", groups = {"Build"})
 //    public void accountApplicationAuthorization2013DebugNX32Build() {
