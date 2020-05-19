@@ -248,14 +248,14 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
-
-    @Test(testName = "AccountApplication - 2017 debug|win32 - build" , groups = { "Build" })
-    public void accountApplication2017DebugX32Build(){
-        setRegistry("0", RegistryKeys.PREDICTED);
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X32_DEBUG, "%s"));
-        setRegistry("2", RegistryKeys.PREDICTED);
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+// Not supported of Nintendo
+//    @Test(testName = "AccountApplication - 2017 debug|win32 - build" , groups = { "Build" })
+//    public void accountApplication2017DebugX32Build(){
+//        setRegistry("0", RegistryKeys.PREDICTED);
+//        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X32_DEBUG, "%s"));
+//        setRegistry("2", RegistryKeys.PREDICTED);
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
 
     @Test(testName = "NvnTutorial06 - 2017 debug|NX32- build" , groups = { "Build" })
     public void nvnTutorial2017DebugNX32Build(){

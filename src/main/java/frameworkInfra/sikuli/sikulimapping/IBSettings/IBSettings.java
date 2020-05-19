@@ -18,9 +18,9 @@ public class IBSettings {
         public static final Pattern enabledAsHelperTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enabled_as_helper_tray.png");
     }
 
-/*    public static final Pattern network = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkTab.png");
-    public static final Pattern networkcoordinator = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkCoordinatorTab.png");
-    public static final Pattern coordinatorNameTB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\CoordinatorNameTB.png");*/
+   public static final Pattern network = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkTab.png");
+     public static final Pattern networkcoordinator = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkCoordinatorTab.png");
+    public static final Pattern coordinatorNameTB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\CoordinatorNameTB.png");
     public static final Pattern OKButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OKButton.png");
     public static final Pattern OKMessageBoxButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OK_messagebox.png");
     public static final Pattern agent = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingAgentTab.png");
