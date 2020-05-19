@@ -2,6 +2,7 @@ package cloudInfra.IncrediCloud.pageObjects;
 
 import cloudInfra.IncrediCloud.metadata.Enums.OnboardingType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,9 +39,8 @@ public class AzureRegistrationPageObject extends RegistrationPageObject {
         wait.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
         eventWebDriver.findElement(PASSWORD_TB).sendKeys(PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(SIGNIN_BUTTON)).click();
-//        WebElement sub = eventWebDriver.findElement(ACCEPT_BUTTON);
-//        Actions actions = new Actions(eventWebDriver);
-//        actions.moveToElement(sub).click().perform();
+        ((JavascriptExecutor) eventWebDriver).executeScript(
+                "arguments[0].scrollIntoView();", eventWebDriver.findElement(ACCEPT_BUTTON));
         wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_BUTTON)).click();
 
         if (onboardingType.equals(OnboardingType.LOW_ONBOARDING)) {

@@ -31,7 +31,7 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
     @BeforeClass
     public void beforeClass() {
         switch (CLOUD) {
-            case "azure":
+            case AZURE:
                 onboardingPage = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
                 updateIncreasePoolSize = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
@@ -41,7 +41,7 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
                 updatePorts = new OnboardingPage("North Europe", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE - 2,
                         31100, 31103);
                 break;
-            case "aws":
+            case AWS:
                 onboardingPage = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE,
                         COORD_PORT, VM_PORT);
                 updateIncreasePoolSize = new OnboardingPage("EU (Ireland)", "Test", "User", "Test@user.com", "Com", TYPE, TIMEOUT, CORES_LIMIT, POOL_SIZE + 2,
@@ -79,10 +79,10 @@ public class CloudUpdateTestBase extends ICEngineTestBase {
         onboardingPageObject = new OnboardingPageObject(eventWebDriver);
 
         switch (CLOUD) {
-            case "azure":
+            case AZURE:
                 cloudRegistrationPageObject = new AzureRegistrationPageObject(eventWebDriver);
                 break;
-            case "aws":
+            case AWS:
                 cloudRegistrationPageObject = new AWSRegistrationPageObject(eventWebDriver);
                 break;
         }

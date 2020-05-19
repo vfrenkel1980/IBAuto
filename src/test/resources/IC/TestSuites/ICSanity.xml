@@ -20,20 +20,20 @@
     </listeners>
 
     <test name="ICAwsSanity">
-        <parameter name="cloudtype" value="aws"/>
+        <parameter name="cloudtype" value="AWS"/>
         <parameter name="machineType" value="c4.large"/>
         <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
         <classes>
             <class name ="IncrediCloud.ICSanityTests" />
         </classes>
     </test>
-<!--    <test name="ICAzureSanity">-->
-<!--        <parameter name="cloudtype" value="azure"/>-->
-<!--    <parameter name="machineType" value="D2"/>-->
-<!--        <parameter name="onboardingType" value="BASIC_ONBOARDING"/>-->
-<!--        <classes>-->
-<!--            <class name ="IncrediCloud.ICSanityTests" />-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="ICAzureSanity">
+        <parameter name="cloudtype" value="AZURE"/>
+    <parameter name="machineType" value="D2"/>
+        <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
+        <classes>
+            <class name ="IncrediCloud.ICSanityTests" />
+        </classes>
+    </test>
 
 </suite>
