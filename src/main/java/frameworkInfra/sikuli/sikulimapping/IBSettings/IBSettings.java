@@ -58,4 +58,5 @@ public class IBSettings {
     public static final Pattern DisableFailOnlyLocally = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_fail_only_locally.png");
     public static final Pattern AllowAgentsToBuildGroups =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\allow_agents_to_buildGroups.png");
     public static final Pattern ClearHistotyNew =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history2.png");
+    public static final Pattern VisualStudioBuilds = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\visual_studio_builds_tab.png");
 }

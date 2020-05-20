@@ -310,7 +310,7 @@ public class IBUIService implements IIBUIService {
         public void verifyMonitorBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Monitor Bar");
             try {
-                screen.wait(pat.similar((float) 0.9), 5);
+                screen.wait(pat.similar((float) 0.9), 25);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Monitor Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -532,7 +532,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeStartupPageToProjects() {
             try {
-                screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.StartingPageProgressDdl.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.StartingPageProjectsDdl.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
