@@ -12,6 +12,9 @@ import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
+/**
+ * Create by tanya gaus
+ */
 public class ButtonsUITests extends UIValidationTestBase {
 
     @Test(testName = "Agent buttons" )
@@ -25,7 +28,10 @@ public class ButtonsUITests extends UIValidationTestBase {
             screen.exists(IBSettings.InitiatorTab.similar((float) 0.9), 15);
             screen.exists(IBSettings.BuildMonitorTab.similar((float) 0.9), 15);
             screen.exists(IBSettings.VisualStudioBuilds.similar((float) 0.9), 15);
+            screen.exists(IBSettings.visualStudioAddIn.similar((float) 0.9), 15);
+            screen.exists(IBSettings.tryIconTab.similar((float) 0.9), 15);
            // Agent Options Tabs
+            screen.wait(IBSettings.agent.similar((float) 0.9), 15).click();
             screen.exists(IBSettings.GeneralTab.similar((float) 0.9), 15);
             screen.exists(IBSettings.PreferenceTab.similar((float) 0.9), 15);
             screen.exists(IBSettings.CpuUtilTab.similar((float) 0.9), 15);
@@ -39,6 +45,13 @@ public class ButtonsUITests extends UIValidationTestBase {
             screen.exists(IBSettings.OutputTab.similar((float) 0.9), 15);
             screen.exists(IBSettings.AdvancedTab.similar((float) 0.9), 15);
             // VS builds tabs
+            screen.wait(IBSettings.VisualStudioBuilds.similar((float) 0.9), 15).click();
+            screen.exists(IBSettings.GeneralTab.similar((float) 0.9), 15);
+            screen.exists(IBSettings.AdvancedTab.similar((float)0.9),15);
+            //VS Add-In options tabs
+            screen.wait(IBSettings.visualStudioAddIn.similar((float) 0.9), 15).click();
+            screen.exists(IBSettings.GeneralTab.similar((float) 0.9), 15);
+            screen.exists(IBSettings.OKButton.similar((float) 0.9), 15);
 
             SystemActions.sleep(10);
         } catch (FindFailed findFailed) {
@@ -46,15 +59,15 @@ public class ButtonsUITests extends UIValidationTestBase {
             Assert.fail();
         }
     }
-    @Test(testName = "Network buttons")
-    public void networkButtonsIfExist(){
-        try{
+    @Test(testName = "Coordinator monitor buttons")
+    public void clickOnCoordMonButtons(){
+        try {
             screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).rightClick();
             screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 15).click();
         }catch(FindFailed findFailed){
-            test.log(Status.WARNING, "Failed to found networks buttons: " + findFailed.getMessage());
-            Assert.fail();
+            test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
         }
     }
+
 
 }

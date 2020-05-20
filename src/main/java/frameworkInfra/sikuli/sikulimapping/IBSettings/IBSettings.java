@@ -1,5 +1,6 @@
 package frameworkInfra.sikuli.sikulimapping.IBSettings;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.sikuli.script.*;
 
 
@@ -16,6 +17,7 @@ public class IBSettings {
         public static final Pattern coordSettingsTry = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\coord_settings_try.png");
         public static final Pattern enableDisableAsHelperDeniedTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enable_disable_as_helper_denied.png");
         public static final Pattern enabledAsHelperTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enabled_as_helper_tray.png");
+
     }
 
    public static final Pattern network = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingNetworkTab.png");
@@ -23,7 +25,7 @@ public class IBSettings {
     public static final Pattern coordinatorNameTB = new Pattern("src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\CoordinatorNameTB.png");
     public static final Pattern OKButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OKButton.png");
     public static final Pattern OKMessageBoxButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OK_messagebox.png");
-    public static final Pattern agent = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingAgentTab.png");
+    public static final Pattern agent =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingAgentTab.png");
     public static final Pattern GeneralTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\general_tab.png");
     public static final Pattern MultiBuildTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\multiple_builds.png");
     public static final Pattern ClearHistoryBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history.png");
@@ -59,4 +61,7 @@ public class IBSettings {
     public static final Pattern AllowAgentsToBuildGroups =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\allow_agents_to_buildGroups.png");
     public static final Pattern ClearHistotyNew =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history2.png");
     public static final Pattern VisualStudioBuilds = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\visual_studio_builds_tab.png");
+    public static final Pattern EnhanceThroughputCheckBox = new Pattern(System.getProperty("user.dir") + "C:\\Users\\TanyaGaus\\IdeaProjects\\qa_automation\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enhance_throughput_check.png");
+    public static final Pattern visualStudioAddIn = new Pattern(System.getProperty("user.dir") + "");
+    public static final Pattern tryIconTab = new Pattern(System.getProperty("user.dir") + "");
 }
