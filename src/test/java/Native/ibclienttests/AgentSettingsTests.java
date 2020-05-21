@@ -39,6 +39,8 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Set registry key Avoid Local ON
      * - Set registry key Standalone Mode OFF
      * }
+     *
+     *
      * @steps{
      * - Clean and build IB
      * - Set registry key Avoid Local OFF
@@ -79,6 +81,16 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
         Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
     }
+
+
+
+      //  setRegistry("1", "Builder", RegistryKeys.STANDALONE_MODE);
+     //   ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
+     //   Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.LOCAL), "Failed to find Local in output log");
+     //   Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, LogOutput.AGENT), "Fount Agent in output log, should'nt be!");
+
+
+
     /**
      * @test Avoid local execution turned OFF, Standalone OFF
      * @pre{
@@ -601,6 +613,15 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Set registry key force CPU count when Helper OFF}
      * @result{ }
      */
+
+
+
+
+
+
+
+
+
     @Test(testName = "Verify When CPU Utilization As Helper checked")
     public void verifyWhenCPUUtilizationAsHelperChecked() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);

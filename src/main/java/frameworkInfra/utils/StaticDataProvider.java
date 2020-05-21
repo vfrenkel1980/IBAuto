@@ -657,7 +657,7 @@ public class StaticDataProvider {
             public static final String CPP_UTEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\cpputest-master\\runner\\test3.bat\" /test=cpputest /title=CPPUTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String IBCONSOLE_BUG_13239_TEST =  Locations.QA_ROOT + "\\Testing\\ibconsole\\ReprosForBugs\\13239\\c++\\RunMe.bat";
             public static final String GTEST = " /command=\"" + Locations.GTEST_ROOT_PATH + "googletest-master\\runner\\test1.bat\" /test=gtest /title=GTEST /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
-            public static final String CTEST = "cmd /c cd " + Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String CTEST = "cmd /c c: &" + "cd " + Locations.GTEST_ROOT_PATH + "google-test-examples-master\\build && " + IbLocations.IBCONSOLE + "/command=\"ctest -VV --parallel 10\" /test=ctest /showagent /minwinver=10 /title=\"CTEST(gtest)\" /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String QT_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\qt-test-advanced\\runner\\test1.bat\" /test=qttest /title=\"QT TEST\" /showagent /minwinver=10 /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String VS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\vstest-master\\runner\\test1.bat\" /test=vstest /title=\"VS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String MS_TEST = "/command=\"" + Locations.QA_ROOT + "\\Testing\\mstest-master\\runner\\runner.bat\" /test=mstest /title=\"MS TEST\" /showagent /minwinver=10  /log=" + Locations.OUTPUT_LOG_FILE;
@@ -778,6 +778,7 @@ public class StaticDataProvider {
             public static final String XGSUBMIT_BATCH = "\"C:\\QA\\Simulation\\Samples\\xgsubmit_xgwait\\BatchFileExecution.bat\"";
             public static final String IBCONSOLE_NOTEXIST_PROFILE = "ibconsole /command=\"c:\\qa\\simulation\\samples\\ibconsole\\7zScript.bat\" /showtime /title=\"ibconsole invalid profile test\" /profile=\"profileNotExists.profile\"";
 
+
         }
 
         public static class CONSOLES {
@@ -831,6 +832,7 @@ public class StaticDataProvider {
         public static final String INCREDICLOUDCOORDID = "IncrediCloudCoordID";
         public static final String MAXWORKERS = "MaxWorkers";
         public static final String MINIDLELEVEL = "MinIdleLevel";
+        public static final String SHOWCORESEMPLOYED = "ShowCoresEmployed";
 
     }
 
@@ -948,7 +950,8 @@ public class StaticDataProvider {
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
-        public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
+        //public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
+        public static final String UNITESTS_HLPR_NAME = "Host-6";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
         public static final String BABYLON = "babylon";
         public static final String SECOND_INITIATOR = "Sr3-w7-vs";

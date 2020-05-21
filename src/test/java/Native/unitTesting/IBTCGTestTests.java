@@ -83,13 +83,15 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      */
     @Test(testName = "GTest CPPSorter TestLevel=8 Test")
     public void gTestCPPSorterTestLevelTest8() throws InterruptedException {
+        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "1");
         final String CORES_IN_USE = "\\d+ cores employed";
         final int expectedCoreInUse = 8;
-        final String HOSTNAME = "windows-qa-1";
+        final String HOSTNAME = "Robin";
 
         Thread.sleep(4000);
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " /testlevel=" + expectedCoreInUse);
         int actualNumOfCoresInUse = SystemActions.extractNumberFromStringInText(output, CORES_IN_USE);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "0");
         Assert.assertEquals(actualNumOfCoresInUse, expectedCoreInUse, "The number of cores in use is not as expected!");
     }
 
@@ -101,13 +103,15 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      */
     @Test(testName = "GTest CPPSorter TestLevel=10 Test")
     public void gTestCPPSorterTestLevelTest10() throws InterruptedException {
+        RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "1");
         final String CORES_IN_USE = "\\d+ cores employed";
         final int expectedCoreInUse = 10;
-        final String HOSTNAME = "windows-qa-1";
+        final String HOSTNAME = "Robin";
 
         Thread.sleep(4000);
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " /testlevel=" + expectedCoreInUse);
         int actualNumOfCoresInUse = SystemActions.extractNumberFromStringInText(output, CORES_IN_USE);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "0");
         Assert.assertEquals(actualNumOfCoresInUse, expectedCoreInUse, "The number of cores in use is not as expected!");
     }
 
