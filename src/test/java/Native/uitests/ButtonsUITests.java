@@ -63,7 +63,8 @@ public class ButtonsUITests extends UIValidationTestBase {
     public void clickOnCoordMonButtons(){
         try {
             screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).rightClick();
-            screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 15).click();
+            screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 15).click();
+
         }catch(FindFailed findFailed){
             test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
         }
