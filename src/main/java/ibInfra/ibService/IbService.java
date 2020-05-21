@@ -193,7 +193,7 @@ public class IbService implements IIBService {
     @Override
     public void loadIbLicense(String license) {
         winService.runCommandDontWaitForTermination(String.format(WindowsCommands.LOAD_IB_LICENSE, license));
-        SystemActions.sleep(10);
+        SystemActions.sleep(60);
         SystemActions.killProcess("XLicProc.exe");
         SystemActions.killProcess("CoordMonitor.exe");
         isLicenseLoaded();
@@ -359,7 +359,7 @@ public class IbService implements IIBService {
                 previousLine = currentLine;
                 currentLine = scanner.nextLine();
                 if (currentLine.contains(StaticDataProvider.LogOutput.LOCAL)) {
-                    if (!currentLine.contains("LNK") && !previousLine.contains("PreBuild") && !previousLine.contains("PostBuild"))
+                    if (!currentLine.contains("LNK") && !previousLine.contains("PreBuild") && !previousLine.contains("PostBuild") && !previousLine.contains("CustomBuild"))
                         return false;
                 }
             }
