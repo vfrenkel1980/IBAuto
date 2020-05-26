@@ -10,6 +10,8 @@ public interface IVSUIService  {
 
     void performIbActionFromMenu(String action);
 
+    void performIbActionFromMenuVS(String action);
+
     void performIbActionFromMenuDontWaitForFinish(String action);
 
     void performIbActionFromPrjExplorer(String action,String type, String solutionName) throws Exception;

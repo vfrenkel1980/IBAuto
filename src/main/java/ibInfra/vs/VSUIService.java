@@ -1,6 +1,8 @@
 package ibInfra.vs;
 
 import com.aventstack.extentreports.Status;
+import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
+import frameworkInfra.sikuli.sikulimapping.VSElement.VSElements;
 import frameworkInfra.utils.AppiumActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
@@ -14,6 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
+import org.testng.Assert;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,6 +40,7 @@ public class VSUIService implements IVSUIService {
 
     private WindowsService winService = new WindowsService();
     private WindowsDriver driver;
+    private Screen screen = new Screen();
 
     public VSUIService(WindowsDriver driver){
         this.driver = driver;
@@ -128,7 +134,18 @@ public class VSUIService implements IVSUIService {
         SystemActions.sleep(3);
         winService.waitForProcessToFinish("buildsystem.exe");
     }
-
+    @Override
+    public void performIbActionFromMenuVS(String action){
+        test.log(Status.INFO, "Perform Action from menu VS");
+        try {
+            screen.wait(VSElements.incrediBuildBtn.similar((float) 0.9), 25).click();
+        } catch (FindFailed findFailed) {
+            test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
+            Assert.fail();
+        }
+        SystemActions.sleep(3);
+        winService.waitForProcessToFinish("buildsystem.exe");
+    }
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("IncrediBuild").click();
