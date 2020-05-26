@@ -32,7 +32,7 @@ import static frameworkInfra.Listeners.SuiteListener.test;
  */
 public class IBTCGTestTests extends UnitTestingTestBase {
 
-    private final String ERROR_MESSAGE_INTERNAL_ERROR = "[error]: Internal error: Unsupported gtest option '%s'";
+    private final String ERROR_MESSAGE_INTERNAL_ERROR = "[error]: Gtest flag '%s'";
 
     private IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
@@ -102,7 +102,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
      * @result{ - Build is succeeded.}
      */
 
-    
+
     @Test(testName = "GTest CPPSorter TestLevel=10 Test")
     public void gTestCPPSorterTestLevelTest10() throws InterruptedException {
         RegistryService.createRegValue(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "1");
@@ -211,7 +211,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest With Exception Thrown Test")
     public void gTestWithExceptionThrownTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_WITH_TEST_THAT_THROWS_AN_EXCEPTION);
-        Assert.assertEquals(exitCode, 1000001, "The test was expected to fail with Error code 1000001");
+        Assert.assertEquals(exitCode, 1, "The test was expected to fail with Error code 1000001");
     }
 
     /**
@@ -274,7 +274,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_EXECUTABLE_FAILS_ON_REMOTE_NOT_ON_LOCAL);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertEquals(result, "1000001", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
+            Assert.assertEquals(result, "1", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
         } catch (IOException e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         } finally {
@@ -388,7 +388,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
     @Test(testName = "GTest Invalid InputFile Multiple Executables Test")
     public void gTestInvalidInputFileMultipleExecutablesTest() {
         int exitCode = winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_MUTIPLE_EXECUTABLES_INVALID_INPUT_FILE);
-        Assert.assertEquals(exitCode, -3, "The test execution was expected to fail");
+        Assert.assertEquals(exitCode, -4, "The test execution was expected to fail");
     }
 
     /**
