@@ -134,18 +134,20 @@ public class VSUIService implements IVSUIService {
         SystemActions.sleep(3);
         winService.waitForProcessToFinish("buildsystem.exe");
     }
+
     @Override
-    public void performIbActionFromMenuVS(String action){
-        test.log(Status.INFO, "Perform Action from menu VS");
-        try {
-            screen.wait(VSElements.incrediBuildBtn.similar((float) 0.9), 25).click();
-        } catch (FindFailed findFailed) {
-            test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
-            Assert.fail();
-        }
-        SystemActions.sleep(3);
-        winService.waitForProcessToFinish("buildsystem.exe");
+    public void performIbActionFromMenuVS(String action) {
+            test.log(Status.INFO, "Perform Action from menu VS");
+            try {
+                screen.wait(VSElements.incrediBuildBtn.similar((float) 0.9), 25).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+            SystemActions.sleep(3);
+            winService.waitForProcessToFinish("buildsystem.exe");
     }
+
     @Override
     public void performIbActionFromMenuDontWaitForFinish(String action) {
         driver.findElementByName("IncrediBuild").click();
