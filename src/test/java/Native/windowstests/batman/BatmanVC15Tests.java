@@ -240,14 +240,14 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
-
-    @Test(testName = "AccountApplication - 2017 release|x64 - build" , groups = { "Build" })
-    public void accountApplication2017ReleaseX64Build(){
-        setRegistry("0", RegistryKeys.PREDICTED);
-        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X64_RELEASE, "%s"));
-        setRegistry("2", RegistryKeys.PREDICTED);
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+    // Not supported of Nintendo
+//    @Test(testName = "AccountApplication - 2017 release|x64 - build" , groups = { "Build" })
+//    public void accountApplication2017ReleaseX64Build(){
+//        setRegistry("0", RegistryKeys.PREDICTED);
+//        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.NINTENDO_AAA_X64_RELEASE, "%s"));
+//        setRegistry("2", RegistryKeys.PREDICTED);
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
 // Not supported of Nintendo
 //    @Test(testName = "AccountApplication - 2017 debug|win32 - build" , groups = { "Build" })
 //    public void accountApplication2017DebugX32Build(){
@@ -264,6 +264,7 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
+
 
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void changePSSDKVersionTo(String SDKVersion) {
