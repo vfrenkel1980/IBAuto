@@ -328,8 +328,9 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = null;
         File dashboard = null;
         try {
-            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST);
-            int exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
+            int exitCode=winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST);
+            Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+            exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
             Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
 
             String indexFilePath = System.getProperty("user.dir") + "\\reports\\index.html";
@@ -363,9 +364,9 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = null;
         File dashboard = null;
         try {
-            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST + " /testlevel=11");
-
-            int exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
+            int exitCode=winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT2_FRAMEWORK_ASSEMBLY_XML_RESULT_TEST + " /testlevel=11");
+            Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+            exitCode = winService.runCommandWaitForFinish("extent -i " + System.getProperty("user.dir") + "\\nunitres.xml -o reports/");
             Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
 
             String indexFilePath = System.getProperty("user.dir") + "\\reports\\index.html";
@@ -792,8 +793,9 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = null;
         File dashboard = null;
         try {
-            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
-            int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
+            int exitCode=winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST);
+            Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+            exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
             Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
             String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
             index = new File(indexFilePath);
@@ -828,9 +830,9 @@ public class IBTCNunitTests extends UnitTestingTestBase {
         File index = null;
         File dashboard = null;
         try {
-            winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
-
-            int exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
+            int exitCode=winService.runCommandWaitForFinish(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.NUNIT3_CONSOLE_RESULT_TEST + " /testlevel=5");
+            Assert.assertEquals(exitCode, 0, "The test execution failed with the exitcode " + exitCode);
+            exitCode = winService.runCommandWaitForFinish("extent -i " + Locations.QA_ROOT + "\\nunitres.xml -o " + Locations.QA_ROOT + "\\reports\\");
             Assert.assertEquals(exitCode, 0, "The test reporter execution failed with the exitcode " + exitCode);
             String indexFilePath = Locations.QA_ROOT + "\\reports\\index.html";
             index = new File(indexFilePath);
