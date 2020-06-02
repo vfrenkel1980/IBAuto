@@ -490,6 +490,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.changeEntInstallationLocation(Locations.DIFFERENT_ENT_INSTALLATION_DIRECTORY);
             installer.changeDashboardPort();
+            SystemActions.sleep(1200);
             installer.clickNext();
             installer.clickNext();
             installer.browseLicense();
