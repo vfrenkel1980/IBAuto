@@ -47,6 +47,6 @@ public class VmSimVC16Tests extends VmSimTestBase {
     public void checkWin10FastringAssignment(){
         winService.runCommandWaitForFinish(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_VMSIM.AUDACITY_X32_DEBUG
                 + " /out=" + Locations.OUTPUT_LOG_FILE + " /showagent /showcmd /showtime", ProjectsCommands.REBUILD));
-        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '" + WindowsMachines.WIN_INSIDER));
+        Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, "Agent '"));
     }
 }
