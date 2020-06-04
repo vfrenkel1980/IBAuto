@@ -239,6 +239,8 @@ public class StaticDataProvider {
             public static final String PROJECTVC10_CUSTOMSTEP_SUCCESS = IbLocations.BUILD_CONSOLE + "\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\ProjectVC10CustomStepSuccess.sln\"  /cfg=\"debug|win32\" /title=\"Project VC10 CustomStep Success\" /profile=\"C:\\QA\\Simulation\\projects\\ProjectVC10CustomStepSuccess\\eFWCompile.ib_profile.xml\"  /rebuild";
             public static final String XG_SAMPLE_WITH_RESPONSE_FILE = IbLocations.XGCONSOLE + " @" + Locations.QA_ROOT + "\\projects\\Misc\\xgConsoleSample\\responseXGSample.opt /showagent";
             public static final String XG_CONSOLE_FAILED_ON_REMOTE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\RemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\Misc\\RemoteFail\\profile.xml\" /title=\"FaileOnlyLocal: XG Console Failed On  remote\"";
+            public static final String XG_CONSOLE_FAILED_ON_REMOTE_AGENT_IS_BLACKLISTED = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\RemoteFail\\RemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\RemoteFail\\profile.xml\" /title=\"FaileOnlyLocal: Agent is Blacked-listed\" /log_warning /log=" + Locations.OUTPUT_LOG_FILE;
+            public static final String XG_CONSOLE_RANDOM_TASK_FAILING_ON_REMOTE = IbLocations.XGCONSOLE + " /command=\"" + Locations.QA_ROOT + "\\projects\\RemoteFail\\MainProcess.exe  " + Locations.QA_ROOT + "\\projects\\RemoteFail\\RandomRemoteFailProcess.exe 50 2000 2000\" /profile=\"" + Locations.QA_ROOT + "\\projects\\RemoteFail\\profile.xml\" /title=\"RandomFaileOnlyLocal: Agent is not Blacked-listed\" /log_warning /log=" + Locations.OUTPUT_LOG_FILE;
             public static final String TEST_SAMPLE = Locations.QA_ROOT + "\\TestSample\\RUNME.bat " + "%d " + "%s";
         }
 
@@ -824,6 +826,7 @@ public class StaticDataProvider {
         public static final String AUTO_PREDICTED_UPDATE = "AutomaticPredictedUpdate";
         public static final String MAX_CONCURRENT_PDBS = "MaxConcurrentPDBs";
         public static final String ONLY_FAIL_LOCALLY = "OnlyFailLocally";
+        public static final String ONLY_FAIL_LOCALLY_BLACKLIST = "OnlyFailLocallyBlackList";
         public static final String GUID = "{F7F636FF-0846-4E64-86F5-25C44E871D90}";
         public static final String INCREDICLOUDSECRET = "IncrediCloudSecret";
         public static final String INCREDICLOUDSITEURL = "IncrediCloudWebSiteURL";
@@ -833,6 +836,7 @@ public class StaticDataProvider {
         public static final String MAXWORKERS = "MaxWorkers";
         public static final String MINIDLELEVEL = "MinIdleLevel";
         public static final String SHOWCORESEMPLOYED = "ShowCoresEmployed";
+        public static final String MAXHELPERS = "MaxHelpers";
 
     }
 
