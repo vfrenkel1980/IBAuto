@@ -58,16 +58,16 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
     }
 
-    @Test(testName = "Exit Code Base Test 5")
-    public void exitCodeBaseTest5() {
-        setBuildServiceRegistry(RegistryKeys.MIN_LOCAL_CORES, "8");
-        setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "2");
-        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
-        SystemActions.sleep(2);
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
-        Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
-        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-    }
+//    @Test(testName = "Exit Code Base Test 5")
+//    public void exitCodeBaseTest5() {
+//        setBuildServiceRegistry(RegistryKeys.MIN_LOCAL_CORES, "8");
+//        setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "2");
+//        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
+//        SystemActions.sleep(2);
+//        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
+//        Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
+//        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+//    }
 
     /*------------------------------METHODS------------------------------*/
 
