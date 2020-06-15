@@ -680,10 +680,10 @@ public class IBUIService implements IIBUIService {
         @Override
         public void enableSchedulingAndVerifyIcon() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.EnableSchedulingCB.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.EnableSchedulingCB.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9), 25).click();
                 boolean objectExists = false;
                 if (screen.exists(IBSettings.DisabledTrayIcon, 15) != null)
                     objectExists = true;
@@ -697,8 +697,8 @@ public class IBUIService implements IIBUIService {
         @Override
         public void disableSchedulingAndVerifyIcon() {
             try {
-                screen.wait(IBSettings.DisableSchedulingCB.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.DisableSchedulingCB.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9), 25).click();
                 boolean objectExists = false;
                 if (screen.exists(IBSettings.TrayIcon.Green, 15) != null)
                     objectExists = true;
@@ -712,14 +712,14 @@ public class IBUIService implements IIBUIService {
         @Override
         public void isNotActiveScheduling() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.isNotActiveScheduling.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.isNotActiveScheduling.similar((float) 0.9), 25).click();
                 boolean objectExists = false;
                 if (screen.exists(IBSettings.isNotActiveScheduling, 15) != null)
                     objectExists = true;
                 Assert.assertTrue(objectExists, "Could not find SchedulingCB");
-                screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.OKButton.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable scheduling with error:" + findFailed.getMessage());
                 Assert.fail();
@@ -734,8 +734,8 @@ public class IBUIService implements IIBUIService {
             public void disableAsHelper() {
                 test.log(Status.INFO, "Disabling agent as helper");
                 try {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 15).rightClick();
+                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.9), 15).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to disable as helper, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -754,8 +754,8 @@ public class IBUIService implements IIBUIService {
             public void enableAsHelper() {
                 test.log(Status.INFO, "Enabling agent as helper");
                 try {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.EnableAsHelperMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 15).rightClick();
+                    screen.wait(CoordMonitor.EnableAsHelperMenu.similar((float) 0.9), 15).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to enable as helper, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -775,8 +775,8 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Unsubscribing agent as helper");
                 try {
                     SystemActions.sleep(5);
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 25).rightClick();
+                    screen.wait(CoordMonitor.UnsubscribeAgentMenu.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to unsubscribe agent, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -796,8 +796,8 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Subscribing agent as helper");
                 try {
                     SystemActions.sleep(5);
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 25).rightClick();
+                    screen.wait(CoordMonitor.SubscribeAgentMenu.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to subscribe agent, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -816,8 +816,8 @@ public class IBUIService implements IIBUIService {
             public void clickAllowRemoteAdministration() {
                 test.log(Status.INFO, "Clicking allow remote administration");
                 try {
-                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.8), 15).rightClick();
-                    screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.8), 15).click();
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 25).rightClick();
+                    screen.wait(CoordMonitor.AllowRemoteAdministrationMenu.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow remote administration, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -828,10 +828,10 @@ public class IBUIService implements IIBUIService {
             public void clickAllowEnableDisableAsHelper() {
                 test.log(Status.INFO, "Clicking allow Enable Disable as helper");
                 try {
-                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.97), 15).rightClick();
-                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.95),15).click();
+                    screen.wait(CoordMonitor.InitiatorFromList.similar((float) 0.9), 25).rightClick();
+                    screen.wait(CoordMonitor.AllowEnableDisableAsHelperMenu.similar((float) 0.95), 25).click();
+                    screen.wait(CoordMonitor.FileMenu.similar((float) 0.9), 15).click();
+                    screen.wait(CoordMonitor.ExitButton.similar((float) 0.9),15).click();
 
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to click allow Enable Disable as helper, failed with error: " + findFailed.getMessage());
@@ -867,10 +867,10 @@ public class IBUIService implements IIBUIService {
             public void pauseCloud() {
                 test.log(Status.INFO, "Pausing cloud");
                 try {
-                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).hover();
-                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.9), 25).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 25).hover();
+                    screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.9), 25).click();
+                    screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
