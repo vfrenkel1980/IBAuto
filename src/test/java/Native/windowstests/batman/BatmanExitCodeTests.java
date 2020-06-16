@@ -48,15 +48,15 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 103, "exitCodeBaseTest3 failed with return code " + returnCode);
     }
 
-    @Test(testName = "Exit Code Base Test 4")
-    public void exitCodeBaseTest4() {
-        setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
-        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
-        SystemActions.sleep(2);
-        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
-        Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
-        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-    }
+//    @Test(testName = "Exit Code Base Test 4")
+//    public void exitCodeBaseTest4() {
+//        setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
+//        winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
+//        SystemActions.sleep(2);
+//        int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
+//        Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
+//        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+//    }
 
 //    @Test(testName = "Exit Code Base Test 5")
 //    public void exitCodeBaseTest5() {
