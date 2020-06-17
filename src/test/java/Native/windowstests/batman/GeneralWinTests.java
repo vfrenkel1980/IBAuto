@@ -61,34 +61,38 @@ public class GeneralWinTests extends BatmanBCTestBase {
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold: "+output + " Expected= "+ MemoryThresholds._20K);
     }
 
-//    @Test(testName = "Verify BuildSystem Memory Usage During Build")
-//    public void verifyBuildSystemMemoryUsageDuringBuild() {
-//        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-//        SystemActions.sleep(20);
-//        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
-//        winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-//        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using: "+output + " Expected= "+ MemoryThresholds._200K);
-//    }
+    @Test(testName = "Verify BuildSystem Memory Usage During Build")
+    public void verifyBuildSystemMemoryUsageDuringBuild() {
+        winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+        SystemActions.sleep(20);
+        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
+        //winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+        SystemActions.sleep(20);
+        SystemActions.killProcess(Processes.BUILD_CONSOLE);
+        Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using: "+output + " Expected= "+ MemoryThresholds._200K);
+    }
 
-//    @Test(testName = "Verify Multi Initiator Assignment")
-//    public void verifyMultiInitiatorAssignment() {
-//        try {
-//            winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
-//            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
-//                    String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
-//            SystemActions.sleep(30);
-//            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
-//            SystemActions.sleep(5);
-//            boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
-//            Assert.assertTrue(isPresent, "No agent assigned to build");
-//        } catch (Exception e) {
-//            e.getMessage();
-//        } finally {
-//            winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-//            SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
-//            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
-//        }
-//    }
+    @Test(testName = "Verify Multi Initiator Assignment")
+    public void verifyMultiInitiatorAssignment() {
+        try {
+            winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+            winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
+                    String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
+            SystemActions.sleep(30);
+            winService.waitForProcessToFinishOnRemoteMachine(WindowsMachines.SECOND_INITIATOR, "Administrator", "4illumination", "buildconsole");
+            SystemActions.sleep(5);
+            boolean isPresent = Parser.doesFileContainString(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", LogOutput.AGENT);
+            Assert.assertTrue(isPresent, "No agent assigned to build");
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            //winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+            SystemActions.sleep(20);
+            SystemActions.killProcess(Processes.BUILD_CONSOLE);
+            SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
+            SystemActions.deleteFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt");
+        }
+    }
 
     @Test(testName = "Verify Predicted Disabled Build")
     public void verifyPredictedDisabledBuild() {
