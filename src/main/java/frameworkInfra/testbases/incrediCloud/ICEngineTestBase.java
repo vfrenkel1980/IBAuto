@@ -19,6 +19,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.TestBase;
 import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.Locations;
 import frameworkInfra.utils.StaticDataProvider.Processes;
 import frameworkInfra.utils.StaticDataProvider.RegistryKeys;
@@ -42,19 +43,28 @@ import static frameworkInfra.Listeners.SuiteListener.*;
 @Listeners(SuiteListener.class)
 public class ICEngineTestBase extends TestBase {
 
+    public static String TYPE;
+    public static CloudType CLOUD;
+    public static OnboardingType ONBOARDING_TYPE;
+
     public static String ENV = System.getProperty("incredicloudEnv");
-    public static String TYPE = System.getProperty("machineType");
-    public static CloudType CLOUD = CloudType.valueOf(System.getProperty("cloudtype"));
-    public static OnboardingType ONBOARDING_TYPE = (System.getProperty("onboardingType") == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(System.getProperty("onboardingType")));
+    //    public static String TYPE = System.getProperty("machineType");
+//    public static CloudType CLOUD = CloudType.valueOf(System.getProperty("cloudtype"));
+//    public static OnboardingType ONBOARDING_TYPE = (System.getProperty("onboardingType") == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(System.getProperty("onboardingType")));
     public static boolean IS_PRIVATE_NETWORK = (System.getProperty("isPVOn") == null ? false : Boolean.getBoolean(System.getProperty("isPVOn")));
     final protected String PROD_USER = "automation@incredicloudcs.onmicrosoft.com";
     final protected String LIMITED_USER = "automation@incredicloudcs.onmicrosoft.com";
     final public String COORDID = "Automation";
     final protected int POOL_SIZE = 4;
-    public int MACHINE_CORES = getMachineCores(TYPE);
+    //    public int MACHINE_CORES = getMachineCores(TYPE);
+//    final public int ON_PREM_CORES = 16;
+//    final public int GRID_CORES = POOL_SIZE * MACHINE_CORES + ON_PREM_CORES;
+//    final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
+    public int MACHINE_CORES;
     final public int ON_PREM_CORES = 16;
-    final public int GRID_CORES = POOL_SIZE * MACHINE_CORES + ON_PREM_CORES;
-    final public int POOL_CORES = POOL_SIZE * MACHINE_CORES;
+    public int GRID_CORES;
+    public int POOL_CORES;
+
     final public int PORT = 12345;
     final protected int TIMEOUT = 480;
     final protected int CORES_LIMIT = 60;
@@ -86,6 +96,10 @@ public class ICEngineTestBase extends TestBase {
         test = extent.createTest("Before Suite");
         // ibService.updateIB(IB_VERSION);
 
+        webServer = new WebServer(PORT);
+        serverThread = new Thread(webServer);
+        icService = new IncrediCloudService(COORDID);
+
         // retrieve Cloud configuration data
         configurationData = CloudUtils.getCloudConfigurationData();
 
@@ -111,8 +125,12 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @BeforeClass
-    public void beforeClass() {
-        isOnBoarding = false;
+    @Parameters({"machineType", "cloudtype", "onboardingType"})
+    public void beforeClass(String machineType, String cloudtype, String onboardingType) {
+        TYPE = machineType;
+        CLOUD = CloudType.valueOf(cloudtype);
+        ONBOARDING_TYPE = (onboardingType == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(onboardingType));
+        calculateCoresGrid();
         //SystemActions.sleep(600); //wait for the previous resource to be deleted
         test = extent.createTest("Before Class");
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/WebDrivers/chromedriver.exe");
@@ -190,6 +208,9 @@ public class ICEngineTestBase extends TestBase {
     @AfterClass
     public void afterClass() {
         try {
+            webServer.closeWebServer();
+            RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.INCREDICLOUDSECRET, "");
+            winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
             if (webDriver != null) {
                 webDriver.close();
             }
@@ -210,6 +231,12 @@ public class ICEngineTestBase extends TestBase {
 
 
     //METHODS
+    protected void calculateCoresGrid() {
+        MACHINE_CORES = getMachineCores(TYPE);
+        GRID_CORES = POOL_SIZE * MACHINE_CORES + ON_PREM_CORES;
+        POOL_CORES = POOL_SIZE * MACHINE_CORES;
+    }
+
     protected void startWebServerThread() {
         serverThread.start();
     }
@@ -269,9 +296,12 @@ public class ICEngineTestBase extends TestBase {
 
     private void deactivateCloud() {
         icService.deactivateCloud();
-        icService.waitForCloudStatus(CloudStatusType.COORDINATOR_IS_DEACTIVATING.getType());
-        icService.waitForCloudStatus(CloudStatusType.COORDINATOR_IS_DEACTIVATED.getType());
         isOnBoarding = false;
+        if (CLOUD.equals(CloudType.AZURE)) {
+            SystemActions.sleep(200);
+        } else if (CLOUD.equals(CloudType.AWS)) {
+            SystemActions.sleep(10);
+        }
     }
 
 }

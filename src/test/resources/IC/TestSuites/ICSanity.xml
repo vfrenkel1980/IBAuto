@@ -19,7 +19,7 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="ICAwsSanity">
+   <test name="ICAwsSanity">
         <parameter name="cloudtype" value="AWS"/>
         <parameter name="machineType" value="c4.large"/>
         <parameter name="onboardingType" value="BASIC_ONBOARDING"/>

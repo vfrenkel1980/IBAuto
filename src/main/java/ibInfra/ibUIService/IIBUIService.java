@@ -175,7 +175,7 @@ public interface IIBUIService {
 
         void deactivateCloud();
 
-        void verifyCloudDeactivated();
+        void verifyCloudIsDeactivating();
 
 
 

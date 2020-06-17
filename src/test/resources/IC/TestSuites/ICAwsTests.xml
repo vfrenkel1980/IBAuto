@@ -9,11 +9,13 @@
 
     <!--  BasicOnboarding, LowBoarding, Private network(in sanity?), Split boarding  -->
     <test name="ICHighPermissions">
-        <parameter name="onboardingType" value="BasicOnboarding"/>
+        <parameter name="cloudtype" value="AWS"/>
+        <parameter name="machineType" value="c4.large"/>
+        <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
         <classes>
             <class name ="IncrediCloud.ICRegressionTests" />
-            <class name ="IncrediCloud.ICDisableEnableTests" />
-            <class name ="IncrediCloud.ICUpdateTests" />
+<!--            <class name ="IncrediCloud.ICDisableEnableTests" />-->
+<!--            <class name ="IncrediCloud.ICUpdateTests" />-->
         </classes>
     </test>
 

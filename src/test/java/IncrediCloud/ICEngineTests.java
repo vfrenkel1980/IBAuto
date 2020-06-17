@@ -322,7 +322,7 @@ public class ICEngineTests extends ICEngineTestBase {
     @Test(testName = "Deactivate Cloud", dependsOnMethods = { "enableCloudAndCreateNewPool"})
     public void deactivateCloud(){
         coordinator.deactivateCloud();
-        coordinator.verifyCloudDeactivated();
+        coordinator.verifyCloudIsDeactivating();
         icService.getCloudStatus();
         winService.runCommandDontWaitForTermination(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
         SystemActions.sleep(120);

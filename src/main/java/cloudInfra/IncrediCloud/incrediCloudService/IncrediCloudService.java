@@ -20,7 +20,7 @@ import static io.restassured.RestAssured.given;
 
 public class IncrediCloudService implements IIncrediCloudService {
 
-//    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2Nlc3NLZXlJZCI6IkFTSUE0QkhJTzJKQkxUVDM3SlhHIiwiU2VjcmV0QWNjZXNzS2V5IjoiY3BMdzVJTDRVUUZYNERKVTNsTGxvV1kwMTE5aGZ2NVpnUENBMEVXMCIsIlNlc3Npb25Ub2tlbiI6IkZ3b0daWEl2WVhkekVKUC8vLy8vLy8vLy93RWFEQ2NZWjFLR3lDUDIxbXo1SHlLd0FUbHlwS1pXVEx4SGZ2ajJXU01rWG5hSGdSNmpaV2YrNFpnQ2o2dnNPOFY3YUhJNUluRmdBQzl2bGpKWFVpRDVHV0lDeFhzc0hHZk5WUHg4bVlTaGpBTFo1T05UOFhvK01jSUNTSFhGZ3hycjQrZ3V3TGRzbEQ2RkxrNDlJWGphTUM5UzQ2bFJJZjhHejRqeUN6ZlJicHBnOTc5UjEvRVF0bCtIYmhUb3UvOFVaZ2JhQWRQa3BYRlN2R1FQRkJCdmFUdmRDeXowOHM3N0ZlZEJSRWlmWFVpakJkQ09JTVdzcFY5bDlUZ2ZqNlNES0lQUXB2UUZNaTJ3K2xpWnhUd2Z1b2Jwd0dSc1ZubGZRZWNOWTZsbkRXYkpRMWZyVjhvRmladHFGRmJWaUc1STBYUUFvZ2c9IiwiRXhwaXJhdGlvbiI6IjIwMjAtMDQtMDVUMTA6NDI6MjcuMDAwWiIsIkV4dGVybmFsSWQiOiI3YmY1YTg5MC03NzFmLTExZWEtYWJmNy1lM2IzZjI5OGRiZTMiLCJpYXQiOjE1ODYwNzk3NDd9.VGQPF9YlriBkaRC6wSDFdU3dBU0V9n2XoG-IJEAv0a8";
+    //    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2Nlc3NLZXlJZCI6IkFTSUE0QkhJTzJKQkxUVDM3SlhHIiwiU2VjcmV0QWNjZXNzS2V5IjoiY3BMdzVJTDRVUUZYNERKVTNsTGxvV1kwMTE5aGZ2NVpnUENBMEVXMCIsIlNlc3Npb25Ub2tlbiI6IkZ3b0daWEl2WVhkekVKUC8vLy8vLy8vLy93RWFEQ2NZWjFLR3lDUDIxbXo1SHlLd0FUbHlwS1pXVEx4SGZ2ajJXU01rWG5hSGdSNmpaV2YrNFpnQ2o2dnNPOFY3YUhJNUluRmdBQzl2bGpKWFVpRDVHV0lDeFhzc0hHZk5WUHg4bVlTaGpBTFo1T05UOFhvK01jSUNTSFhGZ3hycjQrZ3V3TGRzbEQ2RkxrNDlJWGphTUM5UzQ2bFJJZjhHejRqeUN6ZlJicHBnOTc5UjEvRVF0bCtIYmhUb3UvOFVaZ2JhQWRQa3BYRlN2R1FQRkJCdmFUdmRDeXowOHM3N0ZlZEJSRWlmWFVpakJkQ09JTVdzcFY5bDlUZ2ZqNlNES0lQUXB2UUZNaTJ3K2xpWnhUd2Z1b2Jwd0dSc1ZubGZRZWNOWTZsbkRXYkpRMWZyVjhvRmladHFGRmJWaUc1STBYUUFvZ2c9IiwiRXhwaXJhdGlvbiI6IjIwMjAtMDQtMDVUMTA6NDI6MjcuMDAwWiIsIkV4dGVybmFsSWQiOiI3YmY1YTg5MC03NzFmLTExZWEtYWJmNy1lM2IzZjI5OGRiZTMiLCJpYXQiOjE1ODYwNzk3NDd9.VGQPF9YlriBkaRC6wSDFdU3dBU0V9n2XoG-IJEAv0a8";
 //    private String coordId = "Automation";
 //    private String secret = "ZjhiNmZlZDktZmFjYi00MDcxLTk5YTQtMWFmYzcyMzRhZGFm";
     private String token;
@@ -180,19 +180,25 @@ public class IncrediCloudService implements IIncrediCloudService {
     }
 
     @Override
-    public void waitForCloudStatus(String status) {
+    public boolean waitForCloudStatus(String status) {
         int time = 0;
-        int wait = 900;
-        refreshToken();
+        int wait = 500;
+//        try {
+//            refreshToken();
+//        } catch (Exception e) {
+//            return true;
+//        }
+
         while (time != wait) {
             if (getCloudStatus().equals(status)) {
                 test.log(Status.INFO, "Cloud is in " + status + " status");
-                break;
+                return true;
             }
             time += 10;
             SystemActions.sleep(10);
         }
         test.log(Status.INFO, "After waiting 15 minutes, failed to get " + status + " status");
+        return false;
     }
 
     @Override
@@ -242,7 +248,7 @@ public class IncrediCloudService implements IIncrediCloudService {
         Response response = given().
                 header("Authorization", "bearer " + token).
                 when().
-                get("/provision/getCoordMachineNames/" + coordId ).
+                get("/provision/getCoordMachineNames/" + coordId).
                 peek().
                 then().
                 extract().

@@ -920,7 +920,7 @@ public class IBUIService implements IIBUIService {
             }
 
             @Override
-            public void verifyCloudDeactivated() {
+            public void verifyCloudIsDeactivating() {
                 test.log(Status.INFO, "Verifying cloud is deactivated");
                 try {
                     screen.wait(CoordMonitor.DeactivatingButton.similar((float) 0.95), 60);

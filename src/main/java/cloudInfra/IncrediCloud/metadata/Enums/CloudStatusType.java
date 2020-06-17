@@ -1,8 +1,12 @@
 package cloudInfra.IncrediCloud.metadata.Enums;
 
 public enum CloudStatusType {
-    COORDINATOR_IS_DEACTIVATING("Coordinator is Deactivating"),
-    COORDINATOR_IS_DEACTIVATED("Coordinator does not exist");
+    NONE(-1, "None"),
+    IS_DEACTIVATED(0, "Coordinator does not exist"),
+    CLOUD_IS_ENABLED(1, "OK"),
+    CREATING_POOL(2, "Creating pool - please wait"),
+    IS_DEACTIVATING( 3,"Coordinator is Deactivating");
+
     private String type;
 
     public String getType() {
@@ -13,7 +17,7 @@ public enum CloudStatusType {
         type = _type;
     }
 
-    CloudStatusType(String type) {
+    CloudStatusType(int status, String type) {
         setType(type);
     }
 

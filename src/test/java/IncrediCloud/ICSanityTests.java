@@ -1,13 +1,13 @@
 package IncrediCloud;
 
+import cloudInfra.IncrediCloud.metadata.Enums.CloudStatusType;
 import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.SystemActions;
+import org.openqa.selenium.Point;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.IC_COORDINATOR;
 
@@ -24,16 +24,19 @@ public class ICSanityTests extends ICEngineTestBase {
         cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
+        eventWebDriver.manage().window().setPosition(new Point(-2000, 0));
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.COORDMONITOR);
         icService.setSecret(webServer.secret);
         icService.setSecretInRegistry();
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
-        icService.loginToCloud();
+
         isOnBoarding = true;
+        icService.loginToCloud();
         Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
 
-//        if (CLOUD.equals(CloudType.AZURE)) {
-//            verifyVirtualMachinesInfo();
-//        }
+        if (CLOUD.equals(CloudType.AZURE)) {
+            verifyVirtualMachinesInfo();
+        }
     }
 
 
@@ -54,23 +57,31 @@ public class ICSanityTests extends ICEngineTestBase {
         Assert.assertEquals(machinesInPool, POOL_SIZE, "Number of machines in pool is different then original pool size");
     }
 
-//    /**
-//     * @test deactivate cloud and perform a build<br>
-//     * @steps{ - deactivate cloud using sikuli
-//     * - start a build
-//     * }
-//     * @result{ - no cloud machines should participate in build}
-//     */
-//    @Test(testName = "Deactivate Cloud", dependsOnMethods = {"runBuildAndVerifyNumberOfParticipatingMachinesIsEqualToPoolSize"})
-//    public void deactivateCloud() {
-//        coordinator.deactivateCloud();
-//        coordinator.verifyCloudDeactivated();
-//        icService.getCloudStatus();
-//        isOnBoarding = false;
-//        winService.runCommandDontWaitForTermination(String.format(StaticDataProvider.ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "180000"));
-//        SystemActions.sleep(120);
-//        int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
-//        winService.waitForProcessToFinish(StaticDataProvider.Processes.BUILDSYSTEM);
-//        Assert.assertEquals(machinesParticipatingInBuild, 1, "More than one machine are participating in build.");
-//    }
+    /**
+     * @test deactivate cloud and perform a build<br>
+     * @steps{ - deactivate cloud using sikuli
+     * - start a build
+     * }
+     * @result{ - no cloud machines should participate in build}
+     */
+    @Test(testName = "Deactivate Cloud", dependsOnMethods = {"runBuildAndVerifyNumberOfParticipatingMachinesIsEqualToPoolSize"})
+    public void deactivateCloud() {
+        //
+        coordinator.deactivateCloud();
+        coordinator.verifyCloudIsDeactivating();
+        try {
+            if (icService.waitForCloudStatus(CloudStatusType.IS_DEACTIVATED.getType())) {
+                isOnBoarding = false;
+            } else {
+                Assert.fail("The Cloud is still up! Deactivation has failed!");
+            }
+        } catch (Exception e) {
+            isOnBoarding = false;
+        }
+        winService.runCommandDontWaitForTermination(String.format(StaticDataProvider.ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, GRID_CORES, "120000"));
+        SystemActions.sleep(40);
+        int machinesParticipatingInBuild = ibService.getNumberOfMachinesParticipateInBuild(IC_COORDINATOR);
+        winService.waitForProcessToFinish(StaticDataProvider.Processes.BUILDSYSTEM);
+        Assert.assertEquals(machinesParticipatingInBuild, 1, "More than one machine are participating in build.");
+    }
 }

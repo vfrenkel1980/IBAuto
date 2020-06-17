@@ -22,7 +22,7 @@ public interface IIncrediCloudService {
 
     String getCloudStatus();
 
-    void waitForCloudStatus(String status);
+    boolean waitForCloudStatus(String status);
 
     ArrayList<String> getVirtualMachinesNames();
 
