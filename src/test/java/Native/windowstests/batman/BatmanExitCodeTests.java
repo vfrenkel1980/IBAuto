@@ -30,9 +30,11 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     @Test(testName = "Exit Code Base Test 2")
     public void exitCodeBaseTest2() {
         String result = "";
+        log.info("Starting project command  runCommandDontWaitForTermination " +  " " + ProjectsCommands.EXITCODEBASE.PROJECTVC15_DEBUG_X64);
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_DEBUG_X64);
         SystemActions.sleep(5);
         try {
+            log.info("Starting kill process BUILD_CONSOLE" +  " " + Processes.BUILD_CONSOLE);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.sleep(10);
             result = ibService.findValueInPacketLog("ExitCode ");
@@ -51,27 +53,32 @@ public class BatmanExitCodeTests extends BatmanBCTestBase {
     @Test(testName = "Exit Code Base Test 4")
     public void exitCodeBaseTest4() {
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "1");
+        log.info("Starting project command runCommandDontWaitForTermination" +  " " + ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         SystemActions.sleep(2);
+        log.info("Starting project command runCommandWaitForFinish" +  " " + ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
-        SystemActions.sleep(20);
-        SystemActions.killProcess(Processes.BUILD_CONSOLE);
         Assert.assertTrue(returnCode == -4, "exitCodeBaseTest4 failed with return code " + returnCode);
         //winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+        SystemActions.sleep(20);
+        log.info("Starting kill process BUILD_CONSOLE" +  " " + Processes.BUILD_CONSOLE);
+        SystemActions.killProcess(Processes.BUILD_CONSOLE);
     }
 
     @Test(testName = "Exit Code Base Test 5")
     public void exitCodeBaseTest5() {
         setBuildServiceRegistry(RegistryKeys.MIN_LOCAL_CORES, "8");
         setBuildServiceRegistry(RegistryKeys.MAX_CONCURRENT_BUILDS, "2");
+        log.info("Starting project command runCommandDontWaitForTermination" +  " " + ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         winService.runCommandDontWaitForTermination(ProjectsCommands.EXITCODEBASE.PROJECTVC10_DEBUG_WIN32);
         SystemActions.sleep(2);
+        log.info("Starting project command runCommandWaitForFinish" +  " " + ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
         int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.EXITCODEBASE.PROJECTVC15_RELEASE_X64);
-        SystemActions.sleep(20);
-        SystemActions.killProcess(Processes.BUILD_CONSOLE);
         Assert.assertTrue(returnCode == 10005, "exitCodeBaseTest5 failed with return code " + returnCode);
         // winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
-
+        SystemActions.sleep(20);
+        log.info("Starting kill process  BUILD_CONSOLE" +  " " + Processes.BUILD_CONSOLE);
+        SystemActions.killProcess(Processes.BUILD_CONSOLE);
     }
 
     /*------------------------------METHODS------------------------------*/

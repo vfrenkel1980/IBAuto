@@ -63,11 +63,14 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify BuildSystem Memory Usage During Build")
     public void verifyBuildSystemMemoryUsageDuringBuild() {
+        log.info("Starting project command runCommandDontWaitForTermination" +  " " + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
         SystemActions.sleep(20);
+        log.info("Starting project command runCommandGetOutput" +  " " + String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
         String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._200K));
         //winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
         SystemActions.sleep(20);
+        log.info("Starting kill process BUILD_CONSOLE" +  " " + Processes.BUILD_CONSOLE);
         SystemActions.killProcess(Processes.BUILD_CONSOLE);
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildSystem.exe"), "BuildSystem  has exceeded the memory threshold using: "+output + " Expected= "+ MemoryThresholds._200K);
     }
@@ -75,7 +78,12 @@ public class GeneralWinTests extends BatmanBCTestBase {
     @Test(testName = "Verify Multi Initiator Assignment")
     public void verifyMultiInitiatorAssignment() {
         try {
+            log.info("Starting project command runCommandDontWaitForTermination" +  " " + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
             winService.runCommandDontWaitForTermination(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.AUDACITY_X32_DEBUG, ProjectsCommands.REBUILD));
+
+            log.info("Starting project command runCommandDontWaitForTermination" +  " " + Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
+                    String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
+
             winService.runCommandDontWaitForTermination(Processes.PSEXEC + " \\\\" + WindowsMachines.SECOND_INITIATOR + " -u Administrator -p 4illumination -i 0 " +
                     String.format("\"C:\\Program Files\\IncrediBuild\\buildconsole.exe\" " + ProjectsCommands.VC15_BATMAN.AUDACITY_SECOND_INITIATOR, ProjectsCommands.REBUILD));
             SystemActions.sleep(30);
@@ -87,6 +95,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
             e.getMessage();
         } finally {
             //winService.waitForProcessToFinish(Processes.BUILD_CONSOLE);
+            log.info("Starting kill process BUILD_CONSOLE" +  " " + Processes.BUILD_CONSOLE);
             SystemActions.sleep(20);
             SystemActions.killProcess(Processes.BUILD_CONSOLE);
             SystemActions.copyFile(Locations.SECOND_INITIATOR_LOG_PATH + "buildlog.txt", Locations.QA_ROOT + "\\logs\\for_investigation\\buildlog.txt");
