@@ -138,7 +138,7 @@ public class IncrediCloudService implements IIncrediCloudService {
     @Override
     public boolean waitForDeliveredMachines(int numOfMachines) {
         int time = 0;
-        int wait = 900;
+        int wait = 1000;
         refreshToken();
         while (time != wait) {
             if (getStatusQueue(true) == numOfMachines)
