@@ -114,7 +114,7 @@ public class IBTCGTestTests extends UnitTestingTestBase {
         String output = winService.runCommandGetOutput(IbLocations.IBTESTCONSOLE + ProjectsCommands.TESTING_ROBIN.GTEST_CPPSORTER_TEST + " /testlevel=" + CoreInUse);
         int actualNumOfCoresInUse = SystemActions.extractNumberFromStringInText(output, CORES_IN_USE);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", StaticDataProvider.RegistryKeys.SHOWCORESEMPLOYED, "0");
-        Assert.assertTrue(actualNumOfCoresInUse > 8, "The number of cores in use is not as expected!");
+        Assert.assertTrue(actualNumOfCoresInUse >= 8, "The number of cores in use is not as expected!");
     }
 
 
