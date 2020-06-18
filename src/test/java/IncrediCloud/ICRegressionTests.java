@@ -1,5 +1,6 @@
 package IncrediCloud;
 
+import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import com.amazonaws.services.dynamodbv2.xspec.B;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider;
@@ -7,6 +8,7 @@ import frameworkInfra.utils.StaticDataProvider.Processes;
 import frameworkInfra.utils.StaticDataProvider.ProjectsCommands;
 import frameworkInfra.utils.StaticDataProvider.WindowsMachines;
 import frameworkInfra.utils.SystemActions;
+import org.openqa.selenium.Point;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,18 +24,24 @@ public class ICRegressionTests extends ICEngineTestBase {
 
     @Test(testName = "performOnboarding")
     protected void performOnboarding() {
-//        startWebServerThread();
-//        onboardingPageObject.clickTryIncredicloud();
-//        cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
-//        onboardingPageObject.performOnboarding(onboardingPage);
-//        waitForWebServerResponse();
-//        icService.setSecret(webServer.secret);
-//        icService.setSecretInRegistry();
-//        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
-        icService.loginToCloud();
-        //  Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
+        startWebServerThread();
+        onboardingPageObject.clickTryIncredicloud();
+        cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
+        onboardingPageObject.performOnboarding(onboardingPage);
+        waitForWebServerResponse();
+        eventWebDriver.manage().window().setPosition(new Point(-2000, 0));
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.COORDMONITOR);
+        icService.setSecret(webServer.secret);
+        icService.setSecretInRegistry();
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+
         isOnBoarding = true;
-        //verifyVirtualMachinesInfo();
+        icService.loginToCloud();
+        Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
+
+        if (CLOUD.equals(CloudType.AZURE)) {
+            verifyVirtualMachinesInfo();
+        }
     }
 
 
