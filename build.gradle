@@ -51,6 +51,8 @@ def UnitTesting = project.hasProperty("UnitTesting")
 def ICEngine = project.hasProperty("ICEngine") // at the beginning when all tests: sanity, regression and enable/disable run as one suite
 def ICSanity = project.hasProperty("ICSanity")
 def ICRegression = project.hasProperty("ICRegression")
+def ICAwsRegression = project.hasProperty("ICAwsRegression")
+def ICAzureRegression = project.hasProperty("ICAzureRegression")
 def ICDisableEnable = project.hasProperty("ICDisableEnable")
 def ICUpdate = project.hasProperty("ICUpdate")
 def ICOnboarding = project.hasProperty("ICOnboarding")
@@ -273,6 +275,18 @@ test {
             suites "src/test/resources/IC/TestSuites/ICSanity.xml"
         }
         
+        if (ICRegression) {
+            suites "src/test/resources/ICRegression.xml"
+        }
+
+        if (ICAwsRegression) {
+            suites "src/test/resources/IC/TestSuites/ICAwsRegression.xml"
+        }
+
+        if (ICAzureRegression) {
+            suites "src/test/resources/IC/TestSuites/ICAzureRegression.xml"
+        }
+
         if (ICRegression) {
             suites "src/test/resources/ICRegression.xml"
         }

@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="ICSanity"  >
+<suite name="ICSanity">
 
-<!--    Existing parameters:
-    ICSanity
-    -incredicloudEnv="dev"
-    machineType="D2"
-    ibVersion="Latest"
-    cloudtype="azure"
-    new:
-     isPVOn="true"
-     onboardingType=BasicOnboarding, LowBoarding, SplitBoarding
--->
-<!--    <parameter name="incredicloudEnv" value="dev"/>-->
-<!--    <parameter name="ibVersion" value="Latest"/>-->
+    <!--    Existing parameters:
+        ICSanity
+        -incredicloudEnv="dev"
+        machineType="D2"
+        ibVersion="Latest"
+        cloudType="azure"
+        new:
+         isPVOn="true"
+         onboardingType=BasicOnboarding, LowBoarding, SplitBoarding
+    -->
+    <!--    <parameter name="incredicloudEnv" value="dev"/>-->
+    <!--    <parameter name="ibVersion" value="Latest"/>-->
 
     <listeners>
-        <listener class-name="frameworkInfra.Listeners.TestListener" />
+        <listener class-name="frameworkInfra.Listeners.TestListener"/>
     </listeners>
 
-   <test name="ICAwsSanity">
-        <parameter name="cloudtype" value="AWS"/>
+    <test name="ICAwsSanity">
+        <parameter name="cloudType" value="AWS"/>
         <parameter name="machineType" value="c4.large"/>
         <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
         <classes>
-            <class name ="IncrediCloud.ICSanityTests" />
+            <class name="IncrediCloud.ICSanityTests"/>
         </classes>
     </test>
     <test name="ICAzureSanity">
-        <parameter name="cloudtype" value="AZURE"/>
-    <parameter name="machineType" value="D2"/>
+        <parameter name="cloudType" value="AZURE"/>
+        <parameter name="machineType" value="D2"/>
         <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
         <classes>
-            <class name ="IncrediCloud.ICSanityTests" />
+            <class name="IncrediCloud.ICSanityTests"/>
         </classes>
     </test>
 

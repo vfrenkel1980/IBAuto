@@ -125,10 +125,10 @@ public class ICEngineTestBase extends TestBase {
     }
 
     @BeforeClass
-    @Parameters({"machineType", "cloudtype", "onboardingType"})
-    public void beforeClass(String machineType, String cloudtype, String onboardingType) {
+    @Parameters({"machineType", "cloudType", "onboardingType"})
+    public void beforeClass(String machineType, String cloudType, String onboardingType) {
         TYPE = machineType;
-        CLOUD = CloudType.valueOf(cloudtype);
+        CLOUD = CloudType.valueOf(cloudType);
         ONBOARDING_TYPE = (onboardingType == null ? OnboardingType.BASIC_ONBOARDING : OnboardingType.valueOf(onboardingType));
         calculateCoresGrid();
         //SystemActions.sleep(600); //wait for the previous resource to be deleted
