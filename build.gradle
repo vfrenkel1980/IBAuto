@@ -267,38 +267,29 @@ test {
             suites "src/test/resources/AzurePerformance.xml"
         }
 
+    // Cloud    
+        if (ICSanity) {
+            suites "src/test/resources/IC/TestSuites/ICSanity.xml"
+        }      
+        if (ICAwsRegression) {
+            suites "src/test/resources/IC/TestSuites/Regression/Aws/ICAwsRegression.xml"
+        }
+        if (ICAzureRegression) {
+            suites "src/test/resources/IC/TestSuites/Regression/Azure/ICAzureRegression.xml"
+        }
+   // Deprecated
         if (ICEngine) {
             suites "src/test/resources/ICEngine.xml"
         }
-
-        if (ICSanity) {
-            suites "src/test/resources/IC/TestSuites/ICSanity.xml"
-        }
-        
         if (ICRegression) {
             suites "src/test/resources/ICRegression.xml"
         }
-
-        if (ICAwsRegression) {
-            suites "src/test/resources/IC/TestSuites/ICAwsRegression.xml"
-        }
-
-        if (ICAzureRegression) {
-            suites "src/test/resources/IC/TestSuites/ICAzureRegression.xml"
-        }
-
-        if (ICRegression) {
-            suites "src/test/resources/ICRegression.xml"
-        }
-
         if (ICDisableEnable) {
             suites "src/test/resources/ICDisableEnable.xml"
         }
-
         if (ICUpdate) {
             suites "src/test/resources/ICUpdate.xml"
         }
-
         if (ICOnboarding) {
             suites "src/test/resources/ICOnboarding.xml"
         }

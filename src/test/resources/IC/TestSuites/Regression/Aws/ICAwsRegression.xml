@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ICAwsRegression">
+    <!--    <parameter name="Env" value="DEV"/>-->
+    <!--    <parameter name="Cloud" value="Aws"/>-->
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener"/>
+    </listeners>
+
+    <!--     BasicOnboarding, LowBoarding, Private network(in sanity?), Split boarding-->
+    <test name="ICHighPermissions">
+        <parameter name="cloudType" value="AWS"/>
+        <parameter name="machineType" value="c4.large"/>
+        <parameter name="onboardingType" value="BASIC_ONBOARDING"/>
+        <classes>
+            <class name="IncrediCloud.ICRegressionTests"/>
+            <!--                <class name ="IncrediCloud.ICDisableEnableTests" />-->
+            <!--            <class name ="IncrediCloud.ICUpdateTests" />-->
+        </classes>
+    </test>
+    <test name="ICLowPermissions">
+        <parameter name="cloudType" value="AWS"/>
+        <parameter name="machineType" value="c4.large"/>
+        <parameter name="onboardingType" value="LOW_ONBOARDING"/>
+        <classes>
+            <class name="IncrediCloud.ICSanityTests"/>
+        </classes>
+    </test>
+
+</suite>

@@ -66,9 +66,9 @@ public class ICSanityTests extends ICEngineTestBase {
      */
     @Test(testName = "Deactivate Cloud", dependsOnMethods = {"runBuildAndVerifyNumberOfParticipatingMachinesIsEqualToPoolSize"})
     public void deactivateCloud() {
-        //
-        coordinator.deactivateCloud();
-        coordinator.verifyCloudIsDeactivating();
+        icService.deactivateCloud();
+//        coordinator.deactivateCloud();
+//        coordinator.verifyCloudIsDeactivating();
         try {
             if (icService.waitForCloudStatus(CloudStatusType.IS_DEACTIVATED.getType())) {
                 isOnBoarding = false;

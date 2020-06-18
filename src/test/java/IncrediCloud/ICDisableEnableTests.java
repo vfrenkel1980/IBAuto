@@ -1,9 +1,11 @@
 package IncrediCloud;
 
+import cloudInfra.IncrediCloud.metadata.Enums.CloudType;
 import frameworkInfra.testbases.incrediCloud.ICEngineTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
+import org.openqa.selenium.Point;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,13 +26,19 @@ public class ICDisableEnableTests extends ICEngineTestBase {
         cloudRegistrationPageObject.selectUser(PROD_USER, ONBOARDING_TYPE);
         onboardingPageObject.performOnboarding(onboardingPage);
         waitForWebServerResponse();
+        eventWebDriver.manage().window().setPosition(new Point(-2000, 0));
+        winService.runCommandDontWaitForTermination(StaticDataProvider.IbLocations.COORDMONITOR);
         icService.setSecret(webServer.secret);
         icService.setSecretInRegistry();
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+
+        isOnBoarding = true;
         icService.loginToCloud();
         Assert.assertTrue(icService.waitForDeliveredMachines(POOL_SIZE), "Number of delivered machines is not equal to " + POOL_SIZE);
-        isOnBoarding = true;
-        verifyVirtualMachinesInfo();
+
+        if (CLOUD.equals(CloudType.AZURE)) {
+            verifyVirtualMachinesInfo();
+        }
     }
 
     /**
