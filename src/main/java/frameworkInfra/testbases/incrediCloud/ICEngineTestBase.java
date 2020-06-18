@@ -93,6 +93,7 @@ public class ICEngineTestBase extends TestBase {
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
+        SystemActions.sleep(10);
         test = extent.createTest("Before Suite");
         // ibService.updateIB(IB_VERSION);
 
