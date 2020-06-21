@@ -1,7 +1,12 @@
 package ibInfra.ibUIService;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.amazonaws.services.s3.model.InstructionFileId;
 import com.aventstack.extentreports.Status;
+import com.sun.jna.platform.win32.BaseTSD;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinUser;
 import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
 import frameworkInfra.sikuli.sikulimapping.IBInstaller.IBInstaller;
 import frameworkInfra.sikuli.sikulimapping.IBMonitor.Monitor;
@@ -17,6 +22,7 @@ import org.sikuli.script.Screen;
 import org.testng.Assert;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
@@ -26,6 +32,7 @@ public class IBUIService implements IIBUIService {
     private WindowsService winService = new WindowsService();
     private Screen screen = new Screen();
 
+    WinUser.INPUT input = new WinUser.INPUT();
     /**
      * start the IB ui installer
      *
@@ -147,8 +154,10 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeInstallationPath(String path) throws FindFailed {
             test.log(Status.INFO, "Changing installation path to: " + path);
-            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.5), 25).click();
-            screen.type(path);
+            screen.wait(IBInstaller.InstallationPathTB.similar((float) 0.9), 25).click();
+            int pathLen = path.length();
+            for (int i=0; i< pathLen ; i++ )
+                pressAKey(path.charAt(i));
         }
 
         @Override
@@ -930,6 +939,55 @@ public class IBUIService implements IIBUIService {
                 }
             }
         }
+    /*-------------------------------METHODS-------------------------------*/
+    public void pressAKey( int asciiChar)
+    {
+        WinUser.INPUT input = new WinUser.INPUT();
+        input.type = new WinDef.DWORD( WinUser.INPUT.INPUT_KEYBOARD );
+        input.input.setType("ki");
+        input.input.ki.wScan = new WinDef.WORD( 0 );
+        input.input.ki.time = new WinDef.DWORD( 0 );
+        input.input.ki.dwExtraInfo = new BaseTSD.ULONG_PTR( 0 );
+
+        int keyCode = asciiChar;
+        boolean pressShift = false;
+
+        if ( asciiChar > 96 && asciiChar < 123 ) //small letters, need to reduce 32
+            keyCode = asciiChar - 32;
+        if (asciiChar == 73)
+        { keyCode = 20; }//CapsLock
+
+        if (asciiChar == 58 ) // colon  ':'
+        {
+            pressShift = true;
+            keyCode = 186;
+        }
+        if (asciiChar == 92) //backslash
+            keyCode = 220;
+
+        if (pressShift) {
+            input.input.ki.wVk = new WinDef.WORD(16); //shift
+            input.input.ki.dwFlags = new WinDef.DWORD(0);  // keydown
+            User32.INSTANCE.SendInput(new WinDef.DWORD(1), (WinUser.INPUT[]) input.toArray(1), input.size());
+        }
+
+        input.input.ki.wVk = new WinDef.WORD(keyCode);
+        input.input.ki.dwFlags = new WinDef.DWORD( 0 );  // keydown
+        User32.INSTANCE.SendInput( new WinDef.DWORD( 1 ), ( WinUser.INPUT[] ) input.toArray( 1 ), input.size() );
+
+
+        input.input.ki.wVk = new WinDef.WORD(keyCode);
+        input.input.ki.dwFlags = new WinDef.DWORD( 2 );  // keyup
+
+        User32.INSTANCE.SendInput( new WinDef.DWORD( 1 ), ( WinUser.INPUT[] ) input.toArray( 1 ), input.size() );
+
+        if (pressShift )
+        {
+            input.input.ki.wVk = new WinDef.WORD(16); //shift
+            input.input.ki.dwFlags = new WinDef.DWORD( 2 );  // keyup
+            User32.INSTANCE.SendInput( new WinDef.DWORD( 1 ), ( WinUser.INPUT[] ) input.toArray( 1 ), input.size() );
+        }
+    }
 
     }
 

@@ -66,7 +66,7 @@ public class StaticDataProvider {
         public static final String LICENSE_TEST_PROJECTS = "C:\\LicenseTests_projects";
         public static final String NETWORK_IB_INSTALLATIONS = "\\\\192.168.10.15\\Share\\1-IB_Builds\\";
         public static final String NETWORK_REPORTS_FOLDER = "\\\\192.168.10.15\\share\\Automation\\Reports\\";
-        public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\Incredibuild";
+        public static final String DIFFERENT_INSTALLATION_DIRECTORY = "c:\\incredibuild";
         public static final String DIFFERENT_ENT_INSTALLATION_DIRECTORY = "C:\\IncrediBuild Statistics";
         public static final String SECOND_INITIATOR_LOG_PATH = Locations.QA_ROOT + "\\second_initiator_output\\";
         public static final String LINUX_SCRIPT_OUTPUT = Locations.QA_ROOT + "\\Script_Output\\";
@@ -310,6 +310,12 @@ public class StaticDataProvider {
             public static final String NINTENDO_AAA_X64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|x64\"";
             public static final String NINTENDO_AAA_X32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX32\"";
+            public static final String XBOX_SIMPLEBEZIER = "";
+            public static final String XBOX_SIMPLEESRAM = "";
+            public static final String XBOX_INGAMECHAT = "";
+            public static final String XBOX_SIMPLEWINHTTP = "";
+            public static final String XBOX_SIMPLEDIRECTSTORAGEWIN32 = "";
+            public static final String XBOX_BWOIEXAMPLE = "";
         }
 
         public static class VC14_BATMAN {
