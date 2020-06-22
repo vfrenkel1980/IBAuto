@@ -5,12 +5,13 @@ import frameworkInfra.testbases.RobinTestBase;
 import frameworkInfra.utils.StaticDataProvider;
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.Listeners.SuiteListener.test;
 
 public class RobinVC15Tests extends RobinTestBase {
-
+    @Ignore
     @Test(testName = "Chrome release - build" , groups = { "Build" })
     public void chromeReleaseBuild(){
         if (testName.equals("Minimal")){
