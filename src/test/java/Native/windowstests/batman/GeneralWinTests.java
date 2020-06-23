@@ -245,118 +245,118 @@ public class GeneralWinTests extends BatmanBCTestBase {
     }
 
 
-//    /**
-//     * @test Verify that, when 'OnlyFailLocally' flag is ON, after 5 tasks failing remotely, the Agent is black-listed
-//     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
-//     * @pre{ }
-//     * @steps{ - Set OnlyFailLocally to 1
-//     * - Set AvoidLocal to 1
-//     * - Run "Run XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
-//     * - After validation set OnlyFailLocally flag to 0 and AvoidLocal to 0
-//     * }
-//     * @result{ Expected:
-//     * 1. Check in buildlog file that at least 5 remote tasks are failing by searching for the following warning message:
-//     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
-//     * 2. Check that after 5 failing tasks the Agent is black-listed by searching for this warning message:
-//     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
-//     * }
-//     */
-//    @Test(testName = "OnlyFailLocally is ON, verify Agent is Black-listed")
-//    public void onlyFailLocallyIsOnVerifyAgentIsBlackListed() {
-//        try {
-//            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-//
-//            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE_AGENT_IS_BLACKLISTED);
-//            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
-//
-//            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
-//            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_IS_NOT_DISPLAYED);
-//        } finally {
-//            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
-//            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
-//                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-//        }
-//    }
-//
-//    /**
-//     * @test Verify that, when 'OnlyFailLocally' flag is ON, less than 5 tasks are remotely failing, the Agent is NOT black-listed
-//     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
-//     * @pre{ }
-//     * @steps{ - Set OnlyFailLocally to 1
-//     * - Set AvoidLocal to 1
-//     * - Run "Run Random XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
-//     * - After validation set OnlyFailLocally flag to 0 and AvoidLocal to 0
-//     * }
-//     * @result{ Expected:
-//     * 1. Check in buildlog file that at some remote tasks are failing by searching for the following warning message:
-//     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
-//     * 2. Check that the Agent is NOT black-listed by checking that this warning message is not displayed:
-//     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
-//     * }
-//     */
-//    @Test(testName = "OnlyFailLocally is ON, less than 5 remote failing tasks, Verify Agent is NOT Black-listed")
-//    public void onlyFailLocallyisOnLessThan4RemoteFailingTasksVerifyAgentIsNotBlacklisted() {
-//        try {
-//            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-//            setRegistry("10", "Builder", RegistryKeys.MAXHELPERS);
-//
-//            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_RANDOM_TASK_FAILING_ON_REMOTE);
-//            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
-//
-//            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
-//            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_SHOULD_NOT_BE_DISPLAYED);
-//        } finally {
-//            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
-//            setRegistry("0", "Builder", RegistryKeys.MAXHELPERS);
-//            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
-//                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-//        }
-//    }
-//
-//
-//    /**
-//     * @test Verify that, when 'OnlyFailLocally' flag is ON, OnlyFailLocallyBlackList, the Agent is NOT black-listed
-//     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
-//     * @pre{ }
-//     * @steps{ - Set OnlyFailLocally to 1
-//     * - Set AvoidLocal to 1
-//     * -Set OnlyFailLocallyBlackList to 0
-//     * - Run "Run XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
-//     * - After validation set: OnlyFailLocally to 0, AvoidLocal to 0, OnlyFailLocallyBlackList to 1
-//     * }
-//     * @result{ Expected:
-//     * 1. Check in buildlog file that at least 5 remote tasks are failing by searching for the following warning message:
-//     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
-//     * 2. Check that the Agent is NOT black-listed by checking that this warning message is not displayed:
-//     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
-//     * }
-//     */
-//    @Test(testName = "OnlyFailLocally is ON, OnlyFailLocallyBlackList is OFF, verify Agent is Not Black-listed")
-//    public void onlyFailLocallyisOnAndOnlyFailLocallyBlackListisOffVerifyAgentisNotBlacklisted() {
-//        try {
-//            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
-//            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY_BLACKLIST);
-//
-//            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE_AGENT_IS_BLACKLISTED);
-//            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
-//
-//            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
-//            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_SHOULD_NOT_BE_DISPLAYED);
-//        } finally {
-//            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
-//            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
-//            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY_BLACKLIST);
-//            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
-//                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
-//        }
-//    }
-//
-//
+    /**
+     * @test Verify that, when 'OnlyFailLocally' flag is ON, after 5 tasks failing remotely, the Agent is black-listed
+     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
+     * @pre{ }
+     * @steps{ - Set OnlyFailLocally to 1
+     * - Set AvoidLocal to 1
+     * - Run "Run XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
+     * - After validation set OnlyFailLocally flag to 0 and AvoidLocal to 0
+     * }
+     * @result{ Expected:
+     * 1. Check in buildlog file that at least 5 remote tasks are failing by searching for the following warning message:
+     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
+     * 2. Check that after 5 failing tasks the Agent is black-listed by searching for this warning message:
+     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
+     * }
+     */
+    @Test(testName = "OnlyFailLocally is ON, verify Agent is Black-listed")
+    public void onlyFailLocallyIsOnVerifyAgentIsBlackListed() {
+        try {
+            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+
+            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE_AGENT_IS_BLACKLISTED);
+            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
+
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_IS_NOT_DISPLAYED);
+        } finally {
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
+                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        }
+    }
+
+    /**
+     * @test Verify that, when 'OnlyFailLocally' flag is ON, less than 5 tasks are remotely failing, the Agent is NOT black-listed
+     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
+     * @pre{ }
+     * @steps{ - Set OnlyFailLocally to 1
+     * - Set AvoidLocal to 1
+     * - Run "Run Random XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
+     * - After validation set OnlyFailLocally flag to 0 and AvoidLocal to 0
+     * }
+     * @result{ Expected:
+     * 1. Check in buildlog file that at some remote tasks are failing by searching for the following warning message:
+     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
+     * 2. Check that the Agent is NOT black-listed by checking that this warning message is not displayed:
+     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
+     * }
+     */
+    @Test(testName = "OnlyFailLocally is ON, less than 5 remote failing tasks, Verify Agent is NOT Black-listed")
+    public void onlyFailLocallyisOnLessThan4RemoteFailingTasksVerifyAgentIsNotBlacklisted() {
+        try {
+            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("12", "Builder", RegistryKeys.MAXHELPERS);
+
+            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_RANDOM_TASK_FAILING_ON_REMOTE);
+            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
+
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_SHOULD_NOT_BE_DISPLAYED);
+        } finally {
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("0", "Builder", RegistryKeys.MAXHELPERS);
+            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
+                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        }
+    }
+
+
+    /**
+     * @test Verify that, when 'OnlyFailLocally' flag is ON, OnlyFailLocallyBlackList, the Agent is NOT black-listed
+     * Ticket https://incredibuild.atlassian.net/browse/WIN-174
+     * @pre{ }
+     * @steps{ - Set OnlyFailLocally to 1
+     * - Set AvoidLocal to 1
+     * -Set OnlyFailLocallyBlackList to 0
+     * - Run "Run XGE.bat" using with xgconsole/buildconsole command line the /log_warning flag
+     * - After validation set: OnlyFailLocally to 0, AvoidLocal to 0, OnlyFailLocallyBlackList to 1
+     * }
+     * @result{ Expected:
+     * 1. Check in buildlog file that at least 5 remote tasks are failing by searching for the following warning message:
+     * "This task was re-executed locally by IncrediBuild as part of the "OnlyFailLocally" feature as it returned a non-zero exit code when executed remotely"
+     * 2. Check that the Agent is NOT black-listed by checking that this warning message is not displayed:
+     * "<AgentName> will no longer be utilized in this build due to multiple consecutive task failures."
+     * }
+     */
+    @Test(testName = "OnlyFailLocally is ON, OnlyFailLocallyBlackList is OFF, verify Agent is Not Black-listed")
+    public void onlyFailLocallyisOnAndOnlyFailLocallyBlackListisOffVerifyAgentisNotBlacklisted() {
+        try {
+            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("1", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY_BLACKLIST);
+
+            int returnCode = winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE_AGENT_IS_BLACKLISTED);
+            Assert.assertEquals(returnCode, 0, "The build failed with exit code " + returnCode);
+
+            Assert.assertTrue(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_FAILING_REMOTE_TASK_REEXECUTED_LOCALLY), ERROR_MESSAGE_WARNING_FOR_FAILING_REMOTE_TASKS_IS_NOT_DISPLAYED);
+            Assert.assertFalse(Parser.doesFileContainString(Locations.OUTPUT_LOG_FILE, WARNING_AGENT_WAS_BLACKLISTED), ERROR_MESSAGE_WARNING_FOR_BLACKED_LISTED_AGENT_SHOULD_NOT_BE_DISPLAYED);
+        } finally {
+            setRegistry("0", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY);
+            setRegistry("0", "Builder", RegistryKeys.AVOID_LOCAL);
+            setRegistry("1", "Builder", RegistryKeys.ONLY_FAIL_LOCALLY_BLACKLIST);
+            if (SystemActions.doesFileExist(Locations.OUTPUT_LOG_FILE))
+                SystemActions.deleteFile(Locations.OUTPUT_LOG_FILE);
+        }
+    }
+
+
 
     /**
      * @test "Verify (incremental build) that when building the same code twice, the 2nd time there is no update (Stadia, Yeti, GPP)
