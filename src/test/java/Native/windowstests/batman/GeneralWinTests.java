@@ -57,7 +57,7 @@ public class GeneralWinTests extends BatmanBCTestBase {
 
     @Test(testName = "Verify Agent Service Memory Usage")
     public void verifyAgentCoordServiceMemoryUsage() {
-        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._20K));
+        String output = winService.runCommandGetOutput(String.format(WindowsCommands.GET_MEMORY_USAGE, MemoryThresholds._40K));
         Assert.assertFalse(StringUtils.containsIgnoreCase(output, "BuildService.exe"), "BuildService has exceeded the memory threshold: "+output + " Expected= "+ MemoryThresholds._20K);
     }
 
