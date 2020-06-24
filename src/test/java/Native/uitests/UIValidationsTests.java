@@ -163,6 +163,7 @@ public class UIValidationsTests extends UIValidationTestBase {
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar() {
         ibService.openBuildMonitor();
+        SystemActions.sleep(10);
         client.verifyMonitorBarPattern(ibMonBarPattern);
     }
 
@@ -176,7 +177,7 @@ public class UIValidationsTests extends UIValidationTestBase {
      */
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring() {
-        winService.runCommandDontWaitForTermination(IbLocations.BUILDHISTORY);
+        winService.runCommandDontWaitForTermination("C:\\Program Files (x86)\\IncrediBuild\\BuildHistory.exe ");
         SystemActions.sleep(25);
         client.verifyHistoryColoringPattern(historyPattern);
     }
@@ -270,7 +271,7 @@ public class UIValidationsTests extends UIValidationTestBase {
     @Test(testName="Run Coordinator settings as Administrator")
     public void RunCoordSetingsAsAdministrator(){
        SystemActions.doesFileExist(COORD_SETTINGS_LOCATION);
-        winService.runCommandDontWaitForTermination(Processes.COORDMONITOR);
+        winService.runCommandDontWaitForTermination("C:\\Program Files (x86)\\IncrediBuild\\CoordMonitor.exe ");
         if (!project.equals("green01")) {
             test.log(Status.SKIP, "Test should run once on green project");
             throw new SkipException("Skipped test");
