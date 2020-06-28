@@ -284,6 +284,7 @@ public class UIValidationsTests extends UIValidationTestBase {
             boolean objectExists = false;
             if (screen.exists(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15) != null)
                 objectExists = true;
+            SystemActions.killProcess("C:\\Program Files (x86)\\IncrediBuild\\CoordMonitor.exe ");
             Assert.assertTrue(objectExists, "Could not find Stop Service");
         }catch(FindFailed findFailed) {
             test.log(Status.WARNING, "Stop coordinator service is not enabled, failed with error: " + findFailed.getMessage());

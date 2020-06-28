@@ -62,6 +62,7 @@ public class VSIntegrationTestBase extends TestBase {
     @Parameters({"VCVersion"})
     public void setUpEnv(String VCVersion) {
         test = extent.createTest("Before Class");
+        SystemActions.sleep(30); //waite for launch slave-agent
         test.assignCategory("VC" + VCVersion);
         try {
             switch (VCVersion) {
