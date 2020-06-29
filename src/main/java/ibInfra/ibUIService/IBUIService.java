@@ -265,8 +265,10 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeEntInstallationLocation(String path) throws FindFailed {
             test.log(Status.INFO, "Changing Enterprise installation path to: " + path);
-            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5), 25).click();
-            screen.type(path);
+            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.9), 25).click();
+            int pathLen = path.length();
+            for (int i=0; i< pathLen ; i++ )
+                pressAKey(path.charAt(i));
         }
 
         @Override

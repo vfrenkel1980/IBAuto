@@ -83,6 +83,43 @@ public class BatmanVC16Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    @Test(testName = "Xbox_IntroGraphics_SimpleBezier - 2019 debug - build" , groups = { "Build" })
+    public void xboxSimpleBezier2019DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_SIMPLEBEZIER, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Xbox_Graphics_SimpleESRAMR - 2019 debug - build" , groups = { "Build" })
+    public void xboxSimpleESRAM2019DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_SIMPLEESRAM, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+    @Test(testName = "Xbox_Audio_InGameChat - 2019 debug - build" , groups = { "Build" })
+    public void xboxInGameChat2019DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_INGAMECHAT, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Xbox_Live_SimpleWinHttp - 2019 debug - build" , groups = { "Build" })
+    public void xboxSimpleWinHttp2019DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_SIMPLEWINHTTP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Xbox_System_SimpleDirectStorageWin32 - 2019 debug - build" , groups = { "Build" })
+    public void xboxSimpleDirectStorageWin32_2019DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_SIMPLEDIRECTSTORAGEWIN32, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    @Test(testName = "Xbox_Tools_BWOIExample - 2019 debug - build" , groups = { "Build" })
+    public void xboxBWOIExample2019DebugBuild(){
+        setRegistry("0", RegistryKeys.PREDICTED);
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC16_BATMAN.XBOX_BWOIEXAMPLE, "%s"));
+        setRegistry("2", RegistryKeys.PREDICTED);
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void setRegistry(String required, String keyName){
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);

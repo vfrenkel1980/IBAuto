@@ -269,6 +269,12 @@ public class StaticDataProvider {
             public static final String ACE_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\ACE-6.4.0-2015\\ACE_vc14.sln\" /%s /cfg=\"debug|win32\" /title=\"ACE 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BIGPROJECT_X32_DEBUG = "\"D:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"debug|win32\" /title=\"Big Project 2019 - Debug\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
             public static final String BIGPROJECT_X32_RELEASE = "\"D:\\QA\\Simulation\\VC16\\BigProject2\\BigProject2.sln\" /%s /cfg=\"release|win32\" /title=\"Big Project 2019 - Release\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_SIMPLEBEZIER = "\"D:\\QA\\XBox\\GDKSamples\\IntroGraphics\\SimpleBezier\\SimpleBezier.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_SIMPLEESRAM = "\"D:\\QA\\XBox\\GDKSamples\\Graphics\\SimpleESRAM\\SimpleESRAM.sln\" /%s /cfg=\"Debug|Gaming.Xbox.XboxOne.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_INGAMECHAT = "\"D:\\QA\\XBox\\GDKSamples\\Audio\\InGameChat\\InGameChat.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_SIMPLEWINHTTP = "\"D:\\QA\\XBox\\GDKSamples\\Live\\SimpleWinHttp\\SimpleWinHttp.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_SIMPLEDIRECTSTORAGEWIN32 = "\"D:\\QA\\XBox\\GDKSamples\\System\\SimpleDirectStorageWin32\\SimpleDirectStorageWin32.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
+            public static final String XBOX_BWOIEXAMPLE = "\"D:\\QA\\XBox\\GDKSamples\\Tools\\BWOIExample\\BWOIExample.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\" /VSversion=16";
         }
 
         public static class VC16Preview_BATMAN {
@@ -282,6 +288,13 @@ public class StaticDataProvider {
             public static final String NINTENDO_AAA_NX32_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX32\"";
             public static final String NINTENDO_AAA_NX64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|NX64\"";
             public static final String NVNTUTORIAL_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX32\"";
+
+            public static final String XBOX_SIMPLEBEZIER = "\"D:\\QA\\XBox\\GDKSamples\\IntroGraphics\\SimpleBezier\\SimpleBezier.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String XBOX_SIMPLEESRAM = "\"D:\\QA\\XBox\\GDKSamples\\Graphics\\SimpleESRAM\\SimpleESRAM.sln\" /%s /cfg=\"Debug|Gaming.Xbox.XboxOne.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String XBOX_INGAMECHAT = "\"D:\\QA\\XBox\\GDKSamples\\Audio\\InGameChat\\InGameChat.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String XBOX_SIMPLEWINHTTP = "\"D:\\QA\\XBox\\GDKSamples\\Live\\SimpleWinHttp\\SimpleWinHttp.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String XBOX_SIMPLEDIRECTSTORAGEWIN32 = "\"D:\\QA\\XBox\\GDKSamples\\System\\SimpleDirectStorageWin32\\SimpleDirectStorageWin32.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
+            public static final String XBOX_BWOIEXAMPLE = "\"D:\\QA\\XBox\\GDKSamples\\Tools\\BWOIExample\\BWOIExample.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Preview\" /VSversion=16";
         }
 
         public static class VC15_BATMAN {
@@ -312,12 +325,12 @@ public class StaticDataProvider {
             public static final String NINTENDO_AAA_X64_RELEASE = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"release|x64\"";
             public static final String NINTENDO_AAA_X32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\AccountApplication\\AccountApplication-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|win32\"";
             public static final String NVNTUTORIAL_NX32_DEBUG = "\"D:\\Nintendo\\nx\\NintendoSDK\\Samples\\Sources\\Applications\\NvnTutorial06FrameBuffering\\NvnTutorial06-spec.NX.autogen.vs2017.sln\" /%s /cfg=\"debug|NX32\"";
-            public static final String XBOX_SIMPLEBEZIER = "";
-            public static final String XBOX_SIMPLEESRAM = "";
-            public static final String XBOX_INGAMECHAT = "";
-            public static final String XBOX_SIMPLEWINHTTP = "";
-            public static final String XBOX_SIMPLEDIRECTSTORAGEWIN32 = "";
-            public static final String XBOX_BWOIEXAMPLE = "";
+            public static final String XBOX_SIMPLEBEZIER = "\"D:\\QA\\XBox\\GDKSamples\\IntroGraphics\\SimpleBezier\\SimpleBezier.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XBOX_SIMPLEESRAM = "\"D:\\QA\\XBox\\GDKSamples\\Graphics\\SimpleESRAM\\SimpleESRAM.sln\" /%s /cfg=\"Debug|Gaming.Xbox.XboxOne.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XBOX_INGAMECHAT = "\"D:\\QA\\XBox\\GDKSamples\\Audio\\InGameChat\\InGameChat.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XBOX_SIMPLEWINHTTP = "\"D:\\QA\\XBox\\GDKSamples\\Live\\SimpleWinHttp\\SimpleWinHttp.sln\" /%s /cfg=\"Debug|Gaming.Xbox.Scarlett.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XBOX_SIMPLEDIRECTSTORAGEWIN32 = "\"D:\\QA\\XBox\\GDKSamples\\System\\SimpleDirectStorageWin32\\SimpleDirectStorageWin32.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
+            public static final String XBOX_BWOIEXAMPLE = "\"D:\\QA\\XBox\\GDKSamples\\Tools\\BWOIExample\\BWOIExample.sln\" /%s /cfg=\"Debug|Gaming.Desktop.x64\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\" /VSversion=15";
         }
 
         public static class VC14_BATMAN {
