@@ -1,6 +1,7 @@
 package frameworkInfra.testbases;
 
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -46,6 +47,7 @@ public class LinuxTestBase extends TestBase{
     public Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
     protected String reportFilePath;
+    protected String reportFileNewPath;
 
     @BeforeSuite
     public void linuxSetup(ITestContext testContext) {
@@ -80,7 +82,8 @@ public class LinuxTestBase extends TestBase{
     public void afterSuiteRun(ITestContext context) {
         extent.flush();
         Calendar calendar = Calendar.getInstance();
-        String reportFileNewPath = System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html";
+        reportFileNewPath = System.getProperty("user.dir") + "/src/main/java/frameworkInfra/reports/TestOutput" + formatter.format(calendar.getTime()) + " - " + ibVersion + ".html";
+        new ExtentHtmlReporter(reportFileNewPath);
         File toBeRenamed = new File(reportFilePath);
         SystemActions.renameFile(toBeRenamed, reportFileNewPath);
         SystemActions.deleteFile(reportFilePath);
