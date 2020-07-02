@@ -213,17 +213,25 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void selectManualHelperPorts() throws FindFailed {
-            test.log(Status.INFO, "Selecting manual ports");
+        public void selectManualAgentPorts(String path) throws FindFailed {
+            test.log(Status.INFO, "Selecting manual agent ports");
             screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.9), 25).click();
             screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 25).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 25).type(InstallationPorts.AGENT_PORT);
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.9), 25).click();
-            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.4), 25).type(InstallationPorts.HELPER_PORT);
+            int pathLenAgentPort = path.length();
+            for (int i=0; i< pathLenAgentPort ; i++ )
+                pressNumberKey(path.charAt(i));
         }
 
         @Override
-        public void selectManualCoordPort() throws FindFailed {
+        public void selectManualHelperPorts(String path) throws FindFailed {
+            test.log(Status.INFO, "Selecting manual helper ports");
+            screen.wait(IBInstaller.HelpersPortTB.similar((float) 0.9), 25).click();
+            int pathLenHelperPort = path.length();
+            for (int i=0; i< pathLenHelperPort ; i++ )
+                pressNumberKey(path.charAt(i));
+        }
+        @Override
+        public void selectManualCoordPort(String path) throws FindFailed {
             test.log(Status.INFO, "Selecting manual coordinator ports");
             screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9), 5).click();
             screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4), 5).type(InstallationPorts.COORDINATOR_PORT);
@@ -257,8 +265,10 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeEntInstallationLocation(String path) throws FindFailed {
             test.log(Status.INFO, "Changing Enterprise installation path to: " + path);
-            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.5), 25).click();
-            screen.type(path);
+            screen.wait(IBInstaller.EntInstallationLocationTB.similar((float) 0.9), 25).click();
+            int pathLen = path.length();
+            for (int i=0; i< pathLen ; i++ )
+                pressAKey(path.charAt(i));
         }
 
         @Override
@@ -955,7 +965,7 @@ public class IBUIService implements IIBUIService {
         if ( asciiChar > 96 && asciiChar < 123 ) //small letters, need to reduce 32
             keyCode = asciiChar - 32;
         if (asciiChar == 73)
-        { keyCode = 20; }//CapsLock
+       // { keyCode = 20; }//CapsLock
 
         if (asciiChar == 58 ) // colon  ':'
         {
@@ -989,5 +999,26 @@ public class IBUIService implements IIBUIService {
         }
     }
 
+    public void pressNumberKey(int asciiChar){
+        WinUser.INPUT input = new WinUser.INPUT();
+        input.type = new WinDef.DWORD( WinUser.INPUT.INPUT_KEYBOARD );
+        input.input.setType("ki");
+        input.input.ki.wScan = new WinDef.WORD( 0 );
+        input.input.ki.time = new WinDef.DWORD( 0 );
+        input.input.ki.dwExtraInfo = new BaseTSD.ULONG_PTR( 0 );
+
+        int keyCode = asciiChar;
+        boolean pressShift = false;
+
+        input.input.ki.wVk = new WinDef.WORD(keyCode);
+        input.input.ki.dwFlags = new WinDef.DWORD( 0 );  // keydown
+        User32.INSTANCE.SendInput( new WinDef.DWORD( 1 ), ( WinUser.INPUT[] ) input.toArray( 1 ), input.size() );
+
+
+        input.input.ki.wVk = new WinDef.WORD(keyCode);
+        input.input.ki.dwFlags = new WinDef.DWORD( 2 );  // keyup
+
+        User32.INSTANCE.SendInput( new WinDef.DWORD( 1 ), ( WinUser.INPUT[] ) input.toArray( 1 ), input.size() );
     }
+    }//end of class
 

@@ -46,9 +46,11 @@ public interface IIBUIService {
         void selectUninstall() throws FindFailed;
 
 
-        void selectManualHelperPorts() throws FindFailed;
+        void selectManualAgentPorts(String path) throws FindFailed;
 
-        void selectManualCoordPort() throws FindFailed;
+        void selectManualHelperPorts(String path) throws FindFailed;
+
+        void selectManualCoordPort(String path) throws FindFailed;
 
         void uncheckLaunchDashboard() throws FindFailed;
 

@@ -330,9 +330,10 @@ public class SetupTests extends SetupTestBase {
             installer.installNewCoordinator();
             installer.clickNext();
             installer.clickNext();
-            installer.selectManualHelperPorts();
+            installer.selectManualAgentPorts(InstallationPorts.AGENT_PORT);
+            installer.selectManualHelperPorts(InstallationPorts.HELPER_PORT);
             installer.clickNext();
-            installer.selectManualCoordPort();
+            installer.selectManualCoordPort(InstallationPorts.COORDINATOR_PORT);
             installer.clickNext();
             installer.clickNext();
             installer.clickNext();
