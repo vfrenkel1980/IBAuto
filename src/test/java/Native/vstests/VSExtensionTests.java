@@ -54,7 +54,7 @@ public class VSExtensionTests extends VSTestBase {
         vsuiService.openVSInstance(VSINSTALLATION, false, SCENARIO);
         SystemActions.sleep(20);
         vsuiService.createNewProject("custom", VSINSTALLATION);
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.REBUILD_SOLUTION);
+        vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         String result;
         try {
             result = ibService.findValueInPacketLog("ExitCode ");

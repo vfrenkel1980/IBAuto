@@ -8,8 +8,8 @@ public interface IVSUIService  {
 
     void createNewProject(String projectName, String version);
 
-    void performIbActionFromMenuByWebDriver(String action);
-    void performIbActionFromMenuVSByWinAppDriver(String action);
+    void performIbActionFromMenu(String action);
+    void performIbActionFromMenuVS(String action);
 
     void performIbActionFromMenuDontWaitForFinish(String action);
 

@@ -16,8 +16,8 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute Build from Menu")
     public void executeBuildFromMenu() {
         String result;
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.CLEAN_SOLUTION);
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.BUILD_SOLUTION);
+        vsuiService.performIbActionFromMenu(VsActions.CLEAN_SOLUTION);
+        vsuiService.performIbActionFromMenu(VsActions.BUILD_SOLUTION);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
@@ -29,7 +29,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute ReBuild from Menu")
     public void executeReBuildFromMenu() {
         String result;
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.REBUILD_SOLUTION);
+        vsuiService.performIbActionFromMenu(VsActions.REBUILD_SOLUTION);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
@@ -66,8 +66,8 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute Build project from Menu")
     public void executeBuildProjectFromMenu() {
         String result;
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.CLEAN_PROJECT);
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.BUILD_PROJECT);
+        vsuiService.performIbActionFromMenu(VsActions.CLEAN_PROJECT);
+        vsuiService.performIbActionFromMenu(VsActions.BUILD_PROJECT);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
@@ -79,7 +79,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "Execute ReBuild project from Menu")
     public void executeReBuildProjectFromMenu() {
         String result;
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.REBUILD_PROJECT);
+        vsuiService.performIbActionFromMenu(VsActions.REBUILD_PROJECT);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
@@ -116,7 +116,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "IncrediBuild Stop Build")
     public void stopIbBuild() {
         vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-        vsuiService.performIbActionFromMenuByWebDriver(VsActions.STOP_BUILD);
+        vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
         Assert.assertTrue(Parser.doesFileContainString(Locations.SYSTEM_APPDATA_TEMP_FOLDER + "IB_BuildOutput.log", LogOutput.TERMINATION_MESSAGE));
     }
 

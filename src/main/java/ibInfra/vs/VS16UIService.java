@@ -121,7 +121,7 @@ public class VS16UIService implements IVSUIService {
     }
 
     @Override
-    public void performIbActionFromMenuByWebDriver(String action) {
+    public void performIbActionFromMenu(String action) {
         driver.findElementByName("Build");
         driver.findElementByName("Extensions").click();
         driver.findElementByName("IncrediBuild").click();
@@ -132,7 +132,7 @@ public class VS16UIService implements IVSUIService {
     }
 
     @Override
-    public void performIbActionFromMenuVSByWinAppDriver(String action) {
+    public void performIbActionFromMenuVS(String action) {
         test.log(Status.INFO, "Perform Action from menu VS");
         try {
             screen.wait(VSElements.incrediBuildBtn.similar((float) 0.9), 25).click();
