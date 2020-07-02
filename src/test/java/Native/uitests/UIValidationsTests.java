@@ -2,7 +2,6 @@ package Native.uitests;
 
 import com.aventstack.extentreports.Status;
 import frameworkInfra.sikuli.sikulimapping.CoordMonitor.CoordMonitor;
-import frameworkInfra.sikuli.sikulimapping.IBSettings.IBSettings;
 import frameworkInfra.testbases.UIValidationTestBase;
 import frameworkInfra.utils.StaticDataProvider.*;
 import frameworkInfra.utils.SystemActions;
@@ -148,7 +147,8 @@ public class UIValidationsTests extends UIValidationTestBase {
      * @result{ - Try icon is present}
      */
     @Test(testName = "Verify Tray Icon Color")
-    public void verifyTrayIconColor() {
+    public void verifyTrayIconColor()
+    {
         client.verifyTrayIconPattern(trayIconPattern);
     }
 
@@ -163,7 +163,7 @@ public class UIValidationsTests extends UIValidationTestBase {
     @Test(testName = "Verify IB Monitor Bar")
     public void verifyIBMonitorBar() {
         ibService.openBuildMonitor();
-        SystemActions.sleep(10);
+        SystemActions.sleep(25);
         client.verifyMonitorBarPattern(ibMonBarPattern);
     }
 
@@ -177,9 +177,13 @@ public class UIValidationsTests extends UIValidationTestBase {
      */
     @Test(testName = "Verify History Coloring")
     public void verifyHistoryColoring() {
+        try{
         winService.runCommandDontWaitForTermination("C:\\Program Files (x86)\\IncrediBuild\\BuildHistory.exe ");
-        SystemActions.sleep(25);
+        SystemActions.sleep(30);
         client.verifyHistoryColoringPattern(historyPattern);
+        } catch (RuntimeException e) {
+            e.getMessage();
+        }
     }
 
     /**

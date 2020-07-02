@@ -318,7 +318,7 @@ public class IBUIService implements IIBUIService {
         public void verifyTrayIconPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Tray Icon");
             try {
-                screen.wait(pat.similar((float) 0.8), 5);
+                screen.wait(pat.similar((float) 0.9), 25);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
                 Assert.fail();
