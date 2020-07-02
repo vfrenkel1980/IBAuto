@@ -121,7 +121,7 @@ public class VS16UIService implements IVSUIService {
     }
 
     @Override
-    public void performIbActionFromMenu(String action) {
+    public void performIbActionFromMenuByWebDriver(String action) {
         driver.findElementByName("Build");
         driver.findElementByName("Extensions").click();
         driver.findElementByName("IncrediBuild").click();
@@ -132,7 +132,7 @@ public class VS16UIService implements IVSUIService {
     }
 
     @Override
-    public void performIbActionFromMenuVS(String action) {
+    public void performIbActionFromMenuVSByWinAppDriver(String action) {
         test.log(Status.INFO, "Perform Action from menu VS");
         try {
             screen.wait(VSElements.incrediBuildBtn.similar((float) 0.9), 25).click();
@@ -206,7 +206,7 @@ public class VS16UIService implements IVSUIService {
                 test.log(Status.INFO, "Opening VS" + version);
             }
             capabilities.setCapability("app", pathToDevenv);
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+            driver = new WindowsDriver(new URL("http://vs-integration:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
             if (test != null) {
                 test.log(Status.INFO, "Visual Studio opened successfully");
