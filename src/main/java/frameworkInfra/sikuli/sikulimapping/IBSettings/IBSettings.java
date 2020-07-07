@@ -26,6 +26,7 @@ public class IBSettings {
     public static final Pattern OKButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OKButton.png");
     public static final Pattern OKMessageBoxButton = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\OK_messagebox.png");
     public static final Pattern agent =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\settingAgentTab.png");
+    public static final Pattern agent_open = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\agent_open.png");
     public static final Pattern GeneralTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\general_tab.png");
     public static final Pattern MultiBuildTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\multiple_builds.png");
     public static final Pattern ClearHistoryBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history.png");
@@ -54,7 +55,7 @@ public class IBSettings {
     public static final Pattern PreferenceTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\preference_tab.png");
     public static final Pattern EnableSchedulingCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_agent_scheduling_cb.png");
     public static final Pattern isNotActiveScheduling = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\is_not_active_agent_scheduling.png");
-    public static final Pattern DisabledTrayIcon = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disabledTrayIcon.png");
+    public static final Pattern DisabledTrayIcon = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_try_icon.png");
     public static final Pattern DisableSchedulingCB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disableScheduling.png");
     public static final Pattern EnableFailOnlyLocally = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\enable_fail_only_locally.png");
     public static final Pattern DisableFailOnlyLocally = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\disable_fail_only_locally.png");

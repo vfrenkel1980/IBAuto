@@ -527,7 +527,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
         client.openCoordMonitorFromTray();
         coordinator.clickAllowEnableDisableAsHelper();
         SystemActions.sleep(15);
-        SystemActions.killProcess(Processes.COORDMONITOR);
+        //SystemActions.killProcess(Processes.COORDMONITOR);
     }
 
     /**

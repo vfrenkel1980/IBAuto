@@ -228,7 +228,7 @@ public class VSUIService implements IVSUIService {
             }
             if(isFirstActivation) {
                 try {
-                    SystemActions.sleep(10);
+                    SystemActions.sleep(20);
                     vsFirstActivation();
                 } catch (Exception e) {
                     test.log(Status.ERROR, "Failed set VS first activation: ------>" + e.getMessage());
@@ -242,4 +242,4 @@ public class VSUIService implements IVSUIService {
         }
 
     }
-}
+}//end of class

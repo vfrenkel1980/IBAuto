@@ -246,7 +246,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void uncheckCreateEntShortcut() throws FindFailed {
             test.log(Status.INFO, "Removing \"Create Ent. shortcut\" CB");
-            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.9), 25).click();
+            screen.wait(IBInstaller.EnterpriseShortcutCB.similar((float) 0.9), 30).click();
         }
 
         @Override
@@ -731,7 +731,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void isNotActiveScheduling() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                if(screen.exists(IBSettings.agent, 20) ==null){
+                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.agent, 20) !=null){
+                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                }
                 screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.isNotActiveScheduling.similar((float) 0.9), 25).click();
                 boolean objectExists = false;

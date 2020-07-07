@@ -106,7 +106,7 @@ public class VSIntegrationTestBase extends TestBase {
                 vsuiService = new VS16UIService();
             }
             vsuiService.openVSInstance(VCVersion, false, "");
-            SystemActions.sleep(30);
+            SystemActions.sleep(60);
             vsuiService.openProject(projectPath);
 
         } catch (Exception e) {

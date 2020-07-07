@@ -17,7 +17,6 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     public void executeBuildFromMenu() {
         String result;
         vsuiService.performIbActionFromMenu(VsActions.CLEAN_SOLUTION);
-        vsuiService.performIbActionFromMenu(VsActions.BUILD_SOLUTION);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
