@@ -233,8 +233,8 @@ public class GeneralWinTests extends BatmanBCTestBase {
         String result = "";
         winService.runCommandWaitForFinish(ProjectsCommands.MISC_PROJECTS.XG_CONSOLE_FAILED_ON_REMOTE);
         try {
-            result = ibService.findValueInPacketLog("ExitCode ");
-            Assert.assertEquals(result,"1", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
+            result = ibService.findValueInPacketLog("ErrorCount");
+            Assert.assertEquals(result, "34", "verifyOnlyFailLocallyFlagNegativeTest failed with exit code " + result);
         } catch (IOException e) {
             test.log(Status.ERROR, "Test failed with the following error: " + e.getMessage());
         }
