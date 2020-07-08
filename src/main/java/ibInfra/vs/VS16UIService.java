@@ -206,7 +206,7 @@ public class VS16UIService implements IVSUIService {
                 test.log(Status.INFO, "Opening VS" + version);
             }
             capabilities.setCapability("app", pathToDevenv);
-            driver = new WindowsDriver(new URL("http://vs-integration:4723"), capabilities);
+            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
             if (test != null) {
                 test.log(Status.INFO, "Visual Studio opened successfully");
