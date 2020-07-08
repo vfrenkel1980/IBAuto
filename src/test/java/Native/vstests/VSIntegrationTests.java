@@ -2,6 +2,7 @@ package Native.vstests;
 
 import frameworkInfra.Listeners.SuiteListener;
 import frameworkInfra.testbases.VSIntegrationTestBase;
+import frameworkInfra.utils.SystemActions;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
@@ -66,7 +67,8 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     public void executeBuildProjectFromMenu() {
         String result;
         vsuiService.performIbActionFromMenu(VsActions.CLEAN_PROJECT);
-        vsuiService.performIbActionFromMenuVS(VsActions.BUILD_PROJECT);
+        SystemActions.sleep(25);
+        vsuiService.performIbActionFromMenu(VsActions.BUILD_PROJECT);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));

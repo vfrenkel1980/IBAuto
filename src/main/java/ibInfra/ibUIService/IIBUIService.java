@@ -58,7 +58,7 @@ public interface IIBUIService {
 
         void selectDowngrade() throws FindFailed;
 
-        void changeDashboardPort() throws FindFailed;
+        void changeDashboardPort(String path) throws FindFailed;
 
         void changeEntInstallationLocation(String path) throws FindFailed;
 
@@ -150,6 +150,8 @@ public interface IIBUIService {
         void verifyHelperIsDisabled();
 
         void enableAsHelper();
+
+        void enableAsHelperCoord();
 
         void verifyHelperIsEnabled();
 

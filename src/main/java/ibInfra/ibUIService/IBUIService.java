@@ -182,8 +182,8 @@ public class IBUIService implements IIBUIService {
         public void selectLicense()  {
             test.log(Status.INFO, "Selecting license");
             try {
-                screen.wait(IBInstaller.LicenseFile.similar((float) 0.7), 25).doubleClick();
-                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.5), 25).click();
+                screen.wait(IBInstaller.LicenseFile.similar((float) 0.9), 25).doubleClick();
+                screen.wait(IBInstaller.LicenseLoadedOKBTN.similar((float) 0.9), 25).click();
             }
             catch (FindFailed findFailed){
                     test.log(Status.WARNING, "License select fail: " + findFailed.getMessage());
@@ -204,7 +204,7 @@ public class IBUIService implements IIBUIService {
         public void selectUninstall()  {
             test.log(Status.INFO, "Selecting uninstall");
             try {
-                screen.wait(IBInstaller.UninstallRB.similar((float) 0.7), 300).click();
+                screen.wait(IBInstaller.UninstallRB.similar((float) 0.9), 300).click();
             }
             catch (FindFailed findFailed){
                 test.log(Status.WARNING, "Uninstall fail: " + findFailed.getMessage());
@@ -216,7 +216,7 @@ public class IBUIService implements IIBUIService {
         public void selectManualAgentPorts(String path) throws FindFailed {
             test.log(Status.INFO, "Selecting manual agent ports");
             screen.wait(IBInstaller.ManualPortSelectionRB.similar((float) 0.9), 25).click();
-            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.7), 25).click();
+            screen.wait(IBInstaller.AgentServicePortTB.similar((float) 0.9), 25).click();
             int pathLenAgentPort = path.length();
             for (int i=0; i< pathLenAgentPort ; i++ )
                 pressNumberKey(path.charAt(i));
@@ -233,8 +233,10 @@ public class IBUIService implements IIBUIService {
         @Override
         public void selectManualCoordPort(String path) throws FindFailed {
             test.log(Status.INFO, "Selecting manual coordinator ports");
-            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9), 5).click();
-            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.4), 5).type(InstallationPorts.COORDINATOR_PORT);
+            screen.wait(IBInstaller.CoordinatorPortTB.similar((float) 0.9), 25).click();
+            int pathLenCoordPort = path.length();
+            for (int i=0; i< pathLenCoordPort ; i++ )
+                pressNumberKey(path.charAt(i));
         }
 
         @Override
@@ -256,10 +258,12 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void changeDashboardPort() throws FindFailed {
+        public void changeDashboardPort(String path) throws FindFailed {
             test.log(Status.INFO, "Selecting manual dashboard ports");
             screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9), 25).click();
-            screen.wait(IBInstaller.DashboardPortTB.similar((float) 0.9), 25).type(InstallationPorts.DASHBOARD_PORT);
+            int pathLen = path.length();
+            for (int i=0; i< pathLen ; i++ )
+                pressAKey(path.charAt(i));
         }
 
         @Override
@@ -274,13 +278,13 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyInvalidLicenseMessage() throws FindFailed {
             test.log(Status.INFO, "Validating Invalid License Message");
-            screen.wait(IBInstaller.InvalidLicenseMessage.similar((float) 0.5), 600);
+            screen.wait(IBInstaller.InvalidLicenseMessage.similar((float) 0.9), 600);
         }
 
         @Override
         public void clickExit() throws FindFailed {
             test.log(Status.INFO, "Clicking Exit");
-            screen.wait(IBInstaller.ExitBtn.similar((float) 0.7), 5).click();
+            screen.wait(IBInstaller.ExitBtn.similar((float) 0.9), 5).click();
         }
 
         @Override
@@ -307,7 +311,7 @@ public class IBUIService implements IIBUIService {
         public void verifyVSBarPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for VS Bar");
             try {
-                screen.wait(pat.similar((float) 0.8), 60);
+                screen.wait(pat.similar((float) 0.9), 60);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find VS Bar with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -318,7 +322,7 @@ public class IBUIService implements IIBUIService {
         public void verifyTrayIconPattern(Pattern pat) {
             test.log(Status.INFO, "Looking for Tray Icon");
             try {
-                screen.wait(pat.similar((float) 0.9), 25);
+                screen.wait(pat.similar((float) 0.9), 30);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to find Tray Icon with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -401,7 +405,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Opening Coordinator Monitor from tray");
             try {
                 //screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 5).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordMonitorTray.similar((float) 0.9), 30).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open coordinator monitor with error: " + findFailed.getMessage());
@@ -413,7 +417,7 @@ public class IBUIService implements IIBUIService {
         public void openCoordSettingsFromTray() {
             test.log(Status.INFO, "Opening Coordinator Settings from tray");
             try{
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
             }catch (FindFailed findFailed){
                 test.log(Status.WARNING, "Failed to open coordinator settings with error: " + findFailed.getMessage());
@@ -426,9 +430,9 @@ public class IBUIService implements IIBUIService {
         public void openAgentSettingsFromTray() {
             test.log(Status.INFO, "Opening Agent Settings from tray");
             try {
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).hover();
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).rightClick();
-                screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).hover();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
+                screen.wait(IBSettings.TrayIcon.agentSettingsTray.similar((float) 0.9), 25).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -439,7 +443,7 @@ public class IBUIService implements IIBUIService {
         public void clickAdvancedOptionOfCoordSettings() {
             test.log(Status.INFO, "Opening Advanced option of Coordinator Settings");
             try{
-                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 10).rightClick();
+                screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 25).rightClick();
                 screen.wait(IBSettings.TrayIcon.coordSettingsTry.similar((float) 0.9), 30).click();
                 screen.wait(IBSettings.AdvancedTab.similar((float) 0.9), 20).click();
             }catch(FindFailed findFailed){
@@ -453,7 +457,7 @@ public class IBUIService implements IIBUIService {
             test.log(Status.INFO, "Verify allow enable/disable as helper disabled");
             openTray();
             try {
-                screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 0.9), 15);
+                screen.wait(IBSettings.TrayIcon.enableDisableAsHelperDeniedTray.similar((float) 0.9), 25);
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable/disable as  helper is not denied from tray, failed with error: " + findFailed.getMessage());
                 Assert.fail();
@@ -485,7 +489,7 @@ public class IBUIService implements IIBUIService {
         @Override
         public void verifyBuildMonitorOpened() {
             boolean objectExists = false;
-            if (screen.exists(IBStatusBars.buildMonitor, 15) != null)
+            if (screen.exists(IBStatusBars.buildMonitor, 25) != null)
                 objectExists = true;
             Assert.assertTrue(objectExists, "Could not find Build Monitor windows");
         }
@@ -518,7 +522,11 @@ public class IBUIService implements IIBUIService {
         public void clickClearHistory() {
             test.log(Status.INFO, "Clicking on Clear History");
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 15).click();
+                if(screen.exists(IBSettings.agent, 20) ==null){
+                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.agent, 20) !=null){
+                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                }
                 screen.wait(IBSettings.GeneralTab.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5), 10).click();
@@ -532,7 +540,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeCpuUtilCores() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
+                if(screen.exists(IBSettings.agent, 20) ==null){
+                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.agent, 20) !=null){
+                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                }
                 screen.wait(IBSettings.CpuUtilTab.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9), 5).click();
@@ -634,7 +646,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void stopAgentService() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 5).click();
+                if(screen.exists(IBSettings.agent, 20) ==null){
+                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.agent, 20) !=null){
+                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                }
                 screen.wait(IBSettings.StopServiceBtn.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
@@ -699,7 +715,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void enableSchedulingAndVerifyIcon() {
             try {
-                screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                if(screen.exists(IBSettings.agent, 20) ==null){
+                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.agent, 20) !=null){
+                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+                }
                 screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.EnableSchedulingCB.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 25).click();
@@ -758,7 +778,7 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Disabling agent as helper");
                 try {
                     screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 15).rightClick();
-                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.9), 15).click();
+                    screen.wait(CoordMonitor.DisableAsHelperMenu.similar((float) 0.9), 30).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to disable as helper, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -768,7 +788,7 @@ public class IBUIService implements IIBUIService {
             @Override
             public void verifyHelperIsDisabled() {
                 boolean objectExists = false;
-                if (screen.exists(CoordMonitor.DisabledAgentValidation, 15) != null)
+                if (screen.exists(CoordMonitor.DisabledAgentValidation, 25) != null)
                     objectExists = true;
                 Assert.assertTrue(objectExists, "Could not find agent disabled verification");
             }
@@ -785,6 +805,17 @@ public class IBUIService implements IIBUIService {
                 }
             }
 
+            @Override
+            public void enableAsHelperCoord() {
+                test.log(Status.INFO, "Enabling agent as helper");
+                try {
+                    screen.wait(CoordMonitor.HelperFromList.similar((float) 0.9), 15).rightClick();
+                    screen.wait(CoordMonitor.EnableAsHelperMenu.similar((float) 0.9), 15).click();
+                } catch (FindFailed findFailed) {
+                    test.log(Status.WARNING, "Failed to enable as helper, failed with error: " + findFailed.getMessage());
+                    Assert.fail();
+                }
+            }
             @Override
             public void verifyHelperIsEnabled() {
                 boolean objectExists = false;
@@ -866,8 +897,8 @@ public class IBUIService implements IIBUIService {
             public void stopCoordService() {
                 test.log(Status.INFO, "Stopping coordinator service");
                 try {
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.95), 15).click();
+                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 25).click();
+                    screen.wait(CoordMonitor.StopServiceMenu.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to stop coordinator service, failed with error: " + findFailed.getMessage());
                     Assert.fail();

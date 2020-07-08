@@ -613,15 +613,6 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
      * - Set registry key force CPU count when Helper OFF}
      * @result{ }
      */
-
-
-
-
-
-
-
-
-
     @Test(testName = "Verify When CPU Utilization As Helper checked")
     public void verifyWhenCPUUtilizationAsHelperChecked() {
         setRegistry("0", "Builder", RegistryKeys.STANDALONE_MODE);

@@ -500,7 +500,9 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.uncheckReleaseNotes();
+            SystemActions.sleep(5);
             installer.uncheckLaunchDashboard();
+            SystemActions.sleep(5);
             installer.uncheckCreateEntShortcut();
             installer.clickFinish();
         } catch (FindFailed e) {
