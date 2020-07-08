@@ -23,32 +23,30 @@ public class Parser {
      */
     public static String retrieveDataFromFile(String filePath, Map<String, String> lookFor) throws IOException {
         BufferedReader in = null;
+        String line;
+        String pulledData = "";
         try {
-            String line;
+            in = new BufferedReader(new FileReader(filePath));
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+        }
 
-            String pulledData = "";
-            try {
-                in = new BufferedReader(new FileReader(filePath));
-            } catch (FileNotFoundException e) {
-                e.getMessage();
-            }
-
-            while ((line = in.readLine()) != null) {
-                for (Map.Entry<String, String> entry : lookFor.entrySet()) {
-                    String key = entry.getKey();
-                    if (line.contains(key)) {
-                        pulledData = retrieveDataFromString(line, key);
-                        return pulledData;
-                    }
+        while ((line = in.readLine()) != null) {
+            for (Map.Entry<String, String> entry : lookFor.entrySet()) {
+                String key = entry.getKey();
+                if (line.contains(key)) {
+                    pulledData = retrieveDataFromString(line, key);
+                    entry.setValue(pulledData);
                 }
             }
-            return "";
-
-        } finally {
-            in.close();
         }
-    }
+        in.close();
+        return pulledData;
 
+//        for (Map.Entry<String, String> entry : lookFor.entrySet()) {
+//            System.out.println(entry.getKey() + " = " + entry.getValue());
+//        }
+    }
 
     /**
      * Used in order to get data from string line using key
