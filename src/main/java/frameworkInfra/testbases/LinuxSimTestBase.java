@@ -87,7 +87,8 @@ public class LinuxSimTestBase extends LinuxTestBase {
         }
         ibVersion = linuxService.getIBVersion(ipList.get(0));
 
-        log.info("finished before suite");
+        log.info("Finished before suite for version: " + ibVersion);
+        test.log(Status.INFO,"Before Suite ended for version: " + ibVersion);
     }
 
 
@@ -151,6 +152,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
         String output = "res_" + dateFormat.format(calendar.getTime());
+        String performance = "performance_" + dateFormat.format(calendar.getTime());
 
         for (int i = 1; i <= NumInitators; ++i) {
             String scriptFileName = output + "_" + String.valueOf(i);
@@ -182,6 +184,7 @@ public class LinuxSimTestBase extends LinuxTestBase {
            has_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.has_crash");
             if (has_crashes.size() >0 && !has_crashes.get(0).equals("")) {
                 test.log(Status.WARNING, "Found has_crash files in Machine: " + machine + " Path: /etc/incredibuild/log/");
+                log.info("In machine: " + machine + "; has_crashes value is: " + has_crashes);
             } else {
                 test.log(Status.INFO, "No has_crashes files found in Machine: " + machine);
             }
@@ -189,10 +192,22 @@ public class LinuxSimTestBase extends LinuxTestBase {
             log_crashes = linuxService.findFile(machine, "/etc/incredibuild/log/", "*.crash.log");
             if (log_crashes.size()>0 && !log_crashes.get(0).equals("")) {
                 test.log(Status.WARNING, "Found log_crashes files in Machine: " + machine + " Path: /etc/incredibuild/log/");
+                log.info("In machine: " + machine + "; log_crashes value is: " + log_crashes);
                 }
             else {
                 test.log(Status.INFO, "No log_crashes files found in Machine: " + machine);
             }
+        }
+        //performance reports
+        test = extent.createTest("Performance Report");
+        test.assignCategory("Performance-Report");
+        test.log(Status.INFO, "Performance Report - check started");
+
+        for (int i = 1; i <= NumInitators; ++i) {
+            String performanceFileName = performance + "_" + String.valueOf(i) + "_" + ibVersion;
+            //log.info("for: " + ipList.get(i) + " firstBuilds is:  " + firstBuilds.get(i));
+            linuxService.linuxRunSSHCommand(String.format(LinuxCommands.RUN_SQLITE_AVERAGE, firstBuilds.get(i-1)) + " >> " + performanceFileName + "; exit 0", ipList.get(i));
+            linuxService.getFile(ipList.get(i), LinuxCommands.HOME_DIR + performanceFileName, Locations.LINUX_SCRIPT_OUTPUT + "\\" + performanceFileName);
         }
 
     }

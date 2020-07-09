@@ -947,6 +947,7 @@ public class StaticDataProvider {
         public static final String START_IB_SERVICES_NO_SUDOERS = "\"echo xoreax | sudo -S /opt/incredibuild/etc/init.d/incredibuild start > /dev/null\"";
         public static final String STOP_IB_SERVICES = "sudo /opt/incredibuild/etc/init.d/incredibuild stop > /dev/null";
         public static final String RUN_SQLITE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT %s FROM %s ORDER BY BuildId DESC LIMIT 1\"";
+        public static final String RUN_SQLITE_AVERAGE = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildBuildReport.db \"SELECT BuildCaption, count(BuildCaption), AVG(BuildTime) from build_history WHERE ReturnCode=0 AND BuildId>=%s group by BuildCaption\"";
         public static final String RUN_SQLITE_DELETE_Q = "/opt/incredibuild/bin/sqlite3 /etc/incredibuild/db/incredibuildCoordinatorReport.db \"DELETE FROM %s where %s=\\\"%s.incredibuild.local\\\";\"";
         public static final String BUILD_ID = "BuildId";
         public static final String BUILD_HISTORY = "build_history";
