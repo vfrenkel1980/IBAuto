@@ -476,6 +476,17 @@ public class IBUIService implements IIBUIService {
             }
         }
 
+        @Override
+        public void enableAsHelperFromTray(){
+            test.log(Status.INFO, "Verify Agent is enabled as helper from tray");
+            openDisabledTray();
+            try {
+                screen.wait(IBSettings.TrayIcon.enableAsHelperTray.similar((float) 0.9), 25).click();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to find enabled as helper from tray, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
         public void openTray() {
             try {
                 screen.wait(IBSettings.TrayIcon.Green.similar((float) 0.9), 15).hover();
@@ -486,6 +497,15 @@ public class IBUIService implements IIBUIService {
             }
         }
 
+        public void openDisabledTray() {
+            try {
+                screen.wait(IBSettings.DisabledTrayIcon.similar((float) 0.9), 15).hover();
+                screen.wait(IBSettings.DisabledTrayIcon.similar((float) 0.9), 15).rightClick();
+            } catch (FindFailed findFailed) {
+                test.log(Status.WARNING, "Failed to open disabled tray-icon menu, failed with error: " + findFailed.getMessage());
+                Assert.fail();
+            }
+        }
         @Override
         public void verifyBuildMonitorOpened() {
             boolean objectExists = false;
@@ -528,7 +548,7 @@ public class IBUIService implements IIBUIService {
                     screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
                 }
                 screen.wait(IBSettings.GeneralTab.similar((float) 0.9), 15).click();
-                screen.wait(IBSettings.ClearHistoryBtn.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.ClearHistoryGrayBtn.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5), 10).click();
                 SystemActions.sleep(10);
             } catch (FindFailed findFailed) {

@@ -102,6 +102,8 @@ public interface IIBUIService {
 
         void verifyAgentEnabledAsHelperFromTray();
 
+        void enableAsHelperFromTray();
+
         void verifyBuildMonitorOpened();
 
         void verifyBuildHistoryOpened();

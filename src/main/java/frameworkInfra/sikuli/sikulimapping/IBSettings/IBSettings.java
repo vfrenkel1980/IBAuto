@@ -17,6 +17,7 @@ public class IBSettings {
         public static final Pattern coordSettingsTry = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\CoordMonitor\\coord_settings_try.png");
         public static final Pattern enableDisableAsHelperDeniedTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enable_disable_as_helper_denied.png");
         public static final Pattern enabledAsHelperTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enabled_as_helper_tray.png");
+        public static final Pattern enableAsHelperTray = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\TrayIcon\\enable_as_helper.png");
 
     }
 
@@ -30,7 +31,7 @@ public class IBSettings {
     public static final Pattern GeneralTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\general_tab.png");
     public static final Pattern MultiBuildTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\multiple_builds.png");
     public static final Pattern ClearHistoryBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history.png");
-    public static final Pattern ClearHistoryGrayBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clear_history_gray.png");
+    public static final Pattern ClearHistoryGrayBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\clearHistory_btn.png");
     public static final Pattern ConfirmationBtn = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\yes_button.png");
     public static final Pattern ConfirmationBtn2 = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\yes_button2.png");
     public static final Pattern CpuUtilTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\cpu_util_tab.png");
