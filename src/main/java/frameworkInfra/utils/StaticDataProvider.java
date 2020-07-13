@@ -875,6 +875,7 @@ public class StaticDataProvider {
         public static final String MINIDLELEVEL = "MinIdleLevel";
         public static final String SHOWCORESEMPLOYED = "ShowCoresEmployed";
         public static final String MAXHELPERS = "MaxHelpers";
+        public static final String pathLenCPU_UTIL_CORE = "1";
 
     }
 

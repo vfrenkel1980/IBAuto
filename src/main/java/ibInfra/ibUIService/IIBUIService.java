@@ -114,7 +114,7 @@ public interface IIBUIService {
 
         void clickClearHistory();
 
-        void changeCpuUtilCores();
+        void changeCpuUtilCores(String path);
 
         void changeStartupPageToProjects();
 

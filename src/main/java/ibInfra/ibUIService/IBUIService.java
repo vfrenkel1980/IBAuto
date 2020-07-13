@@ -558,7 +558,7 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void changeCpuUtilCores() {
+        public void changeCpuUtilCores(String path) {
             try {
                 if(screen.exists(IBSettings.agent, 20) ==null){
                     screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
@@ -569,7 +569,9 @@ public class IBUIService implements IIBUIService {
                 screen.wait(IBSettings.CpuUtilConfDdl.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.CpuUtilUserDefined.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.CpuUtilNumOfCoresTB.similar((float) 0.9), 5).click();
-                screen.type("1");
+                int pathLenCPU_UTIL_CORE = path.length();
+                for (int i=0; i< pathLenCPU_UTIL_CORE ; i++ )
+                    pressNumberKey(path.charAt(i));
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.ConfirmationBtn2.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9), 5).click();

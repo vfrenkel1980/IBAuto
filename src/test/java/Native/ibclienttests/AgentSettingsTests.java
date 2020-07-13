@@ -26,6 +26,7 @@ import java.util.Set;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.ProjectsCommands.COORD_SETTINGS.COORD_SETTINGS_LOCATION;
+import static frameworkInfra.utils.StaticDataProvider.RegistryKeys.pathLenCPU_UTIL_CORE;
 import static frameworkInfra.utils.StaticDataProvider.WindowsMachines.AGENT_SETTINGS_HLPR_NAME;
 
 /**
@@ -301,7 +302,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Verify CPU Utilization")
     public void verifyCPUUtilization() {
         winService.runCommandDontWaitForTermination(StaticDataProvider.Processes.AGENTSETTINGS);
-        client.changeCpuUtilCores();
+        client.changeCpuUtilCores(pathLenCPU_UTIL_CORE);
         winService.runCommandWaitForFinish(String.format(ProjectsCommands.MISC_PROJECTS.TEST_SAMPLE, 8, "60000"));
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\Builder", RegistryKeys.FORCE_CPU_INITIATOR, "0");
         ibService.agentServiceStop();
