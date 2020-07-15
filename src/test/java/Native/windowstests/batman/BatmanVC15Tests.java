@@ -316,6 +316,89 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    /**
+     * @test Verify Xbox Simple Bezier
+     * @pre{ cfg="Debug|Gaming.Xbox.Scarlett.x64"}
+     * @steps{
+     * - Run clean and build Xbox Simple Bezier on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_IntroGraphics_SimpleBezier - 2017 debug - build" , groups = { "Build" })
+    public void xboxSimpleBezier2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_SIMPLEBEZIER, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Xbox Simple ESRAM
+     * @pre{ cfg="Debug|Gaming.Xbox.XboxOne.x64"}
+     * @steps{
+     * - Run clean and build Xbox Simple ESRAM on VS 2019
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_Graphics_SimpleESRAMR - 2017 debug - build" , groups = { "Build" })
+    public void xboxSimpleESRAM2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_SIMPLEESRAM, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Xbox InGameChat2
+     * @pre{ cfg="Debug|Gaming.Xbox.Scarlett.x64"}
+     * @steps{
+     * - Run clean and build Xbox Simple InGameChat2 on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_Audio_InGameChat - 2017 debug - build" , groups = { "Build" })
+    public void xboxInGameChat2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_INGAMECHAT, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Xbox Simple WinHttp
+     * @pre{ cfg="Debug|Gaming.Xbox.Scarlett.x64"}
+     * @steps{
+     * - Run clean and build Xbox Simple WinHttp on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_Live_SimpleWinHttp - 2017 debug - build" , groups = { "Build" })
+    public void xboxSimpleWinHttp2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_SIMPLEWINHTTP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Xbox Simple DirectStorageWin32
+     * @pre{ cfg="Debug|Gaming.Desktop.x64"}
+     * @steps{
+     * - Run clean and build Xbox Simple DirectStorageWin32 on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_System_SimpleDirectStorageWin32 - 2017 debug - build" , groups = { "Build" })
+    public void xboxSimpleDirectStorageWin32_2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_SIMPLEDIRECTSTORAGEWIN32, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Xbox BWOIExample
+     * @pre{ cfg="Debug|Gaming.Desktop.x64"}
+     * @steps{
+     * - Run clean and build Xbox BWOIExample on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Xbox_Tools_BWOIExample - 2017 debug - build" , groups = { "Build" })
+    public void xboxBWOIExample2017DebugBuild(){
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.XBOX_BWOIEXAMPLE, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
 
     /**
      * @test Verify Google Stadia Achievements C
