@@ -17,7 +17,10 @@ import java.io.IOException;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.*;
-
+/**
+ * @brief  <a href=><b>Coverage Samples of projects</b></a> tests on VS 2017 Professional</b>
+ * @details Run on Batman
+ */
 public class BatmanVC15Tests extends BatmanBCTestBase {
 
 
@@ -207,6 +210,16 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(pass, "Some machines from VMSIM Grid were assigned to the Batman build process");
     }
 
+    /**
+     * @test Verify Nintendo accountApplication project
+     * @pre{ cfg="debug|NX32"}
+     * @steps{
+     * - Set Registry Key to PredictedExecutionMode 0
+     * - Run clean and build accountApplication project on VS 2017
+     * - Set Registry Key to PredictedExecutionMode 2
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "AccountApplication - 2017 debug|NX32 - build" , groups = { "Build" })
     public void accountApplication2017DebugNX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -216,6 +229,16 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 
     }
 
+    /**
+     * @test Verify Nintendo accountApplication project
+     * @pre{ cfg="debug|NX64"}
+     * @steps{
+     * - Set Registry Key to PredictedExecutionMode 0
+     * - Run clean and build accountApplication project on VS 2017
+     * - Set Registry Key to PredictedExecutionMode 2
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "AccountApplication - 2017 debug|NX64 - build" , groups = { "Build" })
     public void accountApplication2017DebugNX64Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -224,6 +247,16 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    /**
+     * @test Verify Nintendo accountApplication project
+     * @pre{ cfg="release|NX32"}
+     * @steps{
+     * - Set Registry Key to PredictedExecutionMode 0
+     * - Run clean and build accountApplication project on VS 2017
+     * - Set Registry Key to PredictedExecutionMode 2
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "AccountApplication - 2017 release|NX32 - build" , groups = { "Build" })
     public void accountApplication2017ReleaseNX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -232,7 +265,16 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-
+    /**
+     * @test Verify Nintendo accountApplication project
+     * @pre{ cfg="release|NX64"}
+     * @steps{
+     * - Set Registry Key to PredictedExecutionMode 0
+     * - Run clean and build accountApplication project on VS 2017
+     * - Set Registry Key to PredictedExecutionMode 2
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "AccountApplication - 2017 release|NX64 - build" , groups = { "Build" })
     public void accountApplication017ReleaseNX64Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -256,7 +298,16 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
 //        setRegistry("2", RegistryKeys.PREDICTED);
 //        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
 //    }
-
+    /**
+     * @test Verify Nintendo nvnTutorial project
+     * @pre{ cfg="debug|NX32"}
+     * @steps{
+     * - Set Registry Key to PredictedExecutionMode 0
+     * - Run clean and build nvnTutorial project on VS 2017
+     * - Set Registry Key to PredictedExecutionMode 2
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "NvnTutorial06 - 2017 debug|NX32- build" , groups = { "Build" })
     public void nvnTutorial2017DebugNX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -266,6 +317,89 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
     }
 
 
+    /**
+     * @test Verify Google Stadia Achievements C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Achievements C on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Achievements C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017AchievementsCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_ACHIEVEMENTS_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Achievements CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Achievements CPP on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Achievements CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017AchievementsCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_ACHIEVEMENTS_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Authentication C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Authentication C on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Authentication C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017AuthenticationCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_AUTHENTICATION_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Authentication CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Authentication CPP on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Authentication CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017AuthenticationCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_AUTHENTICATION_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Commerce C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Commerce C on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Commerce C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017CommerceCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_COMMERCE_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Commerce CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Commerce CPP on VS 2017
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2017 Commerce CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2017CommerceCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.GOOGLE_STADIA_COMMERCE_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void changePSSDKVersionTo(String SDKVersion) {
         winService.runCommandWaitForFinish(winService.changeCurDirTo(OrbisSDK.SDK_INSTALLER_FOLDER) + String.format(OrbisSDK.SWITCH_PS_SDK, SDKVersion));
@@ -274,4 +408,4 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, Locations.IB_REG_ROOT + "\\builder", keyName, required);
     }
 
-}
+}//end of class
