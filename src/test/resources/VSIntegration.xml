@@ -63,21 +63,21 @@
     </test>
 
 
-    <test name="VSIntegrationPs52017VS15">
+    <test name="VS15CmdlineTests">
         <parameter name="VCVersion" value="15"/>
         <classes>
             <class name="Native.vstests.VSIntegrationVS15Tests"/>
         </classes>
     </test>
 
-    <test name="VSIntegrationPs52019VS16Preview">
+    <test name="VS16PreviewCmdlineTests">
         <parameter name="VCVersion" value="16"/>
         <classes>
             <class name="Native.vstests.VSIntegrationVS16PreviewTests"/>
         </classes>
     </test>
 
-    <test name="VSIntegrationPs52019VS16">
+    <test name="VS16CmdlineTests">
         <parameter name="VCVersion" value="16"/>
         <classes>
             <class name="Native.vstests.VSIntegrationVS16Tests"/>
