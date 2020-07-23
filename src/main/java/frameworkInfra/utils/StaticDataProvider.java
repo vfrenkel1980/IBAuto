@@ -392,6 +392,13 @@ public class StaticDataProvider {
             public static final String GOOGLE_STADIA_SAMPLE4_GGP_DEBUG = Locations.QA_ROOT + "\\VC14\\ggp-samples-1.37.0\\samples\\vulkan\\01_hellovulkan\\01_hellovulkan.sln /%s /title=\"Google Stadia - 2015 Sample 4 debug|GGP\" /cfg=\"debug|GGP\"";
             public static final String GOOGLE_STADIA_PREDICTED_OFF_GGP = Locations.QA_ROOT + "\\VC14\\StadiaCppProject1\\StadiaCppProject1.sln /%s /title=\"Google Stadia - 2015 Predicted Release|GGP\" /cfg=\"release|GGP\"";
             public static final String STADIA_INCREDEMENTAL_BUILD = Locations.QA_ROOT + "\\VC14\\StadiaIncrementalBuild\\StadiaIncrementalBuild.sln /%s /title=\"Stadia Incremental Build - 2015\" /cfg=\"debug|GGP\"";
+
+            public static final String GOOGLE_STADIA_ACHIEVEMENTS_C = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\achievements\\c\\achievements_c.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
+            public static final String GOOGLE_STADIA_ACHIEVEMENTS_CPP = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\achievements\\cpp\\achievements_cpp.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
+            public static final String GOOGLE_STADIA_AUTHENTICATION_C = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\authentication\\c\\authentication_c.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
+            public static final String GOOGLE_STADIA_AUTHENTICATION_CPP = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\authentication\\cpp\\authentication_cpp.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
+            public static final String GOOGLE_STADIA_COMMERCE_C = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\commerce\\c\\commerce_c.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
+            public static final String GOOGLE_STADIA_COMMERCE_CPP = "\"D:\\QA\\stadia-samples-v1.45.0.15199\\samples\\commerce\\cpp\\commerce_cpp.sln\" /%s /cfg=\"debug|GGP\" /VSInstallDir=\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\" /VSversion=14";
         }
 
         public static class VC12_BATMAN {

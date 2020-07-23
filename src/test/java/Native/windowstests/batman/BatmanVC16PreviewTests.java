@@ -5,12 +5,16 @@ import frameworkInfra.utils.RegistryService;
 import frameworkInfra.utils.parsers.Parser;
 import frameworkInfra.utils.StaticDataProvider.*;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.File;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
-
+/**
+ * @brief  <b>coverage</b> tests on VS 2019 Preview</b>
+ * @details Run on Batman
+ */
 public class BatmanVC16PreviewTests extends BatmanBCTestBase {
 
 
@@ -85,6 +89,7 @@ public class BatmanVC16PreviewTests extends BatmanBCTestBase {
         setRegistry("2", RegistryKeys.PREDICTED);
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
+
 
     /*-------------------------------------METHODS---------------------------------------------------------------*/
     private void setRegistry(String required, String keyName){

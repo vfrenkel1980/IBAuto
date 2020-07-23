@@ -127,7 +127,6 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     @Test(testName = "IncrediBuild Stop Build")
     public void stopIbBuild() {
         vsuiService.performIbActionFromMenuDontWaitForFinish(VsActions.REBUILD_SOLUTION);
-        SystemActions.sleep(15);
         vsuiService.performIbActionFromMenu(VsActions.STOP_BUILD);
         SystemActions.sleep(15);
         Assert.assertTrue(Parser.doesFileContainString(Locations.SYSTEM_APPDATA_TEMP_FOLDER + "IB_BuildOutput.log", LogOutput.TERMINATION_MESSAGE));

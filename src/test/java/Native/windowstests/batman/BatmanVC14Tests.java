@@ -9,9 +9,11 @@ import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.utils.StaticDataProvider.*;
-
+/**
+ * @brief  <b>Coverage Samples of projects</b> tests on VS 2015 Professional</b>
+ * @details Run on Batman
+ */
 public class BatmanVC14Tests extends BatmanBCTestBase {
-
 
 
     @Test(testName = "Blender 2015 - Release - build" , groups = { "Build" })
@@ -139,6 +141,14 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
 //        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
 //    }
 
+    /**
+     * @test Verify Nintendo nvnTutorial project
+     * @pre{ cfg="release|x64"}
+     * @steps{
+     * - Run clean and build nvnTutorial project on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
     @Test(testName = "NvnTutorial06 - 2015 release|x64 - build" , groups = { "Build" })
     public void nvnTutorial2015ReleaseX32Build(){
         setRegistry("0", RegistryKeys.PREDICTED);
@@ -246,6 +256,89 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
+    /**
+     * @test Verify Google Stadia Achievements C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Achievements C on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Achievements C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015AchievementsCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_ACHIEVEMENTS_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Achievements CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Achievements CPP on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Achievements CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015AchievementsCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_ACHIEVEMENTS_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Authentication C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Authentication C on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Authentication C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015AuthenticationCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_AUTHENTICATION_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Authentication CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Authentication CPP on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Authentication CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015AuthenticationCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_AUTHENTICATION_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Commerce C
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Commerce C on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Commerce C debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015CommerceCBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_COMMERCE_C, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
+
+    /**
+     * @test Verify Google Stadia Commerce CPP
+     * @pre{ cfg="debug|GGP"}
+     * @steps{
+     * - Run clean and build Google Stadia Commerce CPP on VS 2015
+     * }
+     * @result{ - Expected result return code 0 or 2 }
+     */
+    @Test(testName = "Google Stadia - 2015 Commerce CPP debug|GGP SDK 1.45- build", groups = {"Build"})
+    public void googleStadia2015CommerceCPPBuild() {
+        int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.GOOGLE_STADIA_COMMERCE_CPP, "%s"));
+        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+    }
         /*------------------------------METHODS------------------------------*/
 
     private void setRegistry(String required, String keyName){

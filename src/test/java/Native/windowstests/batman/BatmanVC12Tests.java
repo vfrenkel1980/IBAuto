@@ -7,7 +7,10 @@ import org.testng.annotations.Test;
 
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.utils.StaticDataProvider.*;
-
+/**
+ * @brief  <b>Coverage Samples of projects</b> tests on VS 2013 Professional</b>
+ * @details Run on Batman
+ */
 public class BatmanVC12Tests extends BatmanBCTestBase {
 
     @Test(testName = "ACE 2013 - Debug - build", groups = {"Build"})

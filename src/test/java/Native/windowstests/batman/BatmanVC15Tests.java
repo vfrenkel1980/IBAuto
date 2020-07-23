@@ -18,7 +18,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.test;
 import static frameworkInfra.utils.StaticDataProvider.*;
 /**
- * @brief  <a href=><b>Coverage Samples of projects</b></a> tests on VS 2017 Professional</b>
+ * @brief  <b>Coverage Samples of projects</b> tests on VS 2017 Professional</b>
  * @details Run on Batman
  */
 public class BatmanVC15Tests extends BatmanBCTestBase {
@@ -48,61 +48,62 @@ public class BatmanVC15Tests extends BatmanBCTestBase {
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
 
-    @Test(testName = "PS4 - 2017 Sample 1 release|Orbis SDK6 - build", groups = {"Build"})
-    public void ps42017Sample1ReleaseOrbisSDK6Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE1_ORBIS_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2017 Sample 2 debug|Orbis SDK6 - build", groups = {"Build"})
-    public void ps42017Sample2DebugOrbisSDK6Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE2_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2017 Sample 3 release|Orbis SDK6 - build", groups = {"Build"})
-    public void ps42017Sample3ReleaseOrbisSDK6Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE3_ORBIS_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2017 Sample 4 debug|Orbis SDK6 - build", groups = {"Build"})
-    public void ps42017Sample4DebugOrbisSDK6Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE4_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS Prospero 0.900 - 2017 Sample 1 release - build", groups = {"Build"})
-    public void psProspero0900_2017Sample1ReleaseBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE1_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS Prospero 0.900 - 2017 Sample 2 debug - build", groups = {"Build"})
-    public void psProspero0900_2017Sample2DebugBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE2_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS Prospero 0.900 - 2017 Sample 3 release - build", groups = {"Build"})
-    public void psProspero0900_Sample3ReleaseBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE3_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS Prospero 0.900 - 2017 Sample 4 debug - build", groups = {"Build"})
-    public void psProspero0900Sample4DebugBuild() {
-        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE4_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+/*----------------Temporarily commented out Prospero tests----------------------*/
+//    @Test(testName = "PS4 - 2017 Sample 1 release|Orbis SDK6 - build", groups = {"Build"})
+//    public void ps42017Sample1ReleaseOrbisSDK6Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE1_ORBIS_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2017 Sample 2 debug|Orbis SDK6 - build", groups = {"Build"})
+//    public void ps42017Sample2DebugOrbisSDK6Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE2_ORBIS_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2017 Sample 3 release|Orbis SDK6 - build", groups = {"Build"})
+//    public void ps42017Sample3ReleaseOrbisSDK6Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE3_ORBIS_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2017 Sample 4 debug|Orbis SDK6 - build", groups = {"Build"})
+//    public void ps42017Sample4DebugOrbisSDK6Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK6);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS4_SAMPLE4_ORBIS_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS Prospero 0.900 - 2017 Sample 1 release - build", groups = {"Build"})
+//    public void psProspero0900_2017Sample1ReleaseBuild() {
+//        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE1_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS Prospero 0.900 - 2017 Sample 2 debug - build", groups = {"Build"})
+//    public void psProspero0900_2017Sample2DebugBuild() {
+//        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE2_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS Prospero 0.900 - 2017 Sample 3 release - build", groups = {"Build"})
+//    public void psProspero0900_Sample3ReleaseBuild() {
+//        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE3_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS Prospero 0.900 - 2017 Sample 4 debug - build", groups = {"Build"})
+//    public void psProspero0900Sample4DebugBuild() {
+//        changePSSDKVersionTo(OrbisSDK.PS_PROSPERO_0900);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC15_BATMAN.PS_PROSPERO_SAMPLE4_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
 
     @Ignore
     @Test(testName = "Chrome release - build" , groups = { "Build" })

@@ -5,7 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static frameworkInfra.utils.StaticDataProvider.*;
-
+/**
+ * @brief  <b>Coverage Samples of projects</b> tests on VS 2012 Professional</b>
+ * @details Run on Batman
+ */
 public class BatmanVC11Tests extends BatmanBCTestBase {
 
 
