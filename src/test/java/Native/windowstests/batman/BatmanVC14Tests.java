@@ -194,34 +194,35 @@ public class BatmanVC14Tests extends BatmanBCTestBase {
         int returnCode = ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.BIGPROJECT_X32_RELEASE, "%s"));
         Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
     }
-
-    @Test(testName = "PS4 - 2015 Sample 1 debug|Orbis SDK5 - build", groups = {"Build"})
-    public void ps42015Sample1DebugOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE1_ORBIS_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2015 Sample 2 release|Orbis SDK5 - build", groups = {"Build"})
-    public void ps42015Sample2ReleaseOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE2_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2015 Sample 3 debug|Orbis SDK5 - build", groups = {"Build"})
-    public void ps42015Sample3DebugOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE3_ORBIS_DEBUG, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
-
-    @Test(testName = "PS4 - 2015 Sample 4 release|Orbis SDK5 - build", groups = {"Build"})
-    public void ps42015Sample4ReleaseOrbisSDK4Build() {
-        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
-        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE4_ORBIS_RELEASE, "%s"));
-        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
-    }
+    /*----------------Temporarily commented out Prospero tests----------------------*/
+//
+//    @Test(testName = "PS4 - 2015 Sample 1 debug|Orbis SDK5 - build", groups = {"Build"})
+//    public void ps42015Sample1DebugOrbisSDK4Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE1_ORBIS_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2015 Sample 2 release|Orbis SDK5 - build", groups = {"Build"})
+//    public void ps42015Sample2ReleaseOrbisSDK4Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE2_ORBIS_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2015 Sample 3 debug|Orbis SDK5 - build", groups = {"Build"})
+//    public void ps42015Sample3DebugOrbisSDK4Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE3_ORBIS_DEBUG, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
+//
+//    @Test(testName = "PS4 - 2015 Sample 4 release|Orbis SDK5 - build", groups = {"Build"})
+//    public void ps42015Sample4ReleaseOrbisSDK4Build() {
+//        changePSSDKVersionTo(OrbisSDK.PS4_SDK5);
+//        int returnCode = ibService.cleanAndBuild(WindowsCommands.REFRESH_ENV_VARS + IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.VC14_BATMAN.PS4_SAMPLE4_ORBIS_RELEASE, "%s"));
+//        Assert.assertTrue(returnCode == 0 || returnCode == 2, "Build failed with return code " + returnCode);
+//    }
 
     @Test(testName = "Google Stadia - 2015 Sample 1 release|GGP SDK 1.37- build", groups = {"Build"})
     public void googleStadia2015Sample1releaseGGPSDK137Build() {
