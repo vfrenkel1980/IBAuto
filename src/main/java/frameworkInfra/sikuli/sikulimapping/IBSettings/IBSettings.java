@@ -39,6 +39,7 @@ public class IBSettings {
     public static final Pattern CpuUtilUserDefined = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\cpu_util_user_defined.png");
     public static final Pattern CpuUtilNumOfCoresTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\cpu_util_num_of_cores.png");
     public static final Pattern BuildMonitorTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\build_monitor_tab.png");
+    public static final Pattern BuildMonitorTabOpen = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\buildMonitorOpen.png");
     public static final Pattern StartingPageProgressDdl = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\progress_ddl.png");
     public static final Pattern StartingPageProjectsDdl = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\projects_ddl.png");
     public static final Pattern SelectedProjectsTab = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\IBClientSettings\\selected_projects_tab.png");

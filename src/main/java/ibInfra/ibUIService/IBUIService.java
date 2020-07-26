@@ -585,9 +585,13 @@ public class IBUIService implements IIBUIService {
         @Override
         public void changeStartupPageToProjects() {
             try {
-                screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9), 25).click();
-                screen.wait(IBSettings.StartingPageProgressDdl.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.StartingPageProjectsDdl.similar((float) 0.9), 5).click();
+                if(screen.exists(IBSettings.BuildMonitorTab, 20) ==null){
+                    screen.wait(IBSettings.BuildMonitorTabOpen.similar((float) 0.9), 25).click();
+                }else if(screen.exists(IBSettings.BuildMonitorTab, 20) !=null){
+                    screen.wait(IBSettings.BuildMonitorTab.similar((float) 0.9), 25).click();
+                }
+                screen.wait(IBSettings.StartingPageProgressDdl.similar((float) 0.9), 25).click();
+                screen.wait(IBSettings.StartingPageProjectsDdl.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to open agent settings with error: " + findFailed.getMessage());

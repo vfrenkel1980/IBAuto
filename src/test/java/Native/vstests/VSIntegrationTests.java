@@ -46,7 +46,7 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
         vsuiService.performIbActionFromPrjExplorer(VsActions.CLEAN_SOLUTION, VsTreeType.SOLUTION, projectName);
         SystemActions.sleep(15);
         vsuiService.performIbActionFromPrjExplorer(VsActions.BUILD_SOLUTION, VsTreeType.SOLUTION, projectName);
-        SystemActions.sleep(15);
+        SystemActions.sleep(25);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
@@ -72,9 +72,9 @@ public class VSIntegrationTests extends VSIntegrationTestBase {
     public void executeBuildProjectFromMenu() {
         String result;
         vsuiService.performIbActionFromMenu(VsActions.CLEAN_PROJECT);
-        SystemActions.sleep(25);
-        vsuiService.performIbActionFromMenu(VsActions.BUILD_PROJECT);
         SystemActions.sleep(15);
+        vsuiService.performIbActionFromMenu(VsActions.BUILD_PROJECT);
+        SystemActions.sleep(25);
         try {
             result = ibService.findValueInPacketLog("ExitCode ");
             Assert.assertTrue(result.equals("0"));
