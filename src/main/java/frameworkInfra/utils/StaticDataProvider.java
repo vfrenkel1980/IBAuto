@@ -890,6 +890,7 @@ public class StaticDataProvider {
         public static final String SHOWCORESEMPLOYED = "ShowCoresEmployed";
         public static final String MAXHELPERS = "MaxHelpers";
         public static final String pathLenCPU_UTIL_CORE = "1";
+        public static final String COORDINATOR_API_ACESSCoordinator="CoordinatorApiAccess";
 
     }
 
@@ -1008,6 +1009,8 @@ public class StaticDataProvider {
 
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
+        public static final String VM_AGENT_SET = "192.168.10.233";
+        public static final String VM_AGENT_SET_Vlad = "192.168.8.71";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
         //public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String UNITESTS_HLPR_NAME = "Host-6";
