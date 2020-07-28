@@ -43,7 +43,7 @@ public class BuildGroupRestTestsBase extends TestBase {
 
     @BeforeClass
     public void beforeClass(){
-        RestAssured.baseURI =  String.format(RestConstants.Paths.Buildgroup.ROOT_PATH,"10.10.10.9");
+        RestAssured.baseURI =  String.format(RestConstants.Paths.Buildgroup.ROOT_PATH,"192.168.8.71");
       //  coordinatorApiAccess();
         RestUtils.initCertificateForBuildService();
 //        Map<String, String> headers = new HashMap<>();

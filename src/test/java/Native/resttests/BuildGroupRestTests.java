@@ -1,19 +1,17 @@
 package Native.resttests;
 
 import frameworkInfra.testbases.rest.BuildGroupRestTestsBase;
-import webInfra.rest.buildgroup.metadata.AddAgentsData;
+import frameworkInfra.utils.RegistryService;
+import frameworkInfra.utils.StaticDataProvider;
 import webInfra.rest.utils.RestConstants;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
+import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
+import java.util.List;
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
-//import static io.restassured.RestAssured.when;
 
 public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
 
@@ -24,70 +22,63 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
      * @result{ - counts of agents ="n"",group ="Default"}
      */
 
-    @Test(testName = "GetGroupList")
+    @Test(testName = "GetGroupList",priority =0)
     public void getGroupList()  {
-
-        //verify that returned status os 200 !!!
         get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
-
-        // get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).then().assertThat().statusCode(HttpStatus.SC_OK).body("AgentCount",equalTo("4")).body("Group",equalTo("Default"));
-
-
-        String  responseString = get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).then().assertThat().statusCode(HttpStatus.SC_OK).extract().asString();
-        //fetch AgentCount
-        String  expectedAgentCount ="\"AgentCount\":2";
-        Assert.assertTrue(responseString.contains(expectedAgentCount),"Agent count is not equal to  " + expectedAgentCount);
-        //fetch BuildGroup
-        String expectedBuildGroup = "\"Group\":\"Default\"";
-        Assert.assertTrue(responseString.contains(expectedBuildGroup),"Build group is not equal to   " + expectedBuildGroup);
-
-
-        String expectedBuildGroupvlad = "\"Group\":\"Default\"";
+                statusCode(HttpStatus.SC_OK).
+                body(containsString("AgentCount")).body(containsString("Default"));
 
     }
 
-    @Test(testName = "AddHelperToBuildGroup")
+    @Test(testName = "AddHelperToBuildGroup",priority =1)
     public void addHelperToBuildGroup()  {
-
-        AddAgentsData aad = new AddAgentsData();
-        aad.setIP("192.168.10.243");
-        aad.setName("WINDOWS-QA-2");//WINDOWS-QA-2
-
-        AddAgentsData[] arr = new AddAgentsData[1];
-        arr[0]= aad;
-
-       // String data [] = {"\"IP\": \"192.168.10.243\"","\"Name\": \"WINDOWS-QA-2\""};
-
-//        given().
-//                contentType("application/json").
-//                body("[{\"IP\": \"192.168.10.243\",\"Name\": \"WINDOWS-QA-2\"}]").
-//                when().
-//                post("https://10.10.10.9:31100/Groups/Vlad_group/AddAgents").
-//                then().
-//                assertThat().
-//                statusCode(HttpStatus.SC_OK);
-
-
         given().
                 contentType("application/json").
                 body(RestConstants.Body.Buildgroup.BodyContent).
                 when().
-                post("https://10.10.10.9:31100/Groups/Vlad_group/AddAgents").
+                post(String.format("https://%s:31100/Groups/%s/AddAgents",RestConstants.Body.CoordinatorIps.ip,RestConstants.Body.BuildGroups.TestedBuildgroup)).
                 then().
                 assertThat().
                 statusCode(HttpStatus.SC_OK);
 
-
-      String  responseString = get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).then().assertThat().statusCode(HttpStatus.SC_OK).extract().asString();
-
+         List <String> groups = get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).then().extract().path("Group");
+         Assert.assertTrue(groups.contains(RestConstants.Body.BuildGroups.TestedBuildgroup), "failed to add" + RestConstants.Body.HelpersNames.HelperName + "to group" + RestConstants.Body.BuildGroups.TestedBuildgroup);
 
     }
 
+    @Test(testName = "VerifyErrorMassageWhenClickOnGenerateButton")
+    public void verifyErrorMassageWhenClickOnGenerateButton()  {
+
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "F0EE8B702CBB48AE9C7321");
+
+        get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_FORBIDDEN).
+                body(containsString("Fail to authenticate"));
+
+     //   RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
 
 
+    }
+    @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKey")
+    public void verifyResponseIsbackAfterSupplyingApiKey()  {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "F0EE8B702CBB48AE9C7321");
 
+        given().
+                header("api-key",RestConstants.Headers.api_key).
+                when().
+                get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK).body(containsString("AgentCount")).body(containsString("Default"));
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+
+
+    }
 
 }

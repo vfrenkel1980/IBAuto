@@ -891,6 +891,9 @@ public class StaticDataProvider {
         public static final String MAXHELPERS = "MaxHelpers";
         public static final String pathLenCPU_UTIL_CORE = "1";
         public static final String COORDINATOR_API_ACESSCoordinator="CoordinatorApiAccess";
+        public static final String REQUIREDAPIKEYFORACCESS="RequireApiKeyForAccess";
+        public static final String GENERATEDAPIKEY="GeneratedApiKey";
+
 
     }
 

@@ -20,14 +20,42 @@ public class RestConstants {
     }
     public static final class Body {
         public static final class Buildgroup {
-            public static final String BodyContent = "[{\"IP\": \"192.168.10.243\",\"Name\": \"WINDOWS-QA-2\"}]";
+            public static final String BodyContent = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName);
             public static final String GROUP_LIST_PATH = "Groups/list";
             public static final String GROUP_DEFAULT_LIST_PATH = "Groups/list";
         }
 
 
 
+        public static final class HelpersIps {
+
+                public static final String ip = "192.168.10.243";
+
+            }
+        public static final class CoordinatorIps {
+
+            public static final String ip = "192.168.8.71";
+
+        }
+
+        public static final class HelpersNames {
+
+            public static final String HelperName = "WINDOWS-QA-2";
+
+        }
+
+        public static final class BuildGroups {
+
+                public static final String TestedBuildgroup = "tmpGroup";
+        }
+
     }
+
+    public static final class Headers {
+        public static final String api_key = "F0EE8B702CBB48AE9C7321";
+
+    }
+
 
 
 
