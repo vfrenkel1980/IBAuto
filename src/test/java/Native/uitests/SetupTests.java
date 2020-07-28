@@ -46,7 +46,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.acceptTerms();
-            installer.clickNext();
+            installer.clickNextGreyBtn();
             installer.clickNext();
             installer.installNewCoordinator();
             installer.clickNext();
@@ -54,6 +54,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.changeInstallationPath(Locations.DIFFERENT_INSTALLATION_DIRECTORY);
+            SystemActions.sleep(320);
             installer.clickNext();
             installer.clickNext();
             installer.browseLicense();

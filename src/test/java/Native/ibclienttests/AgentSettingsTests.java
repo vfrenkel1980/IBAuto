@@ -408,7 +408,7 @@ public class AgentSettingsTests extends AgentSettingsTestBase {
     @Test(testName = "Verify Core Limit Per Build Limitation")
     public void verifyCoreLimitPerBuildLimitation() {
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
-        client.limitNumberOfCoresPerBuild();
+        client.limitNumberOfCoresPerBuild("5");
         ibService.cleanAndBuild(IbLocations.BUILD_CONSOLE + String.format(ProjectsCommands.AGENT_SETTINGS.AUDACITY_X32_DEBUG, "%s"));
         winService.runCommandDontWaitForTermination(Processes.AGENTSETTINGS);
         client.disableLimitOfCoresPerBuild();

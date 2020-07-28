@@ -17,6 +17,8 @@ public interface IIBUIService {
 
         void clickNext() throws FindFailed;
 
+        void clickNextGreyBtn();
+
         void acceptTerms() throws FindFailed;
 
         void clickFinish() throws FindFailed;
@@ -130,7 +132,7 @@ public interface IIBUIService {
 
         void restartAgentService();
 
-        void limitNumberOfCoresPerBuild();
+        void limitNumberOfCoresPerBuild(String path);
 
         void disableLimitOfCoresPerBuild();
 

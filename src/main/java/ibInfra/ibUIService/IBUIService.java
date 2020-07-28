@@ -105,9 +105,20 @@ public class IBUIService implements IIBUIService {
         @Override
         public void clickNext() throws FindFailed {
             test.log(Status.INFO, "Clicking Next");
-            screen.wait(IBInstaller.NextBTN.similar((float) 0.8), 50).click();
+            screen.wait(IBInstaller.NextBTN.similar((float) 0.9), 50).click();
 
         }
+        @Override
+        public void clickNextGreyBtn() {
+            test.log(Status.INFO, "Clicking Next");
+            try{
+                screen.wait(IBInstaller.NextGreyBTN.similar((float) 0.9), 50).click();
+            }
+            catch (FindFailed findFailed){
+                test.log(Status.WARNING, "Click on button fail: " + findFailed.getMessage());
+                Assert.fail();
+            }
+         }
 
         @Override
         public void acceptTerms() throws FindFailed {
@@ -542,11 +553,11 @@ public class IBUIService implements IIBUIService {
         public void clickClearHistory() {
             test.log(Status.INFO, "Clicking on Clear History");
             try {
-                if(screen.exists(IBSettings.agent, 20) ==null){
-                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
-                }else if(screen.exists(IBSettings.agent, 20) !=null){
-                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
-                }
+//                if(screen.exists(IBSettings.agent, 20) ==null){
+//                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+//                }else if(screen.exists(IBSettings.agent, 20) !=null){
+//                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+//                }
                 screen.wait(IBSettings.GeneralTab.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ClearHistoryGrayBtn.similar((float) 0.9), 15).click();
                 screen.wait(IBSettings.ConfirmationBtn.similar((float) 0.5), 10).click();
@@ -672,11 +683,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void stopAgentService() {
             try {
-                if(screen.exists(IBSettings.agent, 20) ==null){
-                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
-                }else if(screen.exists(IBSettings.agent, 20) !=null){
-                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
-                }
+//                if(screen.exists(IBSettings.agent, 20) ==null){
+//                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+//                }else if(screen.exists(IBSettings.agent, 20) !=null){
+//                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+//                }
                 screen.wait(IBSettings.StopServiceBtn.similar((float) 0.9), 5).click();
                 screen.wait(IBSettings.OKMessageBoxButton.similar((float) 0.9), 5).click();
             } catch (FindFailed findFailed) {
@@ -708,14 +719,16 @@ public class IBUIService implements IIBUIService {
         }
 
         @Override
-        public void limitNumberOfCoresPerBuild() {
+        public void limitNumberOfCoresPerBuild(String path) {
             test.log(Status.INFO, "Limiting the number of cores per build");
             try {
-                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.EnableLimitNumOFCoresPerBuildCB.similar((float) 0.9), 5).click();
-                screen.wait(IBSettings.NumOfCoresPerBuild.similar((float) 0.9), 5).click();
-                screen.type("5");
-                screen.wait(IBSettings.OKButton.similar((float) 0.9), 5).click();
+                screen.wait(IBSettings.InitiatorTab.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.EnableLimitNumOFCoresPerBuildCB.similar((float) 0.9), 15).click();
+                screen.wait(IBSettings.NumOfCoresPerBuild.similar((float) 0.9), 15).click();
+                int corePerBuild = path.length();
+                for (int i=0; i< corePerBuild ; i++ )
+                    pressNumberKey(path.charAt(i));
+                screen.wait(IBSettings.OKButton.similar((float) 0.9), 15).click();
 
             } catch (FindFailed findFailed) {
                 test.log(Status.WARNING, "Failed to enable core limit per build with error: " + findFailed.getMessage());
@@ -741,11 +754,11 @@ public class IBUIService implements IIBUIService {
         @Override
         public void enableSchedulingAndVerifyIcon() {
             try {
-                if(screen.exists(IBSettings.agent, 20) ==null){
-                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
-                }else if(screen.exists(IBSettings.agent, 20) !=null){
-                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
-                }
+//                if(screen.exists(IBSettings.agent, 20) ==null){
+//                    screen.wait(IBSettings.agent_open.similar((float) 0.9), 25).click();
+//                }else if(screen.exists(IBSettings.agent, 20) !=null){
+//                    screen.wait(IBSettings.agent.similar((float) 0.9), 25).click();
+//                }
                 screen.wait(IBSettings.PreferenceTab.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.EnableSchedulingCB.similar((float) 0.9), 25).click();
                 screen.wait(IBSettings.OKButton.similar((float) 0.9), 25).click();
@@ -948,8 +961,11 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Pausing cloud");
                 try {
                     screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.9), 25).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.9), 25).hover();
                     screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.9), 25).click();
+                    boolean objectExists = false;
+                    if (screen.exists(CoordMonitor.CloudPausedButton, 15) == null)
+                        objectExists = true;
+                    Assert.assertFalse(objectExists, "CloudPausedButton did not exists");
                     screen.wait(CoordMonitor.PauseCloudOnly.similar((float) 0.9), 25).click();
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
@@ -969,6 +985,7 @@ public class IBUIService implements IIBUIService {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
                 }
+
             }
 
             @Override

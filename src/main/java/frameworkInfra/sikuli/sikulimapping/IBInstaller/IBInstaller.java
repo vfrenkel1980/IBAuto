@@ -7,6 +7,7 @@ public class IBInstaller {
 
     public static final Pattern NextBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\next.png");
     public static final Pattern NextNewBTN =  new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\next_new_screen.png");
+    public static final Pattern NextGreyBTN =new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\next_grey.png");
     public static final Pattern FinishBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\finish.png");
     public static final Pattern BrowseLicenseBTN = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\browse_lic.png");
     public static final Pattern CoordinatorNameTB = new Pattern(System.getProperty("user.dir") + "\\src\\main\\java\\frameworkInfra\\sikuli\\testscreenshots\\Installer\\coordinator_name.png");
