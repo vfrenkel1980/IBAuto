@@ -978,9 +978,16 @@ public class IBUIService implements IIBUIService {
                 test.log(Status.INFO, "Pausing cloud and deleting pool");
                 try {
                     screen.wait(CoordMonitor.CloudEnabledButton.similar((float) 0.95), 15).click();
-                    screen.wait(CoordMonitor.ToolsMenu.similar((float) 0.95), 15).hover();
                     screen.wait(CoordMonitor.PauseCloudButton.similar((float) 0.95), 15).click();
+                    boolean objectExists = false;
+                    if (screen.exists(CoordMonitor.CloudPausedButton, 15) == null)
+                        objectExists = true;
+                    Assert.assertFalse(objectExists, "CloudPausedButton did not exists");
                     screen.wait(CoordMonitor.PauseCloudAndDeletePool.similar((float) 0.95), 15).click();
+                    boolean objectPoolExists = false;
+                    if (screen.exists(CoordMonitor.CloudPausedButton, 15) == null)
+                        objectPoolExists = true;
+                    Assert.assertFalse(objectPoolExists, "CloudDeleteButton did not exists");
                 } catch (FindFailed findFailed) {
                     test.log(Status.WARNING, "Failed to Pause cloud, failed with error: " + findFailed.getMessage());
                     Assert.fail();
@@ -1042,8 +1049,14 @@ public class IBUIService implements IIBUIService {
 
         if ( asciiChar > 96 && asciiChar < 123 ) //small letters, need to reduce 32
             keyCode = asciiChar - 32;
+
+        if (asciiChar == 67)
+        {  pressShift = true;
+            keyCode = 67; }//CapsLock C
+
         if (asciiChar == 73)
-       // { keyCode = 20; }//CapsLock
+        {  pressShift = true;
+            keyCode = 73; }//CapsLock I
 
         if (asciiChar == 58 ) // colon  ':'
         {
