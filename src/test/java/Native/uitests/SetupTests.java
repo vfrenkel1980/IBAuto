@@ -54,7 +54,7 @@ public class SetupTests extends SetupTestBase {
             installer.clickNext();
             installer.clickNext();
             installer.changeInstallationPath(Locations.DIFFERENT_INSTALLATION_DIRECTORY);
-            SystemActions.sleep(320);
+            SystemActions.sleep(240);
             installer.clickNext();
             installer.clickNext();
             installer.browseLicense();
