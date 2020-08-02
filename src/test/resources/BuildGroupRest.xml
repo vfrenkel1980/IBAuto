@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="BuildGroupRest"  >
+
+    <listeners>
+        <listener class-name="frameworkInfra.Listeners.TestListener" />
+    </listeners>
+
+    <test name="GetGroupList">
+        <classes>
+            <class name ="Native.resttests.BuildGroupRestTests" />
+        </classes>
+    </test>
+
+    <test name="AddHelperToBuildGroup">
+        <classes>
+            <class name ="Native.resttests.BuildGroupRestTests" />
+        </classes>
+    </test>
+
+    <test name="VerifyErrorMassageWhenClickOnGenerateButton">
+        <classes>
+            <class name ="Native.resttests.BuildGroupRestTests" />
+        </classes>
+    </test>
+
+    <test name="VerifyResponseIsBackAfterSupplyingApiKey">
+        <classes>
+            <class name ="Native.resttests.BuildGroupRestTests" />
+        </classes>
+    </test>
+
+
+</suite>

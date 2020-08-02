@@ -44,7 +44,7 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
                 statusCode(HttpStatus.SC_OK);
 
          List <String> groups = get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).then().extract().path("Group");
-         Assert.assertTrue(groups.contains(RestConstants.Body.BuildGroups.TestedBuildgroup), "failed to add" + RestConstants.Body.HelpersNames.HelperName + "to group" + RestConstants.Body.BuildGroups.TestedBuildgroup);
+         Assert.assertTrue(groups.contains(RestConstants.Body.BuildGroups.TestedBuildgroup), "failed to add " + RestConstants.Body.HelpersNames.HelperName + " to group " + RestConstants.Body.BuildGroups.TestedBuildgroup);
 
     }
 
@@ -52,22 +52,23 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
     public void verifyErrorMassageWhenClickOnGenerateButton()  {
 
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "F0EE8B702CBB48AE9C7321");
-
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).
                 then().
                 assertThat().
                 statusCode(HttpStatus.SC_FORBIDDEN).
                 body(containsString("Fail to authenticate"));
 
-     //   RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
-
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
     }
     @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKey")
     public void verifyResponseIsbackAfterSupplyingApiKey()  {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
-        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "F0EE8B702CBB48AE9C7321");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
 
         given().
                 header("api-key",RestConstants.Headers.api_key).
@@ -77,6 +78,7 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
                 assertThat().
                 statusCode(HttpStatus.SC_OK).body(containsString("AgentCount")).body(containsString("Default"));
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
 
     }

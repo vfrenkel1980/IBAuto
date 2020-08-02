@@ -1012,9 +1012,9 @@ public class StaticDataProvider {
 
     public static class WindowsMachines {
         public static final String AGENT_SETTINGS_HLPR_IP = "192.168.10.165";
-        public static final String VM_AGENT_SET = "192.168.10.233";
-        public static final String VM_AGENT_SET_Vlad = "192.168.8.71";
         public static final String AGENT_SETTINGS_HLPR_NAME = "VM-AgntSet-hlp";
+        public static final String VM_WIN_QA1_HELPER = "192.168.8.62";
+        public static final String VM_WIN_QA2 = "192.168.10.243";
         //public static final String UNITESTS_HLPR_NAME = "windows-qa-2";
         public static final String UNITESTS_HLPR_NAME = "Host-6";
         public static final String LICENSE_HLPR_NAME = "VM-LicTest-hlp";
