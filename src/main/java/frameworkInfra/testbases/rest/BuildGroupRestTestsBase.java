@@ -17,13 +17,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-
+import ibInfra.ibExecs.IIBCoordMonitor;
+import ibInfra.ibService.IbService;
+import ibInfra.ibUIService.IBUIService;
+import org.testng.annotations.*;
+import org.xml.sax.SAXException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import static frameworkInfra.Listeners.SuiteListener.*;
 import static frameworkInfra.Listeners.SuiteListener.htmlReporter;
@@ -32,6 +33,10 @@ import static frameworkInfra.Listeners.SuiteListener.test;
 public class BuildGroupRestTestsBase extends TestBase {
 
     public WindowsService winService = new WindowsService();
+    public IbService ibService = new IbService();
+    private IBUIService ibuiService = new IBUIService();
+    protected IBUIService.Coordinator coordinator = ibuiService.new Coordinator();
+    IIBCoordMonitor coordMonitor = new IIBCoordMonitor();
 
     static {
         Calendar calendar = Calendar.getInstance();
@@ -43,15 +48,9 @@ public class BuildGroupRestTestsBase extends TestBase {
 
     @BeforeClass
     public void beforeClass(){
-        RestAssured.baseURI =  String.format(RestConstants.Paths.Buildgroup.ROOT_PATH,"192.168.8.71");
-      //  coordinatorApiAccess();
+        RestAssured.baseURI =  String.format(RestConstants.Paths.Buildgroup.ROOT_PATH,"192.168.10.243");
+        coordinatorApiAccess();
         RestUtils.initCertificateForBuildService();
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put("Content-Type", "application/json");
-//        headers.put("api-key", "AE2BAC97974A444993D57A");
-//        headers.put("Content", "");
-//        RestAssured.requestSpecification = new RequestSpecBuilder().addHeaders(headers).build();
-
     }
 
 
@@ -78,8 +77,7 @@ public class BuildGroupRestTestsBase extends TestBase {
     private  void coordinatorApiAccess()
     {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.COORDINATOR_API_ACESSCoordinator, "1");
-        winService.runCommandWaitForFinish(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.VM_AGENT_SET_Vlad + " -u vladfrenkel -p Genris1980 -i 0 " + "net stop \"" + StaticDataProvider.WindowsServices.COORD_SERVICE + "\"");
-        winService.runCommandWaitForFinish(StaticDataProvider.Processes.PSEXEC + " \\\\" + StaticDataProvider.WindowsMachines.VM_AGENT_SET_Vlad + " -u vladfrenkel -p Genris1980 -i 0 " + "net start \"" + StaticDataProvider.WindowsServices.COORD_SERVICE + "\"");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         SystemActions.sleep(15);
     }
 

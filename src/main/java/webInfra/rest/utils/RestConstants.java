@@ -29,18 +29,18 @@ public class RestConstants {
 
         public static final class HelpersIps {
 
-                public static final String ip = "192.168.10.243";
+                public static final String ip = "192.168.8.162";
 
             }
         public static final class CoordinatorIps {
 
-            public static final String ip = "192.168.8.71";
+            public static final String ip = "192.168.10.243";
 
         }
 
         public static final class HelpersNames {
 
-            public static final String HelperName = "WINDOWS-QA-2";
+            public static final String HelperName = "WINDOWS-QA-1";
 
         }
 
@@ -77,7 +77,7 @@ public class RestConstants {
         public static final class BuildGroup {
             public static final String PROPERTY_TRUSTSTORE = "javax.net.ssl.trustStore";
             public static final String PROPERTY_TRUSTSTORE_PASSWORD = "javax.net.ssl.trustStorePassword";
-            public static final String PROPERTY_TRUSTSTORE_VALUE = "C:\\Users\\VladFrenkel\\.keystore";
+            public static final String PROPERTY_TRUSTSTORE_VALUE = "C:\\Users\\Administrator\\.keystore";
             public static final String PROPERTY_TRUSTSTORE_PASSWORD_VALUE = "incredibuild";
 
         }
