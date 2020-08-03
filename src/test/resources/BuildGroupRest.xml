@@ -6,29 +6,9 @@
         <listener class-name="frameworkInfra.Listeners.TestListener" />
     </listeners>
 
-    <test name="GetGroupList">
+    <test name="BuildGroupRest">
         <classes>
             <class name ="Native.resttests.BuildGroupRestTests" />
         </classes>
     </test>
-
-    <test name="AddHelperToBuildGroup">
-        <classes>
-            <class name ="Native.resttests.BuildGroupRestTests" />
-        </classes>
-    </test>
-
-    <test name="VerifyErrorMassageWhenClickOnGenerateButton">
-        <classes>
-            <class name ="Native.resttests.BuildGroupRestTests" />
-        </classes>
-    </test>
-
-    <test name="VerifyResponseIsBackAfterSupplyingApiKey">
-        <classes>
-            <class name ="Native.resttests.BuildGroupRestTests" />
-        </classes>
-    </test>
-
-
 </suite>

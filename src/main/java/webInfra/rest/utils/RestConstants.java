@@ -13,6 +13,8 @@ public class RestConstants {
             public static final String ROOT_PATH = "https://%s:31100/"; //"https://192.168.10.233:31100/"
             public static final String GROUP_LIST_PATH = "Groups/list";
             public static final String GROUP_DEFAULT_LIST_PATH = "Groups/list";
+            public static final String CLEAR_EXISTED_GROUP = "Groups/%s/clear";
+            public static final String DEFAULT_GROUP_LIST = "Groups/Default/list";
         }
 
 
@@ -21,6 +23,7 @@ public class RestConstants {
     public static final class Body {
         public static final class Buildgroup {
             public static final String BodyContent = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName);
+            public static final String BodyContentMultiplehelpers = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"},{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName,CoordinatorIps.ip,CoordinatorsNames.CoordinatorName);
             public static final String GROUP_LIST_PATH = "Groups/list";
             public static final String GROUP_DEFAULT_LIST_PATH = "Groups/list";
         }
@@ -29,7 +32,7 @@ public class RestConstants {
 
         public static final class HelpersIps {
 
-                public static final String ip = "192.168.8.162";
+            public static final String ip = "192.168.8.162";
 
             }
         public static final class CoordinatorIps {
@@ -47,6 +50,12 @@ public class RestConstants {
         public static final class BuildGroups {
 
                 public static final String TestedBuildgroup = "tmpGroup";
+                public static final String TestedNonExistentBuildgroup = "nonExistentGroup";
+                public static final String DefaultBuildgroup = "Default";
+        }
+
+        public static final class CoordinatorsNames {
+            public static final String CoordinatorName = "WINDOWS-QA-2";
         }
 
     }

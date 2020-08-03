@@ -71,12 +71,18 @@ public class BuildGroupRestTestsBase extends TestBase {
 
     @AfterClass
     public void afterClass(){
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.COORDINATOR_API_ACESSCoordinator, "0");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         extent.flush();
     }
 
     private  void coordinatorApiAccess()
     {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.COORDINATOR_API_ACESSCoordinator, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, "0");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
         SystemActions.sleep(15);
     }

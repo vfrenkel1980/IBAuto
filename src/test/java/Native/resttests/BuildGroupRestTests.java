@@ -22,7 +22,7 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
      * @result{ - counts of agents ="n"",group ="Default"}
      */
 
-    @Test(testName = "GetGroupList",priority =0)
+    @Test(testName = "GetGroupList",priority =1)
     public void getGroupList()  {
         get(RestConstants.Paths.Buildgroup.GROUP_LIST_PATH).
                 then().
@@ -32,7 +32,7 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
 
     }
 
-    @Test(testName = "AddHelperToBuildGroup",priority =1)
+    @Test(testName = "AddHelperToBuildGroup",priority =2)
     public void addHelperToBuildGroup()  {
         given().
                 contentType("application/json").
@@ -48,7 +48,7 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
 
     }
 
-    @Test(testName = "VerifyErrorMassageWhenClickOnGenerateButton")
+    @Test(testName = "VerifyErrorMassageWhenClickOnGenerateButton",priority =3)
     public void verifyErrorMassageWhenClickOnGenerateButton()  {
 
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
@@ -65,10 +65,11 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
     }
-    @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKey")
+    @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKey",priority =4 )
     public void verifyResponseIsbackAfterSupplyingApiKey()  {
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
         given().
                 header("api-key",RestConstants.Headers.api_key).
@@ -77,10 +78,131 @@ public class BuildGroupRestTests  extends BuildGroupRestTestsBase {
                 then().
                 assertThat().
                 statusCode(HttpStatus.SC_OK).body(containsString("AgentCount")).body(containsString("Default"));
+
+
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
         RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
         winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
+    }
+
+//-- - -----------------------------Clean  Buils group tests-------------------------------------------------------
+@Test(testName = "VerifyErrorMassageWhenClickOnGenerateButtonCleanGroup",priority =5)
+public void verifyErrorMassageWhenClickOnGenerateButtonCleangroup()  {
+
+    RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+    RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+    winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+    get(String.format(RestConstants.Paths.Buildgroup.CLEAR_EXISTED_GROUP,RestConstants.Body.BuildGroups.TestedBuildgroup)).
+            then().
+            assertThat().
+            statusCode(HttpStatus.SC_FORBIDDEN).
+            body(containsString("Fail to authenticate"));
+
+    RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+    RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+    winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+
+
+
+
+}
+    @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKeyCleangroup",priority =6)
+    public void verifyResponseIsbackAfterSupplyingApiKeyCleanGroup()  {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+
+        given().
+                header("api-key",RestConstants.Headers.api_key).
+                when().
+                get(String.format(RestConstants.Paths.Buildgroup.CLEAR_EXISTED_GROUP,RestConstants.Body.BuildGroups.TestedBuildgroup)).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK).body(containsString(RestConstants.Body.BuildGroups.TestedBuildgroup)).body(containsString("cleaned"));
+
+
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
 
     }
+
+    @Test(testName = "ClearNonExistedGroup",priority =7)
+    public void clearNonExistedGroup()  {
+        get(String.format(RestConstants.Paths.Buildgroup.CLEAR_EXISTED_GROUP,RestConstants.Body.BuildGroups.TestedNonExistentBuildgroup)).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK).
+                body(containsString(RestConstants.Body.BuildGroups.TestedNonExistentBuildgroup)).body(containsString("Not found"));
+
+    }
+
+    //-----------------------------Add agents to group 'Name_Group_Name'---------------------------------------------
+    @Test(testName = "VerifyErrorMassageaWhenAddMultipleHelpersToGroupName",priority =8)
+    public void verifyErrorMassageaWhenAddMultipleHelpersToGroupName()  {
+
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+        given().
+                contentType("application/json").
+                body(RestConstants.Body.Buildgroup.BodyContentMultiplehelpers).
+                when().
+                post(String.format("https://%s:31100/Groups/%s/AddAgents",RestConstants.Body.CoordinatorIps.ip,RestConstants.Body.BuildGroups.TestedBuildgroup)).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_FORBIDDEN);
+
+    }
+
+    @Test(testName = "VerifyResponseIsBackAfterSupplyingApiKeyMultipleHelpers",priority =9)
+    public void verifyResponseIsbackAfterSupplyingApiKeyCleanGroupMultipleHelpers()  {
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "1");
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+
+        given().
+                header("api-key",RestConstants.Headers.api_key).
+                when().
+                get(RestConstants.Paths.Buildgroup.DEFAULT_GROUP_LIST).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
+
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.GENERATEDAPIKEY, RestConstants.Headers.api_key);
+        RegistryService.setRegistryKey(HKEY_LOCAL_MACHINE, StaticDataProvider.Locations.IB_REG_ROOT + "\\Coordinator", StaticDataProvider.RegistryKeys.REQUIREDAPIKEYFORACCESS, "0");
+        winService.restartService(StaticDataProvider.WindowsServices.COORD_SERVICE);
+    }
+
+    @Test(testName = "AddMultipleHelpersToGroupName",priority =10)
+    public void addMultipleHelpersToGroupName()  {
+        given().
+                contentType("application/json").
+                body(RestConstants.Body.Buildgroup.BodyContentMultiplehelpers).
+                when().
+                post(String.format("https://%s:31100/Groups/%s/AddAgents",RestConstants.Body.CoordinatorIps.ip,RestConstants.Body.BuildGroups.TestedBuildgroup)).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
+
+        List <String> groups = get(RestConstants.Paths.Buildgroup.DEFAULT_GROUP_LIST).
+                then().
+                extract().
+                path("Group");
+        List <String> statuses= get(RestConstants.Paths.Buildgroup.DEFAULT_GROUP_LIST).
+                then().
+                extract().
+                path("Status");
+        Assert.assertTrue(groups.contains(RestConstants.Body.BuildGroups.DefaultBuildgroup) && statuses.contains("Not found"), "failed to add  all helpers  " + RestConstants.Body.HelpersNames.HelperName  + " and "  +RestConstants.Body.CoordinatorsNames.CoordinatorName + " to group " + RestConstants.Body.BuildGroups.TestedBuildgroup);
+
+    }
+
+
+
+
+
+
+
 
 }
