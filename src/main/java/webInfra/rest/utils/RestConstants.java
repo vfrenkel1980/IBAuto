@@ -22,10 +22,10 @@ public class RestConstants {
     }
     public static final class Body {
         public static final class Buildgroup {
-            public static final String BodyContent = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName);
-            public static final String BodyContentMultiplehelpers = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"},{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName,CoordinatorIps.ip,CoordinatorsNames.CoordinatorName);
-            public static final String GROUP_LIST_PATH = "Groups/list";
-            public static final String GROUP_DEFAULT_LIST_PATH = "Groups/list";
+                public static final String BodyContent = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"}]", CoordinatorIps.ip,CoordinatorsNames.CoordinatorName);
+                public static final String BodyContentMultiplehelpers = String.format("[{\"IP\": \"%s\",\"Name\": \"%s\"},{\"IP\": \"%s\",\"Name\": \"%s\"}]", HelpersIps.ip,HelpersNames.HelperName,CoordinatorIps.ip,CoordinatorsNames.CoordinatorName);
+                public static final String GROUP_LIST_PATH = "Groups/list";
+                public static final String GROUP_DEFAULT_LIST_PATH = "Groups/list";
         }
 
 
